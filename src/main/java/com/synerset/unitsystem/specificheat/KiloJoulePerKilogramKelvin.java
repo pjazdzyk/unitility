@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.specificheat;
 
+import java.util.Objects;
+
 public class KiloJoulePerKilogramKelvin implements SpecificHeat{
 
     private static final String DEF_SYMBOL = "kJ/kgK";
@@ -21,12 +23,24 @@ public class KiloJoulePerKilogramKelvin implements SpecificHeat{
 
     @Override
     public JoulePerKilogramKelvin toJoulePerKilogramKelvin() {
-        return JoulePerKilogramKelvin.of(value * 10E3);
+        return JoulePerKilogramKelvin.of(value * 1E3);
     }
 
     @Override
     public KiloJoulePerKilogramKelvin toKiloJoulePerKilogramKelvin() {
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof KiloJoulePerKilogramKelvin that)) return false;
+        return Double.compare(that.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     public static KiloJoulePerKilogramKelvin of(double value) {

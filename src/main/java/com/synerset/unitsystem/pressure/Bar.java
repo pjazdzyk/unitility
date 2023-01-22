@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.pressure;
 
+import java.util.Objects;
+
 public class Bar implements Pressure {
 
     private static final String DEF_SYMBOL = "bar";
@@ -21,22 +23,34 @@ public class Bar implements Pressure {
 
     @Override
     public Pascal toPascal() {
-        return Pascal.of(value * 10E5);
+        return Pascal.of(value * 1E5);
     }
 
     @Override
     public HectoPascal toHectoPascal() {
-        return HectoPascal.of(value * 10E5 / 10E2);
+        return HectoPascal.of(toPascal().getValue() / 1E2);
     }
 
     @Override
     public MegaPascal toMegaPascal() {
-        return MegaPascal.of(value * 10E5 / 10E6);
+        return MegaPascal.of(toPascal().getValue() / 1E6);
     }
 
     @Override
     public Bar toBar() {
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bar bar)) return false;
+        return Double.compare(bar.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 
     static Bar of(double value) {

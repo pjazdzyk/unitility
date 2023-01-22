@@ -2,6 +2,8 @@ package com.synerset.unitsystem.temperature;
 
 import io.vavr.control.Either;
 
+import java.util.Objects;
+
 public class Kelvin implements Temperature {
 
     private static final String DEF_SYMBOL = "K";
@@ -31,6 +33,17 @@ public class Kelvin implements Temperature {
         return Celsius.of(value - 273.15);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Kelvin kelvin)) return false;
+        return Double.compare(kelvin.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 
     static Either<InvalidTemperature, Kelvin> of(double value) {
         return value < 0.0
