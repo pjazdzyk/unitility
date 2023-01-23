@@ -1,4 +1,4 @@
-package com.synerset.unitsystem.dynamicViscosity;
+package com.synerset.unitsystem.dynamicviscosity;
 
 import java.util.Objects;
 

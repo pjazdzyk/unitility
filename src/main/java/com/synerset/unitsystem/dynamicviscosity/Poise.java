@@ -1,13 +1,12 @@
-package com.synerset.unitsystem.dynamicViscosity;
+package com.synerset.unitsystem.dynamicviscosity;
 
 import java.util.Objects;
 
-public class PascalSecond implements DynamicViscosity{
-
-    private static final String DEF_SYMBOL = "Pas";
+public class Poise implements DynamicViscosity {
+    private static final String DEF_SYMBOL = "P";
     private final double value;
 
-    private PascalSecond(double value) {
+    private Poise(double value) {
         this.value = value;
     }
 
@@ -23,24 +22,24 @@ public class PascalSecond implements DynamicViscosity{
 
     @Override
     public PascalSecond toPascalSecond() {
-        return this;
+        return PascalSecond.of(value / 10d);
     }
 
     @Override
     public KiloGramPerMeterSecond toKiloGramPerMeterSecond() {
-        return KiloGramPerMeterSecond.of(value);
+        return KiloGramPerMeterSecond.of(value / 10d);
     }
 
     @Override
     public Poise toPoise() {
-        return Poise.of(value * 10);
+        return this;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PascalSecond that)) return false;
-        return Double.compare(that.value, value) == 0;
+        if (!(o instanceof Poise poise)) return false;
+        return Double.compare(poise.value, value) == 0;
     }
 
     @Override
@@ -48,8 +47,8 @@ public class PascalSecond implements DynamicViscosity{
         return Objects.hash(value);
     }
 
-    static PascalSecond of(double value){
-        return new PascalSecond(value);
+    static Poise of(double value){
+        return new Poise(value);
     }
 
 }
