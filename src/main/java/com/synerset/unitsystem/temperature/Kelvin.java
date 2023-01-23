@@ -34,6 +34,11 @@ public class Kelvin implements Temperature {
     }
 
     @Override
+    public Fahrenheit toFahrenheit() {
+        return Fahrenheit.of((9.0 / 5.0) * value - 459.67);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Kelvin kelvin)) return false;
