@@ -1,4 +1,4 @@
-package com.synerset.physics;
+package com.synerset.utils;
 
 
 public final class MathUtils {
