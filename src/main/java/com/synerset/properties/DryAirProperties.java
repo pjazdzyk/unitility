@@ -1,30 +1,36 @@
-package com.synerset.physics;
+package com.synerset.properties;
 
 import com.synerset.unitsystem.density.Density;
-import com.synerset.unitsystem.dynamicViscosity.DynamicViscosity;
+import com.synerset.unitsystem.density.KiloGramPerCubicMeter;
+import com.synerset.unitsystem.dynamicviscosity.DynamicViscosity;
+import com.synerset.unitsystem.dynamicviscosity.KiloGramPerMeterSecond;
 import com.synerset.unitsystem.kinematicviscosity.KinematicViscosity;
+import com.synerset.unitsystem.kinematicviscosity.SquareMeterPerSecond;
 import com.synerset.unitsystem.pressure.Pressure;
+import com.synerset.unitsystem.specificenthalpy.KiloJoulePerKiloGram;
 import com.synerset.unitsystem.specificenthalpy.SpecificEnthalpy;
+import com.synerset.unitsystem.specificheat.KiloJoulePerKilogramKelvin;
 import com.synerset.unitsystem.specificheat.SpecificHeat;
 import com.synerset.unitsystem.temperature.Temperature;
 import com.synerset.unitsystem.thermalconductivity.ThermalConductivity;
+import com.synerset.unitsystem.thermalconductivity.WattPerMeterKelvin;
+import com.synerset.utils.MathUtils;
+import com.synerset.utils.PhysicsConstants;
 
-public class PropertiesOfDryAir {
+public final class DryAirProperties {
 
-    private static final PropertiesOfDryAir propertiesOfDryAir = new PropertiesOfDryAir();
+    private static final DryAirProperties INSTANCE = new DryAirProperties();
 
-    private PropertiesOfDryAir() {
+    private DryAirProperties() {
     }
 
-    public KinematicViscosity kinematicViscosity(Temperature temp, Density density){
-        double ta = temp.toCelsius().getValue();
+    public SquareMeterPerSecond kinematicViscosity(Temperature temp, Density density){
         double dynVis = dynamicViscosity(temp).toKiloGramPerMeterSecond().getValue();
-        double rho = density.toKiloGramPerCubicMeter().getValue();
-        double kinVis = dynVis / rho;
-        return KinematicViscosity.squareMeterPerSecond(kinVis);
+        double dens = density.toKiloGramPerCubicMeter().getValue();
+        return KinematicViscosity.squareMeterPerSecond(dynVis / dens);
     }
 
-    public DynamicViscosity dynamicViscosity(Temperature temp) {
+    public KiloGramPerMeterSecond dynamicViscosity(Temperature temp) {
         double tk = temp.toKelvin().getValue();
         double dynVis = (0.40401 + 0.074582 * tk - 5.7171 * Math.pow(10, -5)
                 * Math.pow(tk, 2) + 2.9928 * Math.pow(10, -8)
@@ -33,7 +39,7 @@ public class PropertiesOfDryAir {
         return DynamicViscosity.kiloGramPerMeterSecond(dynVis);
     }
 
-    public ThermalConductivity thermalConductivity(Temperature temp) {
+    public WattPerMeterKelvin thermalConductivity(Temperature temp) {
         double ta = temp.toCelsius().getValue();
         double thermalCond = 2.43714 * Math.pow(10, -2)
                 + 7.83035 * Math.pow(10, -5) * ta
@@ -43,7 +49,7 @@ public class PropertiesOfDryAir {
         return ThermalConductivity.wattPerMeterKelvin(thermalCond);
     }
 
-    public SpecificEnthalpy specificEnthalpy(Temperature temp) {
+    public KiloJoulePerKiloGram specificEnthalpy(Temperature temp) {
         SpecificHeat specHeat = specificHeat(temp).toKiloJoulePerKilogramKelvin();
         double specHeatValue = specHeat.getValue();
         double tempValueInC = temp.toCelsius().getValue();
@@ -51,14 +57,14 @@ public class PropertiesOfDryAir {
         return SpecificEnthalpy.kiloJoulePerKiloGram(specEnthalpy);
     }
 
-    public Density density(Temperature temp, Pressure press) {
+    public KiloGramPerCubicMeter density(Temperature temp, Pressure press) {
         double tk = temp.toKelvin().getValue();
         double pa = press.toPascal().getValue();
         double density = pa / (PhysicsConstants.CST_DA_RG * tk);
         return Density.kiloGramPerCubicMeter(density);
     }
 
-    public SpecificHeat specificHeat(Temperature temp) {
+    public KiloJoulePerKilogramKelvin specificHeat(Temperature temp) {
         double ta = temp.toCelsius().getValue();
         if (ta <= -73.15) {
             return SpecificHeat.kiloJoulePerKilogramKelvin(1.002);
@@ -94,8 +100,8 @@ public class PropertiesOfDryAir {
         return SpecificHeat.kiloJoulePerKilogramKelvin(specHeat);
     }
 
-    static PropertiesOfDryAir getInstance(){
-        return propertiesOfDryAir;
+    public static DryAirProperties getInstance(){
+        return INSTANCE;
     }
 
 }
