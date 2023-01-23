@@ -2,7 +2,7 @@ package com.synerset.unitsystem.temperature;
 
 import java.util.Objects;
 
-public class Celsius implements Temperature{
+public class Celsius implements Temperature {
 
     private static final String DEF_SYMBOL = "C";
 
@@ -23,13 +23,19 @@ public class Celsius implements Temperature{
     }
 
     @Override
+    public Kelvin toKelvin() {
+        return Kelvin.of(value + 273.15).getOrElseThrow(() -> new IllegalStateException("Invalid Temperature"));
+    }
+
+    @Override
     public Celsius toCelsius() {
         return this;
     }
 
     @Override
-    public Kelvin toKelvin() {
-        return Kelvin.of(value + 273.15).getOrElseThrow(() -> new IllegalStateException("Invalid Temperature"));
+    public Fahrenheit toFahrenheit() {
+        double tempInKelvin = toKelvin().getValue();
+        return Fahrenheit.of((5.0 / 9.0) * tempInKelvin - 459.67);
     }
 
     @Override
@@ -44,7 +50,7 @@ public class Celsius implements Temperature{
         return Objects.hash(value);
     }
 
-    static Celsius of(double value){
+    static Celsius of(double value) {
         return new Celsius(value);
     }
 
