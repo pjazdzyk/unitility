@@ -59,5 +59,4 @@ class PressureTest {
         assertThat(actualValueInMPa).isEqualTo(expectedValueInMPa);
     }
 
-
 }
