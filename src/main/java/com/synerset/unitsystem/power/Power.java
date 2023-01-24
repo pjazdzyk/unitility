@@ -12,4 +12,15 @@ public interface Power {
 
     BtuPerHour toBtuPerHour();
 
+    static Watt watt(double value){
+        return Watt.of(value);
+    }
+    static KiloWatt kiloWatt(double value){
+        return KiloWatt.of(value);
+    }
+
+    static BtuPerHour btuPerHour(double value){
+        return BtuPerHour.of(value);
+    }
+
 }
