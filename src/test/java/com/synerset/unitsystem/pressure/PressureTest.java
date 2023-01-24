@@ -8,23 +8,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PressureTest {
 
     // Given
-    private static final double TEST_PRESS_VALUE = 100_000.0;
-    private static final Pressure TEST_PASCAL_PRESS = Pressure.pascal(TEST_PRESS_VALUE);
+    private static final Pressure TEST_PASCAL_PRESS = Pressure.pascal(100_000.0);
 
     @Test
     @DisplayName("should convert Pascals to Bars and vice versa")
     void shouldConvertPascalsToBarsAndViceVersa() {
         // When
         Pressure actualUnitBar = TEST_PASCAL_PRESS.toBar();
-        double actualValueInBar = actualUnitBar.getValue();
-
         Pressure actualUnitPa = actualUnitBar.toPascal();
-        double actualValueInPa = actualUnitPa.getValue();
 
         // Then
-        assertThat(actualValueInPa).isEqualTo(TEST_PRESS_VALUE);
-        double expectedValueInBar = 1.0;
-        assertThat(actualValueInBar).isEqualTo(expectedValueInBar);
+        assertThat(actualUnitPa).isEqualTo(TEST_PASCAL_PRESS);
+        Bar expectedValueInBar = Pressure.bar(1.0);
+        assertThat(actualUnitBar).isEqualTo(expectedValueInBar);
     }
 
     @Test
@@ -32,15 +28,12 @@ class PressureTest {
     void shouldConvertPascalsToHectoPascalsAndViceVersa() {
         // When
         Pressure actualUnitHPa = TEST_PASCAL_PRESS.toHectoPascal();
-        double actualValueInHPa = actualUnitHPa.getValue();
-
         Pressure actualUnitPa = actualUnitHPa.toPascal();
-        double actualValueInPa = actualUnitPa.getValue();
 
         // Then
-        assertThat(actualValueInPa).isEqualTo(TEST_PRESS_VALUE);
-        double expectedValueInHPa = 1000;
-        assertThat(actualValueInHPa).isEqualTo(expectedValueInHPa);
+        assertThat(actualUnitPa).isEqualTo(TEST_PASCAL_PRESS);
+        HectoPascal expectedValueInHPa = Pressure.hectoPascal(1000.0);
+        assertThat(actualUnitHPa).isEqualTo(expectedValueInHPa);
     }
 
     @Test
@@ -48,15 +41,12 @@ class PressureTest {
     void shouldConvertPascalsToMegaPascalsAndViceVersa() {
         // When
         Pressure actualUnitMPa = TEST_PASCAL_PRESS.toMegaPascal();
-        double actualValueInMPa = actualUnitMPa.getValue();
-
         Pressure actualUnitPa = actualUnitMPa.toPascal();
-        double actualValueInPa = actualUnitPa.getValue();
 
         // Then
-        assertThat(actualValueInPa).isEqualTo(TEST_PRESS_VALUE);
-        double expectedValueInMPa = 0.1;
-        assertThat(actualValueInMPa).isEqualTo(expectedValueInMPa);
+        assertThat(actualUnitPa).isEqualTo(TEST_PASCAL_PRESS);
+        MegaPascal expectedValueInMPa = Pressure.megaPascal(0.1);
+        assertThat(actualUnitMPa).isEqualTo(expectedValueInMPa);
     }
 
 }
