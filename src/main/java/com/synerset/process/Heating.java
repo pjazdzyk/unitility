@@ -15,24 +15,24 @@ public class Heating {
         this.airFlowFactory = airFlowFactory;
     }
 
-    public HeatingResultDto fromOutletTemperature(FlowOfDryAir inletFlow, Temperature targetTemperature) {
-        double inTemp = inletFlow.temperature().toCelsius().getValue();
-        double outTemp = targetTemperature.toCelsius().getValue();
-        double specHeat = inletFlow.specificHeat().toKiloJoulePerKilogramKelvin().getValue();
-        double massFlow = inletFlow.massFlow().toKiloGramPerSecond().getValue();
+    public HeatingResultDto fromOutletTemperature(FlowOfDryAir inletFlow, Celsius targetTemperature) {
+        double inTemp = inletFlow.temperature().getValue();
+        double outTemp = targetTemperature.getValue();
+        double specHeat = inletFlow.specificHeat().getValue();
+        double massFlow = inletFlow.massFlow().getValue();
         KiloWatt heatOfProcess = Power.kiloWatt(massFlow * specHeat * (outTemp - inTemp));
         FlowOfDryAir outletAir = airFlowFactory.createFlowOfDryAir(targetTemperature, inletFlow.massFlow());
         return new HeatingResultDto(outletAir, heatOfProcess);
     }
 
-    public HeatingResultDto fromTargetPower(FlowOfDryAir inletFlow, Power targetPower) {
-        double inTemp = inletFlow.temperature().toCelsius().getValue();
-        double specHeat = inletFlow.specificHeat().toKiloJoulePerKilogramKelvin().getValue();
-        double massFlow = inletFlow.massFlow().toKiloGramPerSecond().getValue();
-        double heat = targetPower.toKiloWatt().getValue();
+    public HeatingResultDto fromInputPower(FlowOfDryAir inletFlow, KiloWatt inputPower) {
+        double inTemp = inletFlow.temperature().getValue();
+        double specHeat = inletFlow.specificHeat().getValue();
+        double massFlow = inletFlow.massFlow().getValue();
+        double heat = inputPower.getValue();
         Celsius outletTemperature = Temperature.celsius(heat / massFlow * specHeat + inTemp);
         FlowOfDryAir outletAir = airFlowFactory.createFlowOfDryAir(outletTemperature, inletFlow.massFlow());
-        return new HeatingResultDto(outletAir, targetPower.toKiloWatt());
+        return new HeatingResultDto(outletAir, inputPower.toKiloWatt());
     }
 
 
