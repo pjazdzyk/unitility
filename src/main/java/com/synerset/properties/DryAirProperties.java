@@ -24,7 +24,7 @@ public final class DryAirProperties {
     private DryAirProperties() {
     }
 
-    public SquareMeterPerSecond kinematicViscosity(Temperature temp, Density density){
+    public SquareMeterPerSecond kinematicViscosity(Temperature temp, Density density) {
         double dynVis = dynamicViscosity(temp).toKiloGramPerMeterSecond().getValue();
         double dens = density.toKiloGramPerCubicMeter().getValue();
         return KinematicViscosity.squareMeterPerSecond(dynVis / dens);
@@ -100,7 +100,7 @@ public final class DryAirProperties {
         return SpecificHeat.kiloJoulePerKilogramKelvin(specHeat);
     }
 
-    public static DryAirProperties getInstance(){
+    public static DryAirProperties getInstance() {
         return INSTANCE;
     }
 
