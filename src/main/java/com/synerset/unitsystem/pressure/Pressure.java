@@ -14,6 +14,8 @@ public interface Pressure {
 
     Bar toBar();
 
+    Psi toPsi();
+
     static Pascal pascal(double value) {
         return Pascal.of(value);
     }

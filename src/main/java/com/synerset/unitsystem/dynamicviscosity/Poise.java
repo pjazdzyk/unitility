@@ -1,5 +1,8 @@
 package com.synerset.unitsystem.dynamicviscosity;
 
+import com.synerset.unitsystem.density.KiloGramPerCubicMeter;
+import com.synerset.unitsystem.pressure.Pascal;
+
 import java.util.Objects;
 
 public class Poise implements DynamicViscosity {
@@ -27,7 +30,8 @@ public class Poise implements DynamicViscosity {
 
     @Override
     public KiloGramPerMeterSecond toKiloGramPerMeterSecond() {
-        return KiloGramPerMeterSecond.of(value / 10d);
+        PascalSecond pascalSecond = toPascalSecond();
+        return pascalSecond.toKiloGramPerMeterSecond();
     }
 
     @Override

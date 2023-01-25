@@ -2,12 +2,11 @@ package com.synerset.unitsystem.pressure;
 
 import java.util.Objects;
 
-public class HectoPascal implements Pressure {
-
-    private static final String DEF_SYMBOL = "hPa";
+public class Psi implements Pressure{
+    private static final String DEF_SYMBOL = "Psi";
     private final double value;
 
-    private HectoPascal(double value) {
+    private Psi(double value) {
         this.value = value;
     }
 
@@ -23,12 +22,13 @@ public class HectoPascal implements Pressure {
 
     @Override
     public Pascal toPascal() {
-        return Pascal.of(value * 1E2);
+        return Pascal.of(value / 0.0001450377);
     }
 
     @Override
     public HectoPascal toHectoPascal() {
-        return this;
+        Pascal pascal = toPascal();
+        return pascal.toHectoPascal();
     }
 
     @Override
@@ -45,15 +45,14 @@ public class HectoPascal implements Pressure {
 
     @Override
     public Psi toPsi() {
-        Pascal pascal = toPascal();
-        return pascal.toPsi();
+        return this;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof HectoPascal that)) return false;
-        return Double.compare(that.value, value) == 0;
+        if (!(o instanceof Psi psi)) return false;
+        return Double.compare(psi.value, value) == 0;
     }
 
     @Override
@@ -61,8 +60,8 @@ public class HectoPascal implements Pressure {
         return Objects.hash(value);
     }
 
-    static HectoPascal of(double value) {
-        return new HectoPascal(value);
+    static Psi of(double value){
+        return new Psi(value);
     }
 
 }

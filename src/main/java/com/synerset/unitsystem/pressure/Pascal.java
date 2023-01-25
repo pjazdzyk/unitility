@@ -42,6 +42,11 @@ public class Pascal implements Pressure{
     }
 
     @Override
+    public Psi toPsi() {
+        return Psi.of(value * 0.0001450377);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Pascal pascal)) return false;

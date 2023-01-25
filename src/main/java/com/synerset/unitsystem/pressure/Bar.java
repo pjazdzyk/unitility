@@ -28,17 +28,25 @@ public class Bar implements Pressure {
 
     @Override
     public HectoPascal toHectoPascal() {
-        return HectoPascal.of(toPascal().getValue() / 1E2);
+        Pascal pascal = toPascal();
+        return pascal.toHectoPascal();
     }
 
     @Override
     public MegaPascal toMegaPascal() {
-        return MegaPascal.of(toPascal().getValue() / 1E6);
+        Pascal pascal = toPascal();
+        return pascal.toMegaPascal();
     }
 
     @Override
     public Bar toBar() {
         return this;
+    }
+
+    @Override
+    public Psi toPsi() {
+        Pascal pascal = toPascal();
+        return pascal.toPsi();
     }
 
     @Override
