@@ -5,7 +5,7 @@ If you like my project, please hit the star button, thank you!
 
 ## Development status
 This is an early development stage. Any contributions and suggestions are most welcome.
-The project includes also other modules, to show an example of how this unit system can be incorporated into our calculation applications. In the later version, it will be removed, an only the unit package will stay.
+The project includes also other modules, to show an example of how this unit system can be incorporated into any type of calculation application. In the later version, it will be removed, and only the unit system package will stay.
 
 ## Specification
 
