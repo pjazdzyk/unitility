@@ -32,4 +32,8 @@ public interface Pressure {
         return Bar.of(value);
     }
 
+    static Psi psi(double value) {
+        return Psi.of(value);
+    }
+
 }
