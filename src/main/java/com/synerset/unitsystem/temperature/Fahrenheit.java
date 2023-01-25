@@ -29,8 +29,8 @@ public class Fahrenheit implements Temperature {
 
     @Override
     public Celsius toCelsius() {
-        double tempInKelvin = toKelvin().getValue();
-        return Celsius.of(tempInKelvin + 273.15);
+        Kelvin valInKelvin = toKelvin();
+        return valInKelvin.toCelsius();
     }
 
     @Override

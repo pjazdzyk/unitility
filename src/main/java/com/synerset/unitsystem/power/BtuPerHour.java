@@ -27,8 +27,8 @@ public class BtuPerHour implements Power{
 
     @Override
     public KiloWatt toKiloWatt() {
-        double valInWatt = toWatt().getValue();
-        return KiloWatt.of(valInWatt / 1E3);
+        Watt valInWatt = toWatt();
+        return valInWatt.toKiloWatt();
     }
 
     @Override

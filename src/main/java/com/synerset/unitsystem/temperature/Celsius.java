@@ -34,8 +34,8 @@ public class Celsius implements Temperature {
 
     @Override
     public Fahrenheit toFahrenheit() {
-        double tempInKelvin = toKelvin().getValue();
-        return Fahrenheit.of((5.0 / 9.0) * tempInKelvin - 459.67);
+        Kelvin valInKelvin = toKelvin();
+        return valInKelvin.toFahrenheit();
     }
 
     @Override

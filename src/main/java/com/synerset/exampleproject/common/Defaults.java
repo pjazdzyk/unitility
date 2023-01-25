@@ -1,4 +1,4 @@
-package com.synerset.common;
+package com.synerset.exampleproject.common;
 
 import com.synerset.unitsystem.pressure.Pascal;
 import com.synerset.unitsystem.pressure.Pressure;

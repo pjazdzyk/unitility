@@ -1,8 +1,10 @@
-package com.synerset.process;
+package com.synerset.exampleproject.process;
 
-import com.synerset.properties.DryAirProperties;
-import com.synerset.state.AirFlowFactory;
-import com.synerset.state.FlowOfDryAir;
+import com.synerset.exampleproject.process.Heating;
+import com.synerset.exampleproject.process.HeatingResultDto;
+import com.synerset.exampleproject.properties.DryAirProperties;
+import com.synerset.exampleproject.state.AirFlowFactory;
+import com.synerset.exampleproject.state.FlowOfDryAir;
 import com.synerset.unitsystem.massflow.KiloGramPerSecond;
 import com.synerset.unitsystem.massflow.MassFlow;
 import com.synerset.unitsystem.power.KiloWatt;
@@ -41,4 +43,8 @@ class HeatingTest {
         KiloWatt expectedPower = Power.watt(3811.4).toKiloWatt();
         assertThat(actualPower).isEqualTo(expectedPower);
     }
+
+
+
+
 }

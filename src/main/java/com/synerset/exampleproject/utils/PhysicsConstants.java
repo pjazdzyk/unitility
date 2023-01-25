@@ -1,4 +1,4 @@
-package com.synerset.utils;
+package com.synerset.exampleproject.utils;
 
 /**
  * List of most relevant physical constants used in calculations.<br>

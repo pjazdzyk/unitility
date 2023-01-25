@@ -1,5 +1,6 @@
-package com.synerset.properties;
+package com.synerset.exampleproject.properties;
 
+import com.synerset.exampleproject.utils.PhysicsConstants;
 import com.synerset.unitsystem.density.Density;
 import com.synerset.unitsystem.density.KiloGramPerCubicMeter;
 import com.synerset.unitsystem.dynamicviscosity.DynamicViscosity;
@@ -14,8 +15,7 @@ import com.synerset.unitsystem.specificheat.SpecificHeat;
 import com.synerset.unitsystem.temperature.Temperature;
 import com.synerset.unitsystem.thermalconductivity.ThermalConductivity;
 import com.synerset.unitsystem.thermalconductivity.WattPerMeterKelvin;
-import com.synerset.utils.MathUtils;
-import com.synerset.utils.PhysicsConstants;
+import com.synerset.exampleproject.utils.MathUtils;
 
 public final class DryAirProperties {
 

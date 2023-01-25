@@ -1,7 +1,7 @@
-package com.synerset.process;
+package com.synerset.exampleproject.process;
 
-import com.synerset.state.AirFlowFactory;
-import com.synerset.state.FlowOfDryAir;
+import com.synerset.exampleproject.state.AirFlowFactory;
+import com.synerset.exampleproject.state.FlowOfDryAir;
 import com.synerset.unitsystem.power.KiloWatt;
 import com.synerset.unitsystem.power.Power;
 import com.synerset.unitsystem.temperature.Celsius;

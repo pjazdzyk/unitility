@@ -33,8 +33,8 @@ public class KiloGramPerHour implements MassFlow{
 
     @Override
     public PoundPerSecond toPoundPerSecond() {
-        double flowInKgs = toKiloGramPerSecond().getValue();
-        return PoundPerSecond.of(flowInKgs / 2.204622622);
+        KiloGramPerSecond flowInKgs = toKiloGramPerSecond();
+        return flowInKgs.toPoundPerSecond();
     }
 
     @Override

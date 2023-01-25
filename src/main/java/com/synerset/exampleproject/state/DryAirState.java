@@ -1,4 +1,4 @@
-package com.synerset.state;
+package com.synerset.exampleproject.state;
 
 import com.synerset.unitsystem.density.KiloGramPerCubicMeter;
 import com.synerset.unitsystem.pressure.Pascal;
