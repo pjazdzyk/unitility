@@ -11,7 +11,7 @@ The project includes also other modules, to show an example of how this unit sys
 
 At current level of development following units are available:
 - Temperature (K, C, F)
-- Pressure (Pa, hPa, MPa, Bar)
+- Pressure (Pa, hPa, MPa, Bar, Psi)
 - Density (kg/m<sup>3</sup>, lb/ft<sup>3</sup>)
 - Kinematic viscosity (m<sup>2</sup>/s, in<sup>2</sup>/s)
 - Dynamic viscosity (kg/ms, Pas, Ps)
