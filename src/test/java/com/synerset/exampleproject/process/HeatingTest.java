@@ -1,7 +1,5 @@
 package com.synerset.exampleproject.process;
 
-import com.synerset.exampleproject.process.Heating;
-import com.synerset.exampleproject.process.HeatingResultDto;
 import com.synerset.exampleproject.properties.DryAirProperties;
 import com.synerset.exampleproject.state.AirFlowFactory;
 import com.synerset.exampleproject.state.FlowOfDryAir;
