@@ -2,7 +2,7 @@ package com.synerset.unitsystem.temperature;
 
 import java.util.Objects;
 
-public class Celsius implements Temperature {
+public final class Celsius implements Temperature {
 
     private static final String DEF_SYMBOL = "C";
 

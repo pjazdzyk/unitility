@@ -2,7 +2,7 @@ package com.synerset.unitsystem.temperature;
 
 import java.util.Objects;
 
-public class Fahrenheit implements Temperature {
+public final class Fahrenheit implements Temperature {
 
     private static final String DEF_SYMBOL = "F";
 

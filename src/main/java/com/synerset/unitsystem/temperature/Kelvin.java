@@ -4,7 +4,7 @@ import io.vavr.control.Either;
 
 import java.util.Objects;
 
-public class Kelvin implements Temperature {
+public final class Kelvin implements Temperature {
 
     private static final String DEF_SYMBOL = "K";
     private final double value;

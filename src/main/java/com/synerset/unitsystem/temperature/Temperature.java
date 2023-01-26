@@ -2,7 +2,7 @@ package com.synerset.unitsystem.temperature;
 
 import io.vavr.control.Either;
 
-public interface Temperature {
+public sealed interface Temperature permits Celsius, Fahrenheit, Kelvin {
 
     double getValue();
 

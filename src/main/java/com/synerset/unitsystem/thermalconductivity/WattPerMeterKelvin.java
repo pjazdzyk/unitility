@@ -2,7 +2,7 @@ package com.synerset.unitsystem.thermalconductivity;
 
 import java.util.Objects;
 
-public class WattPerMeterKelvin implements ThermalConductivity {
+public final class WattPerMeterKelvin implements ThermalConductivity {
 
     private static final String DEF_SYMBOL = "W/mK";
 

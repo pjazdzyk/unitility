@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.thermalconductivity;
 
-public interface ThermalConductivity {
+public sealed interface ThermalConductivity permits BtuPerHourFootFahrenheit, WattPerMeterKelvin {
 
     double getValue();
 

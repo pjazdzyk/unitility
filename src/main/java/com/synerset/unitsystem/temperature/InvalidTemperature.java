@@ -1,3 +1,3 @@
 package com.synerset.unitsystem.temperature;
 
-public class InvalidTemperature {}
+public final class InvalidTemperature {}

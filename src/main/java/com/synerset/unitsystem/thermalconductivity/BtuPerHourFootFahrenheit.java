@@ -2,7 +2,7 @@ package com.synerset.unitsystem.thermalconductivity;
 
 import java.util.Objects;
 
-public class BtuPerHourFootFahrenheit implements ThermalConductivity {
+public final class BtuPerHourFootFahrenheit implements ThermalConductivity {
     private static final String DEF_SYMBOL = "BTU/hftF";
 
     private final double value;
