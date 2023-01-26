@@ -2,7 +2,7 @@ package com.synerset.unitsystem.specificheat;
 
 import java.util.Objects;
 
-public class JoulePerKilogramKelvin implements SpecificHeat {
+public final class JoulePerKilogramKelvin implements SpecificHeat {
 
     private static final String DEF_SYMBOL = "J/kgK";
     private final double value;

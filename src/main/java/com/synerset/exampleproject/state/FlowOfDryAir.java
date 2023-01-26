@@ -6,8 +6,7 @@ import com.synerset.unitsystem.pressure.Pascal;
 import com.synerset.unitsystem.specificheat.KiloJoulePerKilogramKelvin;
 import com.synerset.unitsystem.temperature.Celsius;
 
-public record FlowOfDryAir(DryAirState dryAir,
-                           KiloGramPerSecond massFlow){
+public record FlowOfDryAir(DryAirState dryAir, KiloGramPerSecond massFlow){
     public Pascal pressure(){
         return dryAir.pressure();
     }

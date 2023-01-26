@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.specificenthalpy;
 
-public interface SpecificEnthalpy {
+public sealed interface SpecificEnthalpy permits JoulePerKiloGram, KiloJoulePerKiloGram {
     double getValue();
 
     String getSymbol();

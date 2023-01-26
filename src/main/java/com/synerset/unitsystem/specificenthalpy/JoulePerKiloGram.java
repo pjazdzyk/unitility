@@ -2,7 +2,7 @@ package com.synerset.unitsystem.specificenthalpy;
 
 import java.util.Objects;
 
-public class JoulePerKiloGram implements SpecificEnthalpy {
+public final class JoulePerKiloGram implements SpecificEnthalpy {
 
     private static final String DEF_SYMBOL = "J/kg";
     private final double value;

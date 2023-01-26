@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.massflow;
 
-public interface MassFlow {
+public sealed interface MassFlow permits KiloGramPerHour, KiloGramPerSecond, PoundPerSecond {
     double getValue();
 
     String getSymbol();

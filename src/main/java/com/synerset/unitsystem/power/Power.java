@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.power;
 
-public interface Power {
+public sealed interface Power permits BtuPerHour, KiloWatt, Watt {
 
     double getValue();
 

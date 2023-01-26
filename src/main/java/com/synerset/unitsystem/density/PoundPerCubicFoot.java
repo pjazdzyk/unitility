@@ -2,7 +2,7 @@ package com.synerset.unitsystem.density;
 
 import java.util.Objects;
 
-public class PoundPerCubicFoot implements Density {
+public final class PoundPerCubicFoot implements Density {
 
     private static final String DEF_SYMBOL = "lb/ft³";
     private final double value;

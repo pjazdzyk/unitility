@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.pressure;
 
-public interface Pressure {
+public sealed interface Pressure permits Bar, HectoPascal, MegaPascal, Pascal, Psi {
 
     double getValue();
 

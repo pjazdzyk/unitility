@@ -2,7 +2,7 @@ package com.synerset.unitsystem.pressure;
 
 import java.util.Objects;
 
-public class Psi implements Pressure{
+public final class Psi implements Pressure{
     private static final String DEF_SYMBOL = "Psi";
     private final double value;
 

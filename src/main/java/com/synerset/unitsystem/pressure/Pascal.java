@@ -2,7 +2,7 @@ package com.synerset.unitsystem.pressure;
 
 import java.util.Objects;
 
-public class Pascal implements Pressure{
+public final class Pascal implements Pressure{
 
     private static final String DEF_SYMBOL = "Pa";
     private final double value;

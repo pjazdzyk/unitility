@@ -2,7 +2,7 @@ package com.synerset.unitsystem.dynamicviscosity;
 
 import java.util.Objects;
 
-public class PascalSecond implements DynamicViscosity{
+public final class PascalSecond implements DynamicViscosity{
 
     private static final String DEF_SYMBOL = "Pas";
     private final double value;

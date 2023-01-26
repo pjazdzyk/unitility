@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.density;
 
-public interface Density {
+public sealed interface Density permits KiloGramPerCubicMeter, PoundPerCubicFoot {
     double getValue();
 
     String getSymbol();

@@ -1,11 +1,8 @@
 package com.synerset.unitsystem.dynamicviscosity;
 
-import com.synerset.unitsystem.density.KiloGramPerCubicMeter;
-import com.synerset.unitsystem.pressure.Pascal;
-
 import java.util.Objects;
 
-public class Poise implements DynamicViscosity {
+public final class Poise implements DynamicViscosity {
     private static final String DEF_SYMBOL = "P";
     private final double value;
 

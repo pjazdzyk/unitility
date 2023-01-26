@@ -2,7 +2,7 @@ package com.synerset.unitsystem.pressure;
 
 import java.util.Objects;
 
-public class HectoPascal implements Pressure {
+public final class HectoPascal implements Pressure {
 
     private static final String DEF_SYMBOL = "hPa";
     private final double value;

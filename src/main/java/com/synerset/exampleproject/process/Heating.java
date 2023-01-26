@@ -35,5 +35,4 @@ public class Heating {
         return new HeatingResultDto(outletAir, inputPower.toKiloWatt());
     }
 
-
 }

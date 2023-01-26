@@ -2,7 +2,7 @@ package com.synerset.unitsystem.massflow;
 
 import java.util.Objects;
 
-public class KiloGramPerHour implements MassFlow{
+public final class KiloGramPerHour implements MassFlow{
 
     private static final String DEF_SYMBOL = "kg/h";
     private final double value;

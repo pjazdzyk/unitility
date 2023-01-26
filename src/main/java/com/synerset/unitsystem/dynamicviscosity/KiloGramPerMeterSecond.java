@@ -2,7 +2,7 @@ package com.synerset.unitsystem.dynamicviscosity;
 
 import java.util.Objects;
 
-public class KiloGramPerMeterSecond implements DynamicViscosity{
+public final class KiloGramPerMeterSecond implements DynamicViscosity{
     private static final String DEF_SYMBOL = "kg/ms";
     private final double value;
 

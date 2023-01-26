@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.kinematicviscosity;
 
-public interface KinematicViscosity {
+public sealed interface KinematicViscosity permits SquareInchPerSecond, SquareMeterPerSecond {
 
     double getValue();
 

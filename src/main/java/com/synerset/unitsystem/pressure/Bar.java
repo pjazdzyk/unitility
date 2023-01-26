@@ -2,7 +2,7 @@ package com.synerset.unitsystem.pressure;
 
 import java.util.Objects;
 
-public class Bar implements Pressure {
+public final class Bar implements Pressure {
 
     private static final String DEF_SYMBOL = "bar";
     private final double value;

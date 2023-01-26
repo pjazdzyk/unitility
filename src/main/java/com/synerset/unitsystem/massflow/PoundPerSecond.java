@@ -2,7 +2,7 @@ package com.synerset.unitsystem.massflow;
 
 import java.util.Objects;
 
-public class PoundPerSecond implements MassFlow {
+public final class PoundPerSecond implements MassFlow {
     private static final String DEF_SYMBOL = "lb/s";
     private final double value;
 

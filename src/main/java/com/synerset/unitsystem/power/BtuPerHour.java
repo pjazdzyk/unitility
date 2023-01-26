@@ -2,7 +2,7 @@ package com.synerset.unitsystem.power;
 
 import java.util.Objects;
 
-public class BtuPerHour implements Power{
+public final class BtuPerHour implements Power{
     private static final String DEF_SYMBOL = "BTU/hr";
     private final double value;
 

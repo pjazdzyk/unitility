@@ -2,7 +2,7 @@ package com.synerset.unitsystem.density;
 
 import java.util.Objects;
 
-public class KiloGramPerCubicMeter implements Density {
+public final class KiloGramPerCubicMeter implements Density {
 
     private static final String DEF_SYMBOL = "kg/m³";
     private final double value;

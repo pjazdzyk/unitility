@@ -2,7 +2,7 @@ package com.synerset.unitsystem.power;
 
 import java.util.Objects;
 
-public class KiloWatt implements Power {
+public final class KiloWatt implements Power {
     private static final String DEF_SYMBOL = "kW";
     private final double value;
 

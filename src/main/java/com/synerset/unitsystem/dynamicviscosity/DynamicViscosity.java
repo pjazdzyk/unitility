@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.dynamicviscosity;
 
-public interface DynamicViscosity {
+public sealed interface DynamicViscosity permits KiloGramPerMeterSecond, PascalSecond, Poise {
 
     double getValue();
 

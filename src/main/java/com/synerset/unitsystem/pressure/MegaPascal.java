@@ -2,7 +2,7 @@ package com.synerset.unitsystem.pressure;
 
 import java.util.Objects;
 
-public class MegaPascal implements Pressure{
+public final class MegaPascal implements Pressure{
 
     private static final String DEF_SYMBOL = "MPa";
     private final double value;

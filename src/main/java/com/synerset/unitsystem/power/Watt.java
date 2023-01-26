@@ -2,7 +2,7 @@ package com.synerset.unitsystem.power;
 
 import java.util.Objects;
 
-public class Watt implements Power {
+public final class Watt implements Power {
     private static final String DEF_SYMBOL = "W";
     private final double value;
 

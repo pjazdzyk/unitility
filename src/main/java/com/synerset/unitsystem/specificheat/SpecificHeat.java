@@ -1,6 +1,6 @@
 package com.synerset.unitsystem.specificheat;
 
-public interface SpecificHeat {
+public sealed interface SpecificHeat permits JoulePerKilogramKelvin, KiloJoulePerKilogramKelvin {
 
     double getValue();
 

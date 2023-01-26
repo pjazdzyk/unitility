@@ -2,7 +2,7 @@ package com.synerset.unitsystem.kinematicviscosity;
 
 import java.util.Objects;
 
-public class SquareMeterPerSecond implements KinematicViscosity{
+public final class SquareMeterPerSecond implements KinematicViscosity{
     private static final String DEF_SYMBOL = "m²/s";
     private final double value;
 
