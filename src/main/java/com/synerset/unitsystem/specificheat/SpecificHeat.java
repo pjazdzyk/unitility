@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.specificheat;
 
+import io.vavr.control.Either;
+
 public sealed interface SpecificHeat permits JoulePerKilogramKelvin, KiloJoulePerKilogramKelvin {
 
     double getValue();
@@ -10,11 +12,11 @@ public sealed interface SpecificHeat permits JoulePerKilogramKelvin, KiloJoulePe
 
     KiloJoulePerKilogramKelvin toKiloJoulePerKilogramKelvin();
 
-    static JoulePerKilogramKelvin joulePerKilogramKelvin(double value){
+    static Either<InvalidSpecificHeat, JoulePerKilogramKelvin> joulePerKilogramKelvin(double value){
         return JoulePerKilogramKelvin.of(value);
     }
 
-    static KiloJoulePerKilogramKelvin kiloJoulePerKilogramKelvin(double value){
+    static Either<InvalidSpecificHeat, KiloJoulePerKilogramKelvin> kiloJoulePerKilogramKelvin(double value){
         return KiloJoulePerKilogramKelvin.of(value);
     }
 

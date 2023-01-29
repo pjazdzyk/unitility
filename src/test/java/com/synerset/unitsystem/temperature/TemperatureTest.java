@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class TemperatureTest {
 
@@ -23,7 +22,7 @@ class TemperatureTest {
 
         // Then
         assertThat(actualUnitKelvin).isEqualTo(TEST_KELVIN_TEMP);
-        Celsius expectedValueInCelsius = Temperature.celsius(20.0);
+        Celsius expectedValueInCelsius = Temperature.celsius(20.0).get();
         assertThat(actualUnitCelsius).isEqualTo(expectedValueInCelsius);
     }
 
@@ -52,6 +51,6 @@ class TemperatureTest {
     @DisplayName("should return InvalidTemperature when unphysical temperature in Celsius is given")
     void shouldReturnInvalidTemperatureWhenUnphysicalTempInCelsiusIsGiven(){
         // Then
-        assertThatThrownBy(()->Temperature.celsius(-1000)).isInstanceOf(IllegalStateException.class);
+        assertThat(Temperature.celsius(-1000).getLeft()).isInstanceOf(InvalidTemperature.class);
     }
 }

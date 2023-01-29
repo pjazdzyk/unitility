@@ -1,11 +1,16 @@
 package com.synerset.unitsystem.specificheat;
 
-import java.util.Objects;
+import io.vavr.control.Either;
 
-public final class KiloJoulePerKilogramKelvin implements SpecificHeat{
+import java.util.Objects;
+import java.util.function.DoubleFunction;
+
+public final class KiloJoulePerKilogramKelvin implements SpecificHeat {
 
     private static final String DEF_SYMBOL = "kJ/kgK";
     private final double value;
+
+    private static final DoubleFunction<Double> VALUE_TO_J_KGK = val -> val * 1E3;
 
     private KiloJoulePerKilogramKelvin(double value) {
         this.value = value;
@@ -23,7 +28,8 @@ public final class KiloJoulePerKilogramKelvin implements SpecificHeat{
 
     @Override
     public JoulePerKilogramKelvin toJoulePerKilogramKelvin() {
-        return JoulePerKilogramKelvin.of(value * 1E3);
+        return JoulePerKilogramKelvin.of(VALUE_TO_J_KGK.apply(value))
+                .getOrElseThrow(() -> new IllegalStateException());
     }
 
     @Override
@@ -43,8 +49,15 @@ public final class KiloJoulePerKilogramKelvin implements SpecificHeat{
         return Objects.hash(value);
     }
 
-    public static KiloJoulePerKilogramKelvin of(double value) {
-        return new KiloJoulePerKilogramKelvin(value);
+    public static Either<InvalidSpecificHeat, KiloJoulePerKilogramKelvin> of(double value) {
+        return JoulePerKilogramKelvin.of(VALUE_TO_J_KGK.apply(value))
+                .mapLeft(left -> new InvalidSpecificHeat(value, KiloJoulePerKilogramKelvin.class))
+                .map(right -> new KiloJoulePerKilogramKelvin(value));
+    }
+
+    @Override
+    public String toString() {
+        return value + ", " + DEF_SYMBOL;
     }
 
 }

@@ -3,11 +3,13 @@ package com.synerset.unitsystem.temperature;
 import io.vavr.control.Either;
 
 import java.util.Objects;
+import java.util.function.DoubleFunction;
 
 public final class Kelvin implements Temperature {
 
     private static final String DEF_SYMBOL = "K";
     private final double value;
+    private static final DoubleFunction<Double> VALUE_TO_KELVIN = val -> (5.0 / 9.0) * (val + 459.67);
 
     private Kelvin(double value) {
         this.value = value;
@@ -30,12 +32,14 @@ public final class Kelvin implements Temperature {
 
     @Override
     public Celsius toCelsius() {
-        return Celsius.of(value - 273.15);
+        return Celsius.of(value - 273.15)
+                .getOrElseThrow(() -> new IllegalStateException());
     }
 
     @Override
     public Fahrenheit toFahrenheit() {
-        return Fahrenheit.of((9.0 / 5.0) * value - 459.67);
+        return Fahrenheit.of((9.0 / 5.0) * value - 459.67)
+                .getOrElseThrow((() -> new IllegalStateException()));
     }
 
     @Override
@@ -52,8 +56,12 @@ public final class Kelvin implements Temperature {
 
     static Either<InvalidTemperature, Kelvin> of(double value) {
         return value < 0.0
-                ? Either.left(new InvalidTemperature())
+                ? Either.left(new InvalidTemperature(value, Kelvin.class))
                 : Either.right(new Kelvin(value));
     }
 
+    @Override
+    public String toString() {
+        return value + ", " + DEF_SYMBOL;
+    }
 }

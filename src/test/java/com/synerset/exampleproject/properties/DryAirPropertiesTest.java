@@ -21,14 +21,14 @@ class DryAirPropertiesTest {
     @DisplayName("should return kinematic viscosity when temperature and density is given in SI")
     void shouldReturnKinematicViscosityWhenTempAndDensityIsGivenInSiUnits(){
         // Given
-        Celsius airTemp = Temperature.celsius(20);
+        Celsius airTemp = Temperature.celsius(20).get();
         Pascal airPress = Pressure.pascal(100_000);
 
         // When
-        KiloGramPerCubicMeter actualDensity = DRY_AIR_PROPERTIES.density(airTemp, airPress);
+        KiloGramPerCubicMeter actualDensity = DRY_AIR_PROPERTIES.density(airTemp, airPress).get();
 
         // Then
-        KiloGramPerCubicMeter expectedDensity = Density.kiloGramPerCubicMeter(1.1883516829241942);
+        KiloGramPerCubicMeter expectedDensity = Density.kiloGramPerCubicMeter(1.1883516829241942).get();
         assertThat(actualDensity).isEqualTo(expectedDensity);
     }
 
@@ -36,14 +36,14 @@ class DryAirPropertiesTest {
     @DisplayName("should return kinematic viscosity when temperature and density is given in Imperial")
     void shouldReturnKinematicViscosityWhenTempAndDensityIsGivenInImperialUnits(){
         // Given
-        Fahrenheit airTemp = Temperature.celsius(20).toFahrenheit();
+        Fahrenheit airTemp = Temperature.celsius(20).get().toFahrenheit();
         Psi airPress = Pressure.pascal(100_000).toPsi();
 
         // When
-        KiloGramPerCubicMeter actualDensity = DRY_AIR_PROPERTIES.density(airTemp, airPress);
+        KiloGramPerCubicMeter actualDensity = DRY_AIR_PROPERTIES.density(airTemp, airPress).get();
 
         // Then
-        KiloGramPerCubicMeter expectedDensity = Density.kiloGramPerCubicMeter(1.1883516829241942);
+        KiloGramPerCubicMeter expectedDensity = Density.kiloGramPerCubicMeter(1.1883516829241942).get();
         assertThat(actualDensity).isEqualTo(expectedDensity);
     }
 

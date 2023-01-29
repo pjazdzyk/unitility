@@ -1,3 +1,3 @@
 package com.synerset.unitsystem.temperature;
 
-public final class InvalidTemperature {}
+public record InvalidTemperature(double value, Class<? extends Temperature> unitClass){}

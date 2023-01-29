@@ -26,11 +26,11 @@ class HeatingTest {
     void shouldHeatUpInletAirWhenTargetTempIsGiven() {
         // Given
         KiloGramPerSecond expectedMassFlow = MassFlow.kiloGramPerSecond(0.1);
-        FlowOfDryAir inletFlow = FLOW_FACTORY.createFlowOfDryAir(Temperature.celsius(-20.0), expectedMassFlow);
-        Celsius expectedTargetTemp = Temperature.celsius(18.0);
+        FlowOfDryAir inletFlow = FLOW_FACTORY.createFlowOfDryAir(Temperature.celsius(-20.0).get(), expectedMassFlow).get();
+        Celsius expectedTargetTemp = Temperature.celsius(18.0).get();
 
         // When
-        HeatingResultDto heatingResults = HEATING_PROCESS.fromOutletTemperature(inletFlow, expectedTargetTemp);
+        HeatingResultDto heatingResults = HEATING_PROCESS.fromOutletTemperature(inletFlow, expectedTargetTemp).get();
         Celsius actualOutTemperature = heatingResults.outletFlow().temperature();
         MassFlow actualMassFlow = heatingResults.outletFlow().massFlow();
         KiloWatt actualPower = heatingResults.outputPower();

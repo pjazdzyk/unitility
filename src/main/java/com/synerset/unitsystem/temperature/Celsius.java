@@ -1,11 +1,14 @@
 package com.synerset.unitsystem.temperature;
 
+import io.vavr.control.Either;
+
 import java.util.Objects;
+import java.util.function.DoubleFunction;
 
 public final class Celsius implements Temperature {
 
-    private static final String DEF_SYMBOL = "C";
-
+    private static final String DEF_SYMBOL = "°C";
+    private static final DoubleFunction<Double> VALUE_TO_KELVIN = val -> val + 273.15;
     private final double value;
 
     private Celsius(double value) {
@@ -24,7 +27,8 @@ public final class Celsius implements Temperature {
 
     @Override
     public Kelvin toKelvin() {
-        return Kelvin.of(value + 273.15).getOrElseThrow(() -> new IllegalStateException("Invalid Temperature"));
+        return Kelvin.of(VALUE_TO_KELVIN.apply(value))
+                .getOrElseThrow(() -> new IllegalStateException());
     }
 
     @Override
@@ -50,8 +54,14 @@ public final class Celsius implements Temperature {
         return Objects.hash(value);
     }
 
-    static Celsius of(double value) {
-        return new Celsius(value);
+    static Either<InvalidTemperature, Celsius> of(double value) {
+        return Kelvin.of(VALUE_TO_KELVIN.apply(value))
+                .mapLeft(left -> new InvalidTemperature(value, Celsius.class))
+                .map(right -> new Celsius(value));
     }
 
+    @Override
+    public String toString() {
+        return value + ", " + DEF_SYMBOL;
+    }
 }

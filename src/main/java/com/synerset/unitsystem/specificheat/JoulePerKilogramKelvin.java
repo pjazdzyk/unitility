@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.specificheat;
 
+import io.vavr.control.Either;
+
 import java.util.Objects;
 
 public final class JoulePerKilogramKelvin implements SpecificHeat {
@@ -28,7 +30,8 @@ public final class JoulePerKilogramKelvin implements SpecificHeat {
 
     @Override
     public KiloJoulePerKilogramKelvin toKiloJoulePerKilogramKelvin() {
-        return KiloJoulePerKilogramKelvin.of(value / 1E3);
+        return KiloJoulePerKilogramKelvin.of(value / 1E3)
+                .getOrElseThrow(() -> new IllegalStateException());
     }
 
     @Override
@@ -43,8 +46,15 @@ public final class JoulePerKilogramKelvin implements SpecificHeat {
         return Objects.hash(value);
     }
 
-    public static JoulePerKilogramKelvin of(double value) {
-        return new JoulePerKilogramKelvin(value);
+    public static Either<InvalidSpecificHeat, JoulePerKilogramKelvin> of(double value) {
+        return value < 0.0
+                ? Either.left(new InvalidSpecificHeat(value, JoulePerKilogramKelvin.class))
+                : Either.right(new JoulePerKilogramKelvin(value));
+    }
+
+    @Override
+    public String toString() {
+        return value + ", " + DEF_SYMBOL;
     }
 
 }

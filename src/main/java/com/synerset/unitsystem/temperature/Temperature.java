@@ -18,11 +18,11 @@ public sealed interface Temperature permits Celsius, Fahrenheit, Kelvin {
         return Kelvin.of(value);
     }
 
-    static Celsius celsius(double value) {
+    static Either<InvalidTemperature, Celsius> celsius(double value) {
         return Celsius.of(value);
     }
 
-    static Fahrenheit fahrenheit(double value){
+    static Either<InvalidTemperature, Fahrenheit> fahrenheit(double value){
         return Fahrenheit.of(value);
     }
 

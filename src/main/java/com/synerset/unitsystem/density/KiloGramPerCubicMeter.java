@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.density;
 
+import io.vavr.control.Either;
+
 import java.util.Objects;
 
 public final class KiloGramPerCubicMeter implements Density {
@@ -43,8 +45,10 @@ public final class KiloGramPerCubicMeter implements Density {
         return Objects.hash(value);
     }
 
-    static KiloGramPerCubicMeter of(double value){
-        return new KiloGramPerCubicMeter(value);
+    static Either<InvalidDensity, KiloGramPerCubicMeter> of(double value){
+        return value < 0.0
+                ? Either.left(new InvalidDensity())
+                : Either.right(new KiloGramPerCubicMeter(value));
     }
 
 }

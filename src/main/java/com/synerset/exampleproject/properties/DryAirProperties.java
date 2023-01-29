@@ -2,20 +2,24 @@ package com.synerset.exampleproject.properties;
 
 import com.synerset.exampleproject.utils.PhysicsConstants;
 import com.synerset.unitsystem.density.Density;
+import com.synerset.unitsystem.density.InvalidDensity;
 import com.synerset.unitsystem.density.KiloGramPerCubicMeter;
 import com.synerset.unitsystem.dynamicviscosity.DynamicViscosity;
 import com.synerset.unitsystem.dynamicviscosity.KiloGramPerMeterSecond;
 import com.synerset.unitsystem.kinematicviscosity.KinematicViscosity;
 import com.synerset.unitsystem.kinematicviscosity.SquareMeterPerSecond;
 import com.synerset.unitsystem.pressure.Pressure;
+import com.synerset.unitsystem.specificenthalpy.InvalidSpecificEnthalpy;
 import com.synerset.unitsystem.specificenthalpy.KiloJoulePerKiloGram;
 import com.synerset.unitsystem.specificenthalpy.SpecificEnthalpy;
+import com.synerset.unitsystem.specificheat.InvalidSpecificHeat;
 import com.synerset.unitsystem.specificheat.KiloJoulePerKilogramKelvin;
 import com.synerset.unitsystem.specificheat.SpecificHeat;
 import com.synerset.unitsystem.temperature.Temperature;
 import com.synerset.unitsystem.thermalconductivity.ThermalConductivity;
 import com.synerset.unitsystem.thermalconductivity.WattPerMeterKelvin;
 import com.synerset.exampleproject.utils.MathUtils;
+import io.vavr.control.Either;
 
 public final class DryAirProperties {
 
@@ -49,22 +53,26 @@ public final class DryAirProperties {
         return ThermalConductivity.wattPerMeterKelvin(thermalCond);
     }
 
-    public KiloJoulePerKiloGram specificEnthalpy(Temperature temp) {
-        SpecificHeat specHeat = specificHeat(temp).toKiloJoulePerKilogramKelvin();
-        double specHeatValue = specHeat.getValue();
+    public Either<InvalidSpecificEnthalpy, KiloJoulePerKiloGram> specificEnthalpy(Temperature temp) {
+        Either<InvalidSpecificHeat, KiloJoulePerKilogramKelvin> specHeat = specificHeat(temp);
+        if (specHeat.isLeft()) {
+            return Either.left(new InvalidSpecificEnthalpy());
+        }
+        double specHeatValue = specHeat.get().toKiloJoulePerKilogramKelvin().getValue();
         double tempValueInC = temp.toCelsius().getValue();
-        double specEnthalpy = specHeatValue * tempValueInC;
-        return SpecificEnthalpy.kiloJoulePerKiloGram(specEnthalpy);
+        double specEnthalpyValue = specHeatValue * tempValueInC;
+        KiloJoulePerKiloGram specEnthalpy = SpecificEnthalpy.kiloJoulePerKiloGram(specEnthalpyValue);
+        return Either.right(specEnthalpy);
     }
 
-    public KiloGramPerCubicMeter density(Temperature temp, Pressure press) {
+    public Either<InvalidDensity, KiloGramPerCubicMeter> density(Temperature temp, Pressure press) {
         double tk = temp.toKelvin().getValue();
         double pa = press.toPascal().getValue();
         double density = pa / (PhysicsConstants.CST_DA_RG * tk);
         return Density.kiloGramPerCubicMeter(density);
     }
 
-    public KiloJoulePerKilogramKelvin specificHeat(Temperature temp) {
+    public Either<InvalidSpecificHeat, KiloJoulePerKilogramKelvin> specificHeat(Temperature temp) {
         double ta = temp.toCelsius().getValue();
         if (ta <= -73.15) {
             return SpecificHeat.kiloJoulePerKilogramKelvin(1.002);

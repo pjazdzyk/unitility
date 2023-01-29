@@ -23,7 +23,7 @@ public final class PoundPerCubicFoot implements Density {
 
     @Override
     public KiloGramPerCubicMeter toKiloGramPerCubicMeter() {
-        return KiloGramPerCubicMeter.of(value / 0.06243);
+        return KiloGramPerCubicMeter.of(value / 0.06243).getOrElseThrow((() -> new IllegalStateException()));
     }
 
     @Override

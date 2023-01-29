@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.density;
 
+import io.vavr.control.Either;
+
 public sealed interface Density permits KiloGramPerCubicMeter, PoundPerCubicFoot {
     double getValue();
 
@@ -9,7 +11,7 @@ public sealed interface Density permits KiloGramPerCubicMeter, PoundPerCubicFoot
 
     PoundPerCubicFoot toPoundPerCubicFoot();
 
-    static KiloGramPerCubicMeter kiloGramPerCubicMeter(double value) {
+    static Either<InvalidDensity, KiloGramPerCubicMeter> kiloGramPerCubicMeter(double value) {
         return KiloGramPerCubicMeter.of(value);
     }
 
