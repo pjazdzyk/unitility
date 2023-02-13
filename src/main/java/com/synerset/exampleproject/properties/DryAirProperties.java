@@ -54,15 +54,14 @@ public final class DryAirProperties {
     }
 
     public Either<InvalidSpecificEnthalpy, KiloJoulePerKiloGram> specificEnthalpy(Temperature temp) {
-        Either<InvalidSpecificHeat, KiloJoulePerKilogramKelvin> specHeat = specificHeat(temp);
-        if (specHeat.isLeft()) {
-            return Either.left(new InvalidSpecificEnthalpy());
-        }
-        double specHeatValue = specHeat.get().toKiloJoulePerKilogramKelvin().getValue();
-        double tempValueInC = temp.toCelsius().getValue();
-        double specEnthalpyValue = specHeatValue * tempValueInC;
-        KiloJoulePerKiloGram specEnthalpy = SpecificEnthalpy.kiloJoulePerKiloGram(specEnthalpyValue);
-        return Either.right(specEnthalpy);
+        return specificHeat(temp)
+                .mapLeft(l -> new InvalidSpecificEnthalpy())
+                .map(specHeat -> {
+                    double specHeatValue = specHeat.toKiloJoulePerKilogramKelvin().getValue();
+                    double tempValueInC = temp.toCelsius().getValue();
+                    double specEnthalpyValue = specHeatValue * tempValueInC;
+                    return SpecificEnthalpy.kiloJoulePerKiloGram(specEnthalpyValue);
+                });
     }
 
     public Either<InvalidDensity, KiloGramPerCubicMeter> density(Temperature temp, Pressure press) {
@@ -99,9 +98,9 @@ public final class DryAirProperties {
             e = 3.0582028042912701E-13;
         }
 
-        double specHeat = e * ta * ta * ta * ta
-                + d * ta * ta * ta
-                + c * ta * ta
+        double specHeat = e * Math.pow(ta, 4)
+                + d * Math.pow(ta, 3)
+                + c * Math.pow(ta, 2)
                 + b * ta
                 + a;
 

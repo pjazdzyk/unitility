@@ -2,11 +2,9 @@ package com.synerset.exampleproject.process;
 
 import com.synerset.exampleproject.state.AirFlowFactory;
 import com.synerset.exampleproject.state.FlowOfDryAir;
-import com.synerset.exampleproject.state.InvalidFlow;
 import com.synerset.unitsystem.power.KiloWatt;
 import com.synerset.unitsystem.power.Power;
 import com.synerset.unitsystem.temperature.Celsius;
-import com.synerset.unitsystem.temperature.InvalidTemperature;
 import com.synerset.unitsystem.temperature.Temperature;
 import io.vavr.control.Either;
 
@@ -24,11 +22,9 @@ public class Heating {
         double specHeat = inletFlow.specificHeat().getValue();
         double massFlow = inletFlow.massFlow().getValue();
         KiloWatt heatOfProcess = Power.kiloWatt(massFlow * specHeat * (outTemp - inTemp));
-        Either<InvalidFlow, FlowOfDryAir> outletAir = airFlowFactory.createFlowOfDryAir(targetTemperature, inletFlow.massFlow());
-        if (outletAir.isLeft()) {
-            return Either.left(new InvalidHeatingProcess());
-        }
-        return Either.right(new HeatingResultDto(outletAir.get(), heatOfProcess));
+        return airFlowFactory.createFlowOfDryAir(targetTemperature, inletFlow.massFlow())
+                .mapLeft(l -> new InvalidHeatingProcess())
+                .map(outletFlow -> new HeatingResultDto(outletFlow, heatOfProcess));
     }
 
     public Either<InvalidHeatingProcess, HeatingResultDto> fromInputPower(FlowOfDryAir inletFlow, Power inputPower) {
@@ -36,15 +32,11 @@ public class Heating {
         double specHeat = inletFlow.specificHeat().getValue();
         double massFlow = inletFlow.massFlow().getValue();
         double heat = inputPower.toKiloWatt().getValue();
-        Either<InvalidTemperature, Celsius> outletTemperature = Temperature.celsius(heat / massFlow * specHeat + inTemp);
-        if (outletTemperature.isLeft()) {
-            return Either.left(new InvalidHeatingProcess());
-        }
-        Either<InvalidFlow, FlowOfDryAir> outletAir = airFlowFactory.createFlowOfDryAir(outletTemperature.get(), inletFlow.massFlow());
-        if (outletAir.isLeft()) {
-            return Either.left(new InvalidHeatingProcess());
-        }
-        return Either.right(new HeatingResultDto(outletAir.get(), inputPower.toKiloWatt()));
+        return Temperature.celsius(heat / massFlow * specHeat + inTemp)
+                .mapLeft(l -> new InvalidHeatingProcess())
+                .flatMap(outletTemp -> airFlowFactory.createFlowOfDryAir(outletTemp, inletFlow.massFlow())
+                        .mapLeft(l -> new InvalidHeatingProcess()))
+                .map(outletFlow -> new HeatingResultDto(outletFlow, inputPower.toKiloWatt()));
     }
 
 }
