@@ -3,6 +3,7 @@ package com.synerset.exampleproject.state;
 import com.synerset.exampleproject.common.Defaults;
 import com.synerset.exampleproject.properties.DryAirProperties;
 import com.synerset.unitsystem.massflow.MassFlow;
+import com.synerset.unitsystem.pressure.Pascal;
 import com.synerset.unitsystem.pressure.Pressure;
 import com.synerset.unitsystem.temperature.Temperature;
 import io.vavr.control.Either;
@@ -11,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class AirFlowFactory {
 
-    private final Logger LOGGER = LogManager.getLogger(this.getClass());
+    protected static final Logger LOGGER = LogManager.getLogger(AirFlowFactory.class.getSimpleName());
 
     private final DryAirProperties dryAirProperties;
 
