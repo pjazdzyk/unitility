@@ -52,4 +52,9 @@ public final class KiloGramPerHour implements MassFlow{
     static KiloGramPerHour of(double value){
         return new KiloGramPerHour(value);
     }
+
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

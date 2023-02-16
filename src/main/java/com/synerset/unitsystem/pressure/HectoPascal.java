@@ -65,4 +65,8 @@ public final class HectoPascal implements Pressure {
         return new HectoPascal(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

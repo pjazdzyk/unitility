@@ -47,4 +47,8 @@ public final class SquareInchPerSecond implements KinematicViscosity{
         return new SquareInchPerSecond(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

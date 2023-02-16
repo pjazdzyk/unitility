@@ -65,4 +65,8 @@ public final class MegaPascal implements Pressure{
         return new MegaPascal(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

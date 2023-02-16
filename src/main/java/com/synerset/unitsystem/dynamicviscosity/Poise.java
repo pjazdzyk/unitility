@@ -52,4 +52,8 @@ public final class Poise implements DynamicViscosity {
         return new Poise(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

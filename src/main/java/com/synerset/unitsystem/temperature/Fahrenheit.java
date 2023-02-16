@@ -62,7 +62,7 @@ public final class Fahrenheit implements Temperature {
 
     @Override
     public String toString() {
-        return value + ", " + DEF_SYMBOL;
+        return value + DEF_SYMBOL;
     }
 
 }

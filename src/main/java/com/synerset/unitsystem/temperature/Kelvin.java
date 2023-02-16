@@ -62,6 +62,6 @@ public final class Kelvin implements Temperature {
 
     @Override
     public String toString() {
-        return value + ", " + DEF_SYMBOL;
+        return value + DEF_SYMBOL;
     }
 }

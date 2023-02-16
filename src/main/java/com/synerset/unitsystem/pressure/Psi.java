@@ -64,4 +64,8 @@ public final class Psi implements Pressure{
         return new Psi(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

@@ -48,4 +48,8 @@ public final class WattPerMeterKelvin implements ThermalConductivity {
         return new WattPerMeterKelvin(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

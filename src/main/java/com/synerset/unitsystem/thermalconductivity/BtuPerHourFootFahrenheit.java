@@ -47,4 +47,9 @@ public final class BtuPerHourFootFahrenheit implements ThermalConductivity {
         return new BtuPerHourFootFahrenheit(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
 }

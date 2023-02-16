@@ -51,4 +51,9 @@ public final class KiloGramPerCubicMeter implements Density {
                 : Either.right(new KiloGramPerCubicMeter(value));
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
 }

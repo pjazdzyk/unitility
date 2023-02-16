@@ -52,4 +52,8 @@ public final class KiloWatt implements Power {
         return new KiloWatt(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

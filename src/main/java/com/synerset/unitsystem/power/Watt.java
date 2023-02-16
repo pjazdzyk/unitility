@@ -51,4 +51,8 @@ public final class Watt implements Power {
         return new Watt(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

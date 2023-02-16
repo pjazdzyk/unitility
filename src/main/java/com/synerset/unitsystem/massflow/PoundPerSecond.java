@@ -52,4 +52,8 @@ public final class PoundPerSecond implements MassFlow {
         return new PoundPerSecond(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

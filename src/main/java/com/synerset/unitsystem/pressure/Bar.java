@@ -65,4 +65,8 @@ public final class Bar implements Pressure {
         return new Bar(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

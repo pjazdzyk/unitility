@@ -62,4 +62,8 @@ public final class Pascal implements Pressure{
         return new Pascal(value);
     }
 
-  }
+    @Override
+    public String toString() {
+        return  value + DEF_SYMBOL;
+    }
+}

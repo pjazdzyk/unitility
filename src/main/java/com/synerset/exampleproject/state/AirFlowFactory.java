@@ -21,7 +21,7 @@ public class AirFlowFactory {
     }
 
     public Either<InvalidFlow, FlowOfDryAir> createFlowOfDryAir(Pressure pressure, Temperature temperature, MassFlow massFlow) {
-        LOGGER.info("Trying to create instance of dry air");
+        LOGGER.info("Trying to create instance of dry air with parameters: Ps={}, ta={}, mda={}",pressure.toPascal(), temperature.toCelsius(), massFlow.toKiloGramPerSecond());
         return dryAirProperties.density(temperature, pressure)
                 .mapLeft(l -> {
                     LOGGER.error("Flow cannot be created due to invalid density.");

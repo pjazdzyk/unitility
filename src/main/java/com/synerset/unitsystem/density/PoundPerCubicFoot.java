@@ -47,4 +47,8 @@ public final class PoundPerCubicFoot implements Density {
         return new PoundPerCubicFoot(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

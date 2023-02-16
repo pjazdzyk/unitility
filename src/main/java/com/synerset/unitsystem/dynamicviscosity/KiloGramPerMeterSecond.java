@@ -51,4 +51,8 @@ public final class KiloGramPerMeterSecond implements DynamicViscosity{
         return new KiloGramPerMeterSecond(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

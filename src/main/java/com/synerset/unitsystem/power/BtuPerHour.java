@@ -52,4 +52,8 @@ public final class BtuPerHour implements Power{
         return new BtuPerHour(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

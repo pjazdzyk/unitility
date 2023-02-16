@@ -52,4 +52,8 @@ public final class PascalSecond implements DynamicViscosity{
         return new PascalSecond(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

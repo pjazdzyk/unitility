@@ -47,4 +47,8 @@ public final class KiloJoulePerKiloGram implements SpecificEnthalpy{
         return new KiloJoulePerKiloGram(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }

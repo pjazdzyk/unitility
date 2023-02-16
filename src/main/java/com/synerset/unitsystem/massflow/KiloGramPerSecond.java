@@ -51,4 +51,9 @@ public final class KiloGramPerSecond implements MassFlow{
         return new KiloGramPerSecond(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
 }

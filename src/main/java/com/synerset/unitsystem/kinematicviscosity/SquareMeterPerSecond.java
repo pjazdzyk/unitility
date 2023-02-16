@@ -46,4 +46,8 @@ public final class SquareMeterPerSecond implements KinematicViscosity{
         return new SquareMeterPerSecond(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
 }
