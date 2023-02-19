@@ -56,8 +56,8 @@ public final class Fahrenheit implements Temperature {
 
     static Either<InvalidTemperature, Fahrenheit> of(double value) {
         return Kelvin.of(VALUE_TO_KELVIN.apply(value))
-                .mapLeft(left -> new InvalidTemperature(value, Fahrenheit.class))
-                .map(right -> new Fahrenheit(value));
+                .mapLeft(l -> new InvalidTemperature(value, Fahrenheit.class))
+                .map(r -> new Fahrenheit(value));
     }
 
     @Override

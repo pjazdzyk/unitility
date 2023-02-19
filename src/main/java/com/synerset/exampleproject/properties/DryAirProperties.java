@@ -5,6 +5,7 @@ import com.synerset.unitsystem.density.Density;
 import com.synerset.unitsystem.density.InvalidDensity;
 import com.synerset.unitsystem.density.KiloGramPerCubicMeter;
 import com.synerset.unitsystem.dynamicviscosity.DynamicViscosity;
+import com.synerset.unitsystem.dynamicviscosity.InvalidDynamicViscosity;
 import com.synerset.unitsystem.dynamicviscosity.KiloGramPerMeterSecond;
 import com.synerset.unitsystem.kinematicviscosity.KinematicViscosity;
 import com.synerset.unitsystem.kinematicviscosity.SquareMeterPerSecond;
@@ -28,13 +29,16 @@ public final class DryAirProperties {
     private DryAirProperties() {
     }
 
-    public SquareMeterPerSecond kinematicViscosity(Temperature temp, Density density) {
-        double dynVis = dynamicViscosity(temp).toKiloGramPerMeterSecond().getValue();
-        double dens = density.toKiloGramPerCubicMeter().getValue();
-        return KinematicViscosity.squareMeterPerSecond(dynVis / dens);
+    public Either<InvalidDynamicViscosity, SquareMeterPerSecond> kinematicViscosity(Temperature temp, Density density) {
+        return dynamicViscosity(temp)
+                .map(dynVis -> {
+                    double densityVal = density.toKiloGramPerCubicMeter().getValue();
+                    double dynVisVal = dynVis.toKiloGramPerMeterSecond().getValue();
+                    return KinematicViscosity.squareMeterPerSecond(dynVisVal/densityVal);
+                });
     }
 
-    public KiloGramPerMeterSecond dynamicViscosity(Temperature temp) {
+    public Either<InvalidDynamicViscosity, KiloGramPerMeterSecond> dynamicViscosity(Temperature temp) {
         double tk = temp.toKelvin().getValue();
         double dynVis = (0.40401 + 0.074582 * tk - 5.7171 * Math.pow(10, -5)
                 * Math.pow(tk, 2) + 2.9928 * Math.pow(10, -8)

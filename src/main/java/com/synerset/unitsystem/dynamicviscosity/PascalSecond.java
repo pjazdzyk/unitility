@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.dynamicviscosity;
 
+import io.vavr.control.Either;
+
 import java.util.Objects;
 
 public final class PascalSecond implements DynamicViscosity{
@@ -22,21 +24,6 @@ public final class PascalSecond implements DynamicViscosity{
     }
 
     @Override
-    public PascalSecond toPascalSecond() {
-        return this;
-    }
-
-    @Override
-    public KiloGramPerMeterSecond toKiloGramPerMeterSecond() {
-        return KiloGramPerMeterSecond.of(value);
-    }
-
-    @Override
-    public Poise toPoise() {
-        return Poise.of(value * 10);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PascalSecond that)) return false;
@@ -48,12 +35,30 @@ public final class PascalSecond implements DynamicViscosity{
         return Objects.hash(value);
     }
 
-    static PascalSecond of(double value){
-        return new PascalSecond(value);
-    }
-
     @Override
     public String toString() {
         return value + DEF_SYMBOL;
     }
+
+    @Override
+    public PascalSecond toPascalSecond() {
+        return this;
+    }
+
+    @Override
+    public KiloGramPerMeterSecond toKiloGramPerMeterSecond() {
+        return KiloGramPerMeterSecond.of(value).getOrElseThrow(()-> new IllegalStateException());
+    }
+
+    @Override
+    public Poise toPoise() {
+        return toKiloGramPerMeterSecond().toPoise();
+    }
+
+    static Either<InvalidDynamicViscosity, PascalSecond> of(double value){
+        return value < 0
+                ? Either.left(new InvalidDynamicViscosity())
+                : Either.right(new PascalSecond(value));
+    }
+
 }

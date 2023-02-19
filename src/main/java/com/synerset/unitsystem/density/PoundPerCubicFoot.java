@@ -1,11 +1,16 @@
 package com.synerset.unitsystem.density;
 
+import io.vavr.control.Either;
+
 import java.util.Objects;
+import java.util.function.DoubleFunction;
 
 public final class PoundPerCubicFoot implements Density {
 
     private static final String DEF_SYMBOL = "lb/ft³";
     private final double value;
+
+    private static final DoubleFunction<Double> VALUE_TO_KG_P_M3 = val -> val / 0.06243;
 
     private PoundPerCubicFoot(double value) {
         this.value = value;
@@ -22,16 +27,6 @@ public final class PoundPerCubicFoot implements Density {
     }
 
     @Override
-    public KiloGramPerCubicMeter toKiloGramPerCubicMeter() {
-        return KiloGramPerCubicMeter.of(value / 0.06243).getOrElseThrow((() -> new IllegalStateException()));
-    }
-
-    @Override
-    public PoundPerCubicFoot toPoundPerCubicFoot() {
-        return this;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PoundPerCubicFoot that)) return false;
@@ -43,12 +38,25 @@ public final class PoundPerCubicFoot implements Density {
         return Objects.hash(value);
     }
 
-    static PoundPerCubicFoot of(double value) {
-        return new PoundPerCubicFoot(value);
-    }
-
     @Override
     public String toString() {
         return value + DEF_SYMBOL;
     }
+
+    @Override
+    public KiloGramPerCubicMeter toKiloGramPerCubicMeter() {
+        return KiloGramPerCubicMeter.of(VALUE_TO_KG_P_M3.apply(value)).getOrElseThrow((() -> new IllegalStateException()));
+    }
+
+    @Override
+    public PoundPerCubicFoot toPoundPerCubicFoot() {
+        return this;
+    }
+
+    static Either<InvalidDensity, PoundPerCubicFoot> of(double value) {
+        return KiloGramPerCubicMeter.of(VALUE_TO_KG_P_M3.apply(value))
+                .mapLeft(l -> new InvalidDensity())
+                .map(r -> new PoundPerCubicFoot(value));
+    }
+
 }

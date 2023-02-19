@@ -15,7 +15,7 @@ public sealed interface Density permits KiloGramPerCubicMeter, PoundPerCubicFoot
         return KiloGramPerCubicMeter.of(value);
     }
 
-    static PoundPerCubicFoot poundPerCubicFoot(double value) {
+    static Either<InvalidDensity, PoundPerCubicFoot> poundPerCubicFoot(double value) {
         return PoundPerCubicFoot.of(value);
     }
 
