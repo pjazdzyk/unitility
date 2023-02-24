@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.kinematicviscosity;
 
+import io.vavr.control.Either;
+
 public sealed interface KinematicViscosity permits SquareInchPerSecond, SquareMeterPerSecond {
 
     double getValue();
@@ -10,11 +12,11 @@ public sealed interface KinematicViscosity permits SquareInchPerSecond, SquareMe
 
     SquareInchPerSecond toSquareInchPerSecond();
 
-    static SquareMeterPerSecond squareMeterPerSecond(double value){
+    static Either<InvalidKinematicViscosity, SquareMeterPerSecond> squareMeterPerSecond(double value){
         return SquareMeterPerSecond.of(value);
     }
 
-    static SquareInchPerSecond squareInchPerSecond(double value){
+    static Either<InvalidKinematicViscosity, SquareInchPerSecond> squareInchPerSecond(double value){
         return SquareInchPerSecond.of(value);
     }
 

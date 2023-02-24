@@ -1,11 +1,16 @@
 package com.synerset.unitsystem.kinematicviscosity;
 
-import java.util.Objects;
+import io.vavr.control.Either;
 
-public final class SquareInchPerSecond implements KinematicViscosity{
+import java.util.Objects;
+import java.util.function.DoubleFunction;
+
+public final class SquareInchPerSecond implements KinematicViscosity {
 
     private static final String DEF_SYMBOL = "in²/s";
     private final double value;
+
+    private static final DoubleFunction<Double> VALUE_TO_M2_S = val -> val / 1550.0031;
 
     private SquareInchPerSecond(double value) {
         this.value = value;
@@ -23,7 +28,7 @@ public final class SquareInchPerSecond implements KinematicViscosity{
 
     @Override
     public SquareMeterPerSecond toSquareMeterPerSecond() {
-        return SquareMeterPerSecond.of(value / 1550.0031);
+        return SquareMeterPerSecond.of(VALUE_TO_M2_S.apply(value)).getOrElseThrow(() -> new IllegalStateException());
     }
 
     @Override
@@ -43,8 +48,10 @@ public final class SquareInchPerSecond implements KinematicViscosity{
         return Objects.hash(value);
     }
 
-    static SquareInchPerSecond of(double value){
-        return new SquareInchPerSecond(value);
+    static Either<InvalidKinematicViscosity, SquareInchPerSecond> of(double value) {
+        return SquareMeterPerSecond.of(VALUE_TO_M2_S.apply(value))
+                .mapLeft(l->new InvalidKinematicViscosity())
+                .map(r -> new SquareInchPerSecond(value));
     }
 
     @Override

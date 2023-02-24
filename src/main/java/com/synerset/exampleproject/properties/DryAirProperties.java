@@ -7,6 +7,7 @@ import com.synerset.unitsystem.density.KiloGramPerCubicMeter;
 import com.synerset.unitsystem.dynamicviscosity.DynamicViscosity;
 import com.synerset.unitsystem.dynamicviscosity.InvalidDynamicViscosity;
 import com.synerset.unitsystem.dynamicviscosity.KiloGramPerMeterSecond;
+import com.synerset.unitsystem.kinematicviscosity.InvalidKinematicViscosity;
 import com.synerset.unitsystem.kinematicviscosity.KinematicViscosity;
 import com.synerset.unitsystem.kinematicviscosity.SquareMeterPerSecond;
 import com.synerset.unitsystem.pressure.Pressure;
@@ -29,13 +30,11 @@ public final class DryAirProperties {
     private DryAirProperties() {
     }
 
-    public Either<InvalidDynamicViscosity, SquareMeterPerSecond> kinematicViscosity(Temperature temp, Density density) {
+    public Either<InvalidKinematicViscosity, SquareMeterPerSecond> kinematicViscosity(Temperature temp, Density density) {
+        double densityVal = density.toKiloGramPerCubicMeter().getValue();
         return dynamicViscosity(temp)
-                .map(dynVis -> {
-                    double densityVal = density.toKiloGramPerCubicMeter().getValue();
-                    double dynVisVal = dynVis.toKiloGramPerMeterSecond().getValue();
-                    return KinematicViscosity.squareMeterPerSecond(dynVisVal/densityVal);
-                });
+                .mapLeft(l -> new InvalidKinematicViscosity())
+                .flatMap(dynVis -> KinematicViscosity.squareMeterPerSecond(dynVis.getValue() / densityVal));
     }
 
     public Either<InvalidDynamicViscosity, KiloGramPerMeterSecond> dynamicViscosity(Temperature temp) {
