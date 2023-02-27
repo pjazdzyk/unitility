@@ -1,11 +1,15 @@
 package com.synerset.unitsystem.massflow;
 
-import java.util.Objects;
+import io.vavr.control.Either;
 
-public final class KiloGramPerHour implements MassFlow{
+import java.util.Objects;
+import java.util.function.DoubleFunction;
+
+public final class KiloGramPerHour implements MassFlow {
 
     private static final String DEF_SYMBOL = "kg/h";
     private final double value;
+    private static final DoubleFunction<Double> VALUE_TO_KGS = val -> val / 3600d;
 
     private KiloGramPerHour(double value) {
         this.value = value;
@@ -23,7 +27,8 @@ public final class KiloGramPerHour implements MassFlow{
 
     @Override
     public KiloGramPerSecond toKiloGramPerSecond() {
-        return KiloGramPerSecond.of(value / 3600d);
+        return KiloGramPerSecond.of(VALUE_TO_KGS.apply(value))
+                .getOrElseThrow(() -> new IllegalStateException());
     }
 
     @Override
@@ -49,8 +54,10 @@ public final class KiloGramPerHour implements MassFlow{
         return Objects.hash(value);
     }
 
-    static KiloGramPerHour of(double value){
-        return new KiloGramPerHour(value);
+    static Either<InvalidMassFlow, KiloGramPerHour> of(double value) {
+        return KiloGramPerSecond.of(VALUE_TO_KGS.apply(value))
+                .mapLeft(l -> new InvalidMassFlow())
+                .map(r -> new KiloGramPerHour(value));
     }
 
     @Override

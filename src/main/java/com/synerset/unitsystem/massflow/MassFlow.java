@@ -1,5 +1,7 @@
 package com.synerset.unitsystem.massflow;
 
+import io.vavr.control.Either;
+
 public sealed interface MassFlow permits KiloGramPerHour, KiloGramPerSecond, PoundPerSecond {
     double getValue();
 
@@ -11,15 +13,15 @@ public sealed interface MassFlow permits KiloGramPerHour, KiloGramPerSecond, Pou
 
     PoundPerSecond toPoundPerSecond();
 
-    static KiloGramPerSecond kiloGramPerSecond(double value){
+    static Either<InvalidMassFlow, KiloGramPerSecond> kiloGramPerSecond(double value){
         return KiloGramPerSecond.of(value);
     }
 
-    static KiloGramPerHour kiloGramPerHour(double value){
+    static Either<InvalidMassFlow, KiloGramPerHour> kiloGramPerHour(double value){
         return KiloGramPerHour.of(value);
     }
 
-    static PoundPerSecond poundPerSecond(double value){
+    static Either<InvalidMassFlow, PoundPerSecond> poundPerSecond(double value){
         return PoundPerSecond.of(value);
     }
 

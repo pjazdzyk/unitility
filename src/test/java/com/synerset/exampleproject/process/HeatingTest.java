@@ -25,7 +25,7 @@ class HeatingTest {
     @DisplayName("should heat up the inlet air when target outlet temperature is given")
     void shouldHeatUpInletAirWhenTargetTempIsGiven() {
         // Given
-        KiloGramPerSecond expectedMassFlow = MassFlow.kiloGramPerSecond(0.1);
+        KiloGramPerSecond expectedMassFlow = MassFlow.kiloGramPerSecond(0.1).get();
         FlowOfDryAir inletFlow = FLOW_FACTORY.createFlowOfDryAir(Temperature.celsius(-20.0).get(), expectedMassFlow).get();
         Celsius expectedTargetTemp = Temperature.celsius(18.0).get();
 

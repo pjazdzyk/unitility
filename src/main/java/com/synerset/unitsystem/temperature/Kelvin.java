@@ -9,7 +9,6 @@ public final class Kelvin implements Temperature {
 
     private static final String DEF_SYMBOL = "K";
     private final double value;
-    private static final DoubleFunction<Double> VALUE_TO_KELVIN = val -> (5.0 / 9.0) * (val + 459.67);
 
     private Kelvin(double value) {
         this.value = value;
