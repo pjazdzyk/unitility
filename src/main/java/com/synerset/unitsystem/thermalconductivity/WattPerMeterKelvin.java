@@ -1,5 +1,9 @@
 package com.synerset.unitsystem.thermalconductivity;
 
+import com.synerset.unitsystem.temperature.InvalidTemperature;
+import io.vavr.control.Either;
+import io.vavr.control.Validation;
+
 import java.util.Objects;
 
 public final class WattPerMeterKelvin implements ThermalConductivity {
@@ -46,10 +50,13 @@ public final class WattPerMeterKelvin implements ThermalConductivity {
 
     @Override
     public BtuPerHourFootFahrenheit toBtuPerHourFootFahrenheit() {
-        return BtuPerHourFootFahrenheit.of(value * 0.57818);
+        return BtuPerHourFootFahrenheit.of(value * 0.57818)
+                .getOrElseThrow(() -> new IllegalStateException());
     }
 
-    static WattPerMeterKelvin of(double value) {
-        return new WattPerMeterKelvin(value);
+    static Either<InvalidThermalConductivity, WattPerMeterKelvin> of(double value) {
+        return value < 0.0
+                ? Either.left(new InvalidThermalConductivity())
+                : Either.right(new WattPerMeterKelvin(value));
     }
 }

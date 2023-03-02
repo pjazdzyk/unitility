@@ -18,6 +18,7 @@ import com.synerset.unitsystem.specificheat.InvalidSpecificHeat;
 import com.synerset.unitsystem.specificheat.KiloJoulePerKilogramKelvin;
 import com.synerset.unitsystem.specificheat.SpecificHeat;
 import com.synerset.unitsystem.temperature.Temperature;
+import com.synerset.unitsystem.thermalconductivity.InvalidThermalConductivity;
 import com.synerset.unitsystem.thermalconductivity.ThermalConductivity;
 import com.synerset.unitsystem.thermalconductivity.WattPerMeterKelvin;
 import com.synerset.exampleproject.utils.MathUtils;
@@ -46,7 +47,7 @@ public final class DryAirProperties {
         return DynamicViscosity.kiloGramPerMeterSecond(dynVis);
     }
 
-    public WattPerMeterKelvin thermalConductivity(Temperature temp) {
+    public Either<InvalidThermalConductivity, WattPerMeterKelvin> thermalConductivity(Temperature temp) {
         double ta = temp.toCelsius().getValue();
         double thermalCond = 2.43714 * Math.pow(10, -2)
                 + 7.83035 * Math.pow(10, -5) * ta
