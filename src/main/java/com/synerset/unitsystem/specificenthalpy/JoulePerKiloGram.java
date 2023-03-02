@@ -22,16 +22,6 @@ public final class JoulePerKiloGram implements SpecificEnthalpy {
     }
 
     @Override
-    public JoulePerKiloGram toJoulePerKiloGram(double value) {
-        return this;
-    }
-
-    @Override
-    public KiloJoulePerKiloGram toKiloJoulePerKiloGram(double value) {
-        return KiloJoulePerKiloGram.of(value / 1E3);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof JoulePerKiloGram that)) return false;
@@ -43,12 +33,22 @@ public final class JoulePerKiloGram implements SpecificEnthalpy {
         return Objects.hash(value);
     }
 
-    static JoulePerKiloGram of(double value){
-        return new JoulePerKiloGram(value);
-    }
-
     @Override
     public String toString() {
         return value + DEF_SYMBOL;
+    }
+
+    @Override
+    public JoulePerKiloGram toJoulePerKiloGram(double value) {
+        return this;
+    }
+
+    @Override
+    public KiloJoulePerKiloGram toKiloJoulePerKiloGram(double value) {
+        return KiloJoulePerKiloGram.of(value / 1E3);
+    }
+
+    static JoulePerKiloGram of(double value){
+        return new JoulePerKiloGram(value);
     }
 }

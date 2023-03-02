@@ -61,12 +61,12 @@ public final class MegaPascal implements Pressure{
         return Objects.hash(value);
     }
 
-    public static MegaPascal of(double value) {
-        return new MegaPascal(value);
-    }
-
     @Override
     public String toString() {
         return value + DEF_SYMBOL;
+    }
+
+    public static MegaPascal of(double value) {
+        return new MegaPascal(value);
     }
 }

@@ -26,6 +26,23 @@ public final class Fahrenheit implements Temperature {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Fahrenheit that)) return false;
+        return Double.compare(that.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
+    @Override
     public Kelvin toKelvin() {
         return Kelvin.of(VALUE_TO_KELVIN.apply(value))
                 .getOrElseThrow(() -> new IllegalStateException());
@@ -42,27 +59,10 @@ public final class Fahrenheit implements Temperature {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Fahrenheit that)) return false;
-        return Double.compare(that.value, value) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
     static Either<InvalidTemperature, Fahrenheit> of(double value) {
         return Kelvin.of(VALUE_TO_KELVIN.apply(value))
                 .mapLeft(l -> new InvalidTemperature(value, Fahrenheit.class))
                 .map(r -> new Fahrenheit(value));
-    }
-
-    @Override
-    public String toString() {
-        return value + DEF_SYMBOL;
     }
 
 }

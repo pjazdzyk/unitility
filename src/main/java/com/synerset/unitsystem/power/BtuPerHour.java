@@ -21,6 +21,23 @@ public final class BtuPerHour implements Power{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BtuPerHour that)) return false;
+        return Double.compare(that.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
+    @Override
     public Watt toWatt() {
         return Watt.of(value / 3.412141633);
     }
@@ -36,24 +53,8 @@ public final class BtuPerHour implements Power{
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BtuPerHour that)) return false;
-        return Double.compare(that.value, value) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
     static BtuPerHour of(double value){
         return new BtuPerHour(value);
     }
 
-    @Override
-    public String toString() {
-        return value + DEF_SYMBOL;
-    }
 }

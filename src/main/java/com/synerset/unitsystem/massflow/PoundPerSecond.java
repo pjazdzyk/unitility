@@ -25,6 +25,23 @@ public final class PoundPerSecond implements MassFlow {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PoundPerSecond that)) return false;
+        return Double.compare(that.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
+    @Override
     public KiloGramPerSecond toKiloGramPerSecond() {
         return KiloGramPerSecond.of(VALUE_TO_KGS.apply(value))
                 .getOrElseThrow(() -> new IllegalStateException());
@@ -41,26 +58,10 @@ public final class PoundPerSecond implements MassFlow {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PoundPerSecond that)) return false;
-        return Double.compare(that.value, value) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
     static Either<InvalidMassFlow, PoundPerSecond> of(double value) {
         return KiloGramPerSecond.of(VALUE_TO_KGS.apply(value))
                 .mapLeft(l -> new InvalidMassFlow())
                 .map(r -> new PoundPerSecond(value));
     }
 
-    @Override
-    public String toString() {
-        return value + DEF_SYMBOL;
-    }
 }

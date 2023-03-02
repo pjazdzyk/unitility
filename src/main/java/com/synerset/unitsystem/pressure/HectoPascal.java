@@ -22,6 +22,23 @@ public final class HectoPascal implements Pressure {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HectoPascal that)) return false;
+        return Double.compare(that.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
+    @Override
     public Pascal toPascal() {
         return Pascal.of(value * 1E2);
     }
@@ -49,24 +66,7 @@ public final class HectoPascal implements Pressure {
         return pascal.toPsi();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof HectoPascal that)) return false;
-        return Double.compare(that.value, value) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
     static HectoPascal of(double value) {
         return new HectoPascal(value);
-    }
-
-    @Override
-    public String toString() {
-        return value + DEF_SYMBOL;
     }
 }

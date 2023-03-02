@@ -18,7 +18,6 @@ public sealed interface Power permits BtuPerHour, KiloWatt, Watt {
     static KiloWatt kiloWatt(double value){
         return KiloWatt.of(value);
     }
-
     static BtuPerHour btuPerHour(double value){
         return BtuPerHour.of(value);
     }

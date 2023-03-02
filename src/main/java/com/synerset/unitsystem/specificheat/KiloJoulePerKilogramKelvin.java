@@ -27,17 +27,6 @@ public final class KiloJoulePerKilogramKelvin implements SpecificHeat {
     }
 
     @Override
-    public JoulePerKilogramKelvin toJoulePerKilogramKelvin() {
-        return JoulePerKilogramKelvin.of(VALUE_TO_J_KGK.apply(value))
-                .getOrElseThrow(() -> new IllegalStateException());
-    }
-
-    @Override
-    public KiloJoulePerKilogramKelvin toKiloJoulePerKilogramKelvin() {
-        return this;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof KiloJoulePerKilogramKelvin that)) return false;
@@ -49,15 +38,27 @@ public final class KiloJoulePerKilogramKelvin implements SpecificHeat {
         return Objects.hash(value);
     }
 
+    @Override
+    public String toString() {
+        return value + ", " + DEF_SYMBOL;
+    }
+
+    @Override
+    public JoulePerKilogramKelvin toJoulePerKilogramKelvin() {
+        return JoulePerKilogramKelvin.of(VALUE_TO_J_KGK.apply(value))
+                .getOrElseThrow(() -> new IllegalStateException());
+    }
+
+    @Override
+    public KiloJoulePerKilogramKelvin toKiloJoulePerKilogramKelvin() {
+        return this;
+    }
+
     public static Either<InvalidSpecificHeat, KiloJoulePerKilogramKelvin> of(double value) {
         return JoulePerKilogramKelvin.of(VALUE_TO_J_KGK.apply(value))
                 .mapLeft(left -> new InvalidSpecificHeat(value, KiloJoulePerKilogramKelvin.class))
                 .map(right -> new KiloJoulePerKilogramKelvin(value));
     }
 
-    @Override
-    public String toString() {
-        return value + ", " + DEF_SYMBOL;
-    }
 
 }

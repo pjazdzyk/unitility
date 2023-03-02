@@ -21,22 +21,6 @@ public final class KiloWatt implements Power {
     }
 
     @Override
-    public Watt toWatt() {
-        return Watt.of(value / 1E3);
-    }
-
-    @Override
-    public KiloWatt toKiloWatt() {
-        return this;
-    }
-
-    @Override
-    public BtuPerHour toBtuPerHour() {
-        Watt valInWatt = toWatt();
-        return valInWatt.toBtuPerHour();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof KiloWatt kiloWatt)) return false;
@@ -48,12 +32,29 @@ public final class KiloWatt implements Power {
         return Objects.hash(value);
     }
 
-    static KiloWatt of(double value) {
-        return new KiloWatt(value);
+    @Override
+    public BtuPerHour toBtuPerHour() {
+        Watt valInWatt = toWatt();
+        return valInWatt.toBtuPerHour();
     }
 
     @Override
     public String toString() {
         return value + DEF_SYMBOL;
     }
+
+    @Override
+    public Watt toWatt() {
+        return Watt.of(value / 1E3);
+    }
+
+    @Override
+    public KiloWatt toKiloWatt() {
+        return this;
+    }
+
+    static KiloWatt of(double value) {
+        return new KiloWatt(value);
+    }
+
 }

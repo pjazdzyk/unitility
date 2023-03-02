@@ -21,6 +21,23 @@ public final class Watt implements Power {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Watt watt)) return false;
+        return Double.compare(watt.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
+    @Override
     public Watt toWatt() {
         return this;
     }
@@ -35,24 +52,8 @@ public final class Watt implements Power {
         return BtuPerHour.of(value * 3.412141633);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Watt watt)) return false;
-        return Double.compare(watt.value, value) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
     static Watt of(double value) {
         return new Watt(value);
     }
 
-    @Override
-    public String toString() {
-        return value + DEF_SYMBOL;
-    }
 }

@@ -22,6 +22,23 @@ public final class Pascal implements Pressure{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pascal pascal)) return false;
+        return Double.compare(pascal.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return  value + DEF_SYMBOL;
+    }
+
+    @Override
     public Pascal toPascal() {
         return this;
     }
@@ -46,24 +63,8 @@ public final class Pascal implements Pressure{
         return Psi.of(value * 0.0001450377);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Pascal pascal)) return false;
-        return Double.compare(pascal.value, value) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
     static Pascal of(double value){
         return new Pascal(value);
     }
 
-    @Override
-    public String toString() {
-        return  value + DEF_SYMBOL;
-    }
 }

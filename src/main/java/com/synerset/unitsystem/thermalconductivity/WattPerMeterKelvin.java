@@ -23,16 +23,6 @@ public final class WattPerMeterKelvin implements ThermalConductivity {
     }
 
     @Override
-    public WattPerMeterKelvin toWattPerMeterKelvin() {
-        return this;
-    }
-
-    @Override
-    public BtuPerHourFootFahrenheit toBtuPerHourFootFahrenheit() {
-        return BtuPerHourFootFahrenheit.of(value * 0.57818);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof WattPerMeterKelvin that)) return false;
@@ -44,12 +34,22 @@ public final class WattPerMeterKelvin implements ThermalConductivity {
         return Objects.hash(value);
     }
 
-    static WattPerMeterKelvin of(double value) {
-        return new WattPerMeterKelvin(value);
-    }
-
     @Override
     public String toString() {
         return value + DEF_SYMBOL;
+    }
+
+    @Override
+    public WattPerMeterKelvin toWattPerMeterKelvin() {
+        return this;
+    }
+
+    @Override
+    public BtuPerHourFootFahrenheit toBtuPerHourFootFahrenheit() {
+        return BtuPerHourFootFahrenheit.of(value * 0.57818);
+    }
+
+    static WattPerMeterKelvin of(double value) {
+        return new WattPerMeterKelvin(value);
     }
 }

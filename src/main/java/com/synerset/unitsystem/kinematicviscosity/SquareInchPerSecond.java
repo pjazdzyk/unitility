@@ -27,16 +27,6 @@ public final class SquareInchPerSecond implements KinematicViscosity {
     }
 
     @Override
-    public SquareMeterPerSecond toSquareMeterPerSecond() {
-        return SquareMeterPerSecond.of(VALUE_TO_M2_S.apply(value)).getOrElseThrow(() -> new IllegalStateException());
-    }
-
-    @Override
-    public SquareInchPerSecond toSquareInchPerSecond() {
-        return this;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SquareInchPerSecond that)) return false;
@@ -48,14 +38,25 @@ public final class SquareInchPerSecond implements KinematicViscosity {
         return Objects.hash(value);
     }
 
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
+    @Override
+    public SquareMeterPerSecond toSquareMeterPerSecond() {
+        return SquareMeterPerSecond.of(VALUE_TO_M2_S.apply(value)).getOrElseThrow(() -> new IllegalStateException());
+    }
+
+    @Override
+    public SquareInchPerSecond toSquareInchPerSecond() {
+        return this;
+    }
+
     static Either<InvalidKinematicViscosity, SquareInchPerSecond> of(double value) {
         return SquareMeterPerSecond.of(VALUE_TO_M2_S.apply(value))
                 .mapLeft(l->new InvalidKinematicViscosity())
                 .map(r -> new SquareInchPerSecond(value));
     }
 
-    @Override
-    public String toString() {
-        return value + DEF_SYMBOL;
-    }
 }

@@ -26,6 +26,23 @@ public final class Celsius implements Temperature {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Celsius celsius)) return false;
+        return Double.compare(celsius.value, value) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
+    @Override
+    public String toString() {
+        return value + DEF_SYMBOL;
+    }
+
+    @Override
     public Kelvin toKelvin() {
         return Kelvin.of(VALUE_TO_KELVIN.apply(value))
                 .getOrElseThrow(() -> new IllegalStateException());
@@ -42,26 +59,9 @@ public final class Celsius implements Temperature {
         return valInKelvin.toFahrenheit();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Celsius celsius)) return false;
-        return Double.compare(celsius.value, value) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
-
     static Either<InvalidTemperature, Celsius> of(double value) {
         return Kelvin.of(VALUE_TO_KELVIN.apply(value))
                 .mapLeft(left -> new InvalidTemperature(value, Celsius.class))
                 .map(right -> new Celsius(value));
-    }
-
-    @Override
-    public String toString() {
-        return value + DEF_SYMBOL;
     }
 }
