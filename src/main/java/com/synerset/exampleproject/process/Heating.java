@@ -16,23 +16,23 @@ public class Heating {
         this.airFlowFactory = airFlowFactory;
     }
 
-    public Either<InvalidHeatingProcess, HeatingResultDto> fromOutletTemperature(FlowOfDryAir inletFlow, Celsius targetTemperature) {
-        double inTemp = inletFlow.temperature().getValue();
-        double outTemp = targetTemperature.getValue();
-        double specHeat = inletFlow.specificHeat().getValue();
-        double massFlow = inletFlow.massFlow().getValue();
-        KiloWatt heatOfProcess = Power.kiloWatt(massFlow * specHeat * (outTemp - inTemp));
-        return airFlowFactory.createFlowOfDryAir(targetTemperature, inletFlow.massFlow())
+    public Either<InvalidHeatingProcess, HeatingResultDto> fromOutletTemperature(FlowOfDryAir inletFlow, Celsius targetTemp) {
+        double t_in = inletFlow.temperature().getValue();
+        double t_out = targetTemp.getValue();
+        double cp = inletFlow.specificHeat().getValue();
+        double mda = inletFlow.massFlow().getValue();
+        KiloWatt heatOfProcess = Power.kiloWatt(mda * cp * (t_out - t_in));
+        return airFlowFactory.createFlowOfDryAir(targetTemp, inletFlow.massFlow())
                 .mapLeft(l -> new InvalidHeatingProcess())
                 .map(outletFlow -> new HeatingResultDto(outletFlow, heatOfProcess));
     }
 
     public Either<InvalidHeatingProcess, HeatingResultDto> fromInputPower(FlowOfDryAir inletFlow, Power inputPower) {
-        double inTemp = inletFlow.temperature().getValue();
-        double specHeat = inletFlow.specificHeat().getValue();
-        double massFlow = inletFlow.massFlow().getValue();
-        double heat = inputPower.toKiloWatt().getValue();
-        return Temperature.celsius(heat / massFlow * specHeat + inTemp)
+        double t_in = inletFlow.temperature().getValue();
+        double cp = inletFlow.specificHeat().getValue();
+        double mda = inletFlow.massFlow().getValue();
+        double Q = inputPower.toKiloWatt().getValue();
+        return Temperature.celsius(Q / mda * cp + t_in)
                 .mapLeft(l -> new InvalidHeatingProcess())
                 .flatMap(outletTemp -> airFlowFactory.createFlowOfDryAir(outletTemp, inletFlow.massFlow())
                         .mapLeft(l -> new InvalidHeatingProcess()))

@@ -3,7 +3,6 @@ package com.synerset.exampleproject.state;
 import com.synerset.exampleproject.common.Defaults;
 import com.synerset.exampleproject.properties.DryAirProperties;
 import com.synerset.unitsystem.massflow.MassFlow;
-import com.synerset.unitsystem.pressure.Pascal;
 import com.synerset.unitsystem.pressure.Pressure;
 import com.synerset.unitsystem.temperature.Temperature;
 import io.vavr.control.Either;
@@ -44,7 +43,7 @@ public class AirFlowFactory {
 
 
     public Either<InvalidFlow, FlowOfDryAir> createFlowOfDryAir(Temperature temperature, MassFlow massFlow) {
-        return createFlowOfDryAir(Defaults.DEF_ATM_PRESSURE, temperature, massFlow);
+        return createFlowOfDryAir(Defaults.DEF_PAT, temperature, massFlow);
     }
 
 }
