@@ -1,4 +1,4 @@
-package com.synerset;
+package com.synerset.unitsystem;
 
 public interface PhysicalQuantity<Q> {
     double getValue();

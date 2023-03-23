@@ -1,13 +1,13 @@
-package com.synerset.temperature;
+package com.synerset.unitsystem.temperature;
 
-import com.synerset.PhysicalQuantity;
-import com.synerset.Unit;
+import com.synerset.unitsystem.PhysicalQuantity;
+import com.synerset.unitsystem.Unit;
 
 import java.util.Objects;
 
 public final class Temperature implements PhysicalQuantity<Temperature> {
 
-    public static final int DECIMAL_PRECISION = 3;
+    public static final byte TO_STRING_PRECISION = 3;
     private final double value;
     private final Unit<Temperature> unit;
 
@@ -39,6 +39,19 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
         return Temperature.of(valueInTargetUnit, targetUnit);
     }
 
+    // Custom converter methods, for most popular units
+    public Temperature toKelvin(){
+        return toUnit(TemperatureUnits.KELVIN);
+    }
+
+    public Temperature toCelsius(){
+        return toUnit(TemperatureUnits.CELSIUS);
+    }
+
+    public Temperature toFahrenheit(){
+        return toUnit(TemperatureUnits.FAHRENHEIT);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,7 +67,7 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
 
     @Override
     public String toString() {
-        return String.format("%%.%df %s", DECIMAL_PRECISION, unit.getSymbol());
+        return String.format("%." + TO_STRING_PRECISION + "f %s", value, unit.getSymbol());
     }
 
     public static Temperature of(double value, Unit<Temperature> unit) {

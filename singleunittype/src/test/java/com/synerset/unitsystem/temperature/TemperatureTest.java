@@ -1,4 +1,4 @@
-package com.synerset.temperature;
+package com.synerset.unitsystem.temperature;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,8 +18,8 @@ class TemperatureTest {
         Temperature actualInCelsius = actualInKelvins.toUnit(TemperatureUnits.CELSIUS);
 
         // Then
-        Temperature expectedTemp = Temperature.ofKelvins(20.5 + 273.15);
-        assertThat(actualInKelvins).isEqualTo(expectedTemp);
+        Temperature expectedInKelvins = Temperature.ofKelvins(20.5 + 273.15);
+        assertThat(actualInKelvins).isEqualTo(expectedInKelvins);
         assertThat(actualInCelsius).isEqualTo(initialTempInCelsius);
     }
 
