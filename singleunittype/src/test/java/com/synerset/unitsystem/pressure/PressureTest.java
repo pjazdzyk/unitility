@@ -19,8 +19,8 @@ public class PressureTest {
 
         // Then
         Pressure expectedInPsi = Pressure.ofPsi(14.6959487755131);
-        assertThat(actualInPsi.getValue()).isEqualTo(expectedInPsi.getValue(), withPrecision(1E-10));
-        assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-10));
+        assertThat(actualInPsi.getValue()).isEqualTo(expectedInPsi.getValue(), withPrecision(1E-11));
+        assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
 
     @Test
@@ -35,8 +35,8 @@ public class PressureTest {
 
         // Then
         Pressure expectedInBar = Pressure.ofBar(1.01325);
-        assertThat(actualInBar.getValue()).isEqualTo(expectedInBar.getValue(), withPrecision(1E-10));
-        assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-10));
+        assertThat(actualInBar.getValue()).isEqualTo(expectedInBar.getValue(), withPrecision(1E-11));
+        assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class PressureTest {
         // Then
         Pressure expectedInHectopascal = Pressure.ofHectoPascal(1013.25);
         assertThat(actualInHectopascal.getValue()).isEqualTo(expectedInHectopascal.getValue(), withPrecision(1E-10));
-        assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-10));
+        assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class PressureTest {
         // Then
         Pressure expectedInMegapascal = Pressure.ofMegaPascal(0.101325);
         assertThat(actualInMegapascal.getValue()).isEqualTo(expectedInMegapascal.getValue(), withPrecision(1E-10));
-        assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-10));
+        assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
 
 
