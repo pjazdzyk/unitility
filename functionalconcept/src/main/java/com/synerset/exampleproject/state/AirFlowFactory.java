@@ -1,7 +1,7 @@
 package com.synerset.exampleproject.state;
 
 import com.synerset.exampleproject.common.Defaults;
-import com.synerset.exampleproject.properties.DryAirProperties;
+import com.synerset.exampleproject.fluidproperties.DryAirProperties;
 import com.synerset.unitsystem.massflow.MassFlow;
 import com.synerset.unitsystem.pressure.Pressure;
 import com.synerset.unitsystem.temperature.Temperature;

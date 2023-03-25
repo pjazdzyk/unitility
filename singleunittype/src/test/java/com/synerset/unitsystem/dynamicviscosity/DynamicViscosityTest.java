@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-public class DynamicViscosityTest {
+class DynamicViscosityTest {
 
     @Test
     @DisplayName("should convert kg/(m·s) to P and vice versa")

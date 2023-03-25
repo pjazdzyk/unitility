@@ -1,4 +1,4 @@
-package com.synerset.exampleproject.properties;
+package com.synerset.exampleproject.fluidproperties;
 
 import com.synerset.exampleproject.utils.PhysicsConstants;
 import com.synerset.unitsystem.density.Density;

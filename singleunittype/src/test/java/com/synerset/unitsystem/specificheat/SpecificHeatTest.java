@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-public class SpecificHeatTest {
+class SpecificHeatTest {
 
     @Test
     @DisplayName("should convert J/(kg·K) to kJ/(kg·K) and vice versa")

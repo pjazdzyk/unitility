@@ -1,4 +1,4 @@
-package com.synerset.exampleproject.properties;
+package com.synerset.exampleproject.fluidproperties;
 
 import com.synerset.exampleproject.utils.MathUtils;
 import com.synerset.exampleproject.utils.PhysicsConstants;
@@ -10,7 +10,6 @@ import com.synerset.unitsystem.specificenthalpy.SpecificEnthalpy;
 import com.synerset.unitsystem.specificheat.SpecificHeat;
 import com.synerset.unitsystem.temperature.Temperature;
 import com.synerset.unitsystem.thermalconductivity.ThermalConductivity;
-import io.vavr.control.Either;
 
 public final class DryAirProperties {
 
@@ -20,7 +19,7 @@ public final class DryAirProperties {
 
     public KinematicViscosity kinematicViscosity(Temperature temp, Density density) {
         double densityVal = density.toKilogramPerCubicMeter().getValue();
-        DynamicViscosity dynVis = dynamicViscosity(temp);
+        DynamicViscosity dynVis = dynamicViscosity(temp).toKiloGramPerMeterSecond();
         return KinematicViscosity.ofSquareMeterPerSecond(dynVis.getValue() / densityVal);
     }
 

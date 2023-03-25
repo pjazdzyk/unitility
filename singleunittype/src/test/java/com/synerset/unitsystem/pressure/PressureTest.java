@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-public class PressureTest {
+class PressureTest {
     @Test
     @DisplayName("should convert Pa to PSI and vice versa")
     public void shouldProperlyConvertPascalToPsi() {

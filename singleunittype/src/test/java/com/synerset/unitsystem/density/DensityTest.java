@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-public class DensityTest {
+class DensityTest {
 
     @Test
     @DisplayName("should convert kg/m3 to lb/ft³ and vice versa")

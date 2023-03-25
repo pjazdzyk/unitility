@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-public class ThermalConductivityTest {
+class ThermalConductivityTest {
 
     @Test
     @DisplayName("should convert W/(m·K) to kW/(m·K) and vice versa")

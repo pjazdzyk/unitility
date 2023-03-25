@@ -1,6 +1,6 @@
 package com.synerset.exampleproject.process;
 
-import com.synerset.exampleproject.properties.DryAirProperties;
+import com.synerset.exampleproject.fluidproperties.DryAirProperties;
 import com.synerset.exampleproject.state.AirFlowFactory;
 import com.synerset.exampleproject.state.FlowOfDryAir;
 import com.synerset.unitsystem.massflow.KiloGramPerSecond;

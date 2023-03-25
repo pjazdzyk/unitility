@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-public class PowerTest {
+class PowerTest {
 
     @Test
     @DisplayName("should convert Watts to BTU/hour and vice versa")
