@@ -10,17 +10,21 @@ import com.synerset.unitsystem.specificenthalpy.SpecificEnthalpy;
 import com.synerset.unitsystem.specificheat.SpecificHeat;
 import com.synerset.unitsystem.temperature.Temperature;
 import com.synerset.unitsystem.thermalconductivity.ThermalConductivity;
+import io.vavr.control.Validation;
 
 public final class DryAirProperties {
 
     private static final DryAirProperties INSTANCE = new DryAirProperties();
+    private static final Temperature TEMP_MIN_LIMIT = Temperature.ofKelvins(0);
 
-    private DryAirProperties() {}
+    private DryAirProperties() {
+    }
 
     public KinematicViscosity kinematicViscosity(Temperature temp, Density density) {
         double densityVal = density.toKilogramPerCubicMeter().getValue();
         DynamicViscosity dynVis = dynamicViscosity(temp).toKiloGramPerMeterSecond();
-        return KinematicViscosity.ofSquareMeterPerSecond(dynVis.getValue() / densityVal);
+        double kinVis = dynVis.getValue() / densityVal;
+        return KinematicViscosity.ofSquareMeterPerSecond(kinVis);
     }
 
     public DynamicViscosity dynamicViscosity(Temperature temp) {
@@ -91,6 +95,14 @@ public final class DryAirProperties {
                 + a;
 
         return SpecificHeat.ofKiloJoulePerKiloGramKelvin(specHeat);
+    }
+
+    private Validation<InvalidProperty, Temperature> validateTemperature(Temperature temperature) {
+        return Validation.combine(
+                        FluidValidators.requireNonNull(temperature, temperature.getClass().getSimpleName()),
+                        FluidValidators.requireNotExceedMinimalLimit(temperature, TEMP_MIN_LIMIT)
+                ).ap((t1, t2) -> temperature)
+                .mapError(InvalidProperty::merge);
     }
 
     public static DryAirProperties getInstance() {

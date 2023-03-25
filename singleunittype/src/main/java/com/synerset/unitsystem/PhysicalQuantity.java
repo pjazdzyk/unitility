@@ -1,6 +1,6 @@
 package com.synerset.unitsystem;
 
-public interface PhysicalQuantity<Q> {
+public interface PhysicalQuantity<Q>{
     double getValue();
     Unit<Q> getUnit();
     Q toBaseUnit();
