@@ -3,7 +3,6 @@ package com.synerset.unitsystem.temperature;
 import io.vavr.control.Either;
 
 import java.util.Objects;
-import java.util.function.DoubleFunction;
 
 public final class Kelvin implements Temperature {
 

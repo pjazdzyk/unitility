@@ -1,8 +1,6 @@
 package com.synerset.unitsystem.thermalconductivity;
 
-import com.synerset.unitsystem.temperature.InvalidTemperature;
 import io.vavr.control.Either;
-import io.vavr.control.Validation;
 
 import java.util.Objects;
 
