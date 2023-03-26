@@ -23,11 +23,13 @@ public class DryAirPropertiesFactory {
                         FluidValidators.validateTemperature(temp),
                         FluidValidators.requireNonNull(press, "Source: Pressure argument in density() method.")
                 ).ap((t, p) -> equations.density(temp, press))
-                .mapError(errors -> {
-                    LOGGER.warn("Invalid arguments: Temperature = {}, Pressure = {}", temp, press);
-                    return FluidValidators.combineSeqOfInvalids(errors);
-                })
-                .toEither();
+                .mapError(FluidValidators::combineSeqOfInvalids)
+                .toEither()
+                .mapLeft(invalid -> {
+                    String errorMsg = String.format("Density could not be created for arguments: " + temp + ", " + press);
+                    LOGGER.warn(errorMsg);
+                    return FluidValidators.combineInvalids(invalid, new InvalidProperty(errorMsg));
+                });
     }
 
     public static DryAirPropertiesFactory ofDefaultEquations(){

@@ -93,7 +93,11 @@ public class FluidValidators {
 
     public static InvalidProperty combineSeqOfInvalids(Seq<InvalidProperty> invalidProperties) {
         return invalidProperties.toStream()
-                .reduce((current, next) -> new InvalidProperty(String.join("\n", current.msg(), next.msg())));
+                .reduce(FluidValidators::combineInvalids);
+    }
+
+    public static InvalidProperty combineInvalids(InvalidProperty firstInvalid, InvalidProperty sourceInvalid){
+        return new InvalidProperty(String.join("\n", firstInvalid.msg(), sourceInvalid.msg()));
     }
 
 }

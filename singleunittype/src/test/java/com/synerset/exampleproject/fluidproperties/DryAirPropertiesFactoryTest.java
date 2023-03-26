@@ -42,5 +42,8 @@ class DryAirPropertiesFactoryTest {
         assertThat(actualDensityEither.isLeft()).isTrue();
         InvalidProperty actualInvalidProperty = actualDensityEither.getLeft();
         assertThat(actualInvalidProperty).isNotNull();
+        assertThat(actualInvalidProperty.msg()).contains("-10000");
+        assertThat(actualInvalidProperty.msg()).contains("Null");
+        assertThat(actualInvalidProperty.msg()).hasLineCount(3);
     }
 }
