@@ -27,7 +27,9 @@ Each quantity consists most popular SI units and at least one Imperial unit.
 
 Core: <br>
 ![image](https://img.shields.io/badge/17-Java-orange?style=for-the-badge) &nbsp;
+![image](https://img.shields.io/badge/1.0.0-VAVR-white?style=for-the-badge) &nbsp;
 ![image](https://img.shields.io/badge/apache_maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white) &nbsp;
+![image](https://img.shields.io/badge/Log4J-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white) &nbsp;
 
 Testing:<br>
 ![image](https://img.shields.io/badge/Junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white) &nbsp;
