@@ -4,14 +4,14 @@ import com.synerset.unitsystem.PhysicalQuantity;
 import com.synerset.unitsystem.temperature.Temperature;
 import io.vavr.collection.Seq;
 import io.vavr.control.Validation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
 public class FluidValidators {
 
-    private static final Logger LOGGER = LogManager.getLogger(FluidValidators.class.getSimpleName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(FluidValidators.class);
     private static final Temperature TEMP_MIN_LIMIT = Temperature.ofKelvins(0);
 
     public static Validation<InvalidProperty, Temperature> validateTemperature(Temperature temperature) {
@@ -19,7 +19,7 @@ public class FluidValidators {
                         requireNonNull(temperature, temperature.getClass().getSimpleName()),
                         requireNotExceedMinimalLimit(temperature, TEMP_MIN_LIMIT)
                 ).ap((t1, t2) -> temperature)
-                .mapError(FluidValidators::combineInvalids);
+                .mapError(FluidValidators::combineSeqOfInvalids);
     }
 
     public static <Q extends PhysicalQuantity<Q>> Validation<InvalidProperty, PhysicalQuantity<Q>> validateForNonNullAndPositive(PhysicalQuantity<Q> physicalQuantity) {
@@ -27,13 +27,17 @@ public class FluidValidators {
                         requireNonNull(physicalQuantity, physicalQuantity.getClass().getSimpleName()),
                         requirePositiveValue(physicalQuantity)
                 ).ap((q1, q2) -> physicalQuantity)
-                .mapError(FluidValidators::combineInvalids);
+                .mapError(FluidValidators::combineSeqOfInvalids);
     }
 
-    public static <Q extends PhysicalQuantity<Q>> Validation<InvalidProperty, PhysicalQuantity<Q>> requireNonNull(PhysicalQuantity<Q> physicalQuantity, String variableName) {
+    public static <Q extends PhysicalQuantity<Q>> Validation<InvalidProperty, PhysicalQuantity<Q>> requireNonNull(PhysicalQuantity<Q> physicalQuantity, String msg) {
         return Objects.isNull(physicalQuantity)
-                ? Validation.invalid(invalidPropertyForNullArgument(variableName))
+                ? Validation.invalid(invalidPropertyForNullArgument(msg))
                 : Validation.valid(physicalQuantity);
+    }
+
+    public static <Q extends PhysicalQuantity<Q>> Validation<InvalidProperty, PhysicalQuantity<Q>> requireNonNull(PhysicalQuantity<Q> physicalQuantity) {
+        return requireNonNull(physicalQuantity, "");
     }
 
     public static <Q extends PhysicalQuantity<Q>> Validation<InvalidProperty, PhysicalQuantity<Q>> requireNotExceedMinimalLimit(PhysicalQuantity<Q> physicalQuantity, PhysicalQuantity<Q> minLimit) {
@@ -59,8 +63,8 @@ public class FluidValidators {
                 : Validation.valid(physicalQuantity);
     }
 
-    private static InvalidProperty invalidPropertyForNullArgument(String variableName) {
-        String message = "Null passed as an argument for: " + variableName;
+    private static InvalidProperty invalidPropertyForNullArgument(String msg) {
+        String message = "Null passed as an argument. " + msg;
         LOGGER.warn(message);
         return new InvalidProperty(message);
     }
@@ -70,7 +74,7 @@ public class FluidValidators {
         String message = String.format("Minimum limit exceeded: (%s)_minLimit = %s, (%s)_current = %s -> (%s)_current = %s",
                 quantityName, minLimit, quantityName, physicalQuantity.toBaseUnit(), quantityName, physicalQuantity);
         LOGGER.warn(message);
-        return new InvalidProperty(physicalQuantity, message);
+        return new InvalidProperty(message);
     }
 
     private static <Q extends PhysicalQuantity<Q>> InvalidProperty invalidPropertyForExceededMaxLimit(PhysicalQuantity<Q> physicalQuantity, PhysicalQuantity<Q> maxLimit) {
@@ -78,21 +82,18 @@ public class FluidValidators {
         String message = String.format("Maximum limit exceeded: (%s)_maxLimit = %s, (%s)_current = %s -> (%s)_current = %s",
                 quantityName, maxLimit, quantityName, physicalQuantity.toBaseUnit(), quantityName, physicalQuantity);
         LOGGER.warn(message);
-        return new InvalidProperty(physicalQuantity, message);
+        return new InvalidProperty(message);
     }
 
     private static <Q extends PhysicalQuantity<Q>> InvalidProperty invalidPropertyForNegativeValue(PhysicalQuantity<Q> physicalQuantity) {
         String message = "Negative value is not allowed. Current value = " + physicalQuantity;
         LOGGER.warn(message);
-        return new InvalidProperty(physicalQuantity, message);
+        return new InvalidProperty(message);
     }
 
-    public static InvalidProperty combineInvalids(Seq<InvalidProperty> invalidProperties) {
-        StringBuilder stringBuilder = new StringBuilder();
-        invalidProperties.forEach(invalidProp -> stringBuilder.append("\n").append(invalidProp.msg()));
-        String combinedMessage = stringBuilder.toString();
-        PhysicalQuantity<?> lastPhysicalQuantity = invalidProperties.last().physicalQuantity();
-        return new InvalidProperty(lastPhysicalQuantity, combinedMessage);
+    public static InvalidProperty combineSeqOfInvalids(Seq<InvalidProperty> invalidProperties) {
+        return invalidProperties.toStream()
+                .reduce((current, next) -> new InvalidProperty(String.join("\n", current.msg(), next.msg())));
     }
 
 }
