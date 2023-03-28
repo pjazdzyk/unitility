@@ -1,6 +1,5 @@
 package com.synerset.exampleproject.fluidproperties;
 
-import com.synerset.exampleproject.common.Defaults;
 import com.synerset.unitsystem.density.Density;
 import com.synerset.unitsystem.pressure.Pressure;
 import com.synerset.unitsystem.temperature.Temperature;
@@ -19,7 +18,7 @@ class DryAirPropertiesFactoryTest {
     void shouldCreateDensityProperty_whenValidTemperatureAndPressureIsGiven() {
         // Given
         Temperature airTemp = Temperature.ofCelsius(20);
-        Pressure atmPress = Defaults.DEF_PAT;
+        Pressure atmPress = Pressure.STANDARD_ATMOSPHERE;
 
         // When
         Density actualDensity = dryAirPropertiesFactory.density(airTemp, atmPress).get();
