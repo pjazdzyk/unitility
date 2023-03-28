@@ -22,7 +22,7 @@ public class DryAirPropertiesFactory {
         this.equations = equations;
     }
 
-    public Either<InvalidProperty, Density> density(Temperature temp, Pressure press) {
+    public Either<InvalidQuantity, Density> density(Temperature temp, Pressure press) {
         LOGGER.debug("Invoking density() with params: Temperature = {}, Pressure = {}", temp, press);
         return Validation.combine(
                         FluidValidators.validateTemperature(temp),
@@ -33,11 +33,11 @@ public class DryAirPropertiesFactory {
                 .mapLeft(invalid -> {
                     String errorMsg = String.format("Density could not be created for arguments: " + temp + ", " + press);
                     LOGGER.warn(errorMsg);
-                    return FluidValidators.combineInvalids(invalid, new InvalidProperty(errorMsg));
+                    return FluidValidators.combineInvalids(invalid, new InvalidQuantity(errorMsg, temp, press));
                 });
     }
 
-    Either<InvalidProperty, DynamicViscosity> dynamicViscosity(Temperature temp) {
+    Either<InvalidQuantity, DynamicViscosity> dynamicViscosity(Temperature temp) {
         LOGGER.debug("Invoking dynamicViscosity() with params: Temperature = {}", temp);
         return FluidValidators.validateTemperature(temp)
                 .map(equations::dynamicViscosity)
@@ -45,11 +45,11 @@ public class DryAirPropertiesFactory {
                 .mapLeft(invalid -> {
                     String errorMsg = String.format("Dynamic viscosity could not be created for arguments: " + temp);
                     LOGGER.warn(errorMsg);
-                    return FluidValidators.combineInvalids(invalid, new InvalidProperty(errorMsg));
+                    return FluidValidators.combineInvalids(invalid, new InvalidQuantity(errorMsg));
                 });
     }
 
-    Either<InvalidProperty, ThermalConductivity> thermalConductivity(Temperature temp) {
+    Either<InvalidQuantity, ThermalConductivity> thermalConductivity(Temperature temp) {
         LOGGER.debug("Invoking thermalConductivity() with params: Temperature = {}", temp);
         return FluidValidators.validateTemperature(temp)
                 .map(equations::thermalConductivity)
@@ -57,11 +57,11 @@ public class DryAirPropertiesFactory {
                 .mapLeft(invalid -> {
                     String errorMsg = String.format("Thermal conductivity could not be created for arguments: " + temp);
                     LOGGER.warn(errorMsg);
-                    return FluidValidators.combineInvalids(invalid, new InvalidProperty(errorMsg));
+                    return FluidValidators.combineInvalids(invalid, new InvalidQuantity(errorMsg));
                 });
     }
 
-    Either<InvalidProperty, SpecificHeat> specificHeat(Temperature temp) {
+    Either<InvalidQuantity, SpecificHeat> specificHeat(Temperature temp) {
         LOGGER.debug("Invoking specificHeat() with params: Temperature = {}", temp);
         return FluidValidators.validateTemperature(temp)
                 .map(equations::specificHeat)
@@ -69,11 +69,11 @@ public class DryAirPropertiesFactory {
                 .mapLeft(invalid -> {
                     String errorMsg = String.format("Specific heat could not be created for arguments: " + temp);
                     LOGGER.warn(errorMsg);
-                    return FluidValidators.combineInvalids(invalid, new InvalidProperty(errorMsg));
+                    return FluidValidators.combineInvalids(invalid, new InvalidQuantity(errorMsg));
                 });
     }
 
-    Either<InvalidProperty, SpecificEnthalpy> specificEnthalpy(Temperature temp) {
+    Either<InvalidQuantity, SpecificEnthalpy> specificEnthalpy(Temperature temp) {
         LOGGER.debug("Invoking specificEnthalpy() with params: Temperature = {}", temp);
         return FluidValidators.validateTemperature(temp)
                 .map(equations::specificEnthalpy)
@@ -81,11 +81,11 @@ public class DryAirPropertiesFactory {
                 .mapLeft(invalid -> {
                     String errorMsg = String.format("Specific enthalpy could not be created for arguments: " + temp);
                     LOGGER.warn(errorMsg);
-                    return FluidValidators.combineInvalids(invalid, new InvalidProperty(errorMsg));
+                    return FluidValidators.combineInvalids(invalid, new InvalidQuantity(errorMsg));
                 });
     }
 
-    public Either<InvalidProperty, KinematicViscosity> kinematicViscosity(Temperature temp, Density density) {
+    public Either<InvalidQuantity, KinematicViscosity> kinematicViscosity(Temperature temp, Density density) {
         LOGGER.debug("Invoking kinematicViscosity() with params: Temperature = {}, Density = {}", temp, density);
         return Validation.combine(
                         FluidValidators.validateTemperature(temp),
@@ -96,7 +96,7 @@ public class DryAirPropertiesFactory {
                 .mapLeft(invalid -> {
                     String errorMsg = String.format("Kinematic Viscosity could not be created for arguments: " + temp + ", " + density);
                     LOGGER.warn(errorMsg);
-                    return FluidValidators.combineInvalids(invalid, new InvalidProperty(errorMsg));
+                    return FluidValidators.combineInvalids(invalid, new InvalidQuantity(errorMsg));
                 });
     }
 

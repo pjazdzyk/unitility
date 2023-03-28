@@ -36,14 +36,14 @@ class DryAirPropertiesFactoryTest {
         Temperature airTemp = Temperature.ofCelsius(-10000);
 
         // When
-        Either<InvalidProperty, Density> actualDensityEither = dryAirPropertiesFactory.density(airTemp, null);
+        Either<InvalidQuantity, Density> actualDensityEither = dryAirPropertiesFactory.density(airTemp, null);
 
         // Then
         assertThat(actualDensityEither.isLeft()).isTrue();
-        InvalidProperty actualInvalidProperty = actualDensityEither.getLeft();
-        assertThat(actualInvalidProperty).isNotNull();
-        assertThat(actualInvalidProperty.msg()).contains("-10000");
-        assertThat(actualInvalidProperty.msg()).contains("Null");
-        assertThat(actualInvalidProperty.msg()).hasLineCount(3);
+        InvalidQuantity actualInvalidQuantity = actualDensityEither.getLeft();
+        assertThat(actualInvalidQuantity).isNotNull();
+        assertThat(actualInvalidQuantity.msg()).contains("-10000");
+        assertThat(actualInvalidQuantity.msg()).contains("Null");
+        assertThat(actualInvalidQuantity.msg()).hasLineCount(3);
     }
 }
