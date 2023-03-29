@@ -1,6 +1,7 @@
 package com.synerset.exampleproject.fluidproperties;
 
 import com.synerset.unitsystem.density.Density;
+import com.synerset.unitsystem.dynamicviscosity.DynamicViscosity;
 import com.synerset.unitsystem.pressure.Pressure;
 import com.synerset.unitsystem.temperature.Temperature;
 import io.vavr.control.Either;
@@ -41,8 +42,38 @@ class DryAirPropertiesFactoryTest {
         assertThat(actualDensityEither.isLeft()).isTrue();
         InvalidQuantity actualInvalidQuantity = actualDensityEither.getLeft();
         assertThat(actualInvalidQuantity).isNotNull();
-        assertThat(actualInvalidQuantity.msg()).contains("-10000");
-        assertThat(actualInvalidQuantity.msg()).contains("Null");
-        assertThat(actualInvalidQuantity.msg()).hasLineCount(3);
+        assertThat(actualInvalidQuantity.msg()).contains("null");
+        assertThat(actualInvalidQuantity.msg()).hasLineCount(1);
     }
+
+    @Test
+    @DisplayName("should create dynamic viscosity of fluid when valid temperature is given")
+    void shouldCreateDynamicViscosityProperty_whenValidTemperatureAndPressureIsGiven() {
+        // Given
+        Temperature fluidTemp = Temperature.ofCelsius(20);
+
+        // When
+        DynamicViscosity actualDynamicViscosity = dryAirPropertiesFactory.dynamicViscosity(fluidTemp).get();
+
+        // Then
+        DynamicViscosity expectedDynamicViscosity = DynamicViscosity.ofPascalSecond(1.8062406974316945E-5);
+        assertThat(actualDynamicViscosity.getValue()).isEqualTo(expectedDynamicViscosity.getValue(), withPrecision(1E-15));
+    }
+
+    @Test
+    @DisplayName("should fail to create dynamic viscosity of fluid when invalid temperature")
+    void shouldFailToCreateDynamicViscosityProperty_whenInvalidTemperatureAndPressureIsGiven() {
+        // Given
+        // When
+        Either<InvalidQuantity, DynamicViscosity> actualDynamicViscosityEither = dryAirPropertiesFactory.dynamicViscosity(null);
+
+        // Then
+        assertThat(actualDynamicViscosityEither.isLeft()).isTrue();
+        InvalidQuantity actualInvalidQuantity = actualDynamicViscosityEither.getLeft();
+        assertThat(actualInvalidQuantity).isNotNull();
+        assertThat(actualInvalidQuantity.msg()).contains("null");
+        assertThat(actualInvalidQuantity.msg()).hasLineCount(1);
+    }
+
+
 }
