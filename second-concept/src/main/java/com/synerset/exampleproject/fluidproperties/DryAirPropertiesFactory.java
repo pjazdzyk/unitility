@@ -13,8 +13,6 @@ import io.vavr.control.Validation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Objects;
-
 public class DryAirPropertiesFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(DryAirPropertiesFactory.class);
     private final DryAirPropertiesEquations equations;

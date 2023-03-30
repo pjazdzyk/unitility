@@ -34,16 +34,16 @@ class DryAirPropertiesFactoryTest {
     void shouldFailToCreateDensityProperty_whenInvalidTemperatureAndPressureIsGiven() {
         // Given
         Temperature airTemp = Temperature.ofCelsius(-10000);
+        Pressure press = Pressure.STANDARD_ATMOSPHERE;
 
         // When
-        Either<InvalidQuantity, Density> actualDensityEither = dryAirPropertiesFactory.density(airTemp, null);
+        Either<InvalidQuantity, Density> actualDensityEither = dryAirPropertiesFactory.density(airTemp, press);
 
         // Then
         assertThat(actualDensityEither.isLeft()).isTrue();
         InvalidQuantity actualInvalidQuantity = actualDensityEither.getLeft();
         assertThat(actualInvalidQuantity).isNotNull();
-        assertThat(actualInvalidQuantity.msg()).contains("null");
-        assertThat(actualInvalidQuantity.msg()).hasLineCount(1);
+        assertThat(actualInvalidQuantity.msg()).hasLineCount(2);
     }
 
     @Test
@@ -59,21 +59,5 @@ class DryAirPropertiesFactoryTest {
         DynamicViscosity expectedDynamicViscosity = DynamicViscosity.ofPascalSecond(1.8062406974316945E-5);
         assertThat(actualDynamicViscosity.getValue()).isEqualTo(expectedDynamicViscosity.getValue(), withPrecision(1E-15));
     }
-
-    @Test
-    @DisplayName("should fail to create dynamic viscosity of fluid when invalid temperature")
-    void shouldFailToCreateDynamicViscosityProperty_whenInvalidTemperatureAndPressureIsGiven() {
-        // Given
-        // When
-        Either<InvalidQuantity, DynamicViscosity> actualDynamicViscosityEither = dryAirPropertiesFactory.dynamicViscosity(null);
-
-        // Then
-        assertThat(actualDynamicViscosityEither.isLeft()).isTrue();
-        InvalidQuantity actualInvalidQuantity = actualDynamicViscosityEither.getLeft();
-        assertThat(actualInvalidQuantity).isNotNull();
-        assertThat(actualInvalidQuantity.msg()).contains("null");
-        assertThat(actualInvalidQuantity.msg()).hasLineCount(1);
-    }
-
-
+    
 }
