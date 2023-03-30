@@ -25,11 +25,6 @@ public class DryAirPropertiesFactory {
 
     public Either<InvalidQuantity, Density> density(Temperature temp, Pressure press) {
         LOGGER.debug("Invoking density() with params: Temperature = {}, Pressure = {}", temp, press);
-        if (Objects.isNull(temp) || Objects.isNull(press)) {
-            String nullMsg = temp == null ? "Temperature cannot be null." : "Density cannot be null.";
-            LOGGER.warn(nullMsg);
-            return Either.left(new InvalidQuantity(nullMsg, temp, press));
-        }
         return FluidValidators.requireNotExceedMinimalLimit(temp, Temperature.PHYSICAL_MIN_LIMIT)
                 .map(tx -> equations.density((Temperature) tx, press))
                 .toEither()
@@ -42,11 +37,6 @@ public class DryAirPropertiesFactory {
 
     Either<InvalidQuantity, DynamicViscosity> dynamicViscosity(Temperature temp) {
         LOGGER.debug("Invoking dynamicViscosity() with params: Temperature = {}", temp);
-        if (Objects.isNull(temp)) {
-            String nullMsg = "Temperature cannot be null.";
-            LOGGER.warn(nullMsg);
-            return Either.left(new InvalidQuantity(nullMsg, temp));
-        }
         return FluidValidators.requireNotExceedMinimalLimit(temp, Temperature.PHYSICAL_MIN_LIMIT)
                 .map(tx -> equations.dynamicViscosity((Temperature) tx))
                 .toEither()
@@ -59,11 +49,6 @@ public class DryAirPropertiesFactory {
 
     Either<InvalidQuantity, ThermalConductivity> thermalConductivity(Temperature temp) {
         LOGGER.debug("Invoking thermalConductivity() with params: Temperature = {}", temp);
-        if (Objects.isNull(temp)) {
-            String nullMsg = "Temperature cannot be null.";
-            LOGGER.warn(nullMsg);
-            return Either.left(new InvalidQuantity(nullMsg, temp));
-        }
         return FluidValidators.requireNotExceedMinimalLimit(temp, Temperature.PHYSICAL_MIN_LIMIT)
                 .map(tx -> equations.thermalConductivity((Temperature) tx))
                 .toEither()
@@ -76,11 +61,6 @@ public class DryAirPropertiesFactory {
 
     Either<InvalidQuantity, SpecificHeat> specificHeat(Temperature temp) {
         LOGGER.debug("Invoking specificHeat() with params: Temperature = {}", temp);
-        if (Objects.isNull(temp)) {
-            String nullMsg = "Temperature cannot be null.";
-            LOGGER.warn(nullMsg);
-            return Either.left(new InvalidQuantity(nullMsg, temp));
-        }
         return FluidValidators.requireNotExceedMinimalLimit(temp, Temperature.PHYSICAL_MIN_LIMIT)
                 .map(tx -> equations.specificHeat((Temperature) tx))
                 .toEither()
@@ -93,11 +73,6 @@ public class DryAirPropertiesFactory {
 
     Either<InvalidQuantity, SpecificEnthalpy> specificEnthalpy(Temperature temp) {
         LOGGER.debug("Invoking specificEnthalpy() with params: Temperature = {}", temp);
-        if (Objects.isNull(temp)) {
-            String nullMsg = "Temperature cannot be null.";
-            LOGGER.warn(nullMsg);
-            return Either.left(new InvalidQuantity(nullMsg, temp));
-        }
         return FluidValidators.requireNotExceedMinimalLimit(temp, Temperature.PHYSICAL_MIN_LIMIT)
                 .map(tx -> equations.specificEnthalpy((Temperature) tx))
                 .toEither()
@@ -110,11 +85,6 @@ public class DryAirPropertiesFactory {
 
     public Either<InvalidQuantity, KinematicViscosity> kinematicViscosity(Temperature temp, Density density) {
         LOGGER.debug("Invoking kinematicViscosity() with params: Temperature = {}, Density = {}", temp, density);
-        if (Objects.isNull(temp) || Objects.isNull(density)) {
-            String nullMsg = temp == null ? "Temperature cannot be null." : "Density cannot be null.";
-            LOGGER.warn(nullMsg);
-            return Either.left(new InvalidQuantity(nullMsg, temp, density));
-        }
         return Validation.combine(
                         FluidValidators.requireNotExceedMinimalLimit(temp, Temperature.PHYSICAL_MIN_LIMIT),
                         FluidValidators.requirePositiveValue(density)
