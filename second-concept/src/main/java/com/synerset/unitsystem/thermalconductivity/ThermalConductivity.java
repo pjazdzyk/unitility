@@ -2,6 +2,7 @@ package com.synerset.unitsystem.thermalconductivity;
 
 import com.synerset.unitsystem.PhysicalQuantity;
 import com.synerset.unitsystem.Unit;
+import com.synerset.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -67,7 +68,7 @@ public final class ThermalConductivity implements PhysicalQuantity<ThermalConduc
 
     @Override
     public String toString() {
-        return String.format("%." + TO_STRING_PRECISION + "f %s", value, unit.getSymbol());
+        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
     }
 
     public static ThermalConductivity of(double value, Unit<ThermalConductivity> unit) {

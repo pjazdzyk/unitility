@@ -1,6 +1,7 @@
 package com.synerset.unitsystem.dimensionless;
 
 import com.synerset.unitsystem.BareQuantity;
+import com.synerset.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class GrashofNum implements BareQuantity {
 
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION);
     }
 
     @Override
