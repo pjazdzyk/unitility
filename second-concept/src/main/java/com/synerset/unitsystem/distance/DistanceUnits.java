@@ -1,10 +1,10 @@
-package com.synerset.unitsystem.length;
+package com.synerset.unitsystem.distance;
 
 import com.synerset.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum LengthUnits implements Unit<Length> {
+public enum DistanceUnits implements Unit<Distance> {
 
     METER("m", val -> val, val -> val),
     CENTIMETER("cm", val -> val / 100, val -> val * 100),
@@ -18,7 +18,7 @@ public enum LengthUnits implements Unit<Length> {
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    LengthUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    DistanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -30,7 +30,7 @@ public enum LengthUnits implements Unit<Length> {
     }
 
     @Override
-    public Unit<Length> getBaseUnit() {
+    public Unit<Distance> getBaseUnit() {
         return METER;
     }
 
