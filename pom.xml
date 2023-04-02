@@ -6,19 +6,14 @@
 
     <groupId>com.synerset</groupId>
     <artifactId>unitility</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.1-beta</version>
     <packaging>pom</packaging>
-    <modules>
-        <module>second-concept</module>
-        <module>first-concept</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
-        <vavr.version>1.0.0-alpha-4</vavr.version>
         <assertj-core.version>3.24.2</assertj-core.version>
     </properties>
 
@@ -34,26 +29,6 @@
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.vavr</groupId>
-            <artifactId>vavr</artifactId>
-            <version>${vavr.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.20.0</version>
         </dependency>
     </dependencies>
 </project>
