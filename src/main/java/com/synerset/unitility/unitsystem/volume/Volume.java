@@ -52,11 +52,11 @@ public final class Volume implements PhysicalQuantity<Volume> {
     }
 
     public Volume toHectoLiter() {
-        return toUnit(VolumeUnits.HECTO_LITER);
+        return toUnit(VolumeUnits.HECTOLITRE);
     }
 
     public Volume toMilliLiter() {
-        return toUnit(VolumeUnits.MILLI_LITER);
+        return toUnit(VolumeUnits.MILLILITRE);
     }
 
     public Volume toOunce() {
@@ -106,11 +106,11 @@ public final class Volume implements PhysicalQuantity<Volume> {
     }
 
     public static Volume ofHectoLiters(double value) {
-        return new Volume(value, VolumeUnits.HECTO_LITER);
+        return new Volume(value, VolumeUnits.HECTOLITRE);
     }
 
     public static Volume ofMilliLiters(double value) {
-        return new Volume(value, VolumeUnits.MILLI_LITER);
+        return new Volume(value, VolumeUnits.MILLILITRE);
     }
 
     public static Volume ofOunces(double value) {

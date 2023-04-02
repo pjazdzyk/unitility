@@ -46,15 +46,15 @@ public final class Energy implements PhysicalQuantity<Energy> {
     }
 
     public Energy toMilliJoules() {
-        return toUnit(EnergyUnits.MILLI_JOULE);
+        return toUnit(EnergyUnits.MILLIJOULE);
     }
 
     public Energy toKiloJoules() {
-        return toUnit(EnergyUnits.KILO_JOULE);
+        return toUnit(EnergyUnits.KILOJOULE);
     }
 
     public Energy toMegaJoules() {
-        return toUnit(EnergyUnits.MEGA_JOULE);
+        return toUnit(EnergyUnits.MEGAJOULE);
     }
 
     public Energy toBTU() {
@@ -92,15 +92,15 @@ public final class Energy implements PhysicalQuantity<Energy> {
     }
 
     public static Energy ofMilliJoules(double value) {
-        return new Energy(value, EnergyUnits.MILLI_JOULE);
+        return new Energy(value, EnergyUnits.MILLIJOULE);
     }
 
     public static Energy ofKiloJoules(double value) {
-        return new Energy(value, EnergyUnits.KILO_JOULE);
+        return new Energy(value, EnergyUnits.KILOJOULE);
     }
 
     public static Energy ofMegaJoules(double value) {
-        return new Energy(value, EnergyUnits.MEGA_JOULE);
+        return new Energy(value, EnergyUnits.MEGAJOULE);
     }
 
     public static Energy ofBTU(double value) {

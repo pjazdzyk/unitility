@@ -45,7 +45,7 @@ public final class Force implements PhysicalQuantity<Force> {
     }
 
     public Force toKiloNewtons() {
-        return toUnit(ForceUnits.KILO_NEWTON);
+        return toUnit(ForceUnits.KILONEWTON);
     }
 
     public Force toKiloponds() {
@@ -91,7 +91,7 @@ public final class Force implements PhysicalQuantity<Force> {
     }
 
     public static Force ofKiloNewtons(double value) {
-        return new Force(value, ForceUnits.KILO_NEWTON);
+        return new Force(value, ForceUnits.KILONEWTON);
     }
 
     public static Force ofKiloponds(double value) {

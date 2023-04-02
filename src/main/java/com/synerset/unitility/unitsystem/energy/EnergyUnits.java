@@ -7,9 +7,9 @@ import java.util.function.DoubleUnaryOperator;
 public enum EnergyUnits implements Unit<Energy> {
 
     JOULE("J", val -> val, val -> val),
-    MILLI_JOULE("mJ", val -> val * 0.001, val -> val / 0.001),
-    KILO_JOULE("kJ", val -> val * 1000, val -> val / 1000),
-    MEGA_JOULE("MJ", val -> val * 1000000, val -> val / 1000000),
+    MILLIJOULE("mJ", val -> val * 0.001, val -> val / 0.001),
+    KILOJOULE("kJ", val -> val * 1000, val -> val / 1000),
+    MEGAJOULE("MJ", val -> val * 1000000, val -> val / 1000000),
     BTU("BTU", val -> val * 1055.05585262, val -> val / 1055.05585262),
     CALORIE("cal", val -> val * 4.184, val -> val / 4.184);
 

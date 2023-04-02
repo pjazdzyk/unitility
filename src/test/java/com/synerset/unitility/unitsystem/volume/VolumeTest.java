@@ -49,7 +49,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeters = initialVolumeInHectoLiters.toBaseUnit();
-        Volume actualInHectoLiters = actualInCubicMeters.toUnit(VolumeUnits.HECTO_LITER);
+        Volume actualInHectoLiters = actualInCubicMeters.toUnit(VolumeUnits.HECTOLITRE);
 
         // Then
         Volume expectedInCubicMeters = Volume.ofCubicMeters(1.0);
@@ -65,7 +65,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInMilliliter.toBaseUnit();
-        Volume actualInMilliliter = actualInCubicMeter.toUnit(VolumeUnits.MILLI_LITER);
+        Volume actualInMilliliter = actualInCubicMeter.toUnit(VolumeUnits.MILLILITRE);
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(100);

@@ -44,7 +44,7 @@ public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy
     }
 
     public SpecificEnthalpy toKiloJoulePerKiloGram() {
-        return toUnit(SpecificEnthalpyUnits.KILO_JOULE_PER_KILOGRAM);
+        return toUnit(SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
     }
 
     public SpecificEnthalpy toBTUPerPound() {
@@ -78,7 +78,7 @@ public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy
     }
 
     public static SpecificEnthalpy ofKiloJoulePerKiloGram(double value) {
-        return new SpecificEnthalpy(value, SpecificEnthalpyUnits.KILO_JOULE_PER_KILOGRAM);
+        return new SpecificEnthalpy(value, SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
     }
 
     public static SpecificEnthalpy ofBTUPerPound(double value) {

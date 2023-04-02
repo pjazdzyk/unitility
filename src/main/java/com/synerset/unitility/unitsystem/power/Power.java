@@ -44,7 +44,7 @@ public final class Power implements PhysicalQuantity<Power> {
     }
 
     public Power toKiloWatts(){
-        return toUnit(PowerUnits.KILO_WATT);
+        return toUnit(PowerUnits.KILOWATT);
     }
 
     public Power toBTUPerHour(){
@@ -52,7 +52,7 @@ public final class Power implements PhysicalQuantity<Power> {
     }
 
     public Power toMegaWatts(){
-        return toUnit(PowerUnits.MEGA_WATT);
+        return toUnit(PowerUnits.MEGAWATT);
     }
 
     public Power toHorsePower(){
@@ -86,11 +86,11 @@ public final class Power implements PhysicalQuantity<Power> {
     }
 
     public static Power ofKiloWatts(double value) {
-        return new Power(value, PowerUnits.KILO_WATT);
+        return new Power(value, PowerUnits.KILOWATT);
     }
 
     public static Power ofMegaWatts(double value) {
-        return new Power(value, PowerUnits.MEGA_WATT);
+        return new Power(value, PowerUnits.MEGAWATT);
     }
 
     public static Power ofBTUPerHour(double value) {

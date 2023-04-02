@@ -7,7 +7,7 @@ import java.util.function.DoubleUnaryOperator;
 public enum SpecificEnthalpyUnits implements Unit<SpecificEnthalpy> {
 
     JOULE_PER_KILOGRAM("J/kg", val -> val, val -> val),
-    KILO_JOULE_PER_KILOGRAM("kJ/kg", val -> val * 1000, val -> val / 1000),
+    KILOJOULE_PER_KILOGRAM("kJ/kg", val -> val * 1000, val -> val / 1000),
     BTU_PER_POUND("BTU/lb", val -> val * 2326, val -> val / 2326.0);
 
     private final String symbol;

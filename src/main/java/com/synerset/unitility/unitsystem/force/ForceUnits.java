@@ -7,7 +7,7 @@ import java.util.function.DoubleUnaryOperator;
 public enum ForceUnits implements Unit<Force> {
 
     NEWTON("N", val -> val, val -> val),
-    KILO_NEWTON("kN", val -> val * 1000.0, val -> val / 1000.0),
+    KILONEWTON("kN", val -> val * 1000.0, val -> val / 1000.0),
     KILOPOND("kp", val -> val * 9.80665, val -> val / 9.80665),
     DYNE("dyn", val -> val * 0.00001, val -> val / 0.00001),
     POUND_FORCE("lbf", val -> val * 4.4482216152605, val -> val / 4.4482216152605),
