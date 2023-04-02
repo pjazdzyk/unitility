@@ -7,7 +7,6 @@ import java.util.Objects;
 
 public class ReynoldsNum implements BareQuantity {
 
-    public static final byte TO_STRING_PRECISION = 8;
     private final double value;
 
     private ReynoldsNum(double value) {

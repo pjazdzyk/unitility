@@ -11,7 +11,6 @@ public final class Pressure implements PhysicalQuantity<Pressure> {
     public final static Pressure STANDARD_ATMOSPHERE = Pressure.ofPascal(101_325);
     public final static Pressure TECHNICAL_ATMOSPHERE = Pressure.ofPascal(98_067);
 
-    public static final byte TO_STRING_PRECISION = 3;
     private final double value;
     private final Unit<Pressure> unit;
 

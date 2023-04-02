@@ -7,8 +7,6 @@ import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 import java.util.Objects;
 
 public final class Power implements PhysicalQuantity<Power> {
-
-    public static final byte TO_STRING_PRECISION = 3;
     private final double value;
     private final Unit<Power> unit;
 

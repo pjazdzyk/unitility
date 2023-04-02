@@ -9,8 +9,6 @@ import java.util.Objects;
 public final class Temperature implements PhysicalQuantity<Temperature> {
 
     public static final Temperature PHYSICAL_MIN_LIMIT = Temperature.ofKelvins(0);
-
-    public static final byte TO_STRING_PRECISION = 3;
     private final double value;
     private final Unit<Temperature> unit;
 

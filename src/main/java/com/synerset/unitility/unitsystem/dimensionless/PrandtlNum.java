@@ -6,8 +6,6 @@ import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 import java.util.Objects;
 
 public class PrandtlNum implements BareQuantity {
-
-    public static final byte TO_STRING_PRECISION = 8;
     private final double value;
 
     private PrandtlNum(double value) {

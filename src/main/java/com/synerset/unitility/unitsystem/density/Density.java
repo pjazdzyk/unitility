@@ -8,7 +8,6 @@ import java.util.Objects;
 
 public final class Density implements PhysicalQuantity<Density> {
 
-    public static final byte TO_STRING_PRECISION = 3;
     private final double value;
     private final Unit<Density> unit;
 

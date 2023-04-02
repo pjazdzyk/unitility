@@ -10,8 +10,6 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
 
     public static final RelativeHumidity RH_MIN_LIMIT = RelativeHumidity.ofPercentage(0);
     public static final RelativeHumidity RH_MAX_LIMIT = RelativeHumidity.ofPercentage(100);
-
-    public static final byte TO_STRING_PRECISION = 3;
     private final double value;
     private final Unit<RelativeHumidity> unit;
 

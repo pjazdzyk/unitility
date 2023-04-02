@@ -8,7 +8,6 @@ import java.util.Objects;
 
 public final class Angle implements PhysicalQuantity<Angle> {
 
-    public static final byte TO_STRING_PRECISION = 3;
     private final double value;
     private final Unit<Angle> unit;
 
