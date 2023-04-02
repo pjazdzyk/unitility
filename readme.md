@@ -4,6 +4,17 @@ Introducing UNITILITY - the ultimate Java library designed to simplify physics u
 With a wide range of value objects that represent commonly used physical quantities, our solution is built using plain Java for optimal speed and lightweight functionality. 
 Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers quick and easy implementation in your project.
 
+## Example
+Below is a simple example how to work with units and convert to another type of unit:
+```java
+Temperature tempInCelsius = Temperature.ofCelsius(20.5);
+Temperature tempInKelvin = tempInCelsius.toKelvin();
+Temperature temInFahrenheit = tempInKelvin.toFahrenheit();
+System.out.println(tempInCelsius  + " | " + tempInKelvin + " | " + temInFahrenheit);
+
+OUTPUT: 20.5 °C | 293.65 K | 68.9 °F
+```
+
 ## Development status & collaboration
 This is an early development stage.
 I welcome other developers who are interested in physics and engineering to collaborate on this project. 
@@ -18,9 +29,9 @@ At current level of development following units are available:
 * Volume: cubic meter [m³], cubic centimetre [L], liter [L], hectolitre [hL], millilitre [mL], ounce [fl.oz], pint [pt], gallon [gal]
 * Mass: kilogram [kg], gram [g], milligram [mg], tonne [t], ounce [oz], pound [lb]
 * Angle: degrees [°], radians [rad]
-#### MECHANICAL
+#### MECHANICAL:
 * Force: newton [N], kilonewton [kN], kilopond [kp], dyne [dyn], pound force [lbf], poundal [pdl]
-#### THERMODYNAMIC
+#### THERMODYNAMIC:
 * Temperature: Kelvin [K], Celsius [°C], Fahrenheit [°F]
 * Pressure: Pascal [Pa], Hectopascal [hPa], Megapascal [MPa], Bar [bar], PSI [psi]
 * Energy: Joule [J], Millijoule [mJ], Kilojoule [kJ], Megajoule [MJ], BTU [BTU], Calorie [cal]
