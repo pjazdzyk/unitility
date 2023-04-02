@@ -1,23 +1,45 @@
 # UNITILITY - The Physics Unit Conversion Solution in Java
 
-This project's goal is to design an elastic, fast, lightweight, and easy-to-use physical unit system, which will allow aggregate value and physical unit together and enable the easy conversion between units of the same type.
-If you like my project, please hit the star button, thank you!
+Introducing UNITILITY - the ultimate Java library designed to simplify physics unit conversion. 
+With a wide range of value objects that represent commonly used physical quantities, our solution is built using plain Java for optimal speed and lightweight functionality. 
+Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers quick and easy implementation in your project.
 
-## Development status
-This is an early development stage. Any contributions and suggestions are most welcome.
-The project includes also other modules, to show an example of how this unit system can be incorporated into any type of calculation application. In the later version, it will be removed, and only the unit system package will stay.
+## Development status & collaboration
+This is an early development stage.
+I welcome other developers who are interested in physics and engineering to collaborate on this project. 
+As we are still in the early stages of development, any contributions or suggestions would be greatly appreciated.
 
 ## Specification
-
 At current level of development following units are available:
-- Temperature (K, C, F)
-- Pressure (Pa, hPa, MPa, Bar, Psi)
-- Density (kg/m<sup>3</sup>, lb/ft<sup>3</sup>)
-- Kinematic viscosity (m<sup>2</sup>/s, in<sup>2</sup>/s)
-- Dynamic viscosity (kg/ms, Pas, Ps)
-- Power (W, kW, BTU/h)
-- Thermal conductivity (W/mK, BTU/hftF)
-- Mass flow (kg/s, kg/h, lb/s)
+
+#### COMMON:
+* Distance: meter [m], centimetre [cm], millimetre [mm], kilometre [km], mile [mi], feet [ft], inch [in]
+* Area: square meter [m²], square kilometre [km²], square centimetre [cm²], square millimetre [mm²], are [a], hectare [ha], square inch [in²], square foot [ft²], square yard [yd²], acre [ac], square mile [mi²]
+* Volume: cubic meter [m³], cubic centimetre [L], liter [L], hectolitre [hL], millilitre [mL], ounce [fl.oz], pint [pt], gallon [gal]
+* Mass: kilogram [kg], gram [g], milligram [mg], tonne [t], ounce [oz], pound [lb]
+* Angle: degrees [°], radians [rad]
+#### MECHANICAL
+* Force: newton [N], kilonewton [kN], kilopond [kp], dyne [dyn], pound force [lbf], poundal [pdl]
+#### THERMODYNAMIC
+* Temperature: Kelvin [K], Celsius [°C], Fahrenheit [°F]
+* Pressure: Pascal [Pa], Hectopascal [hPa], Megapascal [MPa], Bar [bar], PSI [psi]
+* Energy: Joule [J], Millijoule [mJ], Kilojoule [kJ], Megajoule [MJ], BTU [BTU], Calorie [cal]
+* Power: Watt [W], Kilowatt [kW], Megawatt [MW], BTU/hour [BTU/h], Horse Power [HP]
+* Specific heat: Joules per kilogram Kelvin [J/(kg·K)], Kilojoules per kilogram Kelvin [kJ/(kg·K)], BTU per pound Fahrenheit [BTU/(lb·°F)]
+* Density: Kilogram per cubic meter [kg/m³], Pound per cubic foot [lb/ft³], Pounds per cubic inch [lb/in³]
+* Dynamic viscosity: Kilogram per meter second [kg/(m·s)], Pascal second [Pa·s], Poise [P]
+* Kinematic viscosity: Square meter per second [m²/s], Square foot per second [ft²/s]
+* Specific enthalpy: Joule per kilogram [J/kg], Kilojoule per kilogram [kJ/kg], BTU per pound [BTU/lb]
+* Thermal conductivity: Watts per meter Kelvin [W/(m·K)], Kilowatts per meter Kelvin [kW/(m·K)], BTU per hour foot Fahrenheit [BTU/(h·ft·°F)]
+#### FLOWS:
+* Mass flow: Kilogram per second [kg/s], Kilogram per hour [kg/h], Tonne per hour [t/h], Pound per second [lb/s], 
+* Volumetric flow: Cubic meters per second [m³/s], Cubic meters per minute [m³/min], Cubic meters per hour [m³/h], Litre per second [L/s], Litre per minute [L/min], Litre per hour [L/h], 
+* Gallons per second [gal/s], Gallons per minute [gal/min], Gallons per hour [gal/h]
+#### HUMID AIR SPECIFIC:
+* Humidity ratio: Kilogram per kilogram [kg/kg], Pound per pound [lb/lb]
+* Relative humidity: Percent [%], Decimal [-]
+#### DIMENSIONLESS:
+* Grashof number, Prandtl number, Reynolts number
 
 Each quantity consists most popular SI units and at least one Imperial unit.
 
