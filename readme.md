@@ -15,14 +15,14 @@ System.out.println(tempInCelsius  + " | " + tempInKelvin + " | " + temInFahrenhe
 OUTPUT: 20.5 °C | 293.65 K | 68.9 °F
 ```
 All quantities have "smart toString" method, which will always adjust decimal precision to capture by default 3 relevant digits depending on your unit type and its value. 
-This way you have guaranteed an elegant output from toString() without any additional effort of reformatting:
+This way you have guaranteed an elegant output from toString() without any additional effort of reformatting. Values will be rounded up using HALF_UP aproach. 
 
 ```java
 Distance bigDistance = Distance.ofMeters(10);
-Distance smallDistance = Distance.ofMeters(0.00012345);
+Distance smallDistance = Distance.ofMeters(0.000123678);
 System.out.println(bigDistance + " | " + smallDistance);
 
-OUTPUT: 10 m | 0.000123 m
+OUTPUT: 10 m | 0.000124 m
 ```
 
 ## Development status & collaboration
