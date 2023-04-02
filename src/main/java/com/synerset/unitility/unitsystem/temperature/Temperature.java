@@ -83,4 +83,7 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
         return new Temperature(value, TemperatureUnits.CELSIUS);
     }
 
+    public static Temperature ofFahrenheit(double value) {
+        return new Temperature(value, TemperatureUnits.FAHRENHEIT);
+    }
 }
