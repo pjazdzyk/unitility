@@ -7,8 +7,10 @@ import java.util.function.DoubleUnaryOperator;
 public enum PowerUnits implements Unit<Power> {
 
     WATT("W", val -> val, val -> val),
-    KILOWATT("kW", val -> val * 1000.0, val -> val / 1000.0),
-    BTU_PER_HOUR("BTU/h", val -> val * 0.2930710701722222, val -> val / 0.2930710701722222);
+    KILO_WATT("kW", val -> val * 1000.0, val -> val / 1000.0),
+    MEGA_WATT("MW", val -> val * 1_000_000, val -> val / 1_000_000),
+    BTU_PER_HOUR("BTU/h", val -> val * 0.2930710701722222, val -> val / 0.2930710701722222),
+    HORSE_POWER("HP", val -> val * 745.69987158227022, val -> val / 745.69987158227022);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

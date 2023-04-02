@@ -44,11 +44,19 @@ public final class Power implements PhysicalQuantity<Power> {
     }
 
     public Power toKiloWatts(){
-        return toUnit(PowerUnits.KILOWATT);
+        return toUnit(PowerUnits.KILO_WATT);
     }
 
     public Power toBTUPerHour(){
         return toUnit(PowerUnits.BTU_PER_HOUR);
+    }
+
+    public Power toMegaWatts(){
+        return toUnit(PowerUnits.MEGA_WATT);
+    }
+
+    public Power toHorsePower(){
+        return toUnit(PowerUnits.HORSE_POWER);
     }
 
     @Override
@@ -78,10 +86,18 @@ public final class Power implements PhysicalQuantity<Power> {
     }
 
     public static Power ofKiloWatts(double value) {
-        return new Power(value, PowerUnits.KILOWATT);
+        return new Power(value, PowerUnits.KILO_WATT);
+    }
+
+    public static Power ofMegaWatts(double value) {
+        return new Power(value, PowerUnits.MEGA_WATT);
     }
 
     public static Power ofBTUPerHour(double value) {
         return new Power(value, PowerUnits.BTU_PER_HOUR);
+    }
+
+    public static Power ofHorsePower(double value) {
+        return new Power(value, PowerUnits.HORSE_POWER);
     }
 }
