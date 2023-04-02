@@ -1,12 +1,13 @@
 package com.synerset.unitility;
 
+import com.synerset.unitility.unitsystem.distance.Distance;
+import com.synerset.unitility.unitsystem.dynamicviscosity.DynamicViscosity;
 import com.synerset.unitility.unitsystem.temperature.Temperature;
 
 public class Example {
-    public void main(String[] args) {
-        Temperature temp = Temperature.ofCelsius(20.5);
-        Temperature tempInKelvin = temp.toKelvin();
-        Temperature temInFahrenheit = tempInKelvin.toFahrenheit();
-        System.out.println(temp  + " | " + tempInKelvin + " | " + temInFahrenheit);
+    public static void main(String[] args) {
+        Distance bigDistance = Distance.ofMeters(10);
+        Distance smallDistance = Distance.ofMeters(0.00012345);
+        System.out.println(bigDistance + " | " + smallDistance);
     }
 }

@@ -14,11 +14,22 @@ System.out.println(tempInCelsius  + " | " + tempInKelvin + " | " + temInFahrenhe
 
 OUTPUT: 20.5 °C | 293.65 K | 68.9 °F
 ```
+All quantities have "smart toString" method, which will always adjust decimal precision to capture by default 3 relevant digits depending on your unit type and its value. 
+This way you have guaranteed an elegant output from toString() without any additional effort of reformatting:
+
+```java
+Distance bigDistance = Distance.ofMeters(10);
+Distance smallDistance = Distance.ofMeters(0.00012345);
+System.out.println(bigDistance + " | " + smallDistance);
+
+OUTPUT: 10 m | 0.000123 m
+```
 
 ## Development status & collaboration
 This is an early development stage.
 I welcome other developers who are interested in physics and engineering to collaborate on this project. 
-As we are still in the early stages of development, any contributions or suggestions would be greatly appreciated.
+As we are still in the early stages of development, any contributions or suggestions would be greatly appreciated.<br>
+<strong>If you would like me to add any specific units for your field of science just let me know!</strong>
 
 ## Specification
 At current level of development following units are available:
