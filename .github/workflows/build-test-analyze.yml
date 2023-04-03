@@ -36,13 +36,15 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build and analyze
+      - name: Build project
+        run: mvn -B verify
+
+      - name: Scan project by SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
-
+        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
+             
       - name: Upload JaCoCo coverage report
-        env:
-          SONAR_BRANCH_NAME: ${{ github.head_ref }}
-        run: mvn sonar:sonar -Pcoverage -Dsonar.branch.name=$SONAR_BRANCH_NAME
+        run: mvn sonar:sonar -Pcoverage
+
