@@ -85,4 +85,53 @@ class EnergyTest {
         assertThat(actualInCalories).isEqualTo(expectedInCalories);
         assertThat(actualInJoules).isEqualTo(initialEnergyInJoules);
     }
+
+    @Test
+    @DisplayName("should convert from J to kcal and vice versa")
+    public void shouldProperlyConvertToJoulesFromKilocalories() {
+        // Given
+        Energy initialEnergyInJoule = Energy.ofJoules(4184.0);
+
+        // When
+        Energy actualInKilocalorie = initialEnergyInJoule.toKiloCalories();
+        Energy actualInJoule = actualInKilocalorie.toBaseUnit();
+
+        // Then
+        Energy expectedInKilocalorie = Energy.ofKiloCalorie(1.0);
+        assertThat(actualInKilocalorie).isEqualTo(expectedInKilocalorie);
+        assertThat(actualInJoule).isEqualTo(initialEnergyInJoule);
+    }
+
+    @Test
+    @DisplayName("should convert from J to Wh and vice versa")
+    public void shouldProperlyConvertToJoulesFromWattHours() {
+        // Given
+        Energy initialEnergyInJoule = Energy.ofJoules(3600.0);
+
+        // When
+        Energy actualInWattHour = initialEnergyInJoule.toWattHour();
+        Energy actualInJoule = actualInWattHour.toBaseUnit();
+
+        // Then
+        Energy expectedInWattHour = Energy.ofWattHour(1.0);
+        assertThat(actualInWattHour).isEqualTo(expectedInWattHour);
+        assertThat(actualInJoule).isEqualTo(initialEnergyInJoule);
+    }
+
+    @Test
+    @DisplayName("should convert from J to kWh and vice versa")
+    public void shouldProperlyConvertToJoulesFromKilowattHours() {
+        // Given
+        Energy initialEnergyInJoule = Energy.ofJoules(3.6e+6);
+
+        // When
+        Energy actualInKilowattHour = initialEnergyInJoule.toKilowattHour();
+        Energy actualInJoule = actualInKilowattHour.toBaseUnit();
+
+        // Then
+        Energy expectedInKilowattHour = Energy.ofKilowattHour(1.0);
+        assertThat(actualInKilowattHour).isEqualTo(expectedInKilowattHour);
+        assertThat(actualInJoule).isEqualTo(initialEnergyInJoule);
+    }
+
 }

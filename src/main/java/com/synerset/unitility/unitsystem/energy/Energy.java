@@ -65,6 +65,18 @@ public final class Energy implements PhysicalQuantity<Energy> {
         return toUnit(EnergyUnits.CALORIE);
     }
 
+    public Energy toKiloCalories() {
+        return toUnit(EnergyUnits.KILOCALORIE);
+    }
+
+    public Energy toWattHour() {
+        return toUnit(EnergyUnits.WATT_HOUR);
+    }
+
+    public Energy toKilowattHour() {
+        return toUnit(EnergyUnits.KILOWATT_HOUR);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,4 +122,17 @@ public final class Energy implements PhysicalQuantity<Energy> {
     public static Energy ofCalorie(double value) {
         return new Energy(value, EnergyUnits.CALORIE);
     }
+
+    public static Energy ofKiloCalorie(double value) {
+        return new Energy(value, EnergyUnits.KILOCALORIE);
+    }
+
+    public static Energy ofWattHour(double value) {
+        return new Energy(value, EnergyUnits.WATT_HOUR);
+    }
+
+    public static Energy ofKilowattHour(double value) {
+        return new Energy(value, EnergyUnits.KILOWATT_HOUR);
+    }
+
 }
