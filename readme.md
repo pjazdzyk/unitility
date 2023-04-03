@@ -4,6 +4,11 @@ Introducing UNITILITY - the ultimate Java library designed to simplify physics u
 With a wide range of value objects that represent commonly used physical quantities, our solution is built using plain Java for optimal speed and lightweight functionality. 
 Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers quick and easy implementation in your project.
 
+![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) &nbsp;
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
+
 ## Example
 Below is a simple example how to work with units and convert to another type of unit:
 ```java
@@ -75,6 +80,9 @@ Core: <br>
 
 Testing:<br>
 ![image](https://img.shields.io/badge/Junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white) &nbsp;
+
+CI/CD:<br>
+![image](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) &nbsp;
 
 ## Acknowledgements
 Special thanks to Kret11, VeloxDigits, Olin44, and others for their help and contribution.

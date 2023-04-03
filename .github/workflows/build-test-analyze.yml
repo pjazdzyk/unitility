@@ -1,4 +1,4 @@
-name: build-test-analyze
+name: Build And Test
 on:
   push:
     branches:
