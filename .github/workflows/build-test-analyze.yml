@@ -42,5 +42,5 @@ jobs:
         run: mvn sonar:sonar -Pcoverage -Dsonar.projectKey=pjazdzyk_unitility
 
       - name: Scan project by SonarCloud
-        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
+        run: mvn sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
 
