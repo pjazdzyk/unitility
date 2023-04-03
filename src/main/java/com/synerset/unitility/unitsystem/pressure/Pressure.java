@@ -59,8 +59,16 @@ public final class Pressure implements PhysicalQuantity<Pressure> {
         return toUnit(PressureUnits.BAR);
     }
 
+    public Pressure toMilliBar() {
+        return toUnit(PressureUnits.MILLIBAR);
+    }
+
     public Pressure toPsi() {
         return toUnit(PressureUnits.PSI);
+    }
+
+    public Pressure toTorr() {
+        return toUnit(PressureUnits.TORR);
     }
 
     @Override
@@ -101,8 +109,16 @@ public final class Pressure implements PhysicalQuantity<Pressure> {
         return new Pressure(value, PressureUnits.BAR);
     }
 
+    public static Pressure ofMilliBar(double value) {
+        return new Pressure(value, PressureUnits.MILLIBAR);
+    }
+
     public static Pressure ofPsi(double value) {
         return new Pressure(value, PressureUnits.PSI);
+    }
+
+    public static Pressure ofTorr(double value) {
+        return new Pressure(value, PressureUnits.TORR);
     }
 
 }

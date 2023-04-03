@@ -71,6 +71,37 @@ class PressureTest {
         assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
 
+    @Test
+    @DisplayName("should convert Pa to mbar and vice versa")
+    public void shouldProperlyConvertPascalToMillibar() {
+        // Given
+        Pressure initialPressure = Pressure.ofPascal(101325.0);
+
+        // When
+        Pressure actualInMillibar = initialPressure.toMilliBar();
+        Pressure actualInPascal = actualInMillibar.toPascal();
+
+        // Then
+        Pressure expectedInMillibar = Pressure.ofMilliBar(1013.25);
+        assertThat(actualInMillibar).isEqualTo(expectedInMillibar);
+        assertThat(actualInPascal).isEqualTo(initialPressure);
+    }
+
+    @Test
+    @DisplayName("should convert Pa to Torr and vice versa")
+    public void shouldProperlyConvertPascalToTorr() {
+        // Given
+        Pressure initialPressure = Pressure.ofPascal(101325.0);
+
+        // When
+        Pressure actualInTorr = initialPressure.toTorr();
+        Pressure actualInPascal = actualInTorr.toPascal();
+
+        // Then
+        Pressure expectedInTorr = Pressure.ofTorr(759.9999999999979);
+        assertThat(actualInTorr.getValue()).isEqualTo(expectedInTorr.getValue(), withPrecision(1E-15));
+        assertThat(actualInPascal).isEqualTo(initialPressure);
+    }
 
 
 }

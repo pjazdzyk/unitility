@@ -10,6 +10,8 @@ public enum PressureUnits implements Unit<Pressure> {
     HECTOPASCAL("hPa", val -> val * 1.0E2, val -> val / 1.0E2),
     MEGAPASCAL("MPa", val -> val * 1.0E6, val -> val / 1.0E6),
     BAR("bar", val -> val * 1.0E5, val -> val / 1.0E5),
+    MILLIBAR("mbar", val -> val * 100, val -> val / 100),
+    TORR("Torr", val -> val * 133.322368421053, val -> val / 133.322368421053),
     PSI("psi", val -> val * 6894.757293168, val -> val / 6894.757293168);
 
     private final String symbol;
