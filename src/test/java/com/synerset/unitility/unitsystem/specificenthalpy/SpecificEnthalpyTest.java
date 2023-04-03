@@ -10,7 +10,7 @@ class SpecificEnthalpyTest {
 
     @Test
     @DisplayName("should convert J/kg to kJ/kg and vice versa")
-    public void shouldProperlyConvertJoulesPerKilogramToKilojoulesPerKilogram() {
+    void shouldProperlyConvertJoulesPerKilogramToKilojoulesPerKilogram() {
         // Given
         SpecificEnthalpy initialSpecificEnthalpy = SpecificEnthalpy.ofJoulePerKiloGram(1000);
 
@@ -26,7 +26,7 @@ class SpecificEnthalpyTest {
 
     @Test
     @DisplayName("should convert J/kg to BTU/lb and vice versa")
-    public void shouldProperlyConvertJoulesPerKilogramToBTUPerPound() {
+    void shouldProperlyConvertJoulesPerKilogramToBTUPerPound() {
         // Given
         SpecificEnthalpy initialSpecificEnthalpy = SpecificEnthalpy.ofJoulePerKiloGram(1000);
 

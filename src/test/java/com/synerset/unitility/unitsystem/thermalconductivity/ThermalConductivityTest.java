@@ -10,7 +10,7 @@ class ThermalConductivityTest {
 
     @Test
     @DisplayName("should convert W/(m·K) to kW/(m·K) and vice versa")
-    public void shouldProperlyConvertWattsPerMeterKelvinToKilowattsPerMeterKelvin() {
+    void shouldProperlyConvertWattsPerMeterKelvinToKilowattsPerMeterKelvin() {
         // Given
         ThermalConductivity initialUnits = ThermalConductivity.ofWattsPerMeterKelvin(1000);
 
@@ -26,7 +26,7 @@ class ThermalConductivityTest {
 
     @Test
     @DisplayName("should convert W/(m·K) to BTU/(hr·ft·°F) and vice versa")
-    public void shouldProperlyConvertWattsPerMeterKelvinToBTUPerHourFootFahrenheit() {
+    void shouldProperlyConvertWattsPerMeterKelvinToBTUPerHourFootFahrenheit() {
         // Given
         ThermalConductivity initialUnits = ThermalConductivity.ofWattsPerMeterKelvin(1000);
 

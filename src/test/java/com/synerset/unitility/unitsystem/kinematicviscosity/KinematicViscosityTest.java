@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.withPrecision;
 class KinematicViscosityTest {
     @Test
     @DisplayName("should convert m²/s to ft²/s and vice versa")
-    public void shouldProperlyConvertSquareMeterPerSecondToSquareFootPerSecond() {
+    void shouldProperlyConvertSquareMeterPerSecondToSquareFootPerSecond() {
         // Given
         KinematicViscosity initialKinematicViscosity = KinematicViscosity.ofSquareMeterPerSecond(1000);
 

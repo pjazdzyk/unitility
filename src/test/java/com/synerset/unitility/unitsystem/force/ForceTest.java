@@ -10,7 +10,7 @@ class ForceTest {
 
     @Test
     @DisplayName("should convert N to kN and vice versa")
-    public void shouldProperlyConvertNewtonsToKiloNewtons() {
+    void shouldProperlyConvertNewtonsToKiloNewtons() {
         // Given
         Force initialForce = Force.ofNewtons(1000);
         // When
@@ -25,7 +25,7 @@ class ForceTest {
 
     @Test
     @DisplayName("should convert N to kp and vice versa")
-    public void shouldProperlyConvertNewtonsToKiloPonds() {
+    void shouldProperlyConvertNewtonsToKiloPonds() {
         // Given
         Force initialForce = Force.ofNewtons(1000);
 
@@ -41,7 +41,7 @@ class ForceTest {
 
     @Test
     @DisplayName("should convert N to dyn and vice versa")
-    public void shouldProperlyConvertNewtonsToDynes() {
+    void shouldProperlyConvertNewtonsToDynes() {
         // Given
         Force initialForce = Force.ofNewtons(1.0);
 
@@ -57,7 +57,7 @@ class ForceTest {
 
     @Test
     @DisplayName("should convert N to lbf and vice versa")
-    public void shouldProperlyConvertNewtonsToPoundForce() {
+    void shouldProperlyConvertNewtonsToPoundForce() {
         // Given
         Force initialForce = Force.ofNewtons(1000);
 
@@ -73,7 +73,7 @@ class ForceTest {
 
     @Test
     @DisplayName("should convert N to pdl and vice versa")
-    public void shouldProperlyConvertNewtonsToPoundal() {
+    void shouldProperlyConvertNewtonsToPoundal() {
         // Given
         Force initialForce = Force.ofNewtons(1000);
         // When

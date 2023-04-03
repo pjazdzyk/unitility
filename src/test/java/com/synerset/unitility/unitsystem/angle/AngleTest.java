@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AngleTest {
+class AngleTest {
 
     @Test
     @DisplayName("should properly convert degrees to radians and vice versa")
-    public void shouldProperlyConvertFromDegreeToRadian() {
+    void shouldProperlyConvertFromDegreeToRadian() {
         // Given
         Angle initialAngleInDegrees = Angle.ofDegrees(45);
 

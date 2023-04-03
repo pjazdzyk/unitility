@@ -9,7 +9,7 @@ class DynamicViscosityTest {
 
     @Test
     @DisplayName("should convert kg/(m·s) to P and vice versa")
-    public void shouldProperlyConvertKilogramsPerMeterSecondToPoise() {
+    void shouldProperlyConvertKilogramsPerMeterSecondToPoise() {
         // Given
         DynamicViscosity initialViscosity = DynamicViscosity.ofKiloGramPerMeterSecond(100);
 
@@ -25,7 +25,7 @@ class DynamicViscosityTest {
 
     @Test
     @DisplayName("should convert kg/(m·s) to Pa·s and vice versa")
-    public void shouldProperlyConvertKilogramsPerMeterSecondToPascalSecond() {
+    void shouldProperlyConvertKilogramsPerMeterSecondToPascalSecond() {
         // Given
         DynamicViscosity initialViscosity = DynamicViscosity.ofKiloGramPerMeterSecond(100);
 

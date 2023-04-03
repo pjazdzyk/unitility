@@ -9,7 +9,7 @@ class TemperatureTest {
 
     @Test
     @DisplayName("should convert to Kelvin from Celsius and vice versa")
-    public void shouldProperlyConvertToKelvinFromCelsius() {
+    void shouldProperlyConvertToKelvinFromCelsius() {
         // Given
         Temperature initialTempInCelsius = Temperature.ofCelsius(20.5);
 

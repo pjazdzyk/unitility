@@ -10,7 +10,7 @@ class SpecificHeatTest {
 
     @Test
     @DisplayName("should convert J/(kg·K) to kJ/(kg·K) and vice versa")
-    public void shouldProperlyConvertJoulesPerKilogramKelvinToKilojoulesPerKilogramKelvin() {
+    void shouldProperlyConvertJoulesPerKilogramKelvinToKilojoulesPerKilogramKelvin() {
         // Given
         SpecificHeat initialSpecificHeat = SpecificHeat.ofJoulePerKiloGramKelvin(1000);
 
@@ -26,7 +26,7 @@ class SpecificHeatTest {
 
     @Test
     @DisplayName("should convert J/(kg·K) to BTU/(lb·°F) and vice versa")
-    public void shouldProperlyConvertJoulesPerKilogramKelvinToBTUPerPoundFahrenheit() {
+    void shouldProperlyConvertJoulesPerKilogramKelvinToBTUPerPoundFahrenheit() {
         // Given
         SpecificHeat initialSpecificHeat = SpecificHeat.ofJoulePerKiloGramKelvin(1000);
 

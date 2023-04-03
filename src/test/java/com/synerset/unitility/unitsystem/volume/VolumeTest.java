@@ -11,7 +11,7 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from L and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromLiter() {
+    void shouldProperlyConvertToCubicMeterFromLiter() {
         // Given
         Volume initialVolumeInLiter = Volume.ofLiters(1000.0);
 
@@ -27,7 +27,7 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from cm3 and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromCubicCentimeter() {
+    void shouldProperlyConvertToCubicMeterFromCubicCentimeter() {
         // Given
         Volume initialVolumeInCubicCentimeters = Volume.ofCubicCentimeters(1000.0);
 
@@ -43,7 +43,7 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from hectoLiter and vice versa")
-    public void shouldProperlyConvertToCubicMetersFromHectoLiters() {
+    void shouldProperlyConvertToCubicMetersFromHectoLiters() {
         // Given
         Volume initialVolumeInHectoLiters = Volume.ofHectoLiters(10.0);
 
@@ -59,7 +59,7 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from mL and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromMilliliter() {
+    void shouldProperlyConvertToCubicMeterFromMilliliter() {
         // Given
         Volume initialVolumeInMilliliter = Volume.ofMilliLiters(1000_000.0);
 
@@ -75,7 +75,7 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from pt and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromPint() {
+    void shouldProperlyConvertToCubicMeterFromPint() {
         // Given
         Volume initialVolumeInPint = Volume.ofPints(1000.0);
 
@@ -91,7 +91,7 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from gal and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromGallon() {
+    void shouldProperlyConvertToCubicMeterFromGallon() {
         // Given
         Volume initialVolumeInGallon = Volume.ofGallons(1000.0);
 
@@ -107,7 +107,7 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from fl.oz and vice versa")
-    public void shouldProperlyConvertToCubicMetersFromOunce() {
+    void shouldProperlyConvertToCubicMetersFromOunce() {
         // Given
         Volume initialVolumeInOunces = Volume.ofOunces(10.0);
 

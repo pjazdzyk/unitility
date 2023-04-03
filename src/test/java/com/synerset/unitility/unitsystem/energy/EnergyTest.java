@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class EnergyTest {
     @Test
     @DisplayName("should convert from J to kJ and vice versa")
-    public void shouldProperlyConvertToJoulesFromKiloJoules() {
+    void shouldProperlyConvertToJoulesFromKiloJoules() {
         // Given
         Energy initialEnergyInJoule = Energy.ofJoules(1000.0);
 
@@ -24,7 +24,7 @@ class EnergyTest {
 
     @Test
     @DisplayName("should convert from J to mJ and vice versa")
-    public void shouldProperlyConvertToJoulesFromMilliJoules() {
+    void shouldProperlyConvertToJoulesFromMilliJoules() {
         // Given
         Energy initialEnergyInJoule = Energy.ofJoules(1);
 
@@ -40,7 +40,7 @@ class EnergyTest {
 
     @Test
     @DisplayName("should convert from J to MJ and vice versa")
-    public void shouldProperlyConvertToJoulesFromMegaJoules() {
+    void shouldProperlyConvertToJoulesFromMegaJoules() {
         // Given
         Energy initialEnergyInJoules = Energy.ofJoules(1000_000.0);
 
@@ -56,7 +56,7 @@ class EnergyTest {
 
     @Test
     @DisplayName("should convert from J to BTU and vice versa")
-    public void shouldProperlyConvertToJoulesFromBTU() {
+    void shouldProperlyConvertToJoulesFromBTU() {
         // Given
         Energy initialEnergyInJoules = Energy.ofJoules(1000.0);
 
@@ -72,7 +72,7 @@ class EnergyTest {
 
     @Test
     @DisplayName("should convert from J to cal and vice versa")
-    public void shouldProperlyConvertToJoulesFromCalories() {
+    void shouldProperlyConvertToJoulesFromCalories() {
         // Given
         Energy initialEnergyInJoules = Energy.ofJoules(4.184);
 
@@ -88,7 +88,7 @@ class EnergyTest {
 
     @Test
     @DisplayName("should convert from J to kcal and vice versa")
-    public void shouldProperlyConvertToJoulesFromKilocalories() {
+    void shouldProperlyConvertToJoulesFromKilocalories() {
         // Given
         Energy initialEnergyInJoule = Energy.ofJoules(4184.0);
 
@@ -104,7 +104,7 @@ class EnergyTest {
 
     @Test
     @DisplayName("should convert from J to Wh and vice versa")
-    public void shouldProperlyConvertToJoulesFromWattHours() {
+    void shouldProperlyConvertToJoulesFromWattHours() {
         // Given
         Energy initialEnergyInJoule = Energy.ofJoules(3600.0);
 
@@ -120,7 +120,7 @@ class EnergyTest {
 
     @Test
     @DisplayName("should convert from J to kWh and vice versa")
-    public void shouldProperlyConvertToJoulesFromKilowattHours() {
+    void shouldProperlyConvertToJoulesFromKilowattHours() {
         // Given
         Energy initialEnergyInJoule = Energy.ofJoules(3.6e+6);
 

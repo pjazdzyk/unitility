@@ -10,7 +10,7 @@ class MassFlowTest {
 
     @Test
     @DisplayName("should convert kg/s to kg/h and vice versa")
-    public void shouldProperlyConvertKilogramPerSecondToKilogramPerHour() {
+    void shouldProperlyConvertKilogramPerSecondToKilogramPerHour() {
         // Given
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 
@@ -26,7 +26,7 @@ class MassFlowTest {
 
     @Test
     @DisplayName("should convert kg/s to t/h and vice versa")
-    public void shouldProperlyConvertKilogramPerSecondToTonnePerHour() {
+    void shouldProperlyConvertKilogramPerSecondToTonnePerHour() {
         // Given
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 
@@ -42,7 +42,7 @@ class MassFlowTest {
 
     @Test
     @DisplayName("should convert kg/s to lb/s and vice versa")
-    public void shouldProperlyConvertKilogramPerSecondToPoundPerSecond() {
+    void shouldProperlyConvertKilogramPerSecondToPoundPerSecond() {
         // Given
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 

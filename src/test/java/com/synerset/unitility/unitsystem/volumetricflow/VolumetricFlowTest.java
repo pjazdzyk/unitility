@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class VolumetricFlowTest {
+class VolumetricFlowTest {
 
     @Test
     @DisplayName("should convert to m³/s from m³/min and vice versa")
-    public void shouldProperlyConvertToMetersCubedPerSecondFromCubicMetersPerMinute() {
+    void shouldProperlyConvertToMetersCubedPerSecondFromCubicMetersPerMinute() {
         // Given
         VolumetricFlow initialFlowInM3pSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
 
@@ -25,7 +25,7 @@ public class VolumetricFlowTest {
 
     @Test
     @DisplayName("should convert to m³/s from m³/hr and vice versa")
-    public void shouldProperlyConvertToMetersCubedPerSecondFromCubicMetersPerHour() {
+    void shouldProperlyConvertToMetersCubedPerSecondFromCubicMetersPerHour() {
         // Given
         VolumetricFlow initialFlowInM3pSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
 
@@ -41,7 +41,7 @@ public class VolumetricFlowTest {
 
     @Test
     @DisplayName("should convert to m³/s from l/s and vice versa")
-    public void shouldProperlyConvertToMetersCubedPerSecondFromLitrePerSecond() {
+    void shouldProperlyConvertToMetersCubedPerSecondFromLitrePerSecond() {
         // Given
         VolumetricFlow initialFlowInM3pSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
 
@@ -57,7 +57,7 @@ public class VolumetricFlowTest {
 
     @Test
     @DisplayName("should convert to m³/s from l/min and vice versa")
-    public void shouldProperlyConvertToMetersCubedPerSecondFromLitrePerMinute() {
+    void shouldProperlyConvertToMetersCubedPerSecondFromLitrePerMinute() {
         // Given
         VolumetricFlow initialFlowInM3pSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
 
@@ -73,7 +73,7 @@ public class VolumetricFlowTest {
 
     @Test
     @DisplayName("should convert to m³/s from L/h and vice versa")
-    public void shouldProperlyConvertToMetersCubedPerSecondFromLitrePerHour() {
+    void shouldProperlyConvertToMetersCubedPerSecondFromLitrePerHour() {
         // Given
         VolumetricFlow initialFlowInM3pSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
 
@@ -89,7 +89,7 @@ public class VolumetricFlowTest {
 
     @Test
     @DisplayName("should convert to m³/s from gal/s and vice versa")
-    public void shouldProperlyConvertToMetersCubedPerSecondFromGallonsPerSecond() {
+    void shouldProperlyConvertToMetersCubedPerSecondFromGallonsPerSecond() {
         // Given
         VolumetricFlow initialFlowInM3pSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
 
@@ -105,7 +105,7 @@ public class VolumetricFlowTest {
 
     @Test
     @DisplayName("should convert to m³/s from gal/min and vice versa")
-    public void shouldProperlyConvertToMetersCubedPerSecondFromGallonsPerMinute() {
+    void shouldProperlyConvertToMetersCubedPerSecondFromGallonsPerMinute() {
         // Given
         VolumetricFlow initialFlowInM3pSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
 
@@ -121,7 +121,7 @@ public class VolumetricFlowTest {
 
     @Test
     @DisplayName("should convert to m³/s from gal/h and vice versa")
-    public void shouldProperlyConvertToMetersCubedPerSecondFromGallonsPerHour() {
+    void shouldProperlyConvertToMetersCubedPerSecondFromGallonsPerHour() {
         // Given
         VolumetricFlow initialFlowInM3PerSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
 

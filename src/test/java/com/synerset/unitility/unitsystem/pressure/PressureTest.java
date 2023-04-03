@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.withPrecision;
 class PressureTest {
     @Test
     @DisplayName("should convert Pa to PSI and vice versa")
-    public void shouldProperlyConvertPascalToPsi() {
+    void shouldProperlyConvertPascalToPsi() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325);
 
@@ -25,7 +25,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to BAR and vice versa")
-    public void shouldProperlyConvertPascalToBar() {
+    void shouldProperlyConvertPascalToBar() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325);
 
@@ -41,7 +41,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to hPa and vice versa")
-    public void shouldProperlyConvertPascalToHectopascal() {
+    void shouldProperlyConvertPascalToHectopascal() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325);
 
@@ -57,7 +57,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to MPa and vice versa")
-    public void shouldProperlyConvertPascalToMegapascal() {
+    void shouldProperlyConvertPascalToMegapascal() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325);
 
@@ -73,7 +73,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to mbar and vice versa")
-    public void shouldProperlyConvertPascalToMillibar() {
+    void shouldProperlyConvertPascalToMillibar() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325.0);
 
@@ -89,7 +89,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to Torr and vice versa")
-    public void shouldProperlyConvertPascalToTorr() {
+    void shouldProperlyConvertPascalToTorr() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325.0);
 

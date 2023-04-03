@@ -10,7 +10,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to cm/s and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToCentimetersPerSecond() {
+    void shouldProperlyConvertMetersPerSecondToCentimetersPerSecond() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -26,7 +26,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to km/h and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToKilometersPerHour() {
+    void shouldProperlyConvertMetersPerSecondToKilometersPerHour() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -42,7 +42,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to in/s and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToInchesPerSecond() {
+    void shouldProperlyConvertMetersPerSecondToInchesPerSecond() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -58,7 +58,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to ft/s and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToFeetPerSecond() {
+    void shouldProperlyConvertMetersPerSecondToFeetPerSecond() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -74,7 +74,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to mph and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToMilesPerHour() {
+    void shouldProperlyConvertMetersPerSecondToMilesPerHour() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -90,7 +90,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to kn and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToKnots() {
+    void shouldProperlyConvertMetersPerSecondToKnots() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -106,7 +106,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to Mach and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToMach() {
+    void shouldProperlyConvertMetersPerSecondToMach() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(100.0);
 

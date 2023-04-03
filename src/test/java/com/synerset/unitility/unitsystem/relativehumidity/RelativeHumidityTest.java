@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RelativeHumidityTest {
     @Test
     @DisplayName("should convert % to decimal and vice versa")
-    public void shouldProperlyConvertPascalToPsi() {
+    void shouldProperlyConvertPascalToPsi() {
         // Given
         RelativeHumidity initialHumidity = RelativeHumidity.ofPercentage(50.5);
 

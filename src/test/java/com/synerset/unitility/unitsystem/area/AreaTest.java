@@ -10,7 +10,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to km² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareKilometers() {
+    void shouldProperlyConvertSquareMetersToSquareKilometers() {
         // Given
         Area initialArea = Area.ofSquareMeters(1_000_000);
 
@@ -26,7 +26,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to cm² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareCentimeters() {
+    void shouldProperlyConvertSquareMetersToSquareCentimeters() {
         // Given
         Area initialArea = Area.ofSquareMeters(1);
 
@@ -42,7 +42,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to mm² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareMillimeters() {
+    void shouldProperlyConvertSquareMetersToSquareMillimeters() {
         // Given
         Area initialArea = Area.ofSquareMeters(1);
 
@@ -58,7 +58,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to ar and vice versa")
-    public void shouldProperlyConvertSquareMetersToAres() {
+    void shouldProperlyConvertSquareMetersToAres() {
         // Given
         Area initialArea = Area.ofSquareMeters(1);
 
@@ -74,7 +74,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to ha and vice versa")
-    public void shouldProperlyConvertSquareMetersToHectares() {
+    void shouldProperlyConvertSquareMetersToHectares() {
         // Given
         Area initialArea = Area.ofSquareMeters(10_000);
 
@@ -90,7 +90,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to in² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareInches() {
+    void shouldProperlyConvertSquareMetersToSquareInches() {
         // Given
         Area initialArea = Area.ofSquareMeters(1);
 
@@ -106,7 +106,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to ft² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareFeet() {
+    void shouldProperlyConvertSquareMetersToSquareFeet() {
         // Given
         Area initialArea = Area.ofSquareMeters(100);
 
@@ -122,7 +122,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to yd² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareYards() {
+    void shouldProperlyConvertSquareMetersToSquareYards() {
         // Given
         Area initialArea = Area.ofSquareMeters(100);
 
@@ -138,7 +138,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to ac and vice versa")
-    public void shouldProperlyConvertSquareMetersToAcres() {
+    void shouldProperlyConvertSquareMetersToAcres() {
         // Given
         Area initialArea = Area.ofSquareMeters(100);
 
@@ -154,7 +154,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to mi² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareMiles() {
+    void shouldProperlyConvertSquareMetersToSquareMiles() {
         // Given
         Area initialArea = Area.ofSquareMeters(100_000);
 

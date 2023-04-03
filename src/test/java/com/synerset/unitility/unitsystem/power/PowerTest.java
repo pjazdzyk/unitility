@@ -10,7 +10,7 @@ class PowerTest {
 
     @Test
     @DisplayName("should convert W from BTU/hour and vice versa")
-    public void shouldProperlyConvertWattsFromBTUPerHour() {
+    void shouldProperlyConvertWattsFromBTUPerHour() {
         // Given
         Power initialPower = Power.ofWatts(1000);
 
@@ -26,7 +26,7 @@ class PowerTest {
 
     @Test
     @DisplayName("should convert W from kW and vice versa")
-    public void shouldProperlyConvertWattsFromKiloWatts() {
+    void shouldProperlyConvertWattsFromKiloWatts() {
         // Given
         Power initialPowerInWatts = Power.ofWatts(10_000);
 
@@ -42,7 +42,7 @@ class PowerTest {
 
     @Test
     @DisplayName("should convert W from MW and vice versa")
-    public void shouldProperlyConvertWattsFromMegaWatts() {
+    void shouldProperlyConvertWattsFromMegaWatts() {
         // Given
         Power initialPowerInWatts = Power.ofWatts(2_000_000);
 
@@ -58,7 +58,7 @@ class PowerTest {
 
     @Test
     @DisplayName("should convert W from HP and vice versa")
-    public void shouldProperlyConvertWattsFromHorsePower() {
+    void shouldProperlyConvertWattsFromHorsePower() {
         // Given
         Power initialPowerInWatts = Power.ofWatts(2000);
 

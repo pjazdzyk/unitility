@@ -10,7 +10,7 @@ class DensityTest {
 
     @Test
     @DisplayName("should convert kg/m3 to lb/ft³ and vice versa")
-    public void shouldProperlyConvertKilogramsPerCubicMeterToPoundPerCubicFoot() {
+    void shouldProperlyConvertKilogramsPerCubicMeterToPoundPerCubicFoot() {
         // Given
         Density initialDensity = Density.ofKilogramPerCubicMeter(1.2);
 
@@ -26,7 +26,7 @@ class DensityTest {
 
     @Test
     @DisplayName("should convert kg/m³ to lb/in³ and vice versa")
-    public void shouldProperlyConvertKilogramsPerCubicMeterToPoundPerCubicInch() {
+    void shouldProperlyConvertKilogramsPerCubicMeterToPoundPerCubicInch() {
         // Given
         Density initialDensity = Density.ofKilogramPerCubicMeter(1.2);
 
