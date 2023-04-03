@@ -84,5 +84,9 @@ Testing:<br>
 CI/CD:<br>
 ![image](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) &nbsp;
 
-## Acknowledgements
-Special thanks to Kret11, VeloxDigits, Olin44, and others for their help and contribution.
+## License
+GNU GENERAL PUBLIC LICENSE V3<br>
+
+## Acknowledgments
+Special thanks to Kret11, VeloxDigits, Olin44, and others for their help and contribution.<br>
+Badges used in readme: [Shields.io](https://img.shields.io) and [Badges 4 README.md](https://github.com/alexandresanlim/Badges4-README.md-Profile).
