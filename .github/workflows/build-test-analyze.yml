@@ -44,4 +44,6 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
 
       - name: Upload JaCoCo coverage report
-        run: mvn sonar:sonar -Pcoverage
+        env:
+          SONAR_BRANCH_NAME: ${{ github.head_ref }}
+        run: mvn sonar:sonar -Pcoverage -Dsonar.branch.name=$SONAR_BRANCH_NAME
