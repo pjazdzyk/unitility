@@ -9,6 +9,8 @@ jobs:
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - name: Branch checkout
         uses: actions/checkout@v3
@@ -40,11 +42,8 @@ jobs:
         run: mvn -B verify
 
       - name: Scan project by SonarCloud
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
              
       - name: Upload JaCoCo coverage report
-        run: mvn sonar:sonar -Pcoverage
+        run: mvn sonar:sonar -Pcoverage -Dsonar.projectKey=pjazdzyk_unitility
 
