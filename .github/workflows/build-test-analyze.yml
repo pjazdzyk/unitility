@@ -38,11 +38,8 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build project with Jacoco
-        run: mvn -B clean verify org.jacoco:jacoco-maven-plugin:report
-
-      - name: Upload JaCoCo coverage report
-        run: mvn sonar:sonar -Pcoverage -Dsonar.projectKey=pjazdzyk_unitility
+      - name: Generate Jacoco Report
+        run: mvn sonar:sonar -Pcoverage
 
       - name: Scan project by SonarCloud
         run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
