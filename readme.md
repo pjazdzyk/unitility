@@ -1,13 +1,17 @@
-# UNITILITY - The Physics Unit Conversion Solution in Java
+# UNITILITY - The Physics Unit Conversion Solution for Java
 
-Introducing UNITILITY - the ultimate Java library designed to simplify physics unit conversion. 
-With a wide range of value objects that represent commonly used physical quantities, our solution is built using plain Java for optimal speed and lightweight functionality. 
-Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers quick and easy implementation in your project.
+Introducing <strong>UNITILITY</strong> - the Java library designed to simplify physics units conversion. 
+With a wide range of value objects that represent commonly used physical quantities, this solution is built using plain Java for optimal speed and lightweight functionality. 
+Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers quick and easy usage in your project, without any heavy frameworks,
+or external libraries.
 
 ![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) &nbsp;
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
+
+> AUTHOR: <b>Piotr Jażdżyk</b> <br>
+> LINKEDIN: https://www.linkedin.com/in/pjazdzyk <br>
 
 ## Example
 Below is a simple example how to work with units and convert to another type of unit:
@@ -19,8 +23,8 @@ System.out.println(tempInCelsius  + " | " + tempInKelvin + " | " + temInFahrenhe
 
 OUTPUT: 20.5 °C | 293.65 K | 68.9 °F
 ```
-All quantities have "smart toString" method, which will always adjust decimal precision to capture by default 3 relevant digits depending on your unit type and its value. 
-This way you have guaranteed an elegant output from toString() without any additional effort of reformatting. Values will be rounded up using HALF_UP aproach. 
+All quantities have smart toString() method, which will always adjust values decimal precision to capture by default 3 relevant digits depending on your unit type and its value. 
+This way you have guaranteed an elegant output from toString() without any additional effort of reformatting. Values will be rounded up using HALF_UP approach. 
 
 ```java
 Distance bigDistance = Distance.ofMeters(10);
@@ -35,6 +39,21 @@ This is an early development stage.
 I welcome other developers who are interested in physics and engineering to collaborate on this project. 
 As we are still in the early stages of development, any contributions or suggestions would be greatly appreciated.<br>
 <strong>If you would like me to add any specific units for your field of science just let me know!</strong>
+
+## Tech
+
+<strong>Unitility</strong> is developed using following technologies: <br>
+
+Core: <br>
+![image](https://img.shields.io/badge/17-Java-orange?style=for-the-badge) &nbsp;
+![image](https://img.shields.io/badge/apache_maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white) &nbsp;
+
+Testing:<br>
+![image](https://img.shields.io/badge/Junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white) &nbsp;
+
+CI/CD:<br>
+![image](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) &nbsp;
+
 
 ## Specification
 At current level of development following units are available:
@@ -66,23 +85,9 @@ At current level of development following units are available:
 * Humidity ratio: Kilogram per kilogram [kg/kg], Pound per pound [lb/lb]
 * Relative humidity: Percent [%], Decimal [-]
 #### DIMENSIONLESS:
-* Grashof number, Prandtl number, Reynolts number
+* Grashof number, Prandtl number, Reynolds number
 
 Each quantity consists most popular SI units and at least one Imperial unit.
-
-## Tech
-
-<strong>Unitility</strong> is developed using following technologies: <br>
-
-Core: <br>
-![image](https://img.shields.io/badge/17-Java-orange?style=for-the-badge) &nbsp;
-![image](https://img.shields.io/badge/apache_maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white) &nbsp;
-
-Testing:<br>
-![image](https://img.shields.io/badge/Junit5-25A162?style=for-the-badge&logo=junit5&logoColor=white) &nbsp;
-
-CI/CD:<br>
-![image](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) &nbsp;
 
 ## License
 GNU GENERAL PUBLIC LICENSE V3<br>
