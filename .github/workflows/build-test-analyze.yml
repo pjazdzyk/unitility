@@ -41,9 +41,9 @@ jobs:
       - name: Build project
         run: mvn -B verify
 
-      - name: Scan project by SonarCloud
-        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
-             
       - name: Upload JaCoCo coverage report
         run: mvn sonar:sonar -Pcoverage -Dsonar.projectKey=pjazdzyk_unitility
+
+      - name: Scan project by SonarCloud
+        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
 
