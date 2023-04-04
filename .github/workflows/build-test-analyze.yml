@@ -25,14 +25,14 @@ jobs:
           cache: 'maven'
 
       - name: Upload Jacoco report to SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v1
+        uses: SonarSource/sonarcloud-github-action@master
         with:
           organization: synerset
           project: pjazdzyk_unitility
           token: ${{ secrets.SONAR_TOKEN }}
 
       - name: Analyze code quality with SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v1
+        uses: SonarSource/sonarcloud-github-action@master
         with:
           organization: synerset
           project: pjazdzyk_unitility
