@@ -53,7 +53,7 @@ Testing:<br>
 
 CI/CD:<br>
 ![image](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) &nbsp;
-
+![image](https://img.shields.io/badge/Sonar%20cloud-F3702A?style=for-the-badge&logo=sonarcloud&logoColor=white) &nbsp;
 
 ## Specification
 At current level of development following units are available:
