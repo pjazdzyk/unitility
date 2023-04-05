@@ -36,6 +36,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Maven - build and test
-        run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
+        run: mvn clean sonar:sonar -Pcoverage
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
