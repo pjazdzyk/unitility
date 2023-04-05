@@ -40,6 +40,6 @@ jobs:
 
       - name: Upload Jacoco Code Coverage Report
         run: |
-          curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "project=YOUR_PROJECT_KEY&file=@./target/site/jacoco/jacoco.xml" https://sonarcloud.io/api/qualitygates/project_status
+          curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "project=pjazdzyk_unitility&file=@./target/site/jacoco/jacoco.xml" https://sonarcloud.io/api/qualitygates/project_status
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
