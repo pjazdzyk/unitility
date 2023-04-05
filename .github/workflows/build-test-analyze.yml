@@ -36,10 +36,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Maven - build and test
-        run: mvn clean verify
-
-      - name: Upload Jacoco Code Coverage Report
-        run: |
-          curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "project=pjazdzyk_unitility&file=@./target/site/jacoco/jacoco.xml" https://sonarcloud.io/api/qualitygates/project_status
+        run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent verify sonar:sonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
