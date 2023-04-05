@@ -38,12 +38,8 @@ jobs:
       - name: Maven - build and test
         run: mvn clean verify
 
-      - name: Jacoco - create report
-        run: mvn jacoco:report
-
-      - name: Sonar - code analysis
+      - name: Upload Jacoco Code Coverage Report
+        run: |
+          curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "project=YOUR_PROJECT_KEY&file=@./target/site/jacoco/jacoco.xml" https://sonarcloud.io/api/qualitygates/project_status
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
-
