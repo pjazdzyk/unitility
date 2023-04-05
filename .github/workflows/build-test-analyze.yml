@@ -38,8 +38,12 @@ jobs:
       - name: Maven - build and test
         run: mvn clean verify
 
-      - name: Upload coverage to SonarCloud
-        uses: sonarsource/sonarcloud-github-action@master
+      - name: Jacoco - create report
+        run: mvn jacoco:report
+
+      - name: Sonar - code analysis
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
+
