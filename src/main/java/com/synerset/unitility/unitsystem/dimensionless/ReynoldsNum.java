@@ -7,9 +7,9 @@ import java.util.Objects;
 
 public class ReynoldsNum implements BareQuantity {
 
-    public static ReynoldsNum PIPE_TURBULENT_THRESHOLD = ReynoldsNum.of(2300);
-    public static ReynoldsNum PLATE_TURBULENT_THRESHOLD = ReynoldsNum.of(5 * 10E5);
-    public static ReynoldsNum AERO_TURBULENT_THRESHOLD = ReynoldsNum.of(2 * 10E6);
+    public static final ReynoldsNum PIPE_TURBULENT_THRESHOLD = ReynoldsNum.of(2300);
+    public static final ReynoldsNum PLATE_TURBULENT_THRESHOLD = ReynoldsNum.of(5 * 10E5);
+    public static final ReynoldsNum AERO_TURBULENT_THRESHOLD = ReynoldsNum.of(2 * 10E6);
 
     private final double value;
 
