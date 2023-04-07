@@ -20,7 +20,6 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.language>java</sonar.language>
         <sonar.binaries>target/classes</sonar.binaries>
-        <sonar.tests>junit</sonar.tests>
         <sonar.junit.reportsPath>target/test-classes</sonar.junit.reportsPath>
         <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
         <!-- Maven Properties -->
