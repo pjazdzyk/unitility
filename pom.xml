@@ -19,10 +19,10 @@
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.language>java</sonar.language>
-        <sonar.binaries>build/classes</sonar.binaries>
+        <sonar.binaries>target/classes</sonar.binaries>
         <sonar.tests>junit</sonar.tests>
-        <sonar.junit.reportsPath>build/test-reports</sonar.junit.reportsPath>
-        <sonar.jacoco.reportPath>build/test-reports/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.junit.reportsPath>target/test-classes</sonar.junit.reportsPath>
+        <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
