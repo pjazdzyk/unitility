@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PrandtlNumTest {
+class PrandtlNumTest {
 
     @Test
     @DisplayName("should create Prandtl number")
