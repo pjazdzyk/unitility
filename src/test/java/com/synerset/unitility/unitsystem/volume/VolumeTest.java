@@ -33,7 +33,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInCubicCentimeters.toBaseUnit();
-        Volume actualInLiter = actualInCubicMeter.toUnit(VolumeUnits.CUBIC_CENTIMETER);
+        Volume actualInLiter = actualInCubicMeter.toCubicCentimeter();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(1.0);
@@ -49,7 +49,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeters = initialVolumeInHectoLiters.toBaseUnit();
-        Volume actualInHectoLiters = actualInCubicMeters.toUnit(VolumeUnits.HECTOLITRE);
+        Volume actualInHectoLiters = actualInCubicMeters.toHectoLiter();
 
         // Then
         Volume expectedInCubicMeters = Volume.ofCubicMeters(1.0);
@@ -65,7 +65,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInMilliliter.toBaseUnit();
-        Volume actualInMilliliter = actualInCubicMeter.toUnit(VolumeUnits.MILLILITRE);
+        Volume actualInMilliliter = actualInCubicMeter.toMilliLiter();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(100);
@@ -81,7 +81,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInPint.toBaseUnit();
-        Volume actualInPint = actualInCubicMeter.toUnit(VolumeUnits.PINT);
+        Volume actualInPint = actualInCubicMeter.toPint();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(0.473176473);
@@ -97,7 +97,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInGallon.toBaseUnit();
-        Volume actualInGallon = actualInCubicMeter.toUnit(VolumeUnits.GALLON);
+        Volume actualInGallon = actualInCubicMeter.toGallon();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(3.785411784);
@@ -113,7 +113,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeters = initialVolumeInOunces.toBaseUnit();
-        Volume actualInOunces = actualInCubicMeters.toUnit(VolumeUnits.OUNCE);
+        Volume actualInOunces = actualInCubicMeters.toOunce();
 
         // Then
         Volume expectedInCubicMeters = Volume.ofCubicMeters(0.000295735295625);

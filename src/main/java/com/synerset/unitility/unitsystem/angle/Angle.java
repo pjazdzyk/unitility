@@ -28,14 +28,14 @@ public final class Angle implements PhysicalQuantity<Angle> {
 
     @Override
     public Angle toBaseUnit() {
-        double valueInRadians = unit.toBaseUnit(value);
-        return Angle.of(valueInRadians, AngleUnits.RADIANS);
+        double degrees = unit.toBaseUnit(value);
+        return Angle.of(degrees, AngleUnits.DEGREES);
     }
 
     @Override
     public Angle toUnit(Unit<Angle> targetUnit) {
-        double valueInRadians = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInRadians);
+        double valueInDegrees = unit.toBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInDegrees);
         return Angle.of(valueInTargetUnit, targetUnit);
     }
 
@@ -63,7 +63,8 @@ public final class Angle implements PhysicalQuantity<Angle> {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        String separator = unit == AngleUnits.DEGREES ? "" : " ";
+        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + separator + unit.getSymbol();
     }
 
     public static Angle of(double value, Unit<Angle> unit) {

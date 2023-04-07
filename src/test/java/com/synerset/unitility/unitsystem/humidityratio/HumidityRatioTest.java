@@ -3,6 +3,8 @@ package com.synerset.unitility.unitsystem.humidityratio;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
+
 class HumidityRatioTest {
 
     @Test
@@ -14,11 +16,12 @@ class HumidityRatioTest {
 
         // When
         HumidityRatio actualInLbPerLb = initialHumidityRatio.toUnit(HumidityRatioUnits.POUND_PER_POUND);
-        HumidityRatio actualInKgPerKg = actualInLbPerLb.toUnit(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
+        HumidityRatio actualInKgPerKg = actualInLbPerLb.toBaseUnit();
 
         // Then
         HumidityRatio expectedInLbPerLb = HumidityRatio.of(0.033069339826536, HumidityRatioUnits.POUND_PER_POUND);
         assertThat(actualInKgPerKg.getValue()).isEqualTo(initialValue);
+        assertThat(actualInLbPerLb.getValue()).isEqualTo(expectedInLbPerLb.getValue(), withPrecision(1E-9));
         assertThat(actualInKgPerKg.getUnit()).isEqualTo(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
     }
 }

@@ -15,7 +15,7 @@ class AngleTest {
 
         // When
         Angle actualInRadians = initialAngleInDegrees.toRadians();
-        Angle actualInDegrees = actualInRadians.toDegrees();
+        Angle actualInDegrees = actualInRadians.toBaseUnit();
 
         // Then
         Angle expectedRadian = Angle.of(Math.PI/4, AngleUnits.RADIANS);
