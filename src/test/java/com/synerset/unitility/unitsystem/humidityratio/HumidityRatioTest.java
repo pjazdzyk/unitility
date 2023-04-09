@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.humidityratio;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,4 +25,19 @@ class HumidityRatioTest {
         assertThat(actualInLbPerLb.getValue()).isEqualTo(expectedInLbPerLb.getValue(), withPrecision(1E-9));
         assertThat(actualInKgPerKg.getUnit()).isEqualTo(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
     }
+
+    @Test
+    @DisplayName("should have kg/kg as base unit")
+    void shouldHaveKilogramPerKilogramBaseUnit() {
+        // Given
+        HumidityRatioUnits expectedBaseUnit = HumidityRatioUnits.KILOGRAM_PER_KILOGRAM;
+
+        // When
+        HumidityRatio humidityKgPerKg = HumidityRatio.ofPoundPerPound(10);
+        Unit<HumidityRatio> actualBaseUnit = humidityKgPerKg.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
 }

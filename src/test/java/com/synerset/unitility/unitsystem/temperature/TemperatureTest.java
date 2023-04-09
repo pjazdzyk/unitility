@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.temperature;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TemperatureTest {
 
     @Test
-    @DisplayName("should convert to Kelvin from Celsius and vice versa")
+    @DisplayName("should convert to K from °C and vice versa")
     void shouldProperlyConvertToKelvinFromCelsius() {
         // Given
         Temperature initialTempInCelsius = Temperature.ofCelsius(20.5);
@@ -24,7 +25,7 @@ class TemperatureTest {
     }
 
     @Test
-    @DisplayName("should convert to Kelvin from Fahrenheit and vice versa")
+    @DisplayName("should convert to K from F and vice versa")
     void shouldProperlyConvertToKelvinFromFahrenheit() {
         // Given
         Temperature initialTempInKelvin = Temperature.ofKelvins(273.15 + 20.5);
@@ -37,6 +38,20 @@ class TemperatureTest {
         Temperature expectedInFahrenheit = Temperature.ofFahrenheit(68.9);
         assertThat(actualInFahrenheit).isEqualTo(expectedInFahrenheit);
         assertThat(actualInKelvin).isEqualTo(initialTempInKelvin);
+    }
+
+    @Test
+    @DisplayName("should have K as base unit")
+    void shouldHaveKelvinAsBaseUnit() {
+        // Given
+        TemperatureUnits expectedBaseUnit = TemperatureUnits.KELVIN;
+
+        // When
+        Temperature specificHeatInFahrenheit = Temperature.ofFahrenheit(10);
+        Unit<Temperature> actualBaseUnit = specificHeatInFahrenheit.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

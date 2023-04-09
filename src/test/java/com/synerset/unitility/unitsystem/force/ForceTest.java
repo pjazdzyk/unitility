@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.force;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -86,4 +87,17 @@ class ForceTest {
         assertThat(actualInNewtons).isEqualTo(initialForce);
     }
 
+    @Test
+    @DisplayName("should have N as base unit")
+    void shouldHaveNewtonAsBaseUnit() {
+        // Given
+        ForceUnits expectedBaseUnit = ForceUnits.NEWTON;
+
+        // When
+        Force forceInNewton = Force.ofNewtons(10);
+        Unit<Force> actualBaseUnit = forceInNewton.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
 }

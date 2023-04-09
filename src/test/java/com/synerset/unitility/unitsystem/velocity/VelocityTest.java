@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.velocity;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -120,5 +121,18 @@ class VelocityTest {
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
 
+    @Test
+    @DisplayName("should have m/s as base unit")
+    void shouldHaveMeterPerSecondAsBaseUnit() {
+        // Given
+        VelocityUnits expectedBaseUnit = VelocityUnits.METER_PER_SECOND;
+
+        // When
+        Velocity velocityInMilesPerHour = Velocity.ofMilesPerHour(2);
+        Unit<Velocity> actualBaseUnit = velocityInMilesPerHour.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
 
 }

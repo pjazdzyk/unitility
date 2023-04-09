@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.power;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -70,6 +71,20 @@ class PowerTest {
         Power expectedInHorsePower = Power.ofHorsePower(2.68204417919006);
         assertThat(actualInHorsePower.getValue()).isEqualTo(expectedInHorsePower.getValue(), withPrecision(1E-13));
         assertThat(actualInWatts.getValue()).isEqualTo(initialPowerInWatts.getValue(), withPrecision(1E-12));
+    }
+
+    @Test
+    @DisplayName("should have W as base unit")
+    void shouldHaveWattAsBaseUnit() {
+        // Given
+        PowerUnits expectedBaseUnit = PowerUnits.WATT;
+
+        // When
+        Power powerWatt = Power.ofWatts(10);
+        Unit<Power> actualBaseUnit = powerWatt.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

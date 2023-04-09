@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.angle;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,4 +23,19 @@ class AngleTest {
         assertThat(actualInRadians).isEqualTo(expectedRadian);
         assertThat(actualInDegrees).isEqualTo(initialAngleInDegrees);
     }
+
+    @Test
+    @DisplayName("should have DEGREES as base unit")
+    void shouldHaveDegreesAsBaseUnit() {
+        // Given
+        AngleUnits expectedBaseUnit = AngleUnits.DEGREES;
+
+        // When
+        Angle angleInRadians = Angle.ofRadians(10);
+        Unit<Angle> actualBaseUnit = angleInRadians.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.distance;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -101,6 +102,20 @@ class DistanceTest {
         Distance expectedInMeters = Distance.ofMeters(0.254);
         assertThat(actualInMeters).isEqualTo(expectedInMeters);
         assertThat(actualInInch).isEqualTo(initialDistanceInInch);
+    }
+
+    @Test
+    @DisplayName("should have m as base unit")
+    void shouldHaveMetersAsBaseUnit() {
+        // Given
+        DistanceUnits expectedBaseUnit = DistanceUnits.METER;
+
+        // When
+        Distance DistanceInMiles = Distance.ofMiles(10);
+        Unit<Distance> actualBaseUnit = DistanceInMiles.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

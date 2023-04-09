@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.area;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -166,6 +167,20 @@ class AreaTest {
         Area expectedInSquareMiles = Area.ofSquareMiles(0.0386102158542446);
         assertThat(actualInSquareMiles.getValue()).isEqualTo(expectedInSquareMiles.getValue(), withPrecision(1E-15));
         assertThat(actualInSquareMeters).isEqualTo(initialArea);
+    }
+
+    @Test
+    @DisplayName("should have m² as base unit")
+    void shouldHaveSquareMeterAsBaseUnit() {
+        // Given
+        AreaUnits expectedBaseUnit = AreaUnits.SQUARE_METER;
+
+        // When
+        Area areaInSquareYards = Area.ofSquareYards(10);
+        Unit<Area> actualBaseUnit = areaInSquareYards.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

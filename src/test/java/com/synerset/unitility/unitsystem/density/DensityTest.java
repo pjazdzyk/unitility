@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.density;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,7 @@ import static org.assertj.core.api.Assertions.withPrecision;
 class DensityTest {
 
     @Test
-    @DisplayName("should convert kg/m3 to lb/ft³ and vice versa")
+    @DisplayName("should convert kg/m³ to lb/ft³ and vice versa")
     void shouldProperlyConvertKilogramsPerCubicMeterToPoundPerCubicFoot() {
         // Given
         Density initialDensity = Density.ofKilogramPerCubicMeter(1.2);
@@ -40,6 +41,18 @@ class DensityTest {
         assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(1.2, withPrecision(1E-16));
     }
 
+    @Test
+    @DisplayName("should have kg/m³ as base unit")
+    void shouldHaveKilogramPerCubicMeterAsBaseUnit() {
+        // Given
+        DensityUnits expectedBaseUnit = DensityUnits.KILOGRAM_PER_CUBIC_METER;
 
+        // When
+        Density densityInLbPerFt3 = Density.ofPoundPerCubicFoot(10);
+        Unit<Density> actualBaseUnit = densityInLbPerFt3.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
 
 }

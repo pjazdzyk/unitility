@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.mass;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -86,6 +87,20 @@ class MassTest {
         Mass expectedInKilograms = Mass.ofKilograms(4.5359237);
         assertThat(actualInKilograms.getValue()).isEqualTo(expectedInKilograms.getValue(), withPrecision(1E-15));
         assertThat(actualInPounds).isEqualTo(initialMassInPounds);
+    }
+
+    @Test
+    @DisplayName("should have kg as base unit")
+    void shouldHaveKilogramAsBaseUnit() {
+        // Given
+        MassUnits expectedBaseUnit = MassUnits.KILOGRAM;
+
+        // When
+        Mass massInLb = Mass.ofPounds(10);
+        Unit<Mass> actualBaseUnit = massInLb.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

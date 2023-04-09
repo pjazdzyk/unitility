@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.volume;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.assertj.core.api.Assertions.withPrecision;
 
 class VolumeTest {
@@ -121,4 +121,19 @@ class VolumeTest {
         assertThat(actualInOunces).isEqualTo(initialVolumeInOunces);
     }
 
+    @Test
+    @DisplayName("should have m³ as base unit")
+    void shouldHaveCubicMeterAsBaseUnit() {
+        // Given
+        VolumeUnits expectedBaseUnit = VolumeUnits.CUBIC_METER;
+
+        // When
+        Volume volumeInGallons = Volume.ofGallons(100);
+        Unit<Volume> actualBaseUnit = volumeInGallons.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
 }
+

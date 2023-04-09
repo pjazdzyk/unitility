@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.pressure;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -103,5 +104,18 @@ class PressureTest {
         assertThat(actualInPascal).isEqualTo(initialPressure);
     }
 
+    @Test
+    @DisplayName("should have Pa as base unit")
+    void shouldHavePascalAsBaseUnit() {
+        // Given
+        PressureUnits expectedBaseUnit = PressureUnits.PASCAL;
+
+        // When
+        Pressure pressureInPsi = Pressure.ofPsi(10);
+        Unit<Pressure> actualBaseUnit = pressureInPsi.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
 
 }

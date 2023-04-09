@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.volumetricflow;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -134,4 +135,19 @@ class VolumetricFlowTest {
         assertThat(actualFlowInGalPerHr).isEqualTo(expectedFlowInGalPerHr);
         assertThat(actualFlowInM3PerSec).isEqualTo(initialFlowInM3PerSec);
     }
+
+    @Test
+    @DisplayName("should have m³/s as base unit")
+    void shouldHaveCubicMetersPerSecondAsBaseUnit() {
+        // Given
+        VolumetricFlowUnits expectedBaseUnit = VolumetricFlowUnits.CUBIC_METERS_PER_SECOND;
+
+        // When
+        VolumetricFlow volumetricFlowInGalPerHr = VolumetricFlow.ofGallonsPerHour(10);
+        Unit<VolumetricFlow> actualBaseUnit = volumetricFlowInGalPerHr.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
 }

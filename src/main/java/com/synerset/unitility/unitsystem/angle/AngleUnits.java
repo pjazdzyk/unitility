@@ -26,7 +26,7 @@ public enum AngleUnits implements Unit<Angle> {
 
     @Override
     public Unit<Angle> getBaseUnit() {
-        return RADIANS;
+        return DEGREES;
     }
 
     @Override

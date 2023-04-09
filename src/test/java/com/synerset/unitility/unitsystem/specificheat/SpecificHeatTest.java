@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.specificheat;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -38,6 +39,20 @@ class SpecificHeatTest {
         SpecificHeat expected_BTU_PER_KG_F = SpecificHeat.ofBTUPerPoundFahrenheit(0.2388458969999981);
         assertThat(actual_BTU_PER_KG_F.getValue()).isEqualTo(expected_BTU_PER_KG_F.getValue(), withPrecision(1E-10));
         assertThat(actual_J_PER_KG_KG.getValue()).isEqualTo(1000, withPrecision(1E-10));
+    }
+
+    @Test
+    @DisplayName("should have J/(kg·K) as base unit")
+    void shouldHaveJoulesPerKilogramKelvinAsBaseUnit() {
+        // Given
+        SpecificHeatUnits expectedBaseUnit = SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN;
+
+        // When
+        SpecificHeat specificHeatInBTUPerLbF = SpecificHeat.ofBTUPerPoundFahrenheit(0.1);
+        Unit<SpecificHeat> actualBaseUnit = specificHeatInBTUPerLbF.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

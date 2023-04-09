@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.energy;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -133,5 +134,17 @@ class EnergyTest {
         assertThat(actualInKilowattHour).isEqualTo(expectedInKilowattHour);
         assertThat(actualInJoule).isEqualTo(initialEnergyInJoule);
     }
+    @Test
+    @DisplayName("should have J as base unit")
+    void shouldHaveJouleAsBaseUnit() {
+        // Given
+        EnergyUnits expectedBaseUnit = EnergyUnits.JOULE;
 
+        // When
+        Energy energyInJoule = Energy.ofJoules(10);
+        Unit<Energy> actualBaseUnit = energyInJoule.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
 }
