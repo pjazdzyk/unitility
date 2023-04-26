@@ -1,0 +1,23 @@
+
+{
+Ksrc/main/java/com/synerset/unitility/unitsystem/distance/DistanceUnits.java,6\1\61f461958210f1d6ea0fa000460bc365e7675fbd
+z
+Jsrc/test/java/com/synerset/unitility/unitsystem/distance/DistanceTest.java,5\9\59d310915e30ee94517c4b08b5d5bcea196c2e2e
+v
+Fsrc/main/java/com/synerset/unitility/unitsystem/distance/Distance.java,4\c\4c48f234ff6a39677ecfd8f3b21fb483714d50bb
+u
+Esrc/main/java/com/synerset/unitility/unitsystem/PhysicalQuantity.java,1\e\1e164d2ca6182b46a72d00a9571ca73803d887c6
+i
+9src/main/java/com/synerset/unitility/unitsystem/Unit.java,3\d\3d4189111fac5a78ad05ad30439bd2a694cc00b7
+q
+Asrc/main/java/com/synerset/unitility/unitsystem/BareQuantity.java,8\d\8d51ebdb70dc98cc0292eac1116ee790f7b3a603
+}
+Msrc/test/java/com/synerset/unitility/unitsystem/utils/ValueFormatterTest.java,1\1\11268dd68d203c041374f81c1eb43c574bc8069a
+y
+Isrc/main/java/com/synerset/unitility/unitsystem/utils/ValueFormatter.java,c\a\ca83200f336a7387df22042760d4d7824301a8d8
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+9
+	readme.md,2\7\275d783e298228506068436512433d343feb52aa
+X
+(.github/workflows/build-test-analyze.yml,f\7\f73431fbb93a87a4af79b7ca27fed45824f57ca7

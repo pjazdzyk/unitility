@@ -1,8 +1,10 @@
 package com.synerset.unitility.unitsystem;
 
+import java.math.BigDecimal;
+
 public interface Unit<Q> {
     String getSymbol();
     Unit<Q> getBaseUnit();
-    double toBaseUnit(double valueInThisUnit);
-    double fromBaseToThisUnit(double valueInBaseUnit);
+    BigDecimal toBaseUnit(BigDecimal valueInThisUnit);
+    BigDecimal fromBaseToThisUnit(BigDecimal valueInBaseUnit);
 }

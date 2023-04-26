@@ -2,23 +2,28 @@ package com.synerset.unitility.unitsystem.distance;
 
 import com.synerset.unitility.unitsystem.Unit;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.function.DoubleUnaryOperator;
+import java.util.function.UnaryOperator;
 
 public enum DistanceUnits implements Unit<Distance> {
 
     METER("m", val -> val, val -> val),
-    CENTIMETER("cm", val -> val / 100, val -> val * 100),
-    MILLIMETER("mm", val -> val / 1000, val -> val * 1000),
-    KILOMETER("km", val -> val * 1000, val -> val / 1000),
-    MILE("mi", val -> val * 1609.344, val -> val / 1609.344),
-    FEET("ft", val -> val * 0.3048, val -> val / 0.3048),
-    INCH("in", val -> val * 0.0254, val -> val / 0.0254);
+    CENTIMETER("cm", val -> val.divide(new BigDecimal( 100), RoundingMode.HALF_UP), val -> val.multiply(new BigDecimal( 100))),
+    MILLIMETER("mm", val -> val.divide(new BigDecimal( 1000), RoundingMode.HALF_UP), val -> val.multiply(new BigDecimal( 1000))),
+    KILOMETER("km", val -> val.multiply(new BigDecimal( 1000)), val -> val.divide(new BigDecimal( 1000), RoundingMode.HALF_UP)),
+    MILE("mi",  val -> val.multiply(new BigDecimal( "1609.344")), val -> val.divide(new BigDecimal( "1609.344"), RoundingMode.HALF_UP)),
+    FEET("ft", val -> val.multiply(new BigDecimal( "0.3048")), val -> val.divide(new BigDecimal( "0.3048"), RoundingMode.HALF_UP)),
+    INCH("in", val -> val.multiply(new BigDecimal( "0.0254")), val -> val.divide(new BigDecimal( "0.0254"), RoundingMode.HALF_UP));
+
+
 
     private final String symbol;
-    private final DoubleUnaryOperator toBaseConverter;
-    private final DoubleUnaryOperator fromBaseToUnitConverter;
+    private final UnaryOperator<BigDecimal> toBaseConverter;
+    private final UnaryOperator<BigDecimal> fromBaseToUnitConverter;
 
-    DistanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    DistanceUnits(String symbol, UnaryOperator<BigDecimal> toBaseConverter, UnaryOperator<BigDecimal> fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -35,12 +40,12 @@ public enum DistanceUnits implements Unit<Distance> {
     }
 
     @Override
-    public double toBaseUnit(double valueInThisUnit) {
-        return toBaseConverter.applyAsDouble(valueInThisUnit);
+    public BigDecimal toBaseUnit(BigDecimal valueInThisUnit) {
+        return toBaseConverter.apply(valueInThisUnit);
     }
 
     @Override
-    public double fromBaseToThisUnit(double valueInBaseUnit) {
-        return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
+    public BigDecimal fromBaseToThisUnit(BigDecimal valueInBaseUnit) {
+        return fromBaseToUnitConverter.apply(valueInBaseUnit);
     }
 }

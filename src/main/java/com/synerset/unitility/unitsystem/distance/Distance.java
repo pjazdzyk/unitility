@@ -4,20 +4,21 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public final class Distance implements PhysicalQuantity<Distance> {
 
-    private final double value;
+    private final BigDecimal value;
     private final Unit<Distance> unit;
 
-    private Distance(double value, Unit<Distance> unit) {
+    private Distance(BigDecimal value, Unit<Distance> unit) {
         this.value = value;
         this.unit = unit;
     }
 
     @Override
-    public double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
@@ -28,14 +29,14 @@ public final class Distance implements PhysicalQuantity<Distance> {
 
     @Override
     public Distance toBaseUnit() {
-        double valueInMeters = unit.toBaseUnit(value);
+        BigDecimal valueInMeters = unit.toBaseUnit(value);
         return Distance.of(valueInMeters, DistanceUnits.METER);
     }
 
     @Override
     public Distance toUnit(Unit<Distance> targetUnit) {
-        double valueInMeters = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInMeters);
+        BigDecimal valueInMeters = unit.toBaseUnit(value);
+        BigDecimal valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInMeters);
         return Distance.of(valueInTargetUnit, targetUnit);
     }
 
@@ -73,7 +74,7 @@ public final class Distance implements PhysicalQuantity<Distance> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Distance distance = (Distance) o;
-        return Double.compare(distance.value, value) == 0 && unit.equals(distance.unit);
+        return Objects.equals(value, distance.value) && Objects.equals(unit, distance.unit);
     }
 
     @Override
@@ -86,35 +87,35 @@ public final class Distance implements PhysicalQuantity<Distance> {
         return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
     }
 
-    public static Distance of(double value, Unit<Distance> unit) {
+    public static Distance of(BigDecimal value, Unit<Distance> unit) {
         return new Distance(value, unit);
     }
 
-    public static Distance ofMeters(double value) {
+    public static Distance ofMeters(BigDecimal value) {
         return new Distance(value, DistanceUnits.METER);
     }
 
-    public static Distance ofCentimeters(double value) {
+    public static Distance ofCentimeters(BigDecimal value) {
         return new Distance(value, DistanceUnits.CENTIMETER);
     }
 
-    public static Distance ofMillimeters(double value) {
+    public static Distance ofMillimeters(BigDecimal value) {
         return new Distance(value, DistanceUnits.MILLIMETER);
     }
 
-    public static Distance ofKilometers(double value) {
+    public static Distance ofKilometers(BigDecimal value) {
         return new Distance(value, DistanceUnits.KILOMETER);
     }
 
-    public static Distance ofMiles(double value) {
+    public static Distance ofMiles(BigDecimal value) {
         return new Distance(value, DistanceUnits.MILE);
     }
 
-    public static Distance ofFeet(double value) {
+    public static Distance ofFeet(BigDecimal value) {
         return new Distance(value, DistanceUnits.FEET);
     }
 
-    public static Distance ofInches(double value) {
+    public static Distance ofInches(BigDecimal value) {
         return new Distance(value, DistanceUnits.INCH);
     }
 

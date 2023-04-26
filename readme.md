@@ -1,4 +1,12 @@
-# UNITILITY - The Physics Unit Conversion Solution for Java
+
+# UNITLITY BIG DECIMAL
+
+Original library unitility modified to change basic units storage from double to Big Decimals
+> AUTHOR: <b>Paweł Dobrowolski</b> <br>
+----------
+Original Unitility Readme below
+
+## UNITILITY - The Physics Unit Conversion Solution for Java
 
 Introducing <strong>UNITILITY</strong> - the Java library designed to simplify physics units conversion. 
 With a wide range of value objects that represent commonly used physical quantities, this solution is built using plain Java for optimal speed and lightweight functionality. 

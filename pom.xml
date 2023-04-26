@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.synerset</groupId>
-    <artifactId>unitility</artifactId>
-    <version>0.1.1-beta</version>
+    <artifactId>unitility-bigdecimal</artifactId>
+    <version>0.0.1</version>
+    <description>Fork of https://github.com/pjazdzyk/unitility</description>
     <packaging>jar</packaging>
 
     <properties>
@@ -41,6 +42,14 @@
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- unitilityBigDecimal specifid  -->
+
+        <dependency>
+            <groupId>ch.obermuhlner</groupId>
+            <artifactId>big-math</artifactId>
+            <version>2.3.2</version>
         </dependency>
     </dependencies>
 
