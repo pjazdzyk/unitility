@@ -1,16 +1,17 @@
 package com.synerset.unitility.unitsystem.mass;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.withPrecision;
 
-public class MassTest {
+class MassTest {
 
     @Test
     @DisplayName("should convert to kg from g and vice versa")
-    public void shouldProperlyConvertToKilogramsFromGrams() {
+    void shouldProperlyConvertToKilogramsFromGrams() {
         // Given
         Mass initialMassInGrams = Mass.ofGrams(1000.0);
 
@@ -26,7 +27,7 @@ public class MassTest {
 
     @Test
     @DisplayName("should convert to kg from t and vice versa")
-    public void shouldProperlyConvertToKilogramsFromTonneSi() {
+    void shouldProperlyConvertToKilogramsFromTonneSi() {
         // Given
         Mass initialMassInTonneSi = Mass.ofTonneSI(1.0);
 
@@ -42,7 +43,7 @@ public class MassTest {
 
     @Test
     @DisplayName("should convert to kg from mg and vice versa")
-    public void shouldProperlyConvertToKilogramsFromMilligrams() {
+    void shouldProperlyConvertToKilogramsFromMilligrams() {
         // Given
         Mass initialMassInMilligrams = Mass.ofMiligrams(1000.0);
 
@@ -58,7 +59,7 @@ public class MassTest {
 
     @Test
     @DisplayName("should convert to kg from oz and vice versa")
-    public void shouldProperlyConvertToKilogramsFromOunces() {
+    void shouldProperlyConvertToKilogramsFromOunces() {
         // Given
         Mass initialMassInOunces = Mass.ofOunces(10.0);
 
@@ -74,7 +75,7 @@ public class MassTest {
 
     @Test
     @DisplayName("should convert to kg from lb and vice versa")
-    public void shouldProperlyConvertToKilogramsFromPounds() {
+    void shouldProperlyConvertToKilogramsFromPounds() {
         // Given
         Mass initialMassInPounds = Mass.ofPounds(10.0);
 
@@ -86,6 +87,20 @@ public class MassTest {
         Mass expectedInKilograms = Mass.ofKilograms(4.5359237);
         assertThat(actualInKilograms.getValue()).isEqualTo(expectedInKilograms.getValue(), withPrecision(1E-15));
         assertThat(actualInPounds).isEqualTo(initialMassInPounds);
+    }
+
+    @Test
+    @DisplayName("should have kg as base unit")
+    void shouldHaveKilogramAsBaseUnit() {
+        // Given
+        MassUnits expectedBaseUnit = MassUnits.KILOGRAM;
+
+        // When
+        Mass massInLb = Mass.ofPounds(10);
+        Unit<Mass> actualBaseUnit = massInLb.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

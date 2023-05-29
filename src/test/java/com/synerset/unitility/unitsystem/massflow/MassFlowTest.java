@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.massflow;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ class MassFlowTest {
 
     @Test
     @DisplayName("should convert kg/s to kg/h and vice versa")
-    public void shouldProperlyConvertKilogramPerSecondToKilogramPerHour() {
+    void shouldProperlyConvertKilogramPerSecondToKilogramPerHour() {
         // Given
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 
@@ -26,7 +27,7 @@ class MassFlowTest {
 
     @Test
     @DisplayName("should convert kg/s to t/h and vice versa")
-    public void shouldProperlyConvertKilogramPerSecondToTonnePerHour() {
+    void shouldProperlyConvertKilogramPerSecondToTonnePerHour() {
         // Given
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 
@@ -42,7 +43,7 @@ class MassFlowTest {
 
     @Test
     @DisplayName("should convert kg/s to lb/s and vice versa")
-    public void shouldProperlyConvertKilogramPerSecondToPoundPerSecond() {
+    void shouldProperlyConvertKilogramPerSecondToPoundPerSecond() {
         // Given
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 
@@ -54,6 +55,20 @@ class MassFlowTest {
         MassFlow expected_LB_PER_S = MassFlow.ofPoundsPerSecond(3.306933932773164);
         assertThat(actual_LB_PER_S.getValue()).isEqualTo(expected_LB_PER_S.getValue(), withPrecision(1E-15));
         assertThat(actual_KG_PER_S).isEqualTo(initialMassFlow);
+    }
+
+    @Test
+    @DisplayName("should have kg/s as base unit")
+    void shouldHaveSquareMeterPerSecondAsBaseUnit() {
+        // Given
+        MassFlowUnits expectedBaseUnit = MassFlowUnits.KILOGRAM_PER_SECOND;
+
+        // When
+        MassFlow massFlowInLbPerSec = MassFlow.ofPoundsPerSecond(10);
+        Unit<MassFlow> actualBaseUnit = massFlowInLbPerSec.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

@@ -8,7 +8,7 @@ public enum TemperatureUnits implements Unit<Temperature> {
 
     KELVIN("K", val -> val, val -> val),
     CELSIUS("°C", val -> val + 273.15, val -> val - 273.15),
-    FAHRENHEIT("°F", val -> (5.0 / 9.0) * (val + 459.67), val -> (9.0 / 5.0) * val - 459.67);
+    FAHRENHEIT("°F", val ->  (val - 32) * 5/9 + 273.15, val -> (val - 273.15) * 9/5 + 32);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

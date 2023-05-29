@@ -1,17 +1,17 @@
 package com.synerset.unitility.unitsystem.volume;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.assertj.core.api.Assertions.withPrecision;
 
 class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from L and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromLiter() {
+    void shouldProperlyConvertToCubicMeterFromLiter() {
         // Given
         Volume initialVolumeInLiter = Volume.ofLiters(1000.0);
 
@@ -27,13 +27,13 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from cm3 and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromCubicCentimeter() {
+    void shouldProperlyConvertToCubicMeterFromCubicCentimeter() {
         // Given
         Volume initialVolumeInCubicCentimeters = Volume.ofCubicCentimeters(1000.0);
 
         // When
         Volume actualInCubicMeter = initialVolumeInCubicCentimeters.toBaseUnit();
-        Volume actualInLiter = actualInCubicMeter.toUnit(VolumeUnits.CUBIC_CENTIMETER);
+        Volume actualInLiter = actualInCubicMeter.toCubicCentimeter();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(1.0);
@@ -43,13 +43,13 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from hectoLiter and vice versa")
-    public void shouldProperlyConvertToCubicMetersFromHectoLiters() {
+    void shouldProperlyConvertToCubicMetersFromHectoLiters() {
         // Given
         Volume initialVolumeInHectoLiters = Volume.ofHectoLiters(10.0);
 
         // When
         Volume actualInCubicMeters = initialVolumeInHectoLiters.toBaseUnit();
-        Volume actualInHectoLiters = actualInCubicMeters.toUnit(VolumeUnits.HECTOLITRE);
+        Volume actualInHectoLiters = actualInCubicMeters.toHectoLiter();
 
         // Then
         Volume expectedInCubicMeters = Volume.ofCubicMeters(1.0);
@@ -59,13 +59,13 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from mL and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromMilliliter() {
+    void shouldProperlyConvertToCubicMeterFromMilliliter() {
         // Given
         Volume initialVolumeInMilliliter = Volume.ofMilliLiters(1000_000.0);
 
         // When
         Volume actualInCubicMeter = initialVolumeInMilliliter.toBaseUnit();
-        Volume actualInMilliliter = actualInCubicMeter.toUnit(VolumeUnits.MILLILITRE);
+        Volume actualInMilliliter = actualInCubicMeter.toMilliLiter();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(100);
@@ -75,13 +75,13 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from pt and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromPint() {
+    void shouldProperlyConvertToCubicMeterFromPint() {
         // Given
         Volume initialVolumeInPint = Volume.ofPints(1000.0);
 
         // When
         Volume actualInCubicMeter = initialVolumeInPint.toBaseUnit();
-        Volume actualInPint = actualInCubicMeter.toUnit(VolumeUnits.PINT);
+        Volume actualInPint = actualInCubicMeter.toPint();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(0.473176473);
@@ -91,13 +91,13 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from gal and vice versa")
-    public void shouldProperlyConvertToCubicMeterFromGallon() {
+    void shouldProperlyConvertToCubicMeterFromGallon() {
         // Given
         Volume initialVolumeInGallon = Volume.ofGallons(1000.0);
 
         // When
         Volume actualInCubicMeter = initialVolumeInGallon.toBaseUnit();
-        Volume actualInGallon = actualInCubicMeter.toUnit(VolumeUnits.GALLON);
+        Volume actualInGallon = actualInCubicMeter.toGallon();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(3.785411784);
@@ -107,13 +107,13 @@ class VolumeTest {
 
     @Test
     @DisplayName("should convert to m³ from fl.oz and vice versa")
-    public void shouldProperlyConvertToCubicMetersFromOunce() {
+    void shouldProperlyConvertToCubicMetersFromOunce() {
         // Given
         Volume initialVolumeInOunces = Volume.ofOunces(10.0);
 
         // When
         Volume actualInCubicMeters = initialVolumeInOunces.toBaseUnit();
-        Volume actualInOunces = actualInCubicMeters.toUnit(VolumeUnits.OUNCE);
+        Volume actualInOunces = actualInCubicMeters.toOunce();
 
         // Then
         Volume expectedInCubicMeters = Volume.ofCubicMeters(0.000295735295625);
@@ -121,4 +121,19 @@ class VolumeTest {
         assertThat(actualInOunces).isEqualTo(initialVolumeInOunces);
     }
 
+    @Test
+    @DisplayName("should have m³ as base unit")
+    void shouldHaveCubicMeterAsBaseUnit() {
+        // Given
+        VolumeUnits expectedBaseUnit = VolumeUnits.CUBIC_METER;
+
+        // When
+        Volume volumeInGallons = Volume.ofGallons(100);
+        Unit<Volume> actualBaseUnit = volumeInGallons.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
 }
+

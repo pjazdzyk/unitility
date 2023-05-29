@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.specificenthalpy;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ class SpecificEnthalpyTest {
 
     @Test
     @DisplayName("should convert J/kg to kJ/kg and vice versa")
-    public void shouldProperlyConvertJoulesPerKilogramToKilojoulesPerKilogram() {
+    void shouldProperlyConvertJoulesPerKilogramToKilojoulesPerKilogram() {
         // Given
         SpecificEnthalpy initialSpecificEnthalpy = SpecificEnthalpy.ofJoulePerKiloGram(1000);
 
@@ -26,7 +27,7 @@ class SpecificEnthalpyTest {
 
     @Test
     @DisplayName("should convert J/kg to BTU/lb and vice versa")
-    public void shouldProperlyConvertJoulesPerKilogramToBTUPerPound() {
+    void shouldProperlyConvertJoulesPerKilogramToBTUPerPound() {
         // Given
         SpecificEnthalpy initialSpecificEnthalpy = SpecificEnthalpy.ofJoulePerKiloGram(1000);
 
@@ -38,6 +39,20 @@ class SpecificEnthalpyTest {
         SpecificEnthalpy expected_BTU_PER_LB = SpecificEnthalpy.ofBTUPerPound(0.429922614);
         assertThat(actual_BTU_PER_LB.getValue()).isEqualTo(expected_BTU_PER_LB.getValue(), withPrecision(1E-10));
         assertThat(actual_J_PER_KG.getValue()).isEqualTo(1000, withPrecision(1E-10));
+    }
+
+    @Test
+    @DisplayName("should have J/kg as base unit")
+    void shouldHaveJoulesPerKilogramAsBaseUnit() {
+        // Given
+        SpecificEnthalpyUnits expectedBaseUnit = SpecificEnthalpyUnits.JOULE_PER_KILOGRAM;
+
+        // When
+        SpecificEnthalpy specificEnthalpyInBTUPerLb = SpecificEnthalpy.ofBTUPerPound(0.1);
+        Unit<SpecificEnthalpy> actualBaseUnit = specificEnthalpyInBTUPerLb.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.power;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ class PowerTest {
 
     @Test
     @DisplayName("should convert W from BTU/hour and vice versa")
-    public void shouldProperlyConvertWattsFromBTUPerHour() {
+    void shouldProperlyConvertWattsFromBTUPerHour() {
         // Given
         Power initialPower = Power.ofWatts(1000);
 
@@ -26,7 +27,7 @@ class PowerTest {
 
     @Test
     @DisplayName("should convert W from kW and vice versa")
-    public void shouldProperlyConvertWattsFromKiloWatts() {
+    void shouldProperlyConvertWattsFromKiloWatts() {
         // Given
         Power initialPowerInWatts = Power.ofWatts(10_000);
 
@@ -42,7 +43,7 @@ class PowerTest {
 
     @Test
     @DisplayName("should convert W from MW and vice versa")
-    public void shouldProperlyConvertWattsFromMegaWatts() {
+    void shouldProperlyConvertWattsFromMegaWatts() {
         // Given
         Power initialPowerInWatts = Power.ofWatts(2_000_000);
 
@@ -58,7 +59,7 @@ class PowerTest {
 
     @Test
     @DisplayName("should convert W from HP and vice versa")
-    public void shouldProperlyConvertWattsFromHorsePower() {
+    void shouldProperlyConvertWattsFromHorsePower() {
         // Given
         Power initialPowerInWatts = Power.ofWatts(2000);
 
@@ -70,6 +71,20 @@ class PowerTest {
         Power expectedInHorsePower = Power.ofHorsePower(2.68204417919006);
         assertThat(actualInHorsePower.getValue()).isEqualTo(expectedInHorsePower.getValue(), withPrecision(1E-13));
         assertThat(actualInWatts.getValue()).isEqualTo(initialPowerInWatts.getValue(), withPrecision(1E-12));
+    }
+
+    @Test
+    @DisplayName("should have W as base unit")
+    void shouldHaveWattAsBaseUnit() {
+        // Given
+        PowerUnits expectedBaseUnit = PowerUnits.WATT;
+
+        // When
+        Power powerWatt = Power.ofWatts(10);
+        Unit<Power> actualBaseUnit = powerWatt.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

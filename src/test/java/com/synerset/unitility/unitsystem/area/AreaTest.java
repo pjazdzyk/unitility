@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.area;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to km² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareKilometers() {
+    void shouldProperlyConvertSquareMetersToSquareKilometers() {
         // Given
         Area initialArea = Area.ofSquareMeters(1_000_000);
 
@@ -26,7 +27,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to cm² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareCentimeters() {
+    void shouldProperlyConvertSquareMetersToSquareCentimeters() {
         // Given
         Area initialArea = Area.ofSquareMeters(1);
 
@@ -42,7 +43,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to mm² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareMillimeters() {
+    void shouldProperlyConvertSquareMetersToSquareMillimeters() {
         // Given
         Area initialArea = Area.ofSquareMeters(1);
 
@@ -58,7 +59,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to ar and vice versa")
-    public void shouldProperlyConvertSquareMetersToAres() {
+    void shouldProperlyConvertSquareMetersToAres() {
         // Given
         Area initialArea = Area.ofSquareMeters(1);
 
@@ -74,7 +75,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to ha and vice versa")
-    public void shouldProperlyConvertSquareMetersToHectares() {
+    void shouldProperlyConvertSquareMetersToHectares() {
         // Given
         Area initialArea = Area.ofSquareMeters(10_000);
 
@@ -90,7 +91,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to in² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareInches() {
+    void shouldProperlyConvertSquareMetersToSquareInches() {
         // Given
         Area initialArea = Area.ofSquareMeters(1);
 
@@ -106,7 +107,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to ft² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareFeet() {
+    void shouldProperlyConvertSquareMetersToSquareFeet() {
         // Given
         Area initialArea = Area.ofSquareMeters(100);
 
@@ -122,7 +123,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to yd² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareYards() {
+    void shouldProperlyConvertSquareMetersToSquareYards() {
         // Given
         Area initialArea = Area.ofSquareMeters(100);
 
@@ -138,7 +139,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to ac and vice versa")
-    public void shouldProperlyConvertSquareMetersToAcres() {
+    void shouldProperlyConvertSquareMetersToAcres() {
         // Given
         Area initialArea = Area.ofSquareMeters(100);
 
@@ -154,7 +155,7 @@ class AreaTest {
 
     @Test
     @DisplayName("should convert m² to mi² and vice versa")
-    public void shouldProperlyConvertSquareMetersToSquareMiles() {
+    void shouldProperlyConvertSquareMetersToSquareMiles() {
         // Given
         Area initialArea = Area.ofSquareMeters(100_000);
 
@@ -166,6 +167,20 @@ class AreaTest {
         Area expectedInSquareMiles = Area.ofSquareMiles(0.0386102158542446);
         assertThat(actualInSquareMiles.getValue()).isEqualTo(expectedInSquareMiles.getValue(), withPrecision(1E-15));
         assertThat(actualInSquareMeters).isEqualTo(initialArea);
+    }
+
+    @Test
+    @DisplayName("should have m² as base unit")
+    void shouldHaveSquareMeterAsBaseUnit() {
+        // Given
+        AreaUnits expectedBaseUnit = AreaUnits.SQUARE_METER;
+
+        // When
+        Area areaInSquareYards = Area.ofSquareYards(10);
+        Unit<Area> actualBaseUnit = areaInSquareYards.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

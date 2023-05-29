@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.velocity;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to cm/s and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToCentimetersPerSecond() {
+    void shouldProperlyConvertMetersPerSecondToCentimetersPerSecond() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -26,7 +27,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to km/h and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToKilometersPerHour() {
+    void shouldProperlyConvertMetersPerSecondToKilometersPerHour() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -42,7 +43,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to in/s and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToInchesPerSecond() {
+    void shouldProperlyConvertMetersPerSecondToInchesPerSecond() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -58,7 +59,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to ft/s and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToFeetPerSecond() {
+    void shouldProperlyConvertMetersPerSecondToFeetPerSecond() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -74,7 +75,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to mph and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToMilesPerHour() {
+    void shouldProperlyConvertMetersPerSecondToMilesPerHour() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -90,7 +91,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to kn and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToKnots() {
+    void shouldProperlyConvertMetersPerSecondToKnots() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
@@ -106,7 +107,7 @@ class VelocityTest {
 
     @Test
     @DisplayName("should convert m/s to Mach and vice versa")
-    public void shouldProperlyConvertMetersPerSecondToMach() {
+    void shouldProperlyConvertMetersPerSecondToMach() {
         // Given
         Velocity initialVelocity = Velocity.ofMetersPerSecond(100.0);
 
@@ -120,5 +121,18 @@ class VelocityTest {
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
 
+    @Test
+    @DisplayName("should have m/s as base unit")
+    void shouldHaveMeterPerSecondAsBaseUnit() {
+        // Given
+        VelocityUnits expectedBaseUnit = VelocityUnits.METER_PER_SECOND;
+
+        // When
+        Velocity velocityInMilesPerHour = Velocity.ofMilesPerHour(2);
+        Unit<Velocity> actualBaseUnit = velocityInMilesPerHour.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
 
 }

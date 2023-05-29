@@ -1,15 +1,16 @@
 package com.synerset.unitility.unitsystem.distance;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DistanceTest {
+class DistanceTest {
 
     @Test
     @DisplayName("should convert to m from mm and vice versa")
-    public void shouldProperlyConvertToMetersFromMillimeters() {
+    void shouldProperlyConvertToMetersFromMillimeters() {
         // Given
         Distance initialDistanceInMillimeters = Distance.ofMillimeters(1000.0);
 
@@ -25,7 +26,7 @@ public class DistanceTest {
 
     @Test
     @DisplayName("should convert to m from cm and vice versa")
-    public void shouldProperlyConvertToMetersFromCentimeters() {
+    void shouldProperlyConvertToMetersFromCentimeters() {
         // Given
         Distance initialDistanceInCentimeters = Distance.ofCentimeters(100.0);
 
@@ -41,7 +42,7 @@ public class DistanceTest {
 
     @Test
     @DisplayName("should convert to m from km and vice versa")
-    public void shouldProperlyConvertToMetersFromKilometers() {
+    void shouldProperlyConvertToMetersFromKilometers() {
         // Given
         Distance initialDistanceInKilometers = Distance.ofKilometers(1.0);
 
@@ -57,7 +58,7 @@ public class DistanceTest {
 
     @Test
     @DisplayName("should convert to m from mi and vice versa")
-    public void shouldProperlyConvertToMetersFromMile() {
+    void shouldProperlyConvertToMetersFromMile() {
         // Given
         Distance initialDistanceInMiles = Distance.ofMiles(1.0);
 
@@ -73,7 +74,7 @@ public class DistanceTest {
 
     @Test
     @DisplayName("should convert to m from ft and vice versa")
-    public void shouldProperlyConvertToMetersFromFeet() {
+    void shouldProperlyConvertToMetersFromFeet() {
         // Given
         Distance initialDistanceInFeet = Distance.ofFeet(10.0);
 
@@ -89,7 +90,7 @@ public class DistanceTest {
 
     @Test
     @DisplayName("should convert to m from ft and vice versa")
-    public void shouldProperlyConvertToMetersFromInch() {
+    void shouldProperlyConvertToMetersFromInch() {
         // Given
         Distance initialDistanceInInch = Distance.ofInches(10.0);
 
@@ -103,6 +104,18 @@ public class DistanceTest {
         assertThat(actualInInch).isEqualTo(initialDistanceInInch);
     }
 
+    @Test
+    @DisplayName("should have m as base unit")
+    void shouldHaveMetersAsBaseUnit() {
+        // Given
+        DistanceUnits expectedBaseUnit = DistanceUnits.METER;
 
+        // When
+        Distance DistanceInMiles = Distance.ofMiles(10);
+        Unit<Distance> actualBaseUnit = DistanceInMiles.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
 
 }

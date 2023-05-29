@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.thermalconductivity;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ class ThermalConductivityTest {
 
     @Test
     @DisplayName("should convert W/(m·K) to kW/(m·K) and vice versa")
-    public void shouldProperlyConvertWattsPerMeterKelvinToKilowattsPerMeterKelvin() {
+    void shouldProperlyConvertWattsPerMeterKelvinToKilowattsPerMeterKelvin() {
         // Given
         ThermalConductivity initialUnits = ThermalConductivity.ofWattsPerMeterKelvin(1000);
 
@@ -26,7 +27,7 @@ class ThermalConductivityTest {
 
     @Test
     @DisplayName("should convert W/(m·K) to BTU/(hr·ft·°F) and vice versa")
-    public void shouldProperlyConvertWattsPerMeterKelvinToBTUPerHourFootFahrenheit() {
+    void shouldProperlyConvertWattsPerMeterKelvinToBTUPerHourFootFahrenheit() {
         // Given
         ThermalConductivity initialUnits = ThermalConductivity.ofWattsPerMeterKelvin(1000);
 
@@ -38,6 +39,20 @@ class ThermalConductivityTest {
         ThermalConductivity expected_BTU_PER_HR_FT_F = ThermalConductivity.ofBTUPerHourFeetFahrenheit(577.7891109505047);
         assertThat(actual_BTU_PER_HR_FT_F.getValue()).isEqualTo(expected_BTU_PER_HR_FT_F.getValue(), withPrecision(1E-10));
         assertThat(actual_W_PER_M_K.getValue()).isEqualTo(1000, withPrecision(1E-10));
+    }
+
+    @Test
+    @DisplayName("should have W/(m·K) as base unit")
+    void shouldHaveWattPerMeterKelvinAsBaseUnit() {
+        // Given
+        ThermalConductivityUnits expectedBaseUnit = ThermalConductivityUnits.WATTS_PER_METER_KELVIN;
+
+        // When
+        ThermalConductivity thermalConductivityInBTUPerHrF = ThermalConductivity.ofBTUPerHourFeetFahrenheit(0.1);
+        Unit<ThermalConductivity> actualBaseUnit = thermalConductivityInBTUPerHrF.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
 }

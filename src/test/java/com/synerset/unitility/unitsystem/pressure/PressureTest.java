@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.pressure;
 
+import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,7 @@ import static org.assertj.core.api.Assertions.withPrecision;
 class PressureTest {
     @Test
     @DisplayName("should convert Pa to PSI and vice versa")
-    public void shouldProperlyConvertPascalToPsi() {
+    void shouldProperlyConvertPascalToPsi() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325);
 
@@ -25,7 +26,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to BAR and vice versa")
-    public void shouldProperlyConvertPascalToBar() {
+    void shouldProperlyConvertPascalToBar() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325);
 
@@ -41,7 +42,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to hPa and vice versa")
-    public void shouldProperlyConvertPascalToHectopascal() {
+    void shouldProperlyConvertPascalToHectopascal() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325);
 
@@ -57,7 +58,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to MPa and vice versa")
-    public void shouldProperlyConvertPascalToMegapascal() {
+    void shouldProperlyConvertPascalToMegapascal() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325);
 
@@ -73,7 +74,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to mbar and vice versa")
-    public void shouldProperlyConvertPascalToMillibar() {
+    void shouldProperlyConvertPascalToMillibar() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325.0);
 
@@ -89,7 +90,7 @@ class PressureTest {
 
     @Test
     @DisplayName("should convert Pa to Torr and vice versa")
-    public void shouldProperlyConvertPascalToTorr() {
+    void shouldProperlyConvertPascalToTorr() {
         // Given
         Pressure initialPressure = Pressure.ofPascal(101325.0);
 
@@ -103,5 +104,18 @@ class PressureTest {
         assertThat(actualInPascal).isEqualTo(initialPressure);
     }
 
+    @Test
+    @DisplayName("should have Pa as base unit")
+    void shouldHavePascalAsBaseUnit() {
+        // Given
+        PressureUnits expectedBaseUnit = PressureUnits.PASCAL;
+
+        // When
+        Pressure pressureInPsi = Pressure.ofPsi(10);
+        Unit<Pressure> actualBaseUnit = pressureInPsi.getUnit().getBaseUnit();
+
+        // Then
+        assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
 
 }

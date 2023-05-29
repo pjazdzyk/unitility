@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.area;
 
-import com.synerset.unitility.unitsystem.BareQuantity;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.utils.ValueFormatter;
