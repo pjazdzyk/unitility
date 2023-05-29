@@ -91,7 +91,7 @@ At current level of development following units are available:
 Each quantity consists most popular SI units and at least one Imperial unit.
 
 ## License
-GNU GENERAL PUBLIC LICENSE V3<br>
+MIT LICENSE<br>
 
 ## Acknowledgments
 Special thanks to Kret11, VeloxDigits, Olin44, and others for their help and contribution.<br>
