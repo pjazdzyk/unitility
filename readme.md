@@ -5,7 +5,8 @@ With a wide range of value objects that represent commonly used physical quantit
 Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers quick and easy usage in your project, without any heavy frameworks,
 or external libraries.
 
-![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) &nbsp;
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.synerset/unitility/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.synerset/unitility) &nbsp;
+![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) <br>
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
@@ -33,6 +34,19 @@ Distance smallDistance = Distance.ofMeters(0.000123678);
 System.out.println(bigDistance + " | " + smallDistance);
 
 OUTPUT: 10 m | 0.000124 m
+```
+
+### INSTALLATION
+
+Just copy Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers, check maven central repository:
+[UNITILITY](https://central.sonatype.com/artifact/com.synerset/unitility).
+
+```xml
+<dependency>
+    <groupId>com.synerset</groupId>
+    <artifactId>unitility</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
 
 ## Development status & collaboration
