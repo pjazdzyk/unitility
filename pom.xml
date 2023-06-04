@@ -10,7 +10,11 @@
     <packaging>jar</packaging>
 
     <name>Unitility</name>
-    <description>The Physics Units of Measure Library for Java</description>
+    <description>The Physics Units of Measure Library for Java.
+        Unitility is designed to simplify physics units conversion. With a wide range of value objects that represent commonly
+        used physical quantities, this solution is built using plain Java for optimal speed and lightweight functionality.
+        This solution offers quick and easy usage in any project, without heavy frameworks or external libraries.
+    </description>
     <url>https://github.com/pjazdzyk/unitility</url>
 
     <licenses>

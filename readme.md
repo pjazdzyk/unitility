@@ -15,6 +15,19 @@ or external libraries.
 > AUTHOR: <b>Piotr Jażdżyk</b> <br>
 > LINKEDIN: https://www.linkedin.com/in/pjazdzyk <br>
 
+### INSTALLATION
+
+Just copy Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers, check maven central repository:
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.0.0/jar?eh=).
+
+```xml
+<dependency>
+    <groupId>com.synerset</groupId>
+    <artifactId>unitility</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 ## Example
 Below is a simple example how to work with units and convert to another type of unit:
 ```java
@@ -36,18 +49,9 @@ System.out.println(bigDistance + " | " + smallDistance);
 OUTPUT: 10 m | 0.000124 m
 ```
 
-### INSTALLATION
+For more advanced use cases, take a look at the example project that has been prepared to illustrate the integration of this library into a simple dry air property physics app. 
+This project has been implemented in a functional manner using io.vavr library: [unitility-example-project](https://github.com/pjazdzyk/unitility-example-project).
 
-Just copy Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers, check maven central repository:
-[UNITILITY](https://central.sonatype.com/artifact/com.synerset/unitility).
-
-```xml
-<dependency>
-    <groupId>com.synerset</groupId>
-    <artifactId>unitility</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
 
 ## Development status & collaboration
 This is an early development stage.
