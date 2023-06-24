@@ -96,6 +96,7 @@ At current level of development following units are available:
 * Kinematic viscosity: Square meter per second [m²/s], Square foot per second [ft²/s]
 * Specific enthalpy: Joule per kilogram [J/kg], Kilojoule per kilogram [kJ/kg], BTU per pound [BTU/lb]
 * Thermal conductivity: Watts per meter Kelvin [W/(m·K)], Kilowatts per meter Kelvin [kW/(m·K)], BTU per hour foot Fahrenheit [BTU/(h·ft·°F)]
+* Thermal diffusivity: Square meter per second [m²/s], Square feet per second [ft²/s]
 #### FLOWS:
 * Mass flow: Kilogram per second [kg/s], Kilogram per hour [kg/h], Tonne per hour [t/h], Pound per second [lb/s], 
 * Volumetric flow: Cubic meters per second [m³/s], Cubic meters per minute [m³/min], Cubic meters per hour [m³/h], Litre per second [L/s], Litre per minute [L/min], Litre per hour [L/h], 
