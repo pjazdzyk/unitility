@@ -2,7 +2,6 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -65,7 +64,10 @@ public final class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusi
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        return "ThermalDiffusivity{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
     }
 
     public static ThermalDiffusivity of(double value, Unit<ThermalDiffusivity> unit) {

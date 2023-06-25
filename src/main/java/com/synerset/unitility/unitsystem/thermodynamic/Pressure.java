@@ -2,7 +2,6 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -86,7 +85,10 @@ public final class Pressure implements PhysicalQuantity<Pressure> {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        return "Pressure{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
     }
 
     public static Pressure of(double value, Unit<Pressure> unit) {

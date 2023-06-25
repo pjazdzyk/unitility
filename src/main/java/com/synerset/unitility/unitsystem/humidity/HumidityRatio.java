@@ -2,7 +2,6 @@ package com.synerset.unitility.unitsystem.humidity;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -64,7 +63,10 @@ public final class HumidityRatio implements PhysicalQuantity<HumidityRatio> {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        return "HumidityRatio{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
     }
 
     public static HumidityRatio of(double value, Unit<HumidityRatio> unit) {

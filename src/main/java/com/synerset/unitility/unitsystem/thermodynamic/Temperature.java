@@ -68,8 +68,16 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
 
     @Override
     public String toString() {
+        return "Temperature{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
+    }
+
+    @Override
+    public String toStringWithRelevantDigits(int relevantDigits) {
         String separator = unit == TemperatureUnits.CELSIUS ? "" : " ";
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + separator + unit.getSymbol();
+        return ValueFormatter.formatDoubleToRelevantDigits(value, relevantDigits) + separator + unit.getSymbol();
     }
 
     public static Temperature of(double value, Unit<Temperature> unit) {

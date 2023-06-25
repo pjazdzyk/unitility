@@ -1,7 +1,6 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
 import com.synerset.unitility.unitsystem.BareQuantity;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -27,7 +26,9 @@ public class PrandtlNumber implements BareQuantity {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION);
+        return "PrandtlNumber{" +
+                "value=" + value +
+                '}';
     }
 
     @Override

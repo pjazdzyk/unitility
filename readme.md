@@ -31,22 +31,18 @@ Just copy Maven dependency provided below to your pom.xml file, and you are read
 ## Example
 Below is a simple example how to work with units and convert to another type of unit:
 ```java
-Temperature tempInCelsius = Temperature.ofCelsius(20.5);
-Temperature tempInKelvin = tempInCelsius.toKelvin();
-Temperature temInFahrenheit = tempInKelvin.toFahrenheit();
-System.out.println(tempInCelsius  + " | " + tempInKelvin + " | " + temInFahrenheit);
-
-OUTPUT: 20.5 °C | 293.65 K | 68.9 °F
+Temperature tempInCelsius = Temperature.ofCelsius(20.5);     // 20.5°C
+Temperature tempInKelvin = tempInCelsius.toKelvin();         // 293.65 K
+Temperature temInFahrenheit = tempInKelvin.toFahrenheit();   // 68.9 °F
 ```
-All quantities have smart toString() method, which will always adjust values decimal precision to capture by default 3 relevant digits depending on your unit type and its value. 
-This way you have guaranteed an elegant output from toString() without any additional effort of reformatting. Values will be rounded up using HALF_UP approach. 
+All quantities have smart toStringWithRelevantDigits() method, which will always adjust values decimal precision to capture by default specified relevant digits depending on your unit type and its value. 
+This way you have guaranteed an elegant output without any additional effort of reformatting. Values will be rounded up using HALF_UP approach. 
 
 ```java
 Distance bigDistance = Distance.ofMeters(10);
-Distance smallDistance = Distance.ofMeters(0.000123678);
-System.out.println(bigDistance + " | " + smallDistance);
-
-OUTPUT: 10 m | 0.000124 m
+Distance smallDistance = Distance.ofMeters(0.000123678);      
+String bigOutput = bigDistance.toStringWithRelevantDigits(3);    // outputs: 10.0 m
+String bigOutput = smallDistance.toStringWithRelevantDigits(3);  // outputs: 0.00124 m
 ```
 
 For more advanced use cases, take a look at the example project that has been prepared to illustrate the integration of this library into a simple dry air property physics app. 

@@ -2,7 +2,6 @@ package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -67,7 +66,10 @@ public final class Momentum implements PhysicalQuantity<Momentum> {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        return "Momentum{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
     }
 
     public static Momentum of(double value, Unit<Momentum> unit) {

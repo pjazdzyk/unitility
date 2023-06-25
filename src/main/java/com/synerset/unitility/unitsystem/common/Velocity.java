@@ -2,7 +2,6 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -87,7 +86,10 @@ public final class Velocity implements PhysicalQuantity<Velocity> {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        return "Velocity{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
     }
 
     public static Velocity of(double value, Unit<Velocity> unit) {

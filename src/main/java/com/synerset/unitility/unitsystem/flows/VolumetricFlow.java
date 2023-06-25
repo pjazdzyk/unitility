@@ -2,13 +2,10 @@ package com.synerset.unitility.unitsystem.flows;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
 public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
-
-    public static final byte TO_STRING_PRECISION = 3;
 
     private final double value;
     private final Unit<VolumetricFlow> unit;
@@ -93,9 +90,11 @@ public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        return "VolumetricFlow{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
     }
-
 
     public static VolumetricFlow of(double value, Unit<VolumetricFlow> unit) {
         return new VolumetricFlow(value, unit);

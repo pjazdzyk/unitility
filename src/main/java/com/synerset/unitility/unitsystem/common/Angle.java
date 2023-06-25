@@ -63,8 +63,16 @@ public final class Angle implements PhysicalQuantity<Angle> {
 
     @Override
     public String toString() {
+        return "Angle{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
+    }
+
+    @Override
+    public String toStringWithRelevantDigits(int relevantDigits) {
         String separator = unit == AngleUnits.DEGREES ? "" : " ";
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + separator + unit.getSymbol();
+        return ValueFormatter.formatDoubleToRelevantDigits(value, relevantDigits) + separator + unit.getSymbol();
     }
 
     public static Angle of(double value, Unit<Angle> unit) {

@@ -1,6 +1,12 @@
 package com.synerset.unitility.unitsystem;
 
+import com.synerset.unitility.unitsystem.utils.ValueFormatter;
+
 public interface BareQuantity {
-    byte TO_STRING_PRECISION = 3;
     double getValue();
+
+    default String toStringWithRelevantDigits(int relevantDigits) {
+        return ValueFormatter.formatDoubleToRelevantDigits(getValue(), relevantDigits);
+    }
+
 }

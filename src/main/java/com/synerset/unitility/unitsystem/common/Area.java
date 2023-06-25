@@ -2,15 +2,12 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
 public final class Area implements PhysicalQuantity<Area> {
 
     public static final Area PHYSICAL_MIN_LIMIT = Area.ofSquareMeters(0);
-
-    public static final byte TO_STRING_PRECISION = 3;
 
     private final double value;
     private final Unit<Area> unit;
@@ -103,7 +100,10 @@ public final class Area implements PhysicalQuantity<Area> {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        return "Area{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
     }
 
     public static Area of(double value, Unit<Area> unit) {

@@ -2,13 +2,11 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
 public final class Energy implements PhysicalQuantity<Energy> {
 
-    public static final byte TO_STRING_PRECISION = 3;
     private final double value;
     private final Unit<Energy> unit;
 
@@ -92,7 +90,10 @@ public final class Energy implements PhysicalQuantity<Energy> {
 
     @Override
     public String toString() {
-        return ValueFormatter.formatDoubleToRelevantPrecision(value, TO_STRING_PRECISION) + " " + unit.getSymbol();
+        return "Energy{" +
+                "value=" + value +
+                ", unit=" + unit.getSymbol() +
+                '}';
     }
 
     public static Energy of(double value, Unit<Energy> unit) {

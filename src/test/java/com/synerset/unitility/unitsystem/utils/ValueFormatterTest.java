@@ -19,7 +19,7 @@ class ValueFormatterTest {
         int relevantDigits = 3;
 
         // When
-        String actualFormattedDoubleAsString = ValueFormatter.formatDoubleToRelevantPrecision(inputDouble, relevantDigits);
+        String actualFormattedDoubleAsString = ValueFormatter.formatDoubleToRelevantDigits(inputDouble, relevantDigits);
 
         // Then
         assertThat(actualFormattedDoubleAsString).isEqualTo(expectedFormattedDoubleAsString);
