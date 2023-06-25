@@ -1,8 +1,6 @@
-package com.synerset.unitility.unitsystem.thermodynamic;
+package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.mechanical.Force;
-import com.synerset.unitility.unitsystem.mechanical.ForceUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

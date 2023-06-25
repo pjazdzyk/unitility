@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PhysicalQuantityTest {
+class PhysicalQuantityTest {
 
     @Test
     @DisplayName("should be equals in business requirements if their base units and values in base units are the same")
