@@ -42,7 +42,7 @@ This way you have guaranteed an elegant output without any additional effort of 
 Distance bigDistance = Distance.ofMeters(10);
 Distance smallDistance = Distance.ofMeters(0.000123678);      
 String bigOutput = bigDistance.toStringWithRelevantDigits(3);    // outputs: 10.0 m
-String bigOutput = smallDistance.toStringWithRelevantDigits(3);  // outputs: 0.00124 m
+String smallOutput = smallDistance.toStringWithRelevantDigits(3);  // outputs: 0.00124 m
 ```
 
 For more advanced use cases, take a look at the example project that has been prepared to illustrate the integration of this library into a simple dry air property physics app. 

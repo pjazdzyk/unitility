@@ -6,12 +6,13 @@
 
     <groupId>com.synerset</groupId>
     <artifactId>unitility</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>Unitility</name>
     <description>The Physics Units of Measure Library for Java.
-        Unitility is designed to simplify physics units conversion. With a wide range of value objects that represent commonly
+        Unitility provides value objects that combine numerical values with their corresponding units, allowing developers
+        to easily perform accurate and efficient conversions between different units. With a wide range of value objects that represent commonly
         used physical quantities, this solution is built using plain Java for optimal speed and lightweight functionality.
         This solution offers quick and easy usage in any project, without heavy frameworks or external libraries.
     </description>
