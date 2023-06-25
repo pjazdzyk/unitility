@@ -24,7 +24,7 @@ Just copy Maven dependency provided below to your pom.xml file, and you are read
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -85,6 +85,7 @@ At current level of development following units are available:
 * Angle: degrees [°], radians [rad]
 #### MECHANICAL:
 * Force: newton [N], kilonewton [kN], kilopond [kp], dyne [dyn], pound force [lbf], poundal [pdl]
+* Momentum: Kilogram meter per second [kg·m/s], Gram centimeter per second [g·cm/s], Pound feet per second [lb·ft/s]
 #### THERMODYNAMIC:
 * Temperature: Kelvin [K], Celsius [°C], Fahrenheit [°F]
 * Pressure: Pascal [Pa], Hectopascal [hPa], Megapascal [MPa], Bar [bar], Milli Bar [mbar] PSI [psi], Torr [Torr]
