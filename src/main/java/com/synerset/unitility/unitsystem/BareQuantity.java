@@ -8,5 +8,4 @@ public interface BareQuantity {
     default String toStringWithRelevantDigits(int relevantDigits) {
         return ValueFormatter.formatDoubleToRelevantDigits(getValue(), relevantDigits);
     }
-
 }

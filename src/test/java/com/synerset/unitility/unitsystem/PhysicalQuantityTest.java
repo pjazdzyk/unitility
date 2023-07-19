@@ -2,6 +2,7 @@ package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
+import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -43,5 +44,43 @@ class PhysicalQuantityTest {
         assertThat(actualAngleOutput).isEqualTo(expectedAngleOutput);
         assertThat(actualDistanceOutput).isEqualTo(expectedDistanceOutput);
     }
+
+    @Test
+    @DisplayName("should assert that first quantity is greater than second")
+    void shouldAssertThatFirstQuantityIsGreaterThanSecond() {
+        // Given
+        Temperature smallerTemp = Temperature.ofCelsius(-20.0);
+        Temperature greaterTemp = Temperature.ofCelsius(0.0);
+        Temperature smallerOrEqualTemp = Temperature.ofCelsius(-20.0);
+        Temperature greaterOrEqualTemp = Temperature.ofCelsius(0.0);
+
+        // When
+        boolean firstIsSmaller = smallerTemp.isLowerThan(greaterTemp);
+        boolean secondIsGreater = greaterTemp.isGreaterThan(smallerTemp);
+        boolean firstIsEqualOrLower = smallerTemp.isEqualOrLowerThan(smallerOrEqualTemp);
+        boolean secondIsEqualOrGreater = greaterTemp.isEqualOrGreaterThan(greaterOrEqualTemp);
+
+        // Then
+        assertThat(firstIsSmaller).isTrue();
+        assertThat(secondIsGreater).isTrue();
+        assertThat(firstIsEqualOrLower).isTrue();
+        assertThat(secondIsEqualOrGreater).isTrue();
+    }
+
+
+    @Test
+    @DisplayName("should return value in base unit")
+    void shouldReturnValueInBaseUnit() {
+        // Given
+        Distance distanceInKm = Distance.ofKilometers(1.0);
+
+        // When
+        double actualDistanceInBaseUnit = distanceInKm.getBaseValue();
+
+        // Then
+        double expectedDistanceInBaseUnit = 1000; // meters
+        assertThat(actualDistanceInBaseUnit).isEqualTo(expectedDistanceInBaseUnit);
+    }
+
 
 }
