@@ -39,6 +39,19 @@ public final class Torque implements PhysicalQuantity<Torque> {
         return Torque.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<Torque> createNewWithValue(double value) {
+        return Torque.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfKilogramMetersPerSecond() {
+        if (unit == TorqueUnits.NEWTON_METER) {
+            return value;
+        }
+        return toUnit(TorqueUnits.NEWTON_METER).getValue();
+    }
+
     // Custom converter methods for the most popular units
     public Torque toNewtonMeters() {
         return toUnit(TorqueUnits.NEWTON_METER);

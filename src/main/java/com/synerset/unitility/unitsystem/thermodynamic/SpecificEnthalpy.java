@@ -37,6 +37,19 @@ public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy
         return SpecificEnthalpy.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<SpecificEnthalpy> createNewWithValue(double value) {
+        return SpecificEnthalpy.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfKiloJoulePerKilogram() {
+        if (unit == SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM) {
+            return value;
+        }
+        return toUnit(SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public SpecificEnthalpy toJoulePerKiloGram() {
         return toUnit(SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);

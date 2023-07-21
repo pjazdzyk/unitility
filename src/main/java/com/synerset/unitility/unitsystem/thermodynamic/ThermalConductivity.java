@@ -37,6 +37,19 @@ public final class ThermalConductivity implements PhysicalQuantity<ThermalConduc
         return ThermalConductivity.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<ThermalConductivity> createNewWithValue(double value) {
+        return ThermalConductivity.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfWatsPerMeterKelvin() {
+        if (unit == ThermalConductivityUnits.WATTS_PER_METER_KELVIN) {
+            return value;
+        }
+        return toUnit(ThermalConductivityUnits.WATTS_PER_METER_KELVIN).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public ThermalConductivity toWattsPerMeterKelvin() {
         return toUnit(ThermalConductivityUnits.WATTS_PER_METER_KELVIN);

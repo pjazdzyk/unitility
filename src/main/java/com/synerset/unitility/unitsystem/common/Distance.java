@@ -38,6 +38,19 @@ public final class Distance implements PhysicalQuantity<Distance> {
         return Distance.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<Distance> createNewWithValue(double value) {
+        return Distance.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfMeters(){
+        if(unit == DistanceUnits.METER){
+            return value;
+        }
+        return toUnit(DistanceUnits.METER).getValue();
+    }
+
     // Custom converter methods for most popular units
     public Distance toMeter(){
         return toUnit(DistanceUnits.METER);

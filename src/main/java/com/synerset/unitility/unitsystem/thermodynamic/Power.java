@@ -37,6 +37,26 @@ public final class Power implements PhysicalQuantity<Power> {
         return Power.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<Power> createNewWithValue(double value) {
+        return Power.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfWatts() {
+        if (unit == PowerUnits.WATT) {
+            return value;
+        }
+        return toUnit(PowerUnits.WATT).getValue();
+    }
+
+    public double getValueOfKiloWatts() {
+        if (unit == PowerUnits.KILOWATT) {
+            return value;
+        }
+        return toUnit(PowerUnits.KILOWATT).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Power toWatts(){
         return toUnit(PowerUnits.WATT);

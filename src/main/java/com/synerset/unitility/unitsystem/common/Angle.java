@@ -39,6 +39,19 @@ public final class Angle implements PhysicalQuantity<Angle> {
         return Angle.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<Angle> createNewWithValue(double value) {
+        return Angle.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfDegrees(){
+        if(unit == AngleUnits.RADIANS){
+            return value;
+        }
+        return toUnit(AngleUnits.RADIANS).getValue();
+    }
+
     // Custom converter methods for most popular units
     public Angle toRadians() {
         return toUnit(AngleUnits.RADIANS);

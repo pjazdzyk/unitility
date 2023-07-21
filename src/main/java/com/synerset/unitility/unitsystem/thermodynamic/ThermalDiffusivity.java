@@ -7,8 +7,6 @@ import java.util.Objects;
 
 public final class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivity> {
 
-
-
     private final double value;
     private final Unit<ThermalDiffusivity> unit;
 
@@ -40,12 +38,25 @@ public final class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusi
         return ThermalDiffusivity.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<ThermalDiffusivity> createNewWithValue(double value) {
+        return ThermalDiffusivity.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfSquareMetersPerSecond() {
+        if (unit == ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND) {
+            return value;
+        }
+        return toUnit(ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND).getValue();
+    }
+
     // Custom converter methods, for most popular units
-    public ThermalDiffusivity toSquareMeterPerSecond(){
+    public ThermalDiffusivity toSquareMeterPerSecond() {
         return toUnit(ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND);
     }
 
-    public ThermalDiffusivity toSquareFeetPerSecond(){
+    public ThermalDiffusivity toSquareFeetPerSecond() {
         return toUnit(ThermalDiffusivityUnits.SQUARE_FEET_PER_SECOND);
     }
 

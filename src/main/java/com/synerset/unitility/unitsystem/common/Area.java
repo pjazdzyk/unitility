@@ -40,6 +40,19 @@ public final class Area implements PhysicalQuantity<Area> {
         return Area.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<Area> createNewWithValue(double value) {
+        return Area.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfSquareMeters(){
+        if(unit == AreaUnits.SQUARE_METER){
+            return value;
+        }
+        return toUnit(AreaUnits.SQUARE_METER).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Area toSquareMeters() {
         return toUnit(AreaUnits.SQUARE_METER);

@@ -41,6 +41,19 @@ public final class Pressure implements PhysicalQuantity<Pressure> {
         return Pressure.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<Pressure> createNewWithValue(double value) {
+        return Pressure.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfPascals() {
+        if (unit == PressureUnits.PASCAL) {
+            return value;
+        }
+        return toUnit(PressureUnits.PASCAL).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Pressure toPascal() {
         return toUnit(PressureUnits.PASCAL);

@@ -38,6 +38,19 @@ public final class Momentum implements PhysicalQuantity<Momentum> {
         return Momentum.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<Momentum> createNewWithValue(double value) {
+        return Momentum.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfKilogramMetersPerSecond() {
+        if (unit == MomentumUnits.KILOGRAM_METER_PER_SECOND) {
+            return value;
+        }
+        return toUnit(MomentumUnits.KILOGRAM_METER_PER_SECOND).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Momentum toKilogramMeterPerSecond(){
         return toUnit(MomentumUnits.KILOGRAM_METER_PER_SECOND);

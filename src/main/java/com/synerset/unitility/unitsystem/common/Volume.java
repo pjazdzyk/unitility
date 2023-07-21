@@ -37,6 +37,19 @@ public final class Volume implements PhysicalQuantity<Volume> {
         return Volume.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<Volume> createNewWithValue(double value) {
+        return Volume.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfCubicMeters() {
+        if (unit == VolumeUnits.CUBIC_METER) {
+            return value;
+        }
+        return toUnit(VolumeUnits.CUBIC_METER).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Volume toCubicMeter() {
         return toUnit(VolumeUnits.CUBIC_METER);

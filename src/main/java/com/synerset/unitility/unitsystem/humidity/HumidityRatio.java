@@ -39,6 +39,19 @@ public final class HumidityRatio implements PhysicalQuantity<HumidityRatio> {
         return HumidityRatio.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public PhysicalQuantity<HumidityRatio> createNewWithValue(double value) {
+        return HumidityRatio.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfKilogramPerKilogram() {
+        if (unit == HumidityRatioUnits.KILOGRAM_PER_KILOGRAM) {
+            return value;
+        }
+        return toUnit(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public HumidityRatio toKilogramPerKilogram() {
         return toUnit(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);

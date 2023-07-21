@@ -5,7 +5,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
+public final class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
 
     public static final RelativeHumidity RH_MIN_LIMIT = RelativeHumidity.ofPercentage(0);
     public static final RelativeHumidity RH_MAX_LIMIT = RelativeHumidity.ofPercentage(100);
@@ -38,6 +38,19 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
         double valueInPascal = unit.toBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInPascal);
         return RelativeHumidity.of(valueInTargetUnit, targetUnit);
+    }
+
+    @Override
+    public PhysicalQuantity<RelativeHumidity> createNewWithValue(double value) {
+        return RelativeHumidity.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfPercent() {
+        if (unit == RelativeHumidityUnits.PERCENT) {
+            return value;
+        }
+        return toUnit(RelativeHumidityUnits.PERCENT).getValue();
     }
 
     // Custom converter methods, for most popular units

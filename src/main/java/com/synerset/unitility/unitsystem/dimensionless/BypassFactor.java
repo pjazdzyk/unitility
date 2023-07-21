@@ -1,23 +1,46 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.BareQuantity;
+import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class BypassFactor implements BareQuantity {
+public final class BypassFactor implements PhysicalQuantity<BypassFactor> {
 
     public static final BypassFactor BYPASS_MIN_VALUE = BypassFactor.of(0);
     public static final BypassFactor BYPASS_MAX_VALUE = BypassFactor.of(1);
 
     private final double value;
+    private final Unit<BypassFactor> unit;
 
     private BypassFactor(double value) {
         this.value = value;
+        this.unit = BypassFactorUnits.DIMENSIONLESS;
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public Unit<BypassFactor> getUnit() {
+        return unit;
+    }
+
+    @Override
+    public BypassFactor toBaseUnit() {
+        return this;
+    }
+
+    @Override
+    public PhysicalQuantity<BypassFactor> toUnit(Unit<BypassFactor> targetUnit) {
+        return this;
+    }
+
+    @Override
+    public PhysicalQuantity<BypassFactor> createNewWithValue(double value) {
+        return BypassFactor.of(value);
     }
 
     @Override
