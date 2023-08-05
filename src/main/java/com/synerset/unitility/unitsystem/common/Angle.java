@@ -76,10 +76,7 @@ public final class Angle implements PhysicalQuantity<Angle> {
 
     @Override
     public String toString() {
-        return "Angle{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Angle{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override

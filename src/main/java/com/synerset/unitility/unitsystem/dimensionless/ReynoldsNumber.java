@@ -53,9 +53,7 @@ public final class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumber> {
 
     @Override
     public String toString() {
-        return "Bypass factor{" +
-                "value=" + value +
-                '}';
+        return "ReynoldsNumber{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override

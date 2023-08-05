@@ -83,10 +83,7 @@ public final class MassFlow implements PhysicalQuantity<MassFlow> {
 
     @Override
     public String toString() {
-        return "MassFlow{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "MassFlow{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static MassFlow of(double value, Unit<MassFlow> unit) {

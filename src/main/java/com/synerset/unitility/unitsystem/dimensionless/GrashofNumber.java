@@ -49,9 +49,7 @@ public final class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
 
     @Override
     public String toString() {
-        return "Bypass factor{" +
-                "value=" + value +
-                '}';
+        return "GrashofNumber{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override

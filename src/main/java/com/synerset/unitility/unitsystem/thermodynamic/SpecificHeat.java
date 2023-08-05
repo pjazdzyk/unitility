@@ -78,10 +78,7 @@ public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
 
     @Override
     public String toString() {
-        return "SpecificHeat{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "SpecificHeat{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static SpecificHeat of(double value, Unit<SpecificHeat> unit) {

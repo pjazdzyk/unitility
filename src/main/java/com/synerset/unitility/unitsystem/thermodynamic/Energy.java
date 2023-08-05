@@ -110,10 +110,7 @@ public final class Energy implements PhysicalQuantity<Energy> {
 
     @Override
     public String toString() {
-        return "Energy{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Energy{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Energy of(double value, Unit<Energy> unit) {

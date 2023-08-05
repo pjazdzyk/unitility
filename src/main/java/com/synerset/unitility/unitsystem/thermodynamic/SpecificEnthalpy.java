@@ -78,10 +78,7 @@ public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy
 
     @Override
     public String toString() {
-        return "SpecificEnthalpy{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "SpecificEnthalpy{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static SpecificEnthalpy of(double value, Unit<SpecificEnthalpy> unit) {

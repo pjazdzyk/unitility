@@ -79,10 +79,7 @@ public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity
 
     @Override
     public String toString() {
-        return "DynamicViscosity{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "DynamicViscosity{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static DynamicViscosity of(double value, Unit<DynamicViscosity> unit) {

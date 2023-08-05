@@ -75,10 +75,7 @@ public final class Density implements PhysicalQuantity<Density> {
 
     @Override
     public String toString() {
-        return "Density{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Density{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Density of(double value, Unit<Density> unit) {

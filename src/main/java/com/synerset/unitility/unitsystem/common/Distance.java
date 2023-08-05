@@ -95,10 +95,7 @@ public final class Distance implements PhysicalQuantity<Distance> {
 
     @Override
     public String toString() {
-        return "Distance{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Distance{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Distance of(double value, Unit<Distance> unit) {

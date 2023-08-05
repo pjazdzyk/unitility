@@ -78,10 +78,7 @@ public final class ThermalConductivity implements PhysicalQuantity<ThermalConduc
 
     @Override
     public String toString() {
-        return "ThermalConductivity{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "ThermalConductivity{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static ThermalConductivity of(double value, Unit<ThermalConductivity> unit) {

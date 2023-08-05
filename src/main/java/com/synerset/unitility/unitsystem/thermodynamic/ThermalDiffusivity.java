@@ -75,10 +75,7 @@ public final class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusi
 
     @Override
     public String toString() {
-        return "ThermalDiffusivity{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "ThermalDiffusivity{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static ThermalDiffusivity of(double value, Unit<ThermalDiffusivity> unit) {

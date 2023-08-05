@@ -91,10 +91,7 @@ public final class Force implements PhysicalQuantity<Force> {
 
     @Override
     public String toString() {
-        return "Force{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Force{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Force of(double value, Unit<Force> unit) {

@@ -77,10 +77,7 @@ public final class RelativeHumidity implements PhysicalQuantity<RelativeHumidity
 
     @Override
     public String toString() {
-        return "RelativeHumidity{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "RelativeHumidity{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static RelativeHumidity of(double value, Unit<RelativeHumidity> unit) {

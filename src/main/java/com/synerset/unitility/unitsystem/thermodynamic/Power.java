@@ -93,10 +93,7 @@ public final class Power implements PhysicalQuantity<Power> {
 
     @Override
     public String toString() {
-        return "Power{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Power{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Power of(double value, Unit<Power> unit) {

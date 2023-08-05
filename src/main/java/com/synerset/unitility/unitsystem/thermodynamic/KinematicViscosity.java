@@ -75,10 +75,7 @@ public final class KinematicViscosity implements PhysicalQuantity<KinematicVisco
 
     @Override
     public String toString() {
-        return "KinematicViscosity{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "KinematicViscosity{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static KinematicViscosity of(double value, Unit<KinematicViscosity> unit) {

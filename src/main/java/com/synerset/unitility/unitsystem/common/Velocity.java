@@ -99,10 +99,7 @@ public final class Velocity implements PhysicalQuantity<Velocity> {
 
     @Override
     public String toString() {
-        return "Velocity{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Velocity{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Velocity of(double value, Unit<Velocity> unit) {

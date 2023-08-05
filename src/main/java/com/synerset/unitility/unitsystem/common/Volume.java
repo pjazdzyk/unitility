@@ -98,10 +98,7 @@ public final class Volume implements PhysicalQuantity<Volume> {
 
     @Override
     public String toString() {
-        return "Volume{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Volume{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Volume of(double value, Unit<Volume> unit) {

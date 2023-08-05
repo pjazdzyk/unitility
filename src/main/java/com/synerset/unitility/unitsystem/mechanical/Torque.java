@@ -88,10 +88,7 @@ public final class Torque implements PhysicalQuantity<Torque> {
 
     @Override
     public String toString() {
-        return "Torque{" +
-                "value=" + value +
-                ", unit=" + unit +
-                '}';
+        return "Torque{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Torque of(double value, Unit<Torque> unit) {

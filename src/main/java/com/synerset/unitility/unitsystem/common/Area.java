@@ -113,10 +113,7 @@ public final class Area implements PhysicalQuantity<Area> {
 
     @Override
     public String toString() {
-        return "Area{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Area{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Area of(double value, Unit<Area> unit) {

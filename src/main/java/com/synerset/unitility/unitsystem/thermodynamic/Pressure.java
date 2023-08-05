@@ -98,10 +98,7 @@ public final class Pressure implements PhysicalQuantity<Pressure> {
 
     @Override
     public String toString() {
-        return "Pressure{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Pressure{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Pressure of(double value, Unit<Pressure> unit) {

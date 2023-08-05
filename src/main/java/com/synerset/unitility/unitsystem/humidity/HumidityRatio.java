@@ -76,10 +76,7 @@ public final class HumidityRatio implements PhysicalQuantity<HumidityRatio> {
 
     @Override
     public String toString() {
-        return "HumidityRatio{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "HumidityRatio{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static HumidityRatio of(double value, Unit<HumidityRatio> unit) {

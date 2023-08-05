@@ -91,10 +91,7 @@ public final class Mass implements PhysicalQuantity<Mass> {
 
     @Override
     public String toString() {
-        return "Mass{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Mass{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Mass of(double value, Unit<Mass> unit) {

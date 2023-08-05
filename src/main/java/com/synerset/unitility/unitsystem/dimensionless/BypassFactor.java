@@ -53,9 +53,7 @@ public final class BypassFactor implements PhysicalQuantity<BypassFactor> {
 
     @Override
     public String toString() {
-        return "Bypass factor{" +
-                "value=" + value +
-                '}';
+        return "BypassFactor{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override

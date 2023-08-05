@@ -88,10 +88,7 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
 
     @Override
     public String toString() {
-        return "Temperature{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Temperature{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override

@@ -79,10 +79,7 @@ public final class Momentum implements PhysicalQuantity<Momentum> {
 
     @Override
     public String toString() {
-        return "Momentum{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Momentum{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Momentum of(double value, Unit<Momentum> unit) {

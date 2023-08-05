@@ -110,10 +110,7 @@ public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
 
     @Override
     public String toString() {
-        return "VolumetricFlow{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "VolumetricFlow{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static VolumetricFlow of(double value, Unit<VolumetricFlow> unit) {

@@ -49,9 +49,7 @@ public final class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
 
     @Override
     public String toString() {
-        return "Bypass factor{" +
-                "value=" + value +
-                '}';
+        return "PrandtlNumber{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override
