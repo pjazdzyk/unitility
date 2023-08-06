@@ -68,6 +68,26 @@ public interface PhysicalQuantity<Q> {
         return Math.abs(thisValue - inputValue) < epsilon;
     }
 
+    default boolean isPositive() {
+        return getValue() > 0;
+    }
+
+    default boolean isPositiveOrZero() {
+        return getValue() >= 0;
+    }
+
+    default boolean isNegative(){
+        return getValue() < 0;
+    }
+
+    default boolean isNegativeOrZero(){
+        return getValue() <= 0;
+    }
+
+    default boolean isZero(){
+        return getValue() == 0;
+    }
+
     // Transformation methods
     default PhysicalQuantity<Q> add(double value) {
         double newValue = getValue() + value;
