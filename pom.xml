@@ -90,11 +90,8 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>
-                            <class>*</class>
-                            <method>set*</method>
-                            <method>get*</method>
-                        </exclude>
+                        <exclude>get*</exclude>
+                        <exclude>set*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
