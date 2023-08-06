@@ -16,6 +16,10 @@ public interface PhysicalQuantity<Q> {
 
     PhysicalQuantity<Q> createNewWithValue(double value);
 
+    default String getUnitSymbol(){
+        return getUnit().getSymbol();
+    }
+
     default String toStringWithRelevantDigits(int relevantDigits) {
         return ValueFormatter.formatDoubleToRelevantDigits(getValue(), relevantDigits) + " " + getUnit().getSymbol();
     }
