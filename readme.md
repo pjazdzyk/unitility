@@ -3,7 +3,8 @@
 Introducing <strong>UNITILITY</strong> - the Java library designed to simplify physics units conversion. 
 With a wide range of value objects that represent commonly used physical quantities, this solution is built using plain Java for optimal speed and lightweight functionality. 
 Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers quick and easy usage in your project, without any heavy frameworks,
-or external libraries.
+or external libraries.<br>
+**Thread-Safe Architecture:** This library is developed to ensure thread safety, allowing for concurrent access without compromising data integrity through the utilization of immutable objects.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.synerset/unitility/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.synerset/unitility) &nbsp;
 ![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) <br>
@@ -18,43 +19,15 @@ or external libraries.
 ### INSTALLATION
 
 Just copy Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers, check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.0.0/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.0.2/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
-
-## Example
-Below is a simple example how to work with units and convert to another type of unit:
-```java
-Temperature tempInCelsius = Temperature.ofCelsius(20.5);     // 20.5°C
-Temperature tempInKelvin = tempInCelsius.toKelvin();         // 293.65 K
-Temperature temInFahrenheit = tempInKelvin.toFahrenheit();   // 68.9 °F
-```
-All quantities have smart toStringWithRelevantDigits() method, which will always adjust values decimal precision to capture by default specified relevant digits depending on your unit type and its value. 
-This way you have guaranteed an elegant output without any additional effort of reformatting. Values will be rounded up using HALF_UP approach. 
-
-```java
-Distance bigDistance = Distance.ofMeters(10);
-Distance smallDistance = Distance.ofMeters(0.000123678);      
-String bigOutput = bigDistance.toStringWithRelevantDigits(3);    // outputs: 10.0 m
-String smallOutput = smallDistance.toStringWithRelevantDigits(3);  // outputs: 0.00124 m
-```
-
-For more advanced use cases, take a look at the example project that has been prepared to illustrate the integration of this library into a simple dry air property physics app. 
-This project has been implemented in a functional manner using io.vavr library: [unitility-example-project](https://github.com/pjazdzyk/unitility-example-project).
-
-
-## Development status & collaboration
-This is an early development stage.
-I welcome other developers who are interested in physics and engineering to collaborate on this project. 
-As we are still in the early stages of development, any contributions or suggestions would be greatly appreciated.<br>
-<strong>If you would like me to add any specific units for your field of science just let me know!</strong>
-
 ## Tech
 
 <strong>Unitility</strong> is developed using following technologies: <br>
@@ -69,6 +42,74 @@ Testing:<br>
 CI/CD:<br>
 ![image](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) &nbsp;
 ![image](https://img.shields.io/badge/Sonar%20cloud-F3702A?style=for-the-badge&logo=sonarcloud&logoColor=white) &nbsp;
+
+## Examples
+**Creating quantities:**<br>
+Below is a simple example how to work with units and convert to another type of unit:
+```java
+Temperature tempInCelsius = Temperature.ofCelsius(20.5);     // 20.5 °C
+Temperature tempInKelvin = tempInCelsius.toKelvin();         // 293.65 K
+Temperature temInFahrenheit = tempInKelvin.toFahrenheit();   // 68.9 °F
+```
+All quantities have smart toStringWithRelevantDigits() method, which will always adjust values decimal precision to capture by default specified relevant digits depending on your unit type and its value. 
+This way you have guaranteed an elegant output without any additional effort of reformatting. Values will be rounded up using HALF_UP approach. 
+
+```java
+Distance bigDistance = Distance.ofMeters(10);
+Distance smallDistance = Distance.ofMeters(0.000123678);      
+String bigOutput = bigDistance.toStringWithRelevantDigits(3);      // outputs: 10.0 m
+String smallOutput = smallDistance.toStringWithRelevantDigits(3);  // outputs: 0.00124 m
+```
+
+For more advanced use cases, take a look at the example project that has been prepared to illustrate the integration of this library into a simple dry air property physics app. 
+This project has been implemented in a functional manner using io.vavr library: [unitility-example-project](https://github.com/pjazdzyk/unitility-example-project).
+
+Since version **1.0.2** [Unitility](https://github.com/pjazdzyk/unitility) supports basic transformation and logic operations.
+
+**Transformations:**<br>
+* adding or subtracting quantities of the same type:
+```java
+Temperature sourceTemperature = Temperature.ofCelsius(20);
+Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
+Temperature actualTemperature = (Temperature) sourceTemperature.add(temperatureToAdd); // results in: 40 °C
+```
+Performing addition or subtraction will yield a PhysicalQuantity with the same unit. The algorithm will convert the unit of the addend quantity to match that of the augend, 
+ensuring that the operation is conducted within a consistent unit. The unit of the resulting quantity will be set to match that of the augend
+
+* multiply or divide quantities by scalar:
+```java
+Temperature temperature = Temperature.ofCelsius(20);
+Temperature actualTemperature = (Temperature) temperature.multiply(2); //results in 40 °C
+```
+* multiply or divide quantities by different quantity with result as double:
+```java
+Temperature sourceTemperature = Temperature.ofCelsius(20);
+Pressure pressure = Pressure.ofPascal(2);
+double actualDivideResult = sourceTemperature.divide(pressure); //results in 40 °C
+```
+In the given example, division and multiplication both yield a double value. This outcome arises from the current absence of a unit resolver within the developmental stage. 
+The existing unit values are directly employed for multiplication or division operations.
+
+**Logic operations:**<br>
+* basic logic operations
+```java
+Temperature smallerTemp = Temperature.ofCelsius(-20.0);             
+Temperature greaterTemp = Temperature.ofCelsius(0.0);               
+Temperature smallerOrEqualTemp = Temperature.ofCelsius(-20.0);      
+Temperature greaterOrEqualTemp = Temperature.ofCelsius(0.0);        
+smallerTemp.isLowerThan(greaterTemp);                            // is true   
+greaterTemp.isGreaterThan(smallerTemp);                          // is true
+smallerTemp.isEqualOrLowerThan(smallerOrEqualTemp);              // is true
+greaterTemp.isEqualOrGreaterThan(greaterOrEqualTemp);            // is true
+```
+Only quantities of the same type can be compared. When conducting a comparison, the algorithm will harmonize the target unit with the source unit to ensure a valid comparison.
+
+
+## Development status & collaboration
+This is an early development stage.
+I welcome other developers who are interested in physics and engineering to collaborate on this project. 
+As we are still in the early stages of development, any contributions or suggestions would be greatly appreciated.<br>
+<strong>If you would like me to add any specific units for your field of science just let me know!</strong>
 
 ## Specification
 At current level of development following units are available:
@@ -103,12 +144,14 @@ At current level of development following units are available:
 * Humidity ratio: Kilogram per kilogram [kg/kg], Pound per pound [lb/lb]
 * Relative humidity: Percent [%], Decimal [-]
 #### DIMENSIONLESS:
-* Grashof number, Prandtl number, Reynolds number
+* Grashof number, Prandtl number, Reynolds number, Bypass factor
 
 Each quantity consists most popular SI units and at least one Imperial unit.
 
 ## License
-MIT LICENSE<br>
+MIT LICENSE.<br>
+This work is licensed under the terms of the MIT License with the additional requirement that proper attribution be given 
+to the [Piotr Jażdżyk](https://www.linkedin.com/in/pjazdzyk) as the original author in all derivative works and publications.
 
 ## Acknowledgments
 Special thanks to Kret11, VeloxDigits, Olin44, and others for their help and contribution.<br>
