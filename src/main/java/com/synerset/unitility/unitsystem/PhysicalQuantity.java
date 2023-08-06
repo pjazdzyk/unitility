@@ -71,8 +71,8 @@ public interface PhysicalQuantity<Q> {
     // Comparing methods
 
     /**
-     * Check if the physical quantity is greater than another quantity.<>br</>
-     * Both quantities are converted to their respective base units for valid comparison.
+     * Check if the physical quantity is greater than another quantity
+     * Both quantities are converted to their respective base units for valid comparison
      *
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is greater than the given quantity, false otherwise.
