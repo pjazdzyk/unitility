@@ -38,6 +38,19 @@ public final class Force implements PhysicalQuantity<Force> {
         return Force.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public Force createNewWithValue(double value) {
+        return Force.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfNewtons() {
+        if (unit == ForceUnits.NEWTON) {
+            return value;
+        }
+        return toUnit(ForceUnits.NEWTON).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Force toNewtons() {
         return toUnit(ForceUnits.NEWTON);
@@ -78,10 +91,7 @@ public final class Force implements PhysicalQuantity<Force> {
 
     @Override
     public String toString() {
-        return "Force{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Force{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Force of(double value, Unit<Force> unit) {

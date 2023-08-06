@@ -38,6 +38,19 @@ public final class MassFlow implements PhysicalQuantity<MassFlow> {
         return MassFlow.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public MassFlow createNewWithValue(double value) {
+        return MassFlow.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfKilogramsPerSecond() {
+        if (unit == MassFlowUnits.KILOGRAM_PER_SECOND) {
+            return value;
+        }
+        return toUnit(MassFlowUnits.KILOGRAM_PER_SECOND).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public MassFlow toKilogramsPerSecond(){
         return toUnit(MassFlowUnits.KILOGRAM_PER_SECOND);
@@ -70,10 +83,7 @@ public final class MassFlow implements PhysicalQuantity<MassFlow> {
 
     @Override
     public String toString() {
-        return "MassFlow{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "MassFlow{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static MassFlow of(double value, Unit<MassFlow> unit) {

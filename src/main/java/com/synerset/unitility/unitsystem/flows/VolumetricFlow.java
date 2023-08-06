@@ -38,6 +38,26 @@ public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
         return VolumetricFlow.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public VolumetricFlow createNewWithValue(double value) {
+        return VolumetricFlow.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfCubicMetersPerSecond() {
+        if (unit == VolumetricFlowUnits.CUBIC_METERS_PER_SECOND) {
+            return value;
+        }
+        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND).getValue();
+    }
+
+    public double getValueOfCubicMetersPerHour() {
+        if (unit == VolumetricFlowUnits.CUBIC_METERS_PER_HOUR) {
+            return value;
+        }
+        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public VolumetricFlow toCubicMetersPerSecond() {
         return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
@@ -90,10 +110,7 @@ public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
 
     @Override
     public String toString() {
-        return "VolumetricFlow{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "VolumetricFlow{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static VolumetricFlow of(double value, Unit<VolumetricFlow> unit) {

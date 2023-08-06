@@ -38,6 +38,19 @@ public final class Velocity implements PhysicalQuantity<Velocity> {
         return Velocity.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public Velocity createNewWithValue(double value) {
+        return Velocity.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfMetersPerSecond() {
+        if (unit == VelocityUnits.METER_PER_SECOND) {
+            return value;
+        }
+        return toUnit(VelocityUnits.METER_PER_SECOND).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Velocity toMetersPerSecond() {
         return toUnit(VelocityUnits.METER_PER_SECOND);
@@ -86,10 +99,7 @@ public final class Velocity implements PhysicalQuantity<Velocity> {
 
     @Override
     public String toString() {
-        return "Velocity{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Velocity{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Velocity of(double value, Unit<Velocity> unit) {

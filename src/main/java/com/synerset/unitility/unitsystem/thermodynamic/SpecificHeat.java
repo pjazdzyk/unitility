@@ -37,6 +37,19 @@ public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
         return SpecificHeat.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public SpecificHeat createNewWithValue(double value) {
+        return SpecificHeat.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfKiloJoulesPerKilogramKelvin() {
+        if (unit == SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN) {
+            return value;
+        }
+        return toUnit(SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public SpecificHeat toJoulePerKiloGramKelvin() {
         return toUnit(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
@@ -65,10 +78,7 @@ public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
 
     @Override
     public String toString() {
-        return "SpecificHeat{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "SpecificHeat{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static SpecificHeat of(double value, Unit<SpecificHeat> unit) {

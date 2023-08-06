@@ -38,6 +38,26 @@ public final class Energy implements PhysicalQuantity<Energy> {
         return Energy.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public Energy createNewWithValue(double value) {
+        return Energy.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfJoules() {
+        if (unit == EnergyUnits.JOULE) {
+            return value;
+        }
+        return toUnit(EnergyUnits.JOULE).getValue();
+    }
+
+    public double getValueOfKiloJoules() {
+        if (unit == EnergyUnits.KILOJOULE) {
+            return value;
+        }
+        return toUnit(EnergyUnits.KILOJOULE).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Energy toJoules() {
         return toUnit(EnergyUnits.JOULE);
@@ -90,10 +110,7 @@ public final class Energy implements PhysicalQuantity<Energy> {
 
     @Override
     public String toString() {
-        return "Energy{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Energy{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Energy of(double value, Unit<Energy> unit) {

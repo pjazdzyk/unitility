@@ -40,6 +40,26 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
         return Temperature.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public Temperature createNewWithValue(double value) {
+        return Temperature.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfCelsius() {
+        if (unit == TemperatureUnits.CELSIUS) {
+            return value;
+        }
+        return toUnit(TemperatureUnits.CELSIUS).getValue();
+    }
+
+    public double getValueOfKelvin() {
+        if (unit == TemperatureUnits.KELVIN) {
+            return value;
+        }
+        return toUnit(TemperatureUnits.KELVIN).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Temperature toKelvin(){
         return toUnit(TemperatureUnits.KELVIN);
@@ -68,10 +88,7 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
 
     @Override
     public String toString() {
-        return "Temperature{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Temperature{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override

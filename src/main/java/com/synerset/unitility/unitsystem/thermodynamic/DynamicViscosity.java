@@ -38,6 +38,19 @@ public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity
         return DynamicViscosity.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public DynamicViscosity createNewWithValue(double value) {
+        return DynamicViscosity.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfPascalSecond() {
+        if (unit == DynamicViscosityUnits.PASCAL_SECOND) {
+            return value;
+        }
+        return toUnit(DynamicViscosityUnits.PASCAL_SECOND).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public DynamicViscosity toKiloGramPerMeterSecond(){
         return toUnit(DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
@@ -66,10 +79,7 @@ public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity
 
     @Override
     public String toString() {
-        return "DynamicViscosity{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "DynamicViscosity{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static DynamicViscosity of(double value, Unit<DynamicViscosity> unit) {

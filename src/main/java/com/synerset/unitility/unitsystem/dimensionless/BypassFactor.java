@@ -5,13 +5,17 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
-    private final double value;
-    private final Unit<PrandtlNumber> unit;
+public final class BypassFactor implements PhysicalQuantity<BypassFactor> {
 
-    private PrandtlNumber(double value) {
+    public static final BypassFactor BYPASS_MIN_VALUE = BypassFactor.of(0);
+    public static final BypassFactor BYPASS_MAX_VALUE = BypassFactor.of(1);
+
+    private final double value;
+    private final Unit<BypassFactor> unit;
+
+    private BypassFactor(double value) {
         this.value = value;
-        this.unit = PrandtlNumberUnits.DIMENSIONLESS;
+        this.unit = BypassFactorUnits.DIMENSIONLESS;
     }
 
     @Override
@@ -20,36 +24,36 @@ public final class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
     }
 
     @Override
-    public Unit<PrandtlNumber> getUnit() {
+    public Unit<BypassFactor> getUnit() {
         return unit;
     }
 
     @Override
-    public PrandtlNumber toBaseUnit() {
+    public BypassFactor toBaseUnit() {
         return this;
     }
 
     @Override
-    public PhysicalQuantity<PrandtlNumber> toUnit(Unit<PrandtlNumber> targetUnit) {
+    public PhysicalQuantity<BypassFactor> toUnit(Unit<BypassFactor> targetUnit) {
         return this;
     }
 
     @Override
-    public PrandtlNumber createNewWithValue(double value) {
-        return PrandtlNumber.of(value);
+    public BypassFactor createNewWithValue(double value) {
+        return BypassFactor.of(value);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PrandtlNumber that = (PrandtlNumber) o;
+        BypassFactor that = (BypassFactor) o;
         return Double.compare(that.value, value) == 0;
     }
 
     @Override
     public String toString() {
-        return "PrandtlNumber{" + value + " " + unit.getSymbol() + '}';
+        return "BypassFactor{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override
@@ -57,8 +61,8 @@ public final class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
         return Objects.hash(value);
     }
 
-    public static PrandtlNumber of(double value) {
-        return new PrandtlNumber(value);
+    public static BypassFactor of(double value) {
+        return new BypassFactor(value);
     }
 
 }

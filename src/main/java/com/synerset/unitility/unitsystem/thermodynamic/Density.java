@@ -38,6 +38,19 @@ public final class Density implements PhysicalQuantity<Density> {
         return Density.of(valueInTargetUnit, targetUnit);
     }
 
+    @Override
+    public Density createNewWithValue(double value) {
+        return Density.of(value, unit);
+    }
+
+    // Custom value getters
+    public double getValueOfKilogramPerCubicMeter() {
+        if (unit == DensityUnits.KILOGRAM_PER_CUBIC_METER) {
+            return value;
+        }
+        return toUnit(DensityUnits.KILOGRAM_PER_CUBIC_METER).getValue();
+    }
+
     // Custom converter methods, for most popular units
     public Density toKilogramPerCubicMeter() {
         return toUnit(DensityUnits.KILOGRAM_PER_CUBIC_METER);
@@ -62,10 +75,7 @@ public final class Density implements PhysicalQuantity<Density> {
 
     @Override
     public String toString() {
-        return "Density{" +
-                "value=" + value +
-                ", unit=" + unit.getSymbol() +
-                '}';
+        return "Density{" + value + " " + unit.getSymbol() + '}';
     }
 
     public static Density of(double value, Unit<Density> unit) {

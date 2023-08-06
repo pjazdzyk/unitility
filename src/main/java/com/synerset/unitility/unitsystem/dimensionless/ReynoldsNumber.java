@@ -1,24 +1,46 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.BareQuantity;
+import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class ReynoldsNumber implements BareQuantity {
+public final class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumber> {
 
     public static final ReynoldsNumber PIPE_TURBULENT_THRESHOLD = ReynoldsNumber.of(2300);
     public static final ReynoldsNumber PLATE_TURBULENT_THRESHOLD = ReynoldsNumber.of(5 * 10E5);
     public static final ReynoldsNumber AERO_TURBULENT_THRESHOLD = ReynoldsNumber.of(2 * 10E6);
-
     private final double value;
+    private final Unit<ReynoldsNumber> unit;
 
     private ReynoldsNumber(double value) {
         this.value = value;
+        this.unit = ReynoldsNumberUnits.DIMENSIONLESS;
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public Unit<ReynoldsNumber> getUnit() {
+        return unit;
+    }
+
+    @Override
+    public ReynoldsNumber toBaseUnit() {
+        return this;
+    }
+
+    @Override
+    public PhysicalQuantity<ReynoldsNumber> toUnit(Unit<ReynoldsNumber> targetUnit) {
+        return this;
+    }
+
+    @Override
+    public ReynoldsNumber createNewWithValue(double value) {
+        return ReynoldsNumber.of(value);
     }
 
     @Override
@@ -31,9 +53,7 @@ public class ReynoldsNumber implements BareQuantity {
 
     @Override
     public String toString() {
-        return "ReynoldsNumber{" +
-                "value=" + value +
-                '}';
+        return "ReynoldsNumber{" + value + " " + unit.getSymbol() + '}';
     }
 
     @Override

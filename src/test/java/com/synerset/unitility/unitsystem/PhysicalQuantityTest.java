@@ -2,6 +2,8 @@ package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
+import com.synerset.unitility.unitsystem.thermodynamic.Pressure;
+import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +44,189 @@ class PhysicalQuantityTest {
         String expectedDistanceOutput = "100.124 m";
         assertThat(actualAngleOutput).isEqualTo(expectedAngleOutput);
         assertThat(actualDistanceOutput).isEqualTo(expectedDistanceOutput);
+    }
+
+    @Test
+    @DisplayName("should assert that first quantity is greater than second")
+    void shouldAssertThatFirstQuantityIsGreaterThanSecond() {
+        // Given
+        Temperature smallerTemp = Temperature.ofCelsius(-20.0);
+        Temperature greaterTemp = Temperature.ofCelsius(0.0);
+        Temperature smallerOrEqualTemp = Temperature.ofCelsius(-20.0);
+        Temperature greaterOrEqualTemp = Temperature.ofCelsius(0.0);
+
+        // When
+        boolean firstIsSmaller = smallerTemp.isLowerThan(greaterTemp);
+        boolean secondIsGreater = greaterTemp.isGreaterThan(smallerTemp);
+        boolean firstIsEqualOrLower = smallerTemp.isEqualOrLowerThan(smallerOrEqualTemp);
+        boolean secondIsEqualOrGreater = greaterTemp.isEqualOrGreaterThan(greaterOrEqualTemp);
+
+        // Then
+        assertThat(firstIsSmaller).isTrue();
+        assertThat(secondIsGreater).isTrue();
+        assertThat(firstIsEqualOrLower).isTrue();
+        assertThat(secondIsEqualOrGreater).isTrue();
+    }
+
+    @Test
+    @DisplayName("Should correctly add value to quantity")
+    void shouldAddValueToQuantity() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // When
+        Temperature actualTemperature = (Temperature) temperature.add(20);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(40);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Should correctly subtract value from quantity")
+    void shouldSubtractValueToQuantity() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // When
+        Temperature actualTemperature = (Temperature) temperature.subtract(20);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(0);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Should correctly add quantities of the same type, but different units")
+    void shouldAddQuantityToSourceQuantity() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(20);
+        Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
+
+        // When
+        Temperature actualTemperature = (Temperature) sourceTemperature.add(temperatureToAdd);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(40);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Should correctly subtract quantities of the same type, but different units")
+    void shouldSubtractQuantityToSourceQuantity() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(20);
+        Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
+
+        // When
+        Temperature actualTemperature = (Temperature) sourceTemperature.subtract(temperatureToAdd);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(0);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Should correctly multiply quantity by value")
+    void shouldMultiplyValueToQuantity() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // When
+        Temperature actualTemperature = (Temperature) temperature.multiply(2);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(40);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Should correctly multiply quantities of the same type, but different units")
+    void shouldMultiplyQuantityToSourceQuantity() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(20);
+        Pressure pressure = Pressure.ofPascal(2);
+
+        // When
+        double actualMultiplyResult = sourceTemperature.multiply(pressure);
+
+        // Then
+        double expectedMultiplyResult = 40;
+        assertThat(actualMultiplyResult).isEqualTo(expectedMultiplyResult);
+    }
+
+    @Test
+    @DisplayName("Should correctly divide quantity by value")
+    void shouldDivideValueToQuantity() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // When
+        Temperature actualTemperature = (Temperature) temperature.divide(2);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(10);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Should correctly divide quantities of the same type, but different units")
+    void shouldDivideQuantityToSourceQuantity() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(20);
+        Pressure pressure = Pressure.ofPascal(2);
+
+        // When
+        double actualDivideResult = sourceTemperature.divide(pressure);
+
+        // Then
+        double expectedDivideResult = 10;
+        assertThat(actualDivideResult).isEqualTo(expectedDivideResult);
+    }
+
+    @Test
+    @DisplayName("Should subtract value of current unit from number")
+    void shouldSubtractFromValue() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(0.5);
+
+        // When
+        Temperature actualTemperature = (Temperature) sourceTemperature.subtractFromValue(1);
+
+        // Then
+        Temperature expectedTemperature = Temperature.ofCelsius((1 - 0.5));
+        assertThat(actualTemperature).isEqualTo(expectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Should correctly indicate if value is positive, negative or zero")
+    void shouldIndicateIfValueIsPositiveNegativeOrZero() {
+        // Given
+        Temperature negativeTemp = Temperature.ofCelsius(-20);
+        Temperature zeroTemp = Temperature.ofCelsius(0);
+        Temperature positiveTemp = Temperature.ofCelsius(20);
+
+        // When
+
+        // Then
+        assertThat(negativeTemp.isNegative()).isTrue();
+        assertThat(negativeTemp.isNegativeOrZero()).isTrue();
+        assertThat(negativeTemp.isZero()).isFalse();
+        assertThat(negativeTemp.isPositive()).isFalse();
+        assertThat(negativeTemp.isPositiveOrZero()).isFalse();
+
+        assertThat(zeroTemp.isNegative()).isFalse();
+        assertThat(zeroTemp.isNegativeOrZero()).isTrue();
+        assertThat(zeroTemp.isZero()).isTrue();
+        assertThat(zeroTemp.isPositive()).isFalse();
+        assertThat(zeroTemp.isPositiveOrZero()).isTrue();
+
+        assertThat(positiveTemp.isNegative()).isFalse();
+        assertThat(positiveTemp.isNegativeOrZero()).isFalse();
+        assertThat(positiveTemp.isZero()).isFalse();
+        assertThat(positiveTemp.isPositive()).isTrue();
+        assertThat(positiveTemp.isPositiveOrZero()).isTrue();
+
     }
 
 }
