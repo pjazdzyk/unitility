@@ -3,7 +3,8 @@
 Introducing <strong>UNITILITY</strong> - the Java library designed to simplify physics units conversion. 
 With a wide range of value objects that represent commonly used physical quantities, this solution is built using plain Java for optimal speed and lightweight functionality. 
 Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers quick and easy usage in your project, without any heavy frameworks,
-or external libraries.
+or external libraries.<br>
+**Thread-Safe Architecture:** This library is developed to ensure thread safety, allowing for concurrent access without compromising data integrity through the utilization of immutable objects.
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.synerset/unitility/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.synerset/unitility) &nbsp;
 ![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) <br>
@@ -63,8 +64,9 @@ String smallOutput = smallDistance.toStringWithRelevantDigits(3);  // outputs: 0
 For more advanced use cases, take a look at the example project that has been prepared to illustrate the integration of this library into a simple dry air property physics app. 
 This project has been implemented in a functional manner using io.vavr library: [unitility-example-project](https://github.com/pjazdzyk/unitility-example-project).
 
+Since version **1.0.2** [Unitility](https://github.com/pjazdzyk/unitility) supports basic transformation and logic operations.
+
 **Transformations:**<br>
-Since version **1.0.2** [Unitility](https://github.com/pjazdzyk/unitility) supports basic transformation and logic operations such as:
 * adding or subtracting quantities of the same type:
 ```java
 Temperature sourceTemperature = Temperature.ofCelsius(20);

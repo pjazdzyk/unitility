@@ -89,10 +89,6 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <configuration>
-                    <excludes>
-                        <exclude>get*</exclude>
-                        <exclude>set*</exclude>
-                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
