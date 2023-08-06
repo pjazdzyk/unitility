@@ -14,7 +14,7 @@ public interface PhysicalQuantity<Q> {
 
     PhysicalQuantity<Q> toUnit(Unit<Q> targetUnit);
 
-    PhysicalQuantity<Q> createNewWithValue(double value);
+    <K extends PhysicalQuantity<Q>> K createNewWithValue(double value);
 
     default String getUnitSymbol(){
         return getUnit().getSymbol();
@@ -89,31 +89,36 @@ public interface PhysicalQuantity<Q> {
     }
 
     // Transformation methods
-    default PhysicalQuantity<Q> add(double value) {
+    default <K extends PhysicalQuantity<Q>> K add(double value) {
         double newValue = getValue() + value;
         return createNewWithValue(newValue);
     }
 
-    default PhysicalQuantity<Q> add(PhysicalQuantity<Q> inputQuantity) {
+    default <K extends PhysicalQuantity<Q>> K add(PhysicalQuantity<Q> inputQuantity) {
         Unit<Q> sourceUnit = this.getUnit();
         PhysicalQuantity<Q> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() + inputInSourceUnits.getValue();
         return createNewWithValue(newValue);
     }
 
-    default PhysicalQuantity<Q> subtract(double value) {
+    default <K extends PhysicalQuantity<Q>> K subtract(double value) {
         double newValue = getValue() - value;
         return createNewWithValue(newValue);
     }
 
-    default PhysicalQuantity<Q> subtract(PhysicalQuantity<Q> inputQuantity) {
+    default <K extends PhysicalQuantity<Q>> K subtract(PhysicalQuantity<Q> inputQuantity) {
         Unit<Q> sourceUnit = this.getUnit();
         PhysicalQuantity<Q> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() - inputInSourceUnits.getValue();
         return createNewWithValue(newValue);
     }
 
-    default PhysicalQuantity<Q> multiply(double value) {
+    default <K extends PhysicalQuantity<Q>> K subtractFromValue(double value) {
+        double newValue = value - this.getValue();
+        return createNewWithValue(newValue);
+    }
+
+    default <K extends PhysicalQuantity<Q>> K multiply(double value) {
         double newValue = getValue() * value;
         return createNewWithValue(newValue);
     }
@@ -122,7 +127,7 @@ public interface PhysicalQuantity<Q> {
         return this.getValue() * inputQuantity.getValue();
     }
 
-    default PhysicalQuantity<Q> divide(double value) {
+    default <K extends PhysicalQuantity<Q>> K divide(double value) {
         if (value == 0) {
             throw new UnitSystemArgumentException("Divider value cannot be zero.");
         }

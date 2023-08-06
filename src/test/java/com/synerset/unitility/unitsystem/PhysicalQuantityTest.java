@@ -75,7 +75,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        PhysicalQuantity<Temperature> actualTemperature = temperature.add(20);
+        Temperature actualTemperature = temperature.add(20);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -89,7 +89,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        PhysicalQuantity<Temperature> actualTemperature = temperature.subtract(20);
+        Temperature actualTemperature = temperature.subtract(20);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(0);
@@ -104,7 +104,7 @@ class PhysicalQuantityTest {
         Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 
         // When
-        PhysicalQuantity<Temperature> actualTemperature = sourceTemperature.add(temperatureToAdd);
+        Temperature actualTemperature = sourceTemperature.add(temperatureToAdd);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -119,7 +119,7 @@ class PhysicalQuantityTest {
         Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 
         // When
-        PhysicalQuantity<Temperature> actualTemperature = sourceTemperature.subtract(temperatureToAdd);
+        Temperature actualTemperature = sourceTemperature.subtract(temperatureToAdd);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(0);
@@ -133,7 +133,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        PhysicalQuantity<Temperature> actualTemperature = temperature.multiply(2);
+        Temperature actualTemperature = temperature.multiply(2);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -162,7 +162,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        PhysicalQuantity<Temperature> actualTemperature = temperature.divide(2);
+        Temperature actualTemperature = temperature.divide(2);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(10);
@@ -182,6 +182,51 @@ class PhysicalQuantityTest {
         // Then
         double expectedDivideResult = 10;
         assertThat(actualDivideResult).isEqualTo(expectedDivideResult);
+    }
+
+    @Test
+    @DisplayName("Should subtract value of current unit from number")
+    void shouldSubtractFromValue() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(0.5);
+
+        // When
+        Temperature actualTemperature = sourceTemperature.subtractFromValue(1);
+
+        // Then
+        Temperature expectedTemperature = Temperature.ofCelsius((1 - 0.5));
+        assertThat(actualTemperature).isEqualTo(expectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Should correctly indicate if value is positive, negative or zero")
+    void shouldIndicateIfValueIsPositiveNegativeOrZero() {
+        // Given
+        Temperature negativeTemp = Temperature.ofCelsius(-20);
+        Temperature zeroTemp = Temperature.ofCelsius(0);
+        Temperature positiveTemp = Temperature.ofCelsius(20);
+
+        // When
+
+        // Then
+        assertThat(negativeTemp.isNegative()).isTrue();
+        assertThat(negativeTemp.isNegativeOrZero()).isTrue();
+        assertThat(negativeTemp.isZero()).isFalse();
+        assertThat(negativeTemp.isPositive()).isFalse();
+        assertThat(negativeTemp.isPositiveOrZero()).isFalse();
+
+        assertThat(zeroTemp.isNegative()).isFalse();
+        assertThat(zeroTemp.isNegativeOrZero()).isTrue();
+        assertThat(zeroTemp.isZero()).isTrue();
+        assertThat(zeroTemp.isPositive()).isFalse();
+        assertThat(zeroTemp.isPositiveOrZero()).isTrue();
+
+        assertThat(positiveTemp.isNegative()).isFalse();
+        assertThat(positiveTemp.isNegativeOrZero()).isFalse();
+        assertThat(positiveTemp.isZero()).isFalse();
+        assertThat(positiveTemp.isPositive()).isTrue();
+        assertThat(positiveTemp.isPositiveOrZero()).isTrue();
+
     }
 
 }

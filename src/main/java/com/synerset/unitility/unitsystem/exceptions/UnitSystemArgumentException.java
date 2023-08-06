@@ -7,4 +7,9 @@ public class UnitSystemArgumentException extends RuntimeException{
     public UnitSystemArgumentException(String message) {
         super(message);
     }
+
+    public UnitSystemArgumentException(String message, Exception e) {
+        super(message, e);
+    }
+
 }
