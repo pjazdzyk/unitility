@@ -38,7 +38,7 @@ public final class Volume implements PhysicalQuantity<Volume> {
     }
 
     @Override
-    public PhysicalQuantity<Volume> createNewWithValue(double value) {
+    public Volume createNewWithValue(double value) {
         return Volume.of(value, unit);
     }
 

@@ -39,7 +39,7 @@ public final class Mass implements PhysicalQuantity<Mass> {
     }
 
     @Override
-    public PhysicalQuantity<Mass> createNewWithValue(double value) {
+    public Mass createNewWithValue(double value) {
         return Mass.of(value, unit);
     }
 

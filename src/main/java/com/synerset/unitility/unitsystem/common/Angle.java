@@ -40,7 +40,7 @@ public final class Angle implements PhysicalQuantity<Angle> {
     }
 
     @Override
-    public PhysicalQuantity<Angle> createNewWithValue(double value) {
+    public Angle createNewWithValue(double value) {
         return Angle.of(value, unit);
     }
 

@@ -41,7 +41,7 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
     }
 
     @Override
-    public PhysicalQuantity<Temperature> createNewWithValue(double value) {
+    public Temperature createNewWithValue(double value) {
         return Temperature.of(value, unit);
     }
 

@@ -41,7 +41,7 @@ public final class Area implements PhysicalQuantity<Area> {
     }
 
     @Override
-    public PhysicalQuantity<Area> createNewWithValue(double value) {
+    public Area createNewWithValue(double value) {
         return Area.of(value, unit);
     }
 

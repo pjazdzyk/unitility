@@ -39,7 +39,7 @@ public final class BypassFactor implements PhysicalQuantity<BypassFactor> {
     }
 
     @Override
-    public PhysicalQuantity<BypassFactor> createNewWithValue(double value) {
+    public BypassFactor createNewWithValue(double value) {
         return BypassFactor.of(value);
     }
 

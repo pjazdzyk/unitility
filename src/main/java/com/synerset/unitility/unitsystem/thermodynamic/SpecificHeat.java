@@ -38,7 +38,7 @@ public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
     }
 
     @Override
-    public PhysicalQuantity<SpecificHeat> createNewWithValue(double value) {
+    public SpecificHeat createNewWithValue(double value) {
         return SpecificHeat.of(value, unit);
     }
 

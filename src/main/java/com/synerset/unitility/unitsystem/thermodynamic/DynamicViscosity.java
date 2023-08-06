@@ -39,7 +39,7 @@ public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity
     }
 
     @Override
-    public PhysicalQuantity<DynamicViscosity> createNewWithValue(double value) {
+    public DynamicViscosity createNewWithValue(double value) {
         return DynamicViscosity.of(value, unit);
     }
 

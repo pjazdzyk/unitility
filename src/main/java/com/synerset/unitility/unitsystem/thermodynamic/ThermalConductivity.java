@@ -38,7 +38,7 @@ public final class ThermalConductivity implements PhysicalQuantity<ThermalConduc
     }
 
     @Override
-    public PhysicalQuantity<ThermalConductivity> createNewWithValue(double value) {
+    public ThermalConductivity createNewWithValue(double value) {
         return ThermalConductivity.of(value, unit);
     }
 

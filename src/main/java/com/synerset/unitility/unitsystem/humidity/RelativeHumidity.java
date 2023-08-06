@@ -41,7 +41,7 @@ public final class RelativeHumidity implements PhysicalQuantity<RelativeHumidity
     }
 
     @Override
-    public PhysicalQuantity<RelativeHumidity> createNewWithValue(double value) {
+    public RelativeHumidity createNewWithValue(double value) {
         return RelativeHumidity.of(value, unit);
     }
 

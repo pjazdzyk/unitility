@@ -75,7 +75,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = temperature.add(20);
+        Temperature actualTemperature = (Temperature) temperature.add(20);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -89,7 +89,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = temperature.subtract(20);
+        Temperature actualTemperature = (Temperature) temperature.subtract(20);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(0);
@@ -104,7 +104,7 @@ class PhysicalQuantityTest {
         Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 
         // When
-        Temperature actualTemperature = sourceTemperature.add(temperatureToAdd);
+        Temperature actualTemperature = (Temperature) sourceTemperature.add(temperatureToAdd);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -119,7 +119,7 @@ class PhysicalQuantityTest {
         Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 
         // When
-        Temperature actualTemperature = sourceTemperature.subtract(temperatureToAdd);
+        Temperature actualTemperature = (Temperature) sourceTemperature.subtract(temperatureToAdd);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(0);
@@ -133,7 +133,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = temperature.multiply(2);
+        Temperature actualTemperature = (Temperature) temperature.multiply(2);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -162,7 +162,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = temperature.divide(2);
+        Temperature actualTemperature = (Temperature) temperature.divide(2);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(10);
@@ -191,7 +191,7 @@ class PhysicalQuantityTest {
         Temperature sourceTemperature = Temperature.ofCelsius(0.5);
 
         // When
-        Temperature actualTemperature = sourceTemperature.subtractFromValue(1);
+        Temperature actualTemperature = (Temperature) sourceTemperature.subtractFromValue(1);
 
         // Then
         Temperature expectedTemperature = Temperature.ofCelsius((1 - 0.5));

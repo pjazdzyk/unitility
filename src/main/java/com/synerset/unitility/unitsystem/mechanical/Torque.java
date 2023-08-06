@@ -40,7 +40,7 @@ public final class Torque implements PhysicalQuantity<Torque> {
     }
 
     @Override
-    public PhysicalQuantity<Torque> createNewWithValue(double value) {
+    public Torque createNewWithValue(double value) {
         return Torque.of(value, unit);
     }
 

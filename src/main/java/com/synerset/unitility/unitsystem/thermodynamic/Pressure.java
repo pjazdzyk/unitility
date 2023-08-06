@@ -42,7 +42,7 @@ public final class Pressure implements PhysicalQuantity<Pressure> {
     }
 
     @Override
-    public PhysicalQuantity<Pressure> createNewWithValue(double value) {
+    public Pressure createNewWithValue(double value) {
         return Pressure.of(value, unit);
     }
 

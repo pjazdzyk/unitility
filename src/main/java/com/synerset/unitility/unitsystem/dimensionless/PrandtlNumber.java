@@ -35,7 +35,7 @@ public final class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
     }
 
     @Override
-    public PhysicalQuantity<PrandtlNumber> createNewWithValue(double value) {
+    public PrandtlNumber createNewWithValue(double value) {
         return PrandtlNumber.of(value);
     }
 

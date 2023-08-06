@@ -39,7 +39,7 @@ public final class KinematicViscosity implements PhysicalQuantity<KinematicVisco
     }
 
     @Override
-    public PhysicalQuantity<KinematicViscosity> createNewWithValue(double value) {
+    public KinematicViscosity createNewWithValue(double value) {
         return KinematicViscosity.of(value, unit);
     }
 

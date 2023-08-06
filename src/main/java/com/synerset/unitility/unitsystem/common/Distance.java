@@ -39,7 +39,7 @@ public final class Distance implements PhysicalQuantity<Distance> {
     }
 
     @Override
-    public PhysicalQuantity<Distance> createNewWithValue(double value) {
+    public Distance createNewWithValue(double value) {
         return Distance.of(value, unit);
     }
 

@@ -38,7 +38,7 @@ public final class Power implements PhysicalQuantity<Power> {
     }
 
     @Override
-    public PhysicalQuantity<Power> createNewWithValue(double value) {
+    public Power createNewWithValue(double value) {
         return Power.of(value, unit);
     }
 

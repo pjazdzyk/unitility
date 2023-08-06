@@ -39,7 +39,7 @@ public final class Momentum implements PhysicalQuantity<Momentum> {
     }
 
     @Override
-    public PhysicalQuantity<Momentum> createNewWithValue(double value) {
+    public Momentum createNewWithValue(double value) {
         return Momentum.of(value, unit);
     }
 

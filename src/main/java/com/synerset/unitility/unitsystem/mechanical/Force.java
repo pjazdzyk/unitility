@@ -39,7 +39,7 @@ public final class Force implements PhysicalQuantity<Force> {
     }
 
     @Override
-    public PhysicalQuantity<Force> createNewWithValue(double value) {
+    public Force createNewWithValue(double value) {
         return Force.of(value, unit);
     }
 

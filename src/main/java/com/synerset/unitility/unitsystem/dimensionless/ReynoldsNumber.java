@@ -39,7 +39,7 @@ public final class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumber> {
     }
 
     @Override
-    public PhysicalQuantity<ReynoldsNumber> createNewWithValue(double value) {
+    public ReynoldsNumber createNewWithValue(double value) {
         return ReynoldsNumber.of(value);
     }
 

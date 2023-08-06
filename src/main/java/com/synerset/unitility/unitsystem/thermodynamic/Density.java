@@ -39,7 +39,7 @@ public final class Density implements PhysicalQuantity<Density> {
     }
 
     @Override
-    public PhysicalQuantity<Density> createNewWithValue(double value) {
+    public Density createNewWithValue(double value) {
         return Density.of(value, unit);
     }
 

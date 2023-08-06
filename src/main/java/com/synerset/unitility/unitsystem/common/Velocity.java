@@ -39,7 +39,7 @@ public final class Velocity implements PhysicalQuantity<Velocity> {
     }
 
     @Override
-    public PhysicalQuantity<Velocity> createNewWithValue(double value) {
+    public Velocity createNewWithValue(double value) {
         return Velocity.of(value, unit);
     }
 

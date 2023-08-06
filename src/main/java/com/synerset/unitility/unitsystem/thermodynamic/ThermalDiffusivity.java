@@ -39,7 +39,7 @@ public final class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusi
     }
 
     @Override
-    public PhysicalQuantity<ThermalDiffusivity> createNewWithValue(double value) {
+    public ThermalDiffusivity createNewWithValue(double value) {
         return ThermalDiffusivity.of(value, unit);
     }
 

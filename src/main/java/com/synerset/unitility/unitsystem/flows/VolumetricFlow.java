@@ -39,7 +39,7 @@ public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
     }
 
     @Override
-    public PhysicalQuantity<VolumetricFlow> createNewWithValue(double value) {
+    public VolumetricFlow createNewWithValue(double value) {
         return VolumetricFlow.of(value, unit);
     }
 

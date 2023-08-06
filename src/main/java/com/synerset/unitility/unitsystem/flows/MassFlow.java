@@ -39,7 +39,7 @@ public final class MassFlow implements PhysicalQuantity<MassFlow> {
     }
 
     @Override
-    public PhysicalQuantity<MassFlow> createNewWithValue(double value) {
+    public MassFlow createNewWithValue(double value) {
         return MassFlow.of(value, unit);
     }
 

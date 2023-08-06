@@ -35,7 +35,7 @@ public final class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
     }
 
     @Override
-    public PhysicalQuantity<GrashofNumber> createNewWithValue(double value) {
+    public GrashofNumber createNewWithValue(double value) {
         return GrashofNumber.of(value);
     }
 

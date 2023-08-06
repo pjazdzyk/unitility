@@ -39,7 +39,7 @@ public final class Energy implements PhysicalQuantity<Energy> {
     }
 
     @Override
-    public PhysicalQuantity<Energy> createNewWithValue(double value) {
+    public Energy createNewWithValue(double value) {
         return Energy.of(value, unit);
     }
 

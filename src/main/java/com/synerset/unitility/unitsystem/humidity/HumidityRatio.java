@@ -40,7 +40,7 @@ public final class HumidityRatio implements PhysicalQuantity<HumidityRatio> {
     }
 
     @Override
-    public PhysicalQuantity<HumidityRatio> createNewWithValue(double value) {
+    public HumidityRatio createNewWithValue(double value) {
         return HumidityRatio.of(value, unit);
     }
 
