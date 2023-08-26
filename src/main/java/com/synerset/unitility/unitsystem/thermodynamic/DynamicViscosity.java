@@ -8,16 +8,23 @@ import java.util.Objects;
 public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<DynamicViscosity> unit;
 
     private DynamicViscosity(double value, Unit<DynamicViscosity> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity
 
     @Override
     public DynamicViscosity toBaseUnit() {
-        double valueInPascalSecond = unit.toBaseUnit(value);
+        double valueInPascalSecond = unit.toValueInBaseUnit(value);
         return DynamicViscosity.of(valueInPascalSecond, DynamicViscosityUnits.PASCAL_SECOND);
     }
 
     @Override
     public DynamicViscosity toUnit(Unit<DynamicViscosity> targetUnit) {
-        double valueInPascalSecond = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInPascalSecond);
+        double valueInPascalSecond = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascalSecond);
         return DynamicViscosity.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,25 +50,17 @@ public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity
         return DynamicViscosity.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfPascalSecond() {
-        if (unit == DynamicViscosityUnits.PASCAL_SECOND) {
-            return value;
-        }
-        return toUnit(DynamicViscosityUnits.PASCAL_SECOND).getValue();
+    // Convert to target unit
+    public double getInKiloGramPerMeterSecond() {
+        return getIn(DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
     }
 
-    // Custom converter methods, for most popular units
-    public DynamicViscosity toKiloGramPerMeterSecond(){
-        return toUnit(DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
+    public double getInPascalsSecond() {
+        return getIn(DynamicViscosityUnits.PASCAL_SECOND);
     }
 
-    public DynamicViscosity toPascalSecond(){
-        return toUnit(DynamicViscosityUnits.PASCAL_SECOND);
-    }
-
-    public DynamicViscosity toPoise(){
-        return toUnit(DynamicViscosityUnits.POISE);
+    public double getInPoise() {
+        return getIn(DynamicViscosityUnits.POISE);
     }
 
     @Override
@@ -82,6 +81,7 @@ public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity
         return "DynamicViscosity{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static DynamicViscosity of(double value, Unit<DynamicViscosity> unit) {
         return new DynamicViscosity(value, unit);
     }

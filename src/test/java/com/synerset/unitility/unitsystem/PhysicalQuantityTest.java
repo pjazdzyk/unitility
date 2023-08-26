@@ -2,12 +2,18 @@ package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
+import com.synerset.unitility.unitsystem.common.DistanceUnits;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import com.synerset.unitility.unitsystem.thermodynamic.Pressure;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
+import com.synerset.unitility.unitsystem.thermodynamic.ThermalDiffusivity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PhysicalQuantityTest {
 
@@ -17,7 +23,7 @@ class PhysicalQuantityTest {
         // Given
         // When
         Distance distanceInMeters = Distance.ofMeters(100);
-        Distance distanceInMiles = distanceInMeters.toMile();
+        Distance distanceInMiles = distanceInMeters.toUnit(DistanceUnits.MILE);
 
         // Then
 
@@ -170,6 +176,18 @@ class PhysicalQuantityTest {
     }
 
     @Test
+    @DisplayName("Should throw an exception if divided by 0")
+    void shouldNotDivideByZeroThrowingException() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // Then
+        assertThatThrownBy(() -> temperature.divide(0))
+                .isInstanceOf(UnitSystemArgumentException.class)
+                .hasMessage("Division by zero is not allowed. Please provide a non-zero divider value.");
+    }
+
+    @Test
     @DisplayName("Should correctly divide quantities of the same type, but different units")
     void shouldDivideQuantityToSourceQuantity() {
         // Given
@@ -226,6 +244,46 @@ class PhysicalQuantityTest {
         assertThat(positiveTemp.isZero()).isFalse();
         assertThat(positiveTemp.isPositive()).isTrue();
         assertThat(positiveTemp.isPositiveOrZero()).isTrue();
+
+    }
+
+    @Test
+    @DisplayName("Should return property unit symbol")
+    void shouldReturnPropertyUnitSymbol() {
+        // Given
+        ThermalDiffusivity thermalDiffusivity = ThermalDiffusivity.ofSquareFeetPerSecond(0.5);
+
+        // When
+        String actualUnitSymbol = thermalDiffusivity.getUnitSymbol();
+
+        // Then
+        String expectedUnitSymbol = "ft²/s";
+        assertThat(actualUnitSymbol).isEqualTo(expectedUnitSymbol);
+    }
+
+    @Test
+    @DisplayName("Should properly sort all quantities in the list")
+    void shouldSortQuantitiesInTheList() {
+        // Given
+        Temperature[] temperatures = {
+                Temperature.ofCelsius(54),
+                Temperature.ofKelvins(10),
+                Temperature.ofCelsius(-20),
+                Temperature.ofCelsius(100)
+        };
+
+        // When
+        Arrays.sort(temperatures);
+
+        // Then
+        Temperature[] correctOrderTemperatures = {
+                Temperature.ofKelvins(10),
+                Temperature.ofCelsius(-20),
+                Temperature.ofCelsius(54),
+                Temperature.ofCelsius(100)
+        };
+
+        assertThat(temperatures).isEqualTo(correctOrderTemperatures);
 
     }
 

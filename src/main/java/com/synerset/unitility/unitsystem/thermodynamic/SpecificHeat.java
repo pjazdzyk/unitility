@@ -7,16 +7,23 @@ import java.util.Objects;
 
 public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
     private final double value;
+    private final double baseValue;
     private final Unit<SpecificHeat> unit;
 
     private SpecificHeat(double value, Unit<SpecificHeat> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -26,14 +33,14 @@ public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
 
     @Override
     public SpecificHeat toBaseUnit() {
-        double valueInJoulePerKiloGramKelvin = unit.toBaseUnit(value);
+        double valueInJoulePerKiloGramKelvin = unit.toValueInBaseUnit(value);
         return SpecificHeat.of(valueInJoulePerKiloGramKelvin, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
     }
 
     @Override
     public SpecificHeat toUnit(Unit<SpecificHeat> targetUnit) {
-        double valueInJoulePerKiloGramKelvin = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInJoulePerKiloGramKelvin);
+        double valueInJoulePerKiloGramKelvin = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoulePerKiloGramKelvin);
         return SpecificHeat.of(valueInTargetUnit, targetUnit);
     }
 
@@ -42,25 +49,17 @@ public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
         return SpecificHeat.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfKiloJoulesPerKilogramKelvin() {
-        if (unit == SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN) {
-            return value;
-        }
-        return toUnit(SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN).getValue();
+    // Convert to target unit
+    public double getInJoulePerKiloGramKelvin() {
+        return getIn(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
     }
 
-    // Custom converter methods, for most popular units
-    public SpecificHeat toJoulePerKiloGramKelvin() {
-        return toUnit(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
+    public double getInKiloJoulesPerKiloGramKelvin() {
+        return getIn(SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN);
     }
 
-    public SpecificHeat toKiloJoulePerKiloGramKelvin() {
-        return toUnit(SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN);
-    }
-
-    public SpecificHeat toBTUPerPoundFahrenheit() {
-        return toUnit(SpecificHeatUnits.BTU_PER_POUND_FAHRENHEIT);
+    public double getInBTUsPerPoundFahrenheit() {
+        return getIn(SpecificHeatUnits.BTU_PER_POUND_FAHRENHEIT);
     }
 
     @Override
@@ -81,6 +80,7 @@ public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
         return "SpecificHeat{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static SpecificHeat of(double value, Unit<SpecificHeat> unit) {
         return new SpecificHeat(value, unit);
     }

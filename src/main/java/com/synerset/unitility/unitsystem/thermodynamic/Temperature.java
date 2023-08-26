@@ -10,16 +10,23 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
 
     public static final Temperature PHYSICAL_MIN_LIMIT = Temperature.ofKelvins(0);
     private final double value;
+    private final double baseValue;
     private final Unit<Temperature> unit;
 
     private Temperature(double value, Unit<Temperature> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -29,14 +36,14 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
 
     @Override
     public Temperature toBaseUnit() {
-        double valueInKelvin = unit.toBaseUnit(value);
+        double valueInKelvin = unit.toValueInBaseUnit(value);
         return Temperature.of(valueInKelvin, TemperatureUnits.KELVIN);
     }
 
     @Override
     public Temperature toUnit(Unit<Temperature> targetUnit) {
-        double valueInKelvin = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInKelvin);
+        double valueInKelvin = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKelvin);
         return Temperature.of(valueInTargetUnit, targetUnit);
     }
 
@@ -45,32 +52,17 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
         return Temperature.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfCelsius() {
-        if (unit == TemperatureUnits.CELSIUS) {
-            return value;
-        }
-        return toUnit(TemperatureUnits.CELSIUS).getValue();
+    // Convert to target unit
+    public double getInKelvins() {
+        return getIn(TemperatureUnits.KELVIN);
     }
 
-    public double getValueOfKelvin() {
-        if (unit == TemperatureUnits.KELVIN) {
-            return value;
-        }
-        return toUnit(TemperatureUnits.KELVIN).getValue();
+    public double getInCelsius() {
+        return getIn(TemperatureUnits.CELSIUS);
     }
 
-    // Custom converter methods, for most popular units
-    public Temperature toKelvin(){
-        return toUnit(TemperatureUnits.KELVIN);
-    }
-
-    public Temperature toCelsius(){
-        return toUnit(TemperatureUnits.CELSIUS);
-    }
-
-    public Temperature toFahrenheit(){
-        return toUnit(TemperatureUnits.FAHRENHEIT);
+    public double getInFahrenheits() {
+        return getIn(TemperatureUnits.FAHRENHEIT);
     }
 
     @Override
@@ -97,6 +89,7 @@ public final class Temperature implements PhysicalQuantity<Temperature> {
         return ValueFormatter.formatDoubleToRelevantDigits(value, relevantDigits) + separator + unit.getSymbol();
     }
 
+    // Static factory methods
     public static Temperature of(double value, Unit<Temperature> unit) {
         return new Temperature(value, unit);
     }

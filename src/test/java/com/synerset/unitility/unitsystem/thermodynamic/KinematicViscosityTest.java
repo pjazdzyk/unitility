@@ -15,11 +15,15 @@ class KinematicViscosityTest {
         KinematicViscosity initialKinematicViscosity = KinematicViscosity.ofSquareMeterPerSecond(1000);
 
         // When
-        KinematicViscosity actual_FT2_PER_SEC = initialKinematicViscosity.toSquareFootPerSecond();
-        KinematicViscosity actual_M2_PER_SEC = actual_FT2_PER_SEC.toSquareMeterPerSecond();
+        KinematicViscosity actual_FT2_PER_SEC = initialKinematicViscosity.toUnit(KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
+        double actual_FT2_PER_SECVal = initialKinematicViscosity.getInSquareFeetPerSecond();
+        KinematicViscosity actual_M2_PER_SEC = actual_FT2_PER_SEC.toBaseUnit();
+        double actual_M2_PER_SECVal = actual_FT2_PER_SEC.getInSquareMetersPerSecond();
 
         // Then
         KinematicViscosity expected_FT2_PER_SEC = KinematicViscosity.ofSquareFootPerSecond(10763.91041670972);
+        assertThat(actual_FT2_PER_SEC.getValue()).isEqualTo(actual_FT2_PER_SECVal);
+        assertThat(actual_M2_PER_SEC.getValue()).isEqualTo(actual_M2_PER_SECVal);
         assertThat(actual_FT2_PER_SEC.getValue()).isEqualTo(expected_FT2_PER_SEC.getValue(), withPrecision(1E-10));
         assertThat(actual_M2_PER_SEC.getValue()).isEqualTo(initialKinematicViscosity.getValue(), withPrecision(1E-10));
     }

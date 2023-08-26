@@ -8,16 +8,23 @@ import java.util.Objects;
 public final class MassFlow implements PhysicalQuantity<MassFlow> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<MassFlow> unit;
 
     private MassFlow(double value, Unit<MassFlow> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class MassFlow implements PhysicalQuantity<MassFlow> {
 
     @Override
     public MassFlow toBaseUnit() {
-        double valueInKilogramsPerSecond = unit.toBaseUnit(value);
+        double valueInKilogramsPerSecond = unit.toValueInBaseUnit(value);
         return MassFlow.of(valueInKilogramsPerSecond, MassFlowUnits.KILOGRAM_PER_SECOND);
     }
 
     @Override
     public MassFlow toUnit(Unit<MassFlow> targetUnit) {
-        double valueInKilogramsPerSecond = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInKilogramsPerSecond);
+        double valueInKilogramsPerSecond = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogramsPerSecond);
         return MassFlow.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,29 +50,21 @@ public final class MassFlow implements PhysicalQuantity<MassFlow> {
         return MassFlow.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfKilogramsPerSecond() {
-        if (unit == MassFlowUnits.KILOGRAM_PER_SECOND) {
-            return value;
-        }
-        return toUnit(MassFlowUnits.KILOGRAM_PER_SECOND).getValue();
+    // Convert to target unit
+    public double getInKilogramsPerSecond() {
+        return getIn(MassFlowUnits.KILOGRAM_PER_SECOND);
     }
 
-    // Custom converter methods, for most popular units
-    public MassFlow toKilogramsPerSecond(){
-        return toUnit(MassFlowUnits.KILOGRAM_PER_SECOND);
+    public double getInKiloGramsPerHour() {
+        return getIn(MassFlowUnits.KILOGRAM_PER_HOUR);
     }
 
-    public MassFlow toKiloGramPerHour(){
-        return toUnit(MassFlowUnits.KILOGRAM_PER_HOUR);
+    public double getInTonnesPerHour() {
+        return getIn(MassFlowUnits.TONNE_PER_HOUR);
     }
 
-    public MassFlow toTonnesPerHour(){
-        return toUnit(MassFlowUnits.TONNE_PER_HOUR);
-    }
-
-    public MassFlow toPoundsPerSecond(){
-        return toUnit(MassFlowUnits.POUND_PER_SECOND);
+    public double getInPoundsPerSecond() {
+        return getIn(MassFlowUnits.POUND_PER_SECOND);
     }
 
     @Override
@@ -86,6 +85,7 @@ public final class MassFlow implements PhysicalQuantity<MassFlow> {
         return "MassFlow{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static MassFlow of(double value, Unit<MassFlow> unit) {
         return new MassFlow(value, unit);
     }

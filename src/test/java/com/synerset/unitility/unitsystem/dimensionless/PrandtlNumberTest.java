@@ -19,6 +19,8 @@ class PrandtlNumberTest {
         // Then
         PrandtlNumber expectedPrandtlNum = PrandtlNumber.of(10.0);
         assertThat(actualPrandtlNum.getValue()).isEqualTo(expectedValue);
+        assertThat(actualPrandtlNum.getBaseValue()).isEqualTo(actualPrandtlNum.getValue());
+        assertThat(actualPrandtlNum.toUnit(PrandtlNumberUnits.DIMENSIONLESS)).isEqualTo(actualPrandtlNum.toBaseUnit());
         assertThat(actualPrandtlNum).isEqualTo(expectedPrandtlNum);
     }
 

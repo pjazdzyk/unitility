@@ -17,10 +17,14 @@ class TorqueTest {
 
         // When
         Torque actualInMilliNewtonMeters = initialTorque.toUnit(TorqueUnits.MILLINEWTON_METER);
+        double actualInMilliNewtonMetersVal = initialTorque.getInMillinewtonMeters();
         Torque actualInNewtonMeters = actualInMilliNewtonMeters.toBaseUnit();
+        double actualInNewtonMetersVal = actualInMilliNewtonMeters.getInNewtonMeters();
 
         // Then
         Torque expectedInMilliNewtonMeters = Torque.ofMillinewtonMeters(1_000_000);
+        assertThat(actualInMilliNewtonMeters.getValue()).isEqualTo(actualInMilliNewtonMetersVal);
+        assertThat(actualInNewtonMeters.getValue()).isEqualTo(actualInNewtonMetersVal);
         assertThat(actualInMilliNewtonMeters).isEqualTo(expectedInMilliNewtonMeters);
         assertThat(actualInNewtonMeters).isEqualTo(initialTorque);
     }
@@ -32,13 +36,15 @@ class TorqueTest {
         Torque initialTorque = Torque.ofNewtonMeters(1000);
 
         // When
-        Torque actualInKilopondMeters = initialTorque.toKilopondMeters();
+        Torque actualInKilopondMeters = initialTorque.toUnit(TorqueUnits.KILOPOND_METER);
+        double actualInKilopondMetersVal = initialTorque.getInKilopondMeters();
         Torque actualInNewtonMeters = actualInKilopondMeters.toBaseUnit();
 
         // Then
         Torque expectedInKilopondMeters = Torque.ofKilopondMeters(101.9716212977928);
+        assertThat(actualInKilopondMeters.getValue()).isEqualTo(actualInKilopondMetersVal);
         assertThat(actualInKilopondMeters.getValue()).isEqualTo(expectedInKilopondMeters.getValue(), withPrecision(1E-13));
-        assertThat(actualInNewtonMeters.getValue()).isEqualTo(initialTorque.getValue(),withPrecision(1E-13));
+        assertThat(actualInNewtonMeters.getValue()).isEqualTo(initialTorque.getValue(), withPrecision(1E-13));
     }
 
     @Test
@@ -48,11 +54,13 @@ class TorqueTest {
         Torque initialTorque = Torque.ofNewtonMeters(1000);
 
         // When
-        Torque actualInFootPounds = initialTorque.toPoundFeet();
+        Torque actualInFootPounds = initialTorque.toUnit(TorqueUnits.FOOT_POUND);
+        double actualInFootPoundsVal = initialTorque.getInPoundFeet();
         Torque actualInNewtonMeters = actualInFootPounds.toBaseUnit();
 
         // Then
         Torque expectedInFootPounds = Torque.ofFootPounds(737.56214927726536388);
+        assertThat(actualInFootPounds.getValue()).isEqualTo(actualInFootPoundsVal);
         assertThat(actualInFootPounds.getValue()).isEqualTo(expectedInFootPounds.getValue(), withPrecision(1E-13));
         assertThat(actualInNewtonMeters.getValue()).isEqualTo(initialTorque.getValue(), withPrecision(1E-13));
     }
@@ -64,11 +72,13 @@ class TorqueTest {
         Torque initialTorque = Torque.ofNewtonMeters(1000);
 
         // When
-        Torque actualInInchPounds = initialTorque.toInchPounds();
+        Torque actualInInchPounds = initialTorque.toUnit(TorqueUnits.INCH_POUND);
+        double actualInInchPoundsVal = initialTorque.getInInchPounds();
         Torque actualInNewtonMeters = actualInInchPounds.toBaseUnit();
 
         // Then
         Torque expectedInInchPounds = Torque.ofInchPounds(8850.74579132718436654);
+        assertThat(actualInInchPounds.getValue()).isEqualTo(actualInInchPoundsVal);
         assertThat(actualInInchPounds.getValue()).isEqualTo(expectedInInchPounds.getValue(), withPrecision(1E-10));
         assertThat(actualInNewtonMeters).isEqualTo(initialTorque);
     }

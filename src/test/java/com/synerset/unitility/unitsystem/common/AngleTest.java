@@ -15,13 +15,17 @@ class AngleTest {
         Angle initialAngleInDegrees = Angle.ofDegrees(45);
 
         // When
-        Angle actualInRadians = initialAngleInDegrees.toRadians();
-        Angle actualInDegrees = actualInRadians.toBaseUnit();
+        Angle actualInRadians = initialAngleInDegrees.toUnit(AngleUnits.RADIANS);
+        double actualRadiansVal = initialAngleInDegrees.getInRadians();
+        Angle actualInDegrees = actualInRadians.toUnit(AngleUnits.DEGREES);
+        double actualInDegreesVal = actualInRadians.getInDegrees();
 
         // Then
         Angle expectedRadian = Angle.of(Math.PI/4, AngleUnits.RADIANS);
         assertThat(actualInRadians).isEqualTo(expectedRadian);
-        assertThat(actualInDegrees).isEqualTo(initialAngleInDegrees);
+        assertThat(actualRadiansVal).isEqualTo(actualInRadians.getValue());
+        assertThat(actualRadiansVal).isEqualTo(actualInRadians.getValue());
+        assertThat(actualInDegrees.getValue()).isEqualTo(actualInDegreesVal);
     }
 
     @Test

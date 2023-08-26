@@ -7,16 +7,23 @@ import java.util.Objects;
 
 public final class Power implements PhysicalQuantity<Power> {
     private final double value;
+    private final double baseValue;
     private final Unit<Power> unit;
 
     private Power(double value, Unit<Power> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -26,14 +33,14 @@ public final class Power implements PhysicalQuantity<Power> {
 
     @Override
     public Power toBaseUnit() {
-        double valueInWatts = unit.toBaseUnit(value);
+        double valueInWatts = unit.toValueInBaseUnit(value);
         return Power.of(valueInWatts, PowerUnits.WATT);
     }
 
     @Override
     public Power toUnit(Unit<Power> targetUnit) {
-        double valueInWatts = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInWatts);
+        double valueInWatts = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInWatts);
         return Power.of(valueInTargetUnit, targetUnit);
     }
 
@@ -42,40 +49,25 @@ public final class Power implements PhysicalQuantity<Power> {
         return Power.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfWatts() {
-        if (unit == PowerUnits.WATT) {
-            return value;
-        }
-        return toUnit(PowerUnits.WATT).getValue();
+    // Convert to target unit
+    public double getInWatts() {
+        return getIn(PowerUnits.WATT);
     }
 
-    public double getValueOfKiloWatts() {
-        if (unit == PowerUnits.KILOWATT) {
-            return value;
-        }
-        return toUnit(PowerUnits.KILOWATT).getValue();
+    public double getInKiloWatts() {
+        return getIn(PowerUnits.KILOWATT);
     }
 
-    // Custom converter methods, for most popular units
-    public Power toWatts(){
-        return toUnit(PowerUnits.WATT);
+    public double getInBTUPerHour() {
+        return getIn(PowerUnits.BTU_PER_HOUR);
     }
 
-    public Power toKiloWatts(){
-        return toUnit(PowerUnits.KILOWATT);
+    public double getInMegaWatts() {
+        return getIn(PowerUnits.MEGAWATT);
     }
 
-    public Power toBTUPerHour(){
-        return toUnit(PowerUnits.BTU_PER_HOUR);
-    }
-
-    public Power toMegaWatts(){
-        return toUnit(PowerUnits.MEGAWATT);
-    }
-
-    public Power toHorsePower(){
-        return toUnit(PowerUnits.HORSE_POWER);
+    public double getInHorsePower() {
+        return getIn(PowerUnits.HORSE_POWER);
     }
 
     @Override
@@ -96,6 +88,7 @@ public final class Power implements PhysicalQuantity<Power> {
         return "Power{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Power of(double value, Unit<Power> unit) {
         return new Power(value, unit);
     }

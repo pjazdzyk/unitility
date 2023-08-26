@@ -11,16 +11,23 @@ public final class BypassFactor implements PhysicalQuantity<BypassFactor> {
     public static final BypassFactor BYPASS_MAX_VALUE = BypassFactor.of(1);
 
     private final double value;
+    private final double baseValue;
     private final Unit<BypassFactor> unit;
 
     private BypassFactor(double value) {
         this.value = value;
         this.unit = BypassFactorUnits.DIMENSIONLESS;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -61,6 +68,7 @@ public final class BypassFactor implements PhysicalQuantity<BypassFactor> {
         return Objects.hash(value);
     }
 
+    // Static factory methods
     public static BypassFactor of(double value) {
         return new BypassFactor(value);
     }

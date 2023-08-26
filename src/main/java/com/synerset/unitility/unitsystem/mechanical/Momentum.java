@@ -8,16 +8,23 @@ import java.util.Objects;
 public final class Momentum implements PhysicalQuantity<Momentum> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<Momentum> unit;
 
     private Momentum(double value, Unit<Momentum> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class Momentum implements PhysicalQuantity<Momentum> {
 
     @Override
     public Momentum toBaseUnit() {
-        double valueInKilogramMeterPerSecond = unit.toBaseUnit(value);
+        double valueInKilogramMeterPerSecond = unit.toValueInBaseUnit(value);
         return Momentum.of(valueInKilogramMeterPerSecond, MomentumUnits.KILOGRAM_METER_PER_SECOND);
     }
 
     @Override
     public Momentum toUnit(Unit<Momentum> targetUnit) {
-        double valueInKilogramMeterPerSecond = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInKilogramMeterPerSecond);
+        double valueInKilogramMeterPerSecond = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogramMeterPerSecond);
         return Momentum.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,25 +50,17 @@ public final class Momentum implements PhysicalQuantity<Momentum> {
         return Momentum.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfKilogramMetersPerSecond() {
-        if (unit == MomentumUnits.KILOGRAM_METER_PER_SECOND) {
-            return value;
-        }
-        return toUnit(MomentumUnits.KILOGRAM_METER_PER_SECOND).getValue();
+    // Convert to target unit
+    public double getInKilogramMetersPerSecond() {
+        return getIn(MomentumUnits.KILOGRAM_METER_PER_SECOND);
     }
 
-    // Custom converter methods, for most popular units
-    public Momentum toKilogramMeterPerSecond(){
-        return toUnit(MomentumUnits.KILOGRAM_METER_PER_SECOND);
+    public double getInPoundFeetPerSecond() {
+        return getIn(MomentumUnits.POUND_FEET_PER_SECOND);
     }
 
-    public Momentum toPoundFeetPerSecond(){
-        return toUnit(MomentumUnits.POUND_FEET_PER_SECOND);
-    }
-
-    public Momentum toGramCentimetrePerSecond(){
-        return toUnit(MomentumUnits.GRAM_CENTIMETRE_PER_SECOND);
+    public double getInGramCentimetersPerSecond() {
+        return getIn(MomentumUnits.GRAM_CENTIMETRE_PER_SECOND);
     }
 
     @Override
@@ -82,6 +81,7 @@ public final class Momentum implements PhysicalQuantity<Momentum> {
         return "Momentum{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Momentum of(double value, Unit<Momentum> unit) {
         return new Momentum(value, unit);
     }

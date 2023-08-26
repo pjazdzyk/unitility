@@ -15,11 +15,15 @@ class DistanceTest {
         Distance initialDistanceInMillimeters = Distance.ofMillimeters(1000.0);
 
         // When
-        Distance actualInMeters = initialDistanceInMillimeters.toBaseUnit();
+        Distance actualInMeters = initialDistanceInMillimeters.toUnit(DistanceUnits.METER);
+        double actualInMetersVal = actualInMeters.getInMeters();
         Distance actualInMillimeters = actualInMeters.toUnit(DistanceUnits.MILLIMETER);
+        double actualInMillimetersVal = actualInMeters.getInMillimeters();
 
         // Then
         Distance expectedInMeters = Distance.ofMeters(1.0);
+        assertThat(actualInMeters.getValue()).isEqualTo(actualInMetersVal);
+        assertThat(actualInMillimeters.getValue()).isEqualTo(actualInMillimetersVal);
         assertThat(actualInMeters).isEqualTo(expectedInMeters);
         assertThat(actualInMillimeters).isEqualTo(initialDistanceInMillimeters);
     }
@@ -33,9 +37,11 @@ class DistanceTest {
         // When
         Distance actualInMeters = initialDistanceInCentimeters.toBaseUnit();
         Distance actualInCentimeters = actualInMeters.toUnit(DistanceUnits.CENTIMETER);
+        double actualInCentimetersVal = actualInMeters.getInCentimeters();
 
         // Then
         Distance expectedInMeters = Distance.ofMeters(1.0);
+        assertThat(actualInCentimeters.getValue()).isEqualTo(actualInCentimetersVal);
         assertThat(actualInMeters).isEqualTo(expectedInMeters);
         assertThat(actualInCentimeters).isEqualTo(initialDistanceInCentimeters);
     }
@@ -49,9 +55,11 @@ class DistanceTest {
         // When
         Distance actualInMeters = initialDistanceInKilometers.toBaseUnit();
         Distance actualInKilometers = actualInMeters.toUnit(DistanceUnits.KILOMETER);
+        double actualInKilometersVal = actualInMeters.getInKilometers();
 
         // Then
         Distance expectedInMeters = Distance.ofMeters(1000.0);
+        assertThat(actualInKilometers.getValue()).isEqualTo(actualInKilometersVal);
         assertThat(actualInMeters).isEqualTo(expectedInMeters);
         assertThat(actualInKilometers).isEqualTo(initialDistanceInKilometers);
     }
@@ -65,9 +73,11 @@ class DistanceTest {
         // When
         Distance actualInMeters = initialDistanceInMiles.toBaseUnit();
         Distance actualInMiles = actualInMeters.toUnit(DistanceUnits.MILE);
+        double actualInMilesVal = actualInMeters.getInMiles();
 
         // Then
         Distance expectedInMeters = Distance.ofMeters(1609.344);
+        assertThat(actualInMiles.getValue()).isEqualTo(actualInMilesVal);
         assertThat(actualInMeters).isEqualTo(expectedInMeters);
         assertThat(actualInMiles).isEqualTo(initialDistanceInMiles);
     }
@@ -81,9 +91,11 @@ class DistanceTest {
         // When
         Distance actualInMeters = initialDistanceInFeet.toBaseUnit();
         Distance actualInFeet = actualInMeters.toUnit(DistanceUnits.FEET);
+        double actualInFeetVal = actualInMeters.getInFeet();
 
         // Then
         Distance expectedInMeters = Distance.ofMeters(3.048);
+        assertThat(actualInFeet.getValue()).isEqualTo(actualInFeetVal);
         assertThat(actualInMeters).isEqualTo(expectedInMeters);
         assertThat(actualInFeet).isEqualTo(initialDistanceInFeet);
     }
@@ -97,9 +109,11 @@ class DistanceTest {
         // When
         Distance actualInMeters = initialDistanceInInch.toBaseUnit();
         Distance actualInInch = actualInMeters.toUnit(DistanceUnits.INCH);
+        double actualInInchVal = actualInMeters.getInInches();
 
         // Then
         Distance expectedInMeters = Distance.ofMeters(0.254);
+        assertThat(actualInInch.getValue()).isEqualTo(actualInInchVal);
         assertThat(actualInMeters).isEqualTo(expectedInMeters);
         assertThat(actualInInch).isEqualTo(initialDistanceInInch);
     }

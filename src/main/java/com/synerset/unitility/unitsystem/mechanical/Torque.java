@@ -9,16 +9,23 @@ public final class Torque implements PhysicalQuantity<Torque> {
 
     public static final Torque PHYSICAL_MIN_LIMIT = Torque.ofNewtonMeters(0);
     private final double value;
+    private final double baseValue;
     private final Unit<Torque> unit;
 
     private Torque(double value, Unit<Torque> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -28,14 +35,14 @@ public final class Torque implements PhysicalQuantity<Torque> {
 
     @Override
     public Torque toBaseUnit() {
-        double valueInNewtonMeters = unit.toBaseUnit(value);
+        double valueInNewtonMeters = unit.toValueInBaseUnit(value);
         return Torque.of(valueInNewtonMeters, TorqueUnits.NEWTON_METER);
     }
 
     @Override
     public Torque toUnit(Unit<Torque> targetUnit) {
-        double valueInNewtonMeters = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInNewtonMeters);
+        double valueInNewtonMeters = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInNewtonMeters);
         return Torque.of(valueInTargetUnit, targetUnit);
     }
 
@@ -44,33 +51,25 @@ public final class Torque implements PhysicalQuantity<Torque> {
         return Torque.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfKilogramMetersPerSecond() {
-        if (unit == TorqueUnits.NEWTON_METER) {
-            return value;
-        }
-        return toUnit(TorqueUnits.NEWTON_METER).getValue();
+    // Convert to target unit
+    public double getInNewtonMeters() {
+        return getIn(TorqueUnits.NEWTON_METER);
     }
 
-    // Custom converter methods for the most popular units
-    public Torque toNewtonMeters() {
-        return toUnit(TorqueUnits.NEWTON_METER);
+    public double getInMillinewtonMeters() {
+        return getIn(TorqueUnits.MILLINEWTON_METER);
     }
 
-    public Torque toMillinewtonMeters() {
-        return toUnit(TorqueUnits.MILLINEWTON_METER);
+    public double getInKilopondMeters() {
+        return getIn(TorqueUnits.KILOPOND_METER);
     }
 
-    public Torque toKilopondMeters() {
-        return toUnit(TorqueUnits.KILOPOND_METER);
+    public double getInPoundFeet() {
+        return getIn(TorqueUnits.FOOT_POUND);
     }
 
-    public Torque toPoundFeet() {
-        return toUnit(TorqueUnits.FOOT_POUND);
-    }
-
-    public Torque toInchPounds() {
-        return toUnit(TorqueUnits.INCH_POUND);
+    public double getInInchPounds() {
+        return getIn(TorqueUnits.INCH_POUND);
     }
 
     @Override
@@ -91,6 +90,7 @@ public final class Torque implements PhysicalQuantity<Torque> {
         return "Torque{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Torque of(double value, Unit<Torque> unit) {
         return new Torque(value, unit);
     }

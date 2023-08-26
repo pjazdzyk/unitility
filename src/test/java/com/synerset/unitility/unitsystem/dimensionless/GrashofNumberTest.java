@@ -18,6 +18,8 @@ class GrashofNumberTest {
         // Then
         GrashofNumber expectedGrashofNumber = GrashofNumber.of(10.0);
         assertThat(actualGrashofNumber.getValue()).isEqualTo(expectedValue);
+        assertThat(actualGrashofNumber.getBaseValue()).isEqualTo(actualGrashofNumber.getValue());
+        assertThat(actualGrashofNumber.toUnit(GrashofNumberUnits.DIMENSIONLESS)).isEqualTo(actualGrashofNumber.toBaseUnit());
         assertThat(actualGrashofNumber).isEqualTo(expectedGrashofNumber);
     }
 

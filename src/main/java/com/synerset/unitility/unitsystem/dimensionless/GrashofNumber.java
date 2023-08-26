@@ -7,16 +7,23 @@ import java.util.Objects;
 
 public final class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
     private final double value;
+    private final double baseValue;
     private final Unit<GrashofNumber> unit;
 
     private GrashofNumber(double value) {
         this.value = value;
         this.unit = GrashofNumberUnits.DIMENSIONLESS;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -57,6 +64,7 @@ public final class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
         return Objects.hash(value);
     }
 
+    // Static factory methods
     public static GrashofNumber of(double value) {
         return new GrashofNumber(value);
     }

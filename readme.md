@@ -19,13 +19,13 @@ or external libraries.<br>
 ### INSTALLATION
 
 Just copy Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers, check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.0.2/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.1.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 ## Tech
@@ -45,14 +45,25 @@ CI/CD:<br>
 
 ## Examples
 **Creating quantities:**<br>
-Below is a simple example how to work with units and convert to another type of unit:
+Below is a simple example how to work with units and convert property from one unit to another or to convert as doubles for further calculations:
 ```java
-Temperature tempInCelsius = Temperature.ofCelsius(20.5);     // 20.5 °C
-Temperature tempInKelvin = tempInCelsius.toKelvin();         // 293.65 K
-Temperature temInFahrenheit = tempInKelvin.toFahrenheit();   // 68.9 °F
+// Creating temperature instance of specified units
+Temperature temperature = Temperature.ofCelsius(20.5);         // {20.50 °C}
+// Getting converted value for calculations
+double valueInCelsius = temperature.getInCelsius();            // 20.50 °C
+double valueInKelvins = temperature.getInKelvins();            // 293.65 K
+double valueInFahrenheits = temperature.getInFahrenheits();    // 68.90 °F
+// Checking property current unit, value, and value in base unit
+Unit<Temperature> unit = temperature.getUnit();                // CELSIUS
+Unit<Temperature> baseUnit = unit.getBaseUnit();               // KELVIN 
+double valueInUnit = temperature.getValue();                   // 20.50 °C
+double valueInBaseUnits = temperature.getBaseValue();          // 293.65 K
+// Changing property unit and converting back to base unit
+Temperature tempInFahrenheits = temperature.toUnit(TemperatureUnits.FAHRENHEIT); // {68.90 °F}
+Temperature tempInKelvins = temperature.toBaseUnit();                            // {293.65 K}
 ```
 All quantities have smart toStringWithRelevantDigits() method, which will always adjust values decimal precision to capture by default specified relevant digits depending on your unit type and its value. 
-This way you have guaranteed an elegant output without any additional effort of reformatting. Values will be rounded up using HALF_UP approach. 
+This way you have guaranteed an elegant output without any additional effort of reformatting. Values will be rounded up using HALF_EVEN approach. 
 
 ```java
 Distance bigDistance = Distance.ofMeters(10);
@@ -67,6 +78,7 @@ This project has been implemented in a functional manner using io.vavr library: 
 Since version **1.0.2** [Unitility](https://github.com/pjazdzyk/unitility) supports basic transformation and logic operations.
 
 **Transformations:**<br>
+The choice of the developer determines whether calculations are performed using double values or with physical quantity objects through the available transformation methods:
 * adding or subtracting quantities of the same type:
 ```java
 Temperature sourceTemperature = Temperature.ofCelsius(20);

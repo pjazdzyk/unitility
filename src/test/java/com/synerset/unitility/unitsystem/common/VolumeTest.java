@@ -18,9 +18,13 @@ class VolumeTest {
         // When
         Volume actualInCubicMeter = initialVolumeInLiter.toBaseUnit();
         Volume actualInLiter = actualInCubicMeter.toUnit(VolumeUnits.LITER);
+        double actualInLiterVal = actualInCubicMeter.getInLiters();
+        double actualInCubicMeterVal = initialVolumeInLiter.getInCubicMeters();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(1.0);
+        assertThat(actualInLiter.getValue()).isEqualTo(actualInLiterVal);
+        assertThat(actualInCubicMeter.getValue()).isEqualTo(actualInCubicMeterVal);
         assertThat(actualInCubicMeter).isEqualTo(expectedInCubicMeter);
         assertThat(actualInLiter).isEqualTo(initialVolumeInLiter);
     }
@@ -33,12 +37,14 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInCubicCentimeters.toBaseUnit();
-        Volume actualInLiter = actualInCubicMeter.toCubicCentimeter();
+        Volume actualInCubicCM = actualInCubicMeter.toUnit(VolumeUnits.CUBIC_CENTIMETER);
+        double actualInCubicCMVal = actualInCubicMeter.getInCubicCentimeters();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(1.0);
+        assertThat(actualInCubicCM.getValue()).isEqualTo(actualInCubicCMVal);
         assertThat(actualInCubicMeter).isEqualTo(expectedInCubicMeter);
-        assertThat(actualInLiter).isEqualTo(initialVolumeInCubicCentimeters);
+        assertThat(actualInCubicCM).isEqualTo(initialVolumeInCubicCentimeters);
     }
 
     @Test
@@ -48,12 +54,14 @@ class VolumeTest {
         Volume initialVolumeInHectoLiters = Volume.ofHectoLiters(10.0);
 
         // When
-        Volume actualInCubicMeters = initialVolumeInHectoLiters.toBaseUnit();
-        Volume actualInHectoLiters = actualInCubicMeters.toHectoLiter();
+        Volume actualInCubicMeter = initialVolumeInHectoLiters.toBaseUnit();
+        Volume actualInHectoLiters = actualInCubicMeter.toUnit(VolumeUnits.HECTOLITRE);
+        double actualInHectoLitersVal = actualInCubicMeter.getInHectoLiters();
 
         // Then
         Volume expectedInCubicMeters = Volume.ofCubicMeters(1.0);
-        assertThat(actualInCubicMeters).isEqualTo(expectedInCubicMeters);
+        assertThat(actualInHectoLiters.getValue()).isEqualTo(actualInHectoLitersVal);
+        assertThat(actualInCubicMeter).isEqualTo(expectedInCubicMeters);
         assertThat(actualInHectoLiters).isEqualTo(initialVolumeInHectoLiters);
     }
 
@@ -65,10 +73,12 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInMilliliter.toBaseUnit();
-        Volume actualInMilliliter = actualInCubicMeter.toMilliLiter();
+        Volume actualInMilliliter = actualInCubicMeter.toUnit(VolumeUnits.MILLILITRE);
+        double actualInMilliliterVal = actualInCubicMeter.getInMilliLiters();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(100);
+        assertThat(actualInMilliliter.getValue()).isEqualTo(actualInMilliliterVal);
         assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeter.getValue(), withPrecision(1E-15));
         assertThat(actualInMilliliter).isEqualTo(initialVolumeInMilliliter);
     }
@@ -81,10 +91,12 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInPint.toBaseUnit();
-        Volume actualInPint = actualInCubicMeter.toPint();
+        Volume actualInPint = actualInCubicMeter.toUnit(VolumeUnits.PINT);
+        double actualInPintVal = actualInCubicMeter.getInPints();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(0.473176473);
+        assertThat(actualInPint.getValue()).isEqualTo(actualInPintVal);
         assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeter.getValue(), withPrecision(1E-15));
         assertThat(actualInPint).isEqualTo(initialVolumeInPint);
     }
@@ -97,10 +109,12 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInGallon.toBaseUnit();
-        Volume actualInGallon = actualInCubicMeter.toGallon();
+        Volume actualInGallon = actualInCubicMeter.toUnit(VolumeUnits.GALLON);
+        double actualInGallonVal = actualInCubicMeter.getInGallons();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(3.785411784);
+        assertThat(actualInGallon.getValue()).isEqualTo(actualInGallonVal);
         assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeter.getValue(), withPrecision(1E-15));
         assertThat(actualInGallon).isEqualTo(initialVolumeInGallon);
     }
@@ -112,12 +126,14 @@ class VolumeTest {
         Volume initialVolumeInOunces = Volume.ofOunces(10.0);
 
         // When
-        Volume actualInCubicMeters = initialVolumeInOunces.toBaseUnit();
-        Volume actualInOunces = actualInCubicMeters.toOunce();
+        Volume actualInCubicMeter = initialVolumeInOunces.toBaseUnit();
+        Volume actualInOunces = actualInCubicMeter.toUnit(VolumeUnits.OUNCE);
+        double actualInOuncesVal = actualInCubicMeter.getInOunces();
 
         // Then
         Volume expectedInCubicMeters = Volume.ofCubicMeters(0.000295735295625);
-        assertThat(actualInCubicMeters.getValue()).isEqualTo(expectedInCubicMeters.getValue(), withPrecision(1E-15));
+        assertThat(actualInOunces.getValue()).isEqualTo(actualInOuncesVal);
+        assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeters.getValue(), withPrecision(1E-15));
         assertThat(actualInOunces).isEqualTo(initialVolumeInOunces);
     }
 

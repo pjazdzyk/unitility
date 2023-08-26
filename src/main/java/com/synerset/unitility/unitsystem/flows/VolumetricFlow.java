@@ -8,16 +8,23 @@ import java.util.Objects;
 public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<VolumetricFlow> unit;
 
     private VolumetricFlow(double value, Unit<VolumetricFlow> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
 
     @Override
     public VolumetricFlow toBaseUnit() {
-        double valueInCubicMetersPerSecond = unit.toBaseUnit(value);
+        double valueInCubicMetersPerSecond = unit.toValueInBaseUnit(value);
         return VolumetricFlow.of(valueInCubicMetersPerSecond, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
     }
 
     @Override
     public VolumetricFlow toUnit(Unit<VolumetricFlow> targetUnit) {
-        double valueInCubicMetersPerSecond = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInCubicMetersPerSecond);
+        double valueInCubicMetersPerSecond = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInCubicMetersPerSecond);
         return VolumetricFlow.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,56 +50,41 @@ public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
         return VolumetricFlow.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfCubicMetersPerSecond() {
-        if (unit == VolumetricFlowUnits.CUBIC_METERS_PER_SECOND) {
-            return value;
-        }
-        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND).getValue();
+    // Convert to target unit
+    public double getInCubicMetersPerSecond() {
+        return getIn(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
     }
 
-    public double getValueOfCubicMetersPerHour() {
-        if (unit == VolumetricFlowUnits.CUBIC_METERS_PER_HOUR) {
-            return value;
-        }
-        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR).getValue();
+    public double getInCubicMetersPerMinute() {
+        return getIn(VolumetricFlowUnits.CUBIC_METERS_PER_MINUTE);
     }
 
-    // Custom converter methods, for most popular units
-    public VolumetricFlow toCubicMetersPerSecond() {
-        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
+    public double getInCubicMetersPerHour() {
+        return getIn(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
     }
 
-    public VolumetricFlow toCubicMetersPerMinute() {
-        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_MINUTE);
+    public double getInLitresPerSecond() {
+        return getIn(VolumetricFlowUnits.LITRE_PER_SECOND);
     }
 
-    public VolumetricFlow toCubicMetersPerHour() {
-        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
+    public double getInLitresPerMinute() {
+        return getIn(VolumetricFlowUnits.LITRE_PER_MINUTE);
     }
 
-    public VolumetricFlow toLitresPerSecond() {
-        return toUnit(VolumetricFlowUnits.LITRE_PER_SECOND);
+    public double getInLitresPerHour() {
+        return getIn(VolumetricFlowUnits.LITRE_PER_HOUR);
     }
 
-    public VolumetricFlow toLitresPerMinute() {
-        return toUnit(VolumetricFlowUnits.LITRE_PER_MINUTE);
+    public double getInGallonsPerSecond() {
+        return getIn(VolumetricFlowUnits.GALLONS_PER_SECOND);
     }
 
-    public VolumetricFlow toLitresPerHour() {
-        return toUnit(VolumetricFlowUnits.LITRE_PER_HOUR);
+    public double getInGallonsPerMinute() {
+        return getIn(VolumetricFlowUnits.GALLONS_PER_MINUTE);
     }
 
-    public VolumetricFlow toGallonsPerSecond() {
-        return toUnit(VolumetricFlowUnits.GALLONS_PER_SECOND);
-    }
-
-    public VolumetricFlow toGallonsPerMinute() {
-        return toUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE);
-    }
-
-    public VolumetricFlow toGallonsPerHour() {
-        return toUnit(VolumetricFlowUnits.GALLONS_PER_HOUR);
+    public double getInGallonsPerHour() {
+        return getIn(VolumetricFlowUnits.GALLONS_PER_HOUR);
     }
 
     @Override
@@ -113,6 +105,7 @@ public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
         return "VolumetricFlow{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static VolumetricFlow of(double value, Unit<VolumetricFlow> unit) {
         return new VolumetricFlow(value, unit);
     }

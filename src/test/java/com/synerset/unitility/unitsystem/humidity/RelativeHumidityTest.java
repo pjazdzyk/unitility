@@ -14,11 +14,15 @@ class RelativeHumidityTest {
         RelativeHumidity initialHumidity = RelativeHumidity.ofPercentage(50.5);
 
         // When
-        RelativeHumidity actualInDecimal = initialHumidity.toDecimal();
-        RelativeHumidity actualInPercent = actualInDecimal.toPercent();
+        RelativeHumidity actualInDecimal = initialHumidity.toUnit(RelativeHumidityUnits.DECIMAL);
+        double actualInDecimalVal = initialHumidity.getInDecimal();
+        RelativeHumidity actualInPercent = actualInDecimal.toBaseUnit();
+        double actualInPercentVal = actualInDecimal.getInPercent();
 
         // Then
         RelativeHumidity expectedInDecimal = RelativeHumidity.ofDecimal(0.505);
+        assertThat(actualInDecimal.getValue()).isEqualTo(actualInDecimalVal);
+        assertThat(actualInPercent.getValue()).isEqualTo(actualInPercentVal);
         assertThat(actualInDecimal).isEqualTo(expectedInDecimal);
         assertThat(actualInPercent).isEqualTo(initialHumidity);
     }

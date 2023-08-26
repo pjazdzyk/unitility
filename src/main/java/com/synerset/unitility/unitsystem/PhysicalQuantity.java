@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @param <Q> The type of quantity, used to maintain type safety.
  */
-public interface PhysicalQuantity<Q> {
+public interface PhysicalQuantity<Q> extends Comparable<PhysicalQuantity<Q>> {
 
     /**
      * Get the value of the physical quantity.
@@ -18,6 +18,13 @@ public interface PhysicalQuantity<Q> {
      * @return The value of the physical quantity.
      */
     double getValue();
+
+    /**
+     * Get the value of the physical quantity in its base unit.
+     *
+     * @return The base value of the physical quantity.
+     */
+    double getBaseValue();
 
     /**
      * Get the unit associated with the physical quantity.
@@ -68,7 +75,17 @@ public interface PhysicalQuantity<Q> {
         return ValueFormatter.formatDoubleToRelevantDigits(getValue(), relevantDigits) + " " + getUnit().getSymbol();
     }
 
-    // Comparing methods
+    /**
+     * Returns a converted value to target unit of the same type.
+     *
+     * @param targetUnit TThe target unit for conversion.
+     * @return A value converted to target unit.
+     */
+    default double getIn(Unit<Q> targetUnit) {
+        return targetUnit.fromValueInBaseUnit(getBaseValue());
+    }
+
+    // Logical operations
 
     /**
      * Check if the physical quantity is greater than another quantity
@@ -194,7 +211,7 @@ public interface PhysicalQuantity<Q> {
         return getValue() == 0;
     }
 
-    // Transformation methods
+    // Transformations
 
     /**
      * Add a constant value to the physical quantity.
@@ -286,7 +303,7 @@ public interface PhysicalQuantity<Q> {
      */
     default PhysicalQuantity<Q> divide(double value) {
         if (value == 0) {
-            throw new UnitSystemArgumentException("Divider value cannot be zero.");
+            throw new UnitSystemArgumentException("Division by zero is not allowed. Please provide a non-zero divider value.");
         }
         double newValue = getValue() / value;
         return createNewWithValue(newValue);
@@ -306,4 +323,20 @@ public interface PhysicalQuantity<Q> {
         }
         return thisValue / inputQuantity.getValue();
     }
+
+    @Override
+    default int compareTo(PhysicalQuantity<Q> other) {
+        if (this == other) {
+            return 0;
+        }
+        // Convert both quantities to the same unit for comparison
+        PhysicalQuantity<Q> thisInOtherUnit = this.toUnit(other.getUnit());
+
+        // Compare the values of the two quantities
+        double thisValue = thisInOtherUnit.getValue();
+        double otherValue = other.getValue();
+
+        return Double.compare(thisValue, otherValue);
+    }
+
 }

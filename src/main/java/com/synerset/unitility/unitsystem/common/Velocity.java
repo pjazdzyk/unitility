@@ -8,16 +8,23 @@ import java.util.Objects;
 public final class Velocity implements PhysicalQuantity<Velocity> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<Velocity> unit;
 
     private Velocity(double value, Unit<Velocity> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class Velocity implements PhysicalQuantity<Velocity> {
 
     @Override
     public Velocity toBaseUnit() {
-        double valueInMetersPerSecond = unit.toBaseUnit(value);
+        double valueInMetersPerSecond = unit.toValueInBaseUnit(value);
         return Velocity.of(valueInMetersPerSecond, VelocityUnits.METER_PER_SECOND);
     }
 
     @Override
     public Velocity toUnit(Unit<Velocity> targetUnit) {
-        double valueInMetersPerSecond = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInMetersPerSecond);
+        double valueInMetersPerSecond = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInMetersPerSecond);
         return Velocity.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,45 +50,37 @@ public final class Velocity implements PhysicalQuantity<Velocity> {
         return Velocity.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfMetersPerSecond() {
-        if (unit == VelocityUnits.METER_PER_SECOND) {
-            return value;
-        }
-        return toUnit(VelocityUnits.METER_PER_SECOND).getValue();
+    // Convert to target unit
+    public double toMetersPerSecond() {
+        return getIn(VelocityUnits.METER_PER_SECOND);
     }
 
-    // Custom converter methods, for most popular units
-    public Velocity toMetersPerSecond() {
-        return toUnit(VelocityUnits.METER_PER_SECOND);
+    public double toCentimetersPerSeconds() {
+        return getIn(VelocityUnits.CENTIMETER_PER_SECOND);
     }
 
-    public Velocity toCentimetersPerSecond() {
-        return toUnit(VelocityUnits.CENTIMETER_PER_SECOND);
+    public double toKilometersPerHours() {
+        return getIn(VelocityUnits.KILOMETER_PER_HOUR);
     }
 
-    public Velocity toKilometersPerHour() {
-        return toUnit(VelocityUnits.KILOMETER_PER_HOUR);
+    public double toInchesPerSeconds() {
+        return getIn(VelocityUnits.INCH_PER_SECOND);
     }
 
-    public Velocity toInchesPerSecond() {
-        return toUnit(VelocityUnits.INCH_PER_SECOND);
+    public double toFeetPerSeconds() {
+        return getIn(VelocityUnits.FEET_PER_SECOND);
     }
 
-    public Velocity toFeetPerSecond() {
-        return toUnit(VelocityUnits.FEET_PER_SECOND);
+    public double toMilesPerHours() {
+        return getIn(VelocityUnits.MILES_PER_HOUR);
     }
 
-    public Velocity toMilesPerHour() {
-        return toUnit(VelocityUnits.MILES_PER_HOUR);
+    public double toKnots() {
+        return getIn(VelocityUnits.KNOTS);
     }
 
-    public Velocity toKnots() {
-        return toUnit(VelocityUnits.KNOTS);
-    }
-
-    public Velocity toMach() {
-        return toUnit(VelocityUnits.MACH);
+    public double toMach() {
+        return getIn(VelocityUnits.MACH);
     }
 
     @Override
@@ -102,6 +101,7 @@ public final class Velocity implements PhysicalQuantity<Velocity> {
         return "Velocity{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Velocity of(double value, Unit<Velocity> unit) {
         return new Velocity(value, unit);
     }

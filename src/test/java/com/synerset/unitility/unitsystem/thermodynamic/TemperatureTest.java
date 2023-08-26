@@ -17,9 +17,13 @@ class TemperatureTest {
         // When
         Temperature actualInKelvins = initialTempInCelsius.toBaseUnit();
         Temperature actualInCelsius = actualInKelvins.toUnit(TemperatureUnits.CELSIUS);
+        double actualInKelvinsVal = initialTempInCelsius.getInKelvins();
+        double actualInCelsiusVal = actualInKelvins.getInCelsius();
 
         // Then
         Temperature expectedInKelvins = Temperature.ofKelvins(20.5 + 273.15);
+        assertThat(actualInKelvins.getValue()).isEqualTo(actualInKelvinsVal);
+        assertThat(actualInCelsius.getValue()).isEqualTo(actualInCelsiusVal);
         assertThat(actualInKelvins).isEqualTo(expectedInKelvins);
         assertThat(actualInCelsius).isEqualTo(initialTempInCelsius);
     }
@@ -31,11 +35,13 @@ class TemperatureTest {
         Temperature initialTempInKelvin = Temperature.ofKelvins(273.15 + 20.5);
 
         // When
-        Temperature actualInFahrenheit = initialTempInKelvin.toFahrenheit();
+        Temperature actualInFahrenheit = initialTempInKelvin.toUnit(TemperatureUnits.FAHRENHEIT);
         Temperature actualInKelvin = actualInFahrenheit.toBaseUnit();
+        double actualInFahrenheitVal = actualInFahrenheit.getInFahrenheits();
 
         // Then
         Temperature expectedInFahrenheit = Temperature.ofFahrenheit(68.9);
+        assertThat(actualInFahrenheit.getValue()).isEqualTo(actualInFahrenheitVal);
         assertThat(actualInFahrenheit).isEqualTo(expectedInFahrenheit);
         assertThat(actualInKelvin).isEqualTo(initialTempInKelvin);
     }

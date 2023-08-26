@@ -8,16 +8,23 @@ import java.util.Objects;
 public final class Energy implements PhysicalQuantity<Energy> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<Energy> unit;
 
     private Energy(double value, Unit<Energy> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class Energy implements PhysicalQuantity<Energy> {
 
     @Override
     public Energy toBaseUnit() {
-        double valueInJoules = unit.toBaseUnit(value);
+        double valueInJoules = unit.toValueInBaseUnit(value);
         return Energy.of(valueInJoules, EnergyUnits.JOULE);
     }
 
     @Override
     public Energy toUnit(Unit<Energy> targetUnit) {
-        double valueInJoules = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInJoules);
+        double valueInJoules = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoules);
         return Energy.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,56 +50,41 @@ public final class Energy implements PhysicalQuantity<Energy> {
         return Energy.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfJoules() {
-        if (unit == EnergyUnits.JOULE) {
-            return value;
-        }
-        return toUnit(EnergyUnits.JOULE).getValue();
+    // Convert to target unit
+    public double getInJoules() {
+        return getIn(EnergyUnits.JOULE);
     }
 
-    public double getValueOfKiloJoules() {
-        if (unit == EnergyUnits.KILOJOULE) {
-            return value;
-        }
-        return toUnit(EnergyUnits.KILOJOULE).getValue();
+    public double getInMilliJoules() {
+        return getIn(EnergyUnits.MILLIJOULE);
     }
 
-    // Custom converter methods, for most popular units
-    public Energy toJoules() {
-        return toUnit(EnergyUnits.JOULE);
+    public double getInKiloJoules() {
+        return getIn(EnergyUnits.KILOJOULE);
     }
 
-    public Energy toMilliJoules() {
-        return toUnit(EnergyUnits.MILLIJOULE);
+    public double getInMegaJoules() {
+        return getIn(EnergyUnits.MEGAJOULE);
     }
 
-    public Energy toKiloJoules() {
-        return toUnit(EnergyUnits.KILOJOULE);
+    public double getInBTUs() {
+        return getIn(EnergyUnits.BTU);
     }
 
-    public Energy toMegaJoules() {
-        return toUnit(EnergyUnits.MEGAJOULE);
+    public double getInCalories() {
+        return getIn(EnergyUnits.CALORIE);
     }
 
-    public Energy toBTU() {
-        return toUnit(EnergyUnits.BTU);
+    public double getInKiloCalories() {
+        return getIn(EnergyUnits.KILOCALORIE);
     }
 
-    public Energy toCalories() {
-        return toUnit(EnergyUnits.CALORIE);
+    public double getInWattHours() {
+        return getIn(EnergyUnits.WATT_HOUR);
     }
 
-    public Energy toKiloCalories() {
-        return toUnit(EnergyUnits.KILOCALORIE);
-    }
-
-    public Energy toWattHour() {
-        return toUnit(EnergyUnits.WATT_HOUR);
-    }
-
-    public Energy toKilowattHour() {
-        return toUnit(EnergyUnits.KILOWATT_HOUR);
+    public double getInKilowattHours() {
+        return getIn(EnergyUnits.KILOWATT_HOUR);
     }
 
     @Override
@@ -113,6 +105,7 @@ public final class Energy implements PhysicalQuantity<Energy> {
         return "Energy{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Energy of(double value, Unit<Energy> unit) {
         return new Energy(value, unit);
     }

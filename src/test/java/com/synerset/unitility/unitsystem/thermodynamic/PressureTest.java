@@ -15,11 +15,15 @@ class PressureTest {
         Pressure initialPressure = Pressure.ofPascal(101325);
 
         // When
-        Pressure actualInPsi = initialPressure.toPsi();
-        Pressure actualInPascal = actualInPsi.toPascal();
+        Pressure actualInPsi = initialPressure.toUnit(PressureUnits.PSI);
+        double actualInPsiVal = initialPressure.getInPsi();
+        Pressure actualInPascal = actualInPsi.toBaseUnit();
+        double actualInPascalVal = actualInPsi.getInPascals();
 
         // Then
         Pressure expectedInPsi = Pressure.ofPsi(14.6959487755131);
+        assertThat(actualInPsi.getValue()).isEqualTo(actualInPsiVal);
+        assertThat(actualInPascal.getValue()).isEqualTo(actualInPascalVal);
         assertThat(actualInPsi.getValue()).isEqualTo(expectedInPsi.getValue(), withPrecision(1E-11));
         assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
@@ -31,11 +35,13 @@ class PressureTest {
         Pressure initialPressure = Pressure.ofPascal(101325);
 
         // When
-        Pressure actualInBar = initialPressure.toBar();
-        Pressure actualInPascal = actualInBar.toPascal();
+        Pressure actualInBar = initialPressure.toUnit(PressureUnits.BAR);
+        double actualInBarVal = initialPressure.getInBar();
+        Pressure actualInPascal = actualInBar.toBaseUnit();
 
         // Then
         Pressure expectedInBar = Pressure.ofBar(1.01325);
+        assertThat(actualInBar.getValue()).isEqualTo(actualInBarVal);
         assertThat(actualInBar.getValue()).isEqualTo(expectedInBar.getValue(), withPrecision(1E-11));
         assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
@@ -47,11 +53,13 @@ class PressureTest {
         Pressure initialPressure = Pressure.ofPascal(101325);
 
         // When
-        Pressure actualInHectopascal = initialPressure.toHectoPascal();
-        Pressure actualInPascal = actualInHectopascal.toPascal();
+        Pressure actualInHectopascal = initialPressure.toUnit(PressureUnits.HECTOPASCAL);
+        double actualInHectopascalVal = initialPressure.getInHectoPascals();
+        Pressure actualInPascal = actualInHectopascal.toBaseUnit();
 
         // Then
         Pressure expectedInHectopascal = Pressure.ofHectoPascal(1013.25);
+        assertThat(actualInHectopascal.getValue()).isEqualTo(actualInHectopascalVal);
         assertThat(actualInHectopascal.getValue()).isEqualTo(expectedInHectopascal.getValue(), withPrecision(1E-10));
         assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
@@ -63,11 +71,13 @@ class PressureTest {
         Pressure initialPressure = Pressure.ofPascal(101325);
 
         // When
-        Pressure actualInMegapascal = initialPressure.toMegaPascal();
-        Pressure actualInPascal = actualInMegapascal.toPascal();
+        Pressure actualInMegapascal = initialPressure.toUnit(PressureUnits.MEGAPASCAL);
+        double actualInMegapascalVal = initialPressure.getInMegaPascals();
+        Pressure actualInPascal = actualInMegapascal.toBaseUnit();
 
         // Then
         Pressure expectedInMegapascal = Pressure.ofMegaPascal(0.101325);
+        assertThat(actualInMegapascal.getValue()).isEqualTo(actualInMegapascalVal);
         assertThat(actualInMegapascal.getValue()).isEqualTo(expectedInMegapascal.getValue(), withPrecision(1E-10));
         assertThat(actualInPascal.getValue()).isEqualTo(101325, withPrecision(1E-11));
     }
@@ -79,11 +89,13 @@ class PressureTest {
         Pressure initialPressure = Pressure.ofPascal(101325.0);
 
         // When
-        Pressure actualInMillibar = initialPressure.toMilliBar();
-        Pressure actualInPascal = actualInMillibar.toPascal();
+        Pressure actualInMillibar = initialPressure.toUnit(PressureUnits.MILLIBAR);
+        double actualInMillibarVal = initialPressure.getInMilliBar();
+        Pressure actualInPascal = actualInMillibar.toBaseUnit();
 
         // Then
         Pressure expectedInMillibar = Pressure.ofMilliBar(1013.25);
+        assertThat(actualInMillibar.getValue()).isEqualTo(actualInMillibarVal);
         assertThat(actualInMillibar).isEqualTo(expectedInMillibar);
         assertThat(actualInPascal).isEqualTo(initialPressure);
     }
@@ -95,11 +107,13 @@ class PressureTest {
         Pressure initialPressure = Pressure.ofPascal(101325.0);
 
         // When
-        Pressure actualInTorr = initialPressure.toTorr();
-        Pressure actualInPascal = actualInTorr.toPascal();
+        Pressure actualInTorr = initialPressure.toUnit(PressureUnits.TORR);
+        double actualInTorrValue = initialPressure.getInTorr();
+        Pressure actualInPascal = actualInTorr.toBaseUnit();
 
         // Then
         Pressure expectedInTorr = Pressure.ofTorr(759.9999999999979);
+        assertThat(actualInTorr.getValue()).isEqualTo(actualInTorrValue);
         assertThat(actualInTorr.getValue()).isEqualTo(expectedInTorr.getValue(), withPrecision(1E-15));
         assertThat(actualInPascal).isEqualTo(initialPressure);
     }

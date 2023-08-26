@@ -8,16 +8,23 @@ import java.util.Objects;
 public final class Density implements PhysicalQuantity<Density> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<Density> unit;
 
     private Density(double value, Unit<Density> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class Density implements PhysicalQuantity<Density> {
 
     @Override
     public Density toBaseUnit() {
-        double valueInKGpM3 = unit.toBaseUnit(value);
+        double valueInKGpM3 = unit.toValueInBaseUnit(value);
         return Density.of(valueInKGpM3, DensityUnits.KILOGRAM_PER_CUBIC_METER);
     }
 
     @Override
     public Density toUnit(Unit<Density> targetUnit) {
-        double valueInKGpM3 = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInKGpM3);
+        double valueInKGpM3 = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKGpM3);
         return Density.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,21 +50,17 @@ public final class Density implements PhysicalQuantity<Density> {
         return Density.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfKilogramPerCubicMeter() {
-        if (unit == DensityUnits.KILOGRAM_PER_CUBIC_METER) {
-            return value;
-        }
-        return toUnit(DensityUnits.KILOGRAM_PER_CUBIC_METER).getValue();
+    // Convert to target unit
+    public double getInKilogramsPerCubicMeters() {
+        return getIn(DensityUnits.KILOGRAM_PER_CUBIC_METER);
     }
 
-    // Custom converter methods, for most popular units
-    public Density toKilogramPerCubicMeter() {
-        return toUnit(DensityUnits.KILOGRAM_PER_CUBIC_METER);
+    public double getInPoundsPerCubicFoot() {
+        return getIn(DensityUnits.POUND_PER_CUBIC_FOOT);
     }
 
-    public Density toPoundPerCubicFoot() {
-        return toUnit(DensityUnits.POUND_PER_CUBIC_FOOT);
+    public double getInPoundsPerCubicInches() {
+        return getIn(DensityUnits.POUND_PER_CUBIC_INCH);
     }
 
     @Override
@@ -78,6 +81,7 @@ public final class Density implements PhysicalQuantity<Density> {
         return "Density{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Density of(double value, Unit<Density> unit) {
         return new Density(value, unit);
     }

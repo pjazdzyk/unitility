@@ -8,16 +8,23 @@ import java.util.Objects;
 public final class Force implements PhysicalQuantity<Force> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<Force> unit;
 
     private Force(double value, Unit<Force> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class Force implements PhysicalQuantity<Force> {
 
     @Override
     public Force toBaseUnit() {
-        double valueInNewtons = unit.toBaseUnit(value);
+        double valueInNewtons = unit.toValueInBaseUnit(value);
         return Force.of(valueInNewtons, ForceUnits.NEWTON);
     }
 
     @Override
     public Force toUnit(Unit<Force> targetUnit) {
-        double valueInNewtons = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInNewtons);
+        double valueInNewtons = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInNewtons);
         return Force.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,37 +50,29 @@ public final class Force implements PhysicalQuantity<Force> {
         return Force.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfNewtons() {
-        if (unit == ForceUnits.NEWTON) {
-            return value;
-        }
-        return toUnit(ForceUnits.NEWTON).getValue();
+    // Convert to target unit
+    public double getInNewtons() {
+        return getIn(ForceUnits.NEWTON);
     }
 
-    // Custom converter methods, for most popular units
-    public Force toNewtons() {
-        return toUnit(ForceUnits.NEWTON);
+    public double getInKiloNewtons() {
+        return getIn(ForceUnits.KILONEWTON);
     }
 
-    public Force toKiloNewtons() {
-        return toUnit(ForceUnits.KILONEWTON);
+    public double getInKiloponds() {
+        return getIn(ForceUnits.KILOPOND);
     }
 
-    public Force toKiloponds() {
-        return toUnit(ForceUnits.KILOPOND);
+    public double getInDynes() {
+        return getIn(ForceUnits.DYNE);
     }
 
-    public Force toDynes() {
-        return toUnit(ForceUnits.DYNE);
+    public double getInPoundsForce() {
+        return getIn(ForceUnits.POUND_FORCE);
     }
 
-    public Force toPoundForce() {
-        return toUnit(ForceUnits.POUND_FORCE);
-    }
-
-    public Force toPoundal() {
-        return toUnit(ForceUnits.POUNDAL);
+    public double getInPoundals() {
+        return getIn(ForceUnits.POUNDAL);
     }
 
     @Override
@@ -94,6 +93,7 @@ public final class Force implements PhysicalQuantity<Force> {
         return "Force{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Force of(double value, Unit<Force> unit) {
         return new Force(value, unit);
     }
