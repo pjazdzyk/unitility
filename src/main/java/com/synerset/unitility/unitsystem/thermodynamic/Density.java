@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Density implements PhysicalQuantity<Density> {
+public class Density implements PhysicalQuantity<Density> {
 
     private final double value;
     private final double baseValue;
     private final Unit<Density> unit;
 
-    private Density(double value, Unit<Density> unit) {
+    public Density(double value, Unit<Density> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

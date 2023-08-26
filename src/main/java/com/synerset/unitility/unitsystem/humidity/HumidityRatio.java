@@ -5,14 +5,14 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class HumidityRatio implements PhysicalQuantity<HumidityRatio> {
+public class HumidityRatio implements PhysicalQuantity<HumidityRatio> {
 
     public static final RelativeHumidity HUM_RATIO_MIN_LIMIT = RelativeHumidity.ofPercentage(0);
     private final double value;
     private final double baseValue;
     private final Unit<HumidityRatio> unit;
 
-    private HumidityRatio(double value, Unit<HumidityRatio> unit) {
+    public HumidityRatio(double value, Unit<HumidityRatio> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

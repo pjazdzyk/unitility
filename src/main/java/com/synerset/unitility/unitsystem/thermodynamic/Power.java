@@ -5,12 +5,12 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Power implements PhysicalQuantity<Power> {
+public class Power implements PhysicalQuantity<Power> {
     private final double value;
     private final double baseValue;
     private final Unit<Power> unit;
 
-    private Power(double value, Unit<Power> unit) {
+    public Power(double value, Unit<Power> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

@@ -5,7 +5,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
+public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
 
     public static final RelativeHumidity RH_MIN_LIMIT = RelativeHumidity.ofPercentage(0);
     public static final RelativeHumidity RH_MAX_LIMIT = RelativeHumidity.ofPercentage(100);
@@ -13,7 +13,7 @@ public final class RelativeHumidity implements PhysicalQuantity<RelativeHumidity
     private final double baseValue;
     private final Unit<RelativeHumidity> unit;
 
-    private RelativeHumidity(double value, Unit<RelativeHumidity> unit) {
+    public RelativeHumidity(double value, Unit<RelativeHumidity> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

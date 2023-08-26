@@ -5,14 +5,14 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Torque implements PhysicalQuantity<Torque> {
+public class Torque implements PhysicalQuantity<Torque> {
 
     public static final Torque PHYSICAL_MIN_LIMIT = Torque.ofNewtonMeters(0);
     private final double value;
     private final double baseValue;
     private final Unit<Torque> unit;
 
-    private Torque(double value, Unit<Torque> unit) {
+    public Torque(double value, Unit<Torque> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

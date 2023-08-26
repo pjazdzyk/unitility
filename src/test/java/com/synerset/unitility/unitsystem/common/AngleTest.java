@@ -24,7 +24,6 @@ class AngleTest {
         Angle expectedRadian = Angle.of(Math.PI/4, AngleUnits.RADIANS);
         assertThat(actualInRadians).isEqualTo(expectedRadian);
         assertThat(actualRadiansVal).isEqualTo(actualInRadians.getValue());
-        assertThat(actualRadiansVal).isEqualTo(actualInRadians.getValue());
         assertThat(actualInDegrees.getValue()).isEqualTo(actualInDegreesVal);
     }
 

@@ -5,14 +5,14 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Area implements PhysicalQuantity<Area> {
+public class Area implements PhysicalQuantity<Area> {
 
     public static final Area PHYSICAL_MIN_LIMIT = Area.ofSquareMeters(0);
     private final double value;
     private final double baseValue;
     private final Unit<Area> unit;
 
-    private Area(double value, Unit<Area> unit) {
+    public Area(double value, Unit<Area> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

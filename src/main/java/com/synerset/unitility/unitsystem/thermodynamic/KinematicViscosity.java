@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> {
+public class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> {
 
     private final double value;
     private final double baseValue;
     private final Unit<KinematicViscosity> unit;
 
-    private KinematicViscosity(double value, Unit<KinematicViscosity> unit) {
+    public KinematicViscosity(double value, Unit<KinematicViscosity> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

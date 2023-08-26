@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Distance implements PhysicalQuantity<Distance> {
+public class Distance implements PhysicalQuantity<Distance> {
 
     private final double value;
     private final double baseValue;
     private final Unit<Distance> unit;
 
-    private Distance(double value, Unit<Distance> unit) {
+    public Distance(double value, Unit<Distance> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class DynamicViscosity implements PhysicalQuantity<DynamicViscosity> {
+public class DynamicViscosity implements PhysicalQuantity<DynamicViscosity> {
 
     private final double value;
     private final double baseValue;
     private final Unit<DynamicViscosity> unit;
 
-    private DynamicViscosity(double value, Unit<DynamicViscosity> unit) {
+    public DynamicViscosity(double value, Unit<DynamicViscosity> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

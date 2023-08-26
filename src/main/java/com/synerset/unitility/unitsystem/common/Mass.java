@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Mass implements PhysicalQuantity<Mass> {
+public class Mass implements PhysicalQuantity<Mass> {
 
     private final double value;
     private final double baseValue;
     private final Unit<Mass> unit;
 
-    private Mass(double value, Unit<Mass> unit) {
+    public Mass(double value, Unit<Mass> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

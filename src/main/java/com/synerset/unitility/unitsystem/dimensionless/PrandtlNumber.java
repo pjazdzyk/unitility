@@ -5,12 +5,12 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
+public class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
     private final double value;
     private final double baseValue;
     private final Unit<PrandtlNumber> unit;
 
-    private PrandtlNumber(double value) {
+    public PrandtlNumber(double value) {
         this.value = value;
         this.unit = PrandtlNumberUnits.DIMENSIONLESS;
         this.baseValue = unit.toValueInBaseUnit(value);

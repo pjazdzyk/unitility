@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class MassFlow implements PhysicalQuantity<MassFlow> {
+public class MassFlow implements PhysicalQuantity<MassFlow> {
 
     private final double value;
     private final double baseValue;
     private final Unit<MassFlow> unit;
 
-    private MassFlow(double value, Unit<MassFlow> unit) {
+    public MassFlow(double value, Unit<MassFlow> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

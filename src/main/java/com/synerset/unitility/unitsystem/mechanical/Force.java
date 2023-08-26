@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Force implements PhysicalQuantity<Force> {
+public class Force implements PhysicalQuantity<Force> {
 
     private final double value;
     private final double baseValue;
     private final Unit<Force> unit;
 
-    private Force(double value, Unit<Force> unit) {
+    public Force(double value, Unit<Force> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

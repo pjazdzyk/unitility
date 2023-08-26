@@ -5,12 +5,12 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
+public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
     private final double value;
     private final double baseValue;
     private final Unit<SpecificEnthalpy> unit;
 
-    private SpecificEnthalpy(double value, Unit<SpecificEnthalpy> unit) {
+    public SpecificEnthalpy(double value, Unit<SpecificEnthalpy> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

@@ -5,12 +5,12 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class ThermalConductivity implements PhysicalQuantity<ThermalConductivity> {
+public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity> {
     private final double value;
     private final double baseValue;
     private final Unit<ThermalConductivity> unit;
 
-    private ThermalConductivity(double value, Unit<ThermalConductivity> unit) {
+    public ThermalConductivity(double value, Unit<ThermalConductivity> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

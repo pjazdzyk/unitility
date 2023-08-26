@@ -6,13 +6,13 @@ import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
-public final class Angle implements PhysicalQuantity<Angle> {
+public class Angle implements PhysicalQuantity<Angle> {
 
     private final double value;
     private final double baseValue;
     private final Unit<Angle> unit;
 
-    private Angle(double value, Unit<Angle> unit) {
+    public Angle(double value, Unit<Angle> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

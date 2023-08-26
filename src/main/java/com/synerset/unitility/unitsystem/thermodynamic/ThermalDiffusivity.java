@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivity> {
+public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivity> {
 
     private final double value;
     private final double baseValue;
     private final Unit<ThermalDiffusivity> unit;
 
-    private ThermalDiffusivity(double value, Unit<ThermalDiffusivity> unit) {
+    public ThermalDiffusivity(double value, Unit<ThermalDiffusivity> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

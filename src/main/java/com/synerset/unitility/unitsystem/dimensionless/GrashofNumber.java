@@ -5,12 +5,12 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
+public class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
     private final double value;
     private final double baseValue;
     private final Unit<GrashofNumber> unit;
 
-    private GrashofNumber(double value) {
+    public GrashofNumber(double value) {
         this.value = value;
         this.unit = GrashofNumberUnits.DIMENSIONLESS;
         this.baseValue = unit.toValueInBaseUnit(value);

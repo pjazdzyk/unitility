@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Momentum implements PhysicalQuantity<Momentum> {
+public class Momentum implements PhysicalQuantity<Momentum> {
 
     private final double value;
     private final double baseValue;
     private final Unit<Momentum> unit;
 
-    private Momentum(double value, Unit<Momentum> unit) {
+    public Momentum(double value, Unit<Momentum> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

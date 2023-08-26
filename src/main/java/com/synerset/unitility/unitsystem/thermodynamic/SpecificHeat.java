@@ -5,12 +5,12 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
+public class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
     private final double value;
     private final double baseValue;
     private final Unit<SpecificHeat> unit;
 
-    private SpecificHeat(double value, Unit<SpecificHeat> unit) {
+    public SpecificHeat(double value, Unit<SpecificHeat> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

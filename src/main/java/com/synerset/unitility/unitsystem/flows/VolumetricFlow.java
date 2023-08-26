@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
+public class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
 
     private final double value;
     private final double baseValue;
     private final Unit<VolumetricFlow> unit;
 
-    private VolumetricFlow(double value, Unit<VolumetricFlow> unit) {
+    public VolumetricFlow(double value, Unit<VolumetricFlow> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

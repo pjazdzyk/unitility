@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Velocity implements PhysicalQuantity<Velocity> {
+public class Velocity implements PhysicalQuantity<Velocity> {
 
     private final double value;
     private final double baseValue;
     private final Unit<Velocity> unit;
 
-    private Velocity(double value, Unit<Velocity> unit) {
+    public Velocity(double value, Unit<Velocity> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

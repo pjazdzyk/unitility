@@ -6,14 +6,14 @@ import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
-public final class Temperature implements PhysicalQuantity<Temperature> {
+public class Temperature implements PhysicalQuantity<Temperature> {
 
     public static final Temperature PHYSICAL_MIN_LIMIT = Temperature.ofKelvins(0);
     private final double value;
     private final double baseValue;
     private final Unit<Temperature> unit;
 
-    private Temperature(double value, Unit<Temperature> unit) {
+    public Temperature(double value, Unit<Temperature> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

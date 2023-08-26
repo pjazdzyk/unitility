@@ -5,12 +5,12 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Volume implements PhysicalQuantity<Volume> {
+public class Volume implements PhysicalQuantity<Volume> {
     private final double value;
     private final double baseValue;
     private final Unit<Volume> unit;
 
-    private Volume(double value, Unit<Volume> unit) {
+    public Volume(double value, Unit<Volume> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);

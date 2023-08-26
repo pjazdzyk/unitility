@@ -5,13 +5,13 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Energy implements PhysicalQuantity<Energy> {
+public class Energy implements PhysicalQuantity<Energy> {
 
     private final double value;
     private final double baseValue;
     private final Unit<Energy> unit;
 
-    private Energy(double value, Unit<Energy> unit) {
+    public Energy(double value, Unit<Energy> unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
