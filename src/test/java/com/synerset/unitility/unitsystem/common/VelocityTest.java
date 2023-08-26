@@ -16,11 +16,15 @@ class VelocityTest {
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
         // When
-        Velocity actualInCentimetersPerSec = initialVelocity.toCentimetersPerSecond();
+        Velocity actualInCentimetersPerSec = initialVelocity.toUnit(VelocityUnits.CENTIMETER_PER_SECOND);
+        double actualInCentimetersPerSecVal = initialVelocity.toCentimetersPerSeconds();
         Velocity actualInMetersPerSecond = actualInCentimetersPerSec.toBaseUnit();
+        double actualInMetersPerSecondVal = actualInCentimetersPerSec.toMetersPerSecond();
 
         // Then
         Velocity expectedInKilometersPerHour = Velocity.ofCentimetersPerSecond(1000.0);
+        assertThat(actualInCentimetersPerSec.getValue()).isEqualTo(actualInCentimetersPerSecVal);
+        assertThat(actualInMetersPerSecond.getValue()).isEqualTo(actualInMetersPerSecondVal);
         assertThat(actualInCentimetersPerSec).isEqualTo(expectedInKilometersPerHour);
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
@@ -32,11 +36,13 @@ class VelocityTest {
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
         // When
-        Velocity actualInKilometersPerHour = initialVelocity.toKilometersPerHour();
+        Velocity actualInKilometersPerHour = initialVelocity.toUnit(VelocityUnits.KILOMETER_PER_HOUR);
+        double actualInKilometersPerHourVal = initialVelocity.toKilometersPerHours();
         Velocity actualInMetersPerSecond = actualInKilometersPerHour.toBaseUnit();
 
         // Then
         Velocity expectedInKilometersPerHour = Velocity.ofKilometersPerHour(36.0);
+        assertThat(actualInKilometersPerHour.getValue()).isEqualTo(actualInKilometersPerHourVal);
         assertThat(actualInKilometersPerHour).isEqualTo(expectedInKilometersPerHour);
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
@@ -48,11 +54,13 @@ class VelocityTest {
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
         // When
-        Velocity actualInInchesPerSec = initialVelocity.toInchesPerSecond();
+        Velocity actualInInchesPerSec = initialVelocity.toUnit(VelocityUnits.INCH_PER_SECOND);
+        double actualInInchesPerSecVal = initialVelocity.toInchesPerSeconds();
         Velocity actualInMetersPerSecond = actualInInchesPerSec.toBaseUnit();
 
         // Then
         Velocity expectedInInchesPerSec = Velocity.ofInchesPerSecond(393.7007874015748);
+        assertThat(actualInInchesPerSec.getValue()).isEqualTo(actualInInchesPerSecVal);
         assertThat(actualInInchesPerSec.getValue()).isEqualTo(expectedInInchesPerSec.getValue(), withPrecision(1e-15));
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
@@ -64,11 +72,13 @@ class VelocityTest {
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
         // When
-        Velocity actualInFeetPerSecond = initialVelocity.toFeetPerSecond();
+        Velocity actualInFeetPerSecond = initialVelocity.toUnit(VelocityUnits.FEET_PER_SECOND);
+        double actualInFeetPerSecondVal = initialVelocity.toFeetPerSeconds();
         Velocity actualInMetersPerSecond = actualInFeetPerSecond.toBaseUnit();
 
         // Then
         Velocity expectedInFeetPerSecond = Velocity.ofFeetPerSecond(32.80839895013123);
+        assertThat(actualInFeetPerSecond.getValue()).isEqualTo(actualInFeetPerSecondVal);
         assertThat(actualInFeetPerSecond.getValue()).isEqualTo(expectedInFeetPerSecond.getValue(), withPrecision(1e-14));
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
@@ -80,11 +90,13 @@ class VelocityTest {
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
         // When
-        Velocity actualInMilesPerHour = initialVelocity.toMilesPerHour();
+        Velocity actualInMilesPerHour = initialVelocity.toUnit(VelocityUnits.MILES_PER_HOUR);
+        double actualInMilesPerHourVal = initialVelocity.toMilesPerHours();
         Velocity actualInMetersPerSecond = actualInMilesPerHour.toBaseUnit();
 
         // Then
         Velocity expectedInMilesPerHour = Velocity.ofMilesPerHour(22.36936292054402);
+        assertThat(actualInMilesPerHour.getValue()).isEqualTo(actualInMilesPerHourVal);
         assertThat(actualInMilesPerHour.getValue()).isEqualTo(expectedInMilesPerHour.getValue(), withPrecision(1e-14));
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
@@ -96,11 +108,13 @@ class VelocityTest {
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
         // When
-        Velocity actualInKnots = initialVelocity.toKnots();
+        Velocity actualInKnots = initialVelocity.toUnit(VelocityUnits.KNOTS);
+        double actualInKnotsVal = initialVelocity.toKnots();
         Velocity actualInMetersPerSecond = actualInKnots.toBaseUnit();
 
         // Then
         Velocity expectedInKnots = Velocity.ofKnots(19.43844492440606);
+        assertThat(actualInKnots.getValue()).isEqualTo(actualInKnotsVal);
         assertThat(actualInKnots.getValue()).isEqualTo(expectedInKnots.getValue(), withPrecision(1e-14));
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
@@ -112,11 +126,13 @@ class VelocityTest {
         Velocity initialVelocity = Velocity.ofMetersPerSecond(100.0);
 
         // When
-        Velocity actualInMach = initialVelocity.toMach();
+        Velocity actualInMach = initialVelocity.toUnit(VelocityUnits.MACH);
+        double actualInMachVal = initialVelocity.toMach();
         Velocity actualInMetersPerSecond = actualInMach.toBaseUnit();
 
         // Then
         Velocity expectedInMachs = Velocity.ofMach(0.293866995797702);
+        assertThat(actualInMach.getValue()).isEqualTo(actualInMachVal);
         assertThat(actualInMach.getValue()).isEqualTo(expectedInMachs.getValue(), withPrecision(1e-14));
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }

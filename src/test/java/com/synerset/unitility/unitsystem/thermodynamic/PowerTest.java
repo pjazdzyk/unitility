@@ -13,14 +13,18 @@ class PowerTest {
     @DisplayName("should convert W from BTU/hour and vice versa")
     void shouldProperlyConvertWattsFromBTUPerHour() {
         // Given
-        Power initialPower = Power.ofWatts(1000);
+        Power initialPowerInWatts = Power.ofWatts(1000);
 
         // When
-        Power actualInBTUPerHour = initialPower.toBTUPerHour();
-        Power actualInWatts = actualInBTUPerHour.toWatts();
+        Power actualInBTUPerHour = initialPowerInWatts.toUnit(PowerUnits.BTU_PER_HOUR);
+        double actualInBTUPerHourVal = initialPowerInWatts.getInBTUPerHour();
+        Power actualInWatts = actualInBTUPerHour.toBaseUnit();
+        double actualInWattsVal = actualInBTUPerHour.getInWatts();
 
         // Then
         Power expectedInBTUPerHour = Power.ofBTUPerHour(3412.141633127942);
+        assertThat(actualInBTUPerHour.getValue()).isEqualTo(actualInBTUPerHourVal);
+        assertThat(actualInWatts.getValue()).isEqualTo(actualInWattsVal);
         assertThat(actualInBTUPerHour.getValue()).isEqualTo(expectedInBTUPerHour.getValue(), withPrecision(1E-14));
         assertThat(actualInWatts.getValue()).isEqualTo(1000, withPrecision(1E-9));
     }
@@ -32,11 +36,13 @@ class PowerTest {
         Power initialPowerInWatts = Power.ofWatts(10_000);
 
         // When
-        Power actualInKilowatts = initialPowerInWatts.toKiloWatts();
+        Power actualInKilowatts = initialPowerInWatts.toUnit(PowerUnits.KILOWATT);
+        double actualInKilowattsVal = initialPowerInWatts.getInKiloWatts();
         Power actualInWatts = actualInKilowatts.toBaseUnit();
 
         // Then
         Power expectedInKiloWatts = Power.ofKiloWatts(10);
+        assertThat(actualInKilowatts.getValue()).isEqualTo(actualInKilowattsVal);
         assertThat(actualInKilowatts).isEqualTo(expectedInKiloWatts);
         assertThat(actualInWatts).isEqualTo(initialPowerInWatts);
     }
@@ -48,11 +54,13 @@ class PowerTest {
         Power initialPowerInWatts = Power.ofWatts(2_000_000);
 
         // When
-        Power actualInMegaWatts = initialPowerInWatts.toMegaWatts();
+        Power actualInMegaWatts = initialPowerInWatts.toUnit(PowerUnits.MEGAWATT);
+        double actualInMegaWattsVal = initialPowerInWatts.getInMegaWatts();
         Power actualInWatts = actualInMegaWatts.toBaseUnit();
 
         // Then
         Power expectedInMegaWatts = Power.ofMegaWatts(2);
+        assertThat(actualInMegaWatts.getValue()).isEqualTo(actualInMegaWattsVal);
         assertThat(actualInMegaWatts).isEqualTo(expectedInMegaWatts);
         assertThat(actualInWatts).isEqualTo(initialPowerInWatts);
     }
@@ -64,11 +72,13 @@ class PowerTest {
         Power initialPowerInWatts = Power.ofWatts(2000);
 
         // When
-        Power actualInHorsePower = initialPowerInWatts.toHorsePower();
+        Power actualInHorsePower = initialPowerInWatts.toUnit(PowerUnits.HORSE_POWER);
+        double actualInHorsePowerVal = initialPowerInWatts.getInHorsePower();
         Power actualInWatts = actualInHorsePower.toBaseUnit();
 
         // Then
         Power expectedInHorsePower = Power.ofHorsePower(2.68204417919006);
+        assertThat(actualInHorsePower.getValue()).isEqualTo(actualInHorsePowerVal);
         assertThat(actualInHorsePower.getValue()).isEqualTo(expectedInHorsePower.getValue(), withPrecision(1E-13));
         assertThat(actualInWatts.getValue()).isEqualTo(initialPowerInWatts.getValue(), withPrecision(1E-12));
     }

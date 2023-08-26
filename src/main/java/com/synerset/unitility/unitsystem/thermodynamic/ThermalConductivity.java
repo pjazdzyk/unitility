@@ -5,18 +5,25 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class ThermalConductivity implements PhysicalQuantity<ThermalConductivity> {
+public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity> {
     private final double value;
+    private final double baseValue;
     private final Unit<ThermalConductivity> unit;
 
-    private ThermalConductivity(double value, Unit<ThermalConductivity> unit) {
+    public ThermalConductivity(double value, Unit<ThermalConductivity> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -26,14 +33,14 @@ public final class ThermalConductivity implements PhysicalQuantity<ThermalConduc
 
     @Override
     public ThermalConductivity toBaseUnit() {
-        double valueInWattsPerMeterKelvin = unit.toBaseUnit(value);
+        double valueInWattsPerMeterKelvin = unit.toValueInBaseUnit(value);
         return ThermalConductivity.of(valueInWattsPerMeterKelvin, ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
     }
 
     @Override
     public ThermalConductivity toUnit(Unit<ThermalConductivity> targetUnit) {
-        double valueInWattsPerMeterKelvin = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInWattsPerMeterKelvin);
+        double valueInWattsPerMeterKelvin = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInWattsPerMeterKelvin);
         return ThermalConductivity.of(valueInTargetUnit, targetUnit);
     }
 
@@ -42,25 +49,17 @@ public final class ThermalConductivity implements PhysicalQuantity<ThermalConduc
         return ThermalConductivity.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfWatsPerMeterKelvin() {
-        if (unit == ThermalConductivityUnits.WATTS_PER_METER_KELVIN) {
-            return value;
-        }
-        return toUnit(ThermalConductivityUnits.WATTS_PER_METER_KELVIN).getValue();
+    // Convert to target unit
+    public double getInWattsPerMeterKelvin() {
+        return getIn(ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
     }
 
-    // Custom converter methods, for most popular units
-    public ThermalConductivity toWattsPerMeterKelvin() {
-        return toUnit(ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
+    public double getInKilowattsPerMeterKelvin() {
+        return getIn(ThermalConductivityUnits.KILOWATTS_PER_METER_KELVIN);
     }
 
-    public ThermalConductivity toKilowattsPerMeterKelvin() {
-        return toUnit(ThermalConductivityUnits.KILOWATTS_PER_METER_KELVIN);
-    }
-
-    public ThermalConductivity toBTUPerHourFeetFahrenheit() {
-        return toUnit(ThermalConductivityUnits.BTU_PER_HOUR_FOOT_FAHRENHEIT);
+    public double getInBTUsPerHourFeetFahrenheit() {
+        return getIn(ThermalConductivityUnits.BTU_PER_HOUR_FOOT_FAHRENHEIT);
     }
 
     @Override
@@ -81,6 +80,7 @@ public final class ThermalConductivity implements PhysicalQuantity<ThermalConduc
         return "ThermalConductivity{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static ThermalConductivity of(double value, Unit<ThermalConductivity> unit) {
         return new ThermalConductivity(value, unit);
     }

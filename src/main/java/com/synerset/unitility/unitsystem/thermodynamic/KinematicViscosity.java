@@ -5,19 +5,26 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> {
+public class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<KinematicViscosity> unit;
 
-    private KinematicViscosity(double value, Unit<KinematicViscosity> unit) {
+    public KinematicViscosity(double value, Unit<KinematicViscosity> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class KinematicViscosity implements PhysicalQuantity<KinematicVisco
 
     @Override
     public KinematicViscosity toBaseUnit() {
-        double valueInSquareMeterPerSecond = unit.toBaseUnit(value);
+        double valueInSquareMeterPerSecond = unit.toValueInBaseUnit(value);
         return KinematicViscosity.of(valueInSquareMeterPerSecond, KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
     }
 
     @Override
     public KinematicViscosity toUnit(Unit<KinematicViscosity> targetUnit) {
-        double valueInSquareMeterPerSecond = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInSquareMeterPerSecond);
+        double valueInSquareMeterPerSecond = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInSquareMeterPerSecond);
         return KinematicViscosity.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,21 +50,13 @@ public final class KinematicViscosity implements PhysicalQuantity<KinematicVisco
         return KinematicViscosity.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfSquareMetersPerSecond() {
-        if (unit == KinematicViscosityUnits.SQUARE_METER_PER_SECOND) {
-            return value;
-        }
-        return toUnit(KinematicViscosityUnits.SQUARE_METER_PER_SECOND).getValue();
+    // Convert to target unit
+    public double getInSquareMetersPerSecond() {
+        return getIn(KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
     }
 
-    // Custom converter methods, for most popular units
-    public KinematicViscosity toSquareMeterPerSecond(){
-        return toUnit(KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
-    }
-
-    public KinematicViscosity toSquareFootPerSecond(){
-        return toUnit(KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
+    public double getInSquareFeetPerSecond() {
+        return getIn(KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
     }
 
     @Override
@@ -78,6 +77,7 @@ public final class KinematicViscosity implements PhysicalQuantity<KinematicVisco
         return "KinematicViscosity{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static KinematicViscosity of(double value, Unit<KinematicViscosity> unit) {
         return new KinematicViscosity(value, unit);
     }

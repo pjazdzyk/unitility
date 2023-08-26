@@ -17,12 +17,16 @@ class MomentumTest {
 
         // When
         Momentum actualInKgMPerS = initialMomentumInLbFtPerS.toUnit(MomentumUnits.KILOGRAM_METER_PER_SECOND);
-        Momentum actualInPoundFeetPerSecond = actualInKgMPerS.toUnit(MomentumUnits.POUND_FEET_PER_SECOND);
+        Momentum actualInPoundFeetPerSec = actualInKgMPerS.toUnit(MomentumUnits.POUND_FEET_PER_SECOND);
+        double actualInPoundFeetPerSecVal = actualInKgMPerS.getInPoundFeetPerSecond();
+        double actualInKgMPerSVal = actualInPoundFeetPerSec.getInKilogramMetersPerSecond();
 
         // Then
         Momentum expectedInKgMPerS = Momentum.ofKilogramMeterPerSecond(1.38254954376);
+        assertThat(actualInPoundFeetPerSec.getValue()).isEqualTo(actualInPoundFeetPerSecVal);
+        assertThat(actualInKgMPerS.getValue()).isEqualTo(actualInKgMPerSVal);
         assertThat(actualInKgMPerS.getValue()).isEqualTo(expectedInKgMPerS.getValue(), withPrecision(1E-15));
-        assertThat(actualInPoundFeetPerSecond).isEqualTo(initialMomentumInLbFtPerS);
+        assertThat(actualInPoundFeetPerSec).isEqualTo(initialMomentumInLbFtPerS);
     }
 
     @Test
@@ -34,9 +38,11 @@ class MomentumTest {
         // When
         Momentum actualInKgMPerS = initialMomentumInGCmPerS.toUnit(MomentumUnits.KILOGRAM_METER_PER_SECOND);
         Momentum actualInGCmPerS = actualInKgMPerS.toUnit(MomentumUnits.GRAM_CENTIMETRE_PER_SECOND);
+        double actualInGCmPerSVal = actualInKgMPerS.getInGramCentimetersPerSecond();
 
         // Then
         Momentum expectedInKgMPerS = Momentum.ofKilogramMeterPerSecond(0.01);
+        assertThat(actualInGCmPerS.getValue()).isEqualTo(actualInGCmPerSVal);
         assertThat(actualInKgMPerS).isEqualTo(expectedInKgMPerS);
         assertThat(actualInGCmPerS.getValue()).isEqualTo(initialMomentumInGCmPerS.getValue(), withPrecision(1E-13));
     }

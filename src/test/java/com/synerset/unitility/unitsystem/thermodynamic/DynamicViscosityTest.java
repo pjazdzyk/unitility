@@ -15,11 +15,15 @@ class DynamicViscosityTest {
         DynamicViscosity initialViscosity = DynamicViscosity.ofKiloGramPerMeterSecond(100);
 
         // When
-        DynamicViscosity actual_Poise = initialViscosity.toPoise();
-        DynamicViscosity actual_KG_PER_M_S = actual_Poise.toKiloGramPerMeterSecond();
+        DynamicViscosity actual_Poise = initialViscosity.toUnit(DynamicViscosityUnits.POISE);
+        double actual_PoiseVal = initialViscosity.getInPoise();
+        DynamicViscosity actual_KG_PER_M_S = actual_Poise.toBaseUnit();
+        double actual_KG_PER_M_SVal = actual_Poise.getInKiloGramPerMeterSecond();
 
         // Then
         DynamicViscosity expected_Poise = DynamicViscosity.ofPoise(1000);
+        assertThat(actual_Poise.getValue()).isEqualTo(actual_PoiseVal);
+        assertThat(actual_KG_PER_M_S.getValue()).isEqualTo(actual_KG_PER_M_SVal);
         assertThat(actual_Poise.getValue()).isEqualTo(expected_Poise.getValue());
         assertThat(actual_KG_PER_M_S.getValue()).isEqualTo(initialViscosity.getValue());
     }
@@ -31,11 +35,13 @@ class DynamicViscosityTest {
         DynamicViscosity initialViscosity = DynamicViscosity.ofKiloGramPerMeterSecond(100);
 
         // When
-        DynamicViscosity actual_PaS = initialViscosity.toPascalSecond();
-        DynamicViscosity actual_KG_PER_M_S = actual_PaS.toKiloGramPerMeterSecond();
+        DynamicViscosity actual_PaS = initialViscosity.toUnit(DynamicViscosityUnits.PASCAL_SECOND);
+        double actual_PaSVal = initialViscosity.getInPascalsSecond();
+        DynamicViscosity actual_KG_PER_M_S = actual_PaS.toBaseUnit();
 
         // Then
         DynamicViscosity expected_PaS = DynamicViscosity.ofPascalSecond(100);
+        assertThat(actual_PaS.getValue()).isEqualTo(actual_PaSVal);
         assertThat(actual_PaS.getValue()).isEqualTo(expected_PaS.getValue());
         assertThat(actual_KG_PER_M_S.getValue()).isEqualTo(initialViscosity.getValue());
     }

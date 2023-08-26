@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum RelativeHumidityUnits implements Unit<RelativeHumidity>{
+public enum RelativeHumidityUnits implements Unit<RelativeHumidity> {
 
     PERCENT("%", val -> val, val -> val),
     DECIMAL("-", val -> val * 100, val -> val / 100);
@@ -30,12 +30,12 @@ public enum RelativeHumidityUnits implements Unit<RelativeHumidity>{
     }
 
     @Override
-    public double toBaseUnit(double valueInThisUnit) {
+    public double toValueInBaseUnit(double valueInThisUnit) {
         return toBaseConverter.applyAsDouble(valueInThisUnit);
     }
 
     @Override
-    public double fromBaseToThisUnit(double valueInBaseUnit) {
+    public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 

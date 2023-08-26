@@ -8,7 +8,7 @@ public enum TemperatureUnits implements Unit<Temperature> {
 
     KELVIN("K", val -> val, val -> val),
     CELSIUS("°C", val -> val + 273.15, val -> val - 273.15),
-    FAHRENHEIT("°F", val ->  (val - 32) * 5/9 + 273.15, val -> (val - 273.15) * 9/5 + 32);
+    FAHRENHEIT("°F", val -> (val - 32) * 5 / 9 + 273.15, val -> (val - 273.15) * 9 / 5 + 32);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -31,12 +31,12 @@ public enum TemperatureUnits implements Unit<Temperature> {
     }
 
     @Override
-    public double toBaseUnit(double valueInThisUnit) {
+    public double toValueInBaseUnit(double valueInThisUnit) {
         return toBaseConverter.applyAsDouble(valueInThisUnit);
     }
 
     @Override
-    public double fromBaseToThisUnit(double valueInBaseUnit) {
+    public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 

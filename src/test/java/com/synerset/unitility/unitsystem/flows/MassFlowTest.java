@@ -16,13 +16,17 @@ class MassFlowTest {
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 
         // When
-        MassFlow actual_KG_PER_H = initialMassFlow.toKiloGramPerHour();
-        MassFlow actual_KG_PER_S = actual_KG_PER_H.toKilogramsPerSecond();
+        MassFlow actual_KG_PER_Hr = initialMassFlow.toUnit(MassFlowUnits.KILOGRAM_PER_HOUR);
+        double actual_KG_PER_HrVal = initialMassFlow.getInKiloGramsPerHour();
+        MassFlow actual_KG_PER_Sec = actual_KG_PER_Hr.toBaseUnit();
+        double actual_KG_PER_SecVal = actual_KG_PER_Hr.getInKilogramsPerSecond();
 
         // Then
         MassFlow expected_KG_PER_H = MassFlow.ofKilogramsPerHour(5400);
-        assertThat(actual_KG_PER_H).isEqualTo(expected_KG_PER_H);
-        assertThat(actual_KG_PER_S).isEqualTo(initialMassFlow);
+        assertThat(actual_KG_PER_Hr.getValue()).isEqualTo(actual_KG_PER_HrVal);
+        assertThat(actual_KG_PER_Sec.getValue()).isEqualTo(actual_KG_PER_SecVal);
+        assertThat(actual_KG_PER_Hr).isEqualTo(expected_KG_PER_H);
+        assertThat(actual_KG_PER_Sec).isEqualTo(initialMassFlow);
     }
 
     @Test
@@ -32,11 +36,13 @@ class MassFlowTest {
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 
         // When
-        MassFlow actual_TON_PER_H = initialMassFlow.toTonnesPerHour();
-        MassFlow actual_KG_PER_S = actual_TON_PER_H.toKilogramsPerSecond();
+        MassFlow actual_TON_PER_H = initialMassFlow.toUnit(MassFlowUnits.TONNE_PER_HOUR);
+        double actual_TON_PER_HVal = initialMassFlow.getInTonnesPerHour();
+        MassFlow actual_KG_PER_S = actual_TON_PER_H.toBaseUnit();
 
         // Then
         MassFlow expected_TON_PER_H = MassFlow.ofTonnesPerHour(5.4);
+        assertThat(actual_TON_PER_H.getValue()).isEqualTo(actual_TON_PER_HVal);
         assertThat(actual_TON_PER_H.getValue()).isEqualTo(expected_TON_PER_H.getValue(), withPrecision(1E-15));
         assertThat(actual_KG_PER_S).isEqualTo(initialMassFlow);
     }
@@ -48,11 +54,13 @@ class MassFlowTest {
         MassFlow initialMassFlow = MassFlow.ofKilogramsPerSecond(1.5);
 
         // When
-        MassFlow actual_LB_PER_S = initialMassFlow.toPoundsPerSecond();
-        MassFlow actual_KG_PER_S = actual_LB_PER_S.toKilogramsPerSecond();
+        MassFlow actual_LB_PER_S = initialMassFlow.toUnit(MassFlowUnits.POUND_PER_SECOND);
+        double actual_LB_PER_SVal = initialMassFlow.getInPoundsPerSecond();
+        MassFlow actual_KG_PER_S = actual_LB_PER_S.toBaseUnit();
 
         // Then
         MassFlow expected_LB_PER_S = MassFlow.ofPoundsPerSecond(3.306933932773164);
+        assertThat(actual_LB_PER_S.getValue()).isEqualTo(actual_LB_PER_SVal);
         assertThat(actual_LB_PER_S.getValue()).isEqualTo(expected_LB_PER_S.getValue(), withPrecision(1E-15));
         assertThat(actual_KG_PER_S).isEqualTo(initialMassFlow);
     }

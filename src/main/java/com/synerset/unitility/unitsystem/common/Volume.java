@@ -5,18 +5,25 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Volume implements PhysicalQuantity<Volume> {
+public class Volume implements PhysicalQuantity<Volume> {
     private final double value;
+    private final double baseValue;
     private final Unit<Volume> unit;
 
-    private Volume(double value, Unit<Volume> unit) {
+    public Volume(double value, Unit<Volume> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -26,14 +33,14 @@ public final class Volume implements PhysicalQuantity<Volume> {
 
     @Override
     public Volume toBaseUnit() {
-        double valueInCubicMeter = unit.toBaseUnit(value);
+        double valueInCubicMeter = unit.toValueInBaseUnit(value);
         return Volume.of(valueInCubicMeter, VolumeUnits.CUBIC_METER);
     }
 
     @Override
     public Volume toUnit(Unit<Volume> targetUnit) {
-        double valueInCubicMeter = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInCubicMeter);
+        double valueInCubicMeter = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInCubicMeter);
         return Volume.of(valueInTargetUnit, targetUnit);
     }
 
@@ -42,45 +49,37 @@ public final class Volume implements PhysicalQuantity<Volume> {
         return Volume.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfCubicMeters() {
-        if (unit == VolumeUnits.CUBIC_METER) {
-            return value;
-        }
-        return toUnit(VolumeUnits.CUBIC_METER).getValue();
+    // Convert to target unit
+    public double getInCubicMeters() {
+        return getIn(VolumeUnits.CUBIC_METER);
     }
 
-    // Custom converter methods, for most popular units
-    public Volume toCubicMeter() {
-        return toUnit(VolumeUnits.CUBIC_METER);
+    public double getInLiters() {
+        return getIn(VolumeUnits.LITER);
     }
 
-    public Volume toLiter() {
-        return toUnit(VolumeUnits.LITER);
+    public double getInCubicCentimeters() {
+        return getIn(VolumeUnits.CUBIC_CENTIMETER);
     }
 
-    public Volume toCubicCentimeter() {
-        return toUnit(VolumeUnits.CUBIC_CENTIMETER);
+    public double getInHectoLiters() {
+        return getIn(VolumeUnits.HECTOLITRE);
     }
 
-    public Volume toHectoLiter() {
-        return toUnit(VolumeUnits.HECTOLITRE);
+    public double getInMilliLiters() {
+        return getIn(VolumeUnits.MILLILITRE);
     }
 
-    public Volume toMilliLiter() {
-        return toUnit(VolumeUnits.MILLILITRE);
+    public double getInOunces() {
+        return getIn(VolumeUnits.OUNCE);
     }
 
-    public Volume toOunce() {
-        return toUnit(VolumeUnits.OUNCE);
+    public double getInPints() {
+        return getIn(VolumeUnits.PINT);
     }
 
-    public Volume toPint() {
-        return toUnit(VolumeUnits.PINT);
-    }
-
-    public Volume toGallon() {
-        return toUnit(VolumeUnits.GALLON);
+    public double getInGallons() {
+        return getIn(VolumeUnits.GALLON);
     }
 
     @Override
@@ -101,6 +100,7 @@ public final class Volume implements PhysicalQuantity<Volume> {
         return "Volume{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Volume of(double value, Unit<Volume> unit) {
         return new Volume(value, unit);
     }

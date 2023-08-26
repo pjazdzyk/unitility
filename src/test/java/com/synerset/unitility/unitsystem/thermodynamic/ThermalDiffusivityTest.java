@@ -18,9 +18,13 @@ class ThermalDiffusivityTest {
         // When
         ThermalDiffusivity actualInSquareMPerS = initialDiffSquareFtPerS.toUnit(ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND);
         ThermalDiffusivity actualInSquareFtPerS = actualInSquareMPerS.toUnit(ThermalDiffusivityUnits.SQUARE_FEET_PER_SECOND);
+        double actualInSquareFtPerSVal = actualInSquareMPerS.getInSquareFeetPerSecond();
+        double actualInSquareMPerSVal = actualInSquareFtPerS.getInSquareMetersPerSecond();
 
         // Then
         ThermalDiffusivity expectedSquareMPerS = ThermalDiffusivity.ofSquareMeterPerSecond(0.9290304);
+        assertThat(actualInSquareFtPerS.getValue()).isEqualTo(actualInSquareFtPerSVal);
+        assertThat(actualInSquareMPerS.getValue()).isEqualTo(actualInSquareMPerSVal);
         assertThat(actualInSquareMPerS.getValue()).isEqualTo(expectedSquareMPerS.getValue(), withPrecision(1E-15));
         assertThat(actualInSquareFtPerS).isEqualTo(initialDiffSquareFtPerS);
     }

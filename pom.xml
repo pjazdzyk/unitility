@@ -6,7 +6,7 @@
 
     <groupId>com.synerset</groupId>
     <artifactId>unitility</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>Unitility</name>
@@ -14,7 +14,6 @@
         Unitility provides value objects that combine numerical values with their corresponding units, allowing developers
         to easily perform accurate and efficient conversions between different units. With a wide range of value objects that represent commonly
         used physical quantities, this solution is built using plain Java for optimal speed and lightweight functionality.
-        This solution offers quick and easy usage in any project, without heavy frameworks or external libraries.
     </description>
     <url>https://github.com/pjazdzyk/unitility</url>
 

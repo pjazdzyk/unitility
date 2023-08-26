@@ -19,6 +19,8 @@ class ReynoldsNumberTest {
         // Then
         ReynoldsNumber expectedReynoldsNumber = ReynoldsNumber.of(10.0);
         assertThat(actualReynoldsNumber.getValue()).isEqualTo(expectedValue);
+        assertThat(actualReynoldsNumber.getBaseValue()).isEqualTo(actualReynoldsNumber.getValue());
+        assertThat(actualReynoldsNumber.toUnit(ReynoldsNumberUnits.DIMENSIONLESS)).isEqualTo(actualReynoldsNumber.toBaseUnit());
         assertThat(actualReynoldsNumber).isEqualTo(expectedReynoldsNumber);
     }
 

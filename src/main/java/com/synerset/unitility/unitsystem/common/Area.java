@@ -5,21 +5,27 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Area implements PhysicalQuantity<Area> {
+public class Area implements PhysicalQuantity<Area> {
 
     public static final Area PHYSICAL_MIN_LIMIT = Area.ofSquareMeters(0);
-
     private final double value;
+    private final double baseValue;
     private final Unit<Area> unit;
 
-    private Area(double value, Unit<Area> unit) {
+    public Area(double value, Unit<Area> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -29,14 +35,14 @@ public final class Area implements PhysicalQuantity<Area> {
 
     @Override
     public Area toBaseUnit() {
-        double valueInSquareMeters = unit.toBaseUnit(value);
+        double valueInSquareMeters = unit.toValueInBaseUnit(value);
         return Area.of(valueInSquareMeters, AreaUnits.SQUARE_METER);
     }
 
     @Override
     public Area toUnit(Unit<Area> targetUnit) {
-        double valueInSquareMeters = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInSquareMeters);
+        double valueInSquareMeters = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInSquareMeters);
         return Area.of(valueInTargetUnit, targetUnit);
     }
 
@@ -45,57 +51,49 @@ public final class Area implements PhysicalQuantity<Area> {
         return Area.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfSquareMeters(){
-        if(unit == AreaUnits.SQUARE_METER){
-            return value;
-        }
-        return toUnit(AreaUnits.SQUARE_METER).getValue();
+    // Convert to target unit
+    public double getInSquareMeters() {
+        return getIn(AreaUnits.SQUARE_METER);
     }
 
-    // Custom converter methods, for most popular units
-    public Area toSquareMeters() {
-        return toUnit(AreaUnits.SQUARE_METER);
+    public double getInSquareKilometers() {
+        return getIn(AreaUnits.SQUARE_KILOMETER);
     }
 
-    public Area toSquareKilometers() {
-        return toUnit(AreaUnits.SQUARE_KILOMETER);
+    public double getInSquareCentimeters() {
+        return getIn(AreaUnits.SQUARE_CENTIMETER);
     }
 
-    public Area toSquareCentimeters() {
-        return toUnit(AreaUnits.SQUARE_CENTIMETER);
+    public double getInSquareMillimeters() {
+        return getIn(AreaUnits.SQUARE_MILLIMETER);
     }
 
-    public Area toSquareMillimeters() {
-        return toUnit(AreaUnits.SQUARE_MILLIMETER);
+    public double getInAres() {
+        return getIn(AreaUnits.ARE);
     }
 
-    public Area toAres() {
-        return toUnit(AreaUnits.ARE);
+    public double getInHectares() {
+        return getIn(AreaUnits.HECTARE);
     }
 
-    public Area toHectares() {
-        return toUnit(AreaUnits.HECTARE);
+    public double getInSquareInches() {
+        return getIn(AreaUnits.SQUARE_INCH);
     }
 
-    public Area toSquareInches() {
-        return toUnit(AreaUnits.SQUARE_INCH);
+    public double getInSquareFeet() {
+        return getIn(AreaUnits.SQUARE_FOOT);
     }
 
-    public Area toSquareFeet() {
-        return toUnit(AreaUnits.SQUARE_FOOT);
+    public double getInSquareYards() {
+        return getIn(AreaUnits.SQUARE_YARD);
     }
 
-    public Area toSquareYards() {
-        return toUnit(AreaUnits.SQUARE_YARD);
+    public double getInAcres() {
+        return getIn(AreaUnits.ACRE);
     }
 
-    public Area toAcres() {
-        return toUnit(AreaUnits.ACRE);
-    }
-
-    public Area toSquareMiles() {
-        return toUnit(AreaUnits.SQUARE_MILE);
+    public double getInSquareMiles() {
+        return getIn(AreaUnits.SQUARE_MILE);
     }
 
     @Override
@@ -116,6 +114,7 @@ public final class Area implements PhysicalQuantity<Area> {
         return "Area{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Area of(double value, Unit<Area> unit) {
         return new Area(value, unit);
     }

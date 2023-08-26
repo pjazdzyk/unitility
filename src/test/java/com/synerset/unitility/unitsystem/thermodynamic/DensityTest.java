@@ -16,11 +16,15 @@ class DensityTest {
         Density initialDensity = Density.ofKilogramPerCubicMeter(1.2);
 
         // When
-        Density actualInPoundsPerCubicFoot = initialDensity.toPoundPerCubicFoot();
-        Density actualInKilogramPerCubicMeter = actualInPoundsPerCubicFoot.toKilogramPerCubicMeter();
+        Density actualInPoundsPerCubicFoot = initialDensity.toUnit(DensityUnits.POUND_PER_CUBIC_FOOT);
+        double actualInPoundsPerCubicFootVal = initialDensity.getInPoundsPerCubicFoot();
+        Density actualInKilogramPerCubicMeter = actualInPoundsPerCubicFoot.toBaseUnit();
+        double actualInKilogramPerCubicMeterVal = actualInPoundsPerCubicFoot.getInKilogramsPerCubicMeters();
 
         // Then
         Density expectedInPoundsPerCubicFoot = Density.ofPoundPerCubicFoot(0.0749135526913747);
+        assertThat(actualInPoundsPerCubicFoot.getValue()).isEqualTo(actualInPoundsPerCubicFootVal);
+        assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(actualInKilogramPerCubicMeterVal);
         assertThat(actualInPoundsPerCubicFoot.getValue()).isEqualTo(expectedInPoundsPerCubicFoot.getValue(), withPrecision(1E-16));
         assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(1.2, withPrecision(1E-16));
     }
@@ -32,11 +36,13 @@ class DensityTest {
         Density initialDensity = Density.ofKilogramPerCubicMeter(1.2);
 
         // When
-        Density actualInPoundsPerCubicInch = initialDensity.toUnit(DensityUnits.POUNDS_PER_CUBIC_INCH);
+        Density actualInPoundsPerCubicInch = initialDensity.toUnit(DensityUnits.POUND_PER_CUBIC_INCH);
+        double actualInPoundsPerCubicInchVal = initialDensity.getInPoundsPerCubicInches();
         Density actualInKilogramPerCubicMeter = actualInPoundsPerCubicInch.toBaseUnit();
 
         // Then
-        Density expectedInPoundsPerCubicInch = Density.of(0.0000433527506616, DensityUnits.POUNDS_PER_CUBIC_INCH);
+        Density expectedInPoundsPerCubicInch = Density.of(0.0000433527506616, DensityUnits.POUND_PER_CUBIC_INCH);
+        assertThat(actualInPoundsPerCubicInch.getValue()).isEqualTo(actualInPoundsPerCubicInchVal);
         assertThat(actualInPoundsPerCubicInch.getValue()).isEqualTo(expectedInPoundsPerCubicInch.getValue(), withPrecision(1E-16));
         assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(1.2, withPrecision(1E-16));
     }

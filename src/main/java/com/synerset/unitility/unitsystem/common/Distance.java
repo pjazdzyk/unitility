@@ -5,19 +5,26 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class Distance implements PhysicalQuantity<Distance> {
+public class Distance implements PhysicalQuantity<Distance> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<Distance> unit;
 
-    private Distance(double value, Unit<Distance> unit) {
+    public Distance(double value, Unit<Distance> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -27,14 +34,14 @@ public final class Distance implements PhysicalQuantity<Distance> {
 
     @Override
     public Distance toBaseUnit() {
-        double valueInMeters = unit.toBaseUnit(value);
+        double valueInMeters = unit.toValueInBaseUnit(value);
         return Distance.of(valueInMeters, DistanceUnits.METER);
     }
 
     @Override
     public Distance toUnit(Unit<Distance> targetUnit) {
-        double valueInMeters = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInMeters);
+        double valueInMeters = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInMeters);
         return Distance.of(valueInTargetUnit, targetUnit);
     }
 
@@ -43,41 +50,33 @@ public final class Distance implements PhysicalQuantity<Distance> {
         return Distance.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfMeters(){
-        if(unit == DistanceUnits.METER){
-            return value;
-        }
-        return toUnit(DistanceUnits.METER).getValue();
+    // Convert to target unit
+    public double getInMeters() {
+        return getIn(DistanceUnits.METER);
     }
 
-    // Custom converter methods for most popular units
-    public Distance toMeter(){
-        return toUnit(DistanceUnits.METER);
+    public double getInCentimeters() {
+        return getIn(DistanceUnits.CENTIMETER);
     }
 
-    public Distance toCentimeter(){
-        return toUnit(DistanceUnits.CENTIMETER);
+    public double getInMillimeters() {
+        return getIn(DistanceUnits.MILLIMETER);
     }
 
-    public Distance toMillimeter(){
-        return toUnit(DistanceUnits.MILLIMETER);
+    public double getInKilometers() {
+        return getIn(DistanceUnits.KILOMETER);
     }
 
-    public Distance toKilometer(){
-        return toUnit(DistanceUnits.KILOMETER);
+    public double getInMiles() {
+        return getIn(DistanceUnits.MILE);
     }
 
-    public Distance toMile(){
-        return toUnit(DistanceUnits.MILE);
+    public double getInFeet() {
+        return getIn(DistanceUnits.FEET);
     }
 
-    public Distance toFeet(){
-        return toUnit(DistanceUnits.FEET);
-    }
-
-    public Distance toInch(){
-        return toUnit(DistanceUnits.INCH);
+    public double getInInches() {
+        return getIn(DistanceUnits.INCH);
     }
 
     @Override
@@ -98,6 +97,7 @@ public final class Distance implements PhysicalQuantity<Distance> {
         return "Distance{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static Distance of(double value, Unit<Distance> unit) {
         return new Distance(value, unit);
     }

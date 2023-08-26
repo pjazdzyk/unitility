@@ -5,18 +5,25 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
+public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
     private final double value;
+    private final double baseValue;
     private final Unit<SpecificEnthalpy> unit;
 
-    private SpecificEnthalpy(double value, Unit<SpecificEnthalpy> unit) {
+    public SpecificEnthalpy(double value, Unit<SpecificEnthalpy> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -26,14 +33,14 @@ public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy
 
     @Override
     public SpecificEnthalpy toBaseUnit() {
-        double valueInJoulePerKilogram = unit.toBaseUnit(value);
+        double valueInJoulePerKilogram = unit.toValueInBaseUnit(value);
         return SpecificEnthalpy.of(valueInJoulePerKilogram, SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
     }
 
     @Override
     public SpecificEnthalpy toUnit(Unit<SpecificEnthalpy> targetUnit) {
-        double valueInJoulePerKilogram = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInJoulePerKilogram);
+        double valueInJoulePerKilogram = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoulePerKilogram);
         return SpecificEnthalpy.of(valueInTargetUnit, targetUnit);
     }
 
@@ -42,25 +49,17 @@ public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy
         return SpecificEnthalpy.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfKiloJoulePerKilogram() {
-        if (unit == SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM) {
-            return value;
-        }
-        return toUnit(SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM).getValue();
+    // Convert to target unit
+    public double getInJoulesPerKiloGram() {
+        return getIn(SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
     }
 
-    // Custom converter methods, for most popular units
-    public SpecificEnthalpy toJoulePerKiloGram() {
-        return toUnit(SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
+    public double getInKiloJoulesPerKiloGram() {
+        return getIn(SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
     }
 
-    public SpecificEnthalpy toKiloJoulePerKiloGram() {
-        return toUnit(SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
-    }
-
-    public SpecificEnthalpy toBTUPerPound() {
-        return toUnit(SpecificEnthalpyUnits.BTU_PER_POUND);
+    public double getInBTUsPerPound() {
+        return getIn(SpecificEnthalpyUnits.BTU_PER_POUND);
     }
 
     @Override
@@ -81,6 +80,7 @@ public final class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy
         return "SpecificEnthalpy{" + value + " " + unit.getSymbol() + '}';
     }
 
+    // Static factory methods
     public static SpecificEnthalpy of(double value, Unit<SpecificEnthalpy> unit) {
         return new SpecificEnthalpy(value, unit);
     }

@@ -36,12 +36,12 @@ public enum VelocityUnits implements Unit<Velocity> {
     }
 
     @Override
-    public double toBaseUnit(double valueInThisUnit) {
+    public double toValueInBaseUnit(double valueInThisUnit) {
         return toBaseConverter.applyAsDouble(valueInThisUnit);
     }
 
     @Override
-    public double fromBaseToThisUnit(double valueInBaseUnit) {
+    public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 }

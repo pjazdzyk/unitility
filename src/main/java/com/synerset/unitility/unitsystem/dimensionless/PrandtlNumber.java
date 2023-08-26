@@ -5,18 +5,25 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public final class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
+public class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
     private final double value;
+    private final double baseValue;
     private final Unit<PrandtlNumber> unit;
 
-    private PrandtlNumber(double value) {
+    public PrandtlNumber(double value) {
         this.value = value;
         this.unit = PrandtlNumberUnits.DIMENSIONLESS;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -57,6 +64,7 @@ public final class PrandtlNumber implements PhysicalQuantity<PrandtlNumber> {
         return Objects.hash(value);
     }
 
+    // Static factory methods
     public static PrandtlNumber of(double value) {
         return new PrandtlNumber(value);
     }

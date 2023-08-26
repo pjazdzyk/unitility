@@ -6,19 +6,26 @@ import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
-public final class Angle implements PhysicalQuantity<Angle> {
+public class Angle implements PhysicalQuantity<Angle> {
 
     private final double value;
+    private final double baseValue;
     private final Unit<Angle> unit;
 
-    private Angle(double value, Unit<Angle> unit) {
+    public Angle(double value, Unit<Angle> unit) {
         this.value = value;
         this.unit = unit;
+        this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     @Override
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
     }
 
     @Override
@@ -28,14 +35,14 @@ public final class Angle implements PhysicalQuantity<Angle> {
 
     @Override
     public Angle toBaseUnit() {
-        double degrees = unit.toBaseUnit(value);
+        double degrees = unit.toValueInBaseUnit(value);
         return Angle.of(degrees, AngleUnits.DEGREES);
     }
 
     @Override
     public Angle toUnit(Unit<Angle> targetUnit) {
-        double valueInDegrees = unit.toBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromBaseToThisUnit(valueInDegrees);
+        double valueInDegrees = unit.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInDegrees);
         return Angle.of(valueInTargetUnit, targetUnit);
     }
 
@@ -44,21 +51,13 @@ public final class Angle implements PhysicalQuantity<Angle> {
         return Angle.of(value, unit);
     }
 
-    // Custom value getters
-    public double getValueOfDegrees(){
-        if(unit == AngleUnits.RADIANS){
-            return value;
-        }
-        return toUnit(AngleUnits.RADIANS).getValue();
+    // Convert to target unit
+    public double getInRadians() {
+        return getIn(AngleUnits.RADIANS);
     }
 
-    // Custom converter methods for most popular units
-    public Angle toRadians() {
-        return toUnit(AngleUnits.RADIANS);
-    }
-
-    public Angle toDegrees() {
-        return toUnit(AngleUnits.DEGREES);
+    public double getInDegrees() {
+        return getIn(AngleUnits.DEGREES);
     }
 
     @Override
@@ -85,6 +84,7 @@ public final class Angle implements PhysicalQuantity<Angle> {
         return ValueFormatter.formatDoubleToRelevantDigits(value, relevantDigits) + separator + unit.getSymbol();
     }
 
+    // Static factory methods
     public static Angle of(double value, Unit<Angle> unit) {
         return new Angle(value, unit);
     }

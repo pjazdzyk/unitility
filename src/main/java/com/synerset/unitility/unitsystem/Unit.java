@@ -1,7 +1,7 @@
 /**
  * An interface representing a unit of measurement in a unit system.
  *
- * @param <Q> The quantity type associated with the unit (e.g., Length, Mass, Time).
+ * @param <Q> The quantity type associated with the unit (e.g., Length, Mass, Time). It is used to ensure proper unit type usage in physical quantities.
  */
 package com.synerset.unitility.unitsystem;
 
@@ -26,7 +26,7 @@ public interface Unit<Q> {
      * @param valueInThisUnit The value to be converted, in this unit.
      * @return The equivalent value in the base unit.
      */
-    double toBaseUnit(double valueInThisUnit);
+    double toValueInBaseUnit(double valueInThisUnit);
 
     /**
      * Convert a value from the base unit to the equivalent value in this unit.
@@ -34,5 +34,5 @@ public interface Unit<Q> {
      * @param valueInBaseUnit The value to be converted, in the base unit.
      * @return The equivalent value in this unit.
      */
-    double fromBaseToThisUnit(double valueInBaseUnit);
+    double fromValueInBaseUnit(double valueInBaseUnit);
 }
