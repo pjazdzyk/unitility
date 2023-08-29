@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class HumidityRatio implements PhysicalQuantity<HumidityRatio> {
 
-    public static final RelativeHumidity HUM_RATIO_MIN_LIMIT = RelativeHumidity.ofPercentage(0);
+    public static final HumidityRatio HUM_RATIO_MIN_LIMIT = HumidityRatio.ofKilogramPerKilogram(0);
     private final double value;
     private final double baseValue;
     private final Unit<HumidityRatio> unit;
