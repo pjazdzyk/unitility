@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Distance implements PhysicalQuantity<Distance> {
 
+    public static final Distance PHYSICAL_MIN_LIMIT = Distance.ofMeters(0);
     private final double value;
     private final double baseValue;
     private final Unit<Distance> unit;

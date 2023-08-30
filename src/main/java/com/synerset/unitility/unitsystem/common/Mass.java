@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Mass implements PhysicalQuantity<Mass> {
 
+    public static final Mass PHYSICAL_MIN_LIMIT = Mass.ofKilograms(0);
     private final double value;
     private final double baseValue;
     private final Unit<Mass> unit;

@@ -66,12 +66,14 @@ class PhysicalQuantityTest {
         boolean secondIsGreater = greaterTemp.isGreaterThan(smallerTemp);
         boolean firstIsEqualOrLower = smallerTemp.isEqualOrLowerThan(smallerOrEqualTemp);
         boolean secondIsEqualOrGreater = greaterTemp.isEqualOrGreaterThan(greaterOrEqualTemp);
+        boolean bothAreTheSame = greaterTemp.isGreaterThan(greaterTemp);
 
         // Then
         assertThat(firstIsSmaller).isTrue();
         assertThat(secondIsGreater).isTrue();
         assertThat(firstIsEqualOrLower).isTrue();
         assertThat(secondIsEqualOrGreater).isTrue();
+        assertThat(bothAreTheSame).isFalse();
     }
 
     @Test

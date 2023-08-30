@@ -6,6 +6,7 @@ import com.synerset.unitility.unitsystem.Unit;
 import java.util.Objects;
 
 public class Volume implements PhysicalQuantity<Volume> {
+    public static final Volume PHYSICAL_MIN_LIMIT = Volume.ofCubicMeters(0);
     private final double value;
     private final double baseValue;
     private final Unit<Volume> unit;

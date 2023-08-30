@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Density implements PhysicalQuantity<Density> {
 
+    public static final Density PHYSICAL_MIN_LIMIT = Density.ofKilogramPerCubicMeter(0);
     private final double value;
     private final double baseValue;
     private final Unit<Density> unit;
