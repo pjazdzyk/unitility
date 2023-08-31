@@ -132,4 +132,26 @@ class PressureTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Pressure expected = Pressure.ofPascal(10.1);
+
+        // When
+        Pressure actual = expected.toHectoPascal()
+                .toMegaPascal()
+                .toBar()
+                .toMilliBar()
+                .toPsi()
+                .toTorr()
+                .toPascal();
+
+        double actualValue = expected.getInPascals();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

@@ -41,4 +41,21 @@ class RelativeHumidityTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        RelativeHumidity expected = RelativeHumidity.ofPercentage(10.1);
+
+        // When
+        RelativeHumidity actual = expected.toDecimal()
+                .toPercent();
+
+        double actualValue = expected.getInPercent();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

@@ -51,6 +51,43 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
     }
 
     // Convert to target unit
+    public VolumetricFlow toCubicMetersPerSecond() {
+        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
+    }
+
+    public VolumetricFlow toCubicMetersPerMinute() {
+        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_MINUTE);
+    }
+
+    public VolumetricFlow toCubicMetersPerHour() {
+        return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
+    }
+
+    public VolumetricFlow toLitresPerSecond() {
+        return toUnit(VolumetricFlowUnits.LITRE_PER_SECOND);
+    }
+
+    public VolumetricFlow toLitresPerMinute() {
+        return toUnit(VolumetricFlowUnits.LITRE_PER_MINUTE);
+    }
+
+    public VolumetricFlow toLitresPerHour() {
+        return toUnit(VolumetricFlowUnits.LITRE_PER_HOUR);
+    }
+
+    public VolumetricFlow toGallonsPerSecond() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_SECOND);
+    }
+
+    public VolumetricFlow toGallonsPerMinute() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE);
+    }
+
+    public VolumetricFlow toGallonsPerHour() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_HOUR);
+    }
+
+    // Get value in target unit
     public double getInCubicMetersPerSecond() {
         return getIn(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
     }

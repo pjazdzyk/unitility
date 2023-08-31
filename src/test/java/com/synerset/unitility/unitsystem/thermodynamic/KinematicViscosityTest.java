@@ -42,4 +42,21 @@ class KinematicViscosityTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        KinematicViscosity expected = KinematicViscosity.ofSquareMeterPerSecond(10.1);
+
+        // When
+        KinematicViscosity actual = expected.toSquareFootPerSecond()
+                .toSquareMeterPerSecond();
+
+        double actualValue = expected.getInSquareMetersPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

@@ -61,4 +61,22 @@ class SpecificHeatTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        SpecificHeat expected = SpecificHeat.ofJoulePerKiloGramKelvin(10.1);
+
+        // When
+        SpecificHeat actual = expected.toKiloJoulePerKiloGramKelvin()
+                .toBTUPerPoundFahrenheit()
+                .toJoulePerKiloGramKelvin();
+
+        double actualValue = expected.getInJoulePerKiloGramKelvin();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

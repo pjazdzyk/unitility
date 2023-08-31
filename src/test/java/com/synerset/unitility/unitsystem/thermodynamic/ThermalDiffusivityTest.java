@@ -43,4 +43,21 @@ class ThermalDiffusivityTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        ThermalDiffusivity expected = ThermalDiffusivity.ofSquareMeterPerSecond(10.1);
+
+        // When
+        ThermalDiffusivity actual = expected.toSquareFeetPerSecond()
+                .toSquareMeterPerSecond();
+
+        double actualValue = expected.getInSquareMetersPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

@@ -50,6 +50,19 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
     }
 
     // Convert to target unit
+    public SpecificEnthalpy toJoulePerKiloGram() {
+        return toUnit(SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
+    }
+
+    public SpecificEnthalpy toKiloJoulePerKiloGram() {
+        return toUnit(SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
+    }
+
+    public SpecificEnthalpy toBTUPerPound() {
+        return toUnit(SpecificEnthalpyUnits.BTU_PER_POUND);
+    }
+
+    // Get value in target unit
     public double getInJoulesPerKiloGram() {
         return getIn(SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
     }

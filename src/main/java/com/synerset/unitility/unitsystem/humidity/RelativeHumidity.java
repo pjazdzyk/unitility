@@ -53,6 +53,15 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
     }
 
     // Convert to target unit
+    public RelativeHumidity toPercent() {
+        return toUnit(RelativeHumidityUnits.PERCENT);
+    }
+
+    public RelativeHumidity toDecimal() {
+        return toUnit(RelativeHumidityUnits.DECIMAL);
+    }
+
+    // Get value in target unit
     public double getInPercent() {
         return getIn(RelativeHumidityUnits.PERCENT);
     }

@@ -61,4 +61,22 @@ class SpecificEnthalpyTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        SpecificEnthalpy expected = SpecificEnthalpy.ofJoulePerKiloGram(10.1);
+
+        // When
+        SpecificEnthalpy actual = expected.toKiloJoulePerKiloGram()
+                .toBTUPerPound()
+                .toJoulePerKiloGram();
+
+        double actualValue = expected.getInJoulesPerKiloGram();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

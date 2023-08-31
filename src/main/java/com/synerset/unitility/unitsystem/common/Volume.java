@@ -51,6 +51,39 @@ public class Volume implements PhysicalQuantity<Volume> {
     }
 
     // Convert to target unit
+    public Volume toCubicMeter() {
+        return toUnit(VolumeUnits.CUBIC_METER);
+    }
+
+    public Volume toLiter() {
+        return toUnit(VolumeUnits.LITER);
+    }
+
+    public Volume toCubicCentimeter() {
+        return toUnit(VolumeUnits.CUBIC_CENTIMETER);
+    }
+
+    public Volume toHectoLiter() {
+        return toUnit(VolumeUnits.HECTOLITRE);
+    }
+
+    public Volume toMilliLiter() {
+        return toUnit(VolumeUnits.MILLILITRE);
+    }
+
+    public Volume toOunce() {
+        return toUnit(VolumeUnits.OUNCE);
+    }
+
+    public Volume toPint() {
+        return toUnit(VolumeUnits.PINT);
+    }
+
+    public Volume toGallon() {
+        return toUnit(VolumeUnits.GALLON);
+    }
+
+    // Get value in target unit
     public double getInCubicMeters() {
         return getIn(VolumeUnits.CUBIC_METER);
     }

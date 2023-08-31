@@ -205,4 +205,28 @@ class AreaTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Area expected = Area.ofSquareMeters(10.1);
+
+        // When
+        Area actual = expected.toSquareKilometers()
+                .toSquareCentimeters()
+                .toSquareMillimeters()
+                .toAres()
+                .toHectares()
+                .toSquareInches()
+                .toSquareFeet()
+                .toSquareYards()
+                .toAcres()
+                .toSquareMiles()
+                .toSquareMeters();
+        double actualValue = expected.getInSquareMeters();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
 }

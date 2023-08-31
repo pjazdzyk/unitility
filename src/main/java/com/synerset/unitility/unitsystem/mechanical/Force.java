@@ -51,6 +51,31 @@ public class Force implements PhysicalQuantity<Force> {
     }
 
     // Convert to target unit
+    public Force toNewtons() {
+        return toUnit(ForceUnits.NEWTON);
+    }
+
+    public Force toKiloNewtons() {
+        return toUnit(ForceUnits.KILONEWTON);
+    }
+
+    public Force toKiloponds() {
+        return toUnit(ForceUnits.KILOPOND);
+    }
+
+    public Force toDynes() {
+        return toUnit(ForceUnits.DYNE);
+    }
+
+    public Force toPoundForce() {
+        return toUnit(ForceUnits.POUND_FORCE);
+    }
+
+    public Force toPoundal() {
+        return toUnit(ForceUnits.POUNDAL);
+    }
+
+    // Get value in target unit
     public double getInNewtons() {
         return getIn(ForceUnits.NEWTON);
     }

@@ -50,6 +50,27 @@ public class Power implements PhysicalQuantity<Power> {
     }
 
     // Convert to target unit
+    public Power toWatts(){
+        return toUnit(PowerUnits.WATT);
+    }
+
+    public Power toKiloWatts(){
+        return toUnit(PowerUnits.KILOWATT);
+    }
+
+    public Power toBTUPerHour(){
+        return toUnit(PowerUnits.BTU_PER_HOUR);
+    }
+
+    public Power toMegaWatts(){
+        return toUnit(PowerUnits.MEGAWATT);
+    }
+
+    public Power toHorsePower(){
+        return toUnit(PowerUnits.HORSE_POWER);
+    }
+
+    // Get value in target unit
     public double getInWatts() {
         return getIn(PowerUnits.WATT);
     }

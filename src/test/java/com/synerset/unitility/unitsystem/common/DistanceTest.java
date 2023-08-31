@@ -132,4 +132,27 @@ class DistanceTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Distance expected = Distance.ofMeters(10.1);
+
+        // When
+        Distance actual = expected.toMeter()
+                .toCentimeter()
+                .toMillimeter()
+                .toKilometer()
+                .toMile()
+                .toFeet()
+                .toInch()
+                .toMeter();
+
+        double actualValue = expected.getInMeters();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

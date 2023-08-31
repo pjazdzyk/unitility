@@ -52,6 +52,27 @@ public class Torque implements PhysicalQuantity<Torque> {
     }
 
     // Convert to target unit
+    public Torque toNewtonMeters() {
+        return toUnit(TorqueUnits.NEWTON_METER);
+    }
+
+    public Torque toMillinewtonMeters() {
+        return toUnit(TorqueUnits.MILLINEWTON_METER);
+    }
+
+    public Torque toKilopondMeters() {
+        return toUnit(TorqueUnits.KILOPOND_METER);
+    }
+
+    public Torque toPoundFeet() {
+        return toUnit(TorqueUnits.FOOT_POUND);
+    }
+
+    public Torque toInchPounds() {
+        return toUnit(TorqueUnits.INCH_POUND);
+    }
+
+    // Get value in target unit
     public double getInNewtonMeters() {
         return getIn(TorqueUnits.NEWTON_METER);
     }

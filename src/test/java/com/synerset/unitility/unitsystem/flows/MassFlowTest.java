@@ -79,4 +79,23 @@ class MassFlowTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        MassFlow expected = MassFlow.ofKilogramsPerSecond(10.1);
+
+        // When
+        MassFlow actual = expected.toKiloGramPerHour()
+                .toTonnesPerHour()
+                .toPoundsPerSecond()
+                .toKilogramsPerSecond();
+
+        double actualValue = expected.getInKilogramsPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

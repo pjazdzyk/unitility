@@ -21,7 +21,7 @@ class AngleTest {
         double actualInDegreesVal = actualInRadians.getInDegrees();
 
         // Then
-        Angle expectedRadian = Angle.of(Math.PI/4, AngleUnits.RADIANS);
+        Angle expectedRadian = Angle.of(Math.PI / 4, AngleUnits.RADIANS);
         assertThat(actualInRadians).isEqualTo(expectedRadian);
         assertThat(actualRadiansVal).isEqualTo(actualInRadians.getValue());
         assertThat(actualInDegrees.getValue()).isEqualTo(actualInDegreesVal);
@@ -39,6 +39,21 @@ class AngleTest {
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Angle expected = Angle.ofDegrees(10.1);
+
+        // When
+        Angle actual = expected.toRadians().toDegrees();
+        double actualValue = expected.getInDegrees();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

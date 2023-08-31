@@ -61,4 +61,22 @@ class ThermalConductivityTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        ThermalConductivity expected = ThermalConductivity.ofWattsPerMeterKelvin(10.1);
+
+        // When
+        ThermalConductivity actual = expected.toKilowattsPerMeterKelvin()
+                .toBTUPerHourFeetFahrenheit()
+                .toWattsPerMeterKelvin();
+
+        double actualValue = expected.getInWattsPerMeterKelvin();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

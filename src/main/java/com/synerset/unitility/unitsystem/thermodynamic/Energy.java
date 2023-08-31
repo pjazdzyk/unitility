@@ -51,6 +51,43 @@ public class Energy implements PhysicalQuantity<Energy> {
     }
 
     // Convert to target unit
+    public Energy toJoules() {
+        return toUnit(EnergyUnits.JOULE);
+    }
+
+    public Energy toMilliJoules() {
+        return toUnit(EnergyUnits.MILLIJOULE);
+    }
+
+    public Energy toKiloJoules() {
+        return toUnit(EnergyUnits.KILOJOULE);
+    }
+
+    public Energy toMegaJoules() {
+        return toUnit(EnergyUnits.MEGAJOULE);
+    }
+
+    public Energy toBTU() {
+        return toUnit(EnergyUnits.BTU);
+    }
+
+    public Energy toCalories() {
+        return toUnit(EnergyUnits.CALORIE);
+    }
+
+    public Energy toKiloCalories() {
+        return toUnit(EnergyUnits.KILOCALORIE);
+    }
+
+    public Energy toWattHour() {
+        return toUnit(EnergyUnits.WATT_HOUR);
+    }
+
+    public Energy toKilowattHour() {
+        return toUnit(EnergyUnits.KILOWATT_HOUR);
+    }
+
+    // Get value in target unit
     public double getInJoules() {
         return getIn(EnergyUnits.JOULE);
     }

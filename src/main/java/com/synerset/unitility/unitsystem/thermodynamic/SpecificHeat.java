@@ -50,6 +50,19 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
     }
 
     // Convert to target unit
+    public SpecificHeat toJoulePerKiloGramKelvin() {
+        return toUnit(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
+    }
+
+    public SpecificHeat toKiloJoulePerKiloGramKelvin() {
+        return toUnit(SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN);
+    }
+
+    public SpecificHeat toBTUPerPoundFahrenheit() {
+        return toUnit(SpecificHeatUnits.BTU_PER_POUND_FAHRENHEIT);
+    }
+
+    // Get value in target unit
     public double getInJoulePerKiloGramKelvin() {
         return getIn(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
     }

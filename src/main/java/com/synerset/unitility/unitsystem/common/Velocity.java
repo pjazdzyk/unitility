@@ -51,35 +51,68 @@ public class Velocity implements PhysicalQuantity<Velocity> {
     }
 
     // Convert to target unit
-    public double toMetersPerSecond() {
+    public Velocity toMetersPerSecond() {
+        return toUnit(VelocityUnits.METER_PER_SECOND);
+    }
+
+    public Velocity toCentimetersPerSecond() {
+        return toUnit(VelocityUnits.CENTIMETER_PER_SECOND);
+    }
+
+    public Velocity toKilometersPerHour() {
+        return toUnit(VelocityUnits.KILOMETER_PER_HOUR);
+    }
+
+    public Velocity toInchesPerSecond() {
+        return toUnit(VelocityUnits.INCH_PER_SECOND);
+    }
+
+    public Velocity toFeetPerSecond() {
+        return toUnit(VelocityUnits.FEET_PER_SECOND);
+    }
+
+    public Velocity toMilesPerHour() {
+        return toUnit(VelocityUnits.MILES_PER_HOUR);
+    }
+
+    public Velocity toKnots() {
+        return toUnit(VelocityUnits.KNOTS);
+    }
+
+    public Velocity toMach() {
+        return toUnit(VelocityUnits.MACH);
+    }
+
+    // Get value in target unit
+    public double getInMetersPerSecond() {
         return getIn(VelocityUnits.METER_PER_SECOND);
     }
 
-    public double toCentimetersPerSeconds() {
+    public double getInCentimetersPerSeconds() {
         return getIn(VelocityUnits.CENTIMETER_PER_SECOND);
     }
 
-    public double toKilometersPerHours() {
+    public double getInKilometersPerHours() {
         return getIn(VelocityUnits.KILOMETER_PER_HOUR);
     }
 
-    public double toInchesPerSeconds() {
+    public double getInInchesPerSeconds() {
         return getIn(VelocityUnits.INCH_PER_SECOND);
     }
 
-    public double toFeetPerSeconds() {
+    public double getInFeetPerSeconds() {
         return getIn(VelocityUnits.FEET_PER_SECOND);
     }
 
-    public double toMilesPerHours() {
+    public double getInMilesPerHours() {
         return getIn(VelocityUnits.MILES_PER_HOUR);
     }
 
-    public double toKnots() {
+    public double getInKnots() {
         return getIn(VelocityUnits.KNOTS);
     }
 
-    public double toMach() {
+    public double getInMach() {
         return getIn(VelocityUnits.MACH);
     }
 

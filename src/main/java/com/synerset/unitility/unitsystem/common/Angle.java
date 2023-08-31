@@ -52,6 +52,15 @@ public class Angle implements PhysicalQuantity<Angle> {
     }
 
     // Convert to target unit
+    public Angle toRadians() {
+        return toUnit(AngleUnits.RADIANS);
+    }
+
+    public Angle toDegrees() {
+        return toUnit(AngleUnits.DEGREES);
+    }
+
+    // Get value in target unit
     public double getInRadians() {
         return getIn(AngleUnits.RADIANS);
     }

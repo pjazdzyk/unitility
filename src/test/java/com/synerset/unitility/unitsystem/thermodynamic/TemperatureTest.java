@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 class TemperatureTest {
 
@@ -58,6 +59,24 @@ class TemperatureTest {
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Temperature expected = Temperature.ofKelvins(10.1);
+
+        // When
+        Temperature actual = expected.toCelsius()
+                .toFahrenheit()
+                .toKelvin();
+
+        double actualValue = expected.getInKelvins();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

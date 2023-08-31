@@ -51,6 +51,15 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> 
     }
 
     // Convert to target unit
+    public KinematicViscosity toSquareMeterPerSecond(){
+        return toUnit(KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
+    }
+
+    public KinematicViscosity toSquareFootPerSecond(){
+        return toUnit(KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
+    }
+
+    // Get value in target unit
     public double getInSquareMetersPerSecond() {
         return getIn(KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
     }

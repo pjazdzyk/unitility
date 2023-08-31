@@ -61,4 +61,22 @@ class MomentumTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Momentum expected = Momentum.ofKilogramMeterPerSecond(10.1);
+
+        // When
+        Momentum actual = expected.toPoundFeetPerSecond()
+                .toGramCentimetrePerSecond()
+                .toKilogramMeterPerSecond();
+
+        double actualValue = expected.getInKilogramMetersPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

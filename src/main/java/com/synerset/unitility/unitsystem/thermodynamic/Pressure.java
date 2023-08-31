@@ -53,6 +53,35 @@ public class Pressure implements PhysicalQuantity<Pressure> {
     }
 
     // Convert to target unit
+    public Pressure toPascal() {
+        return toUnit(PressureUnits.PASCAL);
+    }
+
+    public Pressure toHectoPascal() {
+        return toUnit(PressureUnits.HECTOPASCAL);
+    }
+
+    public Pressure toMegaPascal() {
+        return toUnit(PressureUnits.MEGAPASCAL);
+    }
+
+    public Pressure toBar() {
+        return toUnit(PressureUnits.BAR);
+    }
+
+    public Pressure toMilliBar() {
+        return toUnit(PressureUnits.MILLIBAR);
+    }
+
+    public Pressure toPsi() {
+        return toUnit(PressureUnits.PSI);
+    }
+
+    public Pressure toTorr() {
+        return toUnit(PressureUnits.TORR);
+    }
+
+    // Get value in target unit
     public double getInPascals() {
         return getIn(PressureUnits.PASCAL);
     }

@@ -50,6 +50,19 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
     }
 
     // Convert to target unit
+    public ThermalConductivity toWattsPerMeterKelvin() {
+        return toUnit(ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
+    }
+
+    public ThermalConductivity toKilowattsPerMeterKelvin() {
+        return toUnit(ThermalConductivityUnits.KILOWATTS_PER_METER_KELVIN);
+    }
+
+    public ThermalConductivity toBTUPerHourFeetFahrenheit() {
+        return toUnit(ThermalConductivityUnits.BTU_PER_HOUR_FOOT_FAHRENHEIT);
+    }
+
+    // Get value in target unit
     public double getInWattsPerMeterKelvin() {
         return getIn(ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
     }

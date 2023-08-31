@@ -324,12 +324,23 @@ public interface PhysicalQuantity<Q> extends Comparable<PhysicalQuantity<Q>> {
         return thisValue / inputQuantity.getValue();
     }
 
-    default String toFormattedString(){
-        return getValue() + " " + getUnitSymbol();
+    default String toFormattedString() {
+        int relevantDigits = 4;
+        return ValueFormatter.formatDoubleToRelevantDigits(getValue(), relevantDigits) + " " + getUnitSymbol();
     }
 
-    default String toFormattedString(String prefix){
-        return prefix + " = " + toFormattedString();
+    default String toFormattedString(String variableName) {
+        return variableName + " = " + toFormattedString();
+    }
+
+    default String toFormattedString(String variableName, String suffix) {
+        String underScore = suffix.isEmpty() ? "" : "_";
+        String equalsSign = variableName.isEmpty() ? "" : " = ";
+        return variableName + underScore + suffix + equalsSign + toFormattedString();
+    }
+
+    default String toFormattedString(String variableName, String suffix, String separator) {
+        return toFormattedString(variableName, suffix) + " " + separator;
     }
 
     @Override

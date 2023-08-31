@@ -53,6 +53,19 @@ public class Temperature implements PhysicalQuantity<Temperature> {
     }
 
     // Convert to target unit
+    public Temperature toKelvin(){
+        return toUnit(TemperatureUnits.KELVIN);
+    }
+
+    public Temperature toCelsius(){
+        return toUnit(TemperatureUnits.CELSIUS);
+    }
+
+    public Temperature toFahrenheit(){
+        return toUnit(TemperatureUnits.FAHRENHEIT);
+    }
+
+    // Get value in target unit
     public double getInKelvins() {
         return getIn(TemperatureUnits.KELVIN);
     }

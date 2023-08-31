@@ -51,6 +51,23 @@ public class MassFlow implements PhysicalQuantity<MassFlow> {
     }
 
     // Convert to target unit
+    public MassFlow toKilogramsPerSecond(){
+        return toUnit(MassFlowUnits.KILOGRAM_PER_SECOND);
+    }
+
+    public MassFlow toKiloGramPerHour(){
+        return toUnit(MassFlowUnits.KILOGRAM_PER_HOUR);
+    }
+
+    public MassFlow toTonnesPerHour(){
+        return toUnit(MassFlowUnits.TONNE_PER_HOUR);
+    }
+
+    public MassFlow toPoundsPerSecond(){
+        return toUnit(MassFlowUnits.POUND_PER_SECOND);
+    }
+
+    // Get value in target unit
     public double getInKilogramsPerSecond() {
         return getIn(MassFlowUnits.KILOGRAM_PER_SECOND);
     }

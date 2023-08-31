@@ -113,4 +113,26 @@ class ForceTest {
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Force expected = Force.ofNewtons(10.1);
+
+        // When
+        Force actual = expected.toKiloNewtons()
+                .toKiloponds()
+                .toDynes()
+                .toPoundForce()
+                .toPoundal()
+                .toNewtons();
+
+        double actualValue = expected.getInNewtons();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

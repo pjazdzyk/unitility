@@ -52,6 +52,51 @@ public class Area implements PhysicalQuantity<Area> {
     }
 
     // Convert to target unit
+    public Area toSquareMeters() {
+        return toUnit(AreaUnits.SQUARE_METER);
+    }
+
+    public Area toSquareKilometers() {
+        return toUnit(AreaUnits.SQUARE_KILOMETER);
+    }
+
+    public Area toSquareCentimeters() {
+        return toUnit(AreaUnits.SQUARE_CENTIMETER);
+    }
+
+    public Area toSquareMillimeters() {
+        return toUnit(AreaUnits.SQUARE_MILLIMETER);
+    }
+
+    public Area toAres() {
+        return toUnit(AreaUnits.ARE);
+    }
+
+    public Area toHectares() {
+        return toUnit(AreaUnits.HECTARE);
+    }
+
+    public Area toSquareInches() {
+        return toUnit(AreaUnits.SQUARE_INCH);
+    }
+
+    public Area toSquareFeet() {
+        return toUnit(AreaUnits.SQUARE_FOOT);
+    }
+
+    public Area toSquareYards() {
+        return toUnit(AreaUnits.SQUARE_YARD);
+    }
+
+    public Area toAcres() {
+        return toUnit(AreaUnits.ACRE);
+    }
+
+    public Area toSquareMiles() {
+        return toUnit(AreaUnits.SQUARE_MILE);
+    }
+
+    // Get value in target unit
     public double getInSquareMeters() {
         return getIn(AreaUnits.SQUARE_METER);
     }

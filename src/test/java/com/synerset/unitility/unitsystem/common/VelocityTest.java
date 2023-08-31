@@ -17,9 +17,9 @@ class VelocityTest {
 
         // When
         Velocity actualInCentimetersPerSec = initialVelocity.toUnit(VelocityUnits.CENTIMETER_PER_SECOND);
-        double actualInCentimetersPerSecVal = initialVelocity.toCentimetersPerSeconds();
+        double actualInCentimetersPerSecVal = initialVelocity.getInCentimetersPerSeconds();
         Velocity actualInMetersPerSecond = actualInCentimetersPerSec.toBaseUnit();
-        double actualInMetersPerSecondVal = actualInCentimetersPerSec.toMetersPerSecond();
+        double actualInMetersPerSecondVal = actualInCentimetersPerSec.getInMetersPerSecond();
 
         // Then
         Velocity expectedInKilometersPerHour = Velocity.ofCentimetersPerSecond(1000.0);
@@ -37,7 +37,7 @@ class VelocityTest {
 
         // When
         Velocity actualInKilometersPerHour = initialVelocity.toUnit(VelocityUnits.KILOMETER_PER_HOUR);
-        double actualInKilometersPerHourVal = initialVelocity.toKilometersPerHours();
+        double actualInKilometersPerHourVal = initialVelocity.getInKilometersPerHours();
         Velocity actualInMetersPerSecond = actualInKilometersPerHour.toBaseUnit();
 
         // Then
@@ -55,7 +55,7 @@ class VelocityTest {
 
         // When
         Velocity actualInInchesPerSec = initialVelocity.toUnit(VelocityUnits.INCH_PER_SECOND);
-        double actualInInchesPerSecVal = initialVelocity.toInchesPerSeconds();
+        double actualInInchesPerSecVal = initialVelocity.getInInchesPerSeconds();
         Velocity actualInMetersPerSecond = actualInInchesPerSec.toBaseUnit();
 
         // Then
@@ -73,7 +73,7 @@ class VelocityTest {
 
         // When
         Velocity actualInFeetPerSecond = initialVelocity.toUnit(VelocityUnits.FEET_PER_SECOND);
-        double actualInFeetPerSecondVal = initialVelocity.toFeetPerSeconds();
+        double actualInFeetPerSecondVal = initialVelocity.getInFeetPerSeconds();
         Velocity actualInMetersPerSecond = actualInFeetPerSecond.toBaseUnit();
 
         // Then
@@ -91,7 +91,7 @@ class VelocityTest {
 
         // When
         Velocity actualInMilesPerHour = initialVelocity.toUnit(VelocityUnits.MILES_PER_HOUR);
-        double actualInMilesPerHourVal = initialVelocity.toMilesPerHours();
+        double actualInMilesPerHourVal = initialVelocity.getInMilesPerHours();
         Velocity actualInMetersPerSecond = actualInMilesPerHour.toBaseUnit();
 
         // Then
@@ -109,7 +109,7 @@ class VelocityTest {
 
         // When
         Velocity actualInKnots = initialVelocity.toUnit(VelocityUnits.KNOTS);
-        double actualInKnotsVal = initialVelocity.toKnots();
+        double actualInKnotsVal = initialVelocity.getInKnots();
         Velocity actualInMetersPerSecond = actualInKnots.toBaseUnit();
 
         // Then
@@ -127,7 +127,7 @@ class VelocityTest {
 
         // When
         Velocity actualInMach = initialVelocity.toUnit(VelocityUnits.MACH);
-        double actualInMachVal = initialVelocity.toMach();
+        double actualInMachVal = initialVelocity.getInMach();
         Velocity actualInMetersPerSecond = actualInMach.toBaseUnit();
 
         // Then
@@ -149,6 +149,29 @@ class VelocityTest {
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Velocity expected = Velocity.ofMetersPerSecond(10.1);
+
+        // When
+        Velocity actual = expected.toCentimetersPerSecond()
+                .toKilometersPerHour()
+                .toInchesPerSecond()
+                .toFeetPerSecond()
+                .toMilesPerHour()
+                .toKnots()
+                .toMach()
+                .toMetersPerSecond();
+
+        double actualValue = expected.getInMetersPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

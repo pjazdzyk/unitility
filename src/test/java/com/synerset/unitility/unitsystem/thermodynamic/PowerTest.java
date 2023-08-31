@@ -97,4 +97,24 @@ class PowerTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Power expected = Power.ofWatts(10.1);
+
+        // When
+        Power actual = expected.toKiloWatts()
+                .toBTUPerHour()
+                .toMegaWatts()
+                .toHorsePower()
+                .toWatts();
+
+        double actualValue = expected.getInWatts();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

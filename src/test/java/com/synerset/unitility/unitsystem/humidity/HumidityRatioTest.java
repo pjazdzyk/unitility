@@ -46,4 +46,21 @@ class HumidityRatioTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        HumidityRatio expected = HumidityRatio.ofKilogramPerKilogram(10.1);
+
+        // When
+        HumidityRatio actual = expected.toPoundPerPound()
+                .toKilogramPerKilogram();
+
+        double actualValue = expected.getInKilogramPerKilogram();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

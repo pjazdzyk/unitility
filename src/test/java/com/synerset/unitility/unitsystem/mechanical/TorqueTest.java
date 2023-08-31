@@ -96,4 +96,25 @@ class TorqueTest {
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Torque expected = Torque.ofNewtonMeters(10.1);
+
+        // When
+        Torque actual = expected.toMillinewtonMeters()
+                .toKilopondMeters()
+                .toPoundFeet()
+                .toInchPounds()
+                .toNewtonMeters();
+
+        double actualValue = expected.getInNewtonMeters();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

@@ -51,6 +51,15 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivity> 
     }
 
     // Convert to target unit
+    public ThermalDiffusivity toSquareMeterPerSecond() {
+        return toUnit(ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND);
+    }
+
+    public ThermalDiffusivity toSquareFeetPerSecond() {
+        return toUnit(ThermalDiffusivityUnits.SQUARE_FEET_PER_SECOND);
+    }
+
+    // Get value in target unit
     public double getInSquareMetersPerSecond() {
         return getIn(ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND);
     }

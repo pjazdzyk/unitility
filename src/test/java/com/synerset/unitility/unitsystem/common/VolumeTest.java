@@ -151,5 +151,27 @@ class VolumeTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Volume expected = Volume.ofCubicMeters(10.1);
+
+        // When
+        Volume actual = expected.toLiter()
+                .toCubicCentimeter()
+                .toHectoLiter()
+                .toMilliLiter()
+                .toOunce()
+                .toPint()
+                .toGallon()
+                .toCubicMeter();
+        double actualValue = expected.getInCubicMeters();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }
 

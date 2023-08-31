@@ -168,4 +168,28 @@ class VolumetricFlowTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        VolumetricFlow expected = VolumetricFlow.ofCubicMetersPerSecond(10.1);
+
+        // When
+        VolumetricFlow actual = expected.toCubicMetersPerMinute()
+                .toCubicMetersPerHour()
+                .toLitresPerSecond()
+                .toLitresPerMinute()
+                .toLitresPerHour()
+                .toGallonsPerSecond()
+                .toGallonsPerMinute()
+                .toGallonsPerHour()
+                .toCubicMetersPerSecond();
+
+        double actualValue = expected.getInCubicMetersPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

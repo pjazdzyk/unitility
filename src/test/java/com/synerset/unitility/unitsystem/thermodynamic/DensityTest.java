@@ -61,4 +61,21 @@ class DensityTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Density expected = Density.ofKilogramPerCubicMeter(10.1);
+
+        // When
+        Density actual = expected.toPoundPerCubicFoot()
+                .toKilogramPerCubicMeter();
+
+        double actualValue = expected.getInKilogramsPerCubicMeters();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

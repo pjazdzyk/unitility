@@ -51,6 +51,19 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosity> {
     }
 
     // Convert to target unit
+    public DynamicViscosity toKiloGramPerMeterSecond(){
+        return toUnit(DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
+    }
+
+    public DynamicViscosity toPascalSecond(){
+        return toUnit(DynamicViscosityUnits.PASCAL_SECOND);
+    }
+
+    public DynamicViscosity toPoise(){
+        return toUnit(DynamicViscosityUnits.POISE);
+    }
+
+    // Get value in target unit
     public double getInKiloGramPerMeterSecond() {
         return getIn(DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
     }

@@ -52,6 +52,15 @@ public class Density implements PhysicalQuantity<Density> {
     }
 
     // Convert to target unit
+    public Density toKilogramPerCubicMeter() {
+        return toUnit(DensityUnits.KILOGRAM_PER_CUBIC_METER);
+    }
+
+    public Density toPoundPerCubicFoot() {
+        return toUnit(DensityUnits.POUND_PER_CUBIC_FOOT);
+    }
+
+    // Get value in target unit
     public double getInKilogramsPerCubicMeters() {
         return getIn(DensityUnits.KILOGRAM_PER_CUBIC_METER);
     }

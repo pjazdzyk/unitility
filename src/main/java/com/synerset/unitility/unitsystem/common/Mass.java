@@ -52,6 +52,31 @@ public class Mass implements PhysicalQuantity<Mass> {
     }
 
     // Convert to target unit
+    public Mass toKilogram(){
+        return toUnit(MassUnits.KILOGRAM);
+    }
+
+    public Mass toGram(){
+        return toUnit(MassUnits.GRAM);
+    }
+
+    public Mass toMilligram(){
+        return toUnit(MassUnits.MILLIGRAM);
+    }
+
+    public Mass toTonneSI(){
+        return toUnit(MassUnits.TONNE_SI);
+    }
+
+    public Mass toOunce(){
+        return toUnit(MassUnits.OUNCE);
+    }
+
+    public Mass toPound(){
+        return toUnit(MassUnits.POUND);
+    }
+
+    // Get value in target unit
     public double getInKilograms() {
         return getIn(MassUnits.KILOGRAM);
     }

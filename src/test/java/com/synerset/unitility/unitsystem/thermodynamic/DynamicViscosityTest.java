@@ -60,4 +60,22 @@ class DynamicViscosityTest {
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        DynamicViscosity expected = DynamicViscosity.ofKiloGramPerMeterSecond(10.1);
+
+        // When
+        DynamicViscosity actual = expected.toPascalSecond()
+                .toPoise()
+                .toKiloGramPerMeterSecond();
+
+        double actualValue = expected.getInKiloGramPerMeterSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

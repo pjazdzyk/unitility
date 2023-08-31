@@ -52,6 +52,35 @@ public class Distance implements PhysicalQuantity<Distance> {
     }
 
     // Convert to target unit
+    public Distance toMeter(){
+        return toUnit(DistanceUnits.METER);
+    }
+
+    public Distance toCentimeter(){
+        return toUnit(DistanceUnits.CENTIMETER);
+    }
+
+    public Distance toMillimeter(){
+        return toUnit(DistanceUnits.MILLIMETER);
+    }
+
+    public Distance toKilometer(){
+        return toUnit(DistanceUnits.KILOMETER);
+    }
+
+    public Distance toMile(){
+        return toUnit(DistanceUnits.MILE);
+    }
+
+    public Distance toFeet(){
+        return toUnit(DistanceUnits.FEET);
+    }
+
+    public Distance toInch(){
+        return toUnit(DistanceUnits.INCH);
+    }
+
+    // Get value in target unit
     public double getInMeters() {
         return getIn(DistanceUnits.METER);
     }
