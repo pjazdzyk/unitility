@@ -289,4 +289,17 @@ class PhysicalQuantityTest {
 
     }
 
+    @Test
+    @DisplayName("should output formatted string")
+    void shouldOutputFormattedString(){
+        // Given
+        Temperature temperature = Temperature.ofCelsius(25.1);
+
+        // When
+        String formattedString = temperature.toFormattedString("t");
+
+        // Then
+        assertThat(formattedString).isEqualTo("t = 25.1 °C");
+    }
+
 }

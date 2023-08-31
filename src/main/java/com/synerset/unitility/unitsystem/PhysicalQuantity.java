@@ -324,6 +324,14 @@ public interface PhysicalQuantity<Q> extends Comparable<PhysicalQuantity<Q>> {
         return thisValue / inputQuantity.getValue();
     }
 
+    default String toFormattedString(){
+        return getValue() + " " + getUnitSymbol();
+    }
+
+    default String toFormattedString(String prefix){
+        return prefix + " = " + toFormattedString();
+    }
+
     @Override
     default int compareTo(PhysicalQuantity<Q> other) {
         if (this == other) {
