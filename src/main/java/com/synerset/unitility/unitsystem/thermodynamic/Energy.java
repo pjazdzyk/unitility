@@ -128,13 +128,13 @@ public class Energy implements PhysicalQuantity<Energy> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Energy that = (Energy) o;
-        return Double.compare(that.value, value) == 0 && unit.equals(that.unit);
+        Energy inputQuantity = (Energy) o;
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(baseValue, unit.getBaseUnit());
     }
 
     @Override

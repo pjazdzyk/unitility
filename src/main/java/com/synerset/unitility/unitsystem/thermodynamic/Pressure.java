@@ -114,13 +114,13 @@ public class Pressure implements PhysicalQuantity<Pressure> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pressure pressure = (Pressure) o;
-        return Double.compare(pressure.value, value) == 0 && unit.equals(pressure.unit);
+        Pressure inputQuantity = (Pressure) o;
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(baseValue, unit.getBaseUnit());
     }
 
     @Override

@@ -145,13 +145,13 @@ public class Area implements PhysicalQuantity<Area> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Area area = (Area) o;
-        return Double.compare(area.value, value) == 0 && unit.equals(area.unit);
+        Area inputQuantity = (Area) o;
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(baseValue, unit.getBaseUnit());
     }
 
     @Override

@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class PhysicalQuantityTest {
 
     @Test
-    @DisplayName("should be equals in business requirements if their base units and values in base units are the same")
+    @DisplayName("should be equals if base units and values in base units are the same")
     void shouldBeEquals_whenBaseUnitsAndValuesAreTheSame() {
         // Given
         // When
@@ -26,12 +26,7 @@ class PhysicalQuantityTest {
         Distance distanceInMiles = distanceInMeters.toUnit(DistanceUnits.MILE);
 
         // Then
-
-        // This equality is true from the business point of view
         assertThat(distanceInMeters.isEqualsWithPrecision(distanceInMiles, 1E-13)).isTrue();
-
-        // This is not equals, because from programmatic point of view, they are different
-        assertThat(distanceInMeters).isNotEqualTo(distanceInMiles);
     }
 
     @Test
