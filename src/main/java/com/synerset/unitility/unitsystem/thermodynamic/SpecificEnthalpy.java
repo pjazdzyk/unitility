@@ -1,19 +1,35 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
+public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits> {
     private final double value;
     private final double baseValue;
-    private final Unit<SpecificEnthalpy> unit;
+    private final SpecificEnthalpyUnits unit;
 
-    public SpecificEnthalpy(double value, Unit<SpecificEnthalpy> unit) {
+    public SpecificEnthalpy(double value, SpecificEnthalpyUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static SpecificEnthalpy of(double value, SpecificEnthalpyUnits unit) {
+        return new SpecificEnthalpy(value, unit);
+    }
+
+    public static SpecificEnthalpy ofJoulePerKiloGram(double value) {
+        return new SpecificEnthalpy(value, SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
+    }
+
+    public static SpecificEnthalpy ofKiloJoulePerKiloGram(double value) {
+        return new SpecificEnthalpy(value, SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
+    }
+
+    public static SpecificEnthalpy ofBTUPerPound(double value) {
+        return new SpecificEnthalpy(value, SpecificEnthalpyUnits.BTU_PER_POUND);
     }
 
     @Override
@@ -27,7 +43,7 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
     }
 
     @Override
-    public Unit<SpecificEnthalpy> getUnit() {
+    public SpecificEnthalpyUnits getUnit() {
         return unit;
     }
 
@@ -38,13 +54,14 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
     }
 
     @Override
-    public SpecificEnthalpy toUnit(Unit<SpecificEnthalpy> targetUnit) {
+    public SpecificEnthalpy toUnit(SpecificEnthalpyUnits targetUnit) {
         double valueInJoulePerKilogram = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoulePerKilogram);
         return SpecificEnthalpy.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public SpecificEnthalpy createNewWithValue(double value) {
         return SpecificEnthalpy.of(value, unit);
     }
@@ -91,22 +108,5 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpy> {
     @Override
     public String toString() {
         return "SpecificEnthalpy{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static SpecificEnthalpy of(double value, Unit<SpecificEnthalpy> unit) {
-        return new SpecificEnthalpy(value, unit);
-    }
-
-    public static SpecificEnthalpy ofJoulePerKiloGram(double value) {
-        return new SpecificEnthalpy(value, SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
-    }
-
-    public static SpecificEnthalpy ofKiloJoulePerKiloGram(double value) {
-        return new SpecificEnthalpy(value, SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
-    }
-
-    public static SpecificEnthalpy ofBTUPerPound(double value) {
-        return new SpecificEnthalpy(value, SpecificEnthalpyUnits.BTU_PER_POUND);
     }
 }

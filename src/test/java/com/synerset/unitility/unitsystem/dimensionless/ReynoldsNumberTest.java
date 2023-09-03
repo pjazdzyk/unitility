@@ -9,7 +9,7 @@ class ReynoldsNumberTest {
 
     @Test
     @DisplayName("should create Reynolds number")
-    void shouldCreateReynoldsNumber(){
+    void shouldCreateReynoldsNumber() {
         // Given
         double expectedValue = 10.0;
 

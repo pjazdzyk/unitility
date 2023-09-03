@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum MassFlowUnits implements Unit<MassFlow> {
+public enum MassFlowUnits implements Unit {
 
     KILOGRAM_PER_SECOND("kg/s", val -> val, val -> val),
     KILOGRAM_PER_HOUR("kg/h", val -> val / 3600.0, val -> val * 3600.0),
@@ -27,7 +27,7 @@ public enum MassFlowUnits implements Unit<MassFlow> {
     }
 
     @Override
-    public Unit<MassFlow> getBaseUnit() {
+    public MassFlowUnits getBaseUnit() {
         return KILOGRAM_PER_SECOND;
     }
 

@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum PowerUnits implements Unit<Power> {
+public enum PowerUnits implements Unit {
 
     WATT("W", val -> val, val -> val),
     KILOWATT("kW", val -> val * 1000.0, val -> val / 1000.0),
@@ -28,7 +28,7 @@ public enum PowerUnits implements Unit<Power> {
     }
 
     @Override
-    public Unit<Power> getBaseUnit() {
+    public PowerUnits getBaseUnit() {
         return WATT;
     }
 

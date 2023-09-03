@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum SpecificHeatUnits implements Unit<SpecificHeat> {
+public enum SpecificHeatUnits implements Unit {
 
     JOULES_PER_KILOGRAM_KELVIN("J/(kg·K)", val -> val, val -> val),
     KILOJOULES_PER_KILOGRAM_KELVIN("kJ/(kg·K)", val -> val * 1000, val -> val / 1000),
@@ -26,7 +26,7 @@ public enum SpecificHeatUnits implements Unit<SpecificHeat> {
     }
 
     @Override
-    public Unit<SpecificHeat> getBaseUnit() {
+    public SpecificHeatUnits getBaseUnit() {
         return JOULES_PER_KILOGRAM_KELVIN;
     }
 

@@ -11,20 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ValueFormatterTest {
 
-    @ParameterizedTest
-    @MethodSource("testDoubleSeed")
-    @DisplayName("should properly format: truncate and round up double values with respect of relevant digits count")
-    void shouldFormatAndTruncateDoubleInputWithRespectOfRelevantDigits(double inputDouble, String expectedFormattedDoubleAsString) {
-        // Given
-        int relevantDigits = 3;
-
-        // When
-        String actualFormattedDoubleAsString = ValueFormatter.formatDoubleToRelevantDigits(inputDouble, relevantDigits);
-
-        // Then
-        assertThat(actualFormattedDoubleAsString).isEqualTo(expectedFormattedDoubleAsString);
-    }
-
     static Stream<Arguments> testDoubleSeed() {
         return Stream.of(
                 Arguments.of(-1.0, "-1"),
@@ -40,6 +26,19 @@ class ValueFormatterTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("testDoubleSeed")
+    @DisplayName("should properly format: truncate and round up double values with respect of relevant digits count")
+    void shouldFormatAndTruncateDoubleInputWithRespectOfRelevantDigits(double inputDouble, String expectedFormattedDoubleAsString) {
+        // Given
+        int relevantDigits = 3;
+
+        // When
+        String actualFormattedDoubleAsString = ValueFormatter.formatDoubleToRelevantDigits(inputDouble, relevantDigits);
+
+        // Then
+        assertThat(actualFormattedDoubleAsString).isEqualTo(expectedFormattedDoubleAsString);
+    }
 
 
 }

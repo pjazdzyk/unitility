@@ -1,21 +1,49 @@
 package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Mass implements PhysicalQuantity<Mass> {
+public class Mass implements PhysicalQuantity<MassUnits> {
 
     public static final Mass PHYSICAL_MIN_LIMIT = Mass.ofKilograms(0);
     private final double value;
     private final double baseValue;
-    private final Unit<Mass> unit;
+    private final MassUnits unit;
 
-    public Mass(double value, Unit<Mass> unit) {
+    public Mass(double value, MassUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Mass of(double value, MassUnits unit) {
+        return new Mass(value, unit);
+    }
+
+    public static Mass ofKilograms(double value) {
+        return new Mass(value, MassUnits.KILOGRAM);
+    }
+
+    public static Mass ofGrams(double value) {
+        return new Mass(value, MassUnits.GRAM);
+    }
+
+    public static Mass ofMilligrams(double value) {
+        return new Mass(value, MassUnits.MILLIGRAM);
+    }
+
+    public static Mass ofTonneSI(double value) {
+        return new Mass(value, MassUnits.TONNE_SI);
+    }
+
+    public static Mass ofOunces(double value) {
+        return new Mass(value, MassUnits.OUNCE);
+    }
+
+    public static Mass ofPounds(double value) {
+        return new Mass(value, MassUnits.POUND);
     }
 
     @Override
@@ -29,7 +57,7 @@ public class Mass implements PhysicalQuantity<Mass> {
     }
 
     @Override
-    public Unit<Mass> getUnit() {
+    public MassUnits getUnit() {
         return unit;
     }
 
@@ -40,39 +68,40 @@ public class Mass implements PhysicalQuantity<Mass> {
     }
 
     @Override
-    public Mass toUnit(Unit<Mass> targetUnit) {
+    public Mass toUnit(MassUnits targetUnit) {
         double valueInKilogram = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogram);
         return Mass.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Mass createNewWithValue(double value) {
         return Mass.of(value, unit);
     }
 
     // Convert to target unit
-    public Mass toKilogram(){
+    public Mass toKilogram() {
         return toUnit(MassUnits.KILOGRAM);
     }
 
-    public Mass toGram(){
+    public Mass toGram() {
         return toUnit(MassUnits.GRAM);
     }
 
-    public Mass toMilligram(){
+    public Mass toMilligram() {
         return toUnit(MassUnits.MILLIGRAM);
     }
 
-    public Mass toTonneSI(){
+    public Mass toTonneSI() {
         return toUnit(MassUnits.TONNE_SI);
     }
 
-    public Mass toOunce(){
+    public Mass toOunce() {
         return toUnit(MassUnits.OUNCE);
     }
 
-    public Mass toPound(){
+    public Mass toPound() {
         return toUnit(MassUnits.POUND);
     }
 
@@ -119,32 +148,4 @@ public class Mass implements PhysicalQuantity<Mass> {
         return "Mass{" + value + " " + unit.getSymbol() + '}';
     }
 
-    // Static factory methods
-    public static Mass of(double value, Unit<Mass> unit) {
-        return new Mass(value, unit);
-    }
-
-    public static Mass ofKilograms(double value) {
-        return new Mass(value, MassUnits.KILOGRAM);
-    }
-
-    public static Mass ofGrams(double value) {
-        return new Mass(value, MassUnits.GRAM);
-    }
-
-    public static Mass ofMilligrams(double value) {
-        return new Mass(value, MassUnits.MILLIGRAM);
-    }
-
-    public static Mass ofTonneSI(double value) {
-        return new Mass(value, MassUnits.TONNE_SI);
-    }
-
-    public static Mass ofOunces(double value) {
-        return new Mass(value, MassUnits.OUNCE);
-    }
-
-    public static Mass ofPounds(double value) {
-        return new Mass(value, MassUnits.POUND);
-    }
 }

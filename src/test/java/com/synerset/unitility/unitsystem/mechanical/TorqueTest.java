@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -91,7 +90,7 @@ class TorqueTest {
 
         // When
         Torque torqueInNewtonMeters = Torque.ofNewtonMeters(10);
-        Unit<Torque> actualBaseUnit = torqueInNewtonMeters.getUnit().getBaseUnit();
+        TorqueUnits actualBaseUnit = torqueInNewtonMeters.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

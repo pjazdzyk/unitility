@@ -1,20 +1,60 @@
 package com.synerset.unitility.unitsystem.flows;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
+public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
 
     private final double value;
     private final double baseValue;
-    private final Unit<VolumetricFlow> unit;
+    private final VolumetricFlowUnits unit;
 
-    public VolumetricFlow(double value, Unit<VolumetricFlow> unit) {
+    public VolumetricFlow(double value, VolumetricFlowUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static VolumetricFlow of(double value, VolumetricFlowUnits unit) {
+        return new VolumetricFlow(value, unit);
+    }
+
+    public static VolumetricFlow ofCubicMetersPerSecond(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
+    }
+
+    public static VolumetricFlow ofCubicMetersPerMinute(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_MINUTE);
+    }
+
+    public static VolumetricFlow ofCubicMetersPerHour(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
+    }
+
+    public static VolumetricFlow ofLitresPerSecond(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.LITRE_PER_SECOND);
+    }
+
+    public static VolumetricFlow ofLitresPerMinute(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.LITRE_PER_MINUTE);
+    }
+
+    public static VolumetricFlow ofLitresPerHour(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.LITRE_PER_HOUR);
+    }
+
+    public static VolumetricFlow ofGallonsPerSecond(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_SECOND);
+    }
+
+    public static VolumetricFlow ofGallonsPerMinute(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_MINUTE);
+    }
+
+    public static VolumetricFlow ofGallonsPerHour(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_HOUR);
     }
 
     @Override
@@ -28,7 +68,7 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
     }
 
     @Override
-    public Unit<VolumetricFlow> getUnit() {
+    public VolumetricFlowUnits getUnit() {
         return unit;
     }
 
@@ -39,13 +79,14 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
     }
 
     @Override
-    public VolumetricFlow toUnit(Unit<VolumetricFlow> targetUnit) {
+    public VolumetricFlow toUnit(VolumetricFlowUnits targetUnit) {
         double valueInCubicMetersPerSecond = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInCubicMetersPerSecond);
         return VolumetricFlow.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public VolumetricFlow createNewWithValue(double value) {
         return VolumetricFlow.of(value, unit);
     }
@@ -140,47 +181,6 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlow> {
     @Override
     public String toString() {
         return "VolumetricFlow{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static VolumetricFlow of(double value, Unit<VolumetricFlow> unit) {
-        return new VolumetricFlow(value, unit);
-    }
-
-    public static VolumetricFlow ofCubicMetersPerSecond(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
-    }
-
-    public static VolumetricFlow ofCubicMetersPerMinute(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_MINUTE);
-    }
-
-    public static VolumetricFlow ofCubicMetersPerHour(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
-    }
-
-    public static VolumetricFlow ofLitresPerSecond(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.LITRE_PER_SECOND);
-    }
-
-    public static VolumetricFlow ofLitresPerMinute(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.LITRE_PER_MINUTE);
-    }
-
-    public static VolumetricFlow ofLitresPerHour(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.LITRE_PER_HOUR);
-    }
-
-    public static VolumetricFlow ofGallonsPerSecond(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_SECOND);
-    }
-
-    public static VolumetricFlow ofGallonsPerMinute(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_MINUTE);
-    }
-
-    public static VolumetricFlow ofGallonsPerHour(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_HOUR);
     }
 
 }

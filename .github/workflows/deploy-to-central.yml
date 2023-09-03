@@ -1,7 +1,7 @@
 name: deploy-to-maven-central
 on:
   release:
-    types: [created]
+    types: [ created ]
 jobs:
   publish:
     runs-on: ubuntu-latest

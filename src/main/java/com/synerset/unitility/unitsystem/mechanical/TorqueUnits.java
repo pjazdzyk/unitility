@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum TorqueUnits implements Unit<Torque> {
+public enum TorqueUnits implements Unit {
 
     NEWTON_METER("N·m", val -> val, val -> val),
     MILLINEWTON_METER("mN·m", val -> val * 0.001, val -> val * 1000),
@@ -28,7 +28,7 @@ public enum TorqueUnits implements Unit<Torque> {
     }
 
     @Override
-    public Unit<Torque> getBaseUnit() {
+    public TorqueUnits getBaseUnit() {
         return NEWTON_METER;
     }
 

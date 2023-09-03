@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum VolumetricFlowUnits implements Unit<VolumetricFlow> {
+public enum VolumetricFlowUnits implements Unit {
 
     CUBIC_METERS_PER_SECOND("m³/s", val -> val, val -> val),
     CUBIC_METERS_PER_MINUTE("m³/min", val -> val / 60.0, val -> val * 60.0),
@@ -32,7 +32,7 @@ public enum VolumetricFlowUnits implements Unit<VolumetricFlow> {
     }
 
     @Override
-    public Unit<VolumetricFlow> getBaseUnit() {
+    public VolumetricFlowUnits getBaseUnit() {
         return CUBIC_METERS_PER_SECOND;
     }
 

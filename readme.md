@@ -6,7 +6,7 @@ Whether you're looking to convert units within the same type or customize to mee
 or external libraries.<br>
 **Thread-Safe Architecture:** This library is developed to ensure thread safety, allowing for concurrent access without compromising data integrity through the utilization of immutable objects.
 
-[![Unitility](https://img.shields.io/github/v/release/pjazdzyk/Unitility?label=Unitility&color=13ADF3&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI0LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/github/v/release/pjazdzyk/Unitility?label=Unitility&color=13ADF3&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI0LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility) &nbsp;
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.synerset/unitility/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.synerset/unitility) &nbsp;
 ![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) <br>
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility) &nbsp;
@@ -20,13 +20,13 @@ or external libraries.<br>
 ### INSTALLATION
 
 Just copy Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers, check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.1.1/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.2.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility</artifactId>
-    <version>1.1.1</version>
+    <version>1.2.0</version>
 </dependency>
 ```
 ## Tech
@@ -55,22 +55,22 @@ double valueInCelsius = temperature.getInCelsius();            // 20.50 °C
 double valueInKelvins = temperature.getInKelvins();            // 293.65 K
 double valueInFahrenheits = temperature.getInFahrenheits();    // 68.90 °F
 // Checking property current unit, value, and value in base unit
-Unit<Temperature> unit = temperature.getUnit();                // CELSIUS
-Unit<Temperature> baseUnit = unit.getBaseUnit();               // KELVIN 
+TemperatureUnits unit = temperature.getUnit();                // CELSIUS
+TemperatureUnits baseUnit = unit.getBaseUnit();               // KELVIN 
 double valueInUnit = temperature.getValue();                   // 20.50 °C
 double valueInBaseUnits = temperature.getBaseValue();          // 293.65 K
 // Changing property unit and converting back to base unit
 Temperature tempInFahrenheits = temperature.toUnit(TemperatureUnits.FAHRENHEIT); // {68.90 °F}
 Temperature tempInKelvins = temperature.toBaseUnit();                            // {293.65 K}
 ```
-All quantities have smart toStringWithRelevantDigits() method, which will always adjust values decimal precision to capture by default specified relevant digits depending on your unit type and its value. 
+All quantities have smart toFormattedString() method, which will always adjust values decimal precision to capture by default specified relevant digits depending on your unit type and its value. 
 This way you have guaranteed an elegant output without any additional effort of reformatting. Values will be rounded up using HALF_EVEN approach. 
 
 ```java
 Distance bigDistance = Distance.ofMeters(10);
 Distance smallDistance = Distance.ofMeters(0.000123678);      
-String bigOutput = bigDistance.toStringWithRelevantDigits(3);      // outputs: 10.0 m
-String smallOutput = smallDistance.toStringWithRelevantDigits(3);  // outputs: 0.00124 m
+String bigOutput = bigDistance.toFormattedString(3);      // outputs: 10.0 m
+String smallOutput = smallDistance.toFormattedString(3);  // outputs: 0.00124 m
 ```
 
 For more advanced use cases, take a look at the example project that has been prepared to illustrate the integration of this library into a simple dry air property physics app. 
@@ -84,7 +84,7 @@ The choice of the developer determines whether calculations are performed using 
 ```java
 Temperature sourceTemperature = Temperature.ofCelsius(20);
 Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
-Temperature actualTemperature = (Temperature) sourceTemperature.add(temperatureToAdd); // results in: 40 °C
+Temperature actualTemperature = sourceTemperature.add(temperatureToAdd); // results in: 40 °C
 ```
 Performing addition or subtraction will yield a PhysicalQuantity with the same unit. The algorithm will convert the unit of the addend quantity to match that of the augend, 
 ensuring that the operation is conducted within a consistent unit. The unit of the resulting quantity will be set to match that of the augend
@@ -92,7 +92,7 @@ ensuring that the operation is conducted within a consistent unit. The unit of t
 * multiply or divide quantities by scalar:
 ```java
 Temperature temperature = Temperature.ofCelsius(20);
-Temperature actualTemperature = (Temperature) temperature.multiply(2); //results in 40 °C
+Temperature actualTemperature = temperature.multiply(2); //results in 40 °C
 ```
 * multiply or divide quantities by different quantity with result as double:
 ```java

@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum DistanceUnits implements Unit<Distance> {
+public enum DistanceUnits implements Unit {
 
     METER("m", val -> val, val -> val),
     CENTIMETER("cm", val -> val / 100, val -> val * 100),
@@ -30,7 +30,7 @@ public enum DistanceUnits implements Unit<Distance> {
     }
 
     @Override
-    public Unit<Distance> getBaseUnit() {
+    public DistanceUnits getBaseUnit() {
         return METER;
     }
 

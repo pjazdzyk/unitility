@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum EnergyUnits implements Unit<Energy> {
+public enum EnergyUnits implements Unit {
 
     JOULE("J", val -> val, val -> val),
     MILLIJOULE("mJ", val -> val * 0.001, val -> val / 0.001),
@@ -32,7 +32,7 @@ public enum EnergyUnits implements Unit<Energy> {
     }
 
     @Override
-    public Unit<Energy> getBaseUnit() {
+    public EnergyUnits getBaseUnit() {
         return JOULE;
     }
 

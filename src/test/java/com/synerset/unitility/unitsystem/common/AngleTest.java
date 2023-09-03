@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +34,7 @@ class AngleTest {
 
         // When
         Angle angleInRadians = Angle.ofRadians(10);
-        Unit<Angle> actualBaseUnit = angleInRadians.getUnit().getBaseUnit();
+        AngleUnits actualBaseUnit = angleInRadians.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

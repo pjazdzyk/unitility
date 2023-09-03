@@ -1,20 +1,60 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Energy implements PhysicalQuantity<Energy> {
+public class Energy implements PhysicalQuantity<EnergyUnits> {
 
     private final double value;
     private final double baseValue;
-    private final Unit<Energy> unit;
+    private final EnergyUnits unit;
 
-    public Energy(double value, Unit<Energy> unit) {
+    public Energy(double value, EnergyUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Energy of(double value, EnergyUnits unit) {
+        return new Energy(value, unit);
+    }
+
+    public static Energy ofJoules(double value) {
+        return new Energy(value, EnergyUnits.JOULE);
+    }
+
+    public static Energy ofMilliJoules(double value) {
+        return new Energy(value, EnergyUnits.MILLIJOULE);
+    }
+
+    public static Energy ofKiloJoules(double value) {
+        return new Energy(value, EnergyUnits.KILOJOULE);
+    }
+
+    public static Energy ofMegaJoules(double value) {
+        return new Energy(value, EnergyUnits.MEGAJOULE);
+    }
+
+    public static Energy ofBTU(double value) {
+        return new Energy(value, EnergyUnits.BTU);
+    }
+
+    public static Energy ofCalorie(double value) {
+        return new Energy(value, EnergyUnits.CALORIE);
+    }
+
+    public static Energy ofKiloCalorie(double value) {
+        return new Energy(value, EnergyUnits.KILOCALORIE);
+    }
+
+    public static Energy ofWattHour(double value) {
+        return new Energy(value, EnergyUnits.WATT_HOUR);
+    }
+
+    public static Energy ofKilowattHour(double value) {
+        return new Energy(value, EnergyUnits.KILOWATT_HOUR);
     }
 
     @Override
@@ -28,7 +68,7 @@ public class Energy implements PhysicalQuantity<Energy> {
     }
 
     @Override
-    public Unit<Energy> getUnit() {
+    public EnergyUnits getUnit() {
         return unit;
     }
 
@@ -39,13 +79,14 @@ public class Energy implements PhysicalQuantity<Energy> {
     }
 
     @Override
-    public Energy toUnit(Unit<Energy> targetUnit) {
+    public Energy toUnit(EnergyUnits targetUnit) {
         double valueInJoules = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoules);
         return Energy.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Energy createNewWithValue(double value) {
         return Energy.of(value, unit);
     }
@@ -140,47 +181,6 @@ public class Energy implements PhysicalQuantity<Energy> {
     @Override
     public String toString() {
         return "Energy{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static Energy of(double value, Unit<Energy> unit) {
-        return new Energy(value, unit);
-    }
-
-    public static Energy ofJoules(double value) {
-        return new Energy(value, EnergyUnits.JOULE);
-    }
-
-    public static Energy ofMilliJoules(double value) {
-        return new Energy(value, EnergyUnits.MILLIJOULE);
-    }
-
-    public static Energy ofKiloJoules(double value) {
-        return new Energy(value, EnergyUnits.KILOJOULE);
-    }
-
-    public static Energy ofMegaJoules(double value) {
-        return new Energy(value, EnergyUnits.MEGAJOULE);
-    }
-
-    public static Energy ofBTU(double value) {
-        return new Energy(value, EnergyUnits.BTU);
-    }
-
-    public static Energy ofCalorie(double value) {
-        return new Energy(value, EnergyUnits.CALORIE);
-    }
-
-    public static Energy ofKiloCalorie(double value) {
-        return new Energy(value, EnergyUnits.KILOCALORIE);
-    }
-
-    public static Energy ofWattHour(double value) {
-        return new Energy(value, EnergyUnits.WATT_HOUR);
-    }
-
-    public static Energy ofKilowattHour(double value) {
-        return new Energy(value, EnergyUnits.KILOWATT_HOUR);
     }
 
 }

@@ -1,20 +1,32 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> {
+public class KinematicViscosity implements PhysicalQuantity<KinematicViscosityUnits> {
 
     private final double value;
     private final double baseValue;
-    private final Unit<KinematicViscosity> unit;
+    private final KinematicViscosityUnits unit;
 
-    public KinematicViscosity(double value, Unit<KinematicViscosity> unit) {
+    public KinematicViscosity(double value, KinematicViscosityUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static KinematicViscosity of(double value, KinematicViscosityUnits unit) {
+        return new KinematicViscosity(value, unit);
+    }
+
+    public static KinematicViscosity ofSquareMeterPerSecond(double value) {
+        return new KinematicViscosity(value, KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
+    }
+
+    public static KinematicViscosity ofSquareFootPerSecond(double value) {
+        return new KinematicViscosity(value, KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
     }
 
     @Override
@@ -28,7 +40,7 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> 
     }
 
     @Override
-    public Unit<KinematicViscosity> getUnit() {
+    public KinematicViscosityUnits getUnit() {
         return unit;
     }
 
@@ -39,23 +51,24 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> 
     }
 
     @Override
-    public KinematicViscosity toUnit(Unit<KinematicViscosity> targetUnit) {
+    public KinematicViscosity toUnit(KinematicViscosityUnits targetUnit) {
         double valueInSquareMeterPerSecond = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInSquareMeterPerSecond);
         return KinematicViscosity.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public KinematicViscosity createNewWithValue(double value) {
         return KinematicViscosity.of(value, unit);
     }
 
     // Convert to target unit
-    public KinematicViscosity toSquareMeterPerSecond(){
+    public KinematicViscosity toSquareMeterPerSecond() {
         return toUnit(KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
     }
 
-    public KinematicViscosity toSquareFootPerSecond(){
+    public KinematicViscosity toSquareFootPerSecond() {
         return toUnit(KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
     }
 
@@ -73,7 +86,8 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         KinematicViscosity inputQuantity = (KinematicViscosity) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(),
+                inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
@@ -84,19 +98,6 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosity> 
     @Override
     public String toString() {
         return "KinematicViscosity{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static KinematicViscosity of(double value, Unit<KinematicViscosity> unit) {
-        return new KinematicViscosity(value, unit);
-    }
-
-    public static KinematicViscosity ofSquareMeterPerSecond(double value) {
-        return new KinematicViscosity(value, KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
-    }
-
-    public static KinematicViscosity ofSquareFootPerSecond(double value) {
-        return new KinematicViscosity(value, KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
     }
 
 }

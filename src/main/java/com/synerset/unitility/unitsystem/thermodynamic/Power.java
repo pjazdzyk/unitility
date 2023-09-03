@@ -1,19 +1,43 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Power implements PhysicalQuantity<Power> {
+public class Power implements PhysicalQuantity<PowerUnits> {
     private final double value;
     private final double baseValue;
-    private final Unit<Power> unit;
+    private final PowerUnits unit;
 
-    public Power(double value, Unit<Power> unit) {
+    public Power(double value, PowerUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Power of(double value, PowerUnits unit) {
+        return new Power(value, unit);
+    }
+
+    public static Power ofWatts(double value) {
+        return new Power(value, PowerUnits.WATT);
+    }
+
+    public static Power ofKiloWatts(double value) {
+        return new Power(value, PowerUnits.KILOWATT);
+    }
+
+    public static Power ofMegaWatts(double value) {
+        return new Power(value, PowerUnits.MEGAWATT);
+    }
+
+    public static Power ofBTUPerHour(double value) {
+        return new Power(value, PowerUnits.BTU_PER_HOUR);
+    }
+
+    public static Power ofHorsePower(double value) {
+        return new Power(value, PowerUnits.HORSE_POWER);
     }
 
     @Override
@@ -27,7 +51,7 @@ public class Power implements PhysicalQuantity<Power> {
     }
 
     @Override
-    public Unit<Power> getUnit() {
+    public PowerUnits getUnit() {
         return unit;
     }
 
@@ -38,35 +62,36 @@ public class Power implements PhysicalQuantity<Power> {
     }
 
     @Override
-    public Power toUnit(Unit<Power> targetUnit) {
+    public Power toUnit(PowerUnits targetUnit) {
         double valueInWatts = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInWatts);
         return Power.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Power createNewWithValue(double value) {
         return Power.of(value, unit);
     }
 
     // Convert to target unit
-    public Power toWatts(){
+    public Power toWatts() {
         return toUnit(PowerUnits.WATT);
     }
 
-    public Power toKiloWatts(){
+    public Power toKiloWatts() {
         return toUnit(PowerUnits.KILOWATT);
     }
 
-    public Power toBTUPerHour(){
+    public Power toBTUPerHour() {
         return toUnit(PowerUnits.BTU_PER_HOUR);
     }
 
-    public Power toMegaWatts(){
+    public Power toMegaWatts() {
         return toUnit(PowerUnits.MEGAWATT);
     }
 
-    public Power toHorsePower(){
+    public Power toHorsePower() {
         return toUnit(PowerUnits.HORSE_POWER);
     }
 
@@ -107,30 +132,5 @@ public class Power implements PhysicalQuantity<Power> {
     @Override
     public String toString() {
         return "Power{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static Power of(double value, Unit<Power> unit) {
-        return new Power(value, unit);
-    }
-
-    public static Power ofWatts(double value) {
-        return new Power(value, PowerUnits.WATT);
-    }
-
-    public static Power ofKiloWatts(double value) {
-        return new Power(value, PowerUnits.KILOWATT);
-    }
-
-    public static Power ofMegaWatts(double value) {
-        return new Power(value, PowerUnits.MEGAWATT);
-    }
-
-    public static Power ofBTUPerHour(double value) {
-        return new Power(value, PowerUnits.BTU_PER_HOUR);
-    }
-
-    public static Power ofHorsePower(double value) {
-        return new Power(value, PowerUnits.HORSE_POWER);
     }
 }

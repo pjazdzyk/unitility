@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum MomentumUnits implements Unit<Momentum> {
+public enum MomentumUnits implements Unit {
     KILOGRAM_METER_PER_SECOND("kg·m/s", val -> val, val -> val),
     POUND_FEET_PER_SECOND("lb·ft/s", val -> val * 0.138254954376, val -> val / 0.138254954376),
     GRAM_CENTIMETRE_PER_SECOND("g·cm/s", val -> val * 0.00001, val -> val / 0.00001);
@@ -25,7 +25,7 @@ public enum MomentumUnits implements Unit<Momentum> {
     }
 
     @Override
-    public Unit<Momentum> getBaseUnit() {
+    public MomentumUnits getBaseUnit() {
         return KILOGRAM_METER_PER_SECOND;
     }
 
@@ -38,4 +38,5 @@ public enum MomentumUnits implements Unit<Momentum> {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

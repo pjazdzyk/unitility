@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +54,7 @@ class TemperatureTest {
 
         // When
         Temperature specificHeatInFahrenheit = Temperature.ofFahrenheit(10);
-        Unit<Temperature> actualBaseUnit = specificHeatInFahrenheit.getUnit().getBaseUnit();
+        TemperatureUnits actualBaseUnit = specificHeatInFahrenheit.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

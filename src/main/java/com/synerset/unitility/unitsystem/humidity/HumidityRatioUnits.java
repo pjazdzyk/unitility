@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum HumidityRatioUnits implements Unit<HumidityRatio> {
+public enum HumidityRatioUnits implements Unit {
 
     KILOGRAM_PER_KILOGRAM("kg/kg", val -> val, val -> val),
     POUND_PER_POUND("lb/lb", val -> val / 2.20462262184878, val -> val * 2.20462262184878);
@@ -25,7 +25,7 @@ public enum HumidityRatioUnits implements Unit<HumidityRatio> {
     }
 
     @Override
-    public Unit<HumidityRatio> getBaseUnit() {
+    public HumidityRatioUnits getBaseUnit() {
         return KILOGRAM_PER_KILOGRAM;
     }
 
@@ -38,4 +38,5 @@ public enum HumidityRatioUnits implements Unit<HumidityRatio> {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

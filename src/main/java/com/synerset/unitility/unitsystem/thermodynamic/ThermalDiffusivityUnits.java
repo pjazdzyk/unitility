@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum ThermalDiffusivityUnits implements Unit<ThermalDiffusivity> {
+public enum ThermalDiffusivityUnits implements Unit {
 
     SQUARE_METER_PER_SECOND("m²/s", val -> val, val -> val),
     SQUARE_FEET_PER_SECOND("ft²/s", val -> val * 0.09290304, val -> val / 0.09290304);
@@ -25,7 +25,7 @@ public enum ThermalDiffusivityUnits implements Unit<ThermalDiffusivity> {
     }
 
     @Override
-    public Unit<ThermalDiffusivity> getBaseUnit() {
+    public ThermalDiffusivityUnits getBaseUnit() {
         return SQUARE_METER_PER_SECOND;
     }
 
@@ -38,4 +38,5 @@ public enum ThermalDiffusivityUnits implements Unit<ThermalDiffusivity> {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

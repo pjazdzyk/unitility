@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -126,7 +125,7 @@ class DistanceTest {
 
         // When
         Distance DistanceInMiles = Distance.ofMiles(10);
-        Unit<Distance> actualBaseUnit = DistanceInMiles.getUnit().getBaseUnit();
+        DistanceUnits actualBaseUnit = DistanceInMiles.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

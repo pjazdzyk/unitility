@@ -1,19 +1,23 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
+public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnits> {
     private final double value;
     private final double baseValue;
-    private final Unit<GrashofNumber> unit;
+    private final GrashofNumberUnits unit;
 
     public GrashofNumber(double value) {
         this.value = value;
         this.unit = GrashofNumberUnits.DIMENSIONLESS;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static GrashofNumber of(double value) {
+        return new GrashofNumber(value);
     }
 
     @Override
@@ -27,7 +31,7 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
     }
 
     @Override
-    public Unit<GrashofNumber> getUnit() {
+    public GrashofNumberUnits getUnit() {
         return unit;
     }
 
@@ -37,11 +41,12 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
     }
 
     @Override
-    public PhysicalQuantity<GrashofNumber> toUnit(Unit<GrashofNumber> targetUnit) {
+    public GrashofNumber toUnit(GrashofNumberUnits targetUnit) {
         return this;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public GrashofNumber createNewWithValue(double value) {
         return GrashofNumber.of(value);
     }
@@ -62,11 +67,6 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    // Static factory methods
-    public static GrashofNumber of(double value) {
-        return new GrashofNumber(value);
     }
 
 }

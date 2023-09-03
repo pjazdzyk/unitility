@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.flows;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -162,7 +161,7 @@ class VolumetricFlowTest {
 
         // When
         VolumetricFlow volumetricFlowInGalPerHr = VolumetricFlow.ofGallonsPerHour(10);
-        Unit<VolumetricFlow> actualBaseUnit = volumetricFlowInGalPerHr.getUnit().getBaseUnit();
+        VolumetricFlowUnits actualBaseUnit = volumetricFlowInGalPerHr.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

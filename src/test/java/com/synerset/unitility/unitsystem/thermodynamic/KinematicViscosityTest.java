@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +35,7 @@ class KinematicViscosityTest {
 
         // When
         KinematicViscosity kinematicViscosityInFt2PerSec = KinematicViscosity.ofSquareFootPerSecond(10);
-        Unit<KinematicViscosity> actualBaseUnit = kinematicViscosityInFt2PerSec.getUnit().getBaseUnit();
+        KinematicViscosityUnits actualBaseUnit = kinematicViscosityInFt2PerSec.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -1,20 +1,56 @@
 package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Velocity implements PhysicalQuantity<Velocity> {
+public class Velocity implements PhysicalQuantity<VelocityUnits> {
 
     private final double value;
     private final double baseValue;
-    private final Unit<Velocity> unit;
+    private final VelocityUnits unit;
 
-    public Velocity(double value, Unit<Velocity> unit) {
+    public Velocity(double value, VelocityUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Velocity of(double value, VelocityUnits unit) {
+        return new Velocity(value, unit);
+    }
+
+    public static Velocity ofMetersPerSecond(double value) {
+        return new Velocity(value, VelocityUnits.METER_PER_SECOND);
+    }
+
+    public static Velocity ofCentimetersPerSecond(double value) {
+        return new Velocity(value, VelocityUnits.CENTIMETER_PER_SECOND);
+    }
+
+    public static Velocity ofKilometersPerHour(double value) {
+        return new Velocity(value, VelocityUnits.KILOMETER_PER_HOUR);
+    }
+
+    public static Velocity ofInchesPerSecond(double value) {
+        return new Velocity(value, VelocityUnits.INCH_PER_SECOND);
+    }
+
+    public static Velocity ofFeetPerSecond(double value) {
+        return new Velocity(value, VelocityUnits.FEET_PER_SECOND);
+    }
+
+    public static Velocity ofMilesPerHour(double value) {
+        return new Velocity(value, VelocityUnits.MILES_PER_HOUR);
+    }
+
+    public static Velocity ofKnots(double value) {
+        return new Velocity(value, VelocityUnits.KNOTS);
+    }
+
+    public static Velocity ofMach(double value) {
+        return new Velocity(value, VelocityUnits.MACH);
     }
 
     @Override
@@ -28,7 +64,7 @@ public class Velocity implements PhysicalQuantity<Velocity> {
     }
 
     @Override
-    public Unit<Velocity> getUnit() {
+    public VelocityUnits getUnit() {
         return unit;
     }
 
@@ -39,13 +75,14 @@ public class Velocity implements PhysicalQuantity<Velocity> {
     }
 
     @Override
-    public Velocity toUnit(Unit<Velocity> targetUnit) {
+    public Velocity toUnit(VelocityUnits targetUnit) {
         double valueInMetersPerSecond = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInMetersPerSecond);
         return Velocity.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Velocity createNewWithValue(double value) {
         return Velocity.of(value, unit);
     }
@@ -132,43 +169,6 @@ public class Velocity implements PhysicalQuantity<Velocity> {
     @Override
     public String toString() {
         return "Velocity{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static Velocity of(double value, Unit<Velocity> unit) {
-        return new Velocity(value, unit);
-    }
-
-    public static Velocity ofMetersPerSecond(double value) {
-        return new Velocity(value, VelocityUnits.METER_PER_SECOND);
-    }
-
-    public static Velocity ofCentimetersPerSecond(double value) {
-        return new Velocity(value, VelocityUnits.CENTIMETER_PER_SECOND);
-    }
-
-    public static Velocity ofKilometersPerHour(double value) {
-        return new Velocity(value, VelocityUnits.KILOMETER_PER_HOUR);
-    }
-
-    public static Velocity ofInchesPerSecond(double value) {
-        return new Velocity(value, VelocityUnits.INCH_PER_SECOND);
-    }
-
-    public static Velocity ofFeetPerSecond(double value) {
-        return new Velocity(value, VelocityUnits.FEET_PER_SECOND);
-    }
-
-    public static Velocity ofMilesPerHour(double value) {
-        return new Velocity(value, VelocityUnits.MILES_PER_HOUR);
-    }
-
-    public static Velocity ofKnots(double value) {
-        return new Velocity(value, VelocityUnits.KNOTS);
-    }
-
-    public static Velocity ofMach(double value) {
-        return new Velocity(value, VelocityUnits.MACH);
     }
 
 }

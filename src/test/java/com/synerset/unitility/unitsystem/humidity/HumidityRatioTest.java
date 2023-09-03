@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.humidity;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +39,7 @@ class HumidityRatioTest {
 
         // When
         HumidityRatio humidityKgPerKg = HumidityRatio.ofPoundPerPound(10);
-        Unit<HumidityRatio> actualBaseUnit = humidityKgPerKg.getUnit().getBaseUnit();
+        HumidityRatioUnits actualBaseUnit = humidityKgPerKg.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

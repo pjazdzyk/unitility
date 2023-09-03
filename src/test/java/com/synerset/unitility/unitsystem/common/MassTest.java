@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -109,7 +108,7 @@ class MassTest {
 
         // When
         Mass massInLb = Mass.ofPounds(10);
-        Unit<Mass> actualBaseUnit = massInLb.getUnit().getBaseUnit();
+        MassUnits actualBaseUnit = massInLb.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

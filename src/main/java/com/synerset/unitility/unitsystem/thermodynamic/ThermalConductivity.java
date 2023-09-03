@@ -1,19 +1,35 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity> {
+public class ThermalConductivity implements PhysicalQuantity<ThermalConductivityUnits> {
     private final double value;
     private final double baseValue;
-    private final Unit<ThermalConductivity> unit;
+    private final ThermalConductivityUnits unit;
 
-    public ThermalConductivity(double value, Unit<ThermalConductivity> unit) {
+    public ThermalConductivity(double value, ThermalConductivityUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static ThermalConductivity of(double value, ThermalConductivityUnits unit) {
+        return new ThermalConductivity(value, unit);
+    }
+
+    public static ThermalConductivity ofWattsPerMeterKelvin(double value) {
+        return new ThermalConductivity(value, ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
+    }
+
+    public static ThermalConductivity ofKilowattsPerMeterKelvin(double value) {
+        return new ThermalConductivity(value, ThermalConductivityUnits.KILOWATTS_PER_METER_KELVIN);
+    }
+
+    public static ThermalConductivity ofBTUPerHourFeetFahrenheit(double value) {
+        return new ThermalConductivity(value, ThermalConductivityUnits.BTU_PER_HOUR_FOOT_FAHRENHEIT);
     }
 
     @Override
@@ -27,7 +43,7 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
     }
 
     @Override
-    public Unit<ThermalConductivity> getUnit() {
+    public ThermalConductivityUnits getUnit() {
         return unit;
     }
 
@@ -38,13 +54,14 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
     }
 
     @Override
-    public ThermalConductivity toUnit(Unit<ThermalConductivity> targetUnit) {
+    public ThermalConductivity toUnit(ThermalConductivityUnits targetUnit) {
         double valueInWattsPerMeterKelvin = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInWattsPerMeterKelvin);
         return ThermalConductivity.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public ThermalConductivity createNewWithValue(double value) {
         return ThermalConductivity.of(value, unit);
     }
@@ -93,20 +110,4 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
         return "ThermalConductivity{" + value + " " + unit.getSymbol() + '}';
     }
 
-    // Static factory methods
-    public static ThermalConductivity of(double value, Unit<ThermalConductivity> unit) {
-        return new ThermalConductivity(value, unit);
-    }
-
-    public static ThermalConductivity ofWattsPerMeterKelvin(double value) {
-        return new ThermalConductivity(value, ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
-    }
-
-    public static ThermalConductivity ofKilowattsPerMeterKelvin(double value) {
-        return new ThermalConductivity(value, ThermalConductivityUnits.KILOWATTS_PER_METER_KELVIN);
-    }
-
-    public static ThermalConductivity ofBTUPerHourFeetFahrenheit(double value) {
-        return new ThermalConductivity(value, ThermalConductivityUnits.BTU_PER_HOUR_FOOT_FAHRENHEIT);
-    }
 }
