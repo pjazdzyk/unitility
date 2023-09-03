@@ -1,22 +1,37 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
-public class Temperature implements PhysicalQuantity<Temperature> {
+public class Temperature implements PhysicalQuantity<TemperatureUnits> {
 
     public static final Temperature PHYSICAL_MIN_LIMIT = Temperature.ofKelvins(0);
     private final double value;
     private final double baseValue;
-    private final Unit<Temperature> unit;
+    private final TemperatureUnits unit;
 
-    public Temperature(double value, Unit<Temperature> unit) {
+    public Temperature(double value, TemperatureUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Temperature of(double value, TemperatureUnits unit) {
+        return new Temperature(value, unit);
+    }
+
+    public static Temperature ofKelvins(double value) {
+        return new Temperature(value, TemperatureUnits.KELVIN);
+    }
+
+    public static Temperature ofCelsius(double value) {
+        return new Temperature(value, TemperatureUnits.CELSIUS);
+    }
+
+    public static Temperature ofFahrenheit(double value) {
+        return new Temperature(value, TemperatureUnits.FAHRENHEIT);
     }
 
     @Override
@@ -30,7 +45,7 @@ public class Temperature implements PhysicalQuantity<Temperature> {
     }
 
     @Override
-    public Unit<Temperature> getUnit() {
+    public TemperatureUnits getUnit() {
         return unit;
     }
 
@@ -41,18 +56,32 @@ public class Temperature implements PhysicalQuantity<Temperature> {
     }
 
     @Override
-    public Temperature toUnit(Unit<Temperature> targetUnit) {
+    public Temperature toUnit(TemperatureUnits targetUnit) {
         double valueInKelvin = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKelvin);
         return Temperature.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Temperature createNewWithValue(double value) {
         return Temperature.of(value, unit);
     }
 
     // Convert to target unit
+    public Temperature toKelvin() {
+        return toUnit(TemperatureUnits.KELVIN);
+    }
+
+    public Temperature toCelsius() {
+        return toUnit(TemperatureUnits.CELSIUS);
+    }
+
+    public Temperature toFahrenheit() {
+        return toUnit(TemperatureUnits.FAHRENHEIT);
+    }
+
+    // Get value in target unit
     public double getInKelvins() {
         return getIn(TemperatureUnits.KELVIN);
     }
@@ -69,13 +98,14 @@ public class Temperature implements PhysicalQuantity<Temperature> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Temperature that = (Temperature) o;
-        return Double.compare(that.value, value) == 0 && unit.equals(that.unit);
+        Temperature inputQuantity = (Temperature) o;
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(),
+                inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(baseValue, unit.getBaseUnit());
     }
 
     @Override
@@ -83,26 +113,4 @@ public class Temperature implements PhysicalQuantity<Temperature> {
         return "Temperature{" + value + " " + unit.getSymbol() + '}';
     }
 
-    @Override
-    public String toStringWithRelevantDigits(int relevantDigits) {
-        String separator = unit == TemperatureUnits.CELSIUS ? "" : " ";
-        return ValueFormatter.formatDoubleToRelevantDigits(value, relevantDigits) + separator + unit.getSymbol();
-    }
-
-    // Static factory methods
-    public static Temperature of(double value, Unit<Temperature> unit) {
-        return new Temperature(value, unit);
-    }
-
-    public static Temperature ofKelvins(double value) {
-        return new Temperature(value, TemperatureUnits.KELVIN);
-    }
-
-    public static Temperature ofCelsius(double value) {
-        return new Temperature(value, TemperatureUnits.CELSIUS);
-    }
-
-    public static Temperature ofFahrenheit(double value) {
-        return new Temperature(value, TemperatureUnits.FAHRENHEIT);
-    }
 }

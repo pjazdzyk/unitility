@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -91,10 +90,30 @@ class PowerTest {
 
         // When
         Power powerWatt = Power.ofWatts(10);
-        Unit<Power> actualBaseUnit = powerWatt.getUnit().getBaseUnit();
+        PowerUnits actualBaseUnit = powerWatt.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Power expected = Power.ofWatts(10.1);
+
+        // When
+        Power actual = expected.toKiloWatts()
+                .toBTUPerHour()
+                .toMegaWatts()
+                .toHorsePower()
+                .toWatts();
+
+        double actualValue = expected.getInWatts();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

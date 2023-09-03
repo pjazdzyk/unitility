@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -145,10 +144,32 @@ class VolumeTest {
 
         // When
         Volume volumeInGallons = Volume.ofGallons(100);
-        Unit<Volume> actualBaseUnit = volumeInGallons.getUnit().getBaseUnit();
+        VolumeUnits actualBaseUnit = volumeInGallons.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Volume expected = Volume.ofCubicMeters(10.1);
+
+        // When
+        Volume actual = expected.toLiter()
+                .toCubicCentimeter()
+                .toHectoLiter()
+                .toMilliLiter()
+                .toOunce()
+                .toPint()
+                .toGallon()
+                .toCubicMeter();
+        double actualValue = expected.getInCubicMeters();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

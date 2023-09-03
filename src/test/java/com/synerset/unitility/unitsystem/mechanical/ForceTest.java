@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -108,9 +107,31 @@ class ForceTest {
 
         // When
         Force forceInNewton = Force.ofNewtons(10);
-        Unit<Force> actualBaseUnit = forceInNewton.getUnit().getBaseUnit();
+        ForceUnits actualBaseUnit = forceInNewton.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Force expected = Force.ofNewtons(10.1);
+
+        // When
+        Force actual = expected.toKiloNewtons()
+                .toKiloponds()
+                .toDynes()
+                .toPoundForce()
+                .toPoundal()
+                .toNewtons();
+
+        double actualValue = expected.getInNewtons();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

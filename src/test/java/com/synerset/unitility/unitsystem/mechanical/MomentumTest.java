@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,10 +54,28 @@ class MomentumTest {
 
         // When
         Momentum momentumInPoundFeetPerSecond = Momentum.ofPoundFeetPerSecond(10);
-        Unit<Momentum> actualBaseUnit = momentumInPoundFeetPerSecond.getUnit().getBaseUnit();
+        MomentumUnits actualBaseUnit = momentumInPoundFeetPerSecond.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Momentum expected = Momentum.ofKilogramMeterPerSecond(10.1);
+
+        // When
+        Momentum actual = expected.toPoundFeetPerSecond()
+                .toGramCentimetrePerSecond()
+                .toKilogramMeterPerSecond();
+
+        double actualValue = expected.getInKilogramMetersPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

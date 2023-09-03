@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -37,10 +36,27 @@ class ThermalDiffusivityTest {
 
         // When
         ThermalDiffusivity diffusivityInSquareFeetPerSecond = ThermalDiffusivity.ofSquareFeetPerSecond(10);
-        Unit<ThermalDiffusivity> actualBaseUnit = diffusivityInSquareFeetPerSecond.getUnit().getBaseUnit();
+        ThermalDiffusivityUnits actualBaseUnit = diffusivityInSquareFeetPerSecond.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        ThermalDiffusivity expected = ThermalDiffusivity.ofSquareMeterPerSecond(10.1);
+
+        // When
+        ThermalDiffusivity actual = expected.toSquareFeetPerSecond()
+                .toSquareMeterPerSecond();
+
+        double actualValue = expected.getInSquareMetersPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

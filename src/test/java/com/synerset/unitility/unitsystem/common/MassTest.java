@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -109,10 +108,31 @@ class MassTest {
 
         // When
         Mass massInLb = Mass.ofPounds(10);
-        Unit<Mass> actualBaseUnit = massInLb.getUnit().getBaseUnit();
+        MassUnits actualBaseUnit = massInLb.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Mass expected = Mass.ofKilograms(10.1);
+
+        // When
+        Mass actual = expected.toGram()
+                .toMilligram()
+                .toTonneSI()
+                .toOunce()
+                .toPound()
+                .toKilogram();
+
+        double actualValue = expected.getInKilograms();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

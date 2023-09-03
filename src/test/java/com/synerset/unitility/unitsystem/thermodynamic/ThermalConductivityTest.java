@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,10 +54,28 @@ class ThermalConductivityTest {
 
         // When
         ThermalConductivity thermalConductivityInBTUPerHrF = ThermalConductivity.ofBTUPerHourFeetFahrenheit(0.1);
-        Unit<ThermalConductivity> actualBaseUnit = thermalConductivityInBTUPerHrF.getUnit().getBaseUnit();
+        ThermalConductivityUnits actualBaseUnit = thermalConductivityInBTUPerHrF.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        ThermalConductivity expected = ThermalConductivity.ofWattsPerMeterKelvin(10.1);
+
+        // When
+        ThermalConductivity actual = expected.toKilowattsPerMeterKelvin()
+                .toBTUPerHourFeetFahrenheit()
+                .toWattsPerMeterKelvin();
+
+        double actualValue = expected.getInWattsPerMeterKelvin();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

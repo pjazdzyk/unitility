@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -91,9 +90,30 @@ class TorqueTest {
 
         // When
         Torque torqueInNewtonMeters = Torque.ofNewtonMeters(10);
-        Unit<Torque> actualBaseUnit = torqueInNewtonMeters.getUnit().getBaseUnit();
+        TorqueUnits actualBaseUnit = torqueInNewtonMeters.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Torque expected = Torque.ofNewtonMeters(10.1);
+
+        // When
+        Torque actual = expected.toMillinewtonMeters()
+                .toKilopondMeters()
+                .toPoundFeet()
+                .toInchPounds()
+                .toNewtonMeters();
+
+        double actualValue = expected.getInNewtonMeters();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

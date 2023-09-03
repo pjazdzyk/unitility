@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.humidity;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,10 +34,27 @@ class RelativeHumidityTest {
 
         // When
         RelativeHumidity relativeHumidityInDecimal = RelativeHumidity.ofDecimal(0.1);
-        Unit<RelativeHumidity> actualBaseUnit = relativeHumidityInDecimal.getUnit().getBaseUnit();
+        RelativeHumidityUnits actualBaseUnit = relativeHumidityInDecimal.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        RelativeHumidity expected = RelativeHumidity.ofPercentage(10.1);
+
+        // When
+        RelativeHumidity actual = expected.toDecimal()
+                .toPercent();
+
+        double actualValue = expected.getInPercent();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

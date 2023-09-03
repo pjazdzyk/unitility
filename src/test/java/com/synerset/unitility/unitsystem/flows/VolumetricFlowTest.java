@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.flows;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -162,10 +161,34 @@ class VolumetricFlowTest {
 
         // When
         VolumetricFlow volumetricFlowInGalPerHr = VolumetricFlow.ofGallonsPerHour(10);
-        Unit<VolumetricFlow> actualBaseUnit = volumetricFlowInGalPerHr.getUnit().getBaseUnit();
+        VolumetricFlowUnits actualBaseUnit = volumetricFlowInGalPerHr.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        VolumetricFlow expected = VolumetricFlow.ofCubicMetersPerSecond(10.1);
+
+        // When
+        VolumetricFlow actual = expected.toCubicMetersPerMinute()
+                .toCubicMetersPerHour()
+                .toLitresPerSecond()
+                .toLitresPerMinute()
+                .toLitresPerHour()
+                .toGallonsPerSecond()
+                .toGallonsPerMinute()
+                .toGallonsPerHour()
+                .toCubicMetersPerSecond();
+
+        double actualValue = expected.getInCubicMetersPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

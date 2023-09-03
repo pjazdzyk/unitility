@@ -1,20 +1,33 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Density implements PhysicalQuantity<Density> {
+public class Density implements PhysicalQuantity<DensityUnits> {
 
+    public static final Density PHYSICAL_MIN_LIMIT = Density.ofKilogramPerCubicMeter(0);
     private final double value;
     private final double baseValue;
-    private final Unit<Density> unit;
+    private final DensityUnits unit;
 
-    public Density(double value, Unit<Density> unit) {
+    public Density(double value, DensityUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Density of(double value, DensityUnits unit) {
+        return new Density(value, unit);
+    }
+
+    public static Density ofKilogramPerCubicMeter(double value) {
+        return new Density(value, DensityUnits.KILOGRAM_PER_CUBIC_METER);
+    }
+
+    public static Density ofPoundPerCubicFoot(double value) {
+        return new Density(value, DensityUnits.POUND_PER_CUBIC_FOOT);
     }
 
     @Override
@@ -28,7 +41,7 @@ public class Density implements PhysicalQuantity<Density> {
     }
 
     @Override
-    public Unit<Density> getUnit() {
+    public DensityUnits getUnit() {
         return unit;
     }
 
@@ -39,18 +52,28 @@ public class Density implements PhysicalQuantity<Density> {
     }
 
     @Override
-    public Density toUnit(Unit<Density> targetUnit) {
+    public Density toUnit(DensityUnits targetUnit) {
         double valueInKGpM3 = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKGpM3);
         return Density.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Density createNewWithValue(double value) {
         return Density.of(value, unit);
     }
 
     // Convert to target unit
+    public Density toKilogramPerCubicMeter() {
+        return toUnit(DensityUnits.KILOGRAM_PER_CUBIC_METER);
+    }
+
+    public Density toPoundPerCubicFoot() {
+        return toUnit(DensityUnits.POUND_PER_CUBIC_FOOT);
+    }
+
+    // Get value in target unit
     public double getInKilogramsPerCubicMeters() {
         return getIn(DensityUnits.KILOGRAM_PER_CUBIC_METER);
     }
@@ -67,30 +90,17 @@ public class Density implements PhysicalQuantity<Density> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Density that = (Density) o;
-        return Double.compare(that.value, value) == 0 && unit.equals(that.unit);
+        Density inputQuantity = (Density) o;
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(baseValue, unit.getBaseUnit());
     }
 
     @Override
     public String toString() {
         return "Density{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static Density of(double value, Unit<Density> unit) {
-        return new Density(value, unit);
-    }
-
-    public static Density ofKilogramPerCubicMeter(double value) {
-        return new Density(value, DensityUnits.KILOGRAM_PER_CUBIC_METER);
-    }
-
-    public static Density ofPoundPerCubicFoot(double value) {
-        return new Density(value, DensityUnits.POUND_PER_CUBIC_FOOT);
     }
 }

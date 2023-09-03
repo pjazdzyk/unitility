@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.flows;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -73,10 +72,29 @@ class MassFlowTest {
 
         // When
         MassFlow massFlowInLbPerSec = MassFlow.ofPoundsPerSecond(10);
-        Unit<MassFlow> actualBaseUnit = massFlowInLbPerSec.getUnit().getBaseUnit();
+        MassFlowUnits actualBaseUnit = massFlowInLbPerSec.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        MassFlow expected = MassFlow.ofKilogramsPerSecond(10.1);
+
+        // When
+        MassFlow actual = expected.toKiloGramPerHour()
+                .toTonnesPerHour()
+                .toPoundsPerSecond()
+                .toKilogramsPerSecond();
+
+        double actualValue = expected.getInKilogramsPerSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

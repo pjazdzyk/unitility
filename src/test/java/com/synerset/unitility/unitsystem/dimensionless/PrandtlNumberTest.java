@@ -9,7 +9,7 @@ class PrandtlNumberTest {
 
     @Test
     @DisplayName("should create Prandtl number")
-    void shouldCreatePrandtlNumber(){
+    void shouldCreatePrandtlNumber() {
         // Given
         double expectedValue = 10.0;
 

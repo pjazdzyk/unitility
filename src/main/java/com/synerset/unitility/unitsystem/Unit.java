@@ -5,7 +5,7 @@
  */
 package com.synerset.unitility.unitsystem;
 
-public interface Unit<Q> {
+public interface Unit {
     /**
      * Get the symbol representing the unit.
      *
@@ -18,7 +18,7 @@ public interface Unit<Q> {
      *
      * @return The base unit for the quantity type.
      */
-    Unit<Q> getBaseUnit();
+    Unit getBaseUnit();
 
     /**
      * Convert a value from this unit to the equivalent value in the base unit.

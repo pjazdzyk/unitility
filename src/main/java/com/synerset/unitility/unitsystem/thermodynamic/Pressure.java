@@ -1,22 +1,54 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Pressure implements PhysicalQuantity<Pressure> {
+public class Pressure implements PhysicalQuantity<PressureUnits> {
 
     public static final Pressure STANDARD_ATMOSPHERE = Pressure.ofPascal(101_325);
     public static final Pressure TECHNICAL_ATMOSPHERE = Pressure.ofPascal(98_067);
     private final double value;
     private final double baseValue;
-    private final Unit<Pressure> unit;
+    private final PressureUnits unit;
 
-    public Pressure(double value, Unit<Pressure> unit) {
+    public Pressure(double value, PressureUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Pressure of(double value, PressureUnits unit) {
+        return new Pressure(value, unit);
+    }
+
+    public static Pressure ofPascal(double value) {
+        return new Pressure(value, PressureUnits.PASCAL);
+    }
+
+    public static Pressure ofHectoPascal(double value) {
+        return new Pressure(value, PressureUnits.HECTOPASCAL);
+    }
+
+    public static Pressure ofMegaPascal(double value) {
+        return new Pressure(value, PressureUnits.MEGAPASCAL);
+    }
+
+    public static Pressure ofBar(double value) {
+        return new Pressure(value, PressureUnits.BAR);
+    }
+
+    public static Pressure ofMilliBar(double value) {
+        return new Pressure(value, PressureUnits.MILLIBAR);
+    }
+
+    public static Pressure ofPsi(double value) {
+        return new Pressure(value, PressureUnits.PSI);
+    }
+
+    public static Pressure ofTorr(double value) {
+        return new Pressure(value, PressureUnits.TORR);
     }
 
     @Override
@@ -30,7 +62,7 @@ public class Pressure implements PhysicalQuantity<Pressure> {
     }
 
     @Override
-    public Unit<Pressure> getUnit() {
+    public PressureUnits getUnit() {
         return unit;
     }
 
@@ -41,18 +73,48 @@ public class Pressure implements PhysicalQuantity<Pressure> {
     }
 
     @Override
-    public Pressure toUnit(Unit<Pressure> targetUnit) {
+    public Pressure toUnit(PressureUnits targetUnit) {
         double valueInPascal = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascal);
         return Pressure.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Pressure createNewWithValue(double value) {
         return Pressure.of(value, unit);
     }
 
     // Convert to target unit
+    public Pressure toPascal() {
+        return toUnit(PressureUnits.PASCAL);
+    }
+
+    public Pressure toHectoPascal() {
+        return toUnit(PressureUnits.HECTOPASCAL);
+    }
+
+    public Pressure toMegaPascal() {
+        return toUnit(PressureUnits.MEGAPASCAL);
+    }
+
+    public Pressure toBar() {
+        return toUnit(PressureUnits.BAR);
+    }
+
+    public Pressure toMilliBar() {
+        return toUnit(PressureUnits.MILLIBAR);
+    }
+
+    public Pressure toPsi() {
+        return toUnit(PressureUnits.PSI);
+    }
+
+    public Pressure toTorr() {
+        return toUnit(PressureUnits.TORR);
+    }
+
+    // Get value in target unit
     public double getInPascals() {
         return getIn(PressureUnits.PASCAL);
     }
@@ -85,51 +147,18 @@ public class Pressure implements PhysicalQuantity<Pressure> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pressure pressure = (Pressure) o;
-        return Double.compare(pressure.value, value) == 0 && unit.equals(pressure.unit);
+        Pressure inputQuantity = (Pressure) o;
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(baseValue, unit.getBaseUnit());
     }
 
     @Override
     public String toString() {
         return "Pressure{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static Pressure of(double value, Unit<Pressure> unit) {
-        return new Pressure(value, unit);
-    }
-
-    public static Pressure ofPascal(double value) {
-        return new Pressure(value, PressureUnits.PASCAL);
-    }
-
-    public static Pressure ofHectoPascal(double value) {
-        return new Pressure(value, PressureUnits.HECTOPASCAL);
-    }
-
-    public static Pressure ofMegaPascal(double value) {
-        return new Pressure(value, PressureUnits.MEGAPASCAL);
-    }
-
-    public static Pressure ofBar(double value) {
-        return new Pressure(value, PressureUnits.BAR);
-    }
-
-    public static Pressure ofMilliBar(double value) {
-        return new Pressure(value, PressureUnits.MILLIBAR);
-    }
-
-    public static Pressure ofPsi(double value) {
-        return new Pressure(value, PressureUnits.PSI);
-    }
-
-    public static Pressure ofTorr(double value) {
-        return new Pressure(value, PressureUnits.TORR);
     }
 
 }

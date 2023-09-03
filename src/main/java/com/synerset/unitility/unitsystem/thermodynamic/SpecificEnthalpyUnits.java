@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum SpecificEnthalpyUnits implements Unit<SpecificEnthalpy> {
+public enum SpecificEnthalpyUnits implements Unit {
 
     JOULE_PER_KILOGRAM("J/kg", val -> val, val -> val),
     KILOJOULE_PER_KILOGRAM("kJ/kg", val -> val * 1000, val -> val / 1000),
@@ -26,7 +26,7 @@ public enum SpecificEnthalpyUnits implements Unit<SpecificEnthalpy> {
     }
 
     @Override
-    public Unit<SpecificEnthalpy> getBaseUnit() {
+    public SpecificEnthalpyUnits getBaseUnit() {
         return JOULE_PER_KILOGRAM;
     }
 
@@ -39,4 +39,5 @@ public enum SpecificEnthalpyUnits implements Unit<SpecificEnthalpy> {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

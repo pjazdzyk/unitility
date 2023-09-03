@@ -1,19 +1,35 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
+public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
     private final double value;
     private final double baseValue;
-    private final Unit<SpecificHeat> unit;
+    private final SpecificHeatUnits unit;
 
-    public SpecificHeat(double value, Unit<SpecificHeat> unit) {
+    public SpecificHeat(double value, SpecificHeatUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static SpecificHeat of(double value, SpecificHeatUnits unit) {
+        return new SpecificHeat(value, unit);
+    }
+
+    public static SpecificHeat ofJoulePerKiloGramKelvin(double value) {
+        return new SpecificHeat(value, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
+    }
+
+    public static SpecificHeat ofKiloJoulePerKiloGramKelvin(double value) {
+        return new SpecificHeat(value, SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN);
+    }
+
+    public static SpecificHeat ofBTUPerPoundFahrenheit(double value) {
+        return new SpecificHeat(value, SpecificHeatUnits.BTU_PER_POUND_FAHRENHEIT);
     }
 
     @Override
@@ -27,7 +43,7 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
     }
 
     @Override
-    public Unit<SpecificHeat> getUnit() {
+    public SpecificHeatUnits getUnit() {
         return unit;
     }
 
@@ -38,18 +54,32 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
     }
 
     @Override
-    public SpecificHeat toUnit(Unit<SpecificHeat> targetUnit) {
+    public SpecificHeat toUnit(SpecificHeatUnits targetUnit) {
         double valueInJoulePerKiloGramKelvin = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoulePerKiloGramKelvin);
         return SpecificHeat.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public SpecificHeat createNewWithValue(double value) {
         return SpecificHeat.of(value, unit);
     }
 
     // Convert to target unit
+    public SpecificHeat toJoulePerKiloGramKelvin() {
+        return toUnit(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
+    }
+
+    public SpecificHeat toKiloJoulePerKiloGramKelvin() {
+        return toUnit(SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN);
+    }
+
+    public SpecificHeat toBTUPerPoundFahrenheit() {
+        return toUnit(SpecificHeatUnits.BTU_PER_POUND_FAHRENHEIT);
+    }
+
+    // Get value in target unit
     public double getInJoulePerKiloGramKelvin() {
         return getIn(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
     }
@@ -66,35 +96,18 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeat> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SpecificHeat that = (SpecificHeat) o;
-        return Double.compare(that.value, value) == 0 && unit.equals(that.unit);
+        SpecificHeat inputQuantity = (SpecificHeat) o;
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(baseValue, unit.getBaseUnit());
     }
 
     @Override
     public String toString() {
         return "SpecificHeat{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static SpecificHeat of(double value, Unit<SpecificHeat> unit) {
-        return new SpecificHeat(value, unit);
-    }
-
-    public static SpecificHeat ofJoulePerKiloGramKelvin(double value) {
-        return new SpecificHeat(value, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
-    }
-
-    public static SpecificHeat ofKiloJoulePerKiloGramKelvin(double value) {
-        return new SpecificHeat(value, SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN);
-    }
-
-    public static SpecificHeat ofBTUPerPoundFahrenheit(double value) {
-        return new SpecificHeat(value, SpecificHeatUnits.BTU_PER_POUND_FAHRENHEIT);
     }
 
 }

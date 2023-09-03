@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum KinematicViscosityUnits implements Unit<KinematicViscosity> {
+public enum KinematicViscosityUnits implements Unit {
     SQUARE_METER_PER_SECOND("m²/s", val -> val, val -> val),
     SQUARE_FOOT_PER_SECOND("ft²/s", val -> val * 0.09290304, val -> val / 0.09290304);
 
@@ -24,7 +24,7 @@ public enum KinematicViscosityUnits implements Unit<KinematicViscosity> {
     }
 
     @Override
-    public Unit<KinematicViscosity> getBaseUnit() {
+    public KinematicViscosityUnits getBaseUnit() {
         return SQUARE_METER_PER_SECOND;
     }
 
@@ -37,4 +37,5 @@ public enum KinematicViscosityUnits implements Unit<KinematicViscosity> {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

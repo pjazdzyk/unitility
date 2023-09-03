@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum AreaUnits implements Unit<Area> {
+public enum AreaUnits implements Unit {
 
     SQUARE_METER("m²", val -> val, val -> val),
     SQUARE_KILOMETER("km²", val -> val * 1_000_000, val -> val / 1_000_000),
@@ -34,7 +34,7 @@ public enum AreaUnits implements Unit<Area> {
     }
 
     @Override
-    public Unit<Area> getBaseUnit() {
+    public AreaUnits getBaseUnit() {
         return SQUARE_METER;
     }
 

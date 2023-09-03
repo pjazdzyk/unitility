@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,10 +54,28 @@ class SpecificHeatTest {
 
         // When
         SpecificHeat specificHeatInBTUPerLbF = SpecificHeat.ofBTUPerPoundFahrenheit(0.1);
-        Unit<SpecificHeat> actualBaseUnit = specificHeatInBTUPerLbF.getUnit().getBaseUnit();
+        SpecificHeatUnits actualBaseUnit = specificHeatInBTUPerLbF.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        SpecificHeat expected = SpecificHeat.ofJoulePerKiloGramKelvin(10.1);
+
+        // When
+        SpecificHeat actual = expected.toKiloJoulePerKiloGramKelvin()
+                .toBTUPerPoundFahrenheit()
+                .toJoulePerKiloGramKelvin();
+
+        double actualValue = expected.getInJoulePerKiloGramKelvin();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

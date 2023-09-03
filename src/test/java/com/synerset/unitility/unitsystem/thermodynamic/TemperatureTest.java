@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 class TemperatureTest {
 
@@ -54,10 +54,28 @@ class TemperatureTest {
 
         // When
         Temperature specificHeatInFahrenheit = Temperature.ofFahrenheit(10);
-        Unit<Temperature> actualBaseUnit = specificHeatInFahrenheit.getUnit().getBaseUnit();
+        TemperatureUnits actualBaseUnit = specificHeatInFahrenheit.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Temperature expected = Temperature.ofKelvins(10.1);
+
+        // When
+        Temperature actual = expected.toCelsius()
+                .toFahrenheit()
+                .toKelvin();
+
+        double actualValue = expected.getInKelvins();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }

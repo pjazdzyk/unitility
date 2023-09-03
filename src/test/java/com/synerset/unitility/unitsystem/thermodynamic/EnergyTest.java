@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -161,9 +160,34 @@ class EnergyTest {
 
         // When
         Energy energyInJoule = Energy.ofJoules(10);
-        Unit<Energy> actualBaseUnit = energyInJoule.getUnit().getBaseUnit();
+        EnergyUnits actualBaseUnit = energyInJoule.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Energy expected = Energy.ofJoules(10.1);
+
+        // When
+        Energy actual = expected.toMilliJoules()
+                .toKiloJoules()
+                .toMegaJoules()
+                .toBTU()
+                .toCalories()
+                .toKiloCalories()
+                .toWattHour()
+                .toKilowattHour()
+                .toJoules();
+
+        double actualValue = expected.getInJoules();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
 }

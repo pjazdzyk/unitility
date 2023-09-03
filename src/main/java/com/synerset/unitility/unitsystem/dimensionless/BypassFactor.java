@@ -1,23 +1,27 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class BypassFactor implements PhysicalQuantity<BypassFactor> {
+public class BypassFactor implements PhysicalQuantity<BypassFactorUnits> {
 
     public static final BypassFactor BYPASS_MIN_VALUE = BypassFactor.of(0);
     public static final BypassFactor BYPASS_MAX_VALUE = BypassFactor.of(1);
 
     private final double value;
     private final double baseValue;
-    private final Unit<BypassFactor> unit;
+    private final BypassFactorUnits unit;
 
     public BypassFactor(double value) {
         this.value = value;
         this.unit = BypassFactorUnits.DIMENSIONLESS;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static BypassFactor of(double value) {
+        return new BypassFactor(value);
     }
 
     @Override
@@ -31,7 +35,7 @@ public class BypassFactor implements PhysicalQuantity<BypassFactor> {
     }
 
     @Override
-    public Unit<BypassFactor> getUnit() {
+    public BypassFactorUnits getUnit() {
         return unit;
     }
 
@@ -41,11 +45,12 @@ public class BypassFactor implements PhysicalQuantity<BypassFactor> {
     }
 
     @Override
-    public PhysicalQuantity<BypassFactor> toUnit(Unit<BypassFactor> targetUnit) {
+    public BypassFactor toUnit(BypassFactorUnits targetUnit) {
         return this;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public BypassFactor createNewWithValue(double value) {
         return BypassFactor.of(value);
     }
@@ -66,11 +71,6 @@ public class BypassFactor implements PhysicalQuantity<BypassFactor> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    // Static factory methods
-    public static BypassFactor of(double value) {
-        return new BypassFactor(value);
     }
 
 }

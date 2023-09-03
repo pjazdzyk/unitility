@@ -1,20 +1,36 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Momentum implements PhysicalQuantity<Momentum> {
+public class Momentum implements PhysicalQuantity<MomentumUnits> {
 
     private final double value;
     private final double baseValue;
-    private final Unit<Momentum> unit;
+    private final MomentumUnits unit;
 
-    public Momentum(double value, Unit<Momentum> unit) {
+    public Momentum(double value, MomentumUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Momentum of(double value, MomentumUnits unit) {
+        return new Momentum(value, unit);
+    }
+
+    public static Momentum ofKilogramMeterPerSecond(double value) {
+        return new Momentum(value, MomentumUnits.KILOGRAM_METER_PER_SECOND);
+    }
+
+    public static Momentum ofPoundFeetPerSecond(double value) {
+        return new Momentum(value, MomentumUnits.POUND_FEET_PER_SECOND);
+    }
+
+    public static Momentum ofGramCentimetrePerSecond(double value) {
+        return new Momentum(value, MomentumUnits.GRAM_CENTIMETRE_PER_SECOND);
     }
 
     @Override
@@ -28,7 +44,7 @@ public class Momentum implements PhysicalQuantity<Momentum> {
     }
 
     @Override
-    public Unit<Momentum> getUnit() {
+    public MomentumUnits getUnit() {
         return unit;
     }
 
@@ -39,18 +55,32 @@ public class Momentum implements PhysicalQuantity<Momentum> {
     }
 
     @Override
-    public Momentum toUnit(Unit<Momentum> targetUnit) {
+    public Momentum toUnit(MomentumUnits targetUnit) {
         double valueInKilogramMeterPerSecond = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogramMeterPerSecond);
         return Momentum.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Momentum createNewWithValue(double value) {
         return Momentum.of(value, unit);
     }
 
     // Convert to target unit
+    public Momentum toKilogramMeterPerSecond() {
+        return toUnit(MomentumUnits.KILOGRAM_METER_PER_SECOND);
+    }
+
+    public Momentum toPoundFeetPerSecond() {
+        return toUnit(MomentumUnits.POUND_FEET_PER_SECOND);
+    }
+
+    public Momentum toGramCentimetrePerSecond() {
+        return toUnit(MomentumUnits.GRAM_CENTIMETRE_PER_SECOND);
+    }
+
+    // Get value in target unit
     public double getInKilogramMetersPerSecond() {
         return getIn(MomentumUnits.KILOGRAM_METER_PER_SECOND);
     }
@@ -67,13 +97,13 @@ public class Momentum implements PhysicalQuantity<Momentum> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Momentum momentum = (Momentum) o;
-        return Double.compare(momentum.value, value) == 0 && Objects.equals(unit, momentum.unit);
+        Momentum inputQuantity = (Momentum) o;
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, unit);
+        return Objects.hash(baseValue, unit.getBaseUnit());
     }
 
     @Override
@@ -81,20 +111,4 @@ public class Momentum implements PhysicalQuantity<Momentum> {
         return "Momentum{" + value + " " + unit.getSymbol() + '}';
     }
 
-    // Static factory methods
-    public static Momentum of(double value, Unit<Momentum> unit) {
-        return new Momentum(value, unit);
-    }
-
-    public static Momentum ofKilogramMeterPerSecond(double value) {
-        return new Momentum(value, MomentumUnits.KILOGRAM_METER_PER_SECOND);
-    }
-
-    public static Momentum ofPoundFeetPerSecond(double value) {
-        return new Momentum(value, MomentumUnits.POUND_FEET_PER_SECOND);
-    }
-
-    public static Momentum ofGramCentimetrePerSecond(double value) {
-        return new Momentum(value, MomentumUnits.GRAM_CENTIMETRE_PER_SECOND);
-    }
 }

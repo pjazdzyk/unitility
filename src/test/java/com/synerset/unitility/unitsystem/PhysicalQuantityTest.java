@@ -17,8 +17,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PhysicalQuantityTest {
 
+    // Equality0
     @Test
-    @DisplayName("should be equals in business requirements if their base units and values in base units are the same")
+    @DisplayName("should be equals if base units and values in base units are the same")
     void shouldBeEquals_whenBaseUnitsAndValuesAreTheSame() {
         // Given
         // When
@@ -26,24 +27,19 @@ class PhysicalQuantityTest {
         Distance distanceInMiles = distanceInMeters.toUnit(DistanceUnits.MILE);
 
         // Then
-
-        // This equality is true from the business point of view
         assertThat(distanceInMeters.isEqualsWithPrecision(distanceInMiles, 1E-13)).isTrue();
-
-        // This is not equals, because from programmatic point of view, they are different
-        assertThat(distanceInMeters).isNotEqualTo(distanceInMiles);
     }
 
     @Test
     @DisplayName("should return String for quantity accordingly to given relevant digits")
-    void shouldStringForQuantity_whenRelevantDigitsAreGiven() {
+    void shouldReturnStringWithRelevantDigitsForQuantity_whenRelevantDigitsAreGiven() {
         // Given
         Angle angle = Angle.ofDegrees(30.123456789);
         Distance distance = Distance.ofMeters(100.1238);
 
         // When
-        String actualAngleOutput = angle.toStringWithRelevantDigits(3);
-        String actualDistanceOutput = distance.toStringWithRelevantDigits(3);
+        String actualAngleOutput = angle.toFormattedString(3);
+        String actualDistanceOutput = distance.toFormattedString(3);
 
         // Then
         String expectedAngleOutput = "30.123°";
@@ -66,22 +62,24 @@ class PhysicalQuantityTest {
         boolean secondIsGreater = greaterTemp.isGreaterThan(smallerTemp);
         boolean firstIsEqualOrLower = smallerTemp.isEqualOrLowerThan(smallerOrEqualTemp);
         boolean secondIsEqualOrGreater = greaterTemp.isEqualOrGreaterThan(greaterOrEqualTemp);
+        boolean bothAreTheSame = greaterTemp.isGreaterThan(greaterTemp);
 
         // Then
         assertThat(firstIsSmaller).isTrue();
         assertThat(secondIsGreater).isTrue();
         assertThat(firstIsEqualOrLower).isTrue();
         assertThat(secondIsEqualOrGreater).isTrue();
+        assertThat(bothAreTheSame).isFalse();
     }
 
     @Test
-    @DisplayName("Should correctly add value to quantity")
+    @DisplayName("should correctly add value to quantity")
     void shouldAddValueToQuantity() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = (Temperature) temperature.add(20);
+        Temperature actualTemperature = temperature.add(20);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -89,13 +87,13 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should correctly subtract value from quantity")
+    @DisplayName("should correctly subtract value from quantity")
     void shouldSubtractValueToQuantity() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = (Temperature) temperature.subtract(20);
+        Temperature actualTemperature = temperature.subtract(20);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(0);
@@ -103,14 +101,14 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should correctly add quantities of the same type, but different units")
+    @DisplayName("should correctly add quantities of the same type, but different units")
     void shouldAddQuantityToSourceQuantity() {
         // Given
         Temperature sourceTemperature = Temperature.ofCelsius(20);
         Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 
         // When
-        Temperature actualTemperature = (Temperature) sourceTemperature.add(temperatureToAdd);
+        Temperature actualTemperature = sourceTemperature.add(temperatureToAdd);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -118,14 +116,14 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should correctly subtract quantities of the same type, but different units")
+    @DisplayName("should correctly subtract quantities of the same type, but different units")
     void shouldSubtractQuantityToSourceQuantity() {
         // Given
         Temperature sourceTemperature = Temperature.ofCelsius(20);
         Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 
         // When
-        Temperature actualTemperature = (Temperature) sourceTemperature.subtract(temperatureToAdd);
+        Temperature actualTemperature = sourceTemperature.subtract(temperatureToAdd);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(0);
@@ -133,13 +131,13 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should correctly multiply quantity by value")
+    @DisplayName("should correctly multiply quantity by value")
     void shouldMultiplyValueToQuantity() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = (Temperature) temperature.multiply(2);
+        Temperature actualTemperature = temperature.multiply(2);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -147,7 +145,7 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should correctly multiply quantities of the same type, but different units")
+    @DisplayName("should correctly multiply quantities of the same type, but different units")
     void shouldMultiplyQuantityToSourceQuantity() {
         // Given
         Temperature sourceTemperature = Temperature.ofCelsius(20);
@@ -162,13 +160,13 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should correctly divide quantity by value")
+    @DisplayName("should correctly divide quantity by value")
     void shouldDivideValueToQuantity() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = (Temperature) temperature.divide(2);
+        Temperature actualTemperature = temperature.divide(2);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(10);
@@ -176,7 +174,7 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should throw an exception if divided by 0")
+    @DisplayName("should throw an exception if divided by 0")
     void shouldNotDivideByZeroThrowingException() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20);
@@ -188,7 +186,7 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should correctly divide quantities of the same type, but different units")
+    @DisplayName("should correctly divide quantities of the same type, but different units")
     void shouldDivideQuantityToSourceQuantity() {
         // Given
         Temperature sourceTemperature = Temperature.ofCelsius(20);
@@ -203,13 +201,13 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should subtract value of current unit from number")
+    @DisplayName("should subtract value of current unit from number")
     void shouldSubtractFromValue() {
         // Given
         Temperature sourceTemperature = Temperature.ofCelsius(0.5);
 
         // When
-        Temperature actualTemperature = (Temperature) sourceTemperature.subtractFromValue(1);
+        Temperature actualTemperature = sourceTemperature.subtractFromValue(1);
 
         // Then
         Temperature expectedTemperature = Temperature.ofCelsius((1 - 0.5));
@@ -217,7 +215,7 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should correctly indicate if value is positive, negative or zero")
+    @DisplayName("should correctly indicate if value is positive, negative or zero")
     void shouldIndicateIfValueIsPositiveNegativeOrZero() {
         // Given
         Temperature negativeTemp = Temperature.ofCelsius(-20);
@@ -248,7 +246,7 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should return property unit symbol")
+    @DisplayName("should return property unit symbol")
     void shouldReturnPropertyUnitSymbol() {
         // Given
         ThermalDiffusivity thermalDiffusivity = ThermalDiffusivity.ofSquareFeetPerSecond(0.5);
@@ -262,7 +260,7 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("Should properly sort all quantities in the list")
+    @DisplayName("should properly sort all quantities in the list")
     void shouldSortQuantitiesInTheList() {
         // Given
         Temperature[] temperatures = {
@@ -285,6 +283,21 @@ class PhysicalQuantityTest {
 
         assertThat(temperatures).isEqualTo(correctOrderTemperatures);
 
+    }
+
+    @Test
+    @DisplayName("should output formatted string")
+    void shouldOutputFormattedString() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(25.1);
+
+        // When
+        String simpleFormattedString = temperature.toFormattedString("t");
+        String formattedString = temperature.toFormattedString("t", "da", "| ");
+
+        // Then
+        assertThat(simpleFormattedString).isEqualTo("t = 25.1 °C");
+        assertThat(formattedString).isEqualTo("t_da = 25.1 °C | ");
     }
 
 }

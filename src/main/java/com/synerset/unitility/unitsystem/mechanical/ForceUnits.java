@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum ForceUnits implements Unit<Force> {
+public enum ForceUnits implements Unit {
 
     NEWTON("N", val -> val, val -> val),
     KILONEWTON("kN", val -> val * 1000.0, val -> val / 1000.0),
@@ -29,7 +29,7 @@ public enum ForceUnits implements Unit<Force> {
     }
 
     @Override
-    public Unit<Force> getBaseUnit() {
+    public ForceUnits getBaseUnit() {
         return NEWTON;
     }
 

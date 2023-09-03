@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -54,10 +53,28 @@ class DynamicViscosityTest {
 
         // When
         DynamicViscosity dynVisInPoise = DynamicViscosity.of(10, DynamicViscosityUnits.POISE);
-        Unit<DynamicViscosity> actualBaseUnit = dynVisInPoise.getUnit().getBaseUnit();
+        DynamicViscosityUnits actualBaseUnit = dynVisInPoise.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        DynamicViscosity expected = DynamicViscosity.ofKiloGramPerMeterSecond(10.1);
+
+        // When
+        DynamicViscosity actual = expected.toPascalSecond()
+                .toPoise()
+                .toKiloGramPerMeterSecond();
+
+        double actualValue = expected.getInKiloGramPerMeterSecond();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
 }
