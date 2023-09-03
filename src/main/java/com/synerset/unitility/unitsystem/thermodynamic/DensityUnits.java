@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum DensityUnits implements Unit<Density> {
+public enum DensityUnits implements Unit {
 
     KILOGRAM_PER_CUBIC_METER("kg/m³", val -> val, val -> val),
     POUND_PER_CUBIC_FOOT("lb/ft³", val -> val * 16.0184633739599, val -> val / 16.0184633739599),
@@ -26,7 +26,7 @@ public enum DensityUnits implements Unit<Density> {
     }
 
     @Override
-    public Unit<Density> getBaseUnit() {
+    public DensityUnits getBaseUnit() {
         return KILOGRAM_PER_CUBIC_METER;
     }
 

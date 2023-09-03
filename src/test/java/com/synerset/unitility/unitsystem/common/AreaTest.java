@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -171,6 +170,7 @@ class AreaTest {
         assertThat(actualInAcres.getValue()).isEqualTo(actualInAcresVal);
         assertThat(actualInAcres.getValue()).isEqualTo(expectedInAcres.getValue(), withPrecision(1E-15));
         assertThat(actualInSquareMeters).isEqualTo(initialArea);
+        assertThat(actualInAcres).isEqualTo(Area.ofAcres(actualInAcresVal));
     }
 
     @Test
@@ -199,7 +199,7 @@ class AreaTest {
 
         // When
         Area areaInSquareYards = Area.ofSquareYards(10);
-        Unit<Area> actualBaseUnit = areaInSquareYards.getUnit().getBaseUnit();
+        AreaUnits actualBaseUnit = areaInSquareYards.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

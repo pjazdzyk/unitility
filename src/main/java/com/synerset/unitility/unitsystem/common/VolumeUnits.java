@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum VolumeUnits implements Unit<Volume> {
+public enum VolumeUnits implements Unit {
 
     CUBIC_METER("m³", val -> val, val -> val),
     CUBIC_CENTIMETER("L", val -> val * 0.001, val -> val * 1000.0),
@@ -31,7 +31,7 @@ public enum VolumeUnits implements Unit<Volume> {
     }
 
     @Override
-    public Unit<Volume> getBaseUnit() {
+    public VolumeUnits getBaseUnit() {
         return CUBIC_METER;
     }
 

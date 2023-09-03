@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.flows;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -73,7 +72,7 @@ class MassFlowTest {
 
         // When
         MassFlow massFlowInLbPerSec = MassFlow.ofPoundsPerSecond(10);
-        Unit<MassFlow> actualBaseUnit = massFlowInLbPerSec.getUnit().getBaseUnit();
+        MassFlowUnits actualBaseUnit = massFlowInLbPerSec.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

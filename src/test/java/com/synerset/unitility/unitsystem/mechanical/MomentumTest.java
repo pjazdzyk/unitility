@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +54,7 @@ class MomentumTest {
 
         // When
         Momentum momentumInPoundFeetPerSecond = Momentum.ofPoundFeetPerSecond(10);
-        Unit<Momentum> actualBaseUnit = momentumInPoundFeetPerSecond.getUnit().getBaseUnit();
+        MomentumUnits actualBaseUnit = momentumInPoundFeetPerSecond.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

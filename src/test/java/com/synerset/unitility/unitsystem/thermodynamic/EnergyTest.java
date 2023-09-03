@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -161,7 +160,7 @@ class EnergyTest {
 
         // When
         Energy energyInJoule = Energy.ofJoules(10);
-        Unit<Energy> actualBaseUnit = energyInJoule.getUnit().getBaseUnit();
+        EnergyUnits actualBaseUnit = energyInJoule.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum ThermalConductivityUnits implements Unit<ThermalConductivity> {
+public enum ThermalConductivityUnits implements Unit {
 
     WATTS_PER_METER_KELVIN("W/(m·K)", val -> val, val -> val),
     KILOWATTS_PER_METER_KELVIN("kW/(m·K)", val -> val * 1000.0, val -> val / 1000.0),
@@ -26,7 +26,7 @@ public enum ThermalConductivityUnits implements Unit<ThermalConductivity> {
     }
 
     @Override
-    public Unit<ThermalConductivity> getBaseUnit() {
+    public ThermalConductivityUnits getBaseUnit() {
         return WATTS_PER_METER_KELVIN;
     }
 
@@ -39,4 +39,5 @@ public enum ThermalConductivityUnits implements Unit<ThermalConductivity> {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +54,7 @@ class DensityTest {
 
         // When
         Density densityInLbPerFt3 = Density.ofPoundPerCubicFoot(10);
-        Unit<Density> actualBaseUnit = densityInLbPerFt3.getUnit().getBaseUnit();
+        DensityUnits actualBaseUnit = densityInLbPerFt3.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum DynamicViscosityUnits implements Unit<DynamicViscosity> {
+public enum DynamicViscosityUnits implements Unit {
 
     KILOGRAM_PER_METER_SECOND("kg/(m·s)", val -> val, val -> val),
     PASCAL_SECOND("Pa·s", val -> val, val -> val),
@@ -26,7 +26,7 @@ public enum DynamicViscosityUnits implements Unit<DynamicViscosity> {
     }
 
     @Override
-    public Unit<DynamicViscosity> getBaseUnit() {
+    public DynamicViscosityUnits getBaseUnit() {
         return KILOGRAM_PER_METER_SECOND;
     }
 

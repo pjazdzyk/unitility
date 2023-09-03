@@ -1,21 +1,53 @@
 package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Distance implements PhysicalQuantity<Distance> {
+public class Distance implements PhysicalQuantity<DistanceUnits> {
 
     public static final Distance PHYSICAL_MIN_LIMIT = Distance.ofMeters(0);
     private final double value;
     private final double baseValue;
-    private final Unit<Distance> unit;
+    private final DistanceUnits unit;
 
-    public Distance(double value, Unit<Distance> unit) {
+    public Distance(double value, DistanceUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Distance of(double value, DistanceUnits unit) {
+        return new Distance(value, unit);
+    }
+
+    public static Distance ofMeters(double value) {
+        return new Distance(value, DistanceUnits.METER);
+    }
+
+    public static Distance ofCentimeters(double value) {
+        return new Distance(value, DistanceUnits.CENTIMETER);
+    }
+
+    public static Distance ofMillimeters(double value) {
+        return new Distance(value, DistanceUnits.MILLIMETER);
+    }
+
+    public static Distance ofKilometers(double value) {
+        return new Distance(value, DistanceUnits.KILOMETER);
+    }
+
+    public static Distance ofMiles(double value) {
+        return new Distance(value, DistanceUnits.MILE);
+    }
+
+    public static Distance ofFeet(double value) {
+        return new Distance(value, DistanceUnits.FEET);
+    }
+
+    public static Distance ofInches(double value) {
+        return new Distance(value, DistanceUnits.INCH);
     }
 
     @Override
@@ -29,7 +61,7 @@ public class Distance implements PhysicalQuantity<Distance> {
     }
 
     @Override
-    public Unit<Distance> getUnit() {
+    public DistanceUnits getUnit() {
         return unit;
     }
 
@@ -40,43 +72,44 @@ public class Distance implements PhysicalQuantity<Distance> {
     }
 
     @Override
-    public Distance toUnit(Unit<Distance> targetUnit) {
+    public Distance toUnit(DistanceUnits targetUnit) {
         double valueInMeters = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInMeters);
         return Distance.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Distance createNewWithValue(double value) {
         return Distance.of(value, unit);
     }
 
     // Convert to target unit
-    public Distance toMeter(){
+    public Distance toMeter() {
         return toUnit(DistanceUnits.METER);
     }
 
-    public Distance toCentimeter(){
+    public Distance toCentimeter() {
         return toUnit(DistanceUnits.CENTIMETER);
     }
 
-    public Distance toMillimeter(){
+    public Distance toMillimeter() {
         return toUnit(DistanceUnits.MILLIMETER);
     }
 
-    public Distance toKilometer(){
+    public Distance toKilometer() {
         return toUnit(DistanceUnits.KILOMETER);
     }
 
-    public Distance toMile(){
+    public Distance toMile() {
         return toUnit(DistanceUnits.MILE);
     }
 
-    public Distance toFeet(){
+    public Distance toFeet() {
         return toUnit(DistanceUnits.FEET);
     }
 
-    public Distance toInch(){
+    public Distance toInch() {
         return toUnit(DistanceUnits.INCH);
     }
 
@@ -125,39 +158,6 @@ public class Distance implements PhysicalQuantity<Distance> {
     @Override
     public String toString() {
         return "Distance{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static Distance of(double value, Unit<Distance> unit) {
-        return new Distance(value, unit);
-    }
-
-    public static Distance ofMeters(double value) {
-        return new Distance(value, DistanceUnits.METER);
-    }
-
-    public static Distance ofCentimeters(double value) {
-        return new Distance(value, DistanceUnits.CENTIMETER);
-    }
-
-    public static Distance ofMillimeters(double value) {
-        return new Distance(value, DistanceUnits.MILLIMETER);
-    }
-
-    public static Distance ofKilometers(double value) {
-        return new Distance(value, DistanceUnits.KILOMETER);
-    }
-
-    public static Distance ofMiles(double value) {
-        return new Distance(value, DistanceUnits.MILE);
-    }
-
-    public static Distance ofFeet(double value) {
-        return new Distance(value, DistanceUnits.FEET);
-    }
-
-    public static Distance ofInches(double value) {
-        return new Distance(value, DistanceUnits.INCH);
     }
 
 }

@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum BypassFactorUnits implements Unit<BypassFactor> {
+public enum BypassFactorUnits implements Unit {
 
     DIMENSIONLESS("", val -> val, val -> val);
 
@@ -24,7 +24,7 @@ public enum BypassFactorUnits implements Unit<BypassFactor> {
     }
 
     @Override
-    public Unit<BypassFactor> getBaseUnit() {
+    public BypassFactorUnits getBaseUnit() {
         return DIMENSIONLESS;
     }
 
@@ -37,4 +37,5 @@ public enum BypassFactorUnits implements Unit<BypassFactor> {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

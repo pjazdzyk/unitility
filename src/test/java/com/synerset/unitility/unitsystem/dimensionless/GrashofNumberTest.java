@@ -1,4 +1,5 @@
 package com.synerset.unitility.unitsystem.dimensionless;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ class GrashofNumberTest {
 
     @Test
     @DisplayName("should create Grashof number")
-    void shouldCreateGrashofNumber(){
+    void shouldCreateGrashofNumber() {
         // Given
         double expectedValue = 10.0;
 

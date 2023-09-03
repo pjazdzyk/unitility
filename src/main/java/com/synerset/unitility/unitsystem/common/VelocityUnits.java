@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum VelocityUnits implements Unit<Velocity> {
+public enum VelocityUnits implements Unit {
 
     METER_PER_SECOND("m/s", val -> val, val -> val),
     CENTIMETER_PER_SECOND("cm/s", val -> val / 100.0, val -> val * 100.0),
@@ -31,7 +31,7 @@ public enum VelocityUnits implements Unit<Velocity> {
     }
 
     @Override
-    public Unit<Velocity> getBaseUnit() {
+    public VelocityUnits getBaseUnit() {
         return METER_PER_SECOND;
     }
 

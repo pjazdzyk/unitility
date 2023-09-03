@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum PressureUnits implements Unit<Pressure> {
+public enum PressureUnits implements Unit {
 
     PASCAL("Pa", val -> val, val -> val),
     HECTOPASCAL("hPa", val -> val * 1.0E2, val -> val / 1.0E2),
@@ -30,7 +30,7 @@ public enum PressureUnits implements Unit<Pressure> {
     }
 
     @Override
-    public Unit<Pressure> getBaseUnit() {
+    public PressureUnits getBaseUnit() {
         return PASCAL;
     }
 

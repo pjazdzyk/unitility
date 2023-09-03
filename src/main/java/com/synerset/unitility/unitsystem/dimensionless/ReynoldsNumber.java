@@ -1,23 +1,27 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumber> {
+public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnits> {
 
     public static final ReynoldsNumber PIPE_TURBULENT_THRESHOLD = ReynoldsNumber.of(2300);
     public static final ReynoldsNumber PLATE_TURBULENT_THRESHOLD = ReynoldsNumber.of(5 * 10E5);
     public static final ReynoldsNumber AERO_TURBULENT_THRESHOLD = ReynoldsNumber.of(2 * 10E6);
     private final double value;
     private final double baseValue;
-    private final Unit<ReynoldsNumber> unit;
+    private final ReynoldsNumberUnits unit;
 
     public ReynoldsNumber(double value) {
         this.value = value;
         this.unit = ReynoldsNumberUnits.DIMENSIONLESS;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static ReynoldsNumber of(double value) {
+        return new ReynoldsNumber(value);
     }
 
     @Override
@@ -31,7 +35,7 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumber> {
     }
 
     @Override
-    public Unit<ReynoldsNumber> getUnit() {
+    public ReynoldsNumberUnits getUnit() {
         return unit;
     }
 
@@ -41,11 +45,12 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumber> {
     }
 
     @Override
-    public PhysicalQuantity<ReynoldsNumber> toUnit(Unit<ReynoldsNumber> targetUnit) {
+    public ReynoldsNumber toUnit(ReynoldsNumberUnits targetUnit) {
         return this;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public ReynoldsNumber createNewWithValue(double value) {
         return ReynoldsNumber.of(value);
     }
@@ -66,11 +71,6 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    // Static factory methods
-    public static ReynoldsNumber of(double value) {
-        return new ReynoldsNumber(value);
     }
 
 }

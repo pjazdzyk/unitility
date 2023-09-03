@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -145,7 +144,7 @@ class VolumeTest {
 
         // When
         Volume volumeInGallons = Volume.ofGallons(100);
-        Unit<Volume> actualBaseUnit = volumeInGallons.getUnit().getBaseUnit();
+        VolumeUnits actualBaseUnit = volumeInGallons.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

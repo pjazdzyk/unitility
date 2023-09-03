@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum AngleUnits implements Unit<Angle> {
+public enum AngleUnits implements Unit {
 
     DEGREES("°", val -> val, val -> val),
     RADIANS("rad", Math::toDegrees, Math::toRadians);
@@ -25,7 +25,7 @@ public enum AngleUnits implements Unit<Angle> {
     }
 
     @Override
-    public Unit<Angle> getBaseUnit() {
+    public AngleUnits getBaseUnit() {
         return DEGREES;
     }
 

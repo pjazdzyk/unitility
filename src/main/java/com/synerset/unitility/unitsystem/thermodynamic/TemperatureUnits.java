@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum TemperatureUnits implements Unit<Temperature> {
+public enum TemperatureUnits implements Unit {
 
     KELVIN("K", val -> val, val -> val),
     CELSIUS("°C", val -> val + 273.15, val -> val - 273.15),
@@ -26,7 +26,7 @@ public enum TemperatureUnits implements Unit<Temperature> {
     }
 
     @Override
-    public Unit<Temperature> getBaseUnit() {
+    public TemperatureUnits getBaseUnit() {
         return KELVIN;
     }
 

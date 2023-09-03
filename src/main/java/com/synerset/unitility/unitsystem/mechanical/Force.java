@@ -1,20 +1,48 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Force implements PhysicalQuantity<Force> {
+public class Force implements PhysicalQuantity<ForceUnits> {
 
     private final double value;
     private final double baseValue;
-    private final Unit<Force> unit;
+    private final ForceUnits unit;
 
-    public Force(double value, Unit<Force> unit) {
+    public Force(double value, ForceUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Force of(double value, ForceUnits unit) {
+        return new Force(value, unit);
+    }
+
+    public static Force ofNewtons(double value) {
+        return new Force(value, ForceUnits.NEWTON);
+    }
+
+    public static Force ofKiloNewtons(double value) {
+        return new Force(value, ForceUnits.KILONEWTON);
+    }
+
+    public static Force ofKiloponds(double value) {
+        return new Force(value, ForceUnits.KILOPOND);
+    }
+
+    public static Force ofDynes(double value) {
+        return new Force(value, ForceUnits.DYNE);
+    }
+
+    public static Force ofPoundForce(double value) {
+        return new Force(value, ForceUnits.POUND_FORCE);
+    }
+
+    public static Force ofPoundal(double value) {
+        return new Force(value, ForceUnits.POUNDAL);
     }
 
     @Override
@@ -28,7 +56,7 @@ public class Force implements PhysicalQuantity<Force> {
     }
 
     @Override
-    public Unit<Force> getUnit() {
+    public ForceUnits getUnit() {
         return unit;
     }
 
@@ -39,13 +67,14 @@ public class Force implements PhysicalQuantity<Force> {
     }
 
     @Override
-    public Force toUnit(Unit<Force> targetUnit) {
+    public Force toUnit(ForceUnits targetUnit) {
         double valueInNewtons = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInNewtons);
         return Force.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Force createNewWithValue(double value) {
         return Force.of(value, unit);
     }
@@ -118,32 +147,4 @@ public class Force implements PhysicalQuantity<Force> {
         return "Force{" + value + " " + unit.getSymbol() + '}';
     }
 
-    // Static factory methods
-    public static Force of(double value, Unit<Force> unit) {
-        return new Force(value, unit);
-    }
-
-    public static Force ofNewtons(double value) {
-        return new Force(value, ForceUnits.NEWTON);
-    }
-
-    public static Force ofKiloNewtons(double value) {
-        return new Force(value, ForceUnits.KILONEWTON);
-    }
-
-    public static Force ofKiloponds(double value) {
-        return new Force(value, ForceUnits.KILOPOND);
-    }
-
-    public static Force ofDynes(double value) {
-        return new Force(value, ForceUnits.DYNE);
-    }
-
-    public static Force ofPoundForce(double value) {
-        return new Force(value, ForceUnits.POUND_FORCE);
-    }
-
-    public static Force ofPoundal(double value) {
-        return new Force(value, ForceUnits.POUNDAL);
-    }
 }

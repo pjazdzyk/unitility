@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum MassUnits implements Unit<Mass> {
+public enum MassUnits implements Unit {
 
     KILOGRAM("kg", val -> val, val -> val),
     GRAM("g", val -> val * 0.001, val -> val / 0.001),
@@ -29,7 +29,7 @@ public enum MassUnits implements Unit<Mass> {
     }
 
     @Override
-    public Unit<Mass> getBaseUnit() {
+    public MassUnits getBaseUnit() {
         return KILOGRAM;
     }
 

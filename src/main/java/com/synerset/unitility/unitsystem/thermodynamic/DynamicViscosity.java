@@ -1,20 +1,36 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class DynamicViscosity implements PhysicalQuantity<DynamicViscosity> {
+public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits> {
 
     private final double value;
     private final double baseValue;
-    private final Unit<DynamicViscosity> unit;
+    private final DynamicViscosityUnits unit;
 
-    public DynamicViscosity(double value, Unit<DynamicViscosity> unit) {
+    public DynamicViscosity(double value, DynamicViscosityUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static DynamicViscosity of(double value, DynamicViscosityUnits unit) {
+        return new DynamicViscosity(value, unit);
+    }
+
+    public static DynamicViscosity ofKiloGramPerMeterSecond(double value) {
+        return new DynamicViscosity(value, DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
+    }
+
+    public static DynamicViscosity ofPascalSecond(double value) {
+        return new DynamicViscosity(value, DynamicViscosityUnits.PASCAL_SECOND);
+    }
+
+    public static DynamicViscosity ofPoise(double value) {
+        return new DynamicViscosity(value, DynamicViscosityUnits.POISE);
     }
 
     @Override
@@ -28,7 +44,7 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosity> {
     }
 
     @Override
-    public Unit<DynamicViscosity> getUnit() {
+    public DynamicViscosityUnits getUnit() {
         return unit;
     }
 
@@ -39,27 +55,28 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosity> {
     }
 
     @Override
-    public DynamicViscosity toUnit(Unit<DynamicViscosity> targetUnit) {
+    public DynamicViscosity toUnit(DynamicViscosityUnits targetUnit) {
         double valueInPascalSecond = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascalSecond);
         return DynamicViscosity.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public DynamicViscosity createNewWithValue(double value) {
         return DynamicViscosity.of(value, unit);
     }
 
     // Convert to target unit
-    public DynamicViscosity toKiloGramPerMeterSecond(){
+    public DynamicViscosity toKiloGramPerMeterSecond() {
         return toUnit(DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
     }
 
-    public DynamicViscosity toPascalSecond(){
+    public DynamicViscosity toPascalSecond() {
         return toUnit(DynamicViscosityUnits.PASCAL_SECOND);
     }
 
-    public DynamicViscosity toPoise(){
+    public DynamicViscosity toPoise() {
         return toUnit(DynamicViscosityUnits.POISE);
     }
 
@@ -92,23 +109,6 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosity> {
     @Override
     public String toString() {
         return "DynamicViscosity{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static DynamicViscosity of(double value, Unit<DynamicViscosity> unit) {
-        return new DynamicViscosity(value, unit);
-    }
-
-    public static DynamicViscosity ofKiloGramPerMeterSecond(double value) {
-        return new DynamicViscosity(value, DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
-    }
-
-    public static DynamicViscosity ofPascalSecond(double value) {
-        return new DynamicViscosity(value, DynamicViscosityUnits.PASCAL_SECOND);
-    }
-
-    public static DynamicViscosity ofPoise(double value) {
-        return new DynamicViscosity(value, DynamicViscosityUnits.POISE);
     }
 
 }

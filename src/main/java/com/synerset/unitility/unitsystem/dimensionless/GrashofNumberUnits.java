@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum GrashofNumberUnits implements Unit<GrashofNumber> {
+public enum GrashofNumberUnits implements Unit {
 
     DIMENSIONLESS("", val -> val, val -> val);
 
@@ -24,7 +24,7 @@ public enum GrashofNumberUnits implements Unit<GrashofNumber> {
     }
 
     @Override
-    public Unit<GrashofNumber> getBaseUnit() {
+    public GrashofNumberUnits getBaseUnit() {
         return DIMENSIONLESS;
     }
 

@@ -1,22 +1,34 @@
 package com.synerset.unitility.unitsystem.humidity;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
+public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits> {
 
     public static final RelativeHumidity RH_MIN_LIMIT = RelativeHumidity.ofPercentage(0);
     public static final RelativeHumidity RH_MAX_LIMIT = RelativeHumidity.ofPercentage(100);
     private final double value;
     private final double baseValue;
-    private final Unit<RelativeHumidity> unit;
+    private final RelativeHumidityUnits unit;
 
-    public RelativeHumidity(double value, Unit<RelativeHumidity> unit) {
+    public RelativeHumidity(double value, RelativeHumidityUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static RelativeHumidity of(double value, RelativeHumidityUnits unit) {
+        return new RelativeHumidity(value, unit);
+    }
+
+    public static RelativeHumidity ofPercentage(double value) {
+        return new RelativeHumidity(value, RelativeHumidityUnits.PERCENT);
+    }
+
+    public static RelativeHumidity ofDecimal(double value) {
+        return new RelativeHumidity(value, RelativeHumidityUnits.DECIMAL);
     }
 
     @Override
@@ -30,7 +42,7 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
     }
 
     @Override
-    public Unit<RelativeHumidity> getUnit() {
+    public RelativeHumidityUnits getUnit() {
         return unit;
     }
 
@@ -41,13 +53,14 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
     }
 
     @Override
-    public RelativeHumidity toUnit(Unit<RelativeHumidity> targetUnit) {
+    public RelativeHumidity toUnit(RelativeHumidityUnits targetUnit) {
         double valueInPascal = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascal);
         return RelativeHumidity.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public RelativeHumidity createNewWithValue(double value) {
         return RelativeHumidity.of(value, unit);
     }
@@ -86,19 +99,6 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidity> {
     @Override
     public String toString() {
         return "RelativeHumidity{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static RelativeHumidity of(double value, Unit<RelativeHumidity> unit) {
-        return new RelativeHumidity(value, unit);
-    }
-
-    public static RelativeHumidity ofPercentage(double value) {
-        return new RelativeHumidity(value, RelativeHumidityUnits.PERCENT);
-    }
-
-    public static RelativeHumidity ofDecimal(double value) {
-        return new RelativeHumidity(value, RelativeHumidityUnits.DECIMAL);
     }
 
 }

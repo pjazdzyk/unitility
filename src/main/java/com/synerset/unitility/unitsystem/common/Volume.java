@@ -1,20 +1,56 @@
 package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Volume implements PhysicalQuantity<Volume> {
+public class Volume implements PhysicalQuantity<VolumeUnits> {
     public static final Volume PHYSICAL_MIN_LIMIT = Volume.ofCubicMeters(0);
     private final double value;
     private final double baseValue;
-    private final Unit<Volume> unit;
+    private final VolumeUnits unit;
 
-    public Volume(double value, Unit<Volume> unit) {
+    public Volume(double value, VolumeUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Volume of(double value, VolumeUnits unit) {
+        return new Volume(value, unit);
+    }
+
+    public static Volume ofCubicMeters(double value) {
+        return new Volume(value, VolumeUnits.CUBIC_METER);
+    }
+
+    public static Volume ofLiters(double value) {
+        return new Volume(value, VolumeUnits.LITER);
+    }
+
+    public static Volume ofCubicCentimeters(double value) {
+        return new Volume(value, VolumeUnits.CUBIC_CENTIMETER);
+    }
+
+    public static Volume ofHectoLiters(double value) {
+        return new Volume(value, VolumeUnits.HECTOLITRE);
+    }
+
+    public static Volume ofMilliLiters(double value) {
+        return new Volume(value, VolumeUnits.MILLILITRE);
+    }
+
+    public static Volume ofOunces(double value) {
+        return new Volume(value, VolumeUnits.OUNCE);
+    }
+
+    public static Volume ofPints(double value) {
+        return new Volume(value, VolumeUnits.PINT);
+    }
+
+    public static Volume ofGallons(double value) {
+        return new Volume(value, VolumeUnits.GALLON);
     }
 
     @Override
@@ -28,7 +64,7 @@ public class Volume implements PhysicalQuantity<Volume> {
     }
 
     @Override
-    public Unit<Volume> getUnit() {
+    public VolumeUnits getUnit() {
         return unit;
     }
 
@@ -39,13 +75,14 @@ public class Volume implements PhysicalQuantity<Volume> {
     }
 
     @Override
-    public Volume toUnit(Unit<Volume> targetUnit) {
+    public Volume toUnit(VolumeUnits targetUnit) {
         double valueInCubicMeter = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInCubicMeter);
         return Volume.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Volume createNewWithValue(double value) {
         return Volume.of(value, unit);
     }
@@ -132,43 +169,6 @@ public class Volume implements PhysicalQuantity<Volume> {
     @Override
     public String toString() {
         return "Volume{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    // Static factory methods
-    public static Volume of(double value, Unit<Volume> unit) {
-        return new Volume(value, unit);
-    }
-
-    public static Volume ofCubicMeters(double value) {
-        return new Volume(value, VolumeUnits.CUBIC_METER);
-    }
-
-    public static Volume ofLiters(double value) {
-        return new Volume(value, VolumeUnits.LITER);
-    }
-
-    public static Volume ofCubicCentimeters(double value) {
-        return new Volume(value, VolumeUnits.CUBIC_CENTIMETER);
-    }
-
-    public static Volume ofHectoLiters(double value) {
-        return new Volume(value, VolumeUnits.HECTOLITRE);
-    }
-
-    public static Volume ofMilliLiters(double value) {
-        return new Volume(value, VolumeUnits.MILLILITRE);
-    }
-
-    public static Volume ofOunces(double value) {
-        return new Volume(value, VolumeUnits.OUNCE);
-    }
-
-    public static Volume ofPints(double value) {
-        return new Volume(value, VolumeUnits.PINT);
-    }
-
-    public static Volume ofGallons(double value) {
-        return new Volume(value, VolumeUnits.GALLON);
     }
 }
 

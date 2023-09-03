@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +53,7 @@ class DynamicViscosityTest {
 
         // When
         DynamicViscosity dynVisInPoise = DynamicViscosity.of(10, DynamicViscosityUnits.POISE);
-        Unit<DynamicViscosity> actualBaseUnit = dynVisInPoise.getUnit().getBaseUnit();
+        DynamicViscosityUnits actualBaseUnit = dynVisInPoise.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

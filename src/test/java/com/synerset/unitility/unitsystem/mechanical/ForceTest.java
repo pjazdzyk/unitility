@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.Unit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -108,7 +107,7 @@ class ForceTest {
 
         // When
         Force forceInNewton = Force.ofNewtons(10);
-        Unit<Force> actualBaseUnit = forceInNewton.getUnit().getBaseUnit();
+        ForceUnits actualBaseUnit = forceInNewton.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -1,21 +1,45 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.Objects;
 
-public class Torque implements PhysicalQuantity<Torque> {
+public class Torque implements PhysicalQuantity<TorqueUnits> {
 
     public static final Torque PHYSICAL_MIN_LIMIT = Torque.ofNewtonMeters(0);
     private final double value;
     private final double baseValue;
-    private final Unit<Torque> unit;
+    private final TorqueUnits unit;
 
-    public Torque(double value, Unit<Torque> unit) {
+    public Torque(double value, TorqueUnits unit) {
         this.value = value;
         this.unit = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Torque of(double value, TorqueUnits unit) {
+        return new Torque(value, unit);
+    }
+
+    public static Torque ofNewtonMeters(double value) {
+        return new Torque(value, TorqueUnits.NEWTON_METER);
+    }
+
+    public static Torque ofMillinewtonMeters(double value) {
+        return new Torque(value, TorqueUnits.MILLINEWTON_METER);
+    }
+
+    public static Torque ofKilopondMeters(double value) {
+        return new Torque(value, TorqueUnits.KILOPOND_METER);
+    }
+
+    public static Torque ofFootPounds(double value) {
+        return new Torque(value, TorqueUnits.FOOT_POUND);
+    }
+
+    public static Torque ofInchPounds(double value) {
+        return new Torque(value, TorqueUnits.INCH_POUND);
     }
 
     @Override
@@ -29,7 +53,7 @@ public class Torque implements PhysicalQuantity<Torque> {
     }
 
     @Override
-    public Unit<Torque> getUnit() {
+    public TorqueUnits getUnit() {
         return unit;
     }
 
@@ -40,13 +64,14 @@ public class Torque implements PhysicalQuantity<Torque> {
     }
 
     @Override
-    public Torque toUnit(Unit<Torque> targetUnit) {
+    public Torque toUnit(TorqueUnits targetUnit) {
         double valueInNewtonMeters = unit.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInNewtonMeters);
         return Torque.of(valueInTargetUnit, targetUnit);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Torque createNewWithValue(double value) {
         return Torque.of(value, unit);
     }
@@ -111,28 +136,4 @@ public class Torque implements PhysicalQuantity<Torque> {
         return "Torque{" + value + " " + unit.getSymbol() + '}';
     }
 
-    // Static factory methods
-    public static Torque of(double value, Unit<Torque> unit) {
-        return new Torque(value, unit);
-    }
-
-    public static Torque ofNewtonMeters(double value) {
-        return new Torque(value, TorqueUnits.NEWTON_METER);
-    }
-
-    public static Torque ofMillinewtonMeters(double value) {
-        return new Torque(value, TorqueUnits.MILLINEWTON_METER);
-    }
-
-    public static Torque ofKilopondMeters(double value) {
-        return new Torque(value, TorqueUnits.KILOPOND_METER);
-    }
-
-    public static Torque ofFootPounds(double value) {
-        return new Torque(value, TorqueUnits.FOOT_POUND);
-    }
-
-    public static Torque ofInchPounds(double value) {
-        return new Torque(value, TorqueUnits.INCH_POUND);
-    }
 }
