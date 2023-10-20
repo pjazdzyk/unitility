@@ -125,7 +125,7 @@ class DistanceTest {
 
         // When
         Distance DistanceInMiles = Distance.ofMiles(10);
-        DistanceUnits actualBaseUnit = DistanceInMiles.getUnit().getBaseUnit();
+        DistanceUnits actualBaseUnit = DistanceInMiles.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

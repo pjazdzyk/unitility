@@ -11,12 +11,12 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnits> {
     public static final ReynoldsNumber AERO_TURBULENT_THRESHOLD = ReynoldsNumber.of(2 * 10E6);
     private final double value;
     private final double baseValue;
-    private final ReynoldsNumberUnits unit;
+    private final ReynoldsNumberUnits unitType;
 
     public ReynoldsNumber(double value) {
         this.value = value;
-        this.unit = ReynoldsNumberUnits.DIMENSIONLESS;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = ReynoldsNumberUnits.DIMENSIONLESS;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -35,8 +35,8 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnits> {
     }
 
     @Override
-    public ReynoldsNumberUnits getUnit() {
-        return unit;
+    public ReynoldsNumberUnits getUnitType() {
+        return unitType;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnits> {
 
     @Override
     public String toString() {
-        return "ReynoldsNumber{" + value + " " + unit.getSymbol() + '}';
+        return "ReynoldsNumber{" + value + " " + unitType.getSymbol() + '}';
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.synerset.unitility.unitsystem.humidity;
 
 import com.synerset.unitility.unitsystem.Unit;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -37,6 +38,26 @@ public enum HumidityRatioUnits implements Unit {
     @Override
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
+    }
+
+    public static HumidityRatioUnits fromSymbol(String rawSymbol) {
+        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        for (HumidityRatioUnits unit : values()) {
+            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
+            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+                return unit;
+            }
+        }
+        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+                + HumidityRatioUnits.class.getSimpleName());
+    }
+
+    private static String formatSymbolInput(String inputString) {
+        return inputString
+                .trim()
+                .toLowerCase()
+                .replace(" ", "")
+                .replace("/", "p");
     }
 
 }

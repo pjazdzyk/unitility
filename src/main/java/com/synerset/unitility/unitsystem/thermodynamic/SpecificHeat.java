@@ -7,12 +7,12 @@ import java.util.Objects;
 public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
     private final double value;
     private final double baseValue;
-    private final SpecificHeatUnits unit;
+    private final SpecificHeatUnits unitType;
 
-    public SpecificHeat(double value, SpecificHeatUnits unit) {
+    public SpecificHeat(double value, SpecificHeatUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -43,19 +43,19 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
     }
 
     @Override
-    public SpecificHeatUnits getUnit() {
-        return unit;
+    public SpecificHeatUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public SpecificHeat toBaseUnit() {
-        double valueInJoulePerKiloGramKelvin = unit.toValueInBaseUnit(value);
+        double valueInJoulePerKiloGramKelvin = unitType.toValueInBaseUnit(value);
         return SpecificHeat.of(valueInJoulePerKiloGramKelvin, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
     }
 
     @Override
     public SpecificHeat toUnit(SpecificHeatUnits targetUnit) {
-        double valueInJoulePerKiloGramKelvin = unit.toValueInBaseUnit(value);
+        double valueInJoulePerKiloGramKelvin = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoulePerKiloGramKelvin);
         return SpecificHeat.of(valueInTargetUnit, targetUnit);
     }
@@ -63,7 +63,7 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public SpecificHeat createNewWithValue(double value) {
-        return SpecificHeat.of(value, unit);
+        return SpecificHeat.of(value, unitType);
     }
 
     // Convert to target unit
@@ -97,17 +97,17 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SpecificHeat inputQuantity = (SpecificHeat) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "SpecificHeat{" + value + " " + unit.getSymbol() + '}';
+        return "SpecificHeat{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

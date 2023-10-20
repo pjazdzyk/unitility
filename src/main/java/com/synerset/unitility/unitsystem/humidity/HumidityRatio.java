@@ -9,12 +9,12 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnits> {
     public static final HumidityRatio HUM_RATIO_MIN_LIMIT = HumidityRatio.ofKilogramPerKilogram(0);
     private final double value;
     private final double baseValue;
-    private final HumidityRatioUnits unit;
+    private final HumidityRatioUnits unitType;
 
-    public HumidityRatio(double value, HumidityRatioUnits unit) {
+    public HumidityRatio(double value, HumidityRatioUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -41,19 +41,19 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnits> {
     }
 
     @Override
-    public HumidityRatioUnits getUnit() {
-        return unit;
+    public HumidityRatioUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public HumidityRatio toBaseUnit() {
-        double valueInKgKg = unit.toValueInBaseUnit(value);
+        double valueInKgKg = unitType.toValueInBaseUnit(value);
         return HumidityRatio.of(valueInKgKg, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
     }
 
     @Override
     public HumidityRatio toUnit(HumidityRatioUnits targetUnit) {
-        double valueInKgKg = unit.toValueInBaseUnit(value);
+        double valueInKgKg = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKgKg);
         return HumidityRatio.of(valueInTargetUnit, targetUnit);
     }
@@ -61,7 +61,7 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public HumidityRatio createNewWithValue(double value) {
-        return HumidityRatio.of(value, unit);
+        return HumidityRatio.of(value, unitType);
     }
 
     // Convert to target unit
@@ -87,16 +87,16 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HumidityRatio inputQuantity = (HumidityRatio) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "HumidityRatio{" + value + " " + unit.getSymbol() + '}';
+        return "HumidityRatio{" + value + " " + unitType.getSymbol() + '}';
     }
 }

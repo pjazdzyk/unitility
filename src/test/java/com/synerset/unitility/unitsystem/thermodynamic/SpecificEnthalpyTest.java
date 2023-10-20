@@ -54,7 +54,7 @@ class SpecificEnthalpyTest {
 
         // When
         SpecificEnthalpy specificEnthalpyInBTUPerLb = SpecificEnthalpy.ofBTUPerPound(0.1);
-        SpecificEnthalpyUnits actualBaseUnit = specificEnthalpyInBTUPerLb.getUnit().getBaseUnit();
+        SpecificEnthalpyUnits actualBaseUnit = specificEnthalpyInBTUPerLb.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

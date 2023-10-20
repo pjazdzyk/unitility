@@ -9,12 +9,12 @@ public class Density implements PhysicalQuantity<DensityUnits> {
     public static final Density PHYSICAL_MIN_LIMIT = Density.ofKilogramPerCubicMeter(0);
     private final double value;
     private final double baseValue;
-    private final DensityUnits unit;
+    private final DensityUnits unitType;
 
-    public Density(double value, DensityUnits unit) {
+    public Density(double value, DensityUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -41,19 +41,19 @@ public class Density implements PhysicalQuantity<DensityUnits> {
     }
 
     @Override
-    public DensityUnits getUnit() {
-        return unit;
+    public DensityUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Density toBaseUnit() {
-        double valueInKGpM3 = unit.toValueInBaseUnit(value);
+        double valueInKGpM3 = unitType.toValueInBaseUnit(value);
         return Density.of(valueInKGpM3, DensityUnits.KILOGRAM_PER_CUBIC_METER);
     }
 
     @Override
     public Density toUnit(DensityUnits targetUnit) {
-        double valueInKGpM3 = unit.toValueInBaseUnit(value);
+        double valueInKGpM3 = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKGpM3);
         return Density.of(valueInTargetUnit, targetUnit);
     }
@@ -61,7 +61,7 @@ public class Density implements PhysicalQuantity<DensityUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Density createNewWithValue(double value) {
-        return Density.of(value, unit);
+        return Density.of(value, unitType);
     }
 
     // Convert to target unit
@@ -91,16 +91,16 @@ public class Density implements PhysicalQuantity<DensityUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Density inputQuantity = (Density) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Density{" + value + " " + unit.getSymbol() + '}';
+        return "Density{" + value + " " + unitType.getSymbol() + '}';
     }
 }

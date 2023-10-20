@@ -8,12 +8,12 @@ public class Force implements PhysicalQuantity<ForceUnits> {
 
     private final double value;
     private final double baseValue;
-    private final ForceUnits unit;
+    private final ForceUnits unitType;
 
-    public Force(double value, ForceUnits unit) {
+    public Force(double value, ForceUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -56,19 +56,19 @@ public class Force implements PhysicalQuantity<ForceUnits> {
     }
 
     @Override
-    public ForceUnits getUnit() {
-        return unit;
+    public ForceUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Force toBaseUnit() {
-        double valueInNewtons = unit.toValueInBaseUnit(value);
+        double valueInNewtons = unitType.toValueInBaseUnit(value);
         return Force.of(valueInNewtons, ForceUnits.NEWTON);
     }
 
     @Override
     public Force toUnit(ForceUnits targetUnit) {
-        double valueInNewtons = unit.toValueInBaseUnit(value);
+        double valueInNewtons = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInNewtons);
         return Force.of(valueInTargetUnit, targetUnit);
     }
@@ -76,7 +76,7 @@ public class Force implements PhysicalQuantity<ForceUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Force createNewWithValue(double value) {
-        return Force.of(value, unit);
+        return Force.of(value, unitType);
     }
 
     // Convert to target unit
@@ -134,17 +134,17 @@ public class Force implements PhysicalQuantity<ForceUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Force inputQuantity = (Force) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Force{" + value + " " + unit.getSymbol() + '}';
+        return "Force{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

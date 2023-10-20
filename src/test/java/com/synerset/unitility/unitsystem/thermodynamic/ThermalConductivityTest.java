@@ -54,7 +54,7 @@ class ThermalConductivityTest {
 
         // When
         ThermalConductivity thermalConductivityInBTUPerHrF = ThermalConductivity.ofBTUPerHourFeetFahrenheit(0.1);
-        ThermalConductivityUnits actualBaseUnit = thermalConductivityInBTUPerHrF.getUnit().getBaseUnit();
+        ThermalConductivityUnits actualBaseUnit = thermalConductivityInBTUPerHrF.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

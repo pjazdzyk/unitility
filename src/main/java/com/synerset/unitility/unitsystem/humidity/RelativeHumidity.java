@@ -10,12 +10,12 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits>
     public static final RelativeHumidity RH_MAX_LIMIT = RelativeHumidity.ofPercentage(100);
     private final double value;
     private final double baseValue;
-    private final RelativeHumidityUnits unit;
+    private final RelativeHumidityUnits unitType;
 
-    public RelativeHumidity(double value, RelativeHumidityUnits unit) {
+    public RelativeHumidity(double value, RelativeHumidityUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -42,19 +42,19 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits>
     }
 
     @Override
-    public RelativeHumidityUnits getUnit() {
-        return unit;
+    public RelativeHumidityUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public RelativeHumidity toBaseUnit() {
-        double valueInPascal = unit.toValueInBaseUnit(value);
+        double valueInPascal = unitType.toValueInBaseUnit(value);
         return RelativeHumidity.of(valueInPascal, RelativeHumidityUnits.PERCENT);
     }
 
     @Override
     public RelativeHumidity toUnit(RelativeHumidityUnits targetUnit) {
-        double valueInPascal = unit.toValueInBaseUnit(value);
+        double valueInPascal = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascal);
         return RelativeHumidity.of(valueInTargetUnit, targetUnit);
     }
@@ -62,7 +62,7 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits>
     @Override
     @SuppressWarnings("unchecked")
     public RelativeHumidity createNewWithValue(double value) {
-        return RelativeHumidity.of(value, unit);
+        return RelativeHumidity.of(value, unitType);
     }
 
     // Convert to target unit
@@ -88,17 +88,17 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits>
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RelativeHumidity inputQuantity = (RelativeHumidity) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "RelativeHumidity{" + value + " " + unit.getSymbol() + '}';
+        return "RelativeHumidity{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

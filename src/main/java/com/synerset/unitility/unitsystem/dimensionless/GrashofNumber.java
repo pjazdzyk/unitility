@@ -7,12 +7,12 @@ import java.util.Objects;
 public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnits> {
     private final double value;
     private final double baseValue;
-    private final GrashofNumberUnits unit;
+    private final GrashofNumberUnits unitType;
 
     public GrashofNumber(double value) {
         this.value = value;
-        this.unit = GrashofNumberUnits.DIMENSIONLESS;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = GrashofNumberUnits.DIMENSIONLESS;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -31,8 +31,8 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnits> {
     }
 
     @Override
-    public GrashofNumberUnits getUnit() {
-        return unit;
+    public GrashofNumberUnits getUnitType() {
+        return unitType;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnits> {
 
     @Override
     public String toString() {
-        return "GrashofNumber{" + value + " " + unit.getSymbol() + '}';
+        return "GrashofNumber{" + value + " " + unitType.getSymbol() + '}';
     }
 
     @Override

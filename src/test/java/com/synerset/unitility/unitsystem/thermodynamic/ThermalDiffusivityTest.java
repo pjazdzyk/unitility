@@ -36,7 +36,7 @@ class ThermalDiffusivityTest {
 
         // When
         ThermalDiffusivity diffusivityInSquareFeetPerSecond = ThermalDiffusivity.ofSquareFeetPerSecond(10);
-        ThermalDiffusivityUnits actualBaseUnit = diffusivityInSquareFeetPerSecond.getUnit().getBaseUnit();
+        ThermalDiffusivityUnits actualBaseUnit = diffusivityInSquareFeetPerSecond.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

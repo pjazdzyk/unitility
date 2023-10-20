@@ -8,12 +8,12 @@ public class Energy implements PhysicalQuantity<EnergyUnits> {
 
     private final double value;
     private final double baseValue;
-    private final EnergyUnits unit;
+    private final EnergyUnits unitType;
 
-    public Energy(double value, EnergyUnits unit) {
+    public Energy(double value, EnergyUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -68,19 +68,19 @@ public class Energy implements PhysicalQuantity<EnergyUnits> {
     }
 
     @Override
-    public EnergyUnits getUnit() {
-        return unit;
+    public EnergyUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Energy toBaseUnit() {
-        double valueInJoules = unit.toValueInBaseUnit(value);
+        double valueInJoules = unitType.toValueInBaseUnit(value);
         return Energy.of(valueInJoules, EnergyUnits.JOULE);
     }
 
     @Override
     public Energy toUnit(EnergyUnits targetUnit) {
-        double valueInJoules = unit.toValueInBaseUnit(value);
+        double valueInJoules = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoules);
         return Energy.of(valueInTargetUnit, targetUnit);
     }
@@ -88,7 +88,7 @@ public class Energy implements PhysicalQuantity<EnergyUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Energy createNewWithValue(double value) {
-        return Energy.of(value, unit);
+        return Energy.of(value, unitType);
     }
 
     // Convert to target unit
@@ -170,17 +170,17 @@ public class Energy implements PhysicalQuantity<EnergyUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Energy inputQuantity = (Energy) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Energy{" + value + " " + unit.getSymbol() + '}';
+        return "Energy{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

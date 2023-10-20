@@ -11,12 +11,12 @@ public class BypassFactor implements PhysicalQuantity<BypassFactorUnits> {
 
     private final double value;
     private final double baseValue;
-    private final BypassFactorUnits unit;
+    private final BypassFactorUnits unitType;
 
     public BypassFactor(double value) {
         this.value = value;
-        this.unit = BypassFactorUnits.DIMENSIONLESS;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = BypassFactorUnits.DIMENSIONLESS;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -35,8 +35,8 @@ public class BypassFactor implements PhysicalQuantity<BypassFactorUnits> {
     }
 
     @Override
-    public BypassFactorUnits getUnit() {
-        return unit;
+    public BypassFactorUnits getUnitType() {
+        return unitType;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class BypassFactor implements PhysicalQuantity<BypassFactorUnits> {
 
     @Override
     public String toString() {
-        return "BypassFactor{" + value + " " + unit.getSymbol() + '}';
+        return "BypassFactor{" + value + " " + unitType.getSymbol() + '}';
     }
 
     @Override

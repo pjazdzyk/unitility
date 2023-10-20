@@ -9,12 +9,12 @@ public class Torque implements PhysicalQuantity<TorqueUnits> {
     public static final Torque PHYSICAL_MIN_LIMIT = Torque.ofNewtonMeters(0);
     private final double value;
     private final double baseValue;
-    private final TorqueUnits unit;
+    private final TorqueUnits unitType;
 
-    public Torque(double value, TorqueUnits unit) {
+    public Torque(double value, TorqueUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -53,19 +53,19 @@ public class Torque implements PhysicalQuantity<TorqueUnits> {
     }
 
     @Override
-    public TorqueUnits getUnit() {
-        return unit;
+    public TorqueUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Torque toBaseUnit() {
-        double valueInNewtonMeters = unit.toValueInBaseUnit(value);
+        double valueInNewtonMeters = unitType.toValueInBaseUnit(value);
         return Torque.of(valueInNewtonMeters, TorqueUnits.NEWTON_METER);
     }
 
     @Override
     public Torque toUnit(TorqueUnits targetUnit) {
-        double valueInNewtonMeters = unit.toValueInBaseUnit(value);
+        double valueInNewtonMeters = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInNewtonMeters);
         return Torque.of(valueInTargetUnit, targetUnit);
     }
@@ -73,7 +73,7 @@ public class Torque implements PhysicalQuantity<TorqueUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Torque createNewWithValue(double value) {
-        return Torque.of(value, unit);
+        return Torque.of(value, unitType);
     }
 
     // Convert to target unit
@@ -123,17 +123,17 @@ public class Torque implements PhysicalQuantity<TorqueUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Torque inputQuantity = (Torque) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Torque{" + value + " " + unit.getSymbol() + '}';
+        return "Torque{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

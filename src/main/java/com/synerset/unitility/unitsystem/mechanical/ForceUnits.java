@@ -1,6 +1,7 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.Unit;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -43,4 +44,23 @@ public enum ForceUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
+    public static ForceUnits fromSymbol(String rawSymbol) {
+        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        for (ForceUnits unit : values()) {
+            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
+            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+                return unit;
+            }
+        }
+        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+                + ForceUnits.class.getSimpleName());
+    }
+
+    private static String formatSymbolInput(String inputString) {
+        return inputString
+                .trim()
+                .toLowerCase()
+                .replace(" ", "");
+    }
+    
 }

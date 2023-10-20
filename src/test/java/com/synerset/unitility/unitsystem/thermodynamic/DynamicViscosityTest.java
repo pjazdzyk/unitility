@@ -53,7 +53,7 @@ class DynamicViscosityTest {
 
         // When
         DynamicViscosity dynVisInPoise = DynamicViscosity.of(10, DynamicViscosityUnits.POISE);
-        DynamicViscosityUnits actualBaseUnit = dynVisInPoise.getUnit().getBaseUnit();
+        DynamicViscosityUnits actualBaseUnit = dynVisInPoise.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

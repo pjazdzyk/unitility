@@ -8,12 +8,12 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosityUn
 
     private final double value;
     private final double baseValue;
-    private final KinematicViscosityUnits unit;
+    private final KinematicViscosityUnits unitType;
 
-    public KinematicViscosity(double value, KinematicViscosityUnits unit) {
+    public KinematicViscosity(double value, KinematicViscosityUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -40,19 +40,19 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosityUn
     }
 
     @Override
-    public KinematicViscosityUnits getUnit() {
-        return unit;
+    public KinematicViscosityUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public KinematicViscosity toBaseUnit() {
-        double valueInSquareMeterPerSecond = unit.toValueInBaseUnit(value);
+        double valueInSquareMeterPerSecond = unitType.toValueInBaseUnit(value);
         return KinematicViscosity.of(valueInSquareMeterPerSecond, KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
     }
 
     @Override
     public KinematicViscosity toUnit(KinematicViscosityUnits targetUnit) {
-        double valueInSquareMeterPerSecond = unit.toValueInBaseUnit(value);
+        double valueInSquareMeterPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInSquareMeterPerSecond);
         return KinematicViscosity.of(valueInTargetUnit, targetUnit);
     }
@@ -60,7 +60,7 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosityUn
     @Override
     @SuppressWarnings("unchecked")
     public KinematicViscosity createNewWithValue(double value) {
-        return KinematicViscosity.of(value, unit);
+        return KinematicViscosity.of(value, unitType);
     }
 
     // Convert to target unit
@@ -86,18 +86,18 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosityUn
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         KinematicViscosity inputQuantity = (KinematicViscosity) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(),
-                inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(),
+                inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "KinematicViscosity{" + value + " " + unit.getSymbol() + '}';
+        return "KinematicViscosity{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

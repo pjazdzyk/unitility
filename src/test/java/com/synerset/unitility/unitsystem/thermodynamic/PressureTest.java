@@ -125,7 +125,7 @@ class PressureTest {
 
         // When
         Pressure pressureInPsi = Pressure.ofPsi(10);
-        PressureUnits actualBaseUnit = pressureInPsi.getUnit().getBaseUnit();
+        PressureUnits actualBaseUnit = pressureInPsi.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

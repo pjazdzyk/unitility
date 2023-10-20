@@ -7,12 +7,12 @@ import java.util.Objects;
 public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits> {
     private final double value;
     private final double baseValue;
-    private final SpecificEnthalpyUnits unit;
+    private final SpecificEnthalpyUnits unitType;
 
-    public SpecificEnthalpy(double value, SpecificEnthalpyUnits unit) {
+    public SpecificEnthalpy(double value, SpecificEnthalpyUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -43,19 +43,19 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits>
     }
 
     @Override
-    public SpecificEnthalpyUnits getUnit() {
-        return unit;
+    public SpecificEnthalpyUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public SpecificEnthalpy toBaseUnit() {
-        double valueInJoulePerKilogram = unit.toValueInBaseUnit(value);
+        double valueInJoulePerKilogram = unitType.toValueInBaseUnit(value);
         return SpecificEnthalpy.of(valueInJoulePerKilogram, SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
     }
 
     @Override
     public SpecificEnthalpy toUnit(SpecificEnthalpyUnits targetUnit) {
-        double valueInJoulePerKilogram = unit.toValueInBaseUnit(value);
+        double valueInJoulePerKilogram = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoulePerKilogram);
         return SpecificEnthalpy.of(valueInTargetUnit, targetUnit);
     }
@@ -63,7 +63,7 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits>
     @Override
     @SuppressWarnings("unchecked")
     public SpecificEnthalpy createNewWithValue(double value) {
-        return SpecificEnthalpy.of(value, unit);
+        return SpecificEnthalpy.of(value, unitType);
     }
 
     // Convert to target unit
@@ -97,16 +97,16 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits>
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SpecificEnthalpy inputQuantity = (SpecificEnthalpy) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "SpecificEnthalpy{" + value + " " + unit.getSymbol() + '}';
+        return "SpecificEnthalpy{" + value + " " + unitType.getSymbol() + '}';
     }
 }

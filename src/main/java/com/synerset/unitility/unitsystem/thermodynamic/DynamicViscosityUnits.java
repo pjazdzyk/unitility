@@ -1,6 +1,7 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.Unit;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -38,6 +39,31 @@ public enum DynamicViscosityUnits implements Unit {
     @Override
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
+    }
+
+    public static DynamicViscosityUnits fromSymbol(String rawSymbol) {
+        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        for (DynamicViscosityUnits unit : values()) {
+            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
+            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+                return unit;
+            }
+        }
+        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+                + DynamicViscosityUnits.class.getSimpleName());
+    }
+
+    private static String formatSymbolInput(String inputString) {
+        return inputString
+                .trim()
+                .toLowerCase()
+                .replace(" ", "")
+                .replace("·", "")
+                .replace(".", "")
+                .replace("x", "")
+                .replace("/", "p")
+                .replace("(", "")
+                .replace(")", "");
     }
 
 }

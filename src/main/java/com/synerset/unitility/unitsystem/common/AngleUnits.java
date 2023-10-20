@@ -1,6 +1,7 @@
 package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.Unit;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -37,6 +38,28 @@ public enum AngleUnits implements Unit {
     @Override
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
+    }
+
+    public static AngleUnits fromSymbol(String rawSymbol) {
+        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        for (AngleUnits unit : values()) {
+            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
+            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+                return unit;
+            }
+        }
+        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+                + AngleUnits.class.getSimpleName());
+    }
+
+    private static String formatSymbolInput(String inputString) {
+        return inputString
+                .trim()
+                .toLowerCase()
+                .replace(" ", "")
+                .replace("o", "°")
+                .replace("deg", "°")
+                .replace("radian", "rad");
     }
 
 }

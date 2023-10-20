@@ -8,12 +8,12 @@ public class Momentum implements PhysicalQuantity<MomentumUnits> {
 
     private final double value;
     private final double baseValue;
-    private final MomentumUnits unit;
+    private final MomentumUnits unitType;
 
-    public Momentum(double value, MomentumUnits unit) {
+    public Momentum(double value, MomentumUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -44,19 +44,19 @@ public class Momentum implements PhysicalQuantity<MomentumUnits> {
     }
 
     @Override
-    public MomentumUnits getUnit() {
-        return unit;
+    public MomentumUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Momentum toBaseUnit() {
-        double valueInKilogramMeterPerSecond = unit.toValueInBaseUnit(value);
+        double valueInKilogramMeterPerSecond = unitType.toValueInBaseUnit(value);
         return Momentum.of(valueInKilogramMeterPerSecond, MomentumUnits.KILOGRAM_METER_PER_SECOND);
     }
 
     @Override
     public Momentum toUnit(MomentumUnits targetUnit) {
-        double valueInKilogramMeterPerSecond = unit.toValueInBaseUnit(value);
+        double valueInKilogramMeterPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogramMeterPerSecond);
         return Momentum.of(valueInTargetUnit, targetUnit);
     }
@@ -64,7 +64,7 @@ public class Momentum implements PhysicalQuantity<MomentumUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Momentum createNewWithValue(double value) {
-        return Momentum.of(value, unit);
+        return Momentum.of(value, unitType);
     }
 
     // Convert to target unit
@@ -98,17 +98,17 @@ public class Momentum implements PhysicalQuantity<MomentumUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Momentum inputQuantity = (Momentum) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Momentum{" + value + " " + unit.getSymbol() + '}';
+        return "Momentum{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

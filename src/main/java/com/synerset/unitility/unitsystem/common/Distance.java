@@ -9,12 +9,12 @@ public class Distance implements PhysicalQuantity<DistanceUnits> {
     public static final Distance PHYSICAL_MIN_LIMIT = Distance.ofMeters(0);
     private final double value;
     private final double baseValue;
-    private final DistanceUnits unit;
+    private final DistanceUnits unitType;
 
-    public Distance(double value, DistanceUnits unit) {
+    public Distance(double value, DistanceUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -61,19 +61,19 @@ public class Distance implements PhysicalQuantity<DistanceUnits> {
     }
 
     @Override
-    public DistanceUnits getUnit() {
-        return unit;
+    public DistanceUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Distance toBaseUnit() {
-        double valueInMeters = unit.toValueInBaseUnit(value);
+        double valueInMeters = unitType.toValueInBaseUnit(value);
         return Distance.of(valueInMeters, DistanceUnits.METER);
     }
 
     @Override
     public Distance toUnit(DistanceUnits targetUnit) {
-        double valueInMeters = unit.toValueInBaseUnit(value);
+        double valueInMeters = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInMeters);
         return Distance.of(valueInTargetUnit, targetUnit);
     }
@@ -81,7 +81,7 @@ public class Distance implements PhysicalQuantity<DistanceUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Distance createNewWithValue(double value) {
-        return Distance.of(value, unit);
+        return Distance.of(value, unitType);
     }
 
     // Convert to target unit
@@ -147,17 +147,17 @@ public class Distance implements PhysicalQuantity<DistanceUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Distance inputQuantity = (Distance) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Distance{" + value + " " + unit.getSymbol() + '}';
+        return "Distance{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

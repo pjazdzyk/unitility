@@ -1,7 +1,6 @@
 package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
@@ -9,12 +8,12 @@ public class Angle implements PhysicalQuantity<AngleUnits> {
 
     private final double value;
     private final double baseValue;
-    private final AngleUnits unit;
+    private final AngleUnits unitType;
 
-    public Angle(double value, AngleUnits unit) {
+    public Angle(double value, AngleUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -41,19 +40,19 @@ public class Angle implements PhysicalQuantity<AngleUnits> {
     }
 
     @Override
-    public AngleUnits getUnit() {
-        return unit;
+    public AngleUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Angle toBaseUnit() {
-        double degrees = unit.toValueInBaseUnit(value);
+        double degrees = unitType.toValueInBaseUnit(value);
         return Angle.of(degrees, AngleUnits.DEGREES);
     }
 
     @Override
     public Angle toUnit(AngleUnits targetUnit) {
-        double valueInDegrees = unit.toValueInBaseUnit(value);
+        double valueInDegrees = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInDegrees);
         return Angle.of(valueInTargetUnit, targetUnit);
     }
@@ -61,7 +60,7 @@ public class Angle implements PhysicalQuantity<AngleUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Angle createNewWithValue(double value) {
-        return Angle.of(value, unit);
+        return Angle.of(value, unitType);
     }
 
     // Convert to target unit
@@ -87,23 +86,18 @@ public class Angle implements PhysicalQuantity<AngleUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Angle inputQuantity = (Angle) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Angle{" + value + " " + unit.getSymbol() + '}';
-    }
-
-    @Override
-    public String toFormattedString(int relevantDigits) {
-        String separator = unit == AngleUnits.DEGREES ? "" : " ";
-        return ValueFormatter.formatDoubleToRelevantDigits(value, relevantDigits) + separator + unit.getSymbol();
+        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
+        return "Angle{" + value + separator + unitType.getSymbol() + '}';
     }
 
 }

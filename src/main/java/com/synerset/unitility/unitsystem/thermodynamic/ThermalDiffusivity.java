@@ -8,12 +8,12 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
 
     private final double value;
     private final double baseValue;
-    private final ThermalDiffusivityUnits unit;
+    private final ThermalDiffusivityUnits unitType;
 
-    public ThermalDiffusivity(double value, ThermalDiffusivityUnits unit) {
+    public ThermalDiffusivity(double value, ThermalDiffusivityUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -40,19 +40,19 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
     }
 
     @Override
-    public ThermalDiffusivityUnits getUnit() {
-        return unit;
+    public ThermalDiffusivityUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public ThermalDiffusivity toBaseUnit() {
-        double valueInSquareMeterPerSecond = unit.toValueInBaseUnit(value);
+        double valueInSquareMeterPerSecond = unitType.toValueInBaseUnit(value);
         return ThermalDiffusivity.of(valueInSquareMeterPerSecond, ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND);
     }
 
     @Override
     public ThermalDiffusivity toUnit(ThermalDiffusivityUnits targetUnit) {
-        double valueInSquareMeterPerSecond = unit.toValueInBaseUnit(value);
+        double valueInSquareMeterPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInSquareMeterPerSecond);
         return ThermalDiffusivity.of(valueInTargetUnit, targetUnit);
     }
@@ -60,7 +60,7 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
     @Override
     @SuppressWarnings("unchecked")
     public ThermalDiffusivity createNewWithValue(double value) {
-        return ThermalDiffusivity.of(value, unit);
+        return ThermalDiffusivity.of(value, unitType);
     }
 
     // Convert to target unit
@@ -86,17 +86,17 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ThermalDiffusivity inputQuantity = (ThermalDiffusivity) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "ThermalDiffusivity{" + value + " " + unit.getSymbol() + '}';
+        return "ThermalDiffusivity{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

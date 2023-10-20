@@ -10,12 +10,12 @@ public class Pressure implements PhysicalQuantity<PressureUnits> {
     public static final Pressure TECHNICAL_ATMOSPHERE = Pressure.ofPascal(98_067);
     private final double value;
     private final double baseValue;
-    private final PressureUnits unit;
+    private final PressureUnits unitType;
 
-    public Pressure(double value, PressureUnits unit) {
+    public Pressure(double value, PressureUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -62,19 +62,19 @@ public class Pressure implements PhysicalQuantity<PressureUnits> {
     }
 
     @Override
-    public PressureUnits getUnit() {
-        return unit;
+    public PressureUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Pressure toBaseUnit() {
-        double valueInPascal = unit.toValueInBaseUnit(value);
+        double valueInPascal = unitType.toValueInBaseUnit(value);
         return Pressure.of(valueInPascal, PressureUnits.PASCAL);
     }
 
     @Override
     public Pressure toUnit(PressureUnits targetUnit) {
-        double valueInPascal = unit.toValueInBaseUnit(value);
+        double valueInPascal = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascal);
         return Pressure.of(valueInTargetUnit, targetUnit);
     }
@@ -82,7 +82,7 @@ public class Pressure implements PhysicalQuantity<PressureUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Pressure createNewWithValue(double value) {
-        return Pressure.of(value, unit);
+        return Pressure.of(value, unitType);
     }
 
     // Convert to target unit
@@ -148,17 +148,17 @@ public class Pressure implements PhysicalQuantity<PressureUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pressure inputQuantity = (Pressure) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Pressure{" + value + " " + unit.getSymbol() + '}';
+        return "Pressure{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }
