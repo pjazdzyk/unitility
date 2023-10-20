@@ -8,11 +8,11 @@ public class Volume implements PhysicalQuantity<VolumeUnits> {
     public static final Volume PHYSICAL_MIN_LIMIT = Volume.ofCubicMeters(0);
     private final double value;
     private final double baseValue;
-    private final VolumeUnits unit;
+    private final VolumeUnits unitType;
 
     public Volume(double value, VolumeUnits unit) {
         this.value = value;
-        this.unit = unit;
+        this.unitType = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
     }
 
@@ -64,19 +64,19 @@ public class Volume implements PhysicalQuantity<VolumeUnits> {
     }
 
     @Override
-    public VolumeUnits getUnit() {
-        return unit;
+    public VolumeUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Volume toBaseUnit() {
-        double valueInCubicMeter = unit.toValueInBaseUnit(value);
+        double valueInCubicMeter = unitType.toValueInBaseUnit(value);
         return Volume.of(valueInCubicMeter, VolumeUnits.CUBIC_METER);
     }
 
     @Override
     public Volume toUnit(VolumeUnits targetUnit) {
-        double valueInCubicMeter = unit.toValueInBaseUnit(value);
+        double valueInCubicMeter = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInCubicMeter);
         return Volume.of(valueInTargetUnit, targetUnit);
     }
@@ -84,7 +84,7 @@ public class Volume implements PhysicalQuantity<VolumeUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Volume createNewWithValue(double value) {
-        return Volume.of(value, unit);
+        return Volume.of(value, unitType);
     }
 
     // Convert to target unit
@@ -158,17 +158,17 @@ public class Volume implements PhysicalQuantity<VolumeUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Volume inputQuantity = (Volume) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Volume{" + value + " " + unit.getSymbol() + '}';
+        return "Volume{" + value + " " + unitType.getSymbol() + '}';
     }
 }
 

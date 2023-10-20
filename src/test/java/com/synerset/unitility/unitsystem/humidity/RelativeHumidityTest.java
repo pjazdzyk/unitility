@@ -34,7 +34,7 @@ class RelativeHumidityTest {
 
         // When
         RelativeHumidity relativeHumidityInDecimal = RelativeHumidity.ofDecimal(0.1);
-        RelativeHumidityUnits actualBaseUnit = relativeHumidityInDecimal.getUnit().getBaseUnit();
+        RelativeHumidityUnits actualBaseUnit = relativeHumidityInDecimal.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

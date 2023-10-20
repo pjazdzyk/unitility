@@ -11,9 +11,12 @@
 
     <name>Unitility</name>
     <description>The Physics Units of Measure Library for Java.
-        Unitility provides value objects that combine numerical values with their corresponding units, allowing developers
-        to easily perform accurate and efficient conversions between different units. With a wide range of value objects that represent commonly
-        used physical quantities, this solution is built using plain Java for optimal speed and lightweight functionality.
+        Unitility provides value objects that combine numerical values with their corresponding units, allowing
+        developers
+        to easily perform accurate and efficient conversions between different units. With a wide range of value objects
+        that represent commonly
+        used physical quantities, this solution is built using plain Java for optimal speed and lightweight
+        functionality.
     </description>
     <url>https://github.com/pjazdzyk/unitility</url>
 

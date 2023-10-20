@@ -9,12 +9,12 @@ public class Area implements PhysicalQuantity<AreaUnits> {
     public static final Area PHYSICAL_MIN_LIMIT = Area.ofSquareMeters(0);
     private final double value;
     private final double baseValue;
-    private final AreaUnits unit;
+    private final AreaUnits unitType;
 
-    public Area(double value, AreaUnits unit) {
+    public Area(double value, AreaUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -77,19 +77,19 @@ public class Area implements PhysicalQuantity<AreaUnits> {
     }
 
     @Override
-    public AreaUnits getUnit() {
-        return unit;
+    public AreaUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Area toBaseUnit() {
-        double valueInSquareMeters = unit.toValueInBaseUnit(value);
+        double valueInSquareMeters = unitType.toValueInBaseUnit(value);
         return Area.of(valueInSquareMeters, AreaUnits.SQUARE_METER);
     }
 
     @Override
     public Area toUnit(AreaUnits targetUnit) {
-        double valueInSquareMeters = unit.toValueInBaseUnit(value);
+        double valueInSquareMeters = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInSquareMeters);
         return Area.of(valueInTargetUnit, targetUnit);
     }
@@ -97,7 +97,7 @@ public class Area implements PhysicalQuantity<AreaUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Area createNewWithValue(double value) {
-        return Area.of(value, unit);
+        return Area.of(value, unitType);
     }
 
     // Convert to target unit
@@ -195,17 +195,17 @@ public class Area implements PhysicalQuantity<AreaUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Area inputQuantity = (Area) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Area{" + value + " " + unit.getSymbol() + '}';
+        return "Area{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

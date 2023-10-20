@@ -72,7 +72,7 @@ class MassFlowTest {
 
         // When
         MassFlow massFlowInLbPerSec = MassFlow.ofPoundsPerSecond(10);
-        MassFlowUnits actualBaseUnit = massFlowInLbPerSec.getUnit().getBaseUnit();
+        MassFlowUnits actualBaseUnit = massFlowInLbPerSec.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

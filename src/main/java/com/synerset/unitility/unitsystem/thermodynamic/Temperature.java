@@ -9,12 +9,12 @@ public class Temperature implements PhysicalQuantity<TemperatureUnits> {
     public static final Temperature PHYSICAL_MIN_LIMIT = Temperature.ofKelvins(0);
     private final double value;
     private final double baseValue;
-    private final TemperatureUnits unit;
+    private final TemperatureUnits unitType;
 
-    public Temperature(double value, TemperatureUnits unit) {
+    public Temperature(double value, TemperatureUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -45,19 +45,19 @@ public class Temperature implements PhysicalQuantity<TemperatureUnits> {
     }
 
     @Override
-    public TemperatureUnits getUnit() {
-        return unit;
+    public TemperatureUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Temperature toBaseUnit() {
-        double valueInKelvin = unit.toValueInBaseUnit(value);
+        double valueInKelvin = unitType.toValueInBaseUnit(value);
         return Temperature.of(valueInKelvin, TemperatureUnits.KELVIN);
     }
 
     @Override
     public Temperature toUnit(TemperatureUnits targetUnit) {
-        double valueInKelvin = unit.toValueInBaseUnit(value);
+        double valueInKelvin = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKelvin);
         return Temperature.of(valueInTargetUnit, targetUnit);
     }
@@ -65,7 +65,7 @@ public class Temperature implements PhysicalQuantity<TemperatureUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Temperature createNewWithValue(double value) {
-        return Temperature.of(value, unit);
+        return Temperature.of(value, unitType);
     }
 
     // Convert to target unit
@@ -99,18 +99,19 @@ public class Temperature implements PhysicalQuantity<TemperatureUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Temperature inputQuantity = (Temperature) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(),
-                inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(),
+                inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Temperature{" + value + " " + unit.getSymbol() + '}';
+        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
+        return "Temperature{" + value + separator + unitType.getSymbol() + '}';
     }
 
 }

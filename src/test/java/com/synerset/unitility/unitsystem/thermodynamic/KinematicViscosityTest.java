@@ -35,7 +35,7 @@ class KinematicViscosityTest {
 
         // When
         KinematicViscosity kinematicViscosityInFt2PerSec = KinematicViscosity.ofSquareFootPerSecond(10);
-        KinematicViscosityUnits actualBaseUnit = kinematicViscosityInFt2PerSec.getUnit().getBaseUnit();
+        KinematicViscosityUnits actualBaseUnit = kinematicViscosityInFt2PerSec.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

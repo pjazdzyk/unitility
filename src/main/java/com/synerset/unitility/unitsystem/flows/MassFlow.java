@@ -8,12 +8,12 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnits> {
 
     private final double value;
     private final double baseValue;
-    private final MassFlowUnits unit;
+    private final MassFlowUnits unitType;
 
-    public MassFlow(double value, MassFlowUnits unit) {
+    public MassFlow(double value, MassFlowUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -48,19 +48,19 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnits> {
     }
 
     @Override
-    public MassFlowUnits getUnit() {
-        return unit;
+    public MassFlowUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public MassFlow toBaseUnit() {
-        double valueInKilogramsPerSecond = unit.toValueInBaseUnit(value);
+        double valueInKilogramsPerSecond = unitType.toValueInBaseUnit(value);
         return MassFlow.of(valueInKilogramsPerSecond, MassFlowUnits.KILOGRAM_PER_SECOND);
     }
 
     @Override
     public MassFlow toUnit(MassFlowUnits targetUnit) {
-        double valueInKilogramsPerSecond = unit.toValueInBaseUnit(value);
+        double valueInKilogramsPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogramsPerSecond);
         return MassFlow.of(valueInTargetUnit, targetUnit);
     }
@@ -68,7 +68,7 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public MassFlow createNewWithValue(double value) {
-        return MassFlow.of(value, unit);
+        return MassFlow.of(value, unitType);
     }
 
     // Convert to target unit
@@ -110,17 +110,17 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MassFlow inputQuantity = (MassFlow) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "MassFlow{" + value + " " + unit.getSymbol() + '}';
+        return "MassFlow{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

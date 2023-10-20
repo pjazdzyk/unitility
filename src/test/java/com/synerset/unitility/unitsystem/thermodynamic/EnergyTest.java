@@ -160,7 +160,7 @@ class EnergyTest {
 
         // When
         Energy energyInJoule = Energy.ofJoules(10);
-        EnergyUnits actualBaseUnit = energyInJoule.getUnit().getBaseUnit();
+        EnergyUnits actualBaseUnit = energyInJoule.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

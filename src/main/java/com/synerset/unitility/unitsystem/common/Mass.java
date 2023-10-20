@@ -9,12 +9,12 @@ public class Mass implements PhysicalQuantity<MassUnits> {
     public static final Mass PHYSICAL_MIN_LIMIT = Mass.ofKilograms(0);
     private final double value;
     private final double baseValue;
-    private final MassUnits unit;
+    private final MassUnits unitType;
 
-    public Mass(double value, MassUnits unit) {
+    public Mass(double value, MassUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -57,19 +57,19 @@ public class Mass implements PhysicalQuantity<MassUnits> {
     }
 
     @Override
-    public MassUnits getUnit() {
-        return unit;
+    public MassUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Mass toBaseUnit() {
-        double valueInKilogram = unit.toValueInBaseUnit(value);
+        double valueInKilogram = unitType.toValueInBaseUnit(value);
         return Mass.of(valueInKilogram, MassUnits.KILOGRAM);
     }
 
     @Override
     public Mass toUnit(MassUnits targetUnit) {
-        double valueInKilogram = unit.toValueInBaseUnit(value);
+        double valueInKilogram = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogram);
         return Mass.of(valueInTargetUnit, targetUnit);
     }
@@ -77,7 +77,7 @@ public class Mass implements PhysicalQuantity<MassUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Mass createNewWithValue(double value) {
-        return Mass.of(value, unit);
+        return Mass.of(value, unitType);
     }
 
     // Convert to target unit
@@ -135,17 +135,17 @@ public class Mass implements PhysicalQuantity<MassUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mass inputQuantity = (Mass) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Mass{" + value + " " + unit.getSymbol() + '}';
+        return "Mass{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

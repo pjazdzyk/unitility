@@ -107,7 +107,7 @@ class VelocityTest {
         Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
 
         // When
-        Velocity actualInKnots = initialVelocity.toUnit(VelocityUnits.KNOTS);
+        Velocity actualInKnots = initialVelocity.toUnit(VelocityUnits.KNOT);
         double actualInKnotsVal = initialVelocity.getInKnots();
         Velocity actualInMetersPerSecond = actualInKnots.toBaseUnit();
 
@@ -144,7 +144,7 @@ class VelocityTest {
 
         // When
         Velocity velocityInMilesPerHour = Velocity.ofMilesPerHour(2);
-        VelocityUnits actualBaseUnit = velocityInMilesPerHour.getUnit().getBaseUnit();
+        VelocityUnits actualBaseUnit = velocityInMilesPerHour.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

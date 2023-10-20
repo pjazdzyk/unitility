@@ -8,12 +8,12 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
 
     private final double value;
     private final double baseValue;
-    private final VelocityUnits unit;
+    private final VelocityUnits unitType;
 
-    public Velocity(double value, VelocityUnits unit) {
+    public Velocity(double value, VelocityUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -46,7 +46,7 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
     }
 
     public static Velocity ofKnots(double value) {
-        return new Velocity(value, VelocityUnits.KNOTS);
+        return new Velocity(value, VelocityUnits.KNOT);
     }
 
     public static Velocity ofMach(double value) {
@@ -64,19 +64,19 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
     }
 
     @Override
-    public VelocityUnits getUnit() {
-        return unit;
+    public VelocityUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Velocity toBaseUnit() {
-        double valueInMetersPerSecond = unit.toValueInBaseUnit(value);
+        double valueInMetersPerSecond = unitType.toValueInBaseUnit(value);
         return Velocity.of(valueInMetersPerSecond, VelocityUnits.METER_PER_SECOND);
     }
 
     @Override
     public Velocity toUnit(VelocityUnits targetUnit) {
-        double valueInMetersPerSecond = unit.toValueInBaseUnit(value);
+        double valueInMetersPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInMetersPerSecond);
         return Velocity.of(valueInTargetUnit, targetUnit);
     }
@@ -84,7 +84,7 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Velocity createNewWithValue(double value) {
-        return Velocity.of(value, unit);
+        return Velocity.of(value, unitType);
     }
 
     // Convert to target unit
@@ -113,7 +113,7 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
     }
 
     public Velocity toKnots() {
-        return toUnit(VelocityUnits.KNOTS);
+        return toUnit(VelocityUnits.KNOT);
     }
 
     public Velocity toMach() {
@@ -146,7 +146,7 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
     }
 
     public double getInKnots() {
-        return getIn(VelocityUnits.KNOTS);
+        return getIn(VelocityUnits.KNOT);
     }
 
     public double getInMach() {
@@ -158,17 +158,17 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Velocity inputQuantity = (Velocity) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Velocity{" + value + " " + unit.getSymbol() + '}';
+        return "Velocity{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

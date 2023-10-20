@@ -54,7 +54,7 @@ class TemperatureTest {
 
         // When
         Temperature specificHeatInFahrenheit = Temperature.ofFahrenheit(10);
-        TemperatureUnits actualBaseUnit = specificHeatInFahrenheit.getUnit().getBaseUnit();
+        TemperatureUnits actualBaseUnit = specificHeatInFahrenheit.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

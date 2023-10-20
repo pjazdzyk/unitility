@@ -7,12 +7,12 @@ import java.util.Objects;
 public class Power implements PhysicalQuantity<PowerUnits> {
     private final double value;
     private final double baseValue;
-    private final PowerUnits unit;
+    private final PowerUnits unitType;
 
-    public Power(double value, PowerUnits unit) {
+    public Power(double value, PowerUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -51,19 +51,19 @@ public class Power implements PhysicalQuantity<PowerUnits> {
     }
 
     @Override
-    public PowerUnits getUnit() {
-        return unit;
+    public PowerUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public Power toBaseUnit() {
-        double valueInWatts = unit.toValueInBaseUnit(value);
+        double valueInWatts = unitType.toValueInBaseUnit(value);
         return Power.of(valueInWatts, PowerUnits.WATT);
     }
 
     @Override
     public Power toUnit(PowerUnits targetUnit) {
-        double valueInWatts = unit.toValueInBaseUnit(value);
+        double valueInWatts = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInWatts);
         return Power.of(valueInTargetUnit, targetUnit);
     }
@@ -71,7 +71,7 @@ public class Power implements PhysicalQuantity<PowerUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public Power createNewWithValue(double value) {
-        return Power.of(value, unit);
+        return Power.of(value, unitType);
     }
 
     // Convert to target unit
@@ -121,16 +121,16 @@ public class Power implements PhysicalQuantity<PowerUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Power inputQuantity = (Power) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "Power{" + value + " " + unit.getSymbol() + '}';
+        return "Power{" + value + " " + unitType.getSymbol() + '}';
     }
 }

@@ -296,8 +296,32 @@ class PhysicalQuantityTest {
         String formattedString = temperature.toFormattedString("t", "da", "| ");
 
         // Then
-        assertThat(simpleFormattedString).isEqualTo("t = 25.1 °C");
-        assertThat(formattedString).isEqualTo("t_da = 25.1 °C | ");
+        assertThat(simpleFormattedString).isEqualTo("t = 25.1°C");
+        assertThat(formattedString).isEqualTo("t_da = 25.1°C | ");
+    }
+
+    @Test
+    @DisplayName("create instance of class from symbol")
+    void shouldCreateInstanceOfClassFromSymbol() {
+        // Given
+        double value = 20.1;
+        // When
+        Temperature actualTemperature = PhysicalQuantity.createParsingFromSymbol(Temperature.class, value, "f");
+
+        // Then
+        assertThat(actualTemperature).isEqualTo(Temperature.ofFahrenheit(value));
+    }
+
+    @Test
+    @DisplayName("create instance of class from unit")
+    void shouldCreateInstanceOfClassFromUnit() {
+        // Given
+        double value = 20.1;
+        // When
+        Temperature actualTemperature = PhysicalQuantity.createParsingFromUnit(Temperature.class, value, "fahrenheit");
+
+        // Then
+        assertThat(actualTemperature).isEqualTo(Temperature.ofFahrenheit(value));
     }
 
 }

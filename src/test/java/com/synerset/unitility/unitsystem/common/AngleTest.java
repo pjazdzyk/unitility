@@ -34,7 +34,7 @@ class AngleTest {
 
         // When
         Angle angleInRadians = Angle.ofRadians(10);
-        AngleUnits actualBaseUnit = angleInRadians.getUnit().getBaseUnit();
+        AngleUnits actualBaseUnit = angleInRadians.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

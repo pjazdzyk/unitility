@@ -54,7 +54,7 @@ class SpecificHeatTest {
 
         // When
         SpecificHeat specificHeatInBTUPerLbF = SpecificHeat.ofBTUPerPoundFahrenheit(0.1);
-        SpecificHeatUnits actualBaseUnit = specificHeatInBTUPerLbF.getUnit().getBaseUnit();
+        SpecificHeatUnits actualBaseUnit = specificHeatInBTUPerLbF.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

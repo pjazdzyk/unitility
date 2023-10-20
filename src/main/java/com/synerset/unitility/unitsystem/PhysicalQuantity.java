@@ -1,6 +1,7 @@
 package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
@@ -28,7 +29,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return The unit associated with the physical quantity.
      */
-    U getUnit();
+    U getUnitType();
 
     /**
      * Convert the physical quantity to its base unit.
@@ -59,7 +60,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return The symbol of the unit associated with the physical quantity.
      */
     default String getUnitSymbol() {
-        return getUnit().getSymbol();
+        return getUnitType().getSymbol();
     }
 
     /**
@@ -147,7 +148,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         if (quantity == null || getClass() != quantity.getClass()) return false;
         PhysicalQuantity<U> thisInBaseUnit = this.toBaseUnit();
         PhysicalQuantity<U> inputInBaseUnit = quantity.toBaseUnit();
-        if (thisInBaseUnit.getUnit() != inputInBaseUnit.getUnit()) return false;
+        if (thisInBaseUnit.getUnitType() != inputInBaseUnit.getUnitType()) return false;
         double thisValue = thisInBaseUnit.getValue();
         double inputValue = inputInBaseUnit.getValue();
         return Math.abs(thisValue - inputValue) < epsilon;
@@ -219,7 +220,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A new physical quantity with the added value.
      */
     default <Q extends PhysicalQuantity<U>> Q add(PhysicalQuantity<U> inputQuantity) {
-        U sourceUnit = this.getUnit();
+        U sourceUnit = this.getUnitType();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() + inputInSourceUnits.getValue();
         return createNewWithValue(newValue);
@@ -243,7 +244,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A new physical quantity with the subtracted value.
      */
     default <Q extends PhysicalQuantity<U>> Q subtract(Q inputQuantity) {
-        U sourceUnit = this.getUnit();
+        U sourceUnit = this.getUnitType();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() - inputInSourceUnits.getValue();
         return createNewWithValue(newValue);
@@ -321,7 +322,8 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A formatted string representation of the value and unit symbol.
      */
     default String toFormattedString(int relevantDigits) {
-        return ValueFormatter.formatDoubleToRelevantDigits(getValue(), relevantDigits) + " " + getUnitSymbol();
+        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
+        return ValueFormatter.formatDoubleToRelevantDigits(getValue(), relevantDigits) + separator + getUnitSymbol();
     }
 
     /**
@@ -379,13 +381,61 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
             return 0;
         }
         // Convert both quantities to the same unit for comparison
-        PhysicalQuantity<U> thisInOtherUnit = this.toUnit(other.getUnit());
+        PhysicalQuantity<U> thisInOtherUnit = this.toUnit(other.getUnitType());
 
         // Compare the values of the two quantities
         double thisValue = thisInOtherUnit.getValue();
         double otherValue = other.getValue();
 
         return Double.compare(thisValue, otherValue);
+    }
+
+    /**
+     * Creates a PhysicalQuantity of a specified type from a symbol representation of a unit and a numeric value.<p>
+     * Intended to be used for deserializers.
+     * For example, "oC" is considered a symbol of Temperature in Celsius degrees.
+     * It can be provided in various ways and still will be resolved to the correct quantity, for i.e.: "C", "c",
+     * "degC", "°C" will all be interpreted in the same way, as degree in Celsius. <p>
+     * Throws {@link UnitSystemParseException} upon parsing failure or {@link UnitSystemArgumentException} in case of
+     * invalid arguments.
+     *
+     * @param clazz          The class type of the PhysicalQuantity.
+     * @param value          The numeric value of the quantity.
+     * @param symbolAsString The symbol representation of the quantity.
+     * @param <U>            The unit type associated with the PhysicalQuantity.
+     * @param <Q>            The type of the PhysicalQuantity.
+     * @return The newly created PhysicalQuantity.
+     */
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromSymbol(Class<Q> clazz, double value,
+                                                                                     String symbolAsString) {
+        if (clazz == null) {
+            throw new UnitSystemArgumentException("Invalid argument. Class cannot be null.");
+        }
+        return PhysicalQuantityParsingFactory.createParsingFromSymbol(clazz, value, symbolAsString);
+    }
+
+    /**
+     * Creates a PhysicalQuantity of a specified type from a unit representation and a numeric value.
+     * Intended to be used for deserializers.
+     * For example, "METER_PER_SECOND" is considered a unit type of Velocity in m/s.
+     * It can be provided in various ways and still will be resolved to the correct quantity,
+     * for i.e.: "meter per second", "meter_per_second" will all be interpreted in the same way, as velocity in m/s.<p>
+     * Throws {@link UnitSystemParseException} upon parsing failure or {@link UnitSystemArgumentException} in case of
+     * invalid arguments.
+     *
+     * @param clazz        The class type of the PhysicalQuantity.
+     * @param value        The numeric value of the quantity.
+     * @param unitAsString The unit representation of the quantity.
+     * @param <U>          The unit type associated with the PhysicalQuantity.
+     * @param <Q>          The type of the PhysicalQuantity.
+     * @return The newly created PhysicalQuantity.
+     */
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromUnit(Class<Q> clazz, double value,
+                                                                                   String unitAsString) {
+        if (clazz == null) {
+            throw new UnitSystemArgumentException("Invalid argument. Class cannot be null.");
+        }
+        return PhysicalQuantityParsingFactory.createParsingFromUnit(clazz, value, unitAsString);
     }
 
 }

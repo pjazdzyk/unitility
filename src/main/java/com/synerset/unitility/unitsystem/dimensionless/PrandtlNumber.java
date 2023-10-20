@@ -7,12 +7,12 @@ import java.util.Objects;
 public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnits> {
     private final double value;
     private final double baseValue;
-    private final PrandtlNumberUnits unit;
+    private final PrandtlNumberUnits unitType;
 
     public PrandtlNumber(double value) {
         this.value = value;
-        this.unit = PrandtlNumberUnits.DIMENSIONLESS;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = PrandtlNumberUnits.DIMENSIONLESS;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -31,8 +31,8 @@ public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnits> {
     }
 
     @Override
-    public PrandtlNumberUnits getUnit() {
-        return unit;
+    public PrandtlNumberUnits getUnitType() {
+        return unitType;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnits> {
 
     @Override
     public String toString() {
-        return "PrandtlNumber{" + value + " " + unit.getSymbol() + '}';
+        return "PrandtlNumber{" + value + " " + unitType.getSymbol() + '}';
     }
 
     @Override

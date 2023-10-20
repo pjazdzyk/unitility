@@ -8,12 +8,12 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits>
 
     private final double value;
     private final double baseValue;
-    private final DynamicViscosityUnits unit;
+    private final DynamicViscosityUnits unitType;
 
-    public DynamicViscosity(double value, DynamicViscosityUnits unit) {
+    public DynamicViscosity(double value, DynamicViscosityUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -44,19 +44,19 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits>
     }
 
     @Override
-    public DynamicViscosityUnits getUnit() {
-        return unit;
+    public DynamicViscosityUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public DynamicViscosity toBaseUnit() {
-        double valueInPascalSecond = unit.toValueInBaseUnit(value);
+        double valueInPascalSecond = unitType.toValueInBaseUnit(value);
         return DynamicViscosity.of(valueInPascalSecond, DynamicViscosityUnits.PASCAL_SECOND);
     }
 
     @Override
     public DynamicViscosity toUnit(DynamicViscosityUnits targetUnit) {
-        double valueInPascalSecond = unit.toValueInBaseUnit(value);
+        double valueInPascalSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascalSecond);
         return DynamicViscosity.of(valueInTargetUnit, targetUnit);
     }
@@ -64,7 +64,7 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits>
     @Override
     @SuppressWarnings("unchecked")
     public DynamicViscosity createNewWithValue(double value) {
-        return DynamicViscosity.of(value, unit);
+        return DynamicViscosity.of(value, unitType);
     }
 
     // Convert to target unit
@@ -98,17 +98,17 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits>
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DynamicViscosity inputQuantity = (DynamicViscosity) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "DynamicViscosity{" + value + " " + unit.getSymbol() + '}';
+        return "DynamicViscosity{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }

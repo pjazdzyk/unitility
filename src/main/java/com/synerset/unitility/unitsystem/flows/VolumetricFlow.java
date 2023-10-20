@@ -8,12 +8,12 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
 
     private final double value;
     private final double baseValue;
-    private final VolumetricFlowUnits unit;
+    private final VolumetricFlowUnits unitType;
 
-    public VolumetricFlow(double value, VolumetricFlowUnits unit) {
+    public VolumetricFlow(double value, VolumetricFlowUnits unitType) {
         this.value = value;
-        this.unit = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
@@ -68,19 +68,19 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
     }
 
     @Override
-    public VolumetricFlowUnits getUnit() {
-        return unit;
+    public VolumetricFlowUnits getUnitType() {
+        return unitType;
     }
 
     @Override
     public VolumetricFlow toBaseUnit() {
-        double valueInCubicMetersPerSecond = unit.toValueInBaseUnit(value);
+        double valueInCubicMetersPerSecond = unitType.toValueInBaseUnit(value);
         return VolumetricFlow.of(valueInCubicMetersPerSecond, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
     }
 
     @Override
     public VolumetricFlow toUnit(VolumetricFlowUnits targetUnit) {
-        double valueInCubicMetersPerSecond = unit.toValueInBaseUnit(value);
+        double valueInCubicMetersPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInCubicMetersPerSecond);
         return VolumetricFlow.of(valueInTargetUnit, targetUnit);
     }
@@ -88,7 +88,7 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
     @Override
     @SuppressWarnings("unchecked")
     public VolumetricFlow createNewWithValue(double value) {
-        return VolumetricFlow.of(value, unit);
+        return VolumetricFlow.of(value, unitType);
     }
 
     // Convert to target unit
@@ -170,17 +170,17 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VolumetricFlow inputQuantity = (VolumetricFlow) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unit.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(baseValue, unit.getBaseUnit());
+        return Objects.hash(baseValue, unitType.getBaseUnit());
     }
 
     @Override
     public String toString() {
-        return "VolumetricFlow{" + value + " " + unit.getSymbol() + '}';
+        return "VolumetricFlow{" + value + " " + unitType.getSymbol() + '}';
     }
 
 }
