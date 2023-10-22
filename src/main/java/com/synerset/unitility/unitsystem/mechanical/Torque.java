@@ -22,6 +22,11 @@ public class Torque implements PhysicalQuantity<TorqueUnits> {
         return new Torque(value, unit);
     }
 
+    public static Torque of(double value, String unitSymbol) {
+        TorqueUnits resolvedUnit = TorqueUnits.fromSymbol(unitSymbol);
+        return new Torque(value, resolvedUnit);
+    }
+    
     public static Torque ofNewtonMeters(double value) {
         return new Torque(value, TorqueUnits.NEWTON_METER);
     }

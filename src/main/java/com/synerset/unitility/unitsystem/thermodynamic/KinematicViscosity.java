@@ -21,6 +21,11 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosityUn
         return new KinematicViscosity(value, unit);
     }
 
+    public static KinematicViscosity of(double value, String unitSymbol) {
+        KinematicViscosityUnits resolvedUnit = KinematicViscosityUnits.fromSymbol(unitSymbol);
+        return new KinematicViscosity(value, resolvedUnit);
+    }
+
     public static KinematicViscosity ofSquareMeterPerSecond(double value) {
         return new KinematicViscosity(value, KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
     }

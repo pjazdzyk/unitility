@@ -20,6 +20,11 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
         return new ThermalConductivity(value, unit);
     }
 
+    public static ThermalConductivity of(double value, String unitSymbol) {
+        ThermalConductivityUnits resolvedUnit = ThermalConductivityUnits.fromSymbol(unitSymbol);
+        return new ThermalConductivity(value, resolvedUnit);
+    }
+    
     public static ThermalConductivity ofWattsPerMeterKelvin(double value) {
         return new ThermalConductivity(value, ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
     }

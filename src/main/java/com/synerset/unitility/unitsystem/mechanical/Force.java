@@ -21,6 +21,11 @@ public class Force implements PhysicalQuantity<ForceUnits> {
         return new Force(value, unit);
     }
 
+    public static Force of(double value, String unitSymbol) {
+        ForceUnits resolvedUnit = ForceUnits.fromSymbol(unitSymbol);
+        return new Force(value, resolvedUnit);
+    }
+    
     public static Force ofNewtons(double value) {
         return new Force(value, ForceUnits.NEWTON);
     }

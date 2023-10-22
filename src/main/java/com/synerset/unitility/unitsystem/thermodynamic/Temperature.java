@@ -22,6 +22,11 @@ public class Temperature implements PhysicalQuantity<TemperatureUnits> {
         return new Temperature(value, unit);
     }
 
+    public static Temperature of(double value, String unitSymbol) {
+        TemperatureUnits resolvedUnit = TemperatureUnits.fromSymbol(unitSymbol);
+        return new Temperature(value, resolvedUnit);
+    }
+    
     public static Temperature ofKelvins(double value) {
         return new Temperature(value, TemperatureUnits.KELVIN);
     }

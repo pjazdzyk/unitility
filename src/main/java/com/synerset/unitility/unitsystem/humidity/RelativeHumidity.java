@@ -23,6 +23,11 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits>
         return new RelativeHumidity(value, unit);
     }
 
+    public static RelativeHumidity of(double value, String unitSymbol) {
+        RelativeHumidityUnits resolvedUnit = RelativeHumidityUnits.fromSymbol(unitSymbol);
+        return new RelativeHumidity(value, resolvedUnit);
+    }
+    
     public static RelativeHumidity ofPercentage(double value) {
         return new RelativeHumidity(value, RelativeHumidityUnits.PERCENT);
     }

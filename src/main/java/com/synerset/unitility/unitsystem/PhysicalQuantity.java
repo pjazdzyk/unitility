@@ -399,19 +399,19 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * Throws {@link UnitSystemParseException} upon parsing failure or {@link UnitSystemArgumentException} in case of
      * invalid arguments.
      *
-     * @param clazz          The class type of the PhysicalQuantity.
+     * @param targetClass    The class type of the PhysicalQuantity.
      * @param value          The numeric value of the quantity.
      * @param symbolAsString The symbol representation of the quantity.
      * @param <U>            The unit type associated with the PhysicalQuantity.
      * @param <Q>            The type of the PhysicalQuantity.
      * @return The newly created PhysicalQuantity.
      */
-    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromSymbol(Class<Q> clazz, double value,
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromSymbol(Class<Q> targetClass, double value,
                                                                                      String symbolAsString) {
-        if (clazz == null) {
+        if (targetClass == null) {
             throw new UnitSystemArgumentException("Invalid argument. Class cannot be null.");
         }
-        return PhysicalQuantityParsingFactory.createParsingFromSymbol(clazz, value, symbolAsString);
+        return PhysicalQuantityParsingFactory.createParsingFromSymbol(targetClass, value, symbolAsString);
     }
 
     /**
@@ -423,19 +423,19 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * Throws {@link UnitSystemParseException} upon parsing failure or {@link UnitSystemArgumentException} in case of
      * invalid arguments.
      *
-     * @param clazz        The class type of the PhysicalQuantity.
+     * @param targetClass  The class type of the PhysicalQuantity.
      * @param value        The numeric value of the quantity.
      * @param unitAsString The unit representation of the quantity.
      * @param <U>          The unit type associated with the PhysicalQuantity.
      * @param <Q>          The type of the PhysicalQuantity.
      * @return The newly created PhysicalQuantity.
      */
-    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromUnit(Class<Q> clazz, double value,
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromUnit(Class<Q> targetClass, double value,
                                                                                    String unitAsString) {
-        if (clazz == null) {
-            throw new UnitSystemArgumentException("Invalid argument. Class cannot be null.");
+        if (targetClass == null) {
+            throw new UnitSystemArgumentException("Invalid argument. Target class cannot be null.");
         }
-        return PhysicalQuantityParsingFactory.createParsingFromUnit(clazz, value, unitAsString);
+        return PhysicalQuantityParsingFactory.createParsingFromUnit(targetClass, value, unitAsString);
     }
 
 }

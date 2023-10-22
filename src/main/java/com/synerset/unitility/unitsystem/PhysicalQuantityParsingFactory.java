@@ -31,94 +31,66 @@ class PhysicalQuantityParsingFactory {
         symbolCreatorsByClassRegistry = new ConcurrentHashMap<>();
         unitCreatorsByClassRegistry = new ConcurrentHashMap<>();
         // Common
-        registerClass(Angle.class,
-                (value, symbol) -> Angle.of(value, AngleUnits.fromSymbol(symbol)),
-                (value, unit) -> Angle.of(value, AngleUnits.valueOf(formatUnit(unit))));
-        registerClass(Area.class,
-                (value, symbol) -> Area.of(value, AreaUnits.fromSymbol(symbol)),
+        registerClass(Angle.class, Angle::of,
+                (value, unit) -> Angle.of(value, AngleUnits.valueOf(unit)));
+        registerClass(Area.class, Area::of,
                 (value, unit) -> Area.of(value, AreaUnits.valueOf(formatUnit(unit))));
-        registerClass(Distance.class,
-                (value, symbol) -> Distance.of(value, DistanceUnits.fromSymbol(symbol)),
+        registerClass(Distance.class, Distance::of,
                 (value, unit) -> Distance.of(value, DistanceUnits.valueOf(formatUnit(unit))));
-        registerClass(Mass.class,
-                (value, symbol) -> Mass.of(value, MassUnits.fromSymbol(symbol)),
+        registerClass(Mass.class, Mass::of,
                 (value, unit) -> Mass.of(value, MassUnits.valueOf(formatUnit(unit))));
-        registerClass(Velocity.class,
-                (value, symbol) -> Velocity.of(value, VelocityUnits.fromSymbol(symbol)),
+        registerClass(Velocity.class, Velocity::of,
                 (value, unit) -> Velocity.of(value, VelocityUnits.valueOf(formatUnit(unit))));
-        registerClass(Volume.class,
-                (value, symbol) -> Volume.of(value, VolumeUnits.fromSymbol(symbol)),
+        registerClass(Volume.class, Volume::of,
                 (value, unit) -> Volume.of(value, VolumeUnits.valueOf(formatUnit(unit))));
         // Dimensionless
         registerClass(BypassFactor.class,
-                (value, symbol) -> BypassFactor.of(value),
-                (value, unit) -> BypassFactor.of(value));
+                (value, symbol) -> BypassFactor.of(value), (value, unit) -> BypassFactor.of(value));
         registerClass(GrashofNumber.class,
-                (value, symbol) -> GrashofNumber.of(value),
-                (value, unit) -> GrashofNumber.of(value));
+                (value, symbol) -> GrashofNumber.of(value), (value, unit) -> GrashofNumber.of(value));
         registerClass(PrandtlNumber.class,
-                (value, symbol) -> PrandtlNumber.of(value),
-                (value, unit) -> PrandtlNumber.of(value));
+                (value, symbol) -> PrandtlNumber.of(value), (value, unit) -> PrandtlNumber.of(value));
         registerClass(ReynoldsNumber.class,
-                (value, symbol) -> ReynoldsNumber.of(value),
-                (value, unit) -> ReynoldsNumber.of(value));
+                (value, symbol) -> ReynoldsNumber.of(value), (value, unit) -> ReynoldsNumber.of(value));
         // Flows
-        registerClass(MassFlow.class,
-                (value, symbol) -> MassFlow.of(value, MassFlowUnits.fromSymbol(symbol)),
+        registerClass(MassFlow.class, MassFlow::of,
                 (value, unit) -> MassFlow.of(value, MassFlowUnits.valueOf(formatUnit(unit))));
-        registerClass(VolumetricFlow.class,
-                (value, symbol) -> VolumetricFlow.of(value, VolumetricFlowUnits.fromSymbol(symbol)),
+        registerClass(VolumetricFlow.class, VolumetricFlow::of,
                 (value, unit) -> VolumetricFlow.of(value, VolumetricFlowUnits.valueOf(formatUnit(unit))));
         // Humidity
-        registerClass(HumidityRatio.class,
-                (value, symbol) -> HumidityRatio.of(value, HumidityRatioUnits.fromSymbol(symbol)),
+        registerClass(HumidityRatio.class, HumidityRatio::of,
                 (value, unit) -> HumidityRatio.of(value, HumidityRatioUnits.valueOf(formatUnit(unit))));
-        registerClass(RelativeHumidity.class,
-                (value, symbol) -> RelativeHumidity.of(value, RelativeHumidityUnits.fromSymbol(symbol)),
+        registerClass(RelativeHumidity.class, RelativeHumidity::of,
                 (value, unit) -> RelativeHumidity.of(value, RelativeHumidityUnits.valueOf(formatUnit(unit))));
         // Mechanical
-        registerClass(Force.class,
-                (value, symbol) -> Force.of(value, ForceUnits.fromSymbol(symbol)),
+        registerClass(Force.class, Force::of,
                 (value, unit) -> Force.of(value, ForceUnits.valueOf(formatUnit(unit))));
-        registerClass(Momentum.class,
-                (value, symbol) -> Momentum.of(value, MomentumUnits.fromSymbol(symbol)),
+        registerClass(Momentum.class, Momentum::of,
                 (value, unit) -> Momentum.of(value, MomentumUnits.valueOf(formatUnit(unit))));
-        registerClass(Torque.class,
-                (value, symbol) -> Torque.of(value, TorqueUnits.fromSymbol(symbol)),
+        registerClass(Torque.class, Torque::of,
                 (value, unit) -> Torque.of(value, TorqueUnits.valueOf(formatUnit(unit))));
         // Thermodynamic
-        registerClass(Density.class,
-                (value, symbol) -> Density.of(value, DensityUnits.fromSymbol(symbol)),
+        registerClass(Density.class, Density::of,
                 (value, unit) -> Density.of(value, DensityUnits.valueOf(formatUnit(unit))));
-        registerClass(DynamicViscosity.class,
-                (value, symbol) -> DynamicViscosity.of(value, DynamicViscosityUnits.fromSymbol(symbol)),
+        registerClass(DynamicViscosity.class, DynamicViscosity::of,
                 (value, unit) -> DynamicViscosity.of(value, DynamicViscosityUnits.valueOf(formatUnit(unit))));
-        registerClass(Energy.class,
-                (value, symbol) -> Energy.of(value, EnergyUnits.fromSymbol(symbol)),
+        registerClass(Energy.class, Energy::of,
                 (value, unit) -> Energy.of(value, EnergyUnits.valueOf(formatUnit(unit))));
-        registerClass(KinematicViscosity.class,
-                (value, symbol) -> KinematicViscosity.of(value, KinematicViscosityUnits.fromSymbol(symbol)),
+        registerClass(KinematicViscosity.class, KinematicViscosity::of,
                 (value, unit) -> KinematicViscosity.of(value, KinematicViscosityUnits.valueOf(formatUnit(unit))));
-        registerClass(Power.class,
-                (value, symbol) -> Power.of(value, PowerUnits.fromSymbol(symbol)),
+        registerClass(Power.class, Power::of,
                 (value, unit) -> Power.of(value, PowerUnits.valueOf(formatUnit(unit))));
-        registerClass(Pressure.class,
-                (value, symbol) -> Pressure.of(value, PressureUnits.fromSymbol(symbol)),
+        registerClass(Pressure.class, Pressure::of,
                 (value, unit) -> Pressure.of(value, PressureUnits.valueOf(formatUnit(unit))));
-        registerClass(SpecificEnthalpy.class,
-                (value, symbol) -> SpecificEnthalpy.of(value, SpecificEnthalpyUnits.fromSymbol(symbol)),
+        registerClass(SpecificEnthalpy.class, SpecificEnthalpy::of,
                 (value, unit) -> SpecificEnthalpy.of(value, SpecificEnthalpyUnits.valueOf(formatUnit(unit))));
-        registerClass(SpecificHeat.class,
-                (value, symbol) -> SpecificHeat.of(value, SpecificHeatUnits.fromSymbol(symbol)),
+        registerClass(SpecificHeat.class, SpecificHeat::of,
                 (value, unit) -> SpecificHeat.of(value, SpecificHeatUnits.valueOf(formatUnit(unit))));
-        registerClass(Temperature.class,
-                (value, symbol) -> Temperature.of(value, TemperatureUnits.fromSymbol(symbol)),
+        registerClass(Temperature.class, Temperature::of,
                 (value, unit) -> Temperature.of(value, TemperatureUnits.valueOf(formatUnit(unit))));
-        registerClass(ThermalConductivity.class,
-                (value, symbol) -> ThermalConductivity.of(value, ThermalConductivityUnits.fromSymbol(symbol)),
+        registerClass(ThermalConductivity.class, ThermalConductivity::of,
                 (value, unit) -> ThermalConductivity.of(value, ThermalConductivityUnits.valueOf(formatUnit(unit))));
-        registerClass(ThermalDiffusivity.class,
-                (value, symbol) -> ThermalDiffusivity.of(value, ThermalDiffusivityUnits.fromSymbol(symbol)),
+        registerClass(ThermalDiffusivity.class, ThermalDiffusivity::of,
                 (value, unit) -> ThermalDiffusivity.of(value, ThermalDiffusivityUnits.valueOf(formatUnit(unit))));
     }
 

@@ -21,6 +21,11 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits>
         return new DynamicViscosity(value, unit);
     }
 
+    public static DynamicViscosity of(double value, String unitSymbol) {
+        DynamicViscosityUnits resolvedUnit = DynamicViscosityUnits.fromSymbol(unitSymbol);
+        return new DynamicViscosity(value, resolvedUnit);
+    }
+
     public static DynamicViscosity ofKiloGramPerMeterSecond(double value) {
         return new DynamicViscosity(value, DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND);
     }

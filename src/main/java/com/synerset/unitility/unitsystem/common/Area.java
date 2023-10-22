@@ -22,6 +22,11 @@ public class Area implements PhysicalQuantity<AreaUnits> {
         return new Area(value, unit);
     }
 
+    public static Area of(double value, String unitSymbol) {
+        AreaUnits resolvedUnit = AreaUnits.fromSymbol(unitSymbol);
+        return new Area(value, resolvedUnit);
+    }
+    
     public static Area ofSquareMeters(double value) {
         return new Area(value, AreaUnits.SQUARE_METER);
     }
