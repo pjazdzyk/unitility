@@ -21,6 +21,11 @@ public class Volume implements PhysicalQuantity<VolumeUnits> {
         return new Volume(value, unit);
     }
 
+    public static Volume of(double value, String unitSymbol) {
+        VolumeUnits resolvedUnit = VolumeUnits.fromSymbol(unitSymbol);
+        return new Volume(value, resolvedUnit);
+    }
+    
     public static Volume ofCubicMeters(double value) {
         return new Volume(value, VolumeUnits.CUBIC_METER);
     }

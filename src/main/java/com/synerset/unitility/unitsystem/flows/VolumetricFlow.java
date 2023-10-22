@@ -21,6 +21,11 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
         return new VolumetricFlow(value, unit);
     }
 
+    public static VolumetricFlow of(double value, String unitSymbol) {
+        VolumetricFlowUnits resolvedUnit = VolumetricFlowUnits.fromSymbol(unitSymbol);
+        return new VolumetricFlow(value, resolvedUnit);
+    }
+    
     public static VolumetricFlow ofCubicMetersPerSecond(double value) {
         return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
     }

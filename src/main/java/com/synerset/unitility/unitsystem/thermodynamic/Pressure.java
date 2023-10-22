@@ -23,6 +23,11 @@ public class Pressure implements PhysicalQuantity<PressureUnits> {
         return new Pressure(value, unit);
     }
 
+    public static Pressure of(double value, String unitSymbol) {
+        PressureUnits resolvedUnit = PressureUnits.fromSymbol(unitSymbol);
+        return new Pressure(value, resolvedUnit);
+    }
+    
     public static Pressure ofPascal(double value) {
         return new Pressure(value, PressureUnits.PASCAL);
     }

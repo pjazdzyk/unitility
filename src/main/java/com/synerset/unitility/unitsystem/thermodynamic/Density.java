@@ -22,6 +22,11 @@ public class Density implements PhysicalQuantity<DensityUnits> {
         return new Density(value, unit);
     }
 
+    public static Density of(double value, String unitSymbol) {
+        DensityUnits resolvedUnit = DensityUnits.fromSymbol(unitSymbol);
+        return new Density(value, resolvedUnit);
+    }
+    
     public static Density ofKilogramPerCubicMeter(double value) {
         return new Density(value, DensityUnits.KILOGRAM_PER_CUBIC_METER);
     }

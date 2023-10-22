@@ -20,6 +20,11 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
         return new SpecificHeat(value, unit);
     }
 
+    public static SpecificHeat of(double value, String unitSymbol) {
+        SpecificHeatUnits resolvedUnit = SpecificHeatUnits.fromSymbol(unitSymbol);
+        return new SpecificHeat(value, resolvedUnit);
+    }
+    
     public static SpecificHeat ofJoulePerKiloGramKelvin(double value) {
         return new SpecificHeat(value, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
     }

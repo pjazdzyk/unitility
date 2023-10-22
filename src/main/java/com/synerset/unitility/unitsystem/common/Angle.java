@@ -20,6 +20,10 @@ public class Angle implements PhysicalQuantity<AngleUnits> {
     public static Angle of(double value, AngleUnits unit) {
         return new Angle(value, unit);
     }
+    public static Angle of(double value, String unitSymbol) {
+        AngleUnits resolvedUnit = AngleUnits.fromSymbol(unitSymbol);
+        return new Angle(value, resolvedUnit);
+    }
 
     public static Angle ofRadians(double value) {
         return new Angle(value, AngleUnits.RADIANS);

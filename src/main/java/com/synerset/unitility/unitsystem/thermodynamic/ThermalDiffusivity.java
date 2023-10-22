@@ -21,6 +21,11 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
         return new ThermalDiffusivity(value, unit);
     }
 
+    public static ThermalDiffusivity of(double value, String unitSymbol) {
+        ThermalDiffusivityUnits resolvedUnit = ThermalDiffusivityUnits.fromSymbol(unitSymbol);
+        return new ThermalDiffusivity(value, resolvedUnit);
+    }
+    
     public static ThermalDiffusivity ofSquareMeterPerSecond(double value) {
         return new ThermalDiffusivity(value, ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND);
     }

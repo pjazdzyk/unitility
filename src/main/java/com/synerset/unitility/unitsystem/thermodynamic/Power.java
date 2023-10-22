@@ -20,6 +20,11 @@ public class Power implements PhysicalQuantity<PowerUnits> {
         return new Power(value, unit);
     }
 
+    public static Power of(double value, String unitSymbol) {
+        PowerUnits resolvedUnit = PowerUnits.fromSymbol(unitSymbol);
+        return new Power(value, resolvedUnit);
+    }
+    
     public static Power ofWatts(double value) {
         return new Power(value, PowerUnits.WATT);
     }

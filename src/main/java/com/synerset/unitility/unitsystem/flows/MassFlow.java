@@ -21,6 +21,11 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnits> {
         return new MassFlow(value, unit);
     }
 
+    public static MassFlow of(double value, String unitSymbol) {
+        MassFlowUnits resolvedUnit = MassFlowUnits.fromSymbol(unitSymbol);
+        return new MassFlow(value, resolvedUnit);
+    }
+    
     public static MassFlow ofKilogramsPerSecond(double value) {
         return new MassFlow(value, MassFlowUnits.KILOGRAM_PER_SECOND);
     }

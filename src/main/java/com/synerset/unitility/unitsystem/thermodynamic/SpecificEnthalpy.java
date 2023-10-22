@@ -20,6 +20,11 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits>
         return new SpecificEnthalpy(value, unit);
     }
 
+    public static SpecificEnthalpy of(double value, String unitSymbol) {
+        SpecificEnthalpyUnits resolvedUnit = SpecificEnthalpyUnits.fromSymbol(unitSymbol);
+        return new SpecificEnthalpy(value, resolvedUnit);
+    }
+    
     public static SpecificEnthalpy ofJoulePerKiloGram(double value) {
         return new SpecificEnthalpy(value, SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
     }

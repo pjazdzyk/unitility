@@ -22,6 +22,11 @@ public class Distance implements PhysicalQuantity<DistanceUnits> {
         return new Distance(value, unit);
     }
 
+    public static Distance of(double value, String unitSymbol) {
+        DistanceUnits resolvedUnit = DistanceUnits.fromSymbol(unitSymbol);
+        return new Distance(value, resolvedUnit);
+    }
+    
     public static Distance ofMeters(double value) {
         return new Distance(value, DistanceUnits.METER);
     }

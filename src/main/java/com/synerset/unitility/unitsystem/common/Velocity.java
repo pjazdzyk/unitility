@@ -21,6 +21,11 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
         return new Velocity(value, unit);
     }
 
+    public static Velocity of(double value, String unitSymbol) {
+        VelocityUnits resolvedUnit = VelocityUnits.fromSymbol(unitSymbol);
+        return new Velocity(value, resolvedUnit);
+    }
+    
     public static Velocity ofMetersPerSecond(double value) {
         return new Velocity(value, VelocityUnits.METER_PER_SECOND);
     }

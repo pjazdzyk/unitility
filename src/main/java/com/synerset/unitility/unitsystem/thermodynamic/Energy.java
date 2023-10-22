@@ -21,6 +21,11 @@ public class Energy implements PhysicalQuantity<EnergyUnits> {
         return new Energy(value, unit);
     }
 
+    public static Energy of(double value, String unitSymbol) {
+        EnergyUnits resolvedUnit = EnergyUnits.fromSymbol(unitSymbol);
+        return new Energy(value, resolvedUnit);
+    }
+    
     public static Energy ofJoules(double value) {
         return new Energy(value, EnergyUnits.JOULE);
     }

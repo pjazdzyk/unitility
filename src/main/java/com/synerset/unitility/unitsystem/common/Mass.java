@@ -22,6 +22,11 @@ public class Mass implements PhysicalQuantity<MassUnits> {
         return new Mass(value, unit);
     }
 
+    public static Mass of(double value, String unitSymbol) {
+        MassUnits resolvedUnit = MassUnits.fromSymbol(unitSymbol);
+        return new Mass(value, resolvedUnit);
+    }
+    
     public static Mass ofKilograms(double value) {
         return new Mass(value, MassUnits.KILOGRAM);
     }

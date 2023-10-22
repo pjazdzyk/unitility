@@ -22,6 +22,11 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnits> {
         return new HumidityRatio(value, unit);
     }
 
+    public static HumidityRatio of(double value, String unitSymbol) {
+        HumidityRatioUnits resolvedUnit = HumidityRatioUnits.fromSymbol(unitSymbol);
+        return new HumidityRatio(value, resolvedUnit);
+    }
+    
     public static HumidityRatio ofKilogramPerKilogram(double value) {
         return new HumidityRatio(value, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
     }

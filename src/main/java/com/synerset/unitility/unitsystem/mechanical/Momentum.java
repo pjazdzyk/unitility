@@ -21,6 +21,11 @@ public class Momentum implements PhysicalQuantity<MomentumUnits> {
         return new Momentum(value, unit);
     }
 
+    public static Momentum of(double value, String unitSymbol) {
+        MomentumUnits resolvedUnit = MomentumUnits.fromSymbol(unitSymbol);
+        return new Momentum(value, resolvedUnit);
+    }
+    
     public static Momentum ofKilogramMeterPerSecond(double value) {
         return new Momentum(value, MomentumUnits.KILOGRAM_METER_PER_SECOND);
     }
