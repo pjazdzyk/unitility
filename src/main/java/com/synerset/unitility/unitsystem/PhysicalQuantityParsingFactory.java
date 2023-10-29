@@ -97,18 +97,18 @@ class PhysicalQuantityParsingFactory {
     private PhysicalQuantityParsingFactory() {
     }
 
-    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromSymbol(Class<Q> clazz, double value,
+    // Json format converters
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromSymbol(Class<Q> targetClass, double value,
                                                                                      String symbolAsString) {
-        validateIfClassIsRegistered(clazz);
-        return clazz.cast(symbolCreatorsByClassRegistry.get(clazz).apply(value, symbolAsString));
+        validateIfClassIsRegistered(targetClass);
+        return targetClass.cast(symbolCreatorsByClassRegistry.get(targetClass).apply(value, symbolAsString));
     }
 
-    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromUnit(Class<Q> clazz, double value,
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromUnit(Class<Q> targetClass, double value,
                                                                                    String unitAsString) {
-        validateIfClassIsRegistered(clazz);
-        return clazz.cast(unitCreatorsByClassRegistry.get(clazz).apply(value, unitAsString));
+        validateIfClassIsRegistered(targetClass);
+        return targetClass.cast(unitCreatorsByClassRegistry.get(targetClass).apply(value, unitAsString));
     }
-
     private static String formatUnit(String unitAsString) {
         return unitAsString
                 .trim()
@@ -116,16 +116,16 @@ class PhysicalQuantityParsingFactory {
                 .toUpperCase();
     }
 
-    private static <U extends Unit, Q extends PhysicalQuantity<U>> void registerClass(Class<Q> clazz,
+    private static <U extends Unit, Q extends PhysicalQuantity<U>> void registerClass(Class<Q> targetClass,
                                                                                       BiFunction<Double, String, Q> symbolFunction,
                                                                                       BiFunction<Double, String, Q> unitFunction) {
-        symbolCreatorsByClassRegistry.put(clazz, symbolFunction);
-        unitCreatorsByClassRegistry.put(clazz, unitFunction);
+        symbolCreatorsByClassRegistry.put(targetClass, symbolFunction);
+        unitCreatorsByClassRegistry.put(targetClass, unitFunction);
     }
 
-    private static <U extends Unit, Q extends PhysicalQuantity<U>> void validateIfClassIsRegistered(Class<Q> clazz) {
-        if (!symbolCreatorsByClassRegistry.containsKey(clazz) || !unitCreatorsByClassRegistry.containsKey(clazz)) {
-            throw new UnitSystemArgumentException("Class not found in the registry: " + clazz.getSimpleName());
+    private static <U extends Unit, Q extends PhysicalQuantity<U>> void validateIfClassIsRegistered(Class<Q> targetClass) {
+        if (!symbolCreatorsByClassRegistry.containsKey(targetClass) || !unitCreatorsByClassRegistry.containsKey(targetClass)) {
+            throw new UnitSystemArgumentException("Class not found in the registry: " + targetClass.getSimpleName());
         }
     }
 
