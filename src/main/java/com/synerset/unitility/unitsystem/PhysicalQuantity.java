@@ -324,7 +324,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     default String toFormattedString(int relevantDigits) {
         String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
-        return ValueFormatter.formatDoubleToRelevantDigits(getValue(), relevantDigits) + separator + getUnitSymbol();
+        return ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits) + separator + getUnitSymbol();
     }
 
     /**
@@ -349,7 +349,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     }
 
     /**
-     * Converts the physical quantity to a engineering format where unit is placed in rectangular braces for i.e.: 20[°C].
+     * Converts the physical quantity to an engineering format where unit is placed in rectangular braces for i.e.: 20[°C].
      *
      * @return The value in canonical format.
      */
