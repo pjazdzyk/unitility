@@ -3,6 +3,7 @@ package com.synerset.unitility.unitsystem;
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.common.DistanceUnits;
+import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import com.synerset.unitility.unitsystem.thermodynamic.Pressure;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
@@ -286,27 +287,12 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("should output formatted string")
-    void shouldOutputFormattedString() {
-        // Given
-        Temperature temperature = Temperature.ofCelsius(25.1);
-
-        // When
-        String simpleFormattedString = temperature.toFormattedString("t");
-        String formattedString = temperature.toFormattedString("t", "da", "| ");
-
-        // Then
-        assertThat(simpleFormattedString).isEqualTo("t = 25.1°C");
-        assertThat(formattedString).isEqualTo("t_da = 25.1°C | ");
-    }
-
-    @Test
     @DisplayName("create instance of class from symbol")
     void shouldCreateInstanceOfClassFromSymbol() {
         // Given
         double value = 20.1;
         // When
-        Temperature actualTemperature = PhysicalQuantity.createParsingFromSymbol(Temperature.class, value, "f");
+        Temperature actualTemperature = PhysicalQuantity.createFromSymbol(Temperature.class, value, "f");
 
         // Then
         assertThat(actualTemperature).isEqualTo(Temperature.ofFahrenheit(value));
@@ -318,10 +304,41 @@ class PhysicalQuantityTest {
         // Given
         double value = 20.1;
         // When
-        Temperature actualTemperature = PhysicalQuantity.createParsingFromUnit(Temperature.class, value, "fahrenheit");
+        Temperature actualTemperature = PhysicalQuantity.createFromUnitName(Temperature.class, value, "fahrenheit");
 
         // Then
         assertThat(actualTemperature).isEqualTo(Temperature.ofFahrenheit(value));
+    }
+
+    @Test
+    @DisplayName("should return canonical string")
+    void shouldReturnCanonicalString() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20.1234567);
+        BypassFactor bypassFactor = BypassFactor.of(20.1234567);
+
+        // When
+        String actualCanonicalTemp = temperature.toEngineeringFormat();
+        String actualCanonicalBf = bypassFactor.toEngineeringFormat();
+
+        // Then
+        assertThat(actualCanonicalTemp).isEqualTo("20.1234567[°C]");
+        assertThat(actualCanonicalBf).isEqualTo("20.1234567");
+    }
+
+    @Test
+    @DisplayName("should convert to canonical format and vice versa")
+    void shouldConvertToCanonicalFormatAndViceVersa() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20.1234567);
+
+        // When
+        String actualCanonicalTemp = temperature.toEngineeringFormat();
+        Temperature actualTemperature = PhysicalQuantity.createFromEngineeringFormat(Temperature.class, actualCanonicalTemp);
+
+        // Then
+        assertThat(actualCanonicalTemp).isEqualTo("20.1234567[°C]");
+        assertThat(actualTemperature).isEqualTo(temperature);
     }
 
 }

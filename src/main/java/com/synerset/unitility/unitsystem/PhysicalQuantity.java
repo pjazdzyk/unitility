@@ -2,13 +2,14 @@ package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.utils.EngineeringFormatter;
 import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
 public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQuantity<U>> {
 
-    int FORMATTING_RELEVANT_DIGITS = 4;
+     int DEFAULT_RELEVANT_DIGITS = 4;
 
     /**
      * Get the value of the physical quantity.
@@ -333,7 +334,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A formatted string representation of the value and unit symbol.
      */
     default String toFormattedString() {
-        return toFormattedString(FORMATTING_RELEVANT_DIGITS);
+        return toFormattedString(DEFAULT_RELEVANT_DIGITS);
     }
 
     /**
@@ -348,31 +349,12 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     }
 
     /**
-     * Returns a formatted string representation of the value associated with this object, followed by its unit symbol,
-     * along with the specified variable name, suffix, and optional separator. Example: t_in = 21.5 K
+     * Converts the physical quantity to a engineering format where unit is placed in rectangular braces for i.e.: 20[°C].
      *
-     * @param variableName The variable name to include in the formatted string.
-     * @param suffix       An optional suffix to include in the formatted string (can be empty).
-     * @return A formatted string representation of the variable name, value, and unit symbol, with optional suffix and separator.
+     * @return The value in canonical format.
      */
-    default String toFormattedString(String variableName, String suffix) {
-        String underScore = suffix.isEmpty() ? "" : "_";
-        String equalitySign = variableName.isEmpty() ? "" : " = ";
-        return variableName + underScore + suffix + equalitySign + toFormattedString();
-    }
-
-    /**
-     * Returns a formatted string representation of the value associated with this object, followed by its unit symbol,
-     * along with the specified variable name, suffix, and optional separator. Example: t_in = 21.5 K |
-     *
-     * @param variableName The variable name to include in the formatted string.
-     * @param suffix       An optional suffix to include in the formatted string (can be empty).
-     * @param separator    An optional separator to include after the formatted string (can be empty).
-     * @return A formatted string representation of the variable name, value, and unit symbol, with optional suffix and separator.
-     */
-    default String toFormattedString(String variableName, String suffix, String separator) {
-        String separatorSymbol = separator.isEmpty() ? "" : " " + separator;
-        return toFormattedString(variableName, suffix) + separatorSymbol;
+    default String toEngineeringFormat() {
+        return EngineeringFormatter.toEngineeringFormat(this);
     }
 
     @Override
@@ -390,28 +372,30 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         return Double.compare(thisValue, otherValue);
     }
 
+    // Static parsers
+
     /**
      * Creates a PhysicalQuantity of a specified type from a symbol representation of a unit and a numeric value.<p>
      * Intended to be used for deserializers.
      * For example, "oC" is considered a symbol of Temperature in Celsius degrees.
      * It can be provided in various ways and still will be resolved to the correct quantity, for i.e.: "C", "c",
      * "degC", "°C" will all be interpreted in the same way, as degree in Celsius. <p>
-     * Throws {@link UnitSystemParseException} upon parsing failure or {@link UnitSystemArgumentException} in case of
-     * invalid arguments.
      *
-     * @param targetClass    The class type of the PhysicalQuantity.
-     * @param value          The numeric value of the quantity.
-     * @param symbolAsString The symbol representation of the quantity.
-     * @param <U>            The unit type associated with the PhysicalQuantity.
-     * @param <Q>            The type of the PhysicalQuantity.
+     * @param targetClass The class type of the PhysicalQuantity.
+     * @param value       The numeric value of the quantity.
+     * @param unitSymbol  The symbol representation of the quantity.
+     * @param <U>         The unit type associated with the PhysicalQuantity.
+     * @param <Q>         The type of the PhysicalQuantity.
      * @return The newly created PhysicalQuantity.
+     * @throws UnitSystemParseException    in case of any failure during parsing process.
+     * @throws UnitSystemArgumentException if the target class is null or of incorrect type.
      */
-    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromSymbol(Class<Q> targetClass, double value,
-                                                                                     String symbolAsString) {
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createFromSymbol(Class<Q> targetClass, double value,
+                                                                              String unitSymbol) {
         if (targetClass == null) {
             throw new UnitSystemArgumentException("Invalid argument. Class cannot be null.");
         }
-        return PhysicalQuantityParsingFactory.createParsingFromSymbol(targetClass, value, symbolAsString);
+        return PhysicalQuantityParsingFactory.createParsingFromSymbol(targetClass, value, unitSymbol);
     }
 
     /**
@@ -423,19 +407,40 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * Throws {@link UnitSystemParseException} upon parsing failure or {@link UnitSystemArgumentException} in case of
      * invalid arguments.
      *
-     * @param targetClass  The class type of the PhysicalQuantity.
-     * @param value        The numeric value of the quantity.
-     * @param unitAsString The unit representation of the quantity.
-     * @param <U>          The unit type associated with the PhysicalQuantity.
-     * @param <Q>          The type of the PhysicalQuantity.
+     * @param targetClass The class type of the PhysicalQuantity.
+     * @param value       The numeric value of the quantity.
+     * @param unitName    The unit representation of the quantity.
+     * @param <U>         The unit type associated with the PhysicalQuantity.
+     * @param <Q>         The type of the PhysicalQuantity.
      * @return The newly created PhysicalQuantity.
+     * @throws UnitSystemParseException    in case of any failure during parsing process.
+     * @throws UnitSystemArgumentException if the target class is null or of incorrect type.
      */
-    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromUnit(Class<Q> targetClass, double value,
-                                                                                   String unitAsString) {
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createFromUnitName(Class<Q> targetClass, double value,
+                                                                                String unitName) {
         if (targetClass == null) {
             throw new UnitSystemArgumentException("Invalid argument. Target class cannot be null.");
         }
-        return PhysicalQuantityParsingFactory.createParsingFromUnit(targetClass, value, unitAsString);
+        return PhysicalQuantityParsingFactory.createParsingFromUnit(targetClass, value, unitName);
+    }
+
+    /**
+     * Create a physical quantity of a specified target class by parsing a string in engineering format (i.e.: 10[m/s]).
+     *
+     * @param <U>                     The type of unit associated with the physical quantity.
+     * @param <Q>                     The type of the physical quantity to create.
+     * @param targetClass             The target class for the physical quantity to be created.
+     * @param unitInEngineeringFormat A string in engineering format representing the physical quantity.
+     * @return The parsed physical quantity of the specified target class.
+     * @throws UnitSystemParseException    in case of any failure during parsing process.
+     * @throws UnitSystemArgumentException if the target class is null or of incorrect type.
+     */
+    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createFromEngineeringFormat(Class<Q> targetClass,
+                                                                                         String unitInEngineeringFormat) {
+        if (targetClass == null) {
+            throw new UnitSystemArgumentException("Invalid argument. Target class cannot be null.");
+        }
+        return EngineeringFormatter.fromEngineeringFormat(targetClass, unitInEngineeringFormat);
     }
 
 }

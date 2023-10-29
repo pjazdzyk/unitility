@@ -40,5 +40,4 @@ class ValueFormatterTest {
         assertThat(actualFormattedDoubleAsString).isEqualTo(expectedFormattedDoubleAsString);
     }
 
-
 }

@@ -35,4 +35,5 @@ public interface Unit {
      * @return The equivalent value in this unit.
      */
     double fromValueInBaseUnit(double valueInBaseUnit);
+
 }
