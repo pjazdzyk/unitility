@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PhysicalQuantityTest {
 
-    // Equality0
+    // Boolean operations
     @Test
     @DisplayName("should be equals if base units and values in base units are the same")
-    void shouldBeEquals_whenBaseUnitsAndValuesAreTheSame() {
+    void equals_shouldBeEquals_whenBaseUnitsAndValuesAreTheSame() {
         // Given
         // When
         Distance distanceInMeters = Distance.ofMeters(100);
@@ -33,7 +33,7 @@ class PhysicalQuantityTest {
 
     @Test
     @DisplayName("should return String for quantity accordingly to given relevant digits")
-    void shouldReturnStringWithRelevantDigitsForQuantity_whenRelevantDigitsAreGiven() {
+    void toFormattedString_shouldReturnStringWithRelevantDigits_whenRelevantDigitsAreGiven() {
         // Given
         Angle angle = Angle.ofDegrees(30.123456789);
         Distance distance = Distance.ofMeters(100.1238);
@@ -51,7 +51,7 @@ class PhysicalQuantityTest {
 
     @Test
     @DisplayName("should assert that first quantity is greater than second")
-    void shouldAssertThatFirstQuantityIsGreaterThanSecond() {
+    void isGreaterThan_isLowerThan_shouldAssertThatFirstQuantityIsGreaterThanSecond() {
         // Given
         Temperature smallerTemp = Temperature.ofCelsius(-20.0);
         Temperature greaterTemp = Temperature.ofCelsius(0.0);
@@ -74,150 +74,8 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("should correctly add value to quantity")
-    void shouldAddValueToQuantity() {
-        // Given
-        Temperature temperature = Temperature.ofCelsius(20);
-
-        // When
-        Temperature actualTemperature = temperature.add(20);
-
-        // Then
-        Temperature exptectedTemperature = Temperature.ofCelsius(40);
-        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
-    }
-
-    @Test
-    @DisplayName("should correctly subtract value from quantity")
-    void shouldSubtractValueToQuantity() {
-        // Given
-        Temperature temperature = Temperature.ofCelsius(20);
-
-        // When
-        Temperature actualTemperature = temperature.subtract(20);
-
-        // Then
-        Temperature exptectedTemperature = Temperature.ofCelsius(0);
-        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
-    }
-
-    @Test
-    @DisplayName("should correctly add quantities of the same type, but different units")
-    void shouldAddQuantityToSourceQuantity() {
-        // Given
-        Temperature sourceTemperature = Temperature.ofCelsius(20);
-        Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
-
-        // When
-        Temperature actualTemperature = sourceTemperature.add(temperatureToAdd);
-
-        // Then
-        Temperature exptectedTemperature = Temperature.ofCelsius(40);
-        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
-    }
-
-    @Test
-    @DisplayName("should correctly subtract quantities of the same type, but different units")
-    void shouldSubtractQuantityToSourceQuantity() {
-        // Given
-        Temperature sourceTemperature = Temperature.ofCelsius(20);
-        Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
-
-        // When
-        Temperature actualTemperature = sourceTemperature.subtract(temperatureToAdd);
-
-        // Then
-        Temperature exptectedTemperature = Temperature.ofCelsius(0);
-        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
-    }
-
-    @Test
-    @DisplayName("should correctly multiply quantity by value")
-    void shouldMultiplyValueToQuantity() {
-        // Given
-        Temperature temperature = Temperature.ofCelsius(20);
-
-        // When
-        Temperature actualTemperature = temperature.multiply(2);
-
-        // Then
-        Temperature exptectedTemperature = Temperature.ofCelsius(40);
-        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
-    }
-
-    @Test
-    @DisplayName("should correctly multiply quantities of the same type, but different units")
-    void shouldMultiplyQuantityToSourceQuantity() {
-        // Given
-        Temperature sourceTemperature = Temperature.ofCelsius(20);
-        Pressure pressure = Pressure.ofPascal(2);
-
-        // When
-        double actualMultiplyResult = sourceTemperature.multiply(pressure);
-
-        // Then
-        double expectedMultiplyResult = 40;
-        assertThat(actualMultiplyResult).isEqualTo(expectedMultiplyResult);
-    }
-
-    @Test
-    @DisplayName("should correctly divide quantity by value")
-    void shouldDivideValueToQuantity() {
-        // Given
-        Temperature temperature = Temperature.ofCelsius(20);
-
-        // When
-        Temperature actualTemperature = temperature.divide(2);
-
-        // Then
-        Temperature exptectedTemperature = Temperature.ofCelsius(10);
-        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
-    }
-
-    @Test
-    @DisplayName("should throw an exception if divided by 0")
-    void shouldNotDivideByZeroThrowingException() {
-        // Given
-        Temperature temperature = Temperature.ofCelsius(20);
-
-        // Then
-        assertThatThrownBy(() -> temperature.divide(0))
-                .isInstanceOf(UnitSystemArgumentException.class)
-                .hasMessage("Division by zero is not allowed. Please provide a non-zero divider value.");
-    }
-
-    @Test
-    @DisplayName("should correctly divide quantities of the same type, but different units")
-    void shouldDivideQuantityToSourceQuantity() {
-        // Given
-        Temperature sourceTemperature = Temperature.ofCelsius(20);
-        Pressure pressure = Pressure.ofPascal(2);
-
-        // When
-        double actualDivideResult = sourceTemperature.divide(pressure);
-
-        // Then
-        double expectedDivideResult = 10;
-        assertThat(actualDivideResult).isEqualTo(expectedDivideResult);
-    }
-
-    @Test
-    @DisplayName("should subtract value of current unit from number")
-    void shouldSubtractFromValue() {
-        // Given
-        Temperature sourceTemperature = Temperature.ofCelsius(0.5);
-
-        // When
-        Temperature actualTemperature = sourceTemperature.subtractFromValue(1);
-
-        // Then
-        Temperature expectedTemperature = Temperature.ofCelsius((1 - 0.5));
-        assertThat(actualTemperature).isEqualTo(expectedTemperature);
-    }
-
-    @Test
     @DisplayName("should correctly indicate if value is positive, negative or zero")
-    void shouldIndicateIfValueIsPositiveNegativeOrZero() {
+    void IsPositive_isNegative_shouldIndicateIfValueIsPositiveNegativeOrZero() {
         // Given
         Temperature negativeTemp = Temperature.ofCelsius(-20);
         Temperature zeroTemp = Temperature.ofCelsius(0);
@@ -246,9 +104,155 @@ class PhysicalQuantityTest {
 
     }
 
+    // Transformations
+
+    @Test
+    @DisplayName("should correctly add value to quantity")
+    void add_shouldAddValueToQuantity() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // When
+        Temperature actualTemperature = temperature.add(20);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(40);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("should correctly subtract value from quantity")
+    void add_shouldSubtractValueToQuantity() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // When
+        Temperature actualTemperature = temperature.subtract(20);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(0);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("should correctly add quantities of the same type, but different units")
+    void subtract_shouldAddQuantityToSourceQuantity() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(20);
+        Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
+
+        // When
+        Temperature actualTemperature = sourceTemperature.add(temperatureToAdd);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(40);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("should correctly subtract quantities of the same type, but different units")
+    void subtract_shouldSubtractQuantityToSourceQuantity() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(20);
+        Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
+
+        // When
+        Temperature actualTemperature = sourceTemperature.subtract(temperatureToAdd);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(0);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("should correctly multiply quantity by value")
+    void multiply_shouldMultiplyValueToQuantity() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // When
+        Temperature actualTemperature = temperature.multiply(2);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(40);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("should correctly multiply quantities of the same type, but different units")
+    void multiply_shouldMultiplyQuantityToSourceQuantity() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(20);
+        Pressure pressure = Pressure.ofPascal(2);
+
+        // When
+        double actualMultiplyResult = sourceTemperature.multiply(pressure);
+
+        // Then
+        double expectedMultiplyResult = 40;
+        assertThat(actualMultiplyResult).isEqualTo(expectedMultiplyResult);
+    }
+
+    @Test
+    @DisplayName("should correctly divide quantity by value")
+    void divide_shouldDivideValueToQuantity() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // When
+        Temperature actualTemperature = temperature.divide(2);
+
+        // Then
+        Temperature exptectedTemperature = Temperature.ofCelsius(10);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+    }
+
+    @Test
+    @DisplayName("should throw an exception if divided by 0")
+    void divide_shouldNotDivideByZeroThrowingException() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20);
+
+        // Then
+        assertThatThrownBy(() -> temperature.divide(0))
+                .isInstanceOf(UnitSystemArgumentException.class)
+                .hasMessage("Division by zero is not allowed. Please provide a non-zero divider value.");
+    }
+
+    @Test
+    @DisplayName("should correctly divide quantities of the same type, but different units")
+    void divide_shouldDivideQuantityToSourceQuantity() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(20);
+        Pressure pressure = Pressure.ofPascal(2);
+
+        // When
+        double actualDivideResult = sourceTemperature.divide(pressure);
+
+        // Then
+        double expectedDivideResult = 10;
+        assertThat(actualDivideResult).isEqualTo(expectedDivideResult);
+    }
+
+    @Test
+    @DisplayName("should subtract value of current unit from number")
+    void subtract_shouldSubtractFromValue() {
+        // Given
+        Temperature sourceTemperature = Temperature.ofCelsius(0.5);
+
+        // When
+        Temperature actualTemperature = sourceTemperature.subtractFromValue(1);
+
+        // Then
+        Temperature expectedTemperature = Temperature.ofCelsius((1 - 0.5));
+        assertThat(actualTemperature).isEqualTo(expectedTemperature);
+    }
+
+    // Others
+
     @Test
     @DisplayName("should return property unit symbol")
-    void shouldReturnPropertyUnitSymbol() {
+    void getUnitSymbol_shouldReturnPropertyUnitSymbol() {
         // Given
         ThermalDiffusivity thermalDiffusivity = ThermalDiffusivity.ofSquareFeetPerSecond(0.5);
 
@@ -262,7 +266,7 @@ class PhysicalQuantityTest {
 
     @Test
     @DisplayName("should properly sort all quantities in the list")
-    void shouldSortQuantitiesInTheList() {
+    void sort_shouldSortQuantitiesInTheList() {
         // Given
         Temperature[] temperatures = {
                 Temperature.ofCelsius(54),
@@ -288,7 +292,7 @@ class PhysicalQuantityTest {
 
     @Test
     @DisplayName("create instance of class from symbol")
-    void shouldCreateInstanceOfClassFromSymbol() {
+    void createFromSymbol_shouldCreateInstanceOfClassFromSymbol() {
         // Given
         double value = 20.1;
         // When
@@ -300,7 +304,7 @@ class PhysicalQuantityTest {
 
     @Test
     @DisplayName("create instance of class from unit")
-    void shouldCreateInstanceOfClassFromUnit() {
+    void createFromUnitName_shouldCreateInstanceOfClassFromUnit() {
         // Given
         double value = 20.1;
         // When
@@ -312,7 +316,7 @@ class PhysicalQuantityTest {
 
     @Test
     @DisplayName("should return canonical string")
-    void shouldReturnCanonicalString() {
+    void toEngineeringFormat_shouldReturnEngineeringString() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20.1234567);
         BypassFactor bypassFactor = BypassFactor.of(20.1234567);
@@ -328,7 +332,7 @@ class PhysicalQuantityTest {
 
     @Test
     @DisplayName("should convert to canonical format and vice versa")
-    void shouldConvertToCanonicalFormatAndViceVersa() {
+    void createFromEngineeringFormat_shouldConvertToEngineeringFormatAndViceVersa() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20.1234567);
 

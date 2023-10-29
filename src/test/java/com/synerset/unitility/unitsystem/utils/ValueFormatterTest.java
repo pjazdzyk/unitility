@@ -34,7 +34,28 @@ class ValueFormatterTest {
         int relevantDigits = 3;
 
         // When
-        String actualFormattedDoubleAsString = ValueFormatter.formatDoubleToRelevantDigits(inputDouble, relevantDigits);
+        String actualFormattedDoubleAsString = ValueFormatter.toStringWithRelevantDigits(inputDouble, relevantDigits);
+
+        // Then
+        assertThat(actualFormattedDoubleAsString).isEqualTo(expectedFormattedDoubleAsString);
+    }
+
+    static Stream<Arguments> lowRelDigitsSeed() {
+        return Stream.of(
+                Arguments.of(10.6, 0, "11"),
+                Arguments.of(10.1234, 1, "10.1"),
+                Arguments.of(10.1234, 2, "10.12"),
+                Arguments.of(10.1234, 3, "10.123")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("lowRelDigitsSeed")
+    @DisplayName("should properly format: truncate and round up double values for relevant digits < 3")
+    void shouldFormatAndTruncateDoubleInput_whenRelevantDigitsAreLowerThan3(double inputDouble, int relDigits, String expectedFormattedDoubleAsString) {
+        // Given
+        // When
+        String actualFormattedDoubleAsString = ValueFormatter.toStringWithRelevantDigits(inputDouble, relDigits);
 
         // Then
         assertThat(actualFormattedDoubleAsString).isEqualTo(expectedFormattedDoubleAsString);
