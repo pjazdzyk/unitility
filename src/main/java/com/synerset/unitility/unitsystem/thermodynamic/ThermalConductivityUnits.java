@@ -41,10 +41,10 @@ public enum ThermalConductivityUnits implements ThermalConductivityUnit {
     }
 
     public static ThermalConductivityUnit fromSymbol(String rawSymbol) {
-        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        String requestedSymbol = formatSymbol(rawSymbol);
         for (ThermalConductivityUnits unit : values()) {
-            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
-            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+            String currentSymbol = formatSymbol(unit.symbol);
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
@@ -52,13 +52,12 @@ public enum ThermalConductivityUnits implements ThermalConductivityUnit {
                 + ThermalConductivityUnits.class.getSimpleName());
     }
 
-    private static String formatSymbolInput(String inputString) {
+    private static String formatSymbol(String inputString) {
         return inputString
                 .trim()
                 .toLowerCase()
                 .replace(" ", "")
                 .replace("·", "")
-                .replace(".", "")
                 .replace("x", "")
                 .replace("/", "p")
                 .replace("(", "")

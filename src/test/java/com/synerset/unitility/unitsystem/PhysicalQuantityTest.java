@@ -303,18 +303,6 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("create instance of class from unit")
-    void createFromUnitName_shouldCreateInstanceOfClassFromUnit() {
-        // Given
-        double value = 20.1;
-        // When
-        Temperature actualTemperature = PhysicalQuantity.createFromUnitName(Temperature.class, value, "fahrenheit");
-
-        // Then
-        assertThat(actualTemperature).isEqualTo(Temperature.ofFahrenheit(value));
-    }
-
-    @Test
     @DisplayName("should return canonical string")
     void toEngineeringFormat_shouldReturnEngineeringString() {
         // Given

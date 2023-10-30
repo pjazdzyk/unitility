@@ -2,7 +2,8 @@ package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
-import com.synerset.unitility.unitsystem.utils.EngineeringFormatter;
+import com.synerset.unitility.unitsystem.utils.PhysicalQuantityEngFormatParsingFactory;
+import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
@@ -354,7 +355,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return The value in canonical format.
      */
     default String toEngineeringFormat() {
-        return EngineeringFormatter.toEngineeringFormat(this);
+        return PhysicalQuantityEngFormatParsingFactory.toEngFormatString(this);
     }
 
     @Override
@@ -399,32 +400,6 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     }
 
     /**
-     * Creates a PhysicalQuantity of a specified type from a unit representation and a numeric value.
-     * Intended to be used for deserializers.
-     * For example, "METER_PER_SECOND" is considered a unit type of Velocity in m/s.
-     * It can be provided in various ways and still will be resolved to the correct quantity,
-     * for i.e.: "meter per second", "meter_per_second" will all be interpreted in the same way, as velocity in m/s.<p>
-     * Throws {@link UnitSystemParseException} upon parsing failure or {@link UnitSystemArgumentException} in case of
-     * invalid arguments.
-     *
-     * @param targetClass The class type of the PhysicalQuantity.
-     * @param value       The numeric value of the quantity.
-     * @param unitName    The unit representation of the quantity.
-     * @param <U>         The unit type associated with the PhysicalQuantity.
-     * @param <Q>         The type of the PhysicalQuantity.
-     * @return The newly created PhysicalQuantity.
-     * @throws UnitSystemParseException    in case of any failure during parsing process.
-     * @throws UnitSystemArgumentException if the target class is null or of incorrect type.
-     */
-    static <U extends Unit, Q extends PhysicalQuantity<U>> Q createFromUnitName(Class<Q> targetClass, double value,
-                                                                                String unitName) {
-        if (targetClass == null) {
-            throw new UnitSystemArgumentException("Invalid argument. Target class cannot be null.");
-        }
-        return PhysicalQuantityParsingFactory.createParsingFromUnit(targetClass, value, unitName);
-    }
-
-    /**
      * Create a physical quantity of a specified target class by parsing a string in engineering format (i.e.: 10[m/s]).
      *
      * @param <U>                     The type of unit associated with the physical quantity.
@@ -440,7 +415,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         if (targetClass == null) {
             throw new UnitSystemArgumentException("Invalid argument. Target class cannot be null.");
         }
-        return EngineeringFormatter.fromEngineeringFormat(targetClass, unitInEngineeringFormat);
+        return PhysicalQuantityEngFormatParsingFactory.createParsingFromEngFormat(targetClass, unitInEngineeringFormat);
     }
 
 }
