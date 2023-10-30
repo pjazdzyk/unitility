@@ -1,11 +1,12 @@
-package com.synerset.unitility.unitsystem.utils;
+package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
+import com.synerset.unitility.unitsystem.utils.PhysicalQuantityEngFormatParsingFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-class EngineeringFormatterTest {
+class PhysicalQuantityEngFormatParsingFactoryTest {
 
     @Test
     void convertFromCanonicalString() {
@@ -13,7 +14,7 @@ class EngineeringFormatterTest {
         Temperature temperature = Temperature.ofCelsius(20.1234);
 
         // When
-        String tempAsString = EngineeringFormatter.toEngineeringFormat(temperature);
+        String tempAsString = PhysicalQuantityEngFormatParsingFactory.toEngFormatString(temperature);
 
         // Then
         assertThat(tempAsString).isEqualTo("20.1234[°C]");
@@ -25,7 +26,7 @@ class EngineeringFormatterTest {
         String tempAsString = "20.1234[°C]";
 
         // When
-        Temperature temperature = EngineeringFormatter.fromEngineeringFormat(Temperature.class, tempAsString);
+        Temperature temperature = PhysicalQuantityEngFormatParsingFactory.createParsingFromEngFormat(Temperature.class, tempAsString);
 
         // Then
         assertThat(temperature).isEqualTo(Temperature.ofCelsius(20.1234));

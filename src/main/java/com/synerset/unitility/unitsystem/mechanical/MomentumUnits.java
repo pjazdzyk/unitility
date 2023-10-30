@@ -40,10 +40,10 @@ public enum MomentumUnits implements MomentumUnit {
     }
 
     public static MomentumUnits fromSymbol(String rawSymbol) {
-        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        String requestedSymbol = formatSymbol(rawSymbol);
         for (MomentumUnits unit : values()) {
-            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
-            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+            String currentSymbol = formatSymbol(unit.symbol);
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
@@ -51,7 +51,7 @@ public enum MomentumUnits implements MomentumUnit {
                 + MomentumUnits.class.getSimpleName());
     }
 
-    private static String formatSymbolInput(String inputString) {
+    private static String formatSymbol(String inputString) {
         return inputString
                 .trim()
                 .toLowerCase()

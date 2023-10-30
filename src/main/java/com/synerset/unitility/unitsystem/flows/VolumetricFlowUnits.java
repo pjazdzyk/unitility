@@ -47,10 +47,10 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
     }
 
     public static VolumetricFlowUnit fromSymbol(String rawSymbol) {
-        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        String requestedSymbol = formatSymbol(rawSymbol);
         for (VolumetricFlowUnits unit : values()) {
-            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
-            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+            String currentSymbol = formatSymbol(unit.symbol);
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
@@ -58,7 +58,7 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
                 + VolumetricFlowUnits.class.getSimpleName());
     }
 
-    private static String formatSymbolInput(String inputString) {
+    private static String formatSymbol(String inputString) {
         return inputString
                 .trim()
                 .toLowerCase()

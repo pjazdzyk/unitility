@@ -40,10 +40,10 @@ public enum HumidityRatioUnits implements HumidityRatioUnit {
     }
 
     public static HumidityRatioUnit fromSymbol(String rawSymbol) {
-        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        String requestedSymbol = formatSymbol(rawSymbol);
         for (HumidityRatioUnits unit : values()) {
-            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
-            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+            String currentSymbol = formatSymbol(unit.symbol);
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
@@ -51,7 +51,7 @@ public enum HumidityRatioUnits implements HumidityRatioUnit {
                 + HumidityRatioUnits.class.getSimpleName());
     }
 
-    private static String formatSymbolInput(String inputString) {
+    private static String formatSymbol(String inputString) {
         return inputString
                 .trim()
                 .toLowerCase()

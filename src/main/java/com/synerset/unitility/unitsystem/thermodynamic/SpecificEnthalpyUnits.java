@@ -41,10 +41,10 @@ public enum SpecificEnthalpyUnits implements SpecificEnthalpyUnit {
     }
 
     public static SpecificEnthalpyUnit fromSymbol(String rawSymbol) {
-        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        String requestedSymbol = formatSymbol(rawSymbol);
         for (SpecificEnthalpyUnits unit : values()) {
-            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
-            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+            String currentSymbol = formatSymbol(unit.symbol);
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
@@ -52,7 +52,7 @@ public enum SpecificEnthalpyUnits implements SpecificEnthalpyUnit {
                 + SpecificEnthalpyUnits.class.getSimpleName());
     }
 
-    private static String formatSymbolInput(String inputString) {
+    private static String formatSymbol(String inputString) {
         return inputString
                 .trim()
                 .toLowerCase()

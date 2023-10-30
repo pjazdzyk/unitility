@@ -43,10 +43,10 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
         if (rawSymbol == null || rawSymbol.isBlank()) {
             return DECIMAL;
         }
-        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
+        String requestedSymbol = formatSymbol(rawSymbol);
         for (RelativeHumidityUnits unit : values()) {
-            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
-            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+            String currentSymbol = formatSymbol(unit.symbol);
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
@@ -54,7 +54,7 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
                 + HumidityRatioUnits.class.getSimpleName());
     }
 
-    private static String formatSymbolInput(String inputString) {
+    private static String formatSymbol(String inputString) {
         return inputString
                 .trim()
                 .toLowerCase()

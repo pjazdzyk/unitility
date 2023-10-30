@@ -4,32 +4,34 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 
-public class EngineeringFormatter {
+public class PhysicalQuantityEngFormatParsingFactory {
 
-    private EngineeringFormatter() {
+    private PhysicalQuantityEngFormatParsingFactory() {
         throw new IllegalStateException("Utility class");
     }
 
-    public static <U extends Unit, Q extends PhysicalQuantity<U>> Q fromEngineeringFormat(Class<Q> targetClass, String source) {
+    public static <U extends Unit, Q extends PhysicalQuantity<U>> Q createParsingFromEngFormat(Class<Q> targetClass,
+                                                                                               String source) {
+
         String preparedSource = source.trim()
                 .replace(" ", "")
                 .replace(",", ".");
         String unitSymbol = null;
         if (preparedSource.contains("[")) {
-            unitSymbol = extractInsideParentheses(targetClass, preparedSource);
+            unitSymbol = extractSymbol(targetClass, preparedSource);
         }
-        double value = extractNumber(targetClass, preparedSource);
+        double value = extractValue(targetClass, preparedSource);
         return PhysicalQuantity.createFromSymbol(targetClass, value, unitSymbol);
     }
 
-    public static <U extends Unit, Q extends PhysicalQuantity<U>> String toEngineeringFormat(Q physicalQuantity) {
+    public static <U extends Unit, Q extends PhysicalQuantity<U>> String toEngFormatString(Q physicalQuantity) {
         if (physicalQuantity.getUnitSymbol().isBlank()) {
             return String.valueOf(physicalQuantity.getValue());
         }
         return String.format("%s[%s]", physicalQuantity.getValue(), physicalQuantity.getUnitSymbol());
     }
 
-    private static double extractNumber(Class<?> targetClass, String input) {
+    private static double extractValue(Class<?> targetClass, String input) {
         String extractedNumber;
 
         if (input.contains("[")) {
@@ -47,10 +49,9 @@ public class EngineeringFormatter {
         }
     }
 
-    private static String extractInsideParentheses(Class<?> targetClass, String input) {
+    private static String extractSymbol(Class<?> targetClass, String input) {
         int startIndex = input.indexOf('[');
         int endIndex = input.indexOf(']', startIndex);
-
         if (startIndex != -1 && endIndex != -1) {
             return input.substring(startIndex + 1, endIndex);
         } else {

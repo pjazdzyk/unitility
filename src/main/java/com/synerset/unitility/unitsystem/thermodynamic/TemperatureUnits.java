@@ -41,10 +41,10 @@ public enum TemperatureUnits implements TemperatureUnit {
     }
 
     public static TemperatureUnit fromSymbol(String rawSymbol) {
-        String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol).trim();
+        String requestedSymbol = formatSymbol(rawSymbol).trim();
         for (TemperatureUnits unit : values()) {
-            String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);
-            if (enumSymbolWithoutDegreesSing.equalsIgnoreCase(inputSymbolWithoutDegreesSign)) {
+            String currentSymbol = formatSymbol(unit.symbol);
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
@@ -52,7 +52,7 @@ public enum TemperatureUnits implements TemperatureUnit {
                 + TemperatureUnits.class.getSimpleName());
     }
 
-    private static String formatSymbolInput(String inputString) {
+    private static String formatSymbol(String inputString) {
         return inputString
                 .toLowerCase()
                 .replace(" ", "")
