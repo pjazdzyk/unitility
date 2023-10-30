@@ -157,11 +157,11 @@ class VolumetricFlowTest {
     @DisplayName("should have m³/s as base unit")
     void shouldHaveCubicMetersPerSecondAsBaseUnit() {
         // Given
-        VolumetricFlowUnits expectedBaseUnit = VolumetricFlowUnits.CUBIC_METERS_PER_SECOND;
+        VolumetricFlowUnit expectedBaseUnit = VolumetricFlowUnits.CUBIC_METERS_PER_SECOND;
 
         // When
         VolumetricFlow volumetricFlowInGalPerHr = VolumetricFlow.ofGallonsPerHour(10);
-        VolumetricFlowUnits actualBaseUnit = volumetricFlowInGalPerHr.getUnitType().getBaseUnit();
+        VolumetricFlowUnit actualBaseUnit = volumetricFlowInGalPerHr.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

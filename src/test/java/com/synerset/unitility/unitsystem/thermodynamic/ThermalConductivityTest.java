@@ -50,11 +50,11 @@ class ThermalConductivityTest {
     @DisplayName("should have W/(m·K) as base unit")
     void shouldHaveWattPerMeterKelvinAsBaseUnit() {
         // Given
-        ThermalConductivityUnits expectedBaseUnit = ThermalConductivityUnits.WATTS_PER_METER_KELVIN;
+        ThermalConductivityUnit expectedBaseUnit = ThermalConductivityUnits.WATTS_PER_METER_KELVIN;
 
         // When
         ThermalConductivity thermalConductivityInBTUPerHrF = ThermalConductivity.ofBTUPerHourFeetFahrenheit(0.1);
-        ThermalConductivityUnits actualBaseUnit = thermalConductivityInBTUPerHrF.getUnitType().getBaseUnit();
+        ThermalConductivityUnit actualBaseUnit = thermalConductivityInBTUPerHrF.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

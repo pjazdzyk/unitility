@@ -4,20 +4,20 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Momentum implements PhysicalQuantity<MomentumUnits> {
+public class Momentum implements PhysicalQuantity<MomentumUnit> {
 
     private final double value;
     private final double baseValue;
-    private final MomentumUnits unitType;
+    private final MomentumUnit unitType;
 
-    public Momentum(double value, MomentumUnits unitType) {
+    public Momentum(double value, MomentumUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Momentum of(double value, MomentumUnits unit) {
+    public static Momentum of(double value, MomentumUnit unit) {
         return new Momentum(value, unit);
     }
 
@@ -49,7 +49,7 @@ public class Momentum implements PhysicalQuantity<MomentumUnits> {
     }
 
     @Override
-    public MomentumUnits getUnitType() {
+    public MomentumUnit getUnitType() {
         return unitType;
     }
 
@@ -60,7 +60,7 @@ public class Momentum implements PhysicalQuantity<MomentumUnits> {
     }
 
     @Override
-    public Momentum toUnit(MomentumUnits targetUnit) {
+    public Momentum toUnit(MomentumUnit targetUnit) {
         double valueInKilogramMeterPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogramMeterPerSecond);
         return Momentum.of(valueInTargetUnit, targetUnit);

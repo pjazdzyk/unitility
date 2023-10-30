@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnits> {
+public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnit> {
     private final double value;
     private final double baseValue;
     private final PrandtlNumberUnits unitType;
@@ -31,7 +31,7 @@ public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnits> {
     }
 
     @Override
-    public PrandtlNumberUnits getUnitType() {
+    public PrandtlNumberUnit getUnitType() {
         return unitType;
     }
 
@@ -41,7 +41,7 @@ public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnits> {
     }
 
     @Override
-    public PrandtlNumber toUnit(PrandtlNumberUnits targetUnit) {
+    public PrandtlNumber toUnit(PrandtlNumberUnit targetUnit) {
         return this;
     }
 

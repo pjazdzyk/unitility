@@ -4,27 +4,27 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Pressure implements PhysicalQuantity<PressureUnits> {
+public class Pressure implements PhysicalQuantity<PressureUnit> {
 
     public static final Pressure STANDARD_ATMOSPHERE = Pressure.ofPascal(101_325);
     public static final Pressure TECHNICAL_ATMOSPHERE = Pressure.ofPascal(98_067);
     private final double value;
     private final double baseValue;
-    private final PressureUnits unitType;
+    private final PressureUnit unitType;
 
-    public Pressure(double value, PressureUnits unitType) {
+    public Pressure(double value, PressureUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Pressure of(double value, PressureUnits unit) {
+    public static Pressure of(double value, PressureUnit unit) {
         return new Pressure(value, unit);
     }
 
     public static Pressure of(double value, String unitSymbol) {
-        PressureUnits resolvedUnit = PressureUnits.fromSymbol(unitSymbol);
+        PressureUnit resolvedUnit = PressureUnits.fromSymbol(unitSymbol);
         return new Pressure(value, resolvedUnit);
     }
     
@@ -67,7 +67,7 @@ public class Pressure implements PhysicalQuantity<PressureUnits> {
     }
 
     @Override
-    public PressureUnits getUnitType() {
+    public PressureUnit getUnitType() {
         return unitType;
     }
 
@@ -78,7 +78,7 @@ public class Pressure implements PhysicalQuantity<PressureUnits> {
     }
 
     @Override
-    public Pressure toUnit(PressureUnits targetUnit) {
+    public Pressure toUnit(PressureUnit targetUnit) {
         double valueInPascal = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascal);
         return Pressure.of(valueInTargetUnit, targetUnit);

@@ -4,25 +4,25 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Force implements PhysicalQuantity<ForceUnits> {
+public class Force implements PhysicalQuantity<ForceUnit> {
 
     private final double value;
     private final double baseValue;
-    private final ForceUnits unitType;
+    private final ForceUnit unitType;
 
-    public Force(double value, ForceUnits unitType) {
+    public Force(double value, ForceUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Force of(double value, ForceUnits unit) {
+    public static Force of(double value, ForceUnit unit) {
         return new Force(value, unit);
     }
 
     public static Force of(double value, String unitSymbol) {
-        ForceUnits resolvedUnit = ForceUnits.fromSymbol(unitSymbol);
+        ForceUnit resolvedUnit = ForceUnits.fromSymbol(unitSymbol);
         return new Force(value, resolvedUnit);
     }
     
@@ -61,7 +61,7 @@ public class Force implements PhysicalQuantity<ForceUnits> {
     }
 
     @Override
-    public ForceUnits getUnitType() {
+    public ForceUnit getUnitType() {
         return unitType;
     }
 
@@ -72,7 +72,7 @@ public class Force implements PhysicalQuantity<ForceUnits> {
     }
 
     @Override
-    public Force toUnit(ForceUnits targetUnit) {
+    public Force toUnit(ForceUnit targetUnit) {
         double valueInNewtons = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInNewtons);
         return Force.of(valueInTargetUnit, targetUnit);

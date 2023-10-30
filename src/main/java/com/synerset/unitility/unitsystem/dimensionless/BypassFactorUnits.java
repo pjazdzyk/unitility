@@ -1,10 +1,9 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum BypassFactorUnits implements Unit {
+public enum BypassFactorUnits implements BypassFactorUnit {
 
     DIMENSIONLESS("", val -> val, val -> val);
 
@@ -24,7 +23,7 @@ public enum BypassFactorUnits implements Unit {
     }
 
     @Override
-    public BypassFactorUnits getBaseUnit() {
+    public BypassFactorUnit getBaseUnit() {
         return DIMENSIONLESS;
     }
 

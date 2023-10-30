@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum DistanceUnits implements Unit {
+public enum DistanceUnits implements DistanceUnit {
 
     METER("m", val -> val, val -> val),
     CENTIMETER("cm", val -> val / 100, val -> val * 100),
@@ -31,7 +30,7 @@ public enum DistanceUnits implements Unit {
     }
 
     @Override
-    public DistanceUnits getBaseUnit() {
+    public DistanceUnit getBaseUnit() {
         return METER;
     }
 
@@ -45,7 +44,7 @@ public enum DistanceUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static DistanceUnits fromSymbol(String rawSymbol) {
+    public static DistanceUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (DistanceUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

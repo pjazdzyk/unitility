@@ -50,11 +50,11 @@ class TemperatureTest {
     @DisplayName("should have K as base unit")
     void shouldHaveKelvinAsBaseUnit() {
         // Given
-        TemperatureUnits expectedBaseUnit = TemperatureUnits.KELVIN;
+        TemperatureUnit expectedBaseUnit = TemperatureUnits.KELVIN;
 
         // When
         Temperature specificHeatInFahrenheit = Temperature.ofFahrenheit(10);
-        TemperatureUnits actualBaseUnit = specificHeatInFahrenheit.getUnitType().getBaseUnit();
+        TemperatureUnit actualBaseUnit = specificHeatInFahrenheit.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -140,11 +140,11 @@ class VelocityTest {
     @DisplayName("should have m/s as base unit")
     void shouldHaveMeterPerSecondAsBaseUnit() {
         // Given
-        VelocityUnits expectedBaseUnit = VelocityUnits.METER_PER_SECOND;
+        VelocityUnit expectedBaseUnit = VelocityUnits.METER_PER_SECOND;
 
         // When
         Velocity velocityInMilesPerHour = Velocity.ofMilesPerHour(2);
-        VelocityUnits actualBaseUnit = velocityInMilesPerHour.getUnitType().getBaseUnit();
+        VelocityUnit actualBaseUnit = velocityInMilesPerHour.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -4,25 +4,25 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
+public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnit> {
 
     private final double value;
     private final double baseValue;
-    private final VolumetricFlowUnits unitType;
+    private final VolumetricFlowUnit unitType;
 
-    public VolumetricFlow(double value, VolumetricFlowUnits unitType) {
+    public VolumetricFlow(double value, VolumetricFlowUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static VolumetricFlow of(double value, VolumetricFlowUnits unit) {
+    public static VolumetricFlow of(double value, VolumetricFlowUnit unit) {
         return new VolumetricFlow(value, unit);
     }
 
     public static VolumetricFlow of(double value, String unitSymbol) {
-        VolumetricFlowUnits resolvedUnit = VolumetricFlowUnits.fromSymbol(unitSymbol);
+        VolumetricFlowUnit resolvedUnit = VolumetricFlowUnits.fromSymbol(unitSymbol);
         return new VolumetricFlow(value, resolvedUnit);
     }
     
@@ -73,7 +73,7 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
     }
 
     @Override
-    public VolumetricFlowUnits getUnitType() {
+    public VolumetricFlowUnit getUnitType() {
         return unitType;
     }
 
@@ -84,7 +84,7 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnits> {
     }
 
     @Override
-    public VolumetricFlow toUnit(VolumetricFlowUnits targetUnit) {
+    public VolumetricFlow toUnit(VolumetricFlowUnit targetUnit) {
         double valueInCubicMetersPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInCubicMetersPerSecond);
         return VolumetricFlow.of(valueInTargetUnit, targetUnit);

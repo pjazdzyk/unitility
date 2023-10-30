@@ -4,26 +4,26 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Temperature implements PhysicalQuantity<TemperatureUnits> {
+public class Temperature implements PhysicalQuantity<TemperatureUnit> {
 
     public static final Temperature PHYSICAL_MIN_LIMIT = Temperature.ofKelvins(0);
     private final double value;
     private final double baseValue;
-    private final TemperatureUnits unitType;
+    private final TemperatureUnit unitType;
 
-    public Temperature(double value, TemperatureUnits unitType) {
+    public Temperature(double value, TemperatureUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Temperature of(double value, TemperatureUnits unit) {
+    public static Temperature of(double value, TemperatureUnit unit) {
         return new Temperature(value, unit);
     }
 
     public static Temperature of(double value, String unitSymbol) {
-        TemperatureUnits resolvedUnit = TemperatureUnits.fromSymbol(unitSymbol);
+        TemperatureUnit resolvedUnit = TemperatureUnits.fromSymbol(unitSymbol);
         return new Temperature(value, resolvedUnit);
     }
     
@@ -50,7 +50,7 @@ public class Temperature implements PhysicalQuantity<TemperatureUnits> {
     }
 
     @Override
-    public TemperatureUnits getUnitType() {
+    public TemperatureUnit getUnitType() {
         return unitType;
     }
 
@@ -61,7 +61,7 @@ public class Temperature implements PhysicalQuantity<TemperatureUnits> {
     }
 
     @Override
-    public Temperature toUnit(TemperatureUnits targetUnit) {
+    public Temperature toUnit(TemperatureUnit targetUnit) {
         double valueInKelvin = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKelvin);
         return Temperature.of(valueInTargetUnit, targetUnit);

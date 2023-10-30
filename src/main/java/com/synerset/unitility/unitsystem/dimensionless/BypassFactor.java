@@ -4,14 +4,14 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class BypassFactor implements PhysicalQuantity<BypassFactorUnits> {
+public class BypassFactor implements PhysicalQuantity<BypassFactorUnit> {
 
     public static final BypassFactor BYPASS_MIN_VALUE = BypassFactor.of(0);
     public static final BypassFactor BYPASS_MAX_VALUE = BypassFactor.of(1);
 
     private final double value;
     private final double baseValue;
-    private final BypassFactorUnits unitType;
+    private final BypassFactorUnit unitType;
 
     public BypassFactor(double value) {
         this.value = value;
@@ -35,7 +35,7 @@ public class BypassFactor implements PhysicalQuantity<BypassFactorUnits> {
     }
 
     @Override
-    public BypassFactorUnits getUnitType() {
+    public BypassFactorUnit getUnitType() {
         return unitType;
     }
 
@@ -45,7 +45,7 @@ public class BypassFactor implements PhysicalQuantity<BypassFactorUnits> {
     }
 
     @Override
-    public BypassFactor toUnit(BypassFactorUnits targetUnit) {
+    public BypassFactor toUnit(BypassFactorUnit targetUnit) {
         return this;
     }
 

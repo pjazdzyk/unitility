@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.flows;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum VolumetricFlowUnits implements Unit {
+public enum VolumetricFlowUnits implements VolumetricFlowUnit {
 
     CUBIC_METERS_PER_SECOND("m³/s", val -> val, val -> val),
     CUBIC_METERS_PER_MINUTE("m³/min", val -> val / 60.0, val -> val * 60.0),
@@ -33,7 +32,7 @@ public enum VolumetricFlowUnits implements Unit {
     }
 
     @Override
-    public VolumetricFlowUnits getBaseUnit() {
+    public VolumetricFlowUnit getBaseUnit() {
         return CUBIC_METERS_PER_SECOND;
     }
 
@@ -47,7 +46,7 @@ public enum VolumetricFlowUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static VolumetricFlowUnits fromSymbol(String rawSymbol) {
+    public static VolumetricFlowUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (VolumetricFlowUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

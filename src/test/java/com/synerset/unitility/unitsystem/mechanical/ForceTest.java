@@ -103,11 +103,11 @@ class ForceTest {
     @DisplayName("should have N as base unit")
     void shouldHaveNewtonAsBaseUnit() {
         // Given
-        ForceUnits expectedBaseUnit = ForceUnits.NEWTON;
+        ForceUnit expectedBaseUnit = ForceUnits.NEWTON;
 
         // When
         Force forceInNewton = Force.ofNewtons(10);
-        ForceUnits actualBaseUnit = forceInNewton.getUnitType().getBaseUnit();
+        ForceUnit actualBaseUnit = forceInNewton.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

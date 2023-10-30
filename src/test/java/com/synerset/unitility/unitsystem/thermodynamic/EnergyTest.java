@@ -156,11 +156,11 @@ class EnergyTest {
     @DisplayName("should have J as base unit")
     void shouldHaveJouleAsBaseUnit() {
         // Given
-        EnergyUnits expectedBaseUnit = EnergyUnits.JOULE;
+        EnergyUnit expectedBaseUnit = EnergyUnits.JOULE;
 
         // When
         Energy energyInJoule = Energy.ofJoules(10);
-        EnergyUnits actualBaseUnit = energyInJoule.getUnitType().getBaseUnit();
+        EnergyUnit actualBaseUnit = energyInJoule.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

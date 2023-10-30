@@ -30,11 +30,11 @@ class RelativeHumidityTest {
     @DisplayName("should have % as base unit")
     void shouldHavePercentAsBaseUnit() {
         // Given
-        RelativeHumidityUnits expectedBaseUnit = RelativeHumidityUnits.PERCENT;
+        RelativeHumidityUnit expectedBaseUnit = RelativeHumidityUnits.PERCENT;
 
         // When
         RelativeHumidity relativeHumidityInDecimal = RelativeHumidity.ofDecimal(0.1);
-        RelativeHumidityUnits actualBaseUnit = relativeHumidityInDecimal.getUnitType().getBaseUnit();
+        RelativeHumidityUnit actualBaseUnit = relativeHumidityInDecimal.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

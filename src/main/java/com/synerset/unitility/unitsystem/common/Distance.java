@@ -4,26 +4,26 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Distance implements PhysicalQuantity<DistanceUnits> {
+public class Distance implements PhysicalQuantity<DistanceUnit> {
 
     public static final Distance PHYSICAL_MIN_LIMIT = Distance.ofMeters(0);
     private final double value;
     private final double baseValue;
-    private final DistanceUnits unitType;
+    private final DistanceUnit unitType;
 
-    public Distance(double value, DistanceUnits unitType) {
+    public Distance(double value, DistanceUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Distance of(double value, DistanceUnits unit) {
+    public static Distance of(double value, DistanceUnit unit) {
         return new Distance(value, unit);
     }
 
     public static Distance of(double value, String unitSymbol) {
-        DistanceUnits resolvedUnit = DistanceUnits.fromSymbol(unitSymbol);
+        DistanceUnit resolvedUnit = DistanceUnits.fromSymbol(unitSymbol);
         return new Distance(value, resolvedUnit);
     }
     
@@ -66,7 +66,7 @@ public class Distance implements PhysicalQuantity<DistanceUnits> {
     }
 
     @Override
-    public DistanceUnits getUnitType() {
+    public DistanceUnit getUnitType() {
         return unitType;
     }
 
@@ -77,7 +77,7 @@ public class Distance implements PhysicalQuantity<DistanceUnits> {
     }
 
     @Override
-    public Distance toUnit(DistanceUnits targetUnit) {
+    public Distance toUnit(DistanceUnit targetUnit) {
         double valueInMeters = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInMeters);
         return Distance.of(valueInTargetUnit, targetUnit);

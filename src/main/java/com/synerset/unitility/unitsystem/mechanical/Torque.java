@@ -4,21 +4,21 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Torque implements PhysicalQuantity<TorqueUnits> {
+public class Torque implements PhysicalQuantity<TorqueUnit> {
 
     public static final Torque PHYSICAL_MIN_LIMIT = Torque.ofNewtonMeters(0);
     private final double value;
     private final double baseValue;
-    private final TorqueUnits unitType;
+    private final TorqueUnit unitType;
 
-    public Torque(double value, TorqueUnits unitType) {
+    public Torque(double value, TorqueUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Torque of(double value, TorqueUnits unit) {
+    public static Torque of(double value, TorqueUnit unit) {
         return new Torque(value, unit);
     }
 
@@ -58,7 +58,7 @@ public class Torque implements PhysicalQuantity<TorqueUnits> {
     }
 
     @Override
-    public TorqueUnits getUnitType() {
+    public TorqueUnit getUnitType() {
         return unitType;
     }
 
@@ -69,7 +69,7 @@ public class Torque implements PhysicalQuantity<TorqueUnits> {
     }
 
     @Override
-    public Torque toUnit(TorqueUnits targetUnit) {
+    public Torque toUnit(TorqueUnit targetUnit) {
         double valueInNewtonMeters = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInNewtonMeters);
         return Torque.of(valueInTargetUnit, targetUnit);

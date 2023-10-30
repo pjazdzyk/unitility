@@ -140,11 +140,11 @@ class VolumeTest {
     @DisplayName("should have m³ as base unit")
     void shouldHaveCubicMeterAsBaseUnit() {
         // Given
-        VolumeUnits expectedBaseUnit = VolumeUnits.CUBIC_METER;
+        VolumeUnit expectedBaseUnit = VolumeUnits.CUBIC_METER;
 
         // When
         Volume volumeInGallons = Volume.ofGallons(100);
-        VolumeUnits actualBaseUnit = volumeInGallons.getUnitType().getBaseUnit();
+        VolumeUnit actualBaseUnit = volumeInGallons.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

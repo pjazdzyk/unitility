@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum VolumeUnits implements Unit {
+public enum VolumeUnits implements VolumeUnit {
 
     CUBIC_METER("m³", val -> val, val -> val),
     CUBIC_CENTIMETER("cm³", val -> val * 0.001, val -> val * 1000.0),
@@ -32,7 +31,7 @@ public enum VolumeUnits implements Unit {
     }
 
     @Override
-    public VolumeUnits getBaseUnit() {
+    public VolumeUnit getBaseUnit() {
         return CUBIC_METER;
     }
 
@@ -46,7 +45,7 @@ public enum VolumeUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static VolumeUnits fromSymbol(String rawSymbol) {
+    public static VolumeUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (VolumeUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

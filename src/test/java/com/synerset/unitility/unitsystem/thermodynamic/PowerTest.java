@@ -86,11 +86,11 @@ class PowerTest {
     @DisplayName("should have W as base unit")
     void shouldHaveWattAsBaseUnit() {
         // Given
-        PowerUnits expectedBaseUnit = PowerUnits.WATT;
+        PowerUnit expectedBaseUnit = PowerUnits.WATT;
 
         // When
         Power powerWatt = Power.ofWatts(10);
-        PowerUnits actualBaseUnit = powerWatt.getUnitType().getBaseUnit();
+        PowerUnit actualBaseUnit = powerWatt.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

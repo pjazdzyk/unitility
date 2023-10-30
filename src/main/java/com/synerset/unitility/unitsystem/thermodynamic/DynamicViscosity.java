@@ -4,25 +4,25 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits> {
+public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnit> {
 
     private final double value;
     private final double baseValue;
-    private final DynamicViscosityUnits unitType;
+    private final DynamicViscosityUnit unitType;
 
-    public DynamicViscosity(double value, DynamicViscosityUnits unitType) {
+    public DynamicViscosity(double value, DynamicViscosityUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static DynamicViscosity of(double value, DynamicViscosityUnits unit) {
+    public static DynamicViscosity of(double value, DynamicViscosityUnit unit) {
         return new DynamicViscosity(value, unit);
     }
 
     public static DynamicViscosity of(double value, String unitSymbol) {
-        DynamicViscosityUnits resolvedUnit = DynamicViscosityUnits.fromSymbol(unitSymbol);
+        DynamicViscosityUnit resolvedUnit = DynamicViscosityUnits.fromSymbol(unitSymbol);
         return new DynamicViscosity(value, resolvedUnit);
     }
 
@@ -49,7 +49,7 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits>
     }
 
     @Override
-    public DynamicViscosityUnits getUnitType() {
+    public DynamicViscosityUnit getUnitType() {
         return unitType;
     }
 
@@ -60,7 +60,7 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnits>
     }
 
     @Override
-    public DynamicViscosity toUnit(DynamicViscosityUnits targetUnit) {
+    public DynamicViscosity toUnit(DynamicViscosityUnit targetUnit) {
         double valueInPascalSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascalSecond);
         return DynamicViscosity.of(valueInTargetUnit, targetUnit);

@@ -1,10 +1,9 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum ReynoldsNumberUnits implements Unit {
+public enum ReynoldsNumberUnits implements ReynoldsNumberUnit {
 
     DIMENSIONLESS("", val -> val, val -> val);
 
@@ -24,7 +23,7 @@ public enum ReynoldsNumberUnits implements Unit {
     }
 
     @Override
-    public ReynoldsNumberUnits getBaseUnit() {
+    public ReynoldsNumberUnit getBaseUnit() {
         return DIMENSIONLESS;
     }
 

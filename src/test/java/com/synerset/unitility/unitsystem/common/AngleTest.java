@@ -30,11 +30,11 @@ class AngleTest {
     @DisplayName("should have DEGREES as base unit")
     void shouldHaveDegreesAsBaseUnit() {
         // Given
-        AngleUnits expectedBaseUnit = AngleUnits.DEGREES;
+        AngleUnit expectedBaseUnit = AngleUnits.DEGREES;
 
         // When
         Angle angleInRadians = Angle.ofRadians(10);
-        AngleUnits actualBaseUnit = angleInRadians.getUnitType().getBaseUnit();
+        AngleUnit actualBaseUnit = angleInRadians.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

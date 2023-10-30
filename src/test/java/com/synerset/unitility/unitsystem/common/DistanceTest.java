@@ -121,11 +121,11 @@ class DistanceTest {
     @DisplayName("should have m as base unit")
     void shouldHaveMetersAsBaseUnit() {
         // Given
-        DistanceUnits expectedBaseUnit = DistanceUnits.METER;
+        DistanceUnit expectedBaseUnit = DistanceUnits.METER;
 
         // When
         Distance DistanceInMiles = Distance.ofMiles(10);
-        DistanceUnits actualBaseUnit = DistanceInMiles.getUnitType().getBaseUnit();
+        DistanceUnit actualBaseUnit = DistanceInMiles.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -50,11 +50,11 @@ class DensityTest {
     @DisplayName("should have kg/m³ as base unit")
     void shouldHaveKilogramPerCubicMeterAsBaseUnit() {
         // Given
-        DensityUnits expectedBaseUnit = DensityUnits.KILOGRAM_PER_CUBIC_METER;
+        DensityUnit expectedBaseUnit = DensityUnits.KILOGRAM_PER_CUBIC_METER;
 
         // When
         Density densityInLbPerFt3 = Density.ofPoundPerCubicFoot(10);
-        DensityUnits actualBaseUnit = densityInLbPerFt3.getUnitType().getBaseUnit();
+        DensityUnit actualBaseUnit = densityInLbPerFt3.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

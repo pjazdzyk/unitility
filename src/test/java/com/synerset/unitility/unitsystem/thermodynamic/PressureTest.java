@@ -121,11 +121,11 @@ class PressureTest {
     @DisplayName("should have Pa as base unit")
     void shouldHavePascalAsBaseUnit() {
         // Given
-        PressureUnits expectedBaseUnit = PressureUnits.PASCAL;
+        PressureUnit expectedBaseUnit = PressureUnits.PASCAL;
 
         // When
         Pressure pressureInPsi = Pressure.ofPsi(10);
-        PressureUnits actualBaseUnit = pressureInPsi.getUnitType().getBaseUnit();
+        PressureUnit actualBaseUnit = pressureInPsi.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

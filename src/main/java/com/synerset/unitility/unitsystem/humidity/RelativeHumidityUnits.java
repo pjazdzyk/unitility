@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.humidity;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum RelativeHumidityUnits implements Unit {
+public enum RelativeHumidityUnits implements RelativeHumidityUnit {
 
     PERCENT("%", val -> val, val -> val),
     DECIMAL("", val -> val * 100, val -> val / 100);
@@ -26,7 +25,7 @@ public enum RelativeHumidityUnits implements Unit {
     }
 
     @Override
-    public RelativeHumidityUnits getBaseUnit() {
+    public RelativeHumidityUnit getBaseUnit() {
         return PERCENT;
     }
 
@@ -40,7 +39,7 @@ public enum RelativeHumidityUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static RelativeHumidityUnits fromSymbol(String rawSymbol) {
+    public static RelativeHumidityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
             return DECIMAL;
         }

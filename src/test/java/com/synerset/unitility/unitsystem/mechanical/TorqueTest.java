@@ -86,11 +86,11 @@ class TorqueTest {
     @DisplayName("should have Nm as base unit")
     void shouldHaveNewtonMetersAsBaseUnit() {
         // Given
-        TorqueUnits expectedBaseUnit = TorqueUnits.NEWTON_METER;
+        TorqueUnit expectedBaseUnit = TorqueUnits.NEWTON_METER;
 
         // When
         Torque torqueInNewtonMeters = Torque.ofNewtonMeters(10);
-        TorqueUnits actualBaseUnit = torqueInNewtonMeters.getUnitType().getBaseUnit();
+        TorqueUnit actualBaseUnit = torqueInNewtonMeters.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

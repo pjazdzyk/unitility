@@ -68,11 +68,11 @@ class MassFlowTest {
     @DisplayName("should have kg/s as base unit")
     void shouldHaveSquareMeterPerSecondAsBaseUnit() {
         // Given
-        MassFlowUnits expectedBaseUnit = MassFlowUnits.KILOGRAM_PER_SECOND;
+        MassFlowUnit expectedBaseUnit = MassFlowUnits.KILOGRAM_PER_SECOND;
 
         // When
         MassFlow massFlowInLbPerSec = MassFlow.ofPoundsPerSecond(10);
-        MassFlowUnits actualBaseUnit = massFlowInLbPerSec.getUnitType().getBaseUnit();
+        MassFlowUnit actualBaseUnit = massFlowInLbPerSec.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -4,20 +4,20 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Angle implements PhysicalQuantity<AngleUnits> {
+public class Angle implements PhysicalQuantity<AngleUnit> {
 
     private final double value;
     private final double baseValue;
-    private final AngleUnits unitType;
+    private final AngleUnit unitType;
 
-    public Angle(double value, AngleUnits unitType) {
+    public Angle(double value, AngleUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Angle of(double value, AngleUnits unit) {
+    public static Angle of(double value, AngleUnit unit) {
         return new Angle(value, unit);
     }
     public static Angle of(double value, String unitSymbol) {
@@ -44,7 +44,7 @@ public class Angle implements PhysicalQuantity<AngleUnits> {
     }
 
     @Override
-    public AngleUnits getUnitType() {
+    public AngleUnit getUnitType() {
         return unitType;
     }
 
@@ -55,7 +55,7 @@ public class Angle implements PhysicalQuantity<AngleUnits> {
     }
 
     @Override
-    public Angle toUnit(AngleUnits targetUnit) {
+    public Angle toUnit(AngleUnit targetUnit) {
         double valueInDegrees = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInDegrees);
         return Angle.of(valueInTargetUnit, targetUnit);

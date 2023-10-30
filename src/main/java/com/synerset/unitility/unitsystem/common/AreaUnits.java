@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum AreaUnits implements Unit {
+public enum AreaUnits implements AreaUnit {
 
     SQUARE_METER("m²", val -> val, val -> val),
     SQUARE_KILOMETER("km²", val -> val * 1_000_000, val -> val / 1_000_000),
@@ -49,7 +48,7 @@ public enum AreaUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static AreaUnits fromSymbol(String rawSymbol) {
+    public static AreaUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (AreaUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

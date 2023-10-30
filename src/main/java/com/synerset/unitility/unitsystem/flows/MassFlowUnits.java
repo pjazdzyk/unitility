@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.flows;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum MassFlowUnits implements Unit {
+public enum MassFlowUnits implements MassFlowUnit {
 
     KILOGRAM_PER_SECOND("kg/s", val -> val, val -> val),
     KILOGRAM_PER_HOUR("kg/h", val -> val / 3600.0, val -> val * 3600.0),
@@ -28,7 +27,7 @@ public enum MassFlowUnits implements Unit {
     }
 
     @Override
-    public MassFlowUnits getBaseUnit() {
+    public MassFlowUnit getBaseUnit() {
         return KILOGRAM_PER_SECOND;
     }
 
@@ -42,7 +41,7 @@ public enum MassFlowUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static MassFlowUnits fromSymbol(String rawSymbol) {
+    public static MassFlowUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (MassFlowUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

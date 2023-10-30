@@ -104,11 +104,11 @@ class MassTest {
     @DisplayName("should have kg as base unit")
     void shouldHaveKilogramAsBaseUnit() {
         // Given
-        MassUnits expectedBaseUnit = MassUnits.KILOGRAM;
+        MassUnit expectedBaseUnit = MassUnits.KILOGRAM;
 
         // When
         Mass massInLb = Mass.ofPounds(10);
-        MassUnits actualBaseUnit = massInLb.getUnitType().getBaseUnit();
+        MassUnit actualBaseUnit = massInLb.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
