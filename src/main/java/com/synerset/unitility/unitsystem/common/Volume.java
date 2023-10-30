@@ -4,25 +4,25 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Volume implements PhysicalQuantity<VolumeUnits> {
+public class Volume implements PhysicalQuantity<VolumeUnit> {
     public static final Volume PHYSICAL_MIN_LIMIT = Volume.ofCubicMeters(0);
     private final double value;
     private final double baseValue;
-    private final VolumeUnits unitType;
+    private final VolumeUnit unitType;
 
-    public Volume(double value, VolumeUnits unit) {
+    public Volume(double value, VolumeUnit unit) {
         this.value = value;
         this.unitType = unit;
         this.baseValue = unit.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Volume of(double value, VolumeUnits unit) {
+    public static Volume of(double value, VolumeUnit unit) {
         return new Volume(value, unit);
     }
 
     public static Volume of(double value, String unitSymbol) {
-        VolumeUnits resolvedUnit = VolumeUnits.fromSymbol(unitSymbol);
+        VolumeUnit resolvedUnit = VolumeUnits.fromSymbol(unitSymbol);
         return new Volume(value, resolvedUnit);
     }
     
@@ -69,7 +69,7 @@ public class Volume implements PhysicalQuantity<VolumeUnits> {
     }
 
     @Override
-    public VolumeUnits getUnitType() {
+    public VolumeUnit getUnitType() {
         return unitType;
     }
 
@@ -80,7 +80,7 @@ public class Volume implements PhysicalQuantity<VolumeUnits> {
     }
 
     @Override
-    public Volume toUnit(VolumeUnits targetUnit) {
+    public Volume toUnit(VolumeUnit targetUnit) {
         double valueInCubicMeter = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInCubicMeter);
         return Volume.of(valueInTargetUnit, targetUnit);

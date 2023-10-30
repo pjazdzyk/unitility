@@ -4,24 +4,24 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class ThermalConductivity implements PhysicalQuantity<ThermalConductivityUnits> {
+public class ThermalConductivity implements PhysicalQuantity<ThermalConductivityUnit> {
     private final double value;
     private final double baseValue;
-    private final ThermalConductivityUnits unitType;
+    private final ThermalConductivityUnit unitType;
 
-    public ThermalConductivity(double value, ThermalConductivityUnits unitType) {
+    public ThermalConductivity(double value, ThermalConductivityUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static ThermalConductivity of(double value, ThermalConductivityUnits unit) {
+    public static ThermalConductivity of(double value, ThermalConductivityUnit unit) {
         return new ThermalConductivity(value, unit);
     }
 
     public static ThermalConductivity of(double value, String unitSymbol) {
-        ThermalConductivityUnits resolvedUnit = ThermalConductivityUnits.fromSymbol(unitSymbol);
+        ThermalConductivityUnit resolvedUnit = ThermalConductivityUnits.fromSymbol(unitSymbol);
         return new ThermalConductivity(value, resolvedUnit);
     }
     
@@ -48,7 +48,7 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
     }
 
     @Override
-    public ThermalConductivityUnits getUnitType() {
+    public ThermalConductivityUnit getUnitType() {
         return unitType;
     }
 
@@ -59,7 +59,7 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
     }
 
     @Override
-    public ThermalConductivity toUnit(ThermalConductivityUnits targetUnit) {
+    public ThermalConductivity toUnit(ThermalConductivityUnit targetUnit) {
         double valueInWattsPerMeterKelvin = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInWattsPerMeterKelvin);
         return ThermalConductivity.of(valueInTargetUnit, targetUnit);

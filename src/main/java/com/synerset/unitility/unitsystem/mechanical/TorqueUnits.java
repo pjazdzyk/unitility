@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum TorqueUnits implements Unit {
+public enum TorqueUnits implements TorqueUnit {
 
     NEWTON_METER("N·m", val -> val, val -> val),
     MILLINEWTON_METER("mN·m", val -> val * 0.001, val -> val * 1000),

@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.humidity;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum HumidityRatioUnits implements Unit {
+public enum HumidityRatioUnits implements HumidityRatioUnit {
 
     KILOGRAM_PER_KILOGRAM("kg/kg", val -> val, val -> val),
     POUND_PER_POUND("lb/lb", val -> val / 2.20462262184878, val -> val * 2.20462262184878);
@@ -26,7 +25,7 @@ public enum HumidityRatioUnits implements Unit {
     }
 
     @Override
-    public HumidityRatioUnits getBaseUnit() {
+    public HumidityRatioUnit getBaseUnit() {
         return KILOGRAM_PER_KILOGRAM;
     }
 
@@ -40,7 +39,7 @@ public enum HumidityRatioUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static HumidityRatioUnits fromSymbol(String rawSymbol) {
+    public static HumidityRatioUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (HumidityRatioUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum ForceUnits implements Unit {
+public enum ForceUnits implements ForceUnit {
 
     NEWTON("N", val -> val, val -> val),
     KILONEWTON("kN", val -> val * 1000.0, val -> val / 1000.0),
@@ -30,7 +29,7 @@ public enum ForceUnits implements Unit {
     }
 
     @Override
-    public ForceUnits getBaseUnit() {
+    public ForceUnit getBaseUnit() {
         return NEWTON;
     }
 
@@ -44,7 +43,7 @@ public enum ForceUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static ForceUnits fromSymbol(String rawSymbol) {
+    public static ForceUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (ForceUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

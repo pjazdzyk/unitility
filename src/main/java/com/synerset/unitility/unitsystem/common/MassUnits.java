@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum MassUnits implements Unit {
+public enum MassUnits implements MassUnit {
 
     KILOGRAM("kg", val -> val, val -> val),
     GRAM("g", val -> val * 0.001, val -> val / 0.001),
@@ -30,7 +29,7 @@ public enum MassUnits implements Unit {
     }
 
     @Override
-    public MassUnits getBaseUnit() {
+    public MassUnit getBaseUnit() {
         return KILOGRAM;
     }
 
@@ -44,7 +43,7 @@ public enum MassUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static MassUnits fromSymbol(String rawSymbol) {
+    public static MassUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (MassUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

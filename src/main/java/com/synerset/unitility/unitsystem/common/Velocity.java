@@ -4,25 +4,25 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Velocity implements PhysicalQuantity<VelocityUnits> {
+public class Velocity implements PhysicalQuantity<VelocityUnit> {
 
     private final double value;
     private final double baseValue;
-    private final VelocityUnits unitType;
+    private final VelocityUnit unitType;
 
-    public Velocity(double value, VelocityUnits unitType) {
+    public Velocity(double value, VelocityUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Velocity of(double value, VelocityUnits unit) {
+    public static Velocity of(double value, VelocityUnit unit) {
         return new Velocity(value, unit);
     }
 
     public static Velocity of(double value, String unitSymbol) {
-        VelocityUnits resolvedUnit = VelocityUnits.fromSymbol(unitSymbol);
+        VelocityUnit resolvedUnit = VelocityUnits.fromSymbol(unitSymbol);
         return new Velocity(value, resolvedUnit);
     }
     
@@ -69,7 +69,7 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
     }
 
     @Override
-    public VelocityUnits getUnitType() {
+    public VelocityUnit getUnitType() {
         return unitType;
     }
 
@@ -80,7 +80,7 @@ public class Velocity implements PhysicalQuantity<VelocityUnits> {
     }
 
     @Override
-    public Velocity toUnit(VelocityUnits targetUnit) {
+    public Velocity toUnit(VelocityUnit targetUnit) {
         double valueInMetersPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInMetersPerSecond);
         return Velocity.of(valueInTargetUnit, targetUnit);

@@ -4,10 +4,10 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnits> {
+public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnit> {
     private final double value;
     private final double baseValue;
-    private final GrashofNumberUnits unitType;
+    private final GrashofNumberUnit unitType;
 
     public GrashofNumber(double value) {
         this.value = value;
@@ -31,7 +31,7 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnits> {
     }
 
     @Override
-    public GrashofNumberUnits getUnitType() {
+    public GrashofNumberUnit getUnitType() {
         return unitType;
     }
 
@@ -41,7 +41,7 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnits> {
     }
 
     @Override
-    public GrashofNumber toUnit(GrashofNumberUnits targetUnit) {
+    public GrashofNumber toUnit(GrashofNumberUnit targetUnit) {
         return this;
     }
 

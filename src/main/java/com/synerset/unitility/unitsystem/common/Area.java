@@ -4,26 +4,26 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Area implements PhysicalQuantity<AreaUnits> {
+public class Area implements PhysicalQuantity<AreaUnit> {
 
     public static final Area PHYSICAL_MIN_LIMIT = Area.ofSquareMeters(0);
     private final double value;
     private final double baseValue;
-    private final AreaUnits unitType;
+    private final AreaUnit unitType;
 
-    public Area(double value, AreaUnits unitType) {
+    public Area(double value, AreaUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Area of(double value, AreaUnits unit) {
+    public static Area of(double value, AreaUnit unit) {
         return new Area(value, unit);
     }
 
     public static Area of(double value, String unitSymbol) {
-        AreaUnits resolvedUnit = AreaUnits.fromSymbol(unitSymbol);
+        AreaUnit resolvedUnit = AreaUnits.fromSymbol(unitSymbol);
         return new Area(value, resolvedUnit);
     }
     
@@ -82,7 +82,7 @@ public class Area implements PhysicalQuantity<AreaUnits> {
     }
 
     @Override
-    public AreaUnits getUnitType() {
+    public AreaUnit getUnitType() {
         return unitType;
     }
 
@@ -93,7 +93,7 @@ public class Area implements PhysicalQuantity<AreaUnits> {
     }
 
     @Override
-    public Area toUnit(AreaUnits targetUnit) {
+    public Area toUnit(AreaUnit targetUnit) {
         double valueInSquareMeters = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInSquareMeters);
         return Area.of(valueInTargetUnit, targetUnit);

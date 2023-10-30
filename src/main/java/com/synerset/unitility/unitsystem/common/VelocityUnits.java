@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum VelocityUnits implements Unit {
+public enum VelocityUnits implements VelocityUnit {
 
     METER_PER_SECOND("m/s", val -> val, val -> val),
     CENTIMETER_PER_SECOND("cm/s", val -> val / 100.0, val -> val * 100.0),
@@ -32,7 +31,7 @@ public enum VelocityUnits implements Unit {
     }
 
     @Override
-    public VelocityUnits getBaseUnit() {
+    public VelocityUnit getBaseUnit() {
         return METER_PER_SECOND;
     }
 
@@ -46,7 +45,7 @@ public enum VelocityUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static VelocityUnits fromSymbol(String rawSymbol) {
+    public static VelocityUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (VelocityUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

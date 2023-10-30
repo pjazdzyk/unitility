@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum AngleUnits implements Unit {
+public enum AngleUnits implements AngleUnit {
 
     DEGREES("°", val -> val, val -> val),
     RADIANS("rad", Math::toDegrees, Math::toRadians);

@@ -50,11 +50,11 @@ class SpecificEnthalpyTest {
     @DisplayName("should have J/kg as base unit")
     void shouldHaveJoulesPerKilogramAsBaseUnit() {
         // Given
-        SpecificEnthalpyUnits expectedBaseUnit = SpecificEnthalpyUnits.JOULE_PER_KILOGRAM;
+        SpecificEnthalpyUnit expectedBaseUnit = SpecificEnthalpyUnits.JOULE_PER_KILOGRAM;
 
         // When
         SpecificEnthalpy specificEnthalpyInBTUPerLb = SpecificEnthalpy.ofBTUPerPound(0.1);
-        SpecificEnthalpyUnits actualBaseUnit = specificEnthalpyInBTUPerLb.getUnitType().getBaseUnit();
+        SpecificEnthalpyUnit actualBaseUnit = specificEnthalpyInBTUPerLb.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum DynamicViscosityUnits implements Unit {
+public enum DynamicViscosityUnits implements DynamicViscosityUnit {
 
     KILOGRAM_PER_METER_SECOND("kg/(m·s)", val -> val, val -> val),
     PASCAL_SECOND("Pa·s", val -> val, val -> val),
@@ -27,7 +26,7 @@ public enum DynamicViscosityUnits implements Unit {
     }
 
     @Override
-    public DynamicViscosityUnits getBaseUnit() {
+    public DynamicViscosityUnit getBaseUnit() {
         return KILOGRAM_PER_METER_SECOND;
     }
 
@@ -41,7 +40,7 @@ public enum DynamicViscosityUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static DynamicViscosityUnits fromSymbol(String rawSymbol) {
+    public static DynamicViscosityUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (DynamicViscosityUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

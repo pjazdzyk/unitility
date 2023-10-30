@@ -49,11 +49,11 @@ class DynamicViscosityTest {
     @DisplayName("should have kg/(m·s) as base unit")
     void shouldHaveKilogramPerMeterSecondAsBaseUnit() {
         // Given
-        DynamicViscosityUnits expectedBaseUnit = DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND;
+        DynamicViscosityUnit expectedBaseUnit = DynamicViscosityUnits.KILOGRAM_PER_METER_SECOND;
 
         // When
         DynamicViscosity dynVisInPoise = DynamicViscosity.of(10, DynamicViscosityUnits.POISE);
-        DynamicViscosityUnits actualBaseUnit = dynVisInPoise.getUnitType().getBaseUnit();
+        DynamicViscosityUnit actualBaseUnit = dynVisInPoise.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

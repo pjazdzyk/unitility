@@ -4,26 +4,26 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnits> {
+public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnit> {
 
     public static final HumidityRatio HUM_RATIO_MIN_LIMIT = HumidityRatio.ofKilogramPerKilogram(0);
     private final double value;
     private final double baseValue;
-    private final HumidityRatioUnits unitType;
+    private final HumidityRatioUnit unitType;
 
-    public HumidityRatio(double value, HumidityRatioUnits unitType) {
+    public HumidityRatio(double value, HumidityRatioUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static HumidityRatio of(double value, HumidityRatioUnits unit) {
+    public static HumidityRatio of(double value, HumidityRatioUnit unit) {
         return new HumidityRatio(value, unit);
     }
 
     public static HumidityRatio of(double value, String unitSymbol) {
-        HumidityRatioUnits resolvedUnit = HumidityRatioUnits.fromSymbol(unitSymbol);
+        HumidityRatioUnit resolvedUnit = HumidityRatioUnits.fromSymbol(unitSymbol);
         return new HumidityRatio(value, resolvedUnit);
     }
     
@@ -46,7 +46,7 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnits> {
     }
 
     @Override
-    public HumidityRatioUnits getUnitType() {
+    public HumidityRatioUnit getUnitType() {
         return unitType;
     }
 
@@ -57,7 +57,7 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnits> {
     }
 
     @Override
-    public HumidityRatio toUnit(HumidityRatioUnits targetUnit) {
+    public HumidityRatio toUnit(HumidityRatioUnit targetUnit) {
         double valueInKgKg = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKgKg);
         return HumidityRatio.of(valueInTargetUnit, targetUnit);

@@ -32,11 +32,11 @@ class ThermalDiffusivityTest {
     @DisplayName("should have square meter per second as base unit")
     void shouldHaveSquareMeterPerSecondAsBaseUnit() {
         // Given
-        ThermalDiffusivityUnits expectedBaseUnit = ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND;
+        ThermalDiffusivityUnit expectedBaseUnit = ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND;
 
         // When
         ThermalDiffusivity diffusivityInSquareFeetPerSecond = ThermalDiffusivity.ofSquareFeetPerSecond(10);
-        ThermalDiffusivityUnits actualBaseUnit = diffusivityInSquareFeetPerSecond.getUnitType().getBaseUnit();
+        ThermalDiffusivityUnit actualBaseUnit = diffusivityInSquareFeetPerSecond.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

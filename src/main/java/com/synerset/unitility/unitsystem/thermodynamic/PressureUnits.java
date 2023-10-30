@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum PressureUnits implements Unit {
+public enum PressureUnits implements PressureUnit {
 
     PASCAL("Pa", val -> val, val -> val),
     HECTOPASCAL("hPa", val -> val * 1.0E2, val -> val / 1.0E2),
@@ -31,7 +30,7 @@ public enum PressureUnits implements Unit {
     }
 
     @Override
-    public PressureUnits getBaseUnit() {
+    public PressureUnit getBaseUnit() {
         return PASCAL;
     }
 
@@ -45,7 +44,7 @@ public enum PressureUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static PressureUnits fromSymbol(String rawSymbol) {
+    public static PressureUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (PressureUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

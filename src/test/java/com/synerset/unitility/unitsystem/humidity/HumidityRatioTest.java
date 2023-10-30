@@ -35,11 +35,11 @@ class HumidityRatioTest {
     @DisplayName("should have kg/kg as base unit")
     void shouldHaveKilogramPerKilogramBaseUnit() {
         // Given
-        HumidityRatioUnits expectedBaseUnit = HumidityRatioUnits.KILOGRAM_PER_KILOGRAM;
+        HumidityRatioUnit expectedBaseUnit = HumidityRatioUnits.KILOGRAM_PER_KILOGRAM;
 
         // When
         HumidityRatio humidityKgPerKg = HumidityRatio.ofPoundPerPound(10);
-        HumidityRatioUnits actualBaseUnit = humidityKgPerKg.getUnitType().getBaseUnit();
+        HumidityRatioUnit actualBaseUnit = humidityKgPerKg.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

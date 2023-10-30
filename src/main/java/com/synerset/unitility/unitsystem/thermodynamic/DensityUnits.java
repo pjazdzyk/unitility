@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum DensityUnits implements Unit {
+public enum DensityUnits implements DensityUnit {
 
     KILOGRAM_PER_CUBIC_METER("kg/m³", val -> val, val -> val),
     POUND_PER_CUBIC_FOOT("lb/ft³", val -> val * 16.0184633739599, val -> val / 16.0184633739599),
@@ -27,7 +26,7 @@ public enum DensityUnits implements Unit {
     }
 
     @Override
-    public DensityUnits getBaseUnit() {
+    public DensityUnit getBaseUnit() {
         return KILOGRAM_PER_CUBIC_METER;
     }
 
@@ -41,7 +40,7 @@ public enum DensityUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static DensityUnits fromSymbol(String rawSymbol) {
+    public static DensityUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (DensityUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

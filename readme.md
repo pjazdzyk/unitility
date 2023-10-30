@@ -29,7 +29,7 @@ compromising data integrity through the utilization of immutable objects.
 
 ### INSTALLATION
 
-Just copy Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
+Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
 [UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.2.0/jar?eh=).
 
@@ -43,7 +43,7 @@ check maven central repository:
 
 ## Tech
 
-<strong>Unitility</strong> is developed using following technologies: <br>
+<strong>Unitility</strong> is developed using the following technologies: <br>
 
 Core: <br>
 ![image](https://img.shields.io/badge/17-Java-orange?style=for-the-badge) &nbsp;
@@ -59,8 +59,10 @@ CI/CD:<br>
 
 ## Examples & user guide
 
+PhysicalQuantity is a composite of a unit and a value.
+
 **Creating quantities:**<br>
-Below is a simple example how to work with units and convert property from one unit to another or to convert as doubles
+Below is a simple example of how to work with units and convert property from one unit to another or to convert as doubles
 for further calculations:
 
 ```java

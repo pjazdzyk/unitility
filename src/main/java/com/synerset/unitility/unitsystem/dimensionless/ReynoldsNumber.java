@@ -4,14 +4,14 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnits> {
+public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnit> {
 
     public static final ReynoldsNumber PIPE_TURBULENT_THRESHOLD = ReynoldsNumber.of(2300);
     public static final ReynoldsNumber PLATE_TURBULENT_THRESHOLD = ReynoldsNumber.of(5 * 10E5);
     public static final ReynoldsNumber AERO_TURBULENT_THRESHOLD = ReynoldsNumber.of(2 * 10E6);
     private final double value;
     private final double baseValue;
-    private final ReynoldsNumberUnits unitType;
+    private final ReynoldsNumberUnit unitType;
 
     public ReynoldsNumber(double value) {
         this.value = value;
@@ -35,7 +35,7 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnits> {
     }
 
     @Override
-    public ReynoldsNumberUnits getUnitType() {
+    public ReynoldsNumberUnit getUnitType() {
         return unitType;
     }
 
@@ -45,7 +45,7 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnits> {
     }
 
     @Override
-    public ReynoldsNumber toUnit(ReynoldsNumberUnits targetUnit) {
+    public ReynoldsNumber toUnit(ReynoldsNumberUnit targetUnit) {
         return this;
     }
 

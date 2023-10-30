@@ -50,11 +50,11 @@ class SpecificHeatTest {
     @DisplayName("should have J/(kg·K) as base unit")
     void shouldHaveJoulesPerKilogramKelvinAsBaseUnit() {
         // Given
-        SpecificHeatUnits expectedBaseUnit = SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN;
+        SpecificHeatUnit expectedBaseUnit = SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN;
 
         // When
         SpecificHeat specificHeatInBTUPerLbF = SpecificHeat.ofBTUPerPoundFahrenheit(0.1);
-        SpecificHeatUnits actualBaseUnit = specificHeatInBTUPerLbF.getUnitType().getBaseUnit();
+        SpecificHeatUnit actualBaseUnit = specificHeatInBTUPerLbF.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

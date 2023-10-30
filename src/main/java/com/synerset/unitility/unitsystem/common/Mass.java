@@ -4,26 +4,26 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Mass implements PhysicalQuantity<MassUnits> {
+public class Mass implements PhysicalQuantity<MassUnit> {
 
     public static final Mass PHYSICAL_MIN_LIMIT = Mass.ofKilograms(0);
     private final double value;
     private final double baseValue;
-    private final MassUnits unitType;
+    private final MassUnit unitType;
 
-    public Mass(double value, MassUnits unitType) {
+    public Mass(double value, MassUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Mass of(double value, MassUnits unit) {
+    public static Mass of(double value, MassUnit unit) {
         return new Mass(value, unit);
     }
 
     public static Mass of(double value, String unitSymbol) {
-        MassUnits resolvedUnit = MassUnits.fromSymbol(unitSymbol);
+        MassUnit resolvedUnit = MassUnits.fromSymbol(unitSymbol);
         return new Mass(value, resolvedUnit);
     }
     
@@ -62,7 +62,7 @@ public class Mass implements PhysicalQuantity<MassUnits> {
     }
 
     @Override
-    public MassUnits getUnitType() {
+    public MassUnit getUnitType() {
         return unitType;
     }
 
@@ -73,7 +73,7 @@ public class Mass implements PhysicalQuantity<MassUnits> {
     }
 
     @Override
-    public Mass toUnit(MassUnits targetUnit) {
+    public Mass toUnit(MassUnit targetUnit) {
         double valueInKilogram = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogram);
         return Mass.of(valueInTargetUnit, targetUnit);

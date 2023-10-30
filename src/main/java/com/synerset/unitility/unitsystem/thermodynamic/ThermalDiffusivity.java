@@ -4,25 +4,25 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUnits> {
+public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUnit> {
 
     private final double value;
     private final double baseValue;
-    private final ThermalDiffusivityUnits unitType;
+    private final ThermalDiffusivityUnit unitType;
 
-    public ThermalDiffusivity(double value, ThermalDiffusivityUnits unitType) {
+    public ThermalDiffusivity(double value, ThermalDiffusivityUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static ThermalDiffusivity of(double value, ThermalDiffusivityUnits unit) {
+    public static ThermalDiffusivity of(double value, ThermalDiffusivityUnit unit) {
         return new ThermalDiffusivity(value, unit);
     }
 
     public static ThermalDiffusivity of(double value, String unitSymbol) {
-        ThermalDiffusivityUnits resolvedUnit = ThermalDiffusivityUnits.fromSymbol(unitSymbol);
+        ThermalDiffusivityUnit resolvedUnit = ThermalDiffusivityUnits.fromSymbol(unitSymbol);
         return new ThermalDiffusivity(value, resolvedUnit);
     }
     
@@ -45,7 +45,7 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
     }
 
     @Override
-    public ThermalDiffusivityUnits getUnitType() {
+    public ThermalDiffusivityUnit getUnitType() {
         return unitType;
     }
 
@@ -56,7 +56,7 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
     }
 
     @Override
-    public ThermalDiffusivity toUnit(ThermalDiffusivityUnits targetUnit) {
+    public ThermalDiffusivity toUnit(ThermalDiffusivityUnit targetUnit) {
         double valueInSquareMeterPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInSquareMeterPerSecond);
         return ThermalDiffusivity.of(valueInTargetUnit, targetUnit);

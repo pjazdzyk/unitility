@@ -4,25 +4,25 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Energy implements PhysicalQuantity<EnergyUnits> {
+public class Energy implements PhysicalQuantity<EnergyUnit> {
 
     private final double value;
     private final double baseValue;
-    private final EnergyUnits unitType;
+    private final EnergyUnit unitType;
 
-    public Energy(double value, EnergyUnits unitType) {
+    public Energy(double value, EnergyUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Energy of(double value, EnergyUnits unit) {
+    public static Energy of(double value, EnergyUnit unit) {
         return new Energy(value, unit);
     }
 
     public static Energy of(double value, String unitSymbol) {
-        EnergyUnits resolvedUnit = EnergyUnits.fromSymbol(unitSymbol);
+        EnergyUnit resolvedUnit = EnergyUnits.fromSymbol(unitSymbol);
         return new Energy(value, resolvedUnit);
     }
     
@@ -73,7 +73,7 @@ public class Energy implements PhysicalQuantity<EnergyUnits> {
     }
 
     @Override
-    public EnergyUnits getUnitType() {
+    public EnergyUnit getUnitType() {
         return unitType;
     }
 
@@ -84,7 +84,7 @@ public class Energy implements PhysicalQuantity<EnergyUnits> {
     }
 
     @Override
-    public Energy toUnit(EnergyUnits targetUnit) {
+    public Energy toUnit(EnergyUnit targetUnit) {
         double valueInJoules = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoules);
         return Energy.of(valueInTargetUnit, targetUnit);

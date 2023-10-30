@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum PowerUnits implements Unit {
+public enum PowerUnits implements PowerUnit {
 
     WATT("W", val -> val, val -> val),
     KILOWATT("kW", val -> val * 1000.0, val -> val / 1000.0),
@@ -43,7 +42,7 @@ public enum PowerUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static PowerUnits fromSymbol(String rawSymbol) {
+    public static PowerUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (PowerUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

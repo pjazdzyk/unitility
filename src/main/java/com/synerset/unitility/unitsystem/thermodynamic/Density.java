@@ -4,26 +4,26 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Density implements PhysicalQuantity<DensityUnits> {
+public class Density implements PhysicalQuantity<DensityUnit> {
 
     public static final Density PHYSICAL_MIN_LIMIT = Density.ofKilogramPerCubicMeter(0);
     private final double value;
     private final double baseValue;
-    private final DensityUnits unitType;
+    private final DensityUnit unitType;
 
-    public Density(double value, DensityUnits unitType) {
+    public Density(double value, DensityUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Density of(double value, DensityUnits unit) {
+    public static Density of(double value, DensityUnit unit) {
         return new Density(value, unit);
     }
 
     public static Density of(double value, String unitSymbol) {
-        DensityUnits resolvedUnit = DensityUnits.fromSymbol(unitSymbol);
+        DensityUnit resolvedUnit = DensityUnits.fromSymbol(unitSymbol);
         return new Density(value, resolvedUnit);
     }
     
@@ -46,7 +46,7 @@ public class Density implements PhysicalQuantity<DensityUnits> {
     }
 
     @Override
-    public DensityUnits getUnitType() {
+    public DensityUnit getUnitType() {
         return unitType;
     }
 
@@ -57,7 +57,7 @@ public class Density implements PhysicalQuantity<DensityUnits> {
     }
 
     @Override
-    public Density toUnit(DensityUnits targetUnit) {
+    public Density toUnit(DensityUnit targetUnit) {
         double valueInKGpM3 = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKGpM3);
         return Density.of(valueInTargetUnit, targetUnit);

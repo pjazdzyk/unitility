@@ -4,25 +4,25 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class MassFlow implements PhysicalQuantity<MassFlowUnits> {
+public class MassFlow implements PhysicalQuantity<MassFlowUnit> {
 
     private final double value;
     private final double baseValue;
-    private final MassFlowUnits unitType;
+    private final MassFlowUnit unitType;
 
-    public MassFlow(double value, MassFlowUnits unitType) {
+    public MassFlow(double value, MassFlowUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static MassFlow of(double value, MassFlowUnits unit) {
+    public static MassFlow of(double value, MassFlowUnit unit) {
         return new MassFlow(value, unit);
     }
 
     public static MassFlow of(double value, String unitSymbol) {
-        MassFlowUnits resolvedUnit = MassFlowUnits.fromSymbol(unitSymbol);
+        MassFlowUnit resolvedUnit = MassFlowUnits.fromSymbol(unitSymbol);
         return new MassFlow(value, resolvedUnit);
     }
     
@@ -53,7 +53,7 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnits> {
     }
 
     @Override
-    public MassFlowUnits getUnitType() {
+    public MassFlowUnit getUnitType() {
         return unitType;
     }
 
@@ -64,7 +64,7 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnits> {
     }
 
     @Override
-    public MassFlow toUnit(MassFlowUnits targetUnit) {
+    public MassFlow toUnit(MassFlowUnit targetUnit) {
         double valueInKilogramsPerSecond = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogramsPerSecond);
         return MassFlow.of(valueInTargetUnit, targetUnit);

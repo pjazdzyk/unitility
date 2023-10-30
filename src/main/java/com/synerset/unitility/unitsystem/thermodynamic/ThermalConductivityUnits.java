@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum ThermalConductivityUnits implements Unit {
+public enum ThermalConductivityUnits implements ThermalConductivityUnit {
 
     WATTS_PER_METER_KELVIN("W/(m·K)", val -> val, val -> val),
     KILOWATTS_PER_METER_KELVIN("kW/(m·K)", val -> val * 1000.0, val -> val / 1000.0),
@@ -27,7 +26,7 @@ public enum ThermalConductivityUnits implements Unit {
     }
 
     @Override
-    public ThermalConductivityUnits getBaseUnit() {
+    public ThermalConductivityUnit getBaseUnit() {
         return WATTS_PER_METER_KELVIN;
     }
 
@@ -41,7 +40,7 @@ public enum ThermalConductivityUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static ThermalConductivityUnits fromSymbol(String rawSymbol) {
+    public static ThermalConductivityUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (ThermalConductivityUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

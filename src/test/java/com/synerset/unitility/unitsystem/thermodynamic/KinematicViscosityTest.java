@@ -31,11 +31,11 @@ class KinematicViscosityTest {
     @DisplayName("should have m²/s as base unit")
     void shouldHaveSquareMeterPerSecondAsBaseUnit() {
         // Given
-        KinematicViscosityUnits expectedBaseUnit = KinematicViscosityUnits.SQUARE_METER_PER_SECOND;
+        KinematicViscosityUnit expectedBaseUnit = KinematicViscosityUnits.SQUARE_METER_PER_SECOND;
 
         // When
         KinematicViscosity kinematicViscosityInFt2PerSec = KinematicViscosity.ofSquareFootPerSecond(10);
-        KinematicViscosityUnits actualBaseUnit = kinematicViscosityInFt2PerSec.getUnitType().getBaseUnit();
+        KinematicViscosityUnit actualBaseUnit = kinematicViscosityInFt2PerSec.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

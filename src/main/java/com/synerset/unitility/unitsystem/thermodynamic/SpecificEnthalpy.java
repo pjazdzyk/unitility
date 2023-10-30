@@ -4,24 +4,24 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits> {
+public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnit> {
     private final double value;
     private final double baseValue;
-    private final SpecificEnthalpyUnits unitType;
+    private final SpecificEnthalpyUnit unitType;
 
-    public SpecificEnthalpy(double value, SpecificEnthalpyUnits unitType) {
+    public SpecificEnthalpy(double value, SpecificEnthalpyUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static SpecificEnthalpy of(double value, SpecificEnthalpyUnits unit) {
+    public static SpecificEnthalpy of(double value, SpecificEnthalpyUnit unit) {
         return new SpecificEnthalpy(value, unit);
     }
 
     public static SpecificEnthalpy of(double value, String unitSymbol) {
-        SpecificEnthalpyUnits resolvedUnit = SpecificEnthalpyUnits.fromSymbol(unitSymbol);
+        SpecificEnthalpyUnit resolvedUnit = SpecificEnthalpyUnits.fromSymbol(unitSymbol);
         return new SpecificEnthalpy(value, resolvedUnit);
     }
     
@@ -48,7 +48,7 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits>
     }
 
     @Override
-    public SpecificEnthalpyUnits getUnitType() {
+    public SpecificEnthalpyUnit getUnitType() {
         return unitType;
     }
 
@@ -59,7 +59,7 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnits>
     }
 
     @Override
-    public SpecificEnthalpy toUnit(SpecificEnthalpyUnits targetUnit) {
+    public SpecificEnthalpy toUnit(SpecificEnthalpyUnit targetUnit) {
         double valueInJoulePerKilogram = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoulePerKilogram);
         return SpecificEnthalpy.of(valueInTargetUnit, targetUnit);

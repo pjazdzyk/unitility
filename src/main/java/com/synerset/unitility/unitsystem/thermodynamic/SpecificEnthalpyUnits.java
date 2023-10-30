@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum SpecificEnthalpyUnits implements Unit {
+public enum SpecificEnthalpyUnits implements SpecificEnthalpyUnit {
 
     JOULE_PER_KILOGRAM("J/kg", val -> val, val -> val),
     KILOJOULE_PER_KILOGRAM("kJ/kg", val -> val * 1000, val -> val / 1000),
@@ -27,7 +26,7 @@ public enum SpecificEnthalpyUnits implements Unit {
     }
 
     @Override
-    public SpecificEnthalpyUnits getBaseUnit() {
+    public SpecificEnthalpyUnit getBaseUnit() {
         return JOULE_PER_KILOGRAM;
     }
 
@@ -41,7 +40,7 @@ public enum SpecificEnthalpyUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static SpecificEnthalpyUnits fromSymbol(String rawSymbol) {
+    public static SpecificEnthalpyUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (SpecificEnthalpyUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

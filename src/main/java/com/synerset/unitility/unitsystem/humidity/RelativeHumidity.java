@@ -4,27 +4,27 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits> {
+public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnit> {
 
     public static final RelativeHumidity RH_MIN_LIMIT = RelativeHumidity.ofPercentage(0);
     public static final RelativeHumidity RH_MAX_LIMIT = RelativeHumidity.ofPercentage(100);
     private final double value;
     private final double baseValue;
-    private final RelativeHumidityUnits unitType;
+    private final RelativeHumidityUnit unitType;
 
-    public RelativeHumidity(double value, RelativeHumidityUnits unitType) {
+    public RelativeHumidity(double value, RelativeHumidityUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static RelativeHumidity of(double value, RelativeHumidityUnits unit) {
+    public static RelativeHumidity of(double value, RelativeHumidityUnit unit) {
         return new RelativeHumidity(value, unit);
     }
 
     public static RelativeHumidity of(double value, String unitSymbol) {
-        RelativeHumidityUnits resolvedUnit = RelativeHumidityUnits.fromSymbol(unitSymbol);
+        RelativeHumidityUnit resolvedUnit = RelativeHumidityUnits.fromSymbol(unitSymbol);
         return new RelativeHumidity(value, resolvedUnit);
     }
     
@@ -47,7 +47,7 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits>
     }
 
     @Override
-    public RelativeHumidityUnits getUnitType() {
+    public RelativeHumidityUnit getUnitType() {
         return unitType;
     }
 
@@ -58,7 +58,7 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnits>
     }
 
     @Override
-    public RelativeHumidity toUnit(RelativeHumidityUnits targetUnit) {
+    public RelativeHumidity toUnit(RelativeHumidityUnit targetUnit) {
         double valueInPascal = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInPascal);
         return RelativeHumidity.of(valueInTargetUnit, targetUnit);

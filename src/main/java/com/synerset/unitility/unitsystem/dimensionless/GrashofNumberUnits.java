@@ -1,10 +1,9 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.Unit;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum GrashofNumberUnits implements Unit {
+public enum GrashofNumberUnits implements GrashofNumberUnit {
 
     DIMENSIONLESS("", val -> val, val -> val);
 
@@ -24,7 +23,7 @@ public enum GrashofNumberUnits implements Unit {
     }
 
     @Override
-    public GrashofNumberUnits getBaseUnit() {
+    public GrashofNumberUnit getBaseUnit() {
         return DIMENSIONLESS;
     }
 

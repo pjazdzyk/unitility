@@ -50,11 +50,11 @@ class MomentumTest {
     @DisplayName("should have kg·m/s as base unit")
     void shouldHaveKilogramMeterPerSecondAsBaseUnit() {
         // Given
-        MomentumUnits expectedBaseUnit = MomentumUnits.KILOGRAM_METER_PER_SECOND;
+        MomentumUnit expectedBaseUnit = MomentumUnits.KILOGRAM_METER_PER_SECOND;
 
         // When
         Momentum momentumInPoundFeetPerSecond = Momentum.ofPoundFeetPerSecond(10);
-        MomentumUnits actualBaseUnit = momentumInPoundFeetPerSecond.getUnitType().getBaseUnit();
+        MomentumUnit actualBaseUnit = momentumInPoundFeetPerSecond.getUnitType().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

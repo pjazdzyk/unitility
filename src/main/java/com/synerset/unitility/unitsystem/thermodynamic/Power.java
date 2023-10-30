@@ -4,24 +4,24 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class Power implements PhysicalQuantity<PowerUnits> {
+public class Power implements PhysicalQuantity<PowerUnit> {
     private final double value;
     private final double baseValue;
-    private final PowerUnits unitType;
+    private final PowerUnit unitType;
 
-    public Power(double value, PowerUnits unitType) {
+    public Power(double value, PowerUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static Power of(double value, PowerUnits unit) {
+    public static Power of(double value, PowerUnit unit) {
         return new Power(value, unit);
     }
 
     public static Power of(double value, String unitSymbol) {
-        PowerUnits resolvedUnit = PowerUnits.fromSymbol(unitSymbol);
+        PowerUnit resolvedUnit = PowerUnits.fromSymbol(unitSymbol);
         return new Power(value, resolvedUnit);
     }
     
@@ -56,7 +56,7 @@ public class Power implements PhysicalQuantity<PowerUnits> {
     }
 
     @Override
-    public PowerUnits getUnitType() {
+    public PowerUnit getUnitType() {
         return unitType;
     }
 
@@ -67,7 +67,7 @@ public class Power implements PhysicalQuantity<PowerUnits> {
     }
 
     @Override
-    public Power toUnit(PowerUnits targetUnit) {
+    public Power toUnit(PowerUnit targetUnit) {
         double valueInWatts = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInWatts);
         return Power.of(valueInTargetUnit, targetUnit);

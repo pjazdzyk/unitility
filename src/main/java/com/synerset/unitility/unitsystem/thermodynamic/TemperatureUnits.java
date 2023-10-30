@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum TemperatureUnits implements Unit {
+public enum TemperatureUnits implements TemperatureUnit {
 
     KELVIN("K", val -> val, val -> val),
     CELSIUS("°C", val -> val + 273.15, val -> val - 273.15),
@@ -27,7 +26,7 @@ public enum TemperatureUnits implements Unit {
     }
 
     @Override
-    public TemperatureUnits getBaseUnit() {
+    public TemperatureUnit getBaseUnit() {
         return KELVIN;
     }
 
@@ -41,7 +40,7 @@ public enum TemperatureUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static TemperatureUnits fromSymbol(String rawSymbol) {
+    public static TemperatureUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol).trim();
         for (TemperatureUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

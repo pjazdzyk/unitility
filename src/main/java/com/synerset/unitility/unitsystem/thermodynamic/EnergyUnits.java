@@ -1,11 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum EnergyUnits implements Unit {
+public enum EnergyUnits implements EnergyUnit {
 
     JOULE("J", val -> val, val -> val),
     MILLIJOULE("mJ", val -> val * 0.001, val -> val / 0.001),
@@ -33,7 +32,7 @@ public enum EnergyUnits implements Unit {
     }
 
     @Override
-    public EnergyUnits getBaseUnit() {
+    public EnergyUnit getBaseUnit() {
         return JOULE;
     }
 
@@ -47,7 +46,7 @@ public enum EnergyUnits implements Unit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static EnergyUnits fromSymbol(String rawSymbol) {
+    public static EnergyUnit fromSymbol(String rawSymbol) {
         String inputSymbolWithoutDegreesSign = formatSymbolInput(rawSymbol);
         for (EnergyUnits unit : values()) {
             String enumSymbolWithoutDegreesSing = formatSymbolInput(unit.symbol);

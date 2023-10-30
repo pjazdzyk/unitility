@@ -4,24 +4,24 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 
 import java.util.Objects;
 
-public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
+public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnit> {
     private final double value;
     private final double baseValue;
-    private final SpecificHeatUnits unitType;
+    private final SpecificHeatUnit unitType;
 
-    public SpecificHeat(double value, SpecificHeatUnits unitType) {
+    public SpecificHeat(double value, SpecificHeatUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static SpecificHeat of(double value, SpecificHeatUnits unit) {
+    public static SpecificHeat of(double value, SpecificHeatUnit unit) {
         return new SpecificHeat(value, unit);
     }
 
     public static SpecificHeat of(double value, String unitSymbol) {
-        SpecificHeatUnits resolvedUnit = SpecificHeatUnits.fromSymbol(unitSymbol);
+        SpecificHeatUnit resolvedUnit = SpecificHeatUnits.fromSymbol(unitSymbol);
         return new SpecificHeat(value, resolvedUnit);
     }
     
@@ -48,7 +48,7 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
     }
 
     @Override
-    public SpecificHeatUnits getUnitType() {
+    public SpecificHeatUnit getUnitType() {
         return unitType;
     }
 
@@ -59,7 +59,7 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnits> {
     }
 
     @Override
-    public SpecificHeat toUnit(SpecificHeatUnits targetUnit) {
+    public SpecificHeat toUnit(SpecificHeatUnit targetUnit) {
         double valueInJoulePerKiloGramKelvin = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInJoulePerKiloGramKelvin);
         return SpecificHeat.of(valueInTargetUnit, targetUnit);
