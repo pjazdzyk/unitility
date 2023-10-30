@@ -28,7 +28,7 @@ class PhysicalQuantityTest {
         Distance distanceInMiles = distanceInMeters.toUnit(DistanceUnits.MILE);
 
         // Then
-        assertThat(distanceInMeters.isEqualsWithPrecision(distanceInMiles, 1E-13)).isTrue();
+        assertThat(distanceInMeters.isEqualWithPrecision(distanceInMiles, 1E-13)).isTrue();
     }
 
     @Test

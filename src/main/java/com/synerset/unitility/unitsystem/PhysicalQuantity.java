@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQuantity<U>> {
 
-     int DEFAULT_RELEVANT_DIGITS = 4;
+    int DEFAULT_RELEVANT_DIGITS = 4;
 
     /**
      * Get the value of the physical quantity.
@@ -145,12 +145,18 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param epsilon  The maximum difference allowed between the quantities.
      * @return True if this quantity is equal to the given quantity within the specified epsilon, false otherwise.
      */
-    default boolean isEqualsWithPrecision(PhysicalQuantity<U> quantity, double epsilon) {
-        if (this == quantity) return true;
-        if (quantity == null || getClass() != quantity.getClass()) return false;
+    default boolean isEqualWithPrecision(PhysicalQuantity<U> quantity, double epsilon) {
+        if (this == quantity) {
+            return true;
+        }
+        if (quantity == null || getClass() != quantity.getClass()) {
+            return false;
+        }
         PhysicalQuantity<U> thisInBaseUnit = this.toBaseUnit();
         PhysicalQuantity<U> inputInBaseUnit = quantity.toBaseUnit();
-        if (thisInBaseUnit.getUnitType() != inputInBaseUnit.getUnitType()) return false;
+        if (thisInBaseUnit.getUnitType() != inputInBaseUnit.getUnitType()) {
+            return false;
+        }
         double thisValue = thisInBaseUnit.getValue();
         double inputValue = inputInBaseUnit.getValue();
         return Math.abs(thisValue - inputValue) < epsilon;
