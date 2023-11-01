@@ -11,7 +11,9 @@ import com.synerset.unitility.unitsystem.mechanical.Momentum;
 import com.synerset.unitility.unitsystem.mechanical.Torque;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingFactory;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -73,5 +75,30 @@ class PhysicalQuantityParsingFactoryTest {
                 Arguments.of(BypassFactor.class, " any pointless symbol --", BypassFactor.of(TEST_VALUE))
         );
     }
+
+    @Test
+    void convertFromCanonicalString() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(20.1234);
+
+        // When
+        String tempAsString = PhysicalQuantityParsingFactory.toEngFormatString(temperature);
+
+        // Then
+        AssertionsForClassTypes.assertThat(tempAsString).isEqualTo("20.1234[°C]");
+    }
+
+    @Test
+    void convertToEngineeringFormat() {
+        // Given
+        String tempAsString = "20.1234[°C]";
+
+        // When
+        Temperature temperature = PhysicalQuantityParsingFactory.createParsingFromEngFormat(Temperature.class, tempAsString);
+
+        // Then
+        AssertionsForClassTypes.assertThat(temperature).isEqualTo(Temperature.ofCelsius(20.1234));
+    }
+
 
 }
