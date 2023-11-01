@@ -2,7 +2,6 @@ package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityEngFormatParsingFactory;
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
@@ -361,7 +360,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return The value in canonical format.
      */
     default String toEngineeringFormat() {
-        return PhysicalQuantityEngFormatParsingFactory.toEngFormatString(this);
+        return PhysicalQuantityParsingFactory.toEngFormatString(this);
     }
 
     @Override
@@ -421,7 +420,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         if (targetClass == null) {
             throw new UnitSystemArgumentException("Invalid argument. Target class cannot be null.");
         }
-        return PhysicalQuantityEngFormatParsingFactory.createParsingFromEngFormat(targetClass, unitInEngineeringFormat);
+        return PhysicalQuantityParsingFactory.createParsingFromEngFormat(targetClass, unitInEngineeringFormat);
     }
 
 }
