@@ -1,0 +1,2 @@
+com.synerset.unitilityconverters.jackson.PhysicalQuantityJacksonConfiguration
+com.synerset.unitilityconverters.webmvc.PhysicalQuantityWebMvcConfiguration

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.synerset</groupId>
+        <artifactId>unitility</artifactId>
+        <version>${project.version}</version>
+    </parent>
+
+    <artifactId>unitility-quarkus</artifactId>
+
+    <name>Unitility Quarkus</name>
+    <description>
+        This module comprises unitility-core and unitility-jackson and autoconfigured beans for a Quarkus framework.
+        Beans will be automatically scanned by your Quarkus app and added to dependency injection registry container.
+        Jackson's modules will be automatically registered and ready to use.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy</artifactId>
+            <version>${quarkus-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-arc</artifactId>
+            <version>${quarkus-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jackson</artifactId>
+            <version>${quarkus-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.synerset</groupId>
+            <artifactId>unitility-core</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.synerset</groupId>
+            <artifactId>unitility-jackson</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

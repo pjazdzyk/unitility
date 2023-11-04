@@ -30,7 +30,7 @@ class PhysicalQuantityParsingFactoryTest {
     @ParameterizedTest
     @MethodSource("inlineSymbolsData")
     @DisplayName("Should create physical quantity when symbol as string is given")
-    void createParsingFromSymbol_shouldResolveToQuantity_whenSymbolAsStringIsGiven(Class clazz,
+    void createParsingFromSymbolShouldResolveToQuantityWhenSymbolAsStringIsGiven(Class clazz,
                                                                                    String symbolAsString,
                                                                                    PhysicalQuantity expected) {
         // Given
