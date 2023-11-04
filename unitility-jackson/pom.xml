@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.synerset</groupId>
+        <artifactId>unitility</artifactId>
+        <version>${project.version}</version>
+    </parent>
+
+    <artifactId>unitility-jackson</artifactId>
+
+    <name>Unitility Jackson</name>
+    <description>
+        This module contains JSON serializers and deserializers and defined implementation of Jackson SimpleModule
+        to be used and extended for any framework using Jackson library.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.synerset</groupId>
+            <artifactId>unitility-core</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -6,17 +6,23 @@
 
     <groupId>com.synerset</groupId>
     <artifactId>unitility</artifactId>
-    <version>1.2.0</version>
-    <packaging>jar</packaging>
+    <version>${project.version}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>unitility-core</module>
+        <module>unitility-jackson</module>
+        <module>unitility-spring</module>
+        <module>unitility-quarkus</module>
+    </modules>
 
     <name>Unitility</name>
-    <description>The Physics Units of Measure Library for Java.
+    <description>
+        The Physics Units of Measure Library for Java.
         Unitility provides value objects that combine numerical values with their corresponding units, allowing
-        developers
-        to easily perform accurate and efficient conversions between different units. With a wide range of value objects
-        that represent commonly
-        used physical quantities, this solution is built using plain Java for optimal speed and lightweight
-        functionality.
+        developers to easily perform accurate and efficient conversions between different units.
+        With a wide range of value objects that represent commonly used physical quantities this solution is built
+        using plain Java for optimal speed and lightweight functionality.
     </description>
     <url>https://github.com/pjazdzyk/unitility</url>
 
@@ -37,6 +43,26 @@
     </developers>
 
     <properties>
+        <!-- MODULES VERSION -->
+        <project.version>0.0.1-SNAPSHOT</project.version>
+        <!-- Maven Properties -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Test dependencies versions -->
+        <jacoco.version>0.8.9</jacoco.version>
+        <junit-jupiter.version>5.9.2</junit-jupiter.version>
+        <assertj-core.version>3.24.2</assertj-core.version>
+        <!-- Framework versions -->
+        <jackson-databind.version>2.15.2</jackson-databind.version>
+        <spring-boot-starter-web.version>3.1.4</spring-boot-starter-web.version>
+        <quarkus-version>3.4.0</quarkus-version>
+        <!-- Plugin versions -->
+        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+        <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
+        <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <!-- Sonar Cloud Properties-->
         <sonar.organization>synerset</sonar.organization>
         <sonar.projectKey>pjazdzyk_unitility</sonar.projectKey>
@@ -45,16 +71,6 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.language>java</sonar.language>
         <sonar.binaries>target/classes</sonar.binaries>
-        <!-- Maven Properties -->
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Dependencies Properties -->
-        <jacoco.version>0.8.9</jacoco.version>
-        <junit-jupiter.version>5.9.2</junit-jupiter.version>
-        <assertj-core.version>3.24.2</assertj-core.version>
-        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
-        <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -163,7 +179,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
+                        <version>${nexus-staging-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
@@ -176,7 +192,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.1</version>
+                        <version>${maven-source-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -191,7 +207,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.4.1</version>
+                        <version>${maven-javadoc-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>

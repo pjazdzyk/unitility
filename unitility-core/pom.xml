@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.synerset</groupId>
+        <artifactId>unitility</artifactId>
+        <version>${project.version}</version>
+    </parent>
+
+    <artifactId>unitility-core</artifactId>
+
+    <name>Unitility Core</name>
+    <description>
+        Unitility Core, the Physics Units of Measure Library for Java, offers a framework-independent solution.
+        It includes a complete set of unit classes, converters, and parsers,
+        ensuring precise and versatile unit manipulation.
+    </description>
+
+</project>
