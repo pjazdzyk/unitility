@@ -1,7 +1,8 @@
-package com.synerset.spring.unitilityconverters.webmvc;
+package com.synerset.unitility.spring.webmvc;
 
 import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivity;
 import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivityUnit;
+import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,6 +12,8 @@ class PhysicalQuantitySpringConverterTest {
     @Test
     void convert_shouldConvertStringToPhysicalQuantity() {
         // Given
+        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+
         String input_1 = "20[BTU/(h·ft·°F)]";
         String input_2 = "20[BTU p (h x ft x oF)]";
         String input_3 = "20[btu p (h . ft . oF)]";
@@ -18,7 +21,7 @@ class PhysicalQuantitySpringConverterTest {
         String input_5 = "    20     [BTU / (h . ft·   °F    )   ]   ";
 
         PhysicalQuantityWebMvcConverter<ThermalConductivityUnit, ThermalConductivity> converter =
-                new PhysicalQuantityWebMvcConverter<>(ThermalConductivity.class);
+                new PhysicalQuantityWebMvcConverter<>(ThermalConductivity.class, parsingFactory);
 
         // When
         ThermalConductivity actualThermCond_1 = converter.convert(input_1);

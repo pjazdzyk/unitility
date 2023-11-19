@@ -291,18 +291,6 @@ class PhysicalQuantityTest {
     }
 
     @Test
-    @DisplayName("create instance of class from symbol")
-    void createFromSymbol_shouldCreateInstanceOfClassFromSymbol() {
-        // Given
-        double value = 20.1;
-        // When
-        Temperature actualTemperature = PhysicalQuantity.createFromSymbol(Temperature.class, value, "f");
-
-        // Then
-        assertThat(actualTemperature).isEqualTo(Temperature.ofFahrenheit(value));
-    }
-
-    @Test
     @DisplayName("should return canonical string")
     void toEngineeringFormat_shouldReturnEngineeringString() {
         // Given
@@ -318,19 +306,5 @@ class PhysicalQuantityTest {
         assertThat(actualCanonicalBf).isEqualTo("20.1234567");
     }
 
-    @Test
-    @DisplayName("should convert to canonical format and vice versa")
-    void createFromEngineeringFormat_shouldConvertToEngineeringFormatAndViceVersa() {
-        // Given
-        Temperature temperature = Temperature.ofCelsius(20.1234567);
-
-        // When
-        String actualCanonicalTemp = temperature.toEngineeringFormat();
-        Temperature actualTemperature = PhysicalQuantity.createFromEngineeringFormat(Temperature.class, actualCanonicalTemp);
-
-        // Then
-        assertThat(actualCanonicalTemp).isEqualTo("20.1234567[°C]");
-        assertThat(actualTemperature).isEqualTo(temperature);
-    }
 
 }

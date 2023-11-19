@@ -1,5 +1,6 @@
 package com.synerset.quarkus.jakarta;
 
+import com.synerset.unitility.quarkus.jakarta.PhysicalQuantityJakartaProvider;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.common.*;
@@ -12,6 +13,7 @@ import com.synerset.unitility.unitsystem.mechanical.Force;
 import com.synerset.unitility.unitsystem.mechanical.Momentum;
 import com.synerset.unitility.unitsystem.mechanical.Torque;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
+import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 import jakarta.ws.rs.ext.ParamConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,12 +23,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SuppressWarnings("unchecked")
 class PhysicalQuantityJakartaProviderTest {
 
-    public static final PhysicalQuantityJakartaProvider CONVERTER_PROVIDER = new PhysicalQuantityJakartaProvider();
+    public static final PhysicalQuantityParsingRegistry PARSING_REGISTRY = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+    public static final PhysicalQuantityJakartaProvider CONVERTER_PROVIDER = new PhysicalQuantityJakartaProvider(PARSING_REGISTRY);
     public static final double TEST_VALUE = 15.1;
 
     @ParameterizedTest
@@ -35,6 +38,8 @@ class PhysicalQuantityJakartaProviderTest {
     void getConverter_shouldProperlyConvertTemperatureClassToString(Class<?> quantityClass,
                                                                     String sourceString,
                                                                     PhysicalQuantity<?> expectedQuantity) {
+
+
         // Given
         ParamConverter<PhysicalQuantity<Unit>> converter =
                 (ParamConverter<PhysicalQuantity<Unit>>) CONVERTER_PROVIDER.getConverter(quantityClass, null, null);
@@ -46,6 +51,7 @@ class PhysicalQuantityJakartaProviderTest {
         // Then
         assertThat(actualQuantity).isEqualTo(expectedQuantity);
         assertThat(actualQuantityAsString).isEqualTo(sourceString);
+
     }
 
     static Stream<Arguments> converterInlineData() {
@@ -81,6 +87,7 @@ class PhysicalQuantityJakartaProviderTest {
     @Test
     @DisplayName("ParamConverter: should handle converting malformed string source")
     void getConverter_shouldProperlyConvertTemperatureClassToString() {
+
         // Given
         String tempInput1 = "15.1[oC]";
         String tempInput2 = "  15.1  [  o   C   ]";
@@ -107,6 +114,7 @@ class PhysicalQuantityJakartaProviderTest {
         assertThat(actualTemperature2).isEqualTo(Temperature.ofCelsius(15.1));
         assertThat(actualDynamicViscosity).isEqualTo(DynamicViscosity.ofKiloGramPerMeterSecond(15.1));
         assertThat(actualThermalDiffusivity).isEqualTo(ThermalDiffusivity.ofSquareFeetPerSecond(15.1));
+
     }
 
 }

@@ -6,16 +6,18 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 
 import java.io.IOException;
 
 public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuantity<U>> extends JsonDeserializer<Q> {
 
     private final Class<Q> quantityClass;
+    private final PhysicalQuantityParsingRegistry parsingFactory;
 
-    PhysicalQuantityDeserializer(Class<Q> quantityClass) {
+    public PhysicalQuantityDeserializer(Class<Q> quantityClass, PhysicalQuantityParsingRegistry parsingFactory) {
         this.quantityClass = quantityClass;
+        this.parsingFactory = parsingFactory;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuan
         if (node.get(FieldNames.JSON_FIELD_UNIT_SYMBOL) != null) {
             unitSymbol = node.get(FieldNames.JSON_FIELD_UNIT_SYMBOL).asText();
         }
-        return PhysicalQuantityParsingFactory.createParsingFromSymbol(quantityClass, value, unitSymbol);
+        return parsingFactory.createFromSymbol(quantityClass, value, unitSymbol);
     }
 
 }
