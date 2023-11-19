@@ -200,7 +200,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = temperature.divide(2);
+        Temperature actualTemperature = temperature.div(2);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(10);
@@ -214,7 +214,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // Then
-        assertThatThrownBy(() -> temperature.divide(0))
+        assertThatThrownBy(() -> temperature.div(0))
                 .isInstanceOf(UnitSystemArgumentException.class)
                 .hasMessage("Division by zero is not allowed. Please provide a non-zero divider value.");
     }
@@ -227,7 +227,7 @@ class PhysicalQuantityTest {
         Pressure pressure = Pressure.ofPascal(2);
 
         // When
-        double actualDivideResult = sourceTemperature.divide(pressure);
+        double actualDivideResult = sourceTemperature.div(pressure);
 
         // Then
         double expectedDivideResult = 10;
