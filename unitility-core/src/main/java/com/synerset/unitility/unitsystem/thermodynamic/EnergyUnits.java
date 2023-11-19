@@ -48,8 +48,8 @@ public enum EnergyUnits implements EnergyUnit {
 
     public static EnergyUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (EnergyUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (EnergyUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

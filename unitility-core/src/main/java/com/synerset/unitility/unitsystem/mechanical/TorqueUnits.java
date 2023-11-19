@@ -42,10 +42,10 @@ public enum TorqueUnits implements TorqueUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static TorqueUnits fromSymbol(String rawSymbol) {
+    public static TorqueUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (TorqueUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (TorqueUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

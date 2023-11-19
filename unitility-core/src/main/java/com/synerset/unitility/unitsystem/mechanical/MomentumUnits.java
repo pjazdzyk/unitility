@@ -39,10 +39,10 @@ public enum MomentumUnits implements MomentumUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static MomentumUnits fromSymbol(String rawSymbol) {
+    public static MomentumUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (MomentumUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (MomentumUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

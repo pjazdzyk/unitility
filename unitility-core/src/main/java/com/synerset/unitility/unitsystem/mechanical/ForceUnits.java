@@ -45,8 +45,8 @@ public enum ForceUnits implements ForceUnit {
 
     public static ForceUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (ForceUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (ForceUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

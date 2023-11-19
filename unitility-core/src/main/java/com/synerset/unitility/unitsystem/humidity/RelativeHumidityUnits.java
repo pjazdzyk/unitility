@@ -44,8 +44,8 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
             return DECIMAL;
         }
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (RelativeHumidityUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (RelativeHumidityUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

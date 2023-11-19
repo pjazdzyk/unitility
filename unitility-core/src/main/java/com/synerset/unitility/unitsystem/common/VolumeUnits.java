@@ -47,8 +47,8 @@ public enum VolumeUnits implements VolumeUnit {
 
     public static VolumeUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (VolumeUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (VolumeUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

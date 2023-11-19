@@ -46,8 +46,8 @@ public enum DistanceUnits implements DistanceUnit {
 
     public static DistanceUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (DistanceUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (DistanceUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

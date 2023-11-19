@@ -42,8 +42,8 @@ public enum SpecificEnthalpyUnits implements SpecificEnthalpyUnit {
 
     public static SpecificEnthalpyUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (SpecificEnthalpyUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (SpecificEnthalpyUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

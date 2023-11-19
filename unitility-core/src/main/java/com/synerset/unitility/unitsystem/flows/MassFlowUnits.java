@@ -43,8 +43,8 @@ public enum MassFlowUnits implements MassFlowUnit {
 
     public static MassFlowUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (MassFlowUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (MassFlowUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

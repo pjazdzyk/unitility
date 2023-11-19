@@ -22,7 +22,7 @@ public class Momentum implements PhysicalQuantity<MomentumUnit> {
     }
 
     public static Momentum of(double value, String unitSymbol) {
-        MomentumUnits resolvedUnit = MomentumUnits.fromSymbol(unitSymbol);
+        MomentumUnit resolvedUnit = MomentumUnits.fromSymbol(unitSymbol);
         return new Momentum(value, resolvedUnit);
     }
     
@@ -103,7 +103,7 @@ public class Momentum implements PhysicalQuantity<MomentumUnit> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Momentum inputQuantity = (Momentum) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override

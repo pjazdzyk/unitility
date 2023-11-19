@@ -39,10 +39,10 @@ public enum AngleUnits implements AngleUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static AngleUnits fromSymbol(String rawSymbol) {
+    public static AngleUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (AngleUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (AngleUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

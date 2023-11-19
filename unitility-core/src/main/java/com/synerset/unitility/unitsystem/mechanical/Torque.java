@@ -23,7 +23,7 @@ public class Torque implements PhysicalQuantity<TorqueUnit> {
     }
 
     public static Torque of(double value, String unitSymbol) {
-        TorqueUnits resolvedUnit = TorqueUnits.fromSymbol(unitSymbol);
+        TorqueUnit resolvedUnit = TorqueUnits.fromSymbol(unitSymbol);
         return new Torque(value, resolvedUnit);
     }
     
@@ -128,7 +128,7 @@ public class Torque implements PhysicalQuantity<TorqueUnit> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Torque inputQuantity = (Torque) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override

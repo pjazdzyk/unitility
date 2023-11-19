@@ -21,7 +21,7 @@ public class Angle implements PhysicalQuantity<AngleUnit> {
         return new Angle(value, unit);
     }
     public static Angle of(double value, String unitSymbol) {
-        AngleUnits resolvedUnit = AngleUnits.fromSymbol(unitSymbol);
+        AngleUnit resolvedUnit = AngleUnits.fromSymbol(unitSymbol);
         return new Angle(value, resolvedUnit);
     }
 
@@ -90,7 +90,7 @@ public class Angle implements PhysicalQuantity<AngleUnit> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Angle inputQuantity = (Angle) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override

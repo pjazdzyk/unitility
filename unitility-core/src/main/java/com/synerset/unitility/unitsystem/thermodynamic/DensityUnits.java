@@ -42,8 +42,8 @@ public enum DensityUnits implements DensityUnit {
 
     public static DensityUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (DensityUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (DensityUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
