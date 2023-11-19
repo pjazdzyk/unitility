@@ -284,7 +284,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A new physical quantity with the divided value.
      * @throws UnitSystemArgumentException If the divider value is zero.
      */
-    default <Q extends PhysicalQuantity<U>> Q divide(double value) {
+    default <Q extends PhysicalQuantity<U>> Q div(double value) {
         if (value == 0) {
             throw new UnitSystemArgumentException("Division by zero is not allowed. Please provide a non-zero divider value.");
         }
@@ -309,7 +309,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return The result of dividing this quantity's value by the other quantity's value.
      * @throws UnitSystemArgumentException If this quantity's value is zero.
      */
-    default double divide(PhysicalQuantity<? extends Unit> inputQuantity) {
+    default double div(PhysicalQuantity<? extends Unit> inputQuantity) {
         double thisValue = getValue();
         if (thisValue == 0) {
             throw new UnitSystemArgumentException("Divider quantity value cannot be zero.");
