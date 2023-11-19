@@ -57,6 +57,7 @@
         <jackson-databind.version>2.15.2</jackson-databind.version>
         <spring-boot-starter-web.version>3.1.4</spring-boot-starter-web.version>
         <quarkus-version>3.4.0</quarkus-version>
+        <jandex-maven-plugin.version>3.1.5</jandex-maven-plugin.version>
         <!-- Plugin versions -->
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>

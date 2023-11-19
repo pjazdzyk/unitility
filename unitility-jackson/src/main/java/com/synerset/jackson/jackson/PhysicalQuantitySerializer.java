@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class PhysicalQuantitySerializer extends StdSerializer<PhysicalQuantity<Unit>> {
 
-    PhysicalQuantitySerializer(JavaType type) {
+    public PhysicalQuantitySerializer(JavaType type) {
         super(type);
     }
 
