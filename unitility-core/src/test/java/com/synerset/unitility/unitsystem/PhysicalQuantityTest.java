@@ -113,7 +113,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = temperature.add(20);
+        Temperature actualTemperature = temperature.plus(20);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -127,7 +127,7 @@ class PhysicalQuantityTest {
         Temperature temperature = Temperature.ofCelsius(20);
 
         // When
-        Temperature actualTemperature = temperature.subtract(20);
+        Temperature actualTemperature = temperature.minus(20);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(0);
@@ -142,7 +142,7 @@ class PhysicalQuantityTest {
         Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 
         // When
-        Temperature actualTemperature = sourceTemperature.add(temperatureToAdd);
+        Temperature actualTemperature = sourceTemperature.plus(temperatureToAdd);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
@@ -157,7 +157,7 @@ class PhysicalQuantityTest {
         Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 
         // When
-        Temperature actualTemperature = sourceTemperature.subtract(temperatureToAdd);
+        Temperature actualTemperature = sourceTemperature.minus(temperatureToAdd);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(0);

@@ -213,7 +213,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param value The value to add.
      * @return A new physical quantity with the added value.
      */
-    default <Q extends PhysicalQuantity<U>> Q add(double value) {
+    default <Q extends PhysicalQuantity<U>> Q plus(double value) {
         double newValue = getValue() + value;
         return createNewWithValue(newValue);
     }
@@ -224,7 +224,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param inputQuantity The other physical quantity to add.
      * @return A new physical quantity with the added value.
      */
-    default <Q extends PhysicalQuantity<U>> Q add(PhysicalQuantity<U> inputQuantity) {
+    default <Q extends PhysicalQuantity<U>> Q plus(PhysicalQuantity<U> inputQuantity) {
         U sourceUnit = this.getUnitType();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() + inputInSourceUnits.getValue();
@@ -237,7 +237,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param value The value to subtract.
      * @return A new physical quantity with the subtracted value.
      */
-    default <Q extends PhysicalQuantity<U>> Q subtract(double value) {
+    default <Q extends PhysicalQuantity<U>> Q minus(double value) {
         double newValue = getValue() - value;
         return createNewWithValue(newValue);
     }
@@ -248,7 +248,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param inputQuantity The other physical quantity to subtract.
      * @return A new physical quantity with the subtracted value.
      */
-    default <Q extends PhysicalQuantity<U>> Q subtract(Q inputQuantity) {
+    default <Q extends PhysicalQuantity<U>> Q minus(Q inputQuantity) {
         U sourceUnit = this.getUnitType();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() - inputInSourceUnits.getValue();

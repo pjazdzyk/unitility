@@ -14,7 +14,7 @@ class CustomAngleUnitTest {
 
         // When
         Angle actualAngleDegrees = angleInCustomUnit.toBaseUnit();
-        Angle actualCustomAngle = angleInCustomUnit.add(Angle.ofDegrees(360));
+        Angle actualCustomAngle = angleInCustomUnit.plus(Angle.ofDegrees(360));
 
         // Then
         assertThat(actualAngleDegrees).isEqualTo(Angle.ofDegrees(360));
