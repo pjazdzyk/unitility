@@ -42,8 +42,8 @@ public enum TemperatureUnits implements TemperatureUnit {
 
     public static TemperatureUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol).trim();
-        for (TemperatureUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (TemperatureUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

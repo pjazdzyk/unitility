@@ -93,7 +93,7 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnit> 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RelativeHumidity inputQuantity = (RelativeHumidity) o;
-        return Double.compare(inputQuantity.toBaseUnit().value, baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
     }
 
     @Override

@@ -50,8 +50,8 @@ public enum AreaUnits implements AreaUnit {
 
     public static AreaUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (AreaUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (AreaUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

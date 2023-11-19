@@ -47,8 +47,8 @@ public enum VelocityUnits implements VelocityUnit {
 
     public static VelocityUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (VelocityUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (VelocityUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

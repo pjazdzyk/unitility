@@ -44,8 +44,8 @@ public enum PowerUnits implements PowerUnit {
 
     public static PowerUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (PowerUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (PowerUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

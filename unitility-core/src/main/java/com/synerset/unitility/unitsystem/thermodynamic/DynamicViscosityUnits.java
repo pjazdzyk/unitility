@@ -42,8 +42,8 @@ public enum DynamicViscosityUnits implements DynamicViscosityUnit {
 
     public static DynamicViscosityUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (DynamicViscosityUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (DynamicViscosityUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

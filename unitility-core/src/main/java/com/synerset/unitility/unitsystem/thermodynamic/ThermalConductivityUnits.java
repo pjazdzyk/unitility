@@ -42,8 +42,8 @@ public enum ThermalConductivityUnits implements ThermalConductivityUnit {
 
     public static ThermalConductivityUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (ThermalConductivityUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (ThermalConductivityUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

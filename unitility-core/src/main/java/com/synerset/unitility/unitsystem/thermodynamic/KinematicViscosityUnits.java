@@ -40,8 +40,8 @@ public enum KinematicViscosityUnits implements KinematicViscosityUnit {
 
     public static KinematicViscosityUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (KinematicViscosityUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (KinematicViscosityUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

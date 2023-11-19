@@ -42,8 +42,8 @@ public enum SpecificHeatUnits implements SpecificHeatUnit {
 
     public static SpecificHeatUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (SpecificHeatUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (SpecificHeatUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }

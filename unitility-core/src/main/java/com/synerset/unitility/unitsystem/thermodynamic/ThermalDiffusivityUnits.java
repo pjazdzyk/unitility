@@ -41,8 +41,8 @@ public enum ThermalDiffusivityUnits implements ThermalDiffusivityUnit {
 
     public static ThermalDiffusivityUnit fromSymbol(String rawSymbol) {
         String requestedSymbol = formatSymbol(rawSymbol);
-        for (ThermalDiffusivityUnits unit : values()) {
-            String currentSymbol = formatSymbol(unit.symbol);
+        for (ThermalDiffusivityUnit unit : values()) {
+            String currentSymbol = formatSymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
