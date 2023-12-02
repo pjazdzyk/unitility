@@ -18,6 +18,10 @@
         Jackson's modules will be automatically registered and ready to use.
     </description>
 
+    <properties>
+        <sonar.projectKey>pjazdzyk_unitility-quarkus</sonar.projectKey>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>

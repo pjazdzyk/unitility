@@ -17,6 +17,10 @@
         to be used and extended for any framework using Jackson library.
     </description>
 
+    <properties>
+        <sonar.projectKey>pjazdzyk_unitility-jackson</sonar.projectKey>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.synerset</groupId>

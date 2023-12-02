@@ -18,4 +18,8 @@
         ensuring precise and versatile unit manipulation.
     </description>
 
+    <properties>
+        <sonar.projectKey>pjazdzyk_unitility-core</sonar.projectKey>
+    </properties>
+
 </project>
