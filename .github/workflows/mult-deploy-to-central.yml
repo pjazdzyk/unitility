@@ -3,7 +3,7 @@ name: Java Maven Library Publisher
 
 on:
   release:
-    types: [created]
+    types: [ created ]
   workflow_dispatch:
 
 jobs:
@@ -25,16 +25,18 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Build with Maven and Publish Modules
-        run: |
-          for module in $(find . -name "pom.xml" -not -path "./target/*"); do
-            module_dir=$(dirname $module)
-            echo "Building and publishing module in $module_dir"
-            cd $module_dir
-            mvn -B deploy -PossrhDeploy
-            cd -
-          done
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
 
       - name: Prepare Maven environment with Java for deployment to OSSRH
         run: export MAVEN_OPTS="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
         shell: bash
+
+      - name: Publish to Apache Maven Central
+        run: mvn deploy -PossrhDeploy
+        shell: bash
+        env:
+          MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.NEXUS_PASSWORD }}
+          MAVEN_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
