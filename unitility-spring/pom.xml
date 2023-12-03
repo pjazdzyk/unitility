@@ -13,11 +13,10 @@
 
     <name>Unitility Spring</name>
     <description>
-        This module comprises unitility-core and unitility-jackson and autoconfigured beans for a Spring Boot framework.
-        Beans will be automatically scanned by your Spring Boot app and added to dependency injection registry container.
-        Jackson's modules will be automatically registered and ready to use.
+        The Spring extension module of UNITILITY, the Physics Units of Measure Library for Java.
+        This module integrates unitility-core and unitility-jackson, providing a configured Jackson module
+        and WebMvcConfigurer for automatic serialization / deserialization of all supported physical quantity types.
     </description>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

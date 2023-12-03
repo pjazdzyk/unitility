@@ -5,6 +5,7 @@ import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -43,8 +44,11 @@ public interface PhysicalQuantityParsingRegistry {
         return getRegistryMap().containsKey(targetClass);
     }
 
-    default Set<Class<?>> findAllRegisteredClasses() {
-        return getRegistryMap().keySet();
+    @SuppressWarnings("unchecked")
+    default <U extends Unit, Q extends PhysicalQuantity<U>> Set<Class<Q>> findAllRegisteredClasses() {
+        Set<Class<Q>> quantityClasses = new HashSet<>();
+        getRegistryMap().keySet().forEach(clazz -> quantityClasses.add((Class<Q>) clazz));
+        return quantityClasses;
     }
 
     private <U extends Unit, Q extends PhysicalQuantity<U>> void validateIfClassIsRegistered(Class<Q> targetClass) {

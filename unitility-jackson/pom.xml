@@ -13,8 +13,9 @@
 
     <name>Unitility Jackson</name>
     <description>
-        This module contains JSON serializers and deserializers and defined implementation of Jackson SimpleModule
-        to be used and extended for any framework using Jackson library.
+        The Jackson module of UNITILITY, the Physics Units of Measure Library for Java.
+        This module contains JSON serializers and deserializers and a predefined implementation of Jackson SimpleModule
+        to be used to extend any framework using the Jackson libraries.
     </description>
 
     <dependencies>
