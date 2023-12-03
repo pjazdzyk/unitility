@@ -353,6 +353,17 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     }
 
     /**
+     * Returns a formatted string representation of the value associated with this object, followed by its unit symbol,
+     * along with the specified variable name. It allows specifying relevant digits. Example: t = 21.5 K
+     *
+     * @param variableName The variable name to include in the formatted string.
+     * @return A formatted string representation of the variable name, value, and unit symbol.
+     */
+    default String toFormattedString(int relevantDigits, String variableName) {
+        return variableName + " = " + toFormattedString(relevantDigits);
+    }
+
+    /**
      * Converts the physical quantity to an engineering format where unit is placed in rectangular braces for i.e.: 20[°C].
      *
      * @return The representation in engineering format.

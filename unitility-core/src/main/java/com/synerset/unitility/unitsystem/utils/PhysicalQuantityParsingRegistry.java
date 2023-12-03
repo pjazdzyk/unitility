@@ -2,7 +2,7 @@ package com.synerset.unitility.unitsystem.utils;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 
 import java.util.HashSet;
@@ -53,7 +53,7 @@ public interface PhysicalQuantityParsingRegistry {
 
     private <U extends Unit, Q extends PhysicalQuantity<U>> void validateIfClassIsRegistered(Class<Q> targetClass) {
         if (!containsClass(targetClass)) {
-            throw new UnitSystemArgumentException("Class not found in the registry: " + targetClass.getSimpleName());
+            throw new UnitSystemClassNotSupportedException("Class not found in the registry: " + targetClass.getSimpleName());
         }
     }
 

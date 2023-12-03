@@ -1,6 +1,6 @@
-package com.synerset.unitility.spring.jackson;
+package com.synerset.unitility.spring;
 
-import com.synerset.jackson.jackson.PhysicalQuantityJacksonModule;
+import com.synerset.unitility.jackson.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;

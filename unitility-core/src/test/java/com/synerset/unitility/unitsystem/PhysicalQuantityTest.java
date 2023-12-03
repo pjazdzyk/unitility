@@ -41,12 +41,14 @@ class PhysicalQuantityTest {
         // When
         String actualAngleOutput = angle.toFormattedString(3);
         String actualDistanceOutput = distance.toFormattedString(3);
+        String actualDistanceOutputVarNAme = distance.toFormattedString("l_1");
+        String actualDistanceOutputVarNAme3Digits = distance.toFormattedString(3, "l_1");
 
         // Then
-        String expectedAngleOutput = "30.123°";
-        String expectedDistanceOutput = "100.124 m";
-        assertThat(actualAngleOutput).isEqualTo(expectedAngleOutput);
-        assertThat(actualDistanceOutput).isEqualTo(expectedDistanceOutput);
+        assertThat(actualAngleOutput).isEqualTo("30.123°");
+        assertThat(actualDistanceOutput).isEqualTo( "100.124 m");
+        assertThat(actualDistanceOutputVarNAme).isEqualTo("l_1 = 100.1238 m");
+        assertThat(actualDistanceOutputVarNAme3Digits).isEqualTo("l_1 = 100.124 m");
     }
 
     @Test
@@ -298,13 +300,15 @@ class PhysicalQuantityTest {
         BypassFactor bypassFactor = BypassFactor.of(20.1234567);
 
         // When
-        String actualCanonicalTemp = temperature.toEngineeringFormat();
-        String actualCanonicalBf = bypassFactor.toEngineeringFormat();
+        String actualFormattedTemp = temperature.toEngineeringFormat();
+        String actualFormattedBf = bypassFactor.toEngineeringFormat();
+
+        String actualFormattedTempTwoDigits = temperature.toEngineeringFormat(2);
 
         // Then
-        assertThat(actualCanonicalTemp).isEqualTo("20.1234567[°C]");
-        assertThat(actualCanonicalBf).isEqualTo("20.1234567");
+        assertThat(actualFormattedTemp).isEqualTo("20.1234567[°C]");
+        assertThat(actualFormattedBf).isEqualTo("20.1234567");
+        assertThat(actualFormattedTempTwoDigits).isEqualTo("20.12[°C]");
     }
-
 
 }

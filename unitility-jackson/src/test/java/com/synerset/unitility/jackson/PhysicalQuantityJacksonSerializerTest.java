@@ -1,4 +1,4 @@
-package com.synerset.jackson.jackson;
+package com.synerset.unitility.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.synerset.jackson.jackson;
+package com.synerset.unitility.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +16,8 @@ class PhysicalQuantityJacksonDeserializerTest {
     void deserialize_shouldDeserializeJsonToPhysicalQuantity() throws JsonProcessingException {
         // Given
         PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
 
         String tempInput1 = "{\"value\":20.0,\"unit\":\"°C\"}";
         String tempInput2 = "{\"value\":20,\"unit\":\"oC\"}";
@@ -25,9 +27,6 @@ class PhysicalQuantityJacksonDeserializerTest {
         String bfFactor6 = "{\"value\":20,\"unit\":\"\"}";
         String bfFactor7 = "{\"value\":20,\"unit\":\"  Celcius   \"}";
         String bfFactor8 = "{\"value\":20}";
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);

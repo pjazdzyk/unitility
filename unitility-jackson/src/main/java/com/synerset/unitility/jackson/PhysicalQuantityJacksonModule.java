@@ -1,4 +1,4 @@
-package com.synerset.jackson.jackson;
+package com.synerset.unitility.jackson;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -18,7 +18,6 @@ public class PhysicalQuantityJacksonModule extends SimpleModule {
         addSerializer(new PhysicalQuantitySerializer(type));
 
         /* DESERIALIZERS */
-        // Common
         parsingRegistry.findAllRegisteredClasses()
                 .forEach(quantityClass -> addDeserializer(
                         quantityClass,

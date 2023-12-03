@@ -1,6 +1,5 @@
-package com.synerset.quarkus.jakarta;
+package com.synerset.unitility.quarkus;
 
-import com.synerset.unitility.quarkus.jakarta.PhysicalQuantityJakartaProvider;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.common.*;

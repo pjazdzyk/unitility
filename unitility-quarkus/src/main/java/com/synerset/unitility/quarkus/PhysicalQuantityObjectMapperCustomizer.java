@@ -1,7 +1,7 @@
-package com.synerset.unitility.quarkus.jackson;
+package com.synerset.unitility.quarkus;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.jackson.jackson.PhysicalQuantityJacksonModule;
+import com.synerset.unitility.jackson.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 import io.quarkus.jackson.ObjectMapperCustomizer;
 import jakarta.enterprise.context.ApplicationScoped;

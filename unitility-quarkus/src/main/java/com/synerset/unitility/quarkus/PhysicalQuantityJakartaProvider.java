@@ -1,7 +1,7 @@
-package com.synerset.unitility.quarkus.jakarta;
+package com.synerset.unitility.quarkus;
 
-import com.synerset.jackson.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;

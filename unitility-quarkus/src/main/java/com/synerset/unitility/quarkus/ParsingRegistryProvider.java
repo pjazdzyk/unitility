@@ -1,14 +1,14 @@
-package com.synerset.unitility.quarkus.jackson;
+package com.synerset.unitility.quarkus;
 
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 
 @ApplicationScoped
-public class ParsingRegistryProvider {
+class ParsingRegistryProvider {
 
     @Produces
-    public PhysicalQuantityParsingRegistry createParsingFactory() {
+    PhysicalQuantityParsingRegistry createParsingFactory() {
         return PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
     }
 

@@ -1,2 +1,2 @@
-com.synerset.unitility.spring.jackson.PhysicalQuantityJacksonConfiguration
-com.synerset.unitility.spring.webmvc.PhysicalQuantityWebMvcConfiguration
+com.synerset.unitility.spring.PhysicalQuantityJacksonConfiguration
+com.synerset.unitility.spring.PhysicalQuantityWebMvcConfiguration

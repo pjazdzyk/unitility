@@ -1,4 +1,4 @@
-package com.synerset.jackson.jackson;
+package com.synerset.unitility.jackson;
 
 public class FieldNames {
 

@@ -1,4 +1,4 @@
-package com.synerset.unitility.spring.webmvc;
+package com.synerset.unitility.spring;
 
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
