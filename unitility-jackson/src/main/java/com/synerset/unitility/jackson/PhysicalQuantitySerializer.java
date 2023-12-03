@@ -9,6 +9,10 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.io.IOException;
 
+/**
+ * The PhysicalQuantitySerializer class is a Jackson JSON serializer for serializing {@link PhysicalQuantity} instances
+ * to their JSON representations.
+ */
 public class PhysicalQuantitySerializer extends StdSerializer<PhysicalQuantity<Unit>> {
 
     public PhysicalQuantitySerializer(JavaType type) {

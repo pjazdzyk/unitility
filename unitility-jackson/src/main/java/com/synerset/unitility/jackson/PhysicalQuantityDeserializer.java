@@ -10,6 +10,13 @@ import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 
 import java.io.IOException;
 
+/**
+ * The {@link PhysicalQuantityDeserializer} class is a Jackson JSON deserializer for deserializing JSON representations
+ * of {@link PhysicalQuantity} instances.
+ *
+ * @param <U> The type of unit associated with the PhysicalQuantity.
+ * @param <Q> The type of PhysicalQuantity.
+ */
 public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuantity<U>> extends JsonDeserializer<Q> {
 
     private final Class<Q> quantityClass;
@@ -20,6 +27,16 @@ public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuan
         this.parsingFactory = parsingFactory;
     }
 
+    /**
+     * Deserializes a JSON representation to a {@link PhysicalQuantity} instance.
+     * This method is called by Jackson's ObjectMapper during the deserialization process. It reads the JSON
+     * representation and uses the {@link PhysicalQuantityParsingRegistry} to create a {@link PhysicalQuantity} instance.
+     *
+     * @param jsonParser             The {@link JsonParser} used to read JSON data.
+     * @param deserializationContext The {@link DeserializationContext} used during deserialization.
+     * @return A {@link PhysicalQuantity} instance.
+     * @throws IOException If an I/O error occurs during the deserialization process.
+     */
     @Override
     public Q deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);

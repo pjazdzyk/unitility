@@ -10,10 +10,31 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+/**
+ * The PhysicalQuantityParsingRegistry interface defines a registry for parsing and creating instances of
+ * PhysicalQuantity based on their symbolic representation.
+ */
 public interface PhysicalQuantityParsingRegistry {
 
+    /**
+     * Retrieves the registry map that maps physical quantity classes to functions capable of creating instances
+     * from a value and a symbol.
+     *
+     * @return The registry map.
+     */
     Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> getRegistryMap();
 
+    /**
+     * Creates a PhysicalQuantity instance from the provided target class, value, and unit symbol.
+     *
+     * @param targetClass    The class of the physical quantity.
+     * @param value          The value of the physical quantity.
+     * @param symbolAsString The symbolic representation of the unit.
+     * @param <U>            The type of unit associated with the physical quantity.
+     * @param <Q>            The type of physical quantity.
+     * @return A new instance of the specified physical quantity.
+     * @throws UnitSystemClassNotSupportedException If the provided class is not registered in the registry.
+     */
     default <U extends Unit, Q extends PhysicalQuantity<U>> Q createFromSymbol(Class<Q> targetClass,
                                                                                double value,
                                                                                String symbolAsString) {
@@ -21,6 +42,16 @@ public interface PhysicalQuantityParsingRegistry {
         return targetClass.cast(getRegistryMap().get(targetClass).apply(value, symbolAsString));
     }
 
+    /**
+     * Creates a PhysicalQuantity instance from the provided class and a string engineering format (20.0[C]).
+     *
+     * @param targetClass         The class of the physical quantity.
+     * @param quantityInEngFormat The string representation of the quantity in engineering format, i.e.: 20.0[C]
+     * @param <U>                 The type of unit associated with the physical quantity.
+     * @param <Q>                 The type of physical quantity.
+     * @return A new instance of the specified physical quantity.
+     * @throws UnitSystemParseException If parsing the English format fails.
+     */
     default <U extends Unit, Q extends PhysicalQuantity<U>> Q createFromEngFormat(Class<Q> targetClass,
                                                                                   String quantityInEngFormat) {
 
@@ -35,10 +66,23 @@ public interface PhysicalQuantityParsingRegistry {
         return createFromSymbol(targetClass, value, unitSymbol);
     }
 
+    /**
+     * Checks if the target class is registered in parsing registry.
+     *
+     * @param targetClass The class to check for in the registry.
+     * @return True if the class is registered, false otherwise.
+     */
     default boolean containsClass(Class<?> targetClass) {
         return getRegistryMap().containsKey(targetClass);
     }
 
+    /**
+     * Retrieves a set of all registered physical quantity classes.
+     *
+     * @param <U> The type of unit associated with the physical quantity.
+     * @param <Q> The type of physical quantity.
+     * @return A set containing all registered physical quantity classes.
+     */
     @SuppressWarnings("unchecked")
     default <U extends Unit, Q extends PhysicalQuantity<U>> Set<Class<Q>> findAllRegisteredClasses() {
         Set<Class<Q>> quantityClasses = new HashSet<>();
@@ -81,6 +125,11 @@ public interface PhysicalQuantityParsingRegistry {
         }
     }
 
+    /**
+     * Creates a new default instance of DefaultPhysicalQuantityParsingRegistry.
+     *
+     * @return A new default registry.
+     */
     static PhysicalQuantityParsingRegistry createNewDefaultRegistry() {
         return new PhysicalQuantityDefaultParsingRegistry();
     }

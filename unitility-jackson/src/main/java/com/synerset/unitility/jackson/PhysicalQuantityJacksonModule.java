@@ -7,6 +7,10 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 
+/**
+ * The PhysicalQuantityJacksonModule class is a Jackson module that provides serializers and deserializers for
+ * handling {@link PhysicalQuantity} instances during JSON serialization and deserialization.
+ */
 public class PhysicalQuantityJacksonModule extends SimpleModule {
 
     public PhysicalQuantityJacksonModule(PhysicalQuantityParsingRegistry parsingRegistry) {

@@ -5,6 +5,8 @@ import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedE
 import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.ext.ParamConverter;
 import jakarta.ws.rs.ext.ParamConverterProvider;
 import jakarta.ws.rs.ext.Provider;
@@ -15,6 +17,12 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * The PhysicalQuantityJakartaProvider class is a Jakarta RS {@link ParamConverterProvider} that provides
+ * {@link ParamConverter} instances for handling {@link PhysicalQuantity} instances in Jakarta resource methods.
+ * This mechanism is required for deserializing {@link PhysicalQuantity} from {@link PathParam} or {@link QueryParam}
+ * based on parsers registered in {@link PhysicalQuantityParsingRegistry}.
+ */
 @Provider
 @Priority(1000)
 @ApplicationScoped
@@ -32,6 +40,15 @@ public class PhysicalQuantityJakartaProvider implements ParamConverterProvider {
         this.immutableConverterRegistry = Collections.unmodifiableMap(registry);
     }
 
+    /**
+     * Returns a {@link ParamConverter} instance for the specified target class.
+     *
+     * @param targetClass      The class of the target type to be converted.
+     * @param parametrizedType The generic type of the target type.
+     * @param annotations      Annotations on the target type.
+     * @param <T>              The target type.
+     * @return A ParamConverter for the specified target class.
+     */
     @Override
     @SuppressWarnings("unchecked")
     public <T> ParamConverter<T> getConverter(Class<T> targetClass, Type parametrizedType, Annotation[] annotations) {
@@ -40,6 +57,11 @@ public class PhysicalQuantityJakartaProvider implements ParamConverterProvider {
     }
 
 
+    /**
+     * Validates whether the target class is supported and registered.
+     *
+     * @param targetClass The target class to be validated.
+     */
     public void validateTargetClass(Class<?> targetClass) {
         if (!PhysicalQuantity.class.isAssignableFrom(targetClass)) {
             throw new UnitSystemClassNotSupportedException("Target class does not implements interface: " +
