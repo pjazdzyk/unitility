@@ -35,11 +35,6 @@ public interface PhysicalQuantityParsingRegistry {
         return createFromSymbol(targetClass, value, unitSymbol);
     }
 
-    default <U extends Unit, Q extends PhysicalQuantity<U>> void overrideQuantityClass(Class<Q> quantityClass,
-                                                                                       BiFunction<Double, String, Q> factoryFunction) {
-        getRegistryMap().put(quantityClass, factoryFunction);
-    }
-
     default boolean containsClass(Class<?> targetClass) {
         return getRegistryMap().containsKey(targetClass);
     }
@@ -47,7 +42,7 @@ public interface PhysicalQuantityParsingRegistry {
     @SuppressWarnings("unchecked")
     default <U extends Unit, Q extends PhysicalQuantity<U>> Set<Class<Q>> findAllRegisteredClasses() {
         Set<Class<Q>> quantityClasses = new HashSet<>();
-        getRegistryMap().keySet().forEach(clazz -> quantityClasses.add((Class<Q>) clazz));
+        getRegistryMap().keySet().forEach(quantityClass -> quantityClasses.add((Class<Q>) quantityClass));
         return quantityClasses;
     }
 
@@ -81,7 +76,7 @@ public interface PhysicalQuantityParsingRegistry {
         if (startIndex != -1 && endIndex != -1) {
             return input.substring(startIndex + 1, endIndex);
         } else {
-            throw new UnitSystemParseException("Could not extract unit symbol from input: " + input
+            throw new UnitSystemParseException("Invalid input string. Could not extract unit symbol from: " + input
                     + ", target class: " + targetClass.getSimpleName());
         }
     }
