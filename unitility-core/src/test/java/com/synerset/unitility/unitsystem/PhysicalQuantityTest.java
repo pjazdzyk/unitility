@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem;
 
-import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.common.DistanceUnits;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
@@ -29,26 +28,6 @@ class PhysicalQuantityTest {
 
         // Then
         assertThat(distanceInMeters.isEqualWithPrecision(distanceInMiles, 1E-13)).isTrue();
-    }
-
-    @Test
-    @DisplayName("should return String for quantity accordingly to given relevant digits")
-    void toFormattedString_shouldReturnStringWithRelevantDigits_whenRelevantDigitsAreGiven() {
-        // Given
-        Angle angle = Angle.ofDegrees(30.123456789);
-        Distance distance = Distance.ofMeters(100.1238);
-
-        // When
-        String actualAngleOutput = angle.toFormattedString(3);
-        String actualDistanceOutput = distance.toFormattedString(3);
-        String actualDistanceOutputVarNAme = distance.toFormattedString("l_1");
-        String actualDistanceOutputVarNAme3Digits = distance.toFormattedString(3, "l_1");
-
-        // Then
-        assertThat(actualAngleOutput).isEqualTo("30.123°");
-        assertThat(actualDistanceOutput).isEqualTo( "100.124 m");
-        assertThat(actualDistanceOutputVarNAme).isEqualTo("l_1 = 100.1238 m");
-        assertThat(actualDistanceOutputVarNAme3Digits).isEqualTo("l_1 = 100.124 m");
     }
 
     @Test
@@ -289,7 +268,6 @@ class PhysicalQuantityTest {
         };
 
         assertThat(temperatures).isEqualTo(correctOrderTemperatures);
-
     }
 
     @Test
@@ -304,11 +282,15 @@ class PhysicalQuantityTest {
         String actualFormattedBf = bypassFactor.toEngineeringFormat();
 
         String actualFormattedTempTwoDigits = temperature.toEngineeringFormat(2);
+        String actualFormattedTempVariable = temperature.toEngineeringFormat("t_a");
+        String actualFormattedTempVariableDigits = temperature.toEngineeringFormat("t_a", 2);
 
         // Then
         assertThat(actualFormattedTemp).isEqualTo("20.1234567[°C]");
         assertThat(actualFormattedBf).isEqualTo("20.1234567");
         assertThat(actualFormattedTempTwoDigits).isEqualTo("20.12[°C]");
+        assertThat(actualFormattedTempVariable).isEqualTo("t_a = 20.1234567[°C]");
+        assertThat(actualFormattedTempVariableDigits).isEqualTo("t_a = 20.12[°C]");
     }
 
 }

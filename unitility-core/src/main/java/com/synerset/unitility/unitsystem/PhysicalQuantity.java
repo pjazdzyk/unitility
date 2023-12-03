@@ -320,51 +320,8 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     // Formatters for console output
 
     /**
-     * Returns a formatted string representation of the value associated with this object, followed by its unit symbol.
-     * The value is formatted to have a specific number of relevant digits.
-     *
-     * @param relevantDigits number of relevant digits
-     * @return A formatted string representation of the value and unit symbol.
-     */
-    default String toFormattedString(int relevantDigits) {
-        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
-        return ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits) + separator + getUnitSymbol();
-    }
-
-    /**
-     * Returns a formatted string representation of the value associated with this object, followed by its unit symbol.
-     * The value is formatted to have a specific number of relevant digits (default is 4).
-     *
-     * @return A formatted string representation of the value and unit symbol.
-     */
-    default String toFormattedString() {
-        return toFormattedString(DEFAULT_RELEVANT_DIGITS);
-    }
-
-    /**
-     * Returns a formatted string representation of the value associated with this object, followed by its unit symbol,
-     * along with the specified variable name. Example: t = 21.5 K
-     *
-     * @param variableName The variable name to include in the formatted string.
-     * @return A formatted string representation of the variable name, value, and unit symbol.
-     */
-    default String toFormattedString(String variableName) {
-        return variableName + " = " + toFormattedString();
-    }
-
-    /**
-     * Returns a formatted string representation of the value associated with this object, followed by its unit symbol,
-     * along with the specified variable name. It allows specifying relevant digits. Example: t = 21.5 K
-     *
-     * @param variableName The variable name to include in the formatted string.
-     * @return A formatted string representation of the variable name, value, and unit symbol.
-     */
-    default String toFormattedString(int relevantDigits, String variableName) {
-        return variableName + " = " + toFormattedString(relevantDigits);
-    }
-
-    /**
-     * Converts the physical quantity to an engineering format where unit is placed in rectangular braces for i.e.: 20[°C].
+     * Converts the physical quantity to an engineering format where the unit is placed in rectangular braces,
+     * for example, 20.123456789[°C].
      *
      * @return The representation in engineering format.
      */
@@ -376,9 +333,24 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     }
 
     /**
-     * Converts the physical quantity to an engineering format where unit is placed in rectangular braces for i.e.: 20[°C].
+     * Converts the physical quantity to an engineering format where the unit is placed in rectangular braces,
+     * with variable name, for example, t_atm = 20.123456789[°C].
      *
-     * @param relevantDigits number of rounded relevant digits to show
+     * @param variableName The name of the variable for which the engineering format is generated.
+     * @return The representation in engineering format.
+     */
+    default String toEngineeringFormat(String variableName) {
+        if (getUnitSymbol().isBlank()) {
+            return String.valueOf(getValue());
+        }
+        return variableName + " = " + toEngineeringFormat();
+    }
+
+    /**
+     * Converts the physical quantity to an engineering format where the unit is placed in rectangular braces,
+     * truncated to relevantDigits: for example, 120.123[F]
+     *
+     * @param relevantDigits The number of rounded relevant digits to show.
      * @return The representation in engineering format.
      */
     default String toEngineeringFormat(int relevantDigits) {
@@ -387,6 +359,22 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         }
         return String.format("%s[%s]", ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits), getUnitSymbol());
     }
+
+    /**
+     * Converts the physical quantity to an engineering format where the unit is placed in rectangular braces,
+     * with variable name, truncated to relevantDigits: for example, t_atm = 120.123[F]
+     *
+     * @param variableName   The name of the variable for which the engineering format is generated.
+     * @param relevantDigits The number of rounded relevant digits to show.
+     * @return The representation in engineering format.
+     */
+    default String toEngineeringFormat(String variableName, int relevantDigits) {
+        if (getUnitSymbol().isBlank()) {
+            return String.valueOf(getValue());
+        }
+        return variableName + " = " + toEngineeringFormat(relevantDigits);
+    }
+
 
     @Override
     default int compareTo(PhysicalQuantity<U> other) {
