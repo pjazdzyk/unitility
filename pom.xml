@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>unitility-bom</module>
         <module>unitility-core</module>
         <module>unitility-jackson</module>
         <module>unitility-spring</module>
@@ -143,7 +144,7 @@
                     <!-- enable flattening -->
                     <execution>
                         <id>flatten</id>
-                        <phase>process-resources</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>flatten</goal>
                         </goals>
