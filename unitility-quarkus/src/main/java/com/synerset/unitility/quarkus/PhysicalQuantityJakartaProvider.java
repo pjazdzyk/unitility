@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Provider
 @Priority(1000)
 @ApplicationScoped
-public class PhysicalQuantityJakartaProvider implements ParamConverterProvider {
+class PhysicalQuantityJakartaProvider implements ParamConverterProvider {
 
     private final Map<Class<?>, ParamConverter<?>> immutableConverterRegistry;
 

@@ -13,7 +13,7 @@ import jakarta.enterprise.context.ApplicationScoped;
  * allow object mapper to serialize / deserialize PhysicalQuantities in Request and Response objects.
  */
 @ApplicationScoped
-public class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
+class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
 
     private final PhysicalQuantityParsingRegistry parsingRegistry;
 
