@@ -67,7 +67,7 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
 
     @Override
     @SuppressWarnings("unchecked")
-    public ThermalConductivity createNewWithValue(double value) {
+    public ThermalConductivity withValue(double value) {
         return ThermalConductivity.of(value, unitType);
     }
 

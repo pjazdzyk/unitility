@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SuppressWarnings("unchecked")
 class PhysicalQuantityJakartaProviderTest {
 
-    public static final PhysicalQuantityParsingRegistry PARSING_REGISTRY = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+    public static final PhysicalQuantityParsingRegistry PARSING_REGISTRY = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
     public static final PhysicalQuantityJakartaProvider CONVERTER_PROVIDER = new PhysicalQuantityJakartaProvider(PARSING_REGISTRY);
     public static final double TEST_VALUE = 15.1;
 

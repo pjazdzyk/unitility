@@ -11,7 +11,7 @@ class ParsingRegistryProvider {
 
     @ApplicationScoped
     PhysicalQuantityParsingRegistry createParsingFactory() {
-        return PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        return PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
     }
 
 }

@@ -67,7 +67,7 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public SpecificHeat createNewWithValue(double value) {
+    public SpecificHeat withValue(double value) {
         return SpecificHeat.of(value, unitType);
     }
 

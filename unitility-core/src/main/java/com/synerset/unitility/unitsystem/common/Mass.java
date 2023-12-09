@@ -81,7 +81,7 @@ public class Mass implements PhysicalQuantity<MassUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Mass createNewWithValue(double value) {
+    public Mass withValue(double value) {
         return Mass.of(value, unitType);
     }
 

@@ -13,7 +13,7 @@ class PhysicalQuantityJacksonSerializerTest {
     @Test
     void serialize_shouldSerializePhysicalQuantityToJson() throws JsonProcessingException {
         // Given
-        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
         Temperature temperature = Temperature.ofCelsius(20);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));

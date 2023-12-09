@@ -28,7 +28,6 @@
             <groupId>com.synerset</groupId>
             <artifactId>unitility-core</artifactId>
             <version>${project.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.synerset</groupId>

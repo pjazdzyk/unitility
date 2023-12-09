@@ -47,7 +47,7 @@ public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public PrandtlNumber createNewWithValue(double value) {
+    public PrandtlNumber withValue(double value) {
         return PrandtlNumber.of(value);
     }
 

@@ -75,7 +75,7 @@ public class Power implements PhysicalQuantity<PowerUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Power createNewWithValue(double value) {
+    public Power withValue(double value) {
         return Power.of(value, unitType);
     }
 

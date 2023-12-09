@@ -23,7 +23,7 @@ class PhysicalQuantityParsingRegistryTest {
     void parsingRegistryTest_shouldCreateRegistry() {
         // Given
         // When
-        PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
         Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> registryMap = parsingRegistry.getRegistryMap();
         Set<Class<PhysicalQuantity<Unit>>> registeredClasses = parsingRegistry.findAllRegisteredClasses();
         boolean status = parsingRegistry.containsClass(Temperature.class);
@@ -39,24 +39,24 @@ class PhysicalQuantityParsingRegistryTest {
     @DisplayName("should fail when attempt to parse for not registered class")
     void createFromSymbol_shouldFailIfQueriedForNonSupportedClass() {
         // Given
-        PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
 
         // When
         // Then
         assertThrows(UnitSystemClassNotSupportedException.class,
-                () -> parsingRegistry.createFromSymbol(TestClass.class, 20.0, "test"));
+                () -> parsingRegistry.fromSymbol(TestClass.class, 20.0, "test"));
     }
 
     @Test
     @DisplayName("should fail when attempt to parse from invalid string")
     void createFromEngFormat_shouldFailIfQueriedForNonSupportedClass() {
         // Given
-        PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
 
         // When
         // Then
         assertThrows(UnitSystemParseException.class,
-                () -> parsingRegistry.createFromEngFormat(TestClass.class, "20C"));
+                () -> parsingRegistry.fromEngFormat(TestClass.class, "20C"));
     }
 
 
@@ -91,7 +91,7 @@ class PhysicalQuantityParsingRegistryTest {
         }
 
         @Override
-        public <Q extends PhysicalQuantity<DistanceUnit>> Q createNewWithValue(double value) {
+        public <Q extends PhysicalQuantity<DistanceUnit>> Q withValue(double value) {
             return null;
         }
     }

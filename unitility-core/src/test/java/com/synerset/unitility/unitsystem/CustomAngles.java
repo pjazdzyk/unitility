@@ -5,7 +5,7 @@ import com.synerset.unitility.unitsystem.common.AngleUnits;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum CustomAngles implements AngleUnit {
+enum CustomAngles implements AngleUnit {
     REVOLUTIONS("rev", val -> val * 360, val -> val / 360);
 
     private final String symbol;

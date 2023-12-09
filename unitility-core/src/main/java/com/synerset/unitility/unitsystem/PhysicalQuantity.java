@@ -46,12 +46,12 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     PhysicalQuantity<U> toUnit(U targetUnit);
 
     /**
-     * Create a new physical quantity with the specified value.
+     * Create a new physical quantity with new value of the same unit.
      *
      * @param value The value for the new physical quantity.
      * @return A new physical quantity with the specified value.
      */
-    <Q extends PhysicalQuantity<U>> Q createNewWithValue(double value);
+    <Q extends PhysicalQuantity<U>> Q withValue(double value);
 
     /**
      * Get the symbol of the unit associated with the physical quantity.
@@ -81,7 +81,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is greater than the given quantity, false otherwise.
      */
-    default boolean isGreaterThan(PhysicalQuantity<U> quantity) {
+    default boolean greaterThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -96,7 +96,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is equal to or greater than the given quantity, false otherwise.
      */
-    default boolean isEqualOrGreaterThan(PhysicalQuantity<U> quantity) {
+    default boolean equalOrGreaterThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -111,7 +111,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is lower than the given quantity, false otherwise.
      */
-    default boolean isLowerThan(PhysicalQuantity<U> quantity) {
+    default boolean lowerThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -126,7 +126,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is equal to or lower than the given quantity, false otherwise.
      */
-    default boolean isEqualOrLowerThan(PhysicalQuantity<U> quantity) {
+    default boolean equalOrLowerThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -142,7 +142,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param epsilon  The maximum difference allowed between the quantities.
      * @return True if this quantity is equal to the given quantity within the specified epsilon, false otherwise.
      */
-    default boolean isEqualWithPrecision(PhysicalQuantity<U> quantity, double epsilon) {
+    default boolean equalsWithPrecision(PhysicalQuantity<U> quantity, double epsilon) {
         if (this == quantity) {
             return true;
         }
@@ -164,7 +164,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is greater than zero, false otherwise.
      */
-    default boolean isPositive() {
+    default boolean positive() {
         return getValue() > 0;
     }
 
@@ -173,7 +173,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is greater than or equal to zero, false otherwise.
      */
-    default boolean isPositiveOrZero() {
+    default boolean positiveOrZero() {
         return getValue() >= 0;
     }
 
@@ -182,7 +182,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is less than zero, false otherwise.
      */
-    default boolean isNegative() {
+    default boolean negative() {
         return getValue() < 0;
     }
 
@@ -191,7 +191,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is less than or equal to zero, false otherwise.
      */
-    default boolean isNegativeOrZero() {
+    default boolean negativeOrZero() {
         return getValue() <= 0;
     }
 
@@ -200,7 +200,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is zero, false otherwise.
      */
-    default boolean isZero() {
+    default boolean equalsZero() {
         return getValue() == 0;
     }
 
@@ -215,7 +215,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     default <Q extends PhysicalQuantity<U>> Q plus(double value) {
         double newValue = getValue() + value;
-        return createNewWithValue(newValue);
+        return withValue(newValue);
     }
 
     /**
@@ -224,11 +224,11 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param inputQuantity The other physical quantity to add.
      * @return A new physical quantity with the added value.
      */
-    default <Q extends PhysicalQuantity<U>> Q plus(PhysicalQuantity<U> inputQuantity) {
+    default <Q extends PhysicalQuantity<U>> Q plus(Q inputQuantity) {
         U sourceUnit = this.getUnitType();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() + inputInSourceUnits.getValue();
-        return createNewWithValue(newValue);
+        return withValue(newValue);
     }
 
     /**
@@ -239,7 +239,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     default <Q extends PhysicalQuantity<U>> Q minus(double value) {
         double newValue = getValue() - value;
-        return createNewWithValue(newValue);
+        return withValue(newValue);
     }
 
     /**
@@ -252,7 +252,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         U sourceUnit = this.getUnitType();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() - inputInSourceUnits.getValue();
-        return createNewWithValue(newValue);
+        return withValue(newValue);
     }
 
     /**
@@ -263,7 +263,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     default <Q extends PhysicalQuantity<U>> Q subtractFromValue(double value) {
         double newValue = value - this.getValue();
-        return createNewWithValue(newValue);
+        return withValue(newValue);
     }
 
     /**
@@ -274,7 +274,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     default <Q extends PhysicalQuantity<U>> Q multiply(double value) {
         double newValue = getValue() * value;
-        return createNewWithValue(newValue);
+        return withValue(newValue);
     }
 
     /**
@@ -289,7 +289,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
             throw new UnitSystemArgumentException("Division by zero is not allowed. Please provide a non-zero divider value.");
         }
         double newValue = getValue() / value;
-        return createNewWithValue(newValue);
+        return withValue(newValue);
     }
 
     /**
@@ -300,6 +300,17 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     default double multiply(PhysicalQuantity<? extends Unit> inputQuantity) {
         return this.getValue() * inputQuantity.getValue();
+    }
+
+    /**
+     * Multiply this physical quantity's value by another physical quantity's value.
+     * Added to provide "*" operator support in Kotlin.
+     *
+     * @param inputQuantity The other physical quantity for multiplication.
+     * @return The result of multiplying the two physical quantities' values.
+     */
+    default double times(PhysicalQuantity<? extends Unit> inputQuantity){
+        return multiply(inputQuantity);
     }
 
     /**
@@ -374,7 +385,6 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         }
         return variableName + " = " + toEngineeringFormat(relevantDigits);
     }
-
 
     @Override
     default int compareTo(PhysicalQuantity<U> other) {

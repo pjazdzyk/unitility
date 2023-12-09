@@ -66,7 +66,7 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnit> 
 
     @Override
     @SuppressWarnings("unchecked")
-    public RelativeHumidity createNewWithValue(double value) {
+    public RelativeHumidity withValue(double value) {
         return RelativeHumidity.of(value, unitType);
     }
 

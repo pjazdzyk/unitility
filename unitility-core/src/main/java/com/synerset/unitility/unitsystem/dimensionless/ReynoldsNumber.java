@@ -51,7 +51,7 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public ReynoldsNumber createNewWithValue(double value) {
+    public ReynoldsNumber withValue(double value) {
         return ReynoldsNumber.of(value);
     }
 

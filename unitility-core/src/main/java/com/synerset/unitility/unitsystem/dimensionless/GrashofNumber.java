@@ -47,7 +47,7 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public GrashofNumber createNewWithValue(double value) {
+    public GrashofNumber withValue(double value) {
         return GrashofNumber.of(value);
     }
 

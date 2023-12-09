@@ -27,7 +27,7 @@ class PhysicalQuantityTest {
         Distance distanceInMiles = distanceInMeters.toUnit(DistanceUnits.MILE);
 
         // Then
-        assertThat(distanceInMeters.isEqualWithPrecision(distanceInMiles, 1E-13)).isTrue();
+        assertThat(distanceInMeters.equalsWithPrecision(distanceInMiles, 1E-13)).isTrue();
     }
 
     @Test
@@ -40,11 +40,11 @@ class PhysicalQuantityTest {
         Temperature greaterOrEqualTemp = Temperature.ofCelsius(0.0);
 
         // When
-        boolean firstIsSmaller = smallerTemp.isLowerThan(greaterTemp);
-        boolean secondIsGreater = greaterTemp.isGreaterThan(smallerTemp);
-        boolean firstIsEqualOrLower = smallerTemp.isEqualOrLowerThan(smallerOrEqualTemp);
-        boolean secondIsEqualOrGreater = greaterTemp.isEqualOrGreaterThan(greaterOrEqualTemp);
-        boolean bothAreTheSame = greaterTemp.isGreaterThan(greaterTemp);
+        boolean firstIsSmaller = smallerTemp.lowerThan(greaterTemp);
+        boolean secondIsGreater = greaterTemp.greaterThan(smallerTemp);
+        boolean firstIsEqualOrLower = smallerTemp.equalOrLowerThan(smallerOrEqualTemp);
+        boolean secondIsEqualOrGreater = greaterTemp.equalOrGreaterThan(greaterOrEqualTemp);
+        boolean bothAreTheSame = greaterTemp.greaterThan(greaterTemp);
 
         // Then
         assertThat(firstIsSmaller).isTrue();
@@ -65,23 +65,23 @@ class PhysicalQuantityTest {
         // When
 
         // Then
-        assertThat(negativeTemp.isNegative()).isTrue();
-        assertThat(negativeTemp.isNegativeOrZero()).isTrue();
-        assertThat(negativeTemp.isZero()).isFalse();
-        assertThat(negativeTemp.isPositive()).isFalse();
-        assertThat(negativeTemp.isPositiveOrZero()).isFalse();
+        assertThat(negativeTemp.negative()).isTrue();
+        assertThat(negativeTemp.negativeOrZero()).isTrue();
+        assertThat(negativeTemp.equalsZero()).isFalse();
+        assertThat(negativeTemp.positive()).isFalse();
+        assertThat(negativeTemp.positiveOrZero()).isFalse();
 
-        assertThat(zeroTemp.isNegative()).isFalse();
-        assertThat(zeroTemp.isNegativeOrZero()).isTrue();
-        assertThat(zeroTemp.isZero()).isTrue();
-        assertThat(zeroTemp.isPositive()).isFalse();
-        assertThat(zeroTemp.isPositiveOrZero()).isTrue();
+        assertThat(zeroTemp.negative()).isFalse();
+        assertThat(zeroTemp.negativeOrZero()).isTrue();
+        assertThat(zeroTemp.equalsZero()).isTrue();
+        assertThat(zeroTemp.positive()).isFalse();
+        assertThat(zeroTemp.positiveOrZero()).isTrue();
 
-        assertThat(positiveTemp.isNegative()).isFalse();
-        assertThat(positiveTemp.isNegativeOrZero()).isFalse();
-        assertThat(positiveTemp.isZero()).isFalse();
-        assertThat(positiveTemp.isPositive()).isTrue();
-        assertThat(positiveTemp.isPositiveOrZero()).isTrue();
+        assertThat(positiveTemp.negative()).isFalse();
+        assertThat(positiveTemp.negativeOrZero()).isFalse();
+        assertThat(positiveTemp.equalsZero()).isFalse();
+        assertThat(positiveTemp.positive()).isTrue();
+        assertThat(positiveTemp.positiveOrZero()).isTrue();
 
     }
 
@@ -168,10 +168,11 @@ class PhysicalQuantityTest {
 
         // When
         double actualMultiplyResult = sourceTemperature.multiply(pressure);
+        double actualMultiplyResultTimes = sourceTemperature.times(pressure);
 
         // Then
         double expectedMultiplyResult = 40;
-        assertThat(actualMultiplyResult).isEqualTo(expectedMultiplyResult);
+        assertThat(actualMultiplyResult).isEqualTo(expectedMultiplyResult).isEqualTo(actualMultiplyResultTimes);
     }
 
     @Test

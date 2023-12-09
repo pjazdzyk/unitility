@@ -72,7 +72,7 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public MassFlow createNewWithValue(double value) {
+    public MassFlow withValue(double value) {
         return MassFlow.of(value, unitType);
     }
 

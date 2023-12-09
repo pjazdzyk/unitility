@@ -92,7 +92,7 @@ public class Energy implements PhysicalQuantity<EnergyUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Energy createNewWithValue(double value) {
+    public Energy withValue(double value) {
         return Energy.of(value, unitType);
     }
 

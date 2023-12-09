@@ -92,7 +92,7 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public VolumetricFlow createNewWithValue(double value) {
+    public VolumetricFlow withValue(double value) {
         return VolumetricFlow.of(value, unitType);
     }
 

@@ -80,7 +80,7 @@ public class Force implements PhysicalQuantity<ForceUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Force createNewWithValue(double value) {
+    public Force withValue(double value) {
         return Force.of(value, unitType);
     }
 

@@ -32,7 +32,7 @@ public class PhysicalQuantityWebMvcConverter<U extends Unit, Q extends PhysicalQ
      */
     @Override
     public Q convert(@NonNull String source) {
-        return parsingFactory.createFromEngFormat(targetClass, source);
+        return parsingFactory.fromEngFormat(targetClass, source);
     }
 
 }

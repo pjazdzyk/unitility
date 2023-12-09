@@ -69,7 +69,7 @@ public class Temperature implements PhysicalQuantity<TemperatureUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Temperature createNewWithValue(double value) {
+    public Temperature withValue(double value) {
         return Temperature.of(value, unitType);
     }
 

@@ -88,7 +88,7 @@ public class Velocity implements PhysicalQuantity<VelocityUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Velocity createNewWithValue(double value) {
+    public Velocity withValue(double value) {
         return Velocity.of(value, unitType);
     }
 

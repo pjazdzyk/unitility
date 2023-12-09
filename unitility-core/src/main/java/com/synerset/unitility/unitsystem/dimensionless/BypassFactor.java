@@ -51,7 +51,7 @@ public class BypassFactor implements PhysicalQuantity<BypassFactorUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public BypassFactor createNewWithValue(double value) {
+    public BypassFactor withValue(double value) {
         return BypassFactor.of(value);
     }
 

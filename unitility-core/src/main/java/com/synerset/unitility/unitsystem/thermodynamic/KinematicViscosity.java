@@ -64,7 +64,7 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosityUn
 
     @Override
     @SuppressWarnings("unchecked")
-    public KinematicViscosity createNewWithValue(double value) {
+    public KinematicViscosity withValue(double value) {
         return KinematicViscosity.of(value, unitType);
     }
 

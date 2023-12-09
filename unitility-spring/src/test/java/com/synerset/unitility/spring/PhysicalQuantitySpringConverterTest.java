@@ -7,12 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 class PhysicalQuantitySpringConverterTest {
     @Test
     void convert_shouldConvertStringToPhysicalQuantity() {
         // Given
-        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
 
         String input_1 = "20[BTU/(h·ft·°F)]";
         String input_2 = "20[BTU p (h x ft x oF)]";

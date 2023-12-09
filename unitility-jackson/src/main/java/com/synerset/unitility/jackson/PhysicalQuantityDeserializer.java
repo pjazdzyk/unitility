@@ -45,7 +45,7 @@ public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuan
         if (node.get(FieldNames.JSON_FIELD_UNIT_SYMBOL) != null) {
             unitSymbol = node.get(FieldNames.JSON_FIELD_UNIT_SYMBOL).asText();
         }
-        return parsingFactory.createFromSymbol(quantityClass, value, unitSymbol);
+        return parsingFactory.fromSymbol(quantityClass, value, unitSymbol);
     }
 
 }

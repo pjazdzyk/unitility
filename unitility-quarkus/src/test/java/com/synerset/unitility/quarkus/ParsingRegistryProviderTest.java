@@ -13,7 +13,7 @@ class ParsingRegistryProviderTest {
     void createParsingRegistryTest() {
         // Given
         ParsingRegistryProvider parsingRegistryProvider =  new ParsingRegistryProvider();
-        PhysicalQuantityParsingRegistry expectedRegistry = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        PhysicalQuantityParsingRegistry expectedRegistry = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
 
         // When
         PhysicalQuantityParsingRegistry actualParsingRegistry = parsingRegistryProvider.createParsingFactory();

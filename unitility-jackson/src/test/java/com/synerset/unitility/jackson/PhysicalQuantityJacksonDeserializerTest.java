@@ -15,7 +15,7 @@ class PhysicalQuantityJacksonDeserializerTest {
     @Test
     void deserialize_shouldDeserializeJsonToPhysicalQuantity() throws JsonProcessingException {
         // Given
-        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
 

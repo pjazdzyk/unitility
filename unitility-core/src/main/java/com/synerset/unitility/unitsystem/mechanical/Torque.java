@@ -77,7 +77,7 @@ public class Torque implements PhysicalQuantity<TorqueUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Torque createNewWithValue(double value) {
+    public Torque withValue(double value) {
         return Torque.of(value, unitType);
     }
 

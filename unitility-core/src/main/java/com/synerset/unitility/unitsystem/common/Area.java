@@ -101,7 +101,7 @@ public class Area implements PhysicalQuantity<AreaUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Area createNewWithValue(double value) {
+    public Area withValue(double value) {
         return Area.of(value, unitType);
     }
 

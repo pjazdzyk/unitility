@@ -67,7 +67,7 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnit> 
 
     @Override
     @SuppressWarnings("unchecked")
-    public SpecificEnthalpy createNewWithValue(double value) {
+    public SpecificEnthalpy withValue(double value) {
         return SpecificEnthalpy.of(value, unitType);
     }
 

@@ -85,7 +85,7 @@ public class Distance implements PhysicalQuantity<DistanceUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Distance createNewWithValue(double value) {
+    public Distance withValue(double value) {
         return Distance.of(value, unitType);
     }
 

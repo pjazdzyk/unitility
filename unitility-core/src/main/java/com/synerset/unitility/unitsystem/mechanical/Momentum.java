@@ -68,7 +68,7 @@ public class Momentum implements PhysicalQuantity<MomentumUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Momentum createNewWithValue(double value) {
+    public Momentum withValue(double value) {
         return Momentum.of(value, unitType);
     }
 

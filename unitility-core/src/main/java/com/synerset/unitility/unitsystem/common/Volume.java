@@ -88,7 +88,7 @@ public class Volume implements PhysicalQuantity<VolumeUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Volume createNewWithValue(double value) {
+    public Volume withValue(double value) {
         return Volume.of(value, unitType);
     }
 

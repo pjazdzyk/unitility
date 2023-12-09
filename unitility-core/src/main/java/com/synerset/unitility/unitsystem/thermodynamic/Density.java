@@ -65,7 +65,7 @@ public class Density implements PhysicalQuantity<DensityUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Density createNewWithValue(double value) {
+    public Density withValue(double value) {
         return Density.of(value, unitType);
     }
 

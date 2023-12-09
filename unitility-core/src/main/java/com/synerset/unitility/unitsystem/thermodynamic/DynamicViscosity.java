@@ -68,7 +68,7 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnit> 
 
     @Override
     @SuppressWarnings("unchecked")
-    public DynamicViscosity createNewWithValue(double value) {
+    public DynamicViscosity withValue(double value) {
         return DynamicViscosity.of(value, unitType);
     }
 

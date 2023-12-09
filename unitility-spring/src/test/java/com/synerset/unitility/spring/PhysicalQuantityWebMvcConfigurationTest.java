@@ -15,7 +15,7 @@ class PhysicalQuantityWebMvcConfigurationTest {
     void addFormatters_shouldRegisterFormattersAndResolveInputToQuantity() {
         // Given
         FormattingConversionService formatterRegistry = new FormattingConversionService();
-        PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
         PhysicalQuantityWebMvcConfiguration webMvcConfiguration = new PhysicalQuantityWebMvcConfiguration(parsingRegistry);
         String inputQuantity = "20[oC]";
 

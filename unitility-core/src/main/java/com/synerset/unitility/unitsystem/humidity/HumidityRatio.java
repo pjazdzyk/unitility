@@ -65,7 +65,7 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public HumidityRatio createNewWithValue(double value) {
+    public HumidityRatio withValue(double value) {
         return HumidityRatio.of(value, unitType);
     }
 

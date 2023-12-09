@@ -86,7 +86,7 @@ public class Pressure implements PhysicalQuantity<PressureUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Pressure createNewWithValue(double value) {
+    public Pressure withValue(double value) {
         return Pressure.of(value, unitType);
     }
 

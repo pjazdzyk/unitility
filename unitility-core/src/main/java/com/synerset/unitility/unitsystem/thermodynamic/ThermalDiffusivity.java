@@ -64,7 +64,7 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
 
     @Override
     @SuppressWarnings("unchecked")
-    public ThermalDiffusivity createNewWithValue(double value) {
+    public ThermalDiffusivity withValue(double value) {
         return ThermalDiffusivity.of(value, unitType);
     }
 

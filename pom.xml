@@ -47,8 +47,8 @@
         <!-- MODULES VERSION -->
         <project.version>0.0.1-SNAPSHOT</project.version>
         <!-- Maven Properties -->
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Test dependencies versions -->
         <jacoco.version>0.8.9</jacoco.version>
@@ -196,7 +196,6 @@
     <profiles>
         <profile>
             <id>ossrhDeploy</id>
-
             <distributionManagement>
                 <snapshotRepository>
                     <id>ossrh</id>
@@ -207,7 +206,6 @@
                     <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
-
             <build>
                 <plugins>
                     <!-- Sonatype Plugin -->
@@ -222,7 +220,6 @@
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
-
                     <!-- Maven GPG Plugin -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -247,12 +244,10 @@
             </build>
         </profile>
     </profiles>
-
     <scm>
         <connection>scm:git:git://github.com/pjazdzyk/unitility.git</connection>
         <developerConnection>scm:git:ssh://github.com:pjazdzyk/unitility.git</developerConnection>
         <url>https://github.com/pjazdzyk/unitility</url>
         <tag>HEAD</tag>
     </scm>
-
 </project>

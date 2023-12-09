@@ -16,6 +16,8 @@ import java.util.function.BiFunction;
  */
 public interface PhysicalQuantityParsingRegistry {
 
+    PhysicalQuantityParsingRegistry DEFAULT_PARSING_REGISTRY = new PhysicalQuantityDefaultParsingRegistry();
+
     /**
      * Retrieves the registry map that maps physical quantity classes to functions capable of creating instances
      * from a value and a symbol.
@@ -35,9 +37,9 @@ public interface PhysicalQuantityParsingRegistry {
      * @return A new instance of the specified physical quantity.
      * @throws UnitSystemClassNotSupportedException If the provided class is not registered in the registry.
      */
-    default <U extends Unit, Q extends PhysicalQuantity<U>> Q createFromSymbol(Class<Q> targetClass,
-                                                                               double value,
-                                                                               String symbolAsString) {
+    default <U extends Unit, Q extends PhysicalQuantity<U>> Q fromSymbol(Class<Q> targetClass,
+                                                                         double value,
+                                                                         String symbolAsString) {
         validateIfClassIsRegistered(targetClass);
         return targetClass.cast(getRegistryMap().get(targetClass).apply(value, symbolAsString));
     }
@@ -52,8 +54,8 @@ public interface PhysicalQuantityParsingRegistry {
      * @return A new instance of the specified physical quantity.
      * @throws UnitSystemParseException If parsing the English format fails.
      */
-    default <U extends Unit, Q extends PhysicalQuantity<U>> Q createFromEngFormat(Class<Q> targetClass,
-                                                                                  String quantityInEngFormat) {
+    default <U extends Unit, Q extends PhysicalQuantity<U>> Q fromEngFormat(Class<Q> targetClass,
+                                                                            String quantityInEngFormat) {
 
         String preparedSource = quantityInEngFormat.trim()
                 .replace(" ", "")
@@ -63,7 +65,7 @@ public interface PhysicalQuantityParsingRegistry {
             unitSymbol = extractSymbolFromEngFormat(targetClass, preparedSource);
         }
         double value = extractValueFromEngFormat(targetClass, preparedSource);
-        return createFromSymbol(targetClass, value, unitSymbol);
+        return fromSymbol(targetClass, value, unitSymbol);
     }
 
     /**
@@ -123,15 +125,6 @@ public interface PhysicalQuantityParsingRegistry {
             throw new UnitSystemParseException("Invalid input string. Could not extract unit symbol from: " + input
                     + ", target class: " + targetClass.getSimpleName());
         }
-    }
-
-    /**
-     * Creates a new default instance of DefaultPhysicalQuantityParsingRegistry.
-     *
-     * @return A new default registry.
-     */
-    static PhysicalQuantityParsingRegistry createNewDefaultRegistry() {
-        return new PhysicalQuantityDefaultParsingRegistry();
     }
 
 }

@@ -32,7 +32,7 @@ public class PhysicalQuantityParamJakartaConverter<U extends Unit, Q extends Phy
      */
     @Override
     public Q fromString(String quantityAsString) {
-        return parsingRegistry.createFromEngFormat(targetClass, quantityAsString);
+        return parsingRegistry.fromEngFormat(targetClass, quantityAsString);
     }
 
     /**

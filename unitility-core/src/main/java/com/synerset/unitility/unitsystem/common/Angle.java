@@ -63,7 +63,7 @@ public class Angle implements PhysicalQuantity<AngleUnit> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Angle createNewWithValue(double value) {
+    public Angle withValue(double value) {
         return Angle.of(value, unitType);
     }
 

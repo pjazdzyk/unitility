@@ -37,7 +37,7 @@ class PhysicalQuantityJacksonConfiguration {
      */
     @Bean
     PhysicalQuantityParsingRegistry createPhysicalQuantityParsingFactory() {
-        return PhysicalQuantityParsingRegistry.createNewDefaultRegistry();
+        return PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
     }
 
 }
