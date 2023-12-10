@@ -619,7 +619,8 @@ def t3 = Temperature.ofKelvins(303.15)  // =30 oC
 def t4 = t1 + t2                // Temperature{30.0°C}
 def t5 = t1 - t2                // Temperature{10.0°C}
 def t6 = t1 + 15.5              // Temperature{35.5°C}    
-// Adding & subtracting: Different units of the same quantity, resolving to unit type of the first addend.
+// Adding & subtracting: Different units of the same quantity,
+// resolving to a first addend unit type.
 def t7 = t1 + t3                // Temperature{50.0°C}
 def t8 = t1 - t3                // Temperature{-10.0°C}
 // Multiply
@@ -647,7 +648,8 @@ val t3 = Temperature.ofKelvins(303.15) // =30 oC
 // Adding & subtracting: The same unit
 val t4 = t1 + t2                // Temperature{30.0°C}
 val t5 = t1 - t2                // Temperature{10.0°C} 
-// Adding & subtracting: Different units of the same quantity, resolving to a unit type of the first addend.
+// Adding & subtracting: Different units of the same quantity,
+// resolving to a first addend unit type.
 val t7 = t1 + t3                // Temperature{50.0°C}
 val t8 = t1 - t3                // Temperature{-10.0°C}
 // Multiply
