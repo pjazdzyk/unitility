@@ -127,35 +127,35 @@ public class Volume implements PhysicalQuantity<VolumeUnit> {
 
     // Get value in target unit
     public double getInCubicMeters() {
-        return getIn(VolumeUnits.CUBIC_METER);
+        return getInUnit(VolumeUnits.CUBIC_METER);
     }
 
     public double getInLiters() {
-        return getIn(VolumeUnits.LITER);
+        return getInUnit(VolumeUnits.LITER);
     }
 
     public double getInCubicCentimeters() {
-        return getIn(VolumeUnits.CUBIC_CENTIMETER);
+        return getInUnit(VolumeUnits.CUBIC_CENTIMETER);
     }
 
     public double getInHectoLiters() {
-        return getIn(VolumeUnits.HECTOLITRE);
+        return getInUnit(VolumeUnits.HECTOLITRE);
     }
 
     public double getInMilliLiters() {
-        return getIn(VolumeUnits.MILLILITRE);
+        return getInUnit(VolumeUnits.MILLILITRE);
     }
 
     public double getInOunces() {
-        return getIn(VolumeUnits.OUNCE);
+        return getInUnit(VolumeUnits.OUNCE);
     }
 
     public double getInPints() {
-        return getIn(VolumeUnits.PINT);
+        return getInUnit(VolumeUnits.PINT);
     }
 
     public double getInGallons() {
-        return getIn(VolumeUnits.GALLON);
+        return getInUnit(VolumeUnits.GALLON);
     }
 
     @Override

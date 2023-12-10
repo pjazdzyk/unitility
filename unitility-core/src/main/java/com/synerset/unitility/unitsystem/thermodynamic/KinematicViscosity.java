@@ -79,11 +79,11 @@ public class KinematicViscosity implements PhysicalQuantity<KinematicViscosityUn
 
     // Get value in target unit
     public double getInSquareMetersPerSecond() {
-        return getIn(KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
+        return getInUnit(KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
     }
 
     public double getInSquareFeetPerSecond() {
-        return getIn(KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
+        return getInUnit(KinematicViscosityUnits.SQUARE_FOOT_PER_SECOND);
     }
 
     @Override

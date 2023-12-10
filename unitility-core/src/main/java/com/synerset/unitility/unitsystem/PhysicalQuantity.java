@@ -68,7 +68,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param targetUnit TThe target unit for conversion.
      * @return A value converted to target unit.
      */
-    default double getIn(U targetUnit) {
+    default double getInUnit(U targetUnit) {
         return targetUnit.fromValueInBaseUnit(getBaseValue());
     }
 
@@ -96,7 +96,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is equal to or greater than the given quantity, false otherwise.
      */
-    default boolean equalOrGreaterThan(PhysicalQuantity<U> quantity) {
+    default boolean equalsOrGreaterThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -126,7 +126,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is equal to or lower than the given quantity, false otherwise.
      */
-    default boolean equalOrLowerThan(PhysicalQuantity<U> quantity) {
+    default boolean equalsOrLowerThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -257,11 +257,12 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
 
     /**
      * Subtract this physical quantity's value from a constant value.
+     * Useful for cases (1 - PhysicalQuantityValue).
      *
      * @param value The value from which to subtract.
      * @return A new physical quantity with the subtracted value.
      */
-    default <Q extends PhysicalQuantity<U>> Q subtractFromValue(double value) {
+    default <Q extends PhysicalQuantity<U>> Q minusFromValue(double value) {
         double newValue = value - this.getValue();
         return withValue(newValue);
     }
@@ -275,6 +276,17 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     default <Q extends PhysicalQuantity<U>> Q multiply(double value) {
         double newValue = getValue() * value;
         return withValue(newValue);
+    }
+
+    /**
+     * Multiply the physical quantity by a constant value.
+     * Added for Kotlin, to use overloaded operator: *
+     *
+     * @param value The value to multiply by.
+     * @return A new physical quantity with the multiplied value.
+     */
+    default <Q extends PhysicalQuantity<U>> Q times(double value) {
+        return multiply(value);
     }
 
     /**
@@ -304,12 +316,12 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
 
     /**
      * Multiply this physical quantity's value by another physical quantity's value.
-     * Added to provide "*" operator support in Kotlin.
+     * Added for Kotlin, to use overloaded operator: *
      *
      * @param inputQuantity The other physical quantity for multiplication.
      * @return The result of multiplying the two physical quantities' values.
      */
-    default double times(PhysicalQuantity<? extends Unit> inputQuantity){
+    default double times(PhysicalQuantity<? extends Unit> inputQuantity) {
         return multiply(inputQuantity);
     }
 
@@ -340,7 +352,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         if (getUnitSymbol().isBlank()) {
             return String.valueOf(getValue());
         }
-        return String.format("%s[%s]", getValue(), getUnitSymbol());
+        return String.format("%s [%s]", getValue(), getUnitSymbol());
     }
 
     /**
@@ -366,9 +378,9 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     default String toEngineeringFormat(int relevantDigits) {
         if (getUnitSymbol().isBlank()) {
-            return String.valueOf(getValue());
+            return ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits);
         }
-        return String.format("%s[%s]", ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits), getUnitSymbol());
+        return String.format("%s [%s]", ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits), getUnitSymbol());
     }
 
     /**
@@ -380,9 +392,6 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return The representation in engineering format.
      */
     default String toEngineeringFormat(String variableName, int relevantDigits) {
-        if (getUnitSymbol().isBlank()) {
-            return String.valueOf(getValue());
-        }
         return variableName + " = " + toEngineeringFormat(relevantDigits);
     }
 

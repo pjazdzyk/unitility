@@ -135,39 +135,39 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnit> {
 
     // Get value in target unit
     public double getInCubicMetersPerSecond() {
-        return getIn(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
+        return getInUnit(VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
     }
 
     public double getInCubicMetersPerMinute() {
-        return getIn(VolumetricFlowUnits.CUBIC_METERS_PER_MINUTE);
+        return getInUnit(VolumetricFlowUnits.CUBIC_METERS_PER_MINUTE);
     }
 
     public double getInCubicMetersPerHour() {
-        return getIn(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
+        return getInUnit(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
     }
 
     public double getInLitresPerSecond() {
-        return getIn(VolumetricFlowUnits.LITRE_PER_SECOND);
+        return getInUnit(VolumetricFlowUnits.LITRE_PER_SECOND);
     }
 
     public double getInLitresPerMinute() {
-        return getIn(VolumetricFlowUnits.LITRE_PER_MINUTE);
+        return getInUnit(VolumetricFlowUnits.LITRE_PER_MINUTE);
     }
 
     public double getInLitresPerHour() {
-        return getIn(VolumetricFlowUnits.LITRE_PER_HOUR);
+        return getInUnit(VolumetricFlowUnits.LITRE_PER_HOUR);
     }
 
     public double getInGallonsPerSecond() {
-        return getIn(VolumetricFlowUnits.GALLONS_PER_SECOND);
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_SECOND);
     }
 
     public double getInGallonsPerMinute() {
-        return getIn(VolumetricFlowUnits.GALLONS_PER_MINUTE);
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE);
     }
 
     public double getInGallonsPerHour() {
-        return getIn(VolumetricFlowUnits.GALLONS_PER_HOUR);
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_HOUR);
     }
 
     @Override

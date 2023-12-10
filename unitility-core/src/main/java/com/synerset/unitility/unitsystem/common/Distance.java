@@ -120,31 +120,31 @@ public class Distance implements PhysicalQuantity<DistanceUnit> {
 
     // Get value in target unit
     public double getInMeters() {
-        return getIn(DistanceUnits.METER);
+        return getInUnit(DistanceUnits.METER);
     }
 
     public double getInCentimeters() {
-        return getIn(DistanceUnits.CENTIMETER);
+        return getInUnit(DistanceUnits.CENTIMETER);
     }
 
     public double getInMillimeters() {
-        return getIn(DistanceUnits.MILLIMETER);
+        return getInUnit(DistanceUnits.MILLIMETER);
     }
 
     public double getInKilometers() {
-        return getIn(DistanceUnits.KILOMETER);
+        return getInUnit(DistanceUnits.KILOMETER);
     }
 
     public double getInMiles() {
-        return getIn(DistanceUnits.MILE);
+        return getInUnit(DistanceUnits.MILE);
     }
 
     public double getInFeet() {
-        return getIn(DistanceUnits.FEET);
+        return getInUnit(DistanceUnits.FEET);
     }
 
     public double getInInches() {
-        return getIn(DistanceUnits.INCH);
+        return getInUnit(DistanceUnits.INCH);
     }
 
     @Override

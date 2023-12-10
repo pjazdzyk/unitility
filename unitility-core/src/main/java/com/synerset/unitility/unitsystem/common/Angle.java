@@ -78,11 +78,11 @@ public class Angle implements PhysicalQuantity<AngleUnit> {
 
     // Get value in target unit
     public double getInRadians() {
-        return getIn(AngleUnits.RADIANS);
+        return getInUnit(AngleUnits.RADIANS);
     }
 
     public double getInDegrees() {
-        return getIn(AngleUnits.DEGREES);
+        return getInUnit(AngleUnits.DEGREES);
     }
 
     @Override

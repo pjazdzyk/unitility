@@ -88,15 +88,15 @@ public class Temperature implements PhysicalQuantity<TemperatureUnit> {
 
     // Get value in target unit
     public double getInKelvins() {
-        return getIn(TemperatureUnits.KELVIN);
+        return getInUnit(TemperatureUnits.KELVIN);
     }
 
     public double getInCelsius() {
-        return getIn(TemperatureUnits.CELSIUS);
+        return getInUnit(TemperatureUnits.CELSIUS);
     }
 
     public double getInFahrenheits() {
-        return getIn(TemperatureUnits.FAHRENHEIT);
+        return getInUnit(TemperatureUnits.FAHRENHEIT);
     }
 
     @Override

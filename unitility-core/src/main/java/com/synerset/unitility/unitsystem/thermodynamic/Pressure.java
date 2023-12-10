@@ -121,31 +121,31 @@ public class Pressure implements PhysicalQuantity<PressureUnit> {
 
     // Get value in target unit
     public double getInPascals() {
-        return getIn(PressureUnits.PASCAL);
+        return getInUnit(PressureUnits.PASCAL);
     }
 
     public double getInHectoPascals() {
-        return getIn(PressureUnits.HECTOPASCAL);
+        return getInUnit(PressureUnits.HECTOPASCAL);
     }
 
     public double getInMegaPascals() {
-        return getIn(PressureUnits.MEGAPASCAL);
+        return getInUnit(PressureUnits.MEGAPASCAL);
     }
 
     public double getInBar() {
-        return getIn(PressureUnits.BAR);
+        return getInUnit(PressureUnits.BAR);
     }
 
     public double getInMilliBar() {
-        return getIn(PressureUnits.MILLIBAR);
+        return getInUnit(PressureUnits.MILLIBAR);
     }
 
     public double getInPsi() {
-        return getIn(PressureUnits.PSI);
+        return getInUnit(PressureUnits.PSI);
     }
 
     public double getInTorr() {
-        return getIn(PressureUnits.TORR);
+        return getInUnit(PressureUnits.TORR);
     }
 
     @Override

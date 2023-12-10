@@ -95,19 +95,19 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnit> {
 
     // Get value in target unit
     public double getInKilogramsPerSecond() {
-        return getIn(MassFlowUnits.KILOGRAM_PER_SECOND);
+        return getInUnit(MassFlowUnits.KILOGRAM_PER_SECOND);
     }
 
     public double getInKiloGramsPerHour() {
-        return getIn(MassFlowUnits.KILOGRAM_PER_HOUR);
+        return getInUnit(MassFlowUnits.KILOGRAM_PER_HOUR);
     }
 
     public double getInTonnesPerHour() {
-        return getIn(MassFlowUnits.TONNE_PER_HOUR);
+        return getInUnit(MassFlowUnits.TONNE_PER_HOUR);
     }
 
     public double getInPoundsPerSecond() {
-        return getIn(MassFlowUnits.POUND_PER_SECOND);
+        return getInUnit(MassFlowUnits.POUND_PER_SECOND);
     }
 
     @Override

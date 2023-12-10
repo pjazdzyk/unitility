@@ -80,15 +80,15 @@ public class Density implements PhysicalQuantity<DensityUnit> {
 
     // Get value in target unit
     public double getInKilogramsPerCubicMeters() {
-        return getIn(DensityUnits.KILOGRAM_PER_CUBIC_METER);
+        return getInUnit(DensityUnits.KILOGRAM_PER_CUBIC_METER);
     }
 
     public double getInPoundsPerCubicFoot() {
-        return getIn(DensityUnits.POUND_PER_CUBIC_FOOT);
+        return getInUnit(DensityUnits.POUND_PER_CUBIC_FOOT);
     }
 
     public double getInPoundsPerCubicInches() {
-        return getIn(DensityUnits.POUND_PER_CUBIC_INCH);
+        return getInUnit(DensityUnits.POUND_PER_CUBIC_INCH);
     }
 
     @Override

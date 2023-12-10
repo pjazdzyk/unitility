@@ -127,35 +127,35 @@ public class Velocity implements PhysicalQuantity<VelocityUnit> {
 
     // Get value in target unit
     public double getInMetersPerSecond() {
-        return getIn(VelocityUnits.METER_PER_SECOND);
+        return getInUnit(VelocityUnits.METER_PER_SECOND);
     }
 
     public double getInCentimetersPerSeconds() {
-        return getIn(VelocityUnits.CENTIMETER_PER_SECOND);
+        return getInUnit(VelocityUnits.CENTIMETER_PER_SECOND);
     }
 
     public double getInKilometersPerHours() {
-        return getIn(VelocityUnits.KILOMETER_PER_HOUR);
+        return getInUnit(VelocityUnits.KILOMETER_PER_HOUR);
     }
 
     public double getInInchesPerSeconds() {
-        return getIn(VelocityUnits.INCH_PER_SECOND);
+        return getInUnit(VelocityUnits.INCH_PER_SECOND);
     }
 
     public double getInFeetPerSeconds() {
-        return getIn(VelocityUnits.FEET_PER_SECOND);
+        return getInUnit(VelocityUnits.FEET_PER_SECOND);
     }
 
     public double getInMilesPerHours() {
-        return getIn(VelocityUnits.MILES_PER_HOUR);
+        return getInUnit(VelocityUnits.MILES_PER_HOUR);
     }
 
     public double getInKnots() {
-        return getIn(VelocityUnits.KNOT);
+        return getInUnit(VelocityUnits.KNOT);
     }
 
     public double getInMach() {
-        return getIn(VelocityUnits.MACH);
+        return getInUnit(VelocityUnits.MACH);
     }
 
     @Override

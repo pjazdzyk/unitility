@@ -104,23 +104,23 @@ public class Torque implements PhysicalQuantity<TorqueUnit> {
 
     // Get value in target unit
     public double getInNewtonMeters() {
-        return getIn(TorqueUnits.NEWTON_METER);
+        return getInUnit(TorqueUnits.NEWTON_METER);
     }
 
     public double getInMillinewtonMeters() {
-        return getIn(TorqueUnits.MILLINEWTON_METER);
+        return getInUnit(TorqueUnits.MILLINEWTON_METER);
     }
 
     public double getInKilopondMeters() {
-        return getIn(TorqueUnits.KILOPOND_METER);
+        return getInUnit(TorqueUnits.KILOPOND_METER);
     }
 
     public double getInPoundFeet() {
-        return getIn(TorqueUnits.FOOT_POUND);
+        return getInUnit(TorqueUnits.FOOT_POUND);
     }
 
     public double getInInchPounds() {
-        return getIn(TorqueUnits.INCH_POUND);
+        return getInUnit(TorqueUnits.INCH_POUND);
     }
 
     @Override

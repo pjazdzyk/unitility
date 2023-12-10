@@ -152,47 +152,47 @@ public class Area implements PhysicalQuantity<AreaUnit> {
 
     // Get value in target unit
     public double getInSquareMeters() {
-        return getIn(AreaUnits.SQUARE_METER);
+        return getInUnit(AreaUnits.SQUARE_METER);
     }
 
     public double getInSquareKilometers() {
-        return getIn(AreaUnits.SQUARE_KILOMETER);
+        return getInUnit(AreaUnits.SQUARE_KILOMETER);
     }
 
     public double getInSquareCentimeters() {
-        return getIn(AreaUnits.SQUARE_CENTIMETER);
+        return getInUnit(AreaUnits.SQUARE_CENTIMETER);
     }
 
     public double getInSquareMillimeters() {
-        return getIn(AreaUnits.SQUARE_MILLIMETER);
+        return getInUnit(AreaUnits.SQUARE_MILLIMETER);
     }
 
     public double getInAres() {
-        return getIn(AreaUnits.ARE);
+        return getInUnit(AreaUnits.ARE);
     }
 
     public double getInHectares() {
-        return getIn(AreaUnits.HECTARE);
+        return getInUnit(AreaUnits.HECTARE);
     }
 
     public double getInSquareInches() {
-        return getIn(AreaUnits.SQUARE_INCH);
+        return getInUnit(AreaUnits.SQUARE_INCH);
     }
 
     public double getInSquareFeet() {
-        return getIn(AreaUnits.SQUARE_FOOT);
+        return getInUnit(AreaUnits.SQUARE_FOOT);
     }
 
     public double getInSquareYards() {
-        return getIn(AreaUnits.SQUARE_YARD);
+        return getInUnit(AreaUnits.SQUARE_YARD);
     }
 
     public double getInAcres() {
-        return getIn(AreaUnits.ACRE);
+        return getInUnit(AreaUnits.ACRE);
     }
 
     public double getInSquareMiles() {
-        return getIn(AreaUnits.SQUARE_MILE);
+        return getInUnit(AreaUnits.SQUARE_MILE);
     }
 
     @Override

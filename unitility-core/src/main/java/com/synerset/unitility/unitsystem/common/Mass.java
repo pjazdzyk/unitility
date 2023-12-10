@@ -112,27 +112,27 @@ public class Mass implements PhysicalQuantity<MassUnit> {
 
     // Get value in target unit
     public double getInKilograms() {
-        return getIn(MassUnits.KILOGRAM);
+        return getInUnit(MassUnits.KILOGRAM);
     }
 
     public double getIntoGrams() {
-        return getIn(MassUnits.GRAM);
+        return getInUnit(MassUnits.GRAM);
     }
 
     public double getInMilligrams() {
-        return getIn(MassUnits.MILLIGRAM);
+        return getInUnit(MassUnits.MILLIGRAM);
     }
 
     public double getIntoTonnesSI() {
-        return getIn(MassUnits.TONNE_SI);
+        return getInUnit(MassUnits.TONNE_SI);
     }
 
     public double getIntoOunces() {
-        return getIn(MassUnits.OUNCE);
+        return getInUnit(MassUnits.OUNCE);
     }
 
     public double getInPounds() {
-        return getIn(MassUnits.POUND);
+        return getInUnit(MassUnits.POUND);
     }
 
     @Override

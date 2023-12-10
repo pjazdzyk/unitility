@@ -102,23 +102,23 @@ public class Power implements PhysicalQuantity<PowerUnit> {
 
     // Get value in target unit
     public double getInWatts() {
-        return getIn(PowerUnits.WATT);
+        return getInUnit(PowerUnits.WATT);
     }
 
     public double getInKiloWatts() {
-        return getIn(PowerUnits.KILOWATT);
+        return getInUnit(PowerUnits.KILOWATT);
     }
 
     public double getInBTUPerHour() {
-        return getIn(PowerUnits.BTU_PER_HOUR);
+        return getInUnit(PowerUnits.BTU_PER_HOUR);
     }
 
     public double getInMegaWatts() {
-        return getIn(PowerUnits.MEGAWATT);
+        return getInUnit(PowerUnits.MEGAWATT);
     }
 
     public double getInHorsePower() {
-        return getIn(PowerUnits.HORSE_POWER);
+        return getInUnit(PowerUnits.HORSE_POWER);
     }
 
     @Override

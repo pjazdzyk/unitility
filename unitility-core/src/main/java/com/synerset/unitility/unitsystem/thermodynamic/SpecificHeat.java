@@ -86,15 +86,15 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnit> {
 
     // Get value in target unit
     public double getInJoulePerKiloGramKelvin() {
-        return getIn(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
+        return getInUnit(SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
     }
 
     public double getInKiloJoulesPerKiloGramKelvin() {
-        return getIn(SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN);
+        return getInUnit(SpecificHeatUnits.KILOJOULES_PER_KILOGRAM_KELVIN);
     }
 
     public double getInBTUsPerPoundFahrenheit() {
-        return getIn(SpecificHeatUnits.BTU_PER_POUND_FAHRENHEIT);
+        return getInUnit(SpecificHeatUnits.BTU_PER_POUND_FAHRENHEIT);
     }
 
     @Override

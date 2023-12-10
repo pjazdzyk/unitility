@@ -111,27 +111,27 @@ public class Force implements PhysicalQuantity<ForceUnit> {
 
     // Get value in target unit
     public double getInNewtons() {
-        return getIn(ForceUnits.NEWTON);
+        return getInUnit(ForceUnits.NEWTON);
     }
 
     public double getInKiloNewtons() {
-        return getIn(ForceUnits.KILONEWTON);
+        return getInUnit(ForceUnits.KILONEWTON);
     }
 
     public double getInKiloponds() {
-        return getIn(ForceUnits.KILOPOND);
+        return getInUnit(ForceUnits.KILOPOND);
     }
 
     public double getInDynes() {
-        return getIn(ForceUnits.DYNE);
+        return getInUnit(ForceUnits.DYNE);
     }
 
     public double getInPoundsForce() {
-        return getIn(ForceUnits.POUND_FORCE);
+        return getInUnit(ForceUnits.POUND_FORCE);
     }
 
     public double getInPoundals() {
-        return getIn(ForceUnits.POUNDAL);
+        return getInUnit(ForceUnits.POUNDAL);
     }
 
     @Override

@@ -86,15 +86,15 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnit> 
 
     // Get value in target unit
     public double getInJoulesPerKiloGram() {
-        return getIn(SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
+        return getInUnit(SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
     }
 
     public double getInKiloJoulesPerKiloGram() {
-        return getIn(SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
+        return getInUnit(SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM);
     }
 
     public double getInBTUsPerPound() {
-        return getIn(SpecificEnthalpyUnits.BTU_PER_POUND);
+        return getInUnit(SpecificEnthalpyUnits.BTU_PER_POUND);
     }
 
     @Override

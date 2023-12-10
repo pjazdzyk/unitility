@@ -135,39 +135,39 @@ public class Energy implements PhysicalQuantity<EnergyUnit> {
 
     // Get value in target unit
     public double getInJoules() {
-        return getIn(EnergyUnits.JOULE);
+        return getInUnit(EnergyUnits.JOULE);
     }
 
     public double getInMilliJoules() {
-        return getIn(EnergyUnits.MILLIJOULE);
+        return getInUnit(EnergyUnits.MILLIJOULE);
     }
 
     public double getInKiloJoules() {
-        return getIn(EnergyUnits.KILOJOULE);
+        return getInUnit(EnergyUnits.KILOJOULE);
     }
 
     public double getInMegaJoules() {
-        return getIn(EnergyUnits.MEGAJOULE);
+        return getInUnit(EnergyUnits.MEGAJOULE);
     }
 
     public double getInBTUs() {
-        return getIn(EnergyUnits.BTU);
+        return getInUnit(EnergyUnits.BTU);
     }
 
     public double getInCalories() {
-        return getIn(EnergyUnits.CALORIE);
+        return getInUnit(EnergyUnits.CALORIE);
     }
 
     public double getInKiloCalories() {
-        return getIn(EnergyUnits.KILOCALORIE);
+        return getInUnit(EnergyUnits.KILOCALORIE);
     }
 
     public double getInWattHours() {
-        return getIn(EnergyUnits.WATT_HOUR);
+        return getInUnit(EnergyUnits.WATT_HOUR);
     }
 
     public double getInKilowattHours() {
-        return getIn(EnergyUnits.KILOWATT_HOUR);
+        return getInUnit(EnergyUnits.KILOWATT_HOUR);
     }
 
     @Override

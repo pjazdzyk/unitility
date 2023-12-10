@@ -42,8 +42,8 @@ class PhysicalQuantityTest {
         // When
         boolean firstIsSmaller = smallerTemp.lowerThan(greaterTemp);
         boolean secondIsGreater = greaterTemp.greaterThan(smallerTemp);
-        boolean firstIsEqualOrLower = smallerTemp.equalOrLowerThan(smallerOrEqualTemp);
-        boolean secondIsEqualOrGreater = greaterTemp.equalOrGreaterThan(greaterOrEqualTemp);
+        boolean firstIsEqualOrLower = smallerTemp.equalsOrLowerThan(smallerOrEqualTemp);
+        boolean secondIsEqualOrGreater = greaterTemp.equalsOrGreaterThan(greaterOrEqualTemp);
         boolean bothAreTheSame = greaterTemp.greaterThan(greaterTemp);
 
         // Then
@@ -153,10 +153,11 @@ class PhysicalQuantityTest {
 
         // When
         Temperature actualTemperature = temperature.multiply(2);
+        Temperature actualTemperatureTimes = temperature.times(2);
 
         // Then
         Temperature exptectedTemperature = Temperature.ofCelsius(40);
-        assertThat(actualTemperature).isEqualTo(exptectedTemperature);
+        assertThat(actualTemperature).isEqualTo(exptectedTemperature).isEqualTo(actualTemperatureTimes);
     }
 
     @Test
@@ -223,7 +224,7 @@ class PhysicalQuantityTest {
         Temperature sourceTemperature = Temperature.ofCelsius(0.5);
 
         // When
-        Temperature actualTemperature = sourceTemperature.subtractFromValue(1);
+        Temperature actualTemperature = sourceTemperature.minusFromValue(1);
 
         // Then
         Temperature expectedTemperature = Temperature.ofCelsius((1 - 0.5));
@@ -287,11 +288,11 @@ class PhysicalQuantityTest {
         String actualFormattedTempVariableDigits = temperature.toEngineeringFormat("t_a", 2);
 
         // Then
-        assertThat(actualFormattedTemp).isEqualTo("20.1234567[°C]");
+        assertThat(actualFormattedTemp).isEqualTo("20.1234567 [°C]");
         assertThat(actualFormattedBf).isEqualTo("20.1234567");
-        assertThat(actualFormattedTempTwoDigits).isEqualTo("20.12[°C]");
-        assertThat(actualFormattedTempVariable).isEqualTo("t_a = 20.1234567[°C]");
-        assertThat(actualFormattedTempVariableDigits).isEqualTo("t_a = 20.12[°C]");
+        assertThat(actualFormattedTempTwoDigits).isEqualTo("20.12 [°C]");
+        assertThat(actualFormattedTempVariable).isEqualTo("t_a = 20.1234567 [°C]");
+        assertThat(actualFormattedTempVariableDigits).isEqualTo("t_a = 20.12 [°C]");
     }
 
 }

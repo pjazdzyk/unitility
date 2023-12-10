@@ -87,15 +87,15 @@ public class Momentum implements PhysicalQuantity<MomentumUnit> {
 
     // Get value in target unit
     public double getInKilogramMetersPerSecond() {
-        return getIn(MomentumUnits.KILOGRAM_METER_PER_SECOND);
+        return getInUnit(MomentumUnits.KILOGRAM_METER_PER_SECOND);
     }
 
     public double getInPoundFeetPerSecond() {
-        return getIn(MomentumUnits.POUND_FEET_PER_SECOND);
+        return getInUnit(MomentumUnits.POUND_FEET_PER_SECOND);
     }
 
     public double getInGramCentimetersPerSecond() {
-        return getIn(MomentumUnits.GRAM_CENTIMETRE_PER_SECOND);
+        return getInUnit(MomentumUnits.GRAM_CENTIMETRE_PER_SECOND);
     }
 
     @Override

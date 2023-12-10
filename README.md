@@ -207,13 +207,16 @@ Distance smallDistance = Distance.ofMeters(0.000123678);
 String bigOutput = bigDistance.toEngineeringFormat(3);      // outputs: 10[m]
 String smallOutput = smallDistance.toEngineeringFormat(3);  // outputs: 0.000124[m]
 ```
+Curious how Unitility integrates with a real project?
+Explore the [hvac-engine](https://github.com/pjazdzyk/hvac-engine) project, a comprehensive library tailored for
+HVAC engineers, offering advanced capabilities for psychrometrics and thermodynamic analysis of humid air. 
+This project served as the driving force behind the development of the library, showcasing its proficiency in addressing
+the complex needs of HVAC professionals.
 
-For more advanced use cases, take a look at the example project that has been prepared to illustrate the integration of
-this library into a simple dry air property physics app.
-This project has been implemented in a functional manner using io.vavr
-library: [unitility-example-project](https://github.com/pjazdzyk/unitility-example-project). <br>
-Also, check out the [hvac-engine](https://github.com/pjazdzyk/hvac-engine), another project of mine, for which this
-library was developed. If you are interested in thermodynamics of humid air, the hvac-engine is will be a great tool for you.
+For a more specific example illustrating the integration of this library, take a look at the 
+[unitility-example-project](https://github.com/pjazdzyk/unitility-example-project).
+This project focuses on a dry air property physics app and demonstrates the library's functionality in a functional 
+programming style using the io.vavr library.
 
 ### 4.2 Parsing quantities from string
 
