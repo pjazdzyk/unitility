@@ -18,22 +18,7 @@
     </modules>
 
     <name>Unitility</name>
-    <description>
-        The Physics Units of Measure Library for Java.
-        Unitility provides value objects that combine numerical values with their corresponding units, allowing
-        developers to easily perform accurate and efficient conversions between different units.
-        With a wide range of value objects that represent commonly used physical quantities this solution is built
-        using plain Java for optimal speed and lightweight functionality.
-    </description>
     <url>https://github.com/pjazdzyk/unitility</url>
-
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>https://www.opensource.org/licenses/mit-license.php</url>
-        </license>
-    </licenses>
-
     <developers>
         <developer>
             <name>Piotr Jażdżyk</name>
@@ -42,29 +27,43 @@
             <organizationUrl>https://www.synerset.com</organizationUrl>
         </developer>
     </developers>
+    <description>
+        The Physics Units of Measure Library for Java.
+        Unitility provides value objects that combine numerical values with their corresponding units, allowing
+        developers to easily perform accurate and efficient conversions between different units.
+        With a wide range of value objects that represent commonly used physical quantities this solution is built
+        using plain Java for optimal speed and lightweight functionality.
+    </description>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>0.0.1-SNAPSHOT</project.version>
+        <project.version>2.0.0</project.version>
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Test dependencies versions -->
-        <jacoco.version>0.8.9</jacoco.version>
-        <junit-jupiter.version>5.9.2</junit-jupiter.version>
+        <jacoco.version>0.8.11</jacoco.version>
+        <junit-jupiter.version>5.10.1</junit-jupiter.version>
         <assertj-core.version>3.24.2</assertj-core.version>
         <!-- Framework versions -->
-        <jackson-databind.version>2.15.2</jackson-databind.version>
-        <spring-boot-starter-web.version>3.1.4</spring-boot-starter-web.version>
-        <quarkus-version>3.4.0</quarkus-version>
-        <jandex-maven-plugin.version>3.1.5</jandex-maven-plugin.version>
+        <jackson-databind.version>2.16.0</jackson-databind.version>
+        <spring-boot-starter-web.version>3.2.0</spring-boot-starter-web.version>
+        <quarkus-version>3.6.1</quarkus-version>
+        <jandex-maven-plugin.version>3.1.6</jandex-maven-plugin.version>
         <!-- Plugin versions -->
-        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
-        <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+        <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
         <!-- Sonar Cloud Properties-->
         <sonar.organization>synerset</sonar.organization>
         <sonar.projectKey>pjazdzyk_unitility</sonar.projectKey>
@@ -74,7 +73,6 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.language>java</sonar.language>
         <sonar.binaries>target/classes</sonar.binaries>
-        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
     </properties>
 
     <dependencies>
@@ -145,7 +143,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>prepare-agent</id>
+                        <id>default-prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
@@ -170,6 +168,7 @@
                 <artifactId>flatten-maven-plugin</artifactId>
                 <version>${flatten-maven-plugin.version}</version>
                 <configuration>
+                    <flattenMode>oss</flattenMode>
                 </configuration>
                 <executions>
                     <!-- enable flattening -->

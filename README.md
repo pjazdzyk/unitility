@@ -6,9 +6,9 @@ Java for optimal speed and lightweight functionality.
 Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers
 quick and easy usage in your project, without any heavy frameworks,
 or external libraries.<p>
-**<span style="color: green;"> Thread-Safe Architecture:</span>** Developed to ensure thread safety,
+**<span style="color: green;"> - Thread-Safe Architecture:</span>** Developed to ensure thread safety,
 allowing for concurrent access without compromising data integrity through the utilization of immutable objects. <br>
-**<span style="color: teal;"> Kotlin and Groovy friendly:</span>** Developed to take some advantages of Kotlin and Groovy 
+**<span style="color: teal;"> - Kotlin and Groovy friendly:</span>** Developed to take some advantages of Kotlin and Groovy 
 features, such as overloaded operators.
 
 [![Unitility](https://img.shields.io/github/v/release/pjazdzyk/Unitility?label=Unitility&color=13ADF3&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI0LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
@@ -56,7 +56,7 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/1.2.0/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.0.0/jar?eh=).
 
 ```xml
 <dependency>
@@ -86,9 +86,8 @@ Extension for the Quarkus framework:
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
-See section on [Spring]() or [Quarkus]() for better explanation.
-Unitility has also provided **[BOM](https://github.com/pjazdzyk/unitility/tree/master/unitility-bom)** to be used 
-for <dependecyManagement> in Maven, for easier version management.
+See section on [Spring](#52-spring-boot-module) or [Quarkus](#53-quarkus-module) for better explanation.
+Unitility has also provided **[BOM](https://github.com/pjazdzyk/unitility/blob/master/unitility-bom/pom.xml)** which can be used for dependency management.
 
 ## 2. TECH AND DEPENDENCIES
 
@@ -204,8 +203,8 @@ using HALF_EVEN approach.
 ```java
 Distance bigDistance = Distance.ofMeters(10);
 Distance smallDistance = Distance.ofMeters(0.000123678);
-String bigOutput = bigDistance.toEngineeringFormat(3);      // outputs: 10[m]
-String smallOutput = smallDistance.toEngineeringFormat(3);  // outputs: 0.000124[m]
+String bigOutput = bigDistance.toEngineeringFormat(3);      // outputs: 10 [m]
+String smallOutput = smallDistance.toEngineeringFormat(3);  // outputs: 0.000124 [m]
 ```
 Curious how Unitility integrates with a real project?
 Explore the [hvac-engine](https://github.com/pjazdzyk/hvac-engine) project, a comprehensive library tailored for
@@ -227,15 +226,19 @@ for all supported physical quantities and their related units.
 
 ```java
 // Create default parsing registry
-PhysicalQuantityParsingRegistry parsingRegistry = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
+PhysicalQuantityParsingRegistry parsingRegistry = 
+        PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
 // Examples of string in engineering format with unit in square brackets
 String k1 = "15.1 [W p mxK)]";
 String k2 = "15.1 [W/(m.K)]";
 String k3 = "   1 5 ,  1 [   WpmK   ]";
 // All above strings are properly resolved to Thermal Conductivity, even partially malformed k3.
-ThermalConductivity thermCond1 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k1); // {15.1 W/(m·K)}
-ThermalConductivity thermCond2 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k2); // {15.1 W/(m·K)}
-ThermalConductivity thermCond3 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k3); // {15.1 W/(m·K)}
+ThermalConductivity thermCond1 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k1); 
+// will resolve to {15.1 W/(m·K)}
+ThermalConductivity thermCond2 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k2); 
+// will resolve to {15.1 W/(m·K)}
+ThermalConductivity thermCond3 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k3); 
+// will resolve to {15.1 W/(m·K)}
 ```
 
 Parsers are designed to interpret the numeric part as the value and the content within square brackets as the unit
@@ -293,7 +296,7 @@ The unit of the resulting quantity will be set to match that of the augend.
 
 ```java
 Temperature temperature = Temperature.ofCelsius(20);
-Temperature actualTemperature = temperature.multiply(2); //results in 40 °C
+Temperature actualTemperature = temperature.multiply(2); // results in 40 °C
 ```
 
 * multiply or divide quantities by different quantity with a result as double:
@@ -301,7 +304,7 @@ Temperature actualTemperature = temperature.multiply(2); //results in 40 °C
 ```java
 Temperature sourceTemperature = Temperature.ofCelsius(20);
 Pressure pressure = Pressure.ofPascal(2);
-double actualDivideResult = sourceTemperature.divide(pressure); //results in 40 °C
+double actualDivideResult = sourceTemperature.divide(pressure); // results in 40 °C
 ```
 
 In the provided example, division and multiplication both yield a double value. This outcome arises from the current
@@ -309,11 +312,15 @@ absence of a unit resolver within the developmental stage.
 The existing unit values are directly employed for multiplication or division operations.
 
 ### 4.5 Equality and sorting
+
 Each PhysicalQuantity class has implemented the equals and hashCode methods and implements the Comparable interface, 
 including additional methods that might be helpful during development. <br>
+
 ---
-**Equality condition: PhysicalQuantity instances are equal, if they are of the same unit Type (i.e.: TemperatureUnit) and
-their values converted to the BASE unit are equal.** <br>
+
+**Equality condition:** PhysicalQuantity instances are equal, if they are of the same unit Type (i.e.: TemperatureUnit) and
+their values converted to the BASE unit are equal. <br>
+
 ---
 
 In other words, equality is set to represent equality in the physical context. By default, values stored as double 
@@ -619,7 +626,8 @@ def t3 = Temperature.ofKelvins(303.15)  // =30 oC
 def t4 = t1 + t2                // Temperature{30.0°C}
 def t5 = t1 - t2                // Temperature{10.0°C}
 def t6 = t1 + 15.5              // Temperature{35.5°C}    
-// Adding & subtracting: Different units of the same quantity, resolving to unit type of the first addend.
+// Adding & subtracting: Different units of the same quantity,
+// resolving to a first addend unit type.
 def t7 = t1 + t3                // Temperature{50.0°C}
 def t8 = t1 - t3                // Temperature{-10.0°C}
 // Multiply
@@ -647,7 +655,8 @@ val t3 = Temperature.ofKelvins(303.15) // =30 oC
 // Adding & subtracting: The same unit
 val t4 = t1 + t2                // Temperature{30.0°C}
 val t5 = t1 - t2                // Temperature{10.0°C} 
-// Adding & subtracting: Different units of the same quantity, resolving to a unit type of the first addend.
+// Adding & subtracting: Different units of the same quantity,
+// resolving to a first addend unit type.
 val t7 = t1 + t3                // Temperature{50.0°C}
 val t8 = t1 - t3                // Temperature{-10.0°C}
 // Multiply
@@ -663,9 +672,8 @@ val isEqual = t1 == t1          // true
 
 ## 8. Collaboration, attribution and citation
 
-This is an early development stage.
 I welcome other developers who are interested in physics and engineering to collaborate on this project.
-As we are still in the early stages of development, any contributions or suggestions would be greatly appreciated.<br>
+Any contributions or suggestions would be greatly appreciated.<br>
 
 ---
 
@@ -689,10 +697,10 @@ Small shield with referenced most recent version tag:<br>
 ```
 
 Tech shield with version tag for manual adjustment (you can indicate which version you actually use): <br>
-[![Unitility](https://img.shields.io/badge/UNITILITY-v1.1.1-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v2.0.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 
 ```markdown
-[![Unitility](https://img.shields.io/badge/UNITILITY-v1.1.1-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v2.0.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 ```
 
 ## 9. Acknowledgments

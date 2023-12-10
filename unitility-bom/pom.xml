@@ -12,7 +12,7 @@
     <artifactId>unitility-bom</artifactId>
     <name>Unitility BOM</name>
     <description>
-        The BOM (Bill ofMaterials) module of UNITILITY, the Physics Units of Measure Library for Java.
+        The BOM module for UNITILITY, the Physics Units of Measure Library for Java.
     </description>
 
     <dependencyManagement>
