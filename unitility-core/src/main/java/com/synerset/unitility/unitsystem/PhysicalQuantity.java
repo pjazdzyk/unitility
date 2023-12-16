@@ -5,7 +5,7 @@ import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
-public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQuantity<U>> {
+public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQuantity<U>>, EngineeringFormat {
 
     int DEFAULT_RELEVANT_DIGITS = 4;
 
@@ -352,7 +352,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         if (getUnitSymbol().isBlank()) {
             return String.valueOf(getValue());
         }
-        return String.format("%s [%s]", getValue(), getUnitSymbol());
+        return String.format("%s[%s]", getValue(), getUnitSymbol());
     }
 
     /**
@@ -380,7 +380,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         if (getUnitSymbol().isBlank()) {
             return ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits);
         }
-        return String.format("%s [%s]", ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits), getUnitSymbol());
+        return String.format("%s[%s]", ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits), getUnitSymbol());
     }
 
     /**
