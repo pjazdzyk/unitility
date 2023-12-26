@@ -2,7 +2,7 @@ package com.synerset.unitility.quarkus;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import jakarta.ws.rs.ext.ParamConverter;
 
 /**
@@ -15,9 +15,9 @@ import jakarta.ws.rs.ext.ParamConverter;
 public class PhysicalQuantityParamJakartaConverter<U extends Unit, Q extends PhysicalQuantity<U>> implements ParamConverter<Q> {
 
     private final Class<Q> targetClass;
-    private final PhysicalQuantityParsingRegistry parsingRegistry;
+    private final PhysicalQuantityParsingFactory parsingRegistry;
 
-    public PhysicalQuantityParamJakartaConverter(Class<Q> targetClass, PhysicalQuantityParsingRegistry parsingRegistry) {
+    public PhysicalQuantityParamJakartaConverter(Class<Q> targetClass, PhysicalQuantityParsingFactory parsingRegistry) {
         this.targetClass = targetClass;
         this.parsingRegistry = parsingRegistry;
     }
@@ -25,14 +25,14 @@ public class PhysicalQuantityParamJakartaConverter<U extends Unit, Q extends Phy
     /**
      * Converts a string representation to a {@link PhysicalQuantity} instance.
      * This method is called by Jakarta RS to convert a string representation to a {@link PhysicalQuantity} instance
-     * using the {@link PhysicalQuantityParsingRegistry}.
+     * using the {@link PhysicalQuantityParsingFactory}.
      *
      * @param quantityAsString The string representation of the {@link PhysicalQuantity}.
      * @return A {@link PhysicalQuantity} instance.
      */
     @Override
     public Q fromString(String quantityAsString) {
-        return parsingRegistry.fromEngFormat(targetClass, quantityAsString);
+        return parsingRegistry.parseFromEngFormat(targetClass, quantityAsString);
     }
 
     /**

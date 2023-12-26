@@ -2,10 +2,10 @@ package com.synerset.unitility.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
-import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivity;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.basic.dimensionless.BypassFactor;
+import com.synerset.unitility.unitsystem.basic.thermodynamic.Temperature;
+import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalConductivity;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +15,7 @@ class PhysicalQuantityJacksonDeserializerTest {
     @Test
     void deserialize_shouldDeserializeJsonToPhysicalQuantity() throws JsonProcessingException {
         // Given
-        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
+        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
 

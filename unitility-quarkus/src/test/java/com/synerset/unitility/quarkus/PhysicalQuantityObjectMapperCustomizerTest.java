@@ -2,8 +2,8 @@ package com.synerset.unitility.quarkus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.basic.thermodynamic.Temperature;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class PhysicalQuantityObjectMapperCustomizerTest {
     void customizeTest_shouldRegisterPhysicalQuantitiesInObjectMapper() throws JsonProcessingException {
         // Given
         ParsingRegistryProvider registryProvider = new ParsingRegistryProvider();
-        PhysicalQuantityParsingRegistry parsingRegistry = registryProvider.createParsingFactory();
+        PhysicalQuantityParsingFactory parsingRegistry = registryProvider.createParsingFactory();
         PhysicalQuantityObjectMapperCustomizer customizer = new PhysicalQuantityObjectMapperCustomizer(parsingRegistry);
         ObjectMapper objectMapper = new ObjectMapper();
         String inputQuantity = "{\"value\":20.0,\"unit\":\"°C\"}";

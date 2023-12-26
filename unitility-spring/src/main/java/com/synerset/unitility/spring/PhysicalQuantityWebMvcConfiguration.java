@@ -1,6 +1,6 @@
 package com.synerset.unitility.spring;
 
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.lang.NonNull;
@@ -10,14 +10,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * The PhysicalQuantityWebMvcConfiguration class is a Spring Boot autoconfiguration class that configures
  * WebMvcConfigurer to add converters for PhysicalQuantity instances. This mechanism is required for
  * deserializing PhysicalQuantity from PathParams or QueryParams based on parsers registered in
- * {@link PhysicalQuantityParsingRegistry}.
+ * {@link PhysicalQuantityParsingFactory}.
  */
 @AutoConfiguration
 class PhysicalQuantityWebMvcConfiguration implements WebMvcConfigurer {
 
-    private final PhysicalQuantityParsingRegistry parsingFactory;
+    private final PhysicalQuantityParsingFactory parsingFactory;
 
-    PhysicalQuantityWebMvcConfiguration(PhysicalQuantityParsingRegistry parsingFactory) {
+    PhysicalQuantityWebMvcConfiguration(PhysicalQuantityParsingFactory parsingFactory) {
         this.parsingFactory = parsingFactory;
     }
 

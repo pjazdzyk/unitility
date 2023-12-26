@@ -3,7 +3,7 @@ package com.synerset.unitility.quarkus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import io.quarkus.jackson.ObjectMapperCustomizer;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -15,9 +15,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
 
-    private final PhysicalQuantityParsingRegistry parsingRegistry;
+    private final PhysicalQuantityParsingFactory parsingRegistry;
 
-    public PhysicalQuantityObjectMapperCustomizer(PhysicalQuantityParsingRegistry parsingRegistry) {
+    public PhysicalQuantityObjectMapperCustomizer(PhysicalQuantityParsingFactory parsingRegistry) {
 
         this.parsingRegistry = parsingRegistry;
     }
@@ -26,7 +26,7 @@ class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
      * Customizes the provided {@link ObjectMapper} by registering the {@link PhysicalQuantityJacksonModule}.
      * Quarkus calls this method during the customization of the {@link ObjectMapper} configuration.
      * It registers the {@link PhysicalQuantityJacksonModule}, enabling the serialization and deserialization of
-     * {@link PhysicalQuantity} instances based on parsers registered in {@link PhysicalQuantityParsingRegistry}.
+     * {@link PhysicalQuantity} instances based on parsers registered in {@link PhysicalQuantityParsingFactory}.
      *
      * @param objectMapper The injected {@link ObjectMapper} to be customized.
      */
