@@ -40,6 +40,19 @@ public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuan
     @Override
     public Q deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
+        String value = node.get(FieldNames.JSON_FIELD_VALUE).asText();
+        if (value.contains("[")) {
+            // In this case, symbol field will be ignored, unit in [] will take precedence
+            return deserializeFromEngineeringFormat(value);
+        }
+        return deserializeFromSymbolAndValue(node);
+    }
+
+    private Q deserializeFromEngineeringFormat(String value) {
+        return parsingFactory.parseFromEngFormat(quantityClass, value);
+    }
+
+    private Q deserializeFromSymbolAndValue(JsonNode node) {
         double value = node.get(FieldNames.JSON_FIELD_VALUE).asDouble();
         String unitSymbol = null;
         if (node.get(FieldNames.JSON_FIELD_UNIT_SYMBOL) != null) {

@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.basic.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.SymbolCleaner;
+import com.synerset.unitility.unitsystem.utils.StringCleaner;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -62,7 +62,7 @@ public enum AreaUnits implements AreaUnit {
     }
 
     private static String unifySymbol(String inputString) {
-        return SymbolCleaner.of(inputString)
+        return StringCleaner.of(inputString)
                 .trimAndClean()
                 .unifyAerialAndVol()
                 .toString();

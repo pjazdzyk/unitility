@@ -1,7 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.dimensionless;
 
-import com.synerset.unitility.unitsystem.basic.dimensionless.ReynoldsNumber;
-import com.synerset.unitility.unitsystem.basic.dimensionless.ReynoldsNumberUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

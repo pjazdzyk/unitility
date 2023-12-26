@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.thermodynamic;
 
-import com.synerset.unitility.unitsystem.basic.thermodynamic.DynamicViscosity;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.DynamicViscosityUnit;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.DynamicViscosityUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

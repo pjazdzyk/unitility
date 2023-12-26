@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.common;
 
-import com.synerset.unitility.unitsystem.basic.common.Distance;
-import com.synerset.unitility.unitsystem.basic.common.DistanceUnit;
-import com.synerset.unitility.unitsystem.basic.common.DistanceUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

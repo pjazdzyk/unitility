@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.mechanical;
 
-import com.synerset.unitility.unitsystem.basic.mechanical.Momentum;
-import com.synerset.unitility.unitsystem.basic.mechanical.MomentumUnit;
-import com.synerset.unitility.unitsystem.basic.mechanical.MomentumUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

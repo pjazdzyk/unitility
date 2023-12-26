@@ -4,6 +4,7 @@ import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.utils.StringCleaner;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -57,9 +58,10 @@ public interface PhysicalQuantityParsingFactory {
     default <U extends Unit, Q extends PhysicalQuantity<U>> Q parseFromEngFormat(Class<Q> targetClass,
                                                                                  String quantityInEngFormat) {
 
-        String preparedSource = quantityInEngFormat.trim()
-                .replace(" ", "")
-                .replace(",", ".");
+        String preparedSource = StringCleaner.of(quantityInEngFormat)
+                .trimAndClean()
+                .toString();
+
         String unitSymbol = null;
         if (preparedSource.contains("[")) {
             unitSymbol = extractSymbolFromEngFormat(targetClass, preparedSource);
@@ -98,20 +100,23 @@ public interface PhysicalQuantityParsingFactory {
         }
     }
 
-    private double extractValueFromEngFormat(Class<?> targetClass, String input) {
-        String extractedNumber;
+    private double extractValueFromEngFormat(Class<?> targetClass, String inputString) {
+        String perparedString = StringCleaner.of(inputString)
+                .replaceCommaForDot()
+                .toString();
 
-        if (input.contains("[")) {
-            int endIndex = input.indexOf('[');
-            extractedNumber = input.substring(0, endIndex);
+        String extractedNumber;
+        if (perparedString.contains("[")) {
+            int endIndex = perparedString.indexOf('[');
+            extractedNumber = perparedString.substring(0, endIndex);
         } else {
-            extractedNumber = input;
+            extractedNumber = perparedString;
         }
 
         try {
             return Double.parseDouble(extractedNumber);
         } catch (Exception e) {
-            throw new UnitSystemParseException("Could not extract number from input: " + input
+            throw new UnitSystemParseException("Could not extract number from input: " + perparedString
                     + ", target class: " + targetClass.getSimpleName());
         }
     }

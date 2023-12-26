@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.basic.humidity;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.SymbolCleaner;
+import com.synerset.unitility.unitsystem.utils.StringCleaner;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -56,7 +56,7 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
     }
 
     private static String unifySymbol(String inputString) {
-        return SymbolCleaner.of(inputString)
+        return StringCleaner.of(inputString)
                 .trimAndClean()
                 .toString();
     }
