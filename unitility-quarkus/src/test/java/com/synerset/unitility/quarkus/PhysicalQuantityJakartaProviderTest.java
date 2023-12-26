@@ -2,17 +2,17 @@ package com.synerset.unitility.quarkus;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.common.*;
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.flows.MassFlow;
-import com.synerset.unitility.unitsystem.flows.VolumetricFlow;
-import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
-import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
-import com.synerset.unitility.unitsystem.mechanical.Force;
-import com.synerset.unitility.unitsystem.mechanical.Momentum;
-import com.synerset.unitility.unitsystem.mechanical.Torque;
-import com.synerset.unitility.unitsystem.thermodynamic.*;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.basic.common.*;
+import com.synerset.unitility.unitsystem.basic.dimensionless.BypassFactor;
+import com.synerset.unitility.unitsystem.basic.flows.MassFlow;
+import com.synerset.unitility.unitsystem.basic.flows.VolumetricFlow;
+import com.synerset.unitility.unitsystem.basic.humidity.HumidityRatio;
+import com.synerset.unitility.unitsystem.basic.humidity.RelativeHumidity;
+import com.synerset.unitility.unitsystem.basic.mechanical.Force;
+import com.synerset.unitility.unitsystem.basic.mechanical.Momentum;
+import com.synerset.unitility.unitsystem.basic.mechanical.Torque;
+import com.synerset.unitility.unitsystem.basic.thermodynamic.*;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import jakarta.ws.rs.ext.ParamConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SuppressWarnings("unchecked")
 class PhysicalQuantityJakartaProviderTest {
 
-    public static final PhysicalQuantityParsingRegistry PARSING_REGISTRY = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
+    public static final PhysicalQuantityParsingFactory PARSING_REGISTRY = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
     public static final PhysicalQuantityJakartaProvider CONVERTER_PROVIDER = new PhysicalQuantityJakartaProvider(PARSING_REGISTRY);
     public static final double TEST_VALUE = 15.1;
 

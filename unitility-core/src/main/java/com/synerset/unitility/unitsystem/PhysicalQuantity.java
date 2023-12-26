@@ -5,7 +5,7 @@ import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
-public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQuantity<U>>, EngineeringFormat {
+public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQuantity<U>> {
 
     int DEFAULT_RELEVANT_DIGITS = 4;
 
@@ -225,6 +225,9 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A new physical quantity with the added value.
      */
     default <Q extends PhysicalQuantity<U>> Q plus(Q inputQuantity) {
+        if (inputQuantity == null) {
+            return withValue(getValue());
+        }
         U sourceUnit = this.getUnitType();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() + inputInSourceUnits.getValue();
@@ -249,6 +252,9 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A new physical quantity with the subtracted value.
      */
     default <Q extends PhysicalQuantity<U>> Q minus(Q inputQuantity) {
+        if (inputQuantity == null) {
+            return withValue(getValue());
+        }
         U sourceUnit = this.getUnitType();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() - inputInSourceUnits.getValue();
@@ -311,6 +317,9 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return The result of multiplying the two physical quantities' values.
      */
     default double multiply(PhysicalQuantity<? extends Unit> inputQuantity) {
+        if (inputQuantity == null) {
+            return getValue();
+        }
         return this.getValue() * inputQuantity.getValue();
     }
 
@@ -333,6 +342,9 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @throws UnitSystemArgumentException If this quantity's value is zero.
      */
     default double div(PhysicalQuantity<? extends Unit> inputQuantity) {
+        if (inputQuantity == null) {
+            return getValue();
+        }
         double thisValue = getValue();
         if (thisValue == 0) {
             throw new UnitSystemArgumentException("Divider quantity value cannot be zero.");
@@ -352,7 +364,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         if (getUnitSymbol().isBlank()) {
             return String.valueOf(getValue());
         }
-        return String.format("%s[%s]", getValue(), getUnitSymbol());
+        return String.format("%s [%s]", getValue(), getUnitSymbol());
     }
 
     /**
@@ -380,7 +392,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         if (getUnitSymbol().isBlank()) {
             return ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits);
         }
-        return String.format("%s[%s]", ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits), getUnitSymbol());
+        return String.format("%s [%s]", ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits), getUnitSymbol());
     }
 
     /**

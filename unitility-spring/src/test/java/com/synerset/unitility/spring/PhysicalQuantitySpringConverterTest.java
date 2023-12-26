@@ -1,8 +1,8 @@
 package com.synerset.unitility.spring;
 
-import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivity;
-import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivityUnit;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalConductivity;
+import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalConductivityUnit;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +11,7 @@ class PhysicalQuantitySpringConverterTest {
     @Test
     void convert_shouldConvertStringToPhysicalQuantity() {
         // Given
-        PhysicalQuantityParsingRegistry parsingFactory = PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
+        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
 
         String input_1 = "20[BTU/(h·ft·°F)]";
         String input_2 = "20[BTU p (h x ft x oF)]";

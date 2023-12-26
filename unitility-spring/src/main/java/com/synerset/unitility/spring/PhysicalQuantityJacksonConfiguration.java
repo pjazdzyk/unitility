@@ -3,7 +3,7 @@ package com.synerset.unitility.spring;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -25,19 +25,19 @@ class PhysicalQuantityJacksonConfiguration {
      * @return A {@link Jackson2ObjectMapperBuilderCustomizer}.
      */
     @Bean
-    Jackson2ObjectMapperBuilderCustomizer createPhysicalQuantityJacksonModule(PhysicalQuantityParsingRegistry parsingFactory) {
+    Jackson2ObjectMapperBuilderCustomizer createPhysicalQuantityJacksonModule(PhysicalQuantityParsingFactory parsingFactory) {
         return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.modules(new PhysicalQuantityJacksonModule(parsingFactory));
     }
 
     /**
-     * Creates a default {@link PhysicalQuantityParsingRegistry} bean.
-     * This bean is responsible for creating and providing a default {@link PhysicalQuantityParsingRegistry} instance.
+     * Creates a default {@link PhysicalQuantityParsingFactory} bean.
+     * This bean is responsible for creating and providing a default {@link PhysicalQuantityParsingFactory} instance.
      *
-     * @return A default {@link PhysicalQuantityParsingRegistry}.
+     * @return A default {@link PhysicalQuantityParsingFactory}.
      */
     @Bean
-    PhysicalQuantityParsingRegistry createPhysicalQuantityParsingFactory() {
-        return PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
+    PhysicalQuantityParsingFactory createPhysicalQuantityParsingFactory() {
+        return PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
     }
 
 }

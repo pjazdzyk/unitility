@@ -2,7 +2,7 @@ package com.synerset.unitility.quarkus;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.PathParam;
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * The PhysicalQuantityJakartaProvider class is a Jakarta RS {@link ParamConverterProvider} that provides
  * {@link ParamConverter} instances for handling {@link PhysicalQuantity} instances in Jakarta resource methods.
  * This mechanism is required for deserializing {@link PhysicalQuantity} from {@link PathParam} or {@link QueryParam}
- * based on parsers registered in {@link PhysicalQuantityParsingRegistry}.
+ * based on parsers registered in {@link PhysicalQuantityParsingFactory}.
  */
 @Provider
 @Priority(1000)
@@ -30,7 +30,7 @@ class PhysicalQuantityJakartaProvider implements ParamConverterProvider {
 
     private final Map<Class<?>, ParamConverter<?>> immutableConverterRegistry;
 
-    public PhysicalQuantityJakartaProvider(PhysicalQuantityParsingRegistry parsingRegistry) {
+    public PhysicalQuantityJakartaProvider(PhysicalQuantityParsingFactory parsingRegistry) {
         Map<Class<?>, ParamConverter<?>> registry = new ConcurrentHashMap<>();
         parsingRegistry.findAllRegisteredClasses()
                 .forEach(quantityClass -> registry.put(

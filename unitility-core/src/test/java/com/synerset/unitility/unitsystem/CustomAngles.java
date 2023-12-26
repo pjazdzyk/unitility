@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem;
 
-import com.synerset.unitility.unitsystem.common.AngleUnit;
-import com.synerset.unitility.unitsystem.common.AngleUnits;
+import com.synerset.unitility.unitsystem.basic.common.AngleUnit;
+import com.synerset.unitility.unitsystem.basic.common.AngleUnits;
 
 import java.util.function.DoubleUnaryOperator;
 

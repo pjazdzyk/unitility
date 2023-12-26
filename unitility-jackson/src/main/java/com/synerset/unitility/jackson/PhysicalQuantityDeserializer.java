@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 
 import java.io.IOException;
 
@@ -20,9 +20,9 @@ import java.io.IOException;
 public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuantity<U>> extends JsonDeserializer<Q> {
 
     private final Class<Q> quantityClass;
-    private final PhysicalQuantityParsingRegistry parsingFactory;
+    private final PhysicalQuantityParsingFactory parsingFactory;
 
-    public PhysicalQuantityDeserializer(Class<Q> quantityClass, PhysicalQuantityParsingRegistry parsingFactory) {
+    public PhysicalQuantityDeserializer(Class<Q> quantityClass, PhysicalQuantityParsingFactory parsingFactory) {
         this.quantityClass = quantityClass;
         this.parsingFactory = parsingFactory;
     }
@@ -30,7 +30,7 @@ public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuan
     /**
      * Deserializes a JSON representation to a {@link PhysicalQuantity} instance.
      * This method is called by Jackson's ObjectMapper during the deserialization process. It reads the JSON
-     * representation and uses the {@link PhysicalQuantityParsingRegistry} to create a {@link PhysicalQuantity} instance.
+     * representation and uses the {@link PhysicalQuantityParsingFactory} to create a {@link PhysicalQuantity} instance.
      *
      * @param jsonParser             The {@link JsonParser} used to read JSON data.
      * @param deserializationContext The {@link DeserializationContext} used during deserialization.
@@ -45,7 +45,7 @@ public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuan
         if (node.get(FieldNames.JSON_FIELD_UNIT_SYMBOL) != null) {
             unitSymbol = node.get(FieldNames.JSON_FIELD_UNIT_SYMBOL).asText();
         }
-        return parsingFactory.fromSymbol(quantityClass, value, unitSymbol);
+        return parsingFactory.parseFromSymbol(quantityClass, value, unitSymbol);
     }
 
 }

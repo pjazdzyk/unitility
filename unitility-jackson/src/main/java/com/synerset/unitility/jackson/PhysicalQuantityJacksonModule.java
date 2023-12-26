@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
+import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
 
 /**
  * The PhysicalQuantityJacksonModule class is a Jackson module that provides serializers and deserializers for
@@ -13,7 +13,7 @@ import com.synerset.unitility.unitsystem.utils.PhysicalQuantityParsingRegistry;
  */
 public class PhysicalQuantityJacksonModule extends SimpleModule {
 
-    public PhysicalQuantityJacksonModule(PhysicalQuantityParsingRegistry parsingRegistry) {
+    public PhysicalQuantityJacksonModule(PhysicalQuantityParsingFactory parsingRegistry) {
         super("PhysicalQuantityJacksonModule");
 
         /* SERIALIZERS */
