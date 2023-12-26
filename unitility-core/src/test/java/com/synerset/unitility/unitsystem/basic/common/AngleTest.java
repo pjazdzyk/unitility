@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.common;
 
-import com.synerset.unitility.unitsystem.basic.common.Angle;
-import com.synerset.unitility.unitsystem.basic.common.AngleUnit;
-import com.synerset.unitility.unitsystem.basic.common.AngleUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.dimensionless;
 
-import com.synerset.unitility.unitsystem.basic.dimensionless.GrashofNumber;
-import com.synerset.unitility.unitsystem.basic.dimensionless.GrashofNumberUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

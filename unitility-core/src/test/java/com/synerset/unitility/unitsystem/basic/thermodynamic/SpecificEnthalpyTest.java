@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.thermodynamic;
 
-import com.synerset.unitility.unitsystem.basic.thermodynamic.SpecificEnthalpy;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.SpecificEnthalpyUnit;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.SpecificEnthalpyUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -12,16 +12,16 @@ class DMSValueFormatter {
     static String latitudeToDmsFormat(Latitude latitude, int relevantDigits) {
         double latitudeInDegrees = latitude.getInDegrees();
         char directionSymbol = (latitudeInDegrees < 0) ? 'S' : 'N';
-        return createDMSFormatString(latitudeInDegrees, directionSymbol, relevantDigits);
+        return createDMSNotation(latitudeInDegrees, directionSymbol, relevantDigits);
     }
 
     static String longitudeToDmsFormat(Longitude longitude, int relevantDigits) {
         double longitudeInDegrees = longitude.getInDegrees();
         char directionSymbol = (longitudeInDegrees < 0) ? 'W' : 'E';
-        return createDMSFormatString(longitudeInDegrees, directionSymbol, relevantDigits);
+        return createDMSNotation(longitudeInDegrees, directionSymbol, relevantDigits);
     }
 
-    private static String createDMSFormatString(double coordinateInDegrees, char directionSymbol, int relevantDigits) {
+    private static String createDMSNotation(double coordinateInDegrees, char directionSymbol, int relevantDigits) {
         coordinateInDegrees = Math.abs(coordinateInDegrees);
 
         int degrees = (int) coordinateInDegrees;

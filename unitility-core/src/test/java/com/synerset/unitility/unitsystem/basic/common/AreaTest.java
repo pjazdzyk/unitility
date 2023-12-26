@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.common;
 
-import com.synerset.unitility.unitsystem.basic.common.Area;
-import com.synerset.unitility.unitsystem.basic.common.AreaUnit;
-import com.synerset.unitility.unitsystem.basic.common.AreaUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

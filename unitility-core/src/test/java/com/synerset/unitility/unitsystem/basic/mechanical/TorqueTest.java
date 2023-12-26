@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.mechanical;
 
-import com.synerset.unitility.unitsystem.basic.mechanical.Torque;
-import com.synerset.unitility.unitsystem.basic.mechanical.TorqueUnit;
-import com.synerset.unitility.unitsystem.basic.mechanical.TorqueUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

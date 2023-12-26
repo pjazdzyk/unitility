@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.thermodynamic;
 
-import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalConductivity;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalConductivityUnit;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalConductivityUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

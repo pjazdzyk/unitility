@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.common;
 
-import com.synerset.unitility.unitsystem.basic.common.Mass;
-import com.synerset.unitility.unitsystem.basic.common.MassUnit;
-import com.synerset.unitility.unitsystem.basic.common.MassUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

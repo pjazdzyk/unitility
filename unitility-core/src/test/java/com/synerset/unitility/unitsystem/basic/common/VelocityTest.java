@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.common;
 
-import com.synerset.unitility.unitsystem.basic.common.Velocity;
-import com.synerset.unitility.unitsystem.basic.common.VelocityUnit;
-import com.synerset.unitility.unitsystem.basic.common.VelocityUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

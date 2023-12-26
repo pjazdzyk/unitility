@@ -3,10 +3,10 @@ package com.synerset.unitility.unitsystem;
 import com.synerset.unitility.unitsystem.basic.common.Distance;
 import com.synerset.unitility.unitsystem.basic.common.DistanceUnits;
 import com.synerset.unitility.unitsystem.basic.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import com.synerset.unitility.unitsystem.basic.thermodynamic.Pressure;
 import com.synerset.unitility.unitsystem.basic.thermodynamic.Temperature;
 import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalDiffusivity;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

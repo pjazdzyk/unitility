@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.basic.mechanical;
 
-import com.synerset.unitility.unitsystem.basic.mechanical.Force;
-import com.synerset.unitility.unitsystem.basic.mechanical.ForceUnit;
-import com.synerset.unitility.unitsystem.basic.mechanical.ForceUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

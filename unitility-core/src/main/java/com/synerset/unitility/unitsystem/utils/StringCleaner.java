@@ -1,33 +1,33 @@
 package com.synerset.unitility.unitsystem.utils;
 
-public class SymbolCleaner {
+public class StringCleaner {
 
     private final String inputString;
 
-    private SymbolCleaner(String inputString) {
+    private StringCleaner(String inputString) {
         this.inputString = inputString;
     }
 
-    public static SymbolCleaner of(String inputString) {
-        return new SymbolCleaner(inputString);
+    public static StringCleaner of(String inputString) {
+        return new StringCleaner(inputString);
     }
 
-    public SymbolCleaner trimAndClean() {
-        return SymbolCleaner.of(
+    public StringCleaner trimAndClean() {
+        return StringCleaner.of(
                 inputString.trim()
                         .toLowerCase()
                         .replace(" ", "")
         );
     }
 
-    public SymbolCleaner unifyAerialAndVol() {
-        return SymbolCleaner.of(
+    public StringCleaner unifyAerialAndVol() {
+        return StringCleaner.of(
                 inputString.replace("³", "3")
                         .replace("²", "2"));
     }
 
-    public SymbolCleaner unifyMultiAndDiv() {
-        return SymbolCleaner.of(
+    public StringCleaner unifyMultiAndDiv() {
+        return StringCleaner.of(
                 inputString.replace(".", "")
                         .replace("·", "")
                         .replace("x", "")
@@ -35,8 +35,8 @@ public class SymbolCleaner {
 
     }
 
-    public SymbolCleaner unifySymbolsOfAngle() {
-        return SymbolCleaner.of(
+    public StringCleaner unifySymbolsOfAngle() {
+        return StringCleaner.of(
                 inputString.replace("°", "")
                         .replace("o", "")
                         .replace("deg", "")
@@ -44,14 +44,20 @@ public class SymbolCleaner {
         );
     }
 
-    public SymbolCleaner removeParentheses() {
-        return SymbolCleaner.of(
+    public StringCleaner removeParentheses() {
+        return StringCleaner.of(
                 inputString.replace("(", "")
                         .replace(")", "")
                         .replace("}", "")
                         .replace("{", "")
                         .replace("<", "")
                         .replace(">", "")
+        );
+    }
+
+    public StringCleaner replaceCommaForDot() {
+        return StringCleaner.of(
+                inputString.replace(",", ".")
         );
     }
 

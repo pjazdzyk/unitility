@@ -52,4 +52,23 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualBypassFactor8).isEqualTo(expectedBypassFactor);
     }
 
+    @Test
+    void deserialize_shouldDeserializeJsonToPhysicalQuantityFromEngFormat() throws JsonProcessingException {
+        // Given
+        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
+
+        String tempInput1 = "{\"value\":\"20.123 [°C]\"}";
+        String tempInput2 = "{\"value\":\"20.123 [°C]\", \"unit\":\"K\"}";
+
+        // When
+        Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
+        Temperature actualTemp2 = objectMapper.readValue(tempInput2, Temperature.class);
+
+        Temperature expetedTemperature = Temperature.ofCelsius(20.123);
+        assertThat(actualTemp1).isEqualTo(expetedTemperature);
+        assertThat(actualTemp2).isEqualTo(expetedTemperature);
+        }
+
 }

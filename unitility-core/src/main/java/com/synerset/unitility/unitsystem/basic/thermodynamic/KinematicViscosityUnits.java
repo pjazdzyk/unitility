@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.basic.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.SymbolCleaner;
+import com.synerset.unitility.unitsystem.utils.StringCleaner;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -52,7 +52,7 @@ public enum KinematicViscosityUnits implements KinematicViscosityUnit {
     }
 
     private static String unifySymbol(String inputString) {
-        return SymbolCleaner.of(inputString)
+        return StringCleaner.of(inputString)
                 .trimAndClean()
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()

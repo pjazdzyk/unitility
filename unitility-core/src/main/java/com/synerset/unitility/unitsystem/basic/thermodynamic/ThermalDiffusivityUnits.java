@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.basic.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.SymbolCleaner;
+import com.synerset.unitility.unitsystem.utils.StringCleaner;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -53,7 +53,7 @@ public enum ThermalDiffusivityUnits implements ThermalDiffusivityUnit {
     }
 
     private static String unifySymbol(String inputSymbol) {
-        return SymbolCleaner.of(inputSymbol)
+        return StringCleaner.of(inputSymbol)
                 .trimAndClean()
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()
