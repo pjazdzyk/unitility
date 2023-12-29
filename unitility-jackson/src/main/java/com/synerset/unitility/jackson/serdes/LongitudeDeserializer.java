@@ -31,10 +31,6 @@ public class LongitudeDeserializer extends JsonDeserializer<Longitude> {
             throw new IOException("Deserialization failure. Field not found: " + FieldNames.JSON_FIELD_VALUE);
         }
 
-        if (valueFieldNode.isDouble()) {
-            return deserializeFromSymbolAndValue(quantityNode);
-        }
-
         String quantityValue = valueFieldNode.asText();
 
         if (quantityValue != null && quantityValue.contains("[")) {
@@ -47,7 +43,7 @@ public class LongitudeDeserializer extends JsonDeserializer<Longitude> {
             return deserializeFromDMSFormat(preparedQuantityValue);
         }
 
-        throw new IOException("Deserialization failure. Attempted to deserialize:: " + quantityValue);
+        return deserializeFromSymbolAndValue(quantityNode);
 
     }
 

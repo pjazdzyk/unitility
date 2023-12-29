@@ -49,20 +49,24 @@ features, such as overloaded operators.
 7. [Compatibility with other JVM languages](#7-compatibility-with-other-jvm-languages) <br>
    7.1 [Groovy](#71-groovy---using-overloaded-operators) <br>
    7.2 [Kotlin](#72-kotlin---using-overloaded-operators) <br>
-8. [Collaboration, attribution and citation](#8-collaboration-attribution-and-citation) <br>
-9. [Acknowledgments](#9-acknowledgments) <br>
+8. [Special types: geographic](#8-special-types-geographic) <br>
+   8.1 [Latitude, Longitude, GeoCoordinate](#81-geographic-latitude-longitude-and-geocoordinate) <br>
+   8.2 [GeoDistance (Haversine equations)](#82-geodistance---spherical-distance-between-two-coordinates) <br>
+   8.3 [Parsing geographic quantities and JSON structures](#83-parsing-geographic-quantities-and-json-structures) <br>
+9. [Collaboration, attribution and citation](#9-collaboration-attribution-and-citation) <br>
+10. [Acknowledgments](#10-acknowledgments) <br>
 
 ## 1. INSTALLATION
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.0.0/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.1.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -74,7 +78,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -82,7 +86,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -112,11 +116,12 @@ transitive dependencies or excessive dependency version management.
 
 ## 3. SUPPORTED PHYSICAL QUANTITIES AND UNITS
 
-At the current level of development, the following units are available:
+At the current level of development, the following units are listed below. Each quantity includes the most popular SI 
+units and at least one Imperial unit.
 
 #### COMMON:
 
-* Distance: meter [m], centimetre [cm], millimetre [mm], kilometre [km], mile [mi], feet [ft], inch [in]
+* Distance: meter [m], centimetre [cm], millimetre [mm], kilometre [km], mile [mi], nautical mile [nmi], feet [ft], inch [in]
 * Area: square meter [m²], square kilometre [km²], square centimetre [cm²], square millimetre [mm²], are [a],
   hectare [ha], square inch [in²], square foot [ft²], square yard [yd²], acre [ac], square mile [mi²]
 * Volume: cubic meter [m³], cubic centimetre [L], liter [L], hectolitre [hL], millilitre [mL], ounce [fl.oz], pint [pt],
@@ -134,7 +139,7 @@ At the current level of development, the following units are available:
 
 * Temperature: Kelvin [K], Celsius [°C], Fahrenheit [°F]
 * Pressure: Pascal [Pa], Hectopascal [hPa], Megapascal [MPa], Bar [bar], Milli Bar [mbar] PSI [psi], Torr [Torr]
-* Energy: Joule [J], Millijoule [mJ], Kilojoule [kJ], Megajoule [MJ], BTU [BTU], Calorie [cal], Kilocalorie [kcal], Watt
+* Energy: Joule [J], Milli joule [mJ], Kilojoule [kJ], Megajoule [MJ], BTU [BTU], Calorie [cal], Kilocalorie [kcal], Watt
   hour [Wh], Kilowatt hour [kWh]
 * Power: Watt [W], Kilowatt [kW], Megawatt [MW], BTU/hour [BTU/h], Horse Power [HP]
 * Specific heat: Joules per kilogram Kelvin [J/(kg·K)], Kilojoules per kilogram Kelvin [kJ/(kg·K)], BTU per pound
@@ -163,8 +168,15 @@ At the current level of development, the following units are available:
 
 * Grashof number, Prandtl number, Reynolds number, Bypass factor
 
-Each quantity consists most popular SI units and at least one Imperial unit.
+#### SPECIAL TYPES:
+#### Geographic:
 
+* Latitude: degrees [°], radians [rad]
+* Longitude: degrees [°], radians [rad]
+* GeoCoordinate: [latitude, longitude]
+* GeoDistance: meter [m], kilometer [km], mile [mi], nautical mile [nmi] <br>
+
+All Geographic quantities can be constructed from DMS format (degrees-minutes-seconds), for i.e.: 20°7'22.8"S.
 
 ## 4. USAGE AND FUNCTIONALITY
 
@@ -221,23 +233,23 @@ programming style using the io.vavr library.
 
 The physical quantity can be instantiated from a string representing the commonly used engineering style of writing 
 values with units: "{value}[{unit}]", for example, "20.5 [K]". To parse a valid string into a PhysicalQuantity, you need 
-to obtain an instance of the parsing registry provided in the core module. The default parsing registry includes parsers 
+to obtain an instance of the parsing factory provided in the core module. The default parsing factory includes parsers 
 for all supported physical quantities and their related units.
 
 ```java
-// Create default parsing registry
-PhysicalQuantityParsingRegistry parsingRegistry = 
-        PhysicalQuantityParsingRegistry.DEFAULT_PARSING_REGISTRY;
+// Create default parsing factory
+PhysicalQuantityParsingFactory parsingFactory = 
+        PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
 // Examples of string in engineering format with unit in square brackets
 String k1 = "15.1 [W p mxK)]";
 String k2 = "15.1 [W/(m.K)]";
 String k3 = "   1 5 ,  1 [   WpmK   ]";
 // All above strings are properly resolved to Thermal Conductivity, even partially malformed k3.
-ThermalConductivity thermCond1 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k1); 
+ThermalConductivity thermCond1 = parsingFactory.fromEngFormat(ThermalConductivity.class, k1); 
 // will resolve to {15.1 W/(m·K)}
-ThermalConductivity thermCond2 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k2); 
+ThermalConductivity thermCond2 = parsingFactory.fromEngFormat(ThermalConductivity.class, k2); 
 // will resolve to {15.1 W/(m·K)}
-ThermalConductivity thermCond3 = parsingRegistry.fromEngFormat(ThermalConductivity.class, k3); 
+ThermalConductivity thermCond3 = parsingFactory.fromEngFormat(ThermalConductivity.class, k3); 
 // will resolve to {15.1 W/(m·K)}
 ```
 
@@ -253,7 +265,7 @@ alternative ways of expressing units in an input string:
 | division          | /   | p       | m/s, mps           |
 
 Please note that this method of creating quantities is designed to be used for deserializers. <Br>
-In your code, you should create units in a programmatic way, not parsing from strings.
+**In your code, you should create units in a programmatic way, not parsing from strings.**
 
 ### 4.3 Logical operations
 
@@ -418,7 +430,7 @@ PhysicalQuantity JSON structure for valid serialization / deserialization has be
 ```
 
 The Jackson module provides a configured SimpleModule with registered StdSerializer and JsonDeserializer instances. 
-Each PhysicalQuantity class has its own defined deserializer. Deserializers use PhysicalQuantityParsingRegistry to
+Each PhysicalQuantity class has its own defined deserializer. Deserializers use PhysicalQuantityParsingFactory to
 obtain the appropriate parser depending on the class type. This module is part of the Spring and Quarkus modules, 
 therefore, it does not need to be added explicitly if framework extensions are included in the project.
 
@@ -445,13 +457,13 @@ or path variables, as in the example below:
 public class DefaultUnitsController {
 
     @GetMapping("/temperatures/{temperature}")
-    public Temperature getCustomAnglePathVariable(@PathVariable("temperature") Temperature temperature) {
+    public Temperature getTemperature(@PathVariable("temperature") Temperature temperature) {
         // Some code
         return temperature;
     }
 
     @PostMapping("/temperatures")
-    public Temperature getCustomAngleRequestBody(@RequestBody Temperature temperature) {
+    public Temperature postTemperature(@RequestBody Temperature temperature) {
         // Some code
         return temperature;
     }
@@ -487,7 +499,7 @@ public class DefaultUnitsResource {
     @GET
     @Path("/temperatures/{temperature}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Temperature getCustomAnglePathVariable(@PathParam("temperature") Temperature temperature) {
+    public Temperature getTemperature(@PathParam("temperature") Temperature temperature) {
         // Some code
         return temperature;
     }
@@ -495,7 +507,7 @@ public class DefaultUnitsResource {
     @POST
     @Path("/temperatures")
     @Produces(MediaType.APPLICATION_JSON)
-    public Temperature getCustomAngleRequestBody(Temperature temperature) {
+    public Temperature postTemperature(Temperature temperature) {
         // Some code
         return temperature;
     }
@@ -506,7 +518,7 @@ For special cases when custom unit is created, which is not a part of standard U
 steps must be carried out to ensure that custom unit is properly resolved from JSON or path/query params. For more details
 see a section: [Registering custom quantity in Quarkus](#63-registering-custom-units-in-quarkus).
 
-## 6. Creating custom quantities
+## 6. CREATING CUSTOM QUANTITIES
 The Unitility includes a set of the most commonly used quantities and related units with an emphasis on thermodynamics. 
 However, the framework foundation can be successfully used to define almost any unit from economic sciences, biology, or 
 logistics, for example, the quantity of bottles in a package. Sooner or later, a developer might face a case where they 
@@ -543,11 +555,11 @@ After creating a custom unit, to ensure that it is properly resolved from JSON o
 must be taken to make it work. A complete example of a new custom unit properly registered in a Spring framework can be 
 found here: [unitility-spring-example](https://github.com/pjazdzyk/unitility-spring-example).
 
-As a first step, a new parsing registry has to be created, which must include currently supported quantities and custom
+As a first step, a new parsing factory has to be created, which must include currently supported quantities and custom
 user quantities:
-[CustomParsingRegistry](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/CustomParsingRegistryWithAngle.java).
+[CustomParsingFactory](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/CustomParsingRegistryWithAngle.java).
 
-After a new parsing registry is created and all standard and new custom quantities parsers are properly registered,
+After a new parsing factory is created and all standard and new custom quantities parsers are properly registered,
 you can now create a configuration and register new JacksonModule and new Conveter in FormatterRegistry: 
 [CustomAngleConfiguration](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/CustomAngleConfiguration.java).
 
@@ -576,11 +588,11 @@ public class CustomAngleController {
 Registering custom unit in Quarkus is a bit different compared to Spring.
 A Complete example of new custom unit properly registered in a Quarkus framework can be
 found here: [unitility-quarkus-example](https://github.com/pjazdzyk/unitility-quarkus-example).
-In this case, a first step is the same, new parsing registry must be created to include currently supported 
-and new custom quantities created by user: [CustomParsingRegistry](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/examples/newquantity/CustomParsingRegistryWithAngle.java).
+In this case, a first step is the same, new parsing factory must be created to include currently supported 
+and new custom quantities created by user: [CustomParsingFactory](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/examples/newquantity/CustomParsingRegistryWithAngle.java).
 
-After a new parsing registry is created and all standard and new custom quantities parsers are properly registered,
-you can now create a new ObjectMapperCustomizer and register JacksonModule with new parsing registry: 
+After a new parsing factory is created and all standard and new custom quantities parsers are properly registered,
+you can now create a new ObjectMapperCustomizer and register JacksonModule with new parsing factory: 
 [CustomObjectMapperCustomizer](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/examples/newquantity/CustomAngleObjectMapperCustomizer.java).
 
 The Last step is to define new PathParamConverterProvider and register ParamConverters for all custom quantities:
@@ -609,7 +621,7 @@ public class CustomAngleController {
 In Quarkus, IntellijJ might highlight PhysicalQuantity types when used as path or query parameters, but when you run the
 application, they will be correctly resolved.
 
-## 7. Compatibility with other JVM languages
+## 7. COMPATIBILITY WITH OTHER JVM LANGUAGES
 Unitility can be easily used with other JVM-based programming languages. There are some features of these languages that 
 make using Unitility easier and more elegant, for example, through the use of overloaded operators. I am more than happy 
 to provide even greater integration with other JVM languages, please use [ISSUES](https://github.com/pjazdzyk/unitility/issues)
@@ -670,14 +682,241 @@ val isGreaterOrEq = t1 >= t2    // true
 val isEqual = t1 == t1          // true
 ```
 
-## 8. Collaboration, attribution and citation
+## 8. SPECIAL TYPES: GEOGRAPHIC
+A set of dedicated types has been provided to cover spatial types used in expressing geographic measures: Latitude, 
+Longitude, GeoCoordinate and GeoDistance. These classes allow representing coordinates on Earth and real curvature
+distance between these coordinates.
+
+### 8.1 Geographic Latitude, Longitude and GeoCoordinate
+The Latitude class includes methods that allow for easy conversion of latitude values to the Degrees-Minutes-Seconds 
+(DMS) format. This format provides a more human-readable representation of geographic coordinates, making it convenient
+for various applications where DMS notation is preferred. <br>
+The Longitude class, analogous to the Latitude class, represents a geographic longitude coordinate. It adheres to the 
+standard range of -180 to +180 degrees, covering the westernmost point at -180 degrees and the easternmost point 
+at +180 degrees.
+```java
+// Latitude and Longitude types are based on Angular units
+Latitude latitude = Latitude.ofDegrees(-20.123);
+Longitude longitude = Longitude.ofDegrees(20.123);
+// Both can be reduced to a string in DMS format or in ENG format:
+String latInDMS = latitude.toDMSFormat(2);          // Outputs: 20°7'22.8"S
+String latInENG = latitude.toEngineeringFormat();   // Outputs: -20.123 [°]
+```
+The GeoCoordinate class combines both Latitude and Longitude to form a complete geographic coordinate. It facilitates 
+easy management and manipulation of spatial data, allowing seamless integration into various applications requiring
+precise location information.
+
+```java
+// GeoCoordinate class represents a coordinate of specific point in the globe, using Latitude and Longitude and optional name
+GeoCoordinate coordinateExample = GeoCoordinate.of(latitude, longitude, "my location");
+// GeoCoordinate can be reduced to DMS format, ENG format, or decimal degrees format
+// Decimal degrees format with coma separating latitude from longitude is for ie: how Google Maps output cords
+String geoCoordDMS = coordinateExample.toDMSFormat();             // 20°7'22.8"S, 20°7'22.8"E
+String geoCoordEND = coordinateExample.toEngineeringFormat();     // -20.12 [°], 20.12 [°]
+String geoCoordDEC = coordinateExample.toDecimalDegrees();        // -20.12, 20.12
+```
+
+Latitude and Longitude do not enforce any angular value limit, but GeoCoordinate will do. Make sure that your
+latitude and longitude values fall withing planet Earth's acceptable limits.
+
+### 8.2 GeoDistance - spherical distance between two coordinates
+The GeoDistance class represents the geographic, spherical distance between two coordinates on Earth, considering 
+the curvature of the Earth. It incorporates calculations involving the start and target coordinates, true bearing, 
+and distance in specified units. The underlying [Haversine equations](https://en.wikipedia.org/wiki/Haversine_formula) 
+serve as the basis for the curved distance calculation. To create a GeoDistance object, you can initialize it with start
+and target coordinates along with the desired unit type for representing the distance. See the example below:
+```java
+GeoCoordinate wroclaw = GeoCoordinate.of(Latitude.ofDegrees(51.102772), Longitude.ofDegrees(16.885802));
+GeoCoordinate newYork = GeoCoordinate.of(Latitude.ofDegrees(40.712671), Longitude.ofDegrees(-74.004655));
+
+GeoDistance geoDistance = GeoDistance.ofKilometers(wroclaw, newYork);
+
+String distanceInEng = geoDistance.toEngineeringFormat();   // 6669.896095258197 [km]
+Angle trueBearing = geoDistance.getTrueBearing();           // Angle{-61.07915625042435°}
+```
+Please note that true bearing is provided in range <-180,+180> degrees, and it is absolute value, to Earth's true north.
+Alternativley, GeoDistance can be initialized with starting coordinate, bearing and distance in that case, target
+coordinate will be calculated. Provided distance must be true, curved distance. 
+```java
+GeoDistance toNewYork = GeoDistance.of(wroclaw, trueBearing, Distance.ofKilometers(6669.896095258197));
+String targetCoordinate = toNewYork.getTargetCoordinate().toDecimalDegrees();   // 40.712671, -74.004655
+```
+As you can see the results, we have set heading towards New York from Wrocław with previously calculated curved distance
+between these two cities, and we have reached to exactly the same spot.<br>
+
+**Progression and translation:** <br>
+The GeoDistance class supports two methods to simulate distance change:<br>
+a) methods named: with(), which accepts new target coordinate or bearing and distance, retaining current starting point
+coordinate and calculates distance to the new coordinates (specified or calculated):
+```java
+GeoCoordinate wellington = GeoCoordinate.of(Latitude.ofDegrees(-41.289463), Longitude.ofDegrees(174.774913));
+
+GeoDistance toWellington = toNewYork.with(wellington);
+
+Distance distance = toWellington.getDistance();                                      // 18005.6198226 km
+String wroclawCoordinate = toWellington.getStartCoordinate().toDecimalDegrees();     // 51.102772, 16.885802
+String wellingtonCoordinate = toWellington.getTargetCoordinate().toDecimalDegrees(); // -41.289463, 174.774913
+```
+Previously, toNewYork represented the distance from Wrocław to New York. Following this change, it now represents the 
+distance from Wrocław to Wellington, along with the updated bearing and calculated distance. <br>
+
+
+b) Methods named translate() will now accept a new target coordinate or bearing and distance. They set the previous target 
+coordinate as the current start coordinate and calculate the distance to the new coordinates, whether specified or calculated.
+```java
+GeoDistance toWellingtonBis = toNewYork.translate(wellington);
+
+Distance distanceBis = toWellingtonBis.getDistance();                                      // 14403.6934729 km
+String wroclawCoordinateBis = toWellingtonBis.getStartCoordinate().toDecimalDegrees();     // 40.712671, -74.004655
+String wellingtonCoordinateBis = toWellingtonBis.getTargetCoordinate().toDecimalDegrees(); // -41.289463, 174.774913
+```
+Previously, toNewYork represented the distance from Wrocław to New York. After this change, it now represents the distance
+from New York to Wellington, along with the updated bearing and calculated distance. <br>
+
+### 8.3 Parsing geographic quantities and JSON structures
+Parsers have been provided mostly for the purpose of deserialization in Spring Boot or Quarkus, but they can also be used directly 
+in the code:
+```java
+GeoQuantityParsingFactory geoParsingFactory = PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
+Latitude parsedLat1 = geoParsingFactory.parseFromDMSFormat(Latitude.class, "20°7'22.8\"S");
+Latitude parsedLat2 = geoParsingFactory.parseFromDMSFormat(Latitude.class, "20deg 7min 22.8sec");
+```
+Latitude, Longitude can be used as JSON request body or as value in path variable / query param. Path param usage example:
+```text
+Latitude path param usage example:
+/routes/latitude/20°7'22.8"S/longitude/-14°7'12.4"W
+/routes/latitude/20o7min22.8secS/longitude/-14o7min12.4secW
+/routes/latitude/20.123[deg]/longitude/-14.123[deg]
+/routes/latitude/20.123/longitude/-14.123
+```
+
+As you can observe, the deserializer behaves liberally, accepting input in various formats to accommodate users' 
+preferences. Latitude, Longitude, GeoCoordinate, and GeoDistance each have their own JSON deserializers, enabling their 
+use in request bodies. A couple of simple examples are provided below. <br>
+
+Example: Latitude in DMS format as a JSON request body:
+```json
+{
+  "value" : "20°7'22.80000000000399\"S"
+}
+```
+Example: Latitude as a pair of value and unit symbol:
+```json
+{
+  "value" : -20.123456,
+  "unit": "deg"
+}
+```
+Example: Latitude as single value, which will always be resolved to decimal degrees:
+```json
+{
+   "value" : -20.123456
+}
+```
+The **GeoCoordinate** JSON structure follows the same pattern.<br>
+Example: GeoCoordinate defined by Latitude in DMS format and longitude as a value-unit pair:
+```json
+{
+  "latitude" : {
+      "value" : "20°7'22.80\"S"
+    },
+  "longitude" : {
+      "value" : -14.1234,
+      "unit": "deg"
+    }
+}
+```
+**GeoDistance** is serialized or deserialized from the exemplary structures as presented below.<br>
+
+Example: GeoDistance - the base case, where both start and target coordinates are known:
+```json
+{
+    "startCoordinate" : {
+        "latitude": {
+            "value": -20.123,
+            "unit": "deg"
+        },
+        "longitude": {
+            "value": 20.123,
+            "unit": "°"
+        },
+        "name": "MyStartLoc"
+    },
+    "targetCoordinate" : {
+        "latitude": {
+            "value": -20.123,
+            "unit": "°"
+    },
+    "longitude": {
+        "value": 20.123,
+        "unit": "°"
+      },
+      "name": "MyTargetLoc"
+    }
+}
+```
+Example: GeoDistance in a case where the start coordinate, true bearing, and distance to the target are known:
+```json
+{
+    "startCoordinate" : {
+        "latitude": {
+            "value": -20.123,
+            "unit": "deg"
+        },
+        "longitude": {
+            "value": 20.123,
+            "unit": "°"
+        },
+        "name": "MyStartLoc"
+    }, 
+    "trueBearing": {
+        "value": -20.123,
+        "unit": "deg"
+    }, 
+    "distance": {
+        "value": 1000.0,
+        "unit": "km"
+    }
+}
+```
+General note: <br>
+- Latitude & Longitude: field "**value**" for Latitude and Longitude is mandatory, it can accept double value or a string in DMS or ENG format,
+field "**unit**" is optional, it is omitted when value is provided as DMS or ENG format. In case of value provided as a 
+double, unit will be automatically resolved to decimal degrees.
+- GeoCoordinate: fields "**latitude**" and "**longitude**" are mandatory, "**name**" is optional.
+- GeoDistance: field "**startCoordinate**" is mandatory. For variant with two coordinates "**targetCoordinate**" must be provided,
+if not available the "**trueBearing**" and "**distance**" must be provided.
+
+Arithmetic transformations: <br>
+For Latitude, Longitude, and GeoDistance, arithmetic operations function in the same manner as for other PhysicalQuantities.
+GeoCoordinate does not support arithmetic operations, as it is just a composite data objects used to construct GeoDistance.
+It's important to note that the natural behavior is such that the result of arithmetic operations will be based on the with()
+progression. This means that the added value will maintain the starting point, adjust the distance, and recalculate the 
+target coordinate in the process. <br>
+However, it's essential to be aware that despite GeoDistance and Distance sharing the same Unit class, arithmetic 
+operations will not work if applied to different types. For example, the following will work (the distance value from 
+the addend will be added to the current augend distance, assuming the augend's travel bearing):
+
+```java
+// GeoDistance + GeoDistance works fine
+GeoDistance sumOfBoth = geoDistanceInstance.plus(otherGeoDistance);
+```
+But this will **NOT** work and cause casting exception:
+```java
+Distance sumOfBoth = geoDistanceInstance.plus(Distance.ofKilometers(20));
+```
+This will be resolved in further releases.
+
+## 9. COLLABORATION, ATTRIBUTION, AND CITATION
 
 I welcome other developers who are interested in physics and engineering to collaborate on this project.
 Any contributions or suggestions would be greatly appreciated.<br>
+Feel free to contact me if yoy have any questions or comments.
 
 ---
 
-**If you would like me to add any specific units for your field of science, let me know!**
+**If you would like me to add any specific units for your field of science, let me know!<br>**
+**I aim for this library to be helpful and simplify your life.**
 
 ---
 
@@ -697,13 +936,13 @@ Small shield with referenced most recent version tag:<br>
 ```
 
 Tech shield with version tag for manual adjustment (you can indicate which version you actually use): <br>
-[![Unitility](https://img.shields.io/badge/UNITILITY-v2.0.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v2.1.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 
 ```markdown
-[![Unitility](https://img.shields.io/badge/UNITILITY-v2.0.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v2.1.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 ```
 
-## 9. Acknowledgments
+## 10. ACKNOWLEDGMENTS
 
 Special thanks to Kret11, VeloxDigits, Olin44, and others for all discussions on architecture we had.<br>
 I extend my heartfelt gratitude to the [Silesian University of Technology](https://www.polsl.pl/en/) for imparting
