@@ -1,7 +1,8 @@
 package com.synerset.unitility.spring;
 
-import com.synerset.unitility.unitsystem.basic.thermodynamic.Temperature;
-import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.format.support.FormattingConversionService;
@@ -16,7 +17,8 @@ class PhysicalQuantityWebMvcConfigurationTest {
         // Given
         FormattingConversionService formatterRegistry = new FormattingConversionService();
         PhysicalQuantityParsingFactory parsingRegistry = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
-        PhysicalQuantityWebMvcConfiguration webMvcConfiguration = new PhysicalQuantityWebMvcConfiguration(parsingRegistry);
+        GeoQuantityParsingFactory geoParsingFactory = GeoQuantityParsingFactory.GEO_PARSING_FACTORY;
+        PhysicalQuantityWebMvcConfiguration webMvcConfiguration = new PhysicalQuantityWebMvcConfiguration(parsingRegistry, geoParsingFactory);
         String inputQuantity = "20[oC]";
 
         // When

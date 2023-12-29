@@ -1,18 +1,21 @@
 package com.synerset.unitility.quarkus;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.basic.common.*;
-import com.synerset.unitility.unitsystem.basic.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.basic.flows.MassFlow;
-import com.synerset.unitility.unitsystem.basic.flows.VolumetricFlow;
-import com.synerset.unitility.unitsystem.basic.humidity.HumidityRatio;
-import com.synerset.unitility.unitsystem.basic.humidity.RelativeHumidity;
-import com.synerset.unitility.unitsystem.basic.mechanical.Force;
-import com.synerset.unitility.unitsystem.basic.mechanical.Momentum;
-import com.synerset.unitility.unitsystem.basic.mechanical.Torque;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.*;
-import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.common.*;
+import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
+import com.synerset.unitility.unitsystem.flows.MassFlow;
+import com.synerset.unitility.unitsystem.flows.VolumetricFlow;
+import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.geographic.Latitude;
+import com.synerset.unitility.unitsystem.geographic.Longitude;
+import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
+import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
+import com.synerset.unitility.unitsystem.mechanical.Force;
+import com.synerset.unitility.unitsystem.mechanical.Momentum;
+import com.synerset.unitility.unitsystem.mechanical.Torque;
+import com.synerset.unitility.unitsystem.thermodynamic.*;
 import jakarta.ws.rs.ext.ParamConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,15 +31,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PhysicalQuantityJakartaProviderTest {
 
     public static final PhysicalQuantityParsingFactory PARSING_REGISTRY = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
-    public static final PhysicalQuantityJakartaProvider CONVERTER_PROVIDER = new PhysicalQuantityJakartaProvider(PARSING_REGISTRY);
+    public static final GeoQuantityParsingFactory GEO_PARSING_REGISTRY = PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
+    public static final PhysicalQuantityJakartaProvider CONVERTER_PROVIDER = new PhysicalQuantityJakartaProvider(PARSING_REGISTRY, GEO_PARSING_REGISTRY);
     public static final double TEST_VALUE = 15.1;
 
     @ParameterizedTest
     @MethodSource("converterInlineData")
     @DisplayName("ParamConverter: should get proper param converter for target class and convert to string and vice versa")
-    void getConverter_shouldProperlyConvertTemperatureClassToString(Class<?> quantityClass,
-                                                                    String sourceString,
-                                                                    PhysicalQuantity<?> expectedQuantity) {
+    void getConverter_shouldProperlyDeserializePhysicalQuantity(Class<?> quantityClass,
+                                                                String sourceString,
+                                                                PhysicalQuantity<?> expectedQuantity) {
 
 
         // Given
@@ -80,6 +84,40 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(ThermalConductivity.class, "15.1 [W/(m·K)]", ThermalConductivity.ofWattsPerMeterKelvin(TEST_VALUE)),
                 Arguments.of(ThermalDiffusivity.class, "15.1 [ft²/s]", ThermalDiffusivity.ofSquareFeetPerSecond(TEST_VALUE)),
                 Arguments.of(BypassFactor.class, "15.1", BypassFactor.of(TEST_VALUE))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("geoInlineData")
+    @DisplayName("ParamConverter: should deserialize geo quantities")
+    void getConverter_shouldProperlyDeserializeGeoQuantities(Class<?> quantityClass,
+                                                             String sourceString,
+                                                             PhysicalQuantity<?> expectedQuantity) {
+
+        // Given
+        ParamConverter<PhysicalQuantity<Unit>> converter =
+                (ParamConverter<PhysicalQuantity<Unit>>) CONVERTER_PROVIDER.getConverter(quantityClass, null, null);
+
+        // When
+        PhysicalQuantity<Unit> actualQuantity = converter.fromString(sourceString);
+
+        // Then
+        assertThat(actualQuantity).isEqualTo(expectedQuantity);
+
+    }
+
+    static Stream<Arguments> geoInlineData() {
+        return Stream.of(
+                Arguments.of(Latitude.class, "-15.111", Latitude.ofDegrees(-15.111)),
+                Arguments.of(Longitude.class, "-15.111", Longitude.ofDegrees(-15.111)),
+                Arguments.of(Latitude.class, "52°14'5.123\"N", Latitude.ofDegrees(52.23475638888889)),
+                Arguments.of(Latitude.class, "52deg 14min 5.123sec N", Latitude.ofDegrees(52.23475638888889)),
+                Arguments.of(Latitude.class, "52deg 14min 5.123sec S", Latitude.ofDegrees(-52.23475638888889)),
+                Arguments.of(Latitude.class, "52°14'5.123\"", Latitude.ofDegrees(52.23475638888889)),
+                Arguments.of(Latitude.class, "52°14'", Latitude.ofDegrees(52.233333333333334)),
+                Arguments.of(Latitude.class, "52°", Latitude.ofDegrees(52.0)),
+                Arguments.of(Latitude.class, "52", Latitude.ofDegrees(52.0)),
+                Arguments.of(Latitude.class, "52 [deg]", Latitude.ofDegrees(52.0))
         );
     }
 

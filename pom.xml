@@ -54,9 +54,9 @@
         <junit-jupiter.version>5.10.1</junit-jupiter.version>
         <assertj-core.version>3.24.2</assertj-core.version>
         <!-- Framework versions -->
-        <jackson-databind.version>2.16.0</jackson-databind.version>
-        <spring-boot-starter-web.version>3.2.0</spring-boot-starter-web.version>
-        <quarkus-version>3.6.1</quarkus-version>
+        <jackson-databind.version>2.16.1</jackson-databind.version>
+        <spring-boot-starter-web.version>3.2.1</spring-boot-starter-web.version>
+        <quarkus-version>3.6.4</quarkus-version>
         <jandex-maven-plugin.version>3.1.6</jandex-maven-plugin.version>
         <!-- Plugin versions -->
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>

@@ -2,10 +2,15 @@ package com.synerset.unitility.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.unitility.unitsystem.basic.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.Temperature;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalConductivity;
-import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.jackson.modules.GeoQuantityJacksonModule;
+import com.synerset.unitility.jackson.modules.PhysicalQuantityJacksonModule;
+import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
+import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.geographic.Latitude;
+import com.synerset.unitility.unitsystem.geographic.Longitude;
+import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
+import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivity;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -69,6 +74,77 @@ class PhysicalQuantityJacksonDeserializerTest {
         Temperature expetedTemperature = Temperature.ofCelsius(20.123);
         assertThat(actualTemp1).isEqualTo(expetedTemperature);
         assertThat(actualTemp2).isEqualTo(expetedTemperature);
-        }
+    }
+
+    @Test
+    void deserialize_shouldDeserializeJsonToLatitudeAndLongitude() throws JsonProcessingException {
+        // Given
+        GeoQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new GeoQuantityJacksonModule(parsingFactory));
+
+        String lat1 = "{\"value\":\"52°14'5.123\\\"N\"}";
+        String lon1 = "{\"value\":\"21°4'3.986\\\"W\"}";
+        String lat2 = "{\"value\":\" 52o 14min 5.123sec N\"}";
+        String lon2 = "{\"value\":\"21deg 4' 3.986\\\"   w\"}";
+        String lat3 = "{\"value\":\"52°14'5.123\\\"N\"}";
+        String lon3 = "{\"value\":\"-21°4'3.986\\\"\"}";
+        String lat4 = "{\"value\":\"52°14'N\"}";
+        String lon4 = "{\"value\":\"21°4'W\"}";
+        String lat5 = "{\"value\":\"52°N\"}";
+        String lon5 = "{\"value\":\"21°4'W\"}";
+        String lat6 = "{\"value\":\"52deg N\"}";
+        String lon6 = "{\"value\":\"21o 4'W\"}";
+
+        String lat7 = "{\"value\":-21.222}";
+        String lon7 = "{\"value\":-21.222}";
+
+        String lat8 = "{\"value\":\"-21.222 [deg]\"}";
+        String lon8 = "{\"value\":\"-21.222 [o]\"}";
+
+        // When
+        Latitude actualLat1 = objectMapper.readValue(lat1, Latitude.class);
+        Longitude actualLon1 = objectMapper.readValue(lon1, Longitude.class);
+
+        Latitude actualLat2 = objectMapper.readValue(lat2, Latitude.class);
+        Longitude actualLon2 = objectMapper.readValue(lon2, Longitude.class);
+
+        Latitude actualLat3 = objectMapper.readValue(lat3, Latitude.class);
+        Longitude actualLon3 = objectMapper.readValue(lon3, Longitude.class);
+
+        Latitude actualLat4 = objectMapper.readValue(lat4, Latitude.class);
+        Longitude actualLon4 = objectMapper.readValue(lon4, Longitude.class);
+
+        Latitude actualLat5 = objectMapper.readValue(lat5, Latitude.class);
+        Longitude actualLon5 = objectMapper.readValue(lon5, Longitude.class);
+
+        Latitude actualLat6 = objectMapper.readValue(lat6, Latitude.class);
+        Longitude actualLon6 = objectMapper.readValue(lon6, Longitude.class);
+
+        Latitude actualLat7 = objectMapper.readValue(lat7, Latitude.class);
+        Longitude actualLon7 = objectMapper.readValue(lon7, Longitude.class);
+
+        Latitude actualLat8 = objectMapper.readValue(lat8, Latitude.class);
+        Longitude actualLon8 = objectMapper.readValue(lon8, Longitude.class);
+
+        // Then
+        assertThat(actualLat1).isEqualTo(Latitude.ofDegrees(52.23475638888889));
+        assertThat(actualLon1).isEqualTo(Longitude.ofDegrees(-21.06777388888889));
+        assertThat(actualLat2).isEqualTo(Latitude.ofDegrees(52.23475638888889));
+        assertThat(actualLon2).isEqualTo(Longitude.ofDegrees(-21.06777388888889));
+        assertThat(actualLat3).isEqualTo(Latitude.ofDegrees(52.23475638888889));
+        assertThat(actualLon3).isEqualTo(Longitude.ofDegrees(-21.06777388888889));
+        assertThat(actualLat4).isEqualTo(Latitude.ofDegrees(52.233333333333334));
+        assertThat(actualLon4).isEqualTo(Longitude.ofDegrees(-21.066666666666666));
+        assertThat(actualLat5).isEqualTo(Latitude.ofDegrees(52.0));
+        assertThat(actualLon5).isEqualTo(Longitude.ofDegrees(-21.066666666666666));
+        assertThat(actualLat6).isEqualTo(Latitude.ofDegrees(52.0));
+        assertThat(actualLon6).isEqualTo(Longitude.ofDegrees(-21.066666666666666));
+        assertThat(actualLat7).isEqualTo(Latitude.ofDegrees(-21.222));
+        assertThat(actualLon7).isEqualTo(Longitude.ofDegrees(-21.222));
+        assertThat(actualLat8).isEqualTo(Latitude.ofDegrees(-21.222));
+        assertThat(actualLon8).isEqualTo(Longitude.ofDegrees(-21.222));
+
+    }
 
 }

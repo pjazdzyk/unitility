@@ -1,6 +1,7 @@
 package com.synerset.unitility.unitsystem;
 
-import com.synerset.unitility.unitsystem.basic.common.Angle;
+import com.synerset.unitility.unitsystem.common.Angle;
+import com.synerset.unitility.unitsystem.customunits.CustomAngleUnits;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -10,7 +11,7 @@ class CustomAngleUnitTest {
     @Test
     void shouldConvertUsingCustomUnit() {
         // Given
-        Angle angleInCustomUnit = Angle.of(1, CustomAngles.REVOLUTIONS);
+        Angle angleInCustomUnit = Angle.of(1, CustomAngleUnits.REVOLUTIONS);
 
         // When
         Angle actualAngleDegrees = angleInCustomUnit.toBaseUnit();
@@ -18,7 +19,7 @@ class CustomAngleUnitTest {
 
         // Then
         assertThat(actualAngleDegrees).isEqualTo(Angle.ofDegrees(360));
-        assertThat(actualCustomAngle).isEqualTo(Angle.of(2, CustomAngles.REVOLUTIONS));
+        assertThat(actualCustomAngle).isEqualTo(Angle.of(2, CustomAngleUnits.REVOLUTIONS));
     }
 
 }
