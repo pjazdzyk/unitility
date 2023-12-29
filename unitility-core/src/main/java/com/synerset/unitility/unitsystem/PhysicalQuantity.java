@@ -81,7 +81,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is greater than the given quantity, false otherwise.
      */
-    default boolean greaterThan(PhysicalQuantity<U> quantity) {
+    default boolean isGreaterThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -111,7 +111,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is lower than the given quantity, false otherwise.
      */
-    default boolean lowerThan(PhysicalQuantity<U> quantity) {
+    default boolean isLowerThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -164,7 +164,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is greater than zero, false otherwise.
      */
-    default boolean positive() {
+    default boolean isPositive() {
         return getValue() > 0;
     }
 
@@ -173,7 +173,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is greater than or equal to zero, false otherwise.
      */
-    default boolean positiveOrZero() {
+    default boolean isPositiveOrZero() {
         return getValue() >= 0;
     }
 
@@ -182,7 +182,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is less than zero, false otherwise.
      */
-    default boolean negative() {
+    default boolean isNegative() {
         return getValue() < 0;
     }
 
@@ -191,7 +191,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is less than or equal to zero, false otherwise.
      */
-    default boolean negativeOrZero() {
+    default boolean isNegativeOrZero() {
         return getValue() <= 0;
     }
 
@@ -285,32 +285,6 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     }
 
     /**
-     * Multiply the physical quantity by a constant value.
-     * Added for Kotlin, to use overloaded operator: *
-     *
-     * @param value The value to multiply by.
-     * @return A new physical quantity with the multiplied value.
-     */
-    default <Q extends PhysicalQuantity<U>> Q times(double value) {
-        return multiply(value);
-    }
-
-    /**
-     * Divide the physical quantity by a constant value.
-     *
-     * @param value The value to divide by.
-     * @return A new physical quantity with the divided value.
-     * @throws UnitSystemArgumentException If the divider value is zero.
-     */
-    default <Q extends PhysicalQuantity<U>> Q div(double value) {
-        if (value == 0) {
-            throw new UnitSystemArgumentException("Division by zero is not allowed. Please provide a non-zero divider value.");
-        }
-        double newValue = getValue() / value;
-        return withValue(newValue);
-    }
-
-    /**
      * Multiply this physical quantity's value by another physical quantity's value.
      *
      * @param inputQuantity The other physical quantity for multiplication.
@@ -321,6 +295,63 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
             return getValue();
         }
         return this.getValue() * inputQuantity.getValue();
+    }
+
+    /**
+     * Divide the physical quantity by a constant value.
+     *
+     * @param value The value to divide by.
+     * @return A new physical quantity with the divided value.
+     * @throws UnitSystemArgumentException If the divider value is zero.
+     */
+    default <Q extends PhysicalQuantity<U>> Q divide(double value) {
+        if (value == 0) {
+            throw new UnitSystemArgumentException("Division by zero is not allowed. Please provide a non-zero divider value.");
+        }
+        double newValue = getValue() / value;
+        return withValue(newValue);
+    }
+
+    /**
+     * Divide this physical quantity's value by another physical quantity's value.
+     *
+     * @param inputQuantity The other physical quantity for division.
+     * @return The result of dividing this quantity's value by the other quantity's value.
+     * @throws UnitSystemArgumentException If this quantity's value is zero.
+     */
+    default double divide(PhysicalQuantity<? extends Unit> inputQuantity) {
+        if (inputQuantity == null) {
+            return getValue();
+        }
+        double thisValue = getValue();
+        if (thisValue == 0) {
+            throw new UnitSystemArgumentException("Divider quantity value cannot be zero.");
+        }
+        return thisValue / inputQuantity.getValue();
+    }
+
+    /**
+     * Divide the physical quantity by a constant value.
+     * Added for Kotlin, to use overloaded operator: /
+     *
+     * @param value The value to divide by.
+     * @return A new physical quantity with the divided value.
+     * @throws UnitSystemArgumentException If the divider value is zero.
+     */
+    default <Q extends PhysicalQuantity<U>> Q div(double value) {
+        return divide(value);
+    }
+
+    /**
+     * Divide this physical quantity's value by another physical quantity's value.
+     * Added for Kotlin, to use overloaded operator: /
+     *
+     * @param inputQuantity The other physical quantity for division.
+     * @return The result of dividing this quantity's value by the other quantity's value.
+     * @throws UnitSystemArgumentException If this quantity's value is zero.
+     */
+    default double div(PhysicalQuantity<? extends Unit> inputQuantity) {
+        return divide(inputQuantity);
     }
 
     /**
@@ -335,21 +366,14 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
     }
 
     /**
-     * Divide this physical quantity's value by another physical quantity's value.
+     * Multiply the physical quantity by a constant value.
+     * Added for Kotlin, to use overloaded operator: *
      *
-     * @param inputQuantity The other physical quantity for division.
-     * @return The result of dividing this quantity's value by the other quantity's value.
-     * @throws UnitSystemArgumentException If this quantity's value is zero.
+     * @param value The value to multiply by.
+     * @return A new physical quantity with the multiplied value.
      */
-    default double div(PhysicalQuantity<? extends Unit> inputQuantity) {
-        if (inputQuantity == null) {
-            return getValue();
-        }
-        double thisValue = getValue();
-        if (thisValue == 0) {
-            throw new UnitSystemArgumentException("Divider quantity value cannot be zero.");
-        }
-        return thisValue / inputQuantity.getValue();
+    default <Q extends PhysicalQuantity<U>> Q times(double value) {
+        return multiply(value);
     }
 
     // Formatters for console output

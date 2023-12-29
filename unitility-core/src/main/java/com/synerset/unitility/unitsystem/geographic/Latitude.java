@@ -1,0 +1,134 @@
+package com.synerset.unitility.unitsystem.geographic;
+
+import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.common.AngleUnit;
+import com.synerset.unitility.unitsystem.common.AngleUnits;
+
+import java.util.Objects;
+
+/**
+ * Represents a latitude coordinate on any celestial spherical body, measured in degrees, with optional output
+ * to DMS format (degrees minutes and seconds).
+ * Latitude max/min values are not enforced here, for flexibility.
+ */
+public class Latitude implements PhysicalQuantity<AngleUnit> {
+
+    public static final Latitude MIN_EARTH_LATITUDE = Latitude.ofDegrees(-90);
+    public static final Latitude MAX_EARTH_LATITUDE = Latitude.ofDegrees(90);
+    private final double value;
+    private final double baseValue;
+    private final AngleUnit unitType;
+
+    public Latitude(double value, AngleUnit unitType) {
+        this.value = value;
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
+    }
+
+    // Static factory methods
+    public static Latitude of(double value, AngleUnit unit) {
+        return new Latitude(value, unit);
+    }
+
+    public static Latitude of(double value, String unitSymbol) {
+        AngleUnit resolvedUnit = AngleUnits.fromSymbol(unitSymbol);
+        return new Latitude(value, resolvedUnit);
+    }
+
+    public static Latitude ofRadians(double value) {
+        return new Latitude(value, AngleUnits.RADIANS);
+    }
+
+    public static Latitude ofDegrees(double value) {
+        return new Latitude(value, AngleUnits.DEGREES);
+    }
+
+    @Override
+    public double getValue() {
+        return value;
+    }
+
+    @Override
+    public double getBaseValue() {
+        return baseValue;
+    }
+
+    @Override
+    public AngleUnit getUnitType() {
+        return unitType;
+    }
+
+    @Override
+    public Latitude toBaseUnit() {
+        double degrees = unitType.toValueInBaseUnit(value);
+        return Latitude.of(degrees, AngleUnits.DEGREES);
+    }
+
+    @Override
+    public Latitude toUnit(AngleUnit targetUnit) {
+        double valueInDegrees = unitType.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInDegrees);
+        return Latitude.of(valueInTargetUnit, targetUnit);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Latitude withValue(double value) {
+        return Latitude.of(value, unitType);
+    }
+
+    // Convert to target unit
+    public Latitude toRadians() {
+        return toUnit(AngleUnits.RADIANS);
+    }
+
+    public Latitude toDegrees() {
+        return toUnit(AngleUnits.DEGREES);
+    }
+
+    // Get value in target unit
+    public double getInRadians() {
+        return getInUnit(AngleUnits.RADIANS);
+    }
+
+    public double getInDegrees() {
+        return getInUnit(AngleUnits.DEGREES);
+    }
+
+    // Console output in DMS (degrees, minutes, seconds) format
+    public String toDMSFormat() {
+        return DMSValueFormatter.latitudeToDmsFormat(this, -1);
+    }
+
+    public String toDMSFormat(String variableName) {
+        return variableName + " = " + toDMSFormat();
+    }
+
+    public String toDMSFormat(int relevantDigits) {
+        return DMSValueFormatter.latitudeToDmsFormat(this, relevantDigits);
+    }
+
+    public String toDMSFormat(String variableName, int relevantDigits) {
+        return variableName + " = " + toDMSFormat(relevantDigits);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Latitude inputQuantity = (Latitude) o;
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(baseValue, unitType.getBaseUnit());
+    }
+
+    @Override
+    public String toString() {
+        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
+        return "Latitude{" + value + separator + unitType.getSymbol() + '}';
+    }
+
+}

@@ -1,11 +1,12 @@
 package com.synerset.unitility.unitsystem.parsers;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.basic.common.DistanceUnit;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.Temperature;
+import com.synerset.unitility.unitsystem.common.DistanceUnit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ class PhysicalQuantityParsingFactoryTest {
         // Given
         // When
         PhysicalQuantityParsingFactory parsingRegistry = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
-        Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> registryMap = parsingRegistry.getRegistryMap();
+        Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> registryMap = parsingRegistry.getClassRegistry();
         Set<Class<PhysicalQuantity<Unit>>> registeredClasses = parsingRegistry.findAllRegisteredClasses();
         boolean status = parsingRegistry.containsClass(Temperature.class);
 

@@ -1,9 +1,11 @@
 package com.synerset.unitility.quarkus;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.unitility.jackson.PhysicalQuantityJacksonModule;
+import com.synerset.unitility.jackson.modules.GeoQuantityJacksonModule;
+import com.synerset.unitility.jackson.modules.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.parsers.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
 import io.quarkus.jackson.ObjectMapperCustomizer;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -15,11 +17,14 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
 
-    private final PhysicalQuantityParsingFactory parsingRegistry;
+    private final PhysicalQuantityParsingFactory parsingFactory;
+    private final GeoQuantityParsingFactory geoParsingFactory;
 
-    public PhysicalQuantityObjectMapperCustomizer(PhysicalQuantityParsingFactory parsingRegistry) {
+    public PhysicalQuantityObjectMapperCustomizer(@DefaultParsingFactory PhysicalQuantityParsingFactory parsingFactory,
+                                                  @GeoParsingFactory GeoQuantityParsingFactory geoParsingFactory) {
 
-        this.parsingRegistry = parsingRegistry;
+        this.parsingFactory = parsingFactory;
+        this.geoParsingFactory = geoParsingFactory;
     }
 
     /**
@@ -32,7 +37,8 @@ class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
      */
     @Override
     public void customize(ObjectMapper objectMapper) {
-        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingRegistry));
+        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
+        objectMapper.registerModule(new GeoQuantityJacksonModule(geoParsingFactory));
     }
 
 }

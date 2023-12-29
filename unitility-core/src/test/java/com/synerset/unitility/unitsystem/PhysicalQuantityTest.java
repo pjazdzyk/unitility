@@ -1,12 +1,12 @@
 package com.synerset.unitility.unitsystem;
 
-import com.synerset.unitility.unitsystem.basic.common.Distance;
-import com.synerset.unitility.unitsystem.basic.common.DistanceUnits;
-import com.synerset.unitility.unitsystem.basic.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.Pressure;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.Temperature;
-import com.synerset.unitility.unitsystem.basic.thermodynamic.ThermalDiffusivity;
+import com.synerset.unitility.unitsystem.common.Distance;
+import com.synerset.unitility.unitsystem.common.DistanceUnits;
+import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
+import com.synerset.unitility.unitsystem.thermodynamic.Pressure;
+import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
+import com.synerset.unitility.unitsystem.thermodynamic.ThermalDiffusivity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,11 +40,11 @@ class PhysicalQuantityTest {
         Temperature greaterOrEqualTemp = Temperature.ofCelsius(0.0);
 
         // When
-        boolean firstIsSmaller = smallerTemp.lowerThan(greaterTemp);
-        boolean secondIsGreater = greaterTemp.greaterThan(smallerTemp);
+        boolean firstIsSmaller = smallerTemp.isLowerThan(greaterTemp);
+        boolean secondIsGreater = greaterTemp.isGreaterThan(smallerTemp);
         boolean firstIsEqualOrLower = smallerTemp.equalsOrLowerThan(smallerOrEqualTemp);
         boolean secondIsEqualOrGreater = greaterTemp.equalsOrGreaterThan(greaterOrEqualTemp);
-        boolean bothAreTheSame = greaterTemp.greaterThan(greaterTemp);
+        boolean bothAreTheSame = greaterTemp.isGreaterThan(greaterTemp);
 
         // Then
         assertThat(firstIsSmaller).isTrue();
@@ -65,23 +65,23 @@ class PhysicalQuantityTest {
         // When
 
         // Then
-        assertThat(negativeTemp.negative()).isTrue();
-        assertThat(negativeTemp.negativeOrZero()).isTrue();
+        assertThat(negativeTemp.isNegative()).isTrue();
+        assertThat(negativeTemp.isNegativeOrZero()).isTrue();
         assertThat(negativeTemp.equalsZero()).isFalse();
-        assertThat(negativeTemp.positive()).isFalse();
-        assertThat(negativeTemp.positiveOrZero()).isFalse();
+        assertThat(negativeTemp.isPositive()).isFalse();
+        assertThat(negativeTemp.isPositiveOrZero()).isFalse();
 
-        assertThat(zeroTemp.negative()).isFalse();
-        assertThat(zeroTemp.negativeOrZero()).isTrue();
+        assertThat(zeroTemp.isNegative()).isFalse();
+        assertThat(zeroTemp.isNegativeOrZero()).isTrue();
         assertThat(zeroTemp.equalsZero()).isTrue();
-        assertThat(zeroTemp.positive()).isFalse();
-        assertThat(zeroTemp.positiveOrZero()).isTrue();
+        assertThat(zeroTemp.isPositive()).isFalse();
+        assertThat(zeroTemp.isPositiveOrZero()).isTrue();
 
-        assertThat(positiveTemp.negative()).isFalse();
-        assertThat(positiveTemp.negativeOrZero()).isFalse();
+        assertThat(positiveTemp.isNegative()).isFalse();
+        assertThat(positiveTemp.isNegativeOrZero()).isFalse();
         assertThat(positiveTemp.equalsZero()).isFalse();
-        assertThat(positiveTemp.positive()).isTrue();
-        assertThat(positiveTemp.positiveOrZero()).isTrue();
+        assertThat(positiveTemp.isPositive()).isTrue();
+        assertThat(positiveTemp.isPositiveOrZero()).isTrue();
 
     }
 
