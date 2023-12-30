@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Energy implements PhysicalQuantity<EnergyUnit> {
+public class Energy implements CalculableQuantity<EnergyUnit, Energy> {
 
     private final double value;
     private final double baseValue;
@@ -91,7 +91,6 @@ public class Energy implements PhysicalQuantity<EnergyUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Energy withValue(double value) {
         return Energy.of(value, unitType);
     }

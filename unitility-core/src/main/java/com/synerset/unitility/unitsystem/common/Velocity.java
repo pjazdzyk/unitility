@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Velocity implements PhysicalQuantity<VelocityUnit> {
+public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
 
     private final double value;
     private final double baseValue;
@@ -87,7 +87,6 @@ public class Velocity implements PhysicalQuantity<VelocityUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Velocity withValue(double value) {
         return Velocity.of(value, unitType);
     }

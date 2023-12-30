@@ -1,6 +1,6 @@
 package com.synerset.unitility.unitsystem.geographic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.common.DistanceUnit;
@@ -13,7 +13,7 @@ import java.util.Objects;
  * the Earth. The calculation includes the start coordinate, target coordinate, true bearing, and distance in specified
  * units, utilizing the Haversine equations as a calculation basis.
  */
-public class GeoDistance implements PhysicalQuantity<DistanceUnit> {
+public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance> {
     private final DistanceUnit unitType;
     private final GeoCoordinate startCoordinate;
     private final GeoCoordinate targetCoordinate;
@@ -145,7 +145,6 @@ public class GeoDistance implements PhysicalQuantity<DistanceUnit> {
      * @return A new {@link GeoDistance} instance representing the progressed distance.
      */
     @Override
-    @SuppressWarnings("unchecked")
     public GeoDistance withValue(double distanceValue) {
         return with(Distance.of(distanceValue, unitType));
     }

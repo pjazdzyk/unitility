@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Volume implements PhysicalQuantity<VolumeUnit> {
+public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
     public static final Volume PHYSICAL_MIN_LIMIT = Volume.ofCubicMeters(0);
     private final double value;
     private final double baseValue;
@@ -87,7 +87,6 @@ public class Volume implements PhysicalQuantity<VolumeUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Volume withValue(double value) {
         return Volume.of(value, unitType);
     }

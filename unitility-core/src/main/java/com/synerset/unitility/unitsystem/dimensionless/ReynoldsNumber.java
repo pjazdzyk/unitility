@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnit> {
+public class ReynoldsNumber implements CalculableQuantity<ReynoldsNumberUnit, ReynoldsNumber> {
 
     public static final ReynoldsNumber PIPE_TURBULENT_THRESHOLD = ReynoldsNumber.of(2300);
     public static final ReynoldsNumber PLATE_TURBULENT_THRESHOLD = ReynoldsNumber.of(5 * 10E5);
@@ -50,7 +50,6 @@ public class ReynoldsNumber implements PhysicalQuantity<ReynoldsNumberUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public ReynoldsNumber withValue(double value) {
         return ReynoldsNumber.of(value);
     }

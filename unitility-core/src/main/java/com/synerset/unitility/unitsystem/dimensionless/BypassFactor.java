@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class BypassFactor implements PhysicalQuantity<BypassFactorUnit> {
+public class BypassFactor implements CalculableQuantity<BypassFactorUnit, BypassFactor> {
 
     public static final BypassFactor BYPASS_MIN_VALUE = BypassFactor.of(0);
     public static final BypassFactor BYPASS_MAX_VALUE = BypassFactor.of(1);
@@ -50,7 +50,6 @@ public class BypassFactor implements PhysicalQuantity<BypassFactorUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public BypassFactor withValue(double value) {
         return BypassFactor.of(value);
     }

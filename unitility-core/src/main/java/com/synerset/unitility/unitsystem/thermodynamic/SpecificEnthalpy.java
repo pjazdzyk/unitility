@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnit> {
+public class SpecificEnthalpy implements CalculableQuantity<SpecificEnthalpyUnit, SpecificEnthalpy> {
     private final double value;
     private final double baseValue;
     private final SpecificEnthalpyUnit unitType;
@@ -66,7 +66,6 @@ public class SpecificEnthalpy implements PhysicalQuantity<SpecificEnthalpyUnit> 
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public SpecificEnthalpy withValue(double value) {
         return SpecificEnthalpy.of(value, unitType);
     }

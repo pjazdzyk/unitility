@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.humidity;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnit> {
+public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, HumidityRatio> {
 
     public static final HumidityRatio HUM_RATIO_MIN_LIMIT = HumidityRatio.ofKilogramPerKilogram(0);
     private final double value;
@@ -26,7 +26,7 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnit> {
         HumidityRatioUnit resolvedUnit = HumidityRatioUnits.fromSymbol(unitSymbol);
         return new HumidityRatio(value, resolvedUnit);
     }
-    
+
     public static HumidityRatio ofKilogramPerKilogram(double value) {
         return new HumidityRatio(value, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
     }
@@ -64,7 +64,6 @@ public class HumidityRatio implements PhysicalQuantity<HumidityRatioUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public HumidityRatio withValue(double value) {
         return HumidityRatio.of(value, unitType);
     }

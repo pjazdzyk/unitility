@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnit> {
+public class PrandtlNumber implements CalculableQuantity<PrandtlNumberUnit, PrandtlNumber> {
     private final double value;
     private final double baseValue;
     private final PrandtlNumberUnits unitType;
@@ -46,7 +46,6 @@ public class PrandtlNumber implements PhysicalQuantity<PrandtlNumberUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public PrandtlNumber withValue(double value) {
         return PrandtlNumber.of(value);
     }

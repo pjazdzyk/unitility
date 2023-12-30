@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.flows;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class MassFlow implements PhysicalQuantity<MassFlowUnit> {
+public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
 
     private final double value;
     private final double baseValue;
@@ -71,7 +71,6 @@ public class MassFlow implements PhysicalQuantity<MassFlowUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public MassFlow withValue(double value) {
         return MassFlow.of(value, unitType);
     }

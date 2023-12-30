@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.flows;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnit> {
+public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, VolumetricFlow> {
 
     private final double value;
     private final double baseValue;
@@ -25,7 +25,7 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnit> {
         VolumetricFlowUnit resolvedUnit = VolumetricFlowUnits.fromSymbol(unitSymbol);
         return new VolumetricFlow(value, resolvedUnit);
     }
-    
+
     public static VolumetricFlow ofCubicMetersPerSecond(double value) {
         return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
     }
@@ -91,7 +91,6 @@ public class VolumetricFlow implements PhysicalQuantity<VolumetricFlowUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public VolumetricFlow withValue(double value) {
         return VolumetricFlow.of(value, unitType);
     }

@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.humidity;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnit> {
+public class RelativeHumidity implements CalculableQuantity<RelativeHumidityUnit, RelativeHumidity> {
 
     public static final RelativeHumidity RH_MIN_LIMIT = RelativeHumidity.ofPercentage(0);
     public static final RelativeHumidity RH_MAX_LIMIT = RelativeHumidity.ofPercentage(100);
@@ -27,7 +27,7 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnit> 
         RelativeHumidityUnit resolvedUnit = RelativeHumidityUnits.fromSymbol(unitSymbol);
         return new RelativeHumidity(value, resolvedUnit);
     }
-    
+
     public static RelativeHumidity ofPercentage(double value) {
         return new RelativeHumidity(value, RelativeHumidityUnits.PERCENT);
     }
@@ -65,7 +65,6 @@ public class RelativeHumidity implements PhysicalQuantity<RelativeHumidityUnit> 
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public RelativeHumidity withValue(double value) {
         return RelativeHumidity.of(value, unitType);
     }

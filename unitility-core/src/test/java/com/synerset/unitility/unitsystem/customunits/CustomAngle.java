@@ -1,12 +1,12 @@
 package com.synerset.unitility.unitsystem.customunits;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 import com.synerset.unitility.unitsystem.common.AngleUnit;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
 
 import java.util.Objects;
 
-public class CustomAngle implements PhysicalQuantity<AngleUnit> {
+public class CustomAngle implements CalculableQuantity<AngleUnit, CustomAngle> {
 
     private final double value;
     private final double baseValue;
@@ -57,7 +57,6 @@ public class CustomAngle implements PhysicalQuantity<AngleUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public CustomAngle withValue(double value) {
         return CustomAngle.of(value, unitType);
     }

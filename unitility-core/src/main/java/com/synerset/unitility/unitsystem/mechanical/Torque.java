@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Torque implements PhysicalQuantity<TorqueUnit> {
+public class Torque implements CalculableQuantity<TorqueUnit, Torque> {
 
     public static final Torque PHYSICAL_MIN_LIMIT = Torque.ofNewtonMeters(0);
     private final double value;
@@ -26,7 +26,7 @@ public class Torque implements PhysicalQuantity<TorqueUnit> {
         TorqueUnit resolvedUnit = TorqueUnits.fromSymbol(unitSymbol);
         return new Torque(value, resolvedUnit);
     }
-    
+
     public static Torque ofNewtonMeters(double value) {
         return new Torque(value, TorqueUnits.NEWTON_METER);
     }
@@ -76,7 +76,6 @@ public class Torque implements PhysicalQuantity<TorqueUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Torque withValue(double value) {
         return Torque.of(value, unitType);
     }

@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Distance implements PhysicalQuantity<DistanceUnit> {
+public class Distance implements CalculableQuantity<DistanceUnit, Distance> {
 
     public static final Distance PHYSICAL_MIN_LIMIT = Distance.ofMeters(0);
     private final double value;
@@ -88,7 +88,6 @@ public class Distance implements PhysicalQuantity<DistanceUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Distance withValue(double value) {
         return Distance.of(value, unitType);
     }

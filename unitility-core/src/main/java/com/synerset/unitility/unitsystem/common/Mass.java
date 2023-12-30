@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Mass implements PhysicalQuantity<MassUnit> {
+public class Mass implements CalculableQuantity<MassUnit, Mass> {
 
     public static final Mass PHYSICAL_MIN_LIMIT = Mass.ofKilograms(0);
     private final double value;
@@ -80,7 +80,6 @@ public class Mass implements PhysicalQuantity<MassUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Mass withValue(double value) {
         return Mass.of(value, unitType);
     }

@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class ThermalConductivity implements PhysicalQuantity<ThermalConductivityUnit> {
+public class ThermalConductivity implements CalculableQuantity<ThermalConductivityUnit, ThermalConductivity> {
     private final double value;
     private final double baseValue;
     private final ThermalConductivityUnit unitType;
@@ -24,7 +24,7 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
         ThermalConductivityUnit resolvedUnit = ThermalConductivityUnits.fromSymbol(unitSymbol);
         return new ThermalConductivity(value, resolvedUnit);
     }
-    
+
     public static ThermalConductivity ofWattsPerMeterKelvin(double value) {
         return new ThermalConductivity(value, ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
     }
@@ -66,7 +66,6 @@ public class ThermalConductivity implements PhysicalQuantity<ThermalConductivity
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public ThermalConductivity withValue(double value) {
         return ThermalConductivity.of(value, unitType);
     }

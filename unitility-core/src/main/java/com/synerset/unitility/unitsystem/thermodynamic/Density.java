@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Density implements PhysicalQuantity<DensityUnit> {
+public class Density implements CalculableQuantity<DensityUnit, Density> {
 
     public static final Density PHYSICAL_MIN_LIMIT = Density.ofKilogramPerCubicMeter(0);
     private final double value;
@@ -64,7 +64,6 @@ public class Density implements PhysicalQuantity<DensityUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Density withValue(double value) {
         return Density.of(value, unitType);
     }
