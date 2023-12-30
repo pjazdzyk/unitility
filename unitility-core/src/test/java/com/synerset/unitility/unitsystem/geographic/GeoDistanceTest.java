@@ -291,4 +291,32 @@ class GeoDistanceTest {
                 .isEqualTo(-171, withPrecision(0.01));
     }
 
+    @Test
+    @DisplayName("should handle arithmetic operations with units of the same family")
+    void geoDistance_shouldHandleArithmeticOperationsWithUnitsOfTheSameFamily() {
+        // Given
+        GeoCoordinate wroclaw = GeoCoordinate.of(
+                Latitude.ofDegrees(51.102772),
+                Longitude.ofDegrees(16.885802),
+                "Wroclaw");
+        GeoCoordinate newYork = GeoCoordinate.of(
+                Latitude.ofDegrees(40.712671),
+                Longitude.ofDegrees(-74.004655),
+                "NewYork");
+
+        GeoDistance geoDistanceA = GeoDistance.ofKilometers(wroclaw, newYork);
+        GeoDistance geoDistanceB = geoDistanceA.translate(Distance.ofKilometers(5000));
+
+        Distance basicDistance = Distance.ofKilometers(1000);
+
+        // When
+        GeoDistance increasedDistance = geoDistanceA.plus(geoDistanceB);
+        GeoDistance evenMoreIncreasedDistance = increasedDistance.plus(basicDistance);
+
+        // Then
+        assertThat(geoDistanceA.getDistance()).isEqualTo(Distance.ofKilometers(6669.896095258197));
+        assertThat(increasedDistance.getDistance()).isEqualTo(Distance.ofKilometers(5000 + 6669.896095258197));
+        assertThat(evenMoreIncreasedDistance.getDistance()).isEqualTo(Distance.ofKilometers(5000 + 1000 + 6669.896095258197));
+    }
+
 }

@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Force implements PhysicalQuantity<ForceUnit> {
+public class Force implements CalculableQuantity<ForceUnit, Force> {
 
     private final double value;
     private final double baseValue;
@@ -25,7 +25,7 @@ public class Force implements PhysicalQuantity<ForceUnit> {
         ForceUnit resolvedUnit = ForceUnits.fromSymbol(unitSymbol);
         return new Force(value, resolvedUnit);
     }
-    
+
     public static Force ofNewtons(double value) {
         return new Force(value, ForceUnits.NEWTON);
     }
@@ -79,7 +79,6 @@ public class Force implements PhysicalQuantity<ForceUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Force withValue(double value) {
         return Force.of(value, unitType);
     }

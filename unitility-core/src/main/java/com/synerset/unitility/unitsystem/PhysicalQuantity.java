@@ -1,13 +1,15 @@
 package com.synerset.unitility.unitsystem;
 
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import com.synerset.unitility.unitsystem.utils.ValueFormatter;
 
 import java.util.Objects;
 
+/**
+ * Interface representing a physical quantity with a specific {@link Unit}.
+ *
+ * @param <U> The type of {@link Unit} associated with the physical quantity.
+ */
 public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQuantity<U>> {
-
-    int DEFAULT_RELEVANT_DIGITS = 4;
 
     /**
      * Get the value of the physical quantity.
@@ -44,14 +46,6 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A new physical quantity converted to the target unit.
      */
     PhysicalQuantity<U> toUnit(U targetUnit);
-
-    /**
-     * Create a new physical quantity with new value of the same unit.
-     *
-     * @param value The value for the new physical quantity.
-     * @return A new physical quantity with the specified value.
-     */
-    <Q extends PhysicalQuantity<U>> Q withValue(double value);
 
     /**
      * Get the symbol of the unit associated with the physical quantity.
@@ -202,178 +196,6 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     default boolean equalsZero() {
         return getValue() == 0;
-    }
-
-    // Transformations
-
-    /**
-     * Add a constant value to the physical quantity.
-     * Value is added to the value of quantity current unit.
-     *
-     * @param value The value to add.
-     * @return A new physical quantity with the added value.
-     */
-    default <Q extends PhysicalQuantity<U>> Q plus(double value) {
-        double newValue = getValue() + value;
-        return withValue(newValue);
-    }
-
-    /**
-     * Add another physical quantity to this quantity after converting it to the source unit.
-     *
-     * @param inputQuantity The other physical quantity to add.
-     * @return A new physical quantity with the added value.
-     */
-    default <Q extends PhysicalQuantity<U>> Q plus(Q inputQuantity) {
-        if (inputQuantity == null) {
-            return withValue(getValue());
-        }
-        U sourceUnit = this.getUnitType();
-        PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
-        double newValue = this.getValue() + inputInSourceUnits.getValue();
-        return withValue(newValue);
-    }
-
-    /**
-     * Subtract a constant value from the physical quantity.
-     *
-     * @param value The value to subtract.
-     * @return A new physical quantity with the subtracted value.
-     */
-    default <Q extends PhysicalQuantity<U>> Q minus(double value) {
-        double newValue = getValue() - value;
-        return withValue(newValue);
-    }
-
-    /**
-     * Subtract another physical quantity from this quantity after converting it to the source unit.
-     *
-     * @param inputQuantity The other physical quantity to subtract.
-     * @return A new physical quantity with the subtracted value.
-     */
-    default <Q extends PhysicalQuantity<U>> Q minus(Q inputQuantity) {
-        if (inputQuantity == null) {
-            return withValue(getValue());
-        }
-        U sourceUnit = this.getUnitType();
-        PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
-        double newValue = this.getValue() - inputInSourceUnits.getValue();
-        return withValue(newValue);
-    }
-
-    /**
-     * Subtract this physical quantity's value from a constant value.
-     * Useful for cases (1 - PhysicalQuantityValue).
-     *
-     * @param value The value from which to subtract.
-     * @return A new physical quantity with the subtracted value.
-     */
-    default <Q extends PhysicalQuantity<U>> Q minusFromValue(double value) {
-        double newValue = value - this.getValue();
-        return withValue(newValue);
-    }
-
-    /**
-     * Multiply the physical quantity by a constant value.
-     *
-     * @param value The value to multiply by.
-     * @return A new physical quantity with the multiplied value.
-     */
-    default <Q extends PhysicalQuantity<U>> Q multiply(double value) {
-        double newValue = getValue() * value;
-        return withValue(newValue);
-    }
-
-    /**
-     * Multiply this physical quantity's value by another physical quantity's value.
-     *
-     * @param inputQuantity The other physical quantity for multiplication.
-     * @return The result of multiplying the two physical quantities' values.
-     */
-    default double multiply(PhysicalQuantity<? extends Unit> inputQuantity) {
-        if (inputQuantity == null) {
-            return getValue();
-        }
-        return this.getValue() * inputQuantity.getValue();
-    }
-
-    /**
-     * Divide the physical quantity by a constant value.
-     *
-     * @param value The value to divide by.
-     * @return A new physical quantity with the divided value.
-     * @throws UnitSystemArgumentException If the divider value is zero.
-     */
-    default <Q extends PhysicalQuantity<U>> Q divide(double value) {
-        if (value == 0) {
-            throw new UnitSystemArgumentException("Division by zero is not allowed. Please provide a non-zero divider value.");
-        }
-        double newValue = getValue() / value;
-        return withValue(newValue);
-    }
-
-    /**
-     * Divide this physical quantity's value by another physical quantity's value.
-     *
-     * @param inputQuantity The other physical quantity for division.
-     * @return The result of dividing this quantity's value by the other quantity's value.
-     * @throws UnitSystemArgumentException If this quantity's value is zero.
-     */
-    default double divide(PhysicalQuantity<? extends Unit> inputQuantity) {
-        if (inputQuantity == null) {
-            return getValue();
-        }
-        double thisValue = getValue();
-        if (thisValue == 0) {
-            throw new UnitSystemArgumentException("Divider quantity value cannot be zero.");
-        }
-        return thisValue / inputQuantity.getValue();
-    }
-
-    /**
-     * Divide the physical quantity by a constant value.
-     * Added for Kotlin, to use overloaded operator: /
-     *
-     * @param value The value to divide by.
-     * @return A new physical quantity with the divided value.
-     * @throws UnitSystemArgumentException If the divider value is zero.
-     */
-    default <Q extends PhysicalQuantity<U>> Q div(double value) {
-        return divide(value);
-    }
-
-    /**
-     * Divide this physical quantity's value by another physical quantity's value.
-     * Added for Kotlin, to use overloaded operator: /
-     *
-     * @param inputQuantity The other physical quantity for division.
-     * @return The result of dividing this quantity's value by the other quantity's value.
-     * @throws UnitSystemArgumentException If this quantity's value is zero.
-     */
-    default double div(PhysicalQuantity<? extends Unit> inputQuantity) {
-        return divide(inputQuantity);
-    }
-
-    /**
-     * Multiply this physical quantity's value by another physical quantity's value.
-     * Added for Kotlin, to use overloaded operator: *
-     *
-     * @param inputQuantity The other physical quantity for multiplication.
-     * @return The result of multiplying the two physical quantities' values.
-     */
-    default double times(PhysicalQuantity<? extends Unit> inputQuantity) {
-        return multiply(inputQuantity);
-    }
-
-    /**
-     * Multiply the physical quantity by a constant value.
-     * Added for Kotlin, to use overloaded operator: *
-     *
-     * @param value The value to multiply by.
-     * @return A new physical quantity with the multiplied value.
-     */
-    default <Q extends PhysicalQuantity<U>> Q times(double value) {
-        return multiply(value);
     }
 
     // Formatters for console output

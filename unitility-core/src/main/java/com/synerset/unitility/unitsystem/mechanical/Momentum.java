@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.mechanical;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Momentum implements PhysicalQuantity<MomentumUnit> {
+public class Momentum implements CalculableQuantity<MomentumUnit, Momentum> {
 
     private final double value;
     private final double baseValue;
@@ -25,7 +25,7 @@ public class Momentum implements PhysicalQuantity<MomentumUnit> {
         MomentumUnit resolvedUnit = MomentumUnits.fromSymbol(unitSymbol);
         return new Momentum(value, resolvedUnit);
     }
-    
+
     public static Momentum ofKilogramMeterPerSecond(double value) {
         return new Momentum(value, MomentumUnits.KILOGRAM_METER_PER_SECOND);
     }
@@ -67,7 +67,6 @@ public class Momentum implements PhysicalQuantity<MomentumUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Momentum withValue(double value) {
         return Momentum.of(value, unitType);
     }

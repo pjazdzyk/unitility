@@ -656,29 +656,43 @@ def isEqual = t1 == t1          // true
 ```
 
 ### 7.2 Kotlin - using overloaded operators
-Usage in Kotlin is very similar, however, using overloaded operators will work only if both sides are instances
-of PhysicalQuantity. Adding PhysicalQuantity instance to a double does not seem to be supported in Kotlin. If you
-know how to resolve it, do not hesitate to contact me. Please find the below examples in Kotlin:
+Usage in Kotlin is analogous, please find the below some examples:
 ```kotlin
-// Temperature examples
+    // Temperature examples
 val t1 = Temperature.ofCelsius(20.0)
 val t2 = Temperature.ofCelsius(10.0)
 val t3 = Temperature.ofKelvins(303.15) // =30 oC
+
 // Adding & subtracting: The same unit
-val t4 = t1 + t2                // Temperature{30.0°C}
-val t5 = t1 - t2                // Temperature{10.0°C} 
-// Adding & subtracting: Different units of the same quantity,
-// resolving to a first addend unit type.
-val t7 = t1 + t3                // Temperature{50.0°C}
-val t8 = t1 - t3                // Temperature{-10.0°C}
+val t4 = t1 + t2
+val t5 = t1 - t2
+val t6 = t1 + 15.5
+println(t4) // Temperature{30.0°C}
+println(t5) // Temperature{10.0°C}
+println(t6) // Temperature{35.5°C}
+
+// Adding & subtracting: Different units of the same quantity, resolving to unit type of the first addend.
+val t7 = t1 + t3
+val t8 = t1 - t3
+println(t7) // Temperature{50.0°C}
+println(t8) // Temperature{-10.0°C}
+
 // Multiply
-val t9 = t1 * t2                // will resolve to double = 200.0
+val t9 = t1 * t2
+val t10 = t1 * 2.0
+println(t9) // will resolve to double = 200.0
+println(t10) // Temperature{40.0°C}
+
 // Divide
-val t11 = t1 / t2               // will resolve to double = 2.0
-// Logical
+val t11 = t1 / t2
+val t12 = t1 / 2.0
+println(t11) // will resolve to double = 2.0
+println(t12) // Temperature{10.0°C}
+
+// Logical operations
 val isGreater = t1 > t2         // true
-val isLower = t1 < t2           // false    
-val isGreaterOrEq = t1 >= t2    // true    
+val isLower = t1 < t2           // false
+val isGreaterOrEq = t1 >= t2    // true
 val isEqual = t1 == t1          // true
 ```
 
@@ -893,19 +907,19 @@ GeoCoordinate does not support arithmetic operations, as it is just a composite 
 It's important to note that the natural behavior is such that the result of arithmetic operations will be based on the with()
 progression. This means that the added value will maintain the starting point, adjust the distance, and recalculate the 
 target coordinate in the process. <br>
-However, it's essential to be aware that despite GeoDistance and Distance sharing the same Unit class, arithmetic 
-operations will not work if applied to different types. For example, the following will work (the distance value from 
-the addend will be added to the current augend distance, assuming the augend's travel bearing):
 
 ```java
-// GeoDistance + GeoDistance works fine
-GeoDistance sumOfBoth = geoDistanceInstance.plus(otherGeoDistance);
+// Sum of two GeoQuantities
+GeoCoordinate start = GeoCoordinate.of(Latitude.ofDegrees(51.1), Longitude.ofDegrees(16.9));
+GeoCoordinate target = GeoCoordinate.of(Latitude.ofDegrees(40.8), Longitude.ofDegrees(-74.1));
+
+GeoDistance firstGeoDistance = GeoDistance.ofKilometers(start, target);         // 6670.048729447209 km
+GeoDistance secondGeoDistance = firstGeoDistance.translate(Distance.ofKilometers(1000)); // 1000 km
+
+GeoDistance sumOfDistances = firstGeoDistance.plus(secondGeoDistance);          // 7670.048729447209 km and new target
+GeoDistance greaterDistance = sumOfDistances.plus(Distance.ofKilometers(1000)); // 8670.048729447209 km and new target
+GeoDistance evenGreaterDistance = greaterDistance.plus(1000);                   // 9670.048729447209 km and new target
 ```
-But this will **NOT** work and cause casting exception:
-```java
-Distance sumOfBoth = geoDistanceInstance.plus(Distance.ofKilometers(20));
-```
-This will be resolved in further releases.
 
 ## 9. COLLABORATION, ATTRIBUTION, AND CITATION
 
@@ -915,7 +929,7 @@ Feel free to contact me if yoy have any questions or comments.
 
 ---
 
-**If you would like me to add any specific units for your field of science, let me know!<br>**
+**If there are particular units relevant to your scientific field that you'd like me to include, please inform me.<br>**
 **I aim for this library to be helpful and simplify your life.**
 
 ---

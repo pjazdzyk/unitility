@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Area implements PhysicalQuantity<AreaUnit> {
+public class Area implements CalculableQuantity<AreaUnit, Area> {
 
     public static final Area PHYSICAL_MIN_LIMIT = Area.ofSquareMeters(0);
     private final double value;
@@ -100,7 +100,6 @@ public class Area implements PhysicalQuantity<AreaUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Area withValue(double value) {
         return Area.of(value, unitType);
     }

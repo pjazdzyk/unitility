@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnit> {
+public class SpecificHeat implements CalculableQuantity<SpecificHeatUnit, SpecificHeat> {
     private final double value;
     private final double baseValue;
     private final SpecificHeatUnit unitType;
@@ -24,7 +24,7 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnit> {
         SpecificHeatUnit resolvedUnit = SpecificHeatUnits.fromSymbol(unitSymbol);
         return new SpecificHeat(value, resolvedUnit);
     }
-    
+
     public static SpecificHeat ofJoulePerKiloGramKelvin(double value) {
         return new SpecificHeat(value, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
     }
@@ -66,7 +66,6 @@ public class SpecificHeat implements PhysicalQuantity<SpecificHeatUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public SpecificHeat withValue(double value) {
         return SpecificHeat.of(value, unitType);
     }

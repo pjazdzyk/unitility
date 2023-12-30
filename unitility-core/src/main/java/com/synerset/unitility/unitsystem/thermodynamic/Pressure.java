@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Pressure implements PhysicalQuantity<PressureUnit> {
+public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
 
     public static final Pressure STANDARD_ATMOSPHERE = Pressure.ofPascal(101_325);
     public static final Pressure TECHNICAL_ATMOSPHERE = Pressure.ofPascal(98_067);
@@ -27,7 +27,7 @@ public class Pressure implements PhysicalQuantity<PressureUnit> {
         PressureUnit resolvedUnit = PressureUnits.fromSymbol(unitSymbol);
         return new Pressure(value, resolvedUnit);
     }
-    
+
     public static Pressure ofPascal(double value) {
         return new Pressure(value, PressureUnits.PASCAL);
     }
@@ -85,7 +85,6 @@ public class Pressure implements PhysicalQuantity<PressureUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Pressure withValue(double value) {
         return Pressure.of(value, unitType);
     }

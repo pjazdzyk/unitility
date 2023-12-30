@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUnit> {
+public class ThermalDiffusivity implements CalculableQuantity<ThermalDiffusivityUnit, ThermalDiffusivity> {
 
     private final double value;
     private final double baseValue;
@@ -63,7 +63,6 @@ public class ThermalDiffusivity implements PhysicalQuantity<ThermalDiffusivityUn
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public ThermalDiffusivity withValue(double value) {
         return ThermalDiffusivity.of(value, unitType);
     }

@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnit> {
+public class DynamicViscosity implements CalculableQuantity<DynamicViscosityUnit, DynamicViscosity> {
 
     private final double value;
     private final double baseValue;
@@ -67,7 +67,6 @@ public class DynamicViscosity implements PhysicalQuantity<DynamicViscosityUnit> 
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public DynamicViscosity withValue(double value) {
         return DynamicViscosity.of(value, unitType);
     }

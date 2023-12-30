@@ -1,6 +1,6 @@
 package com.synerset.unitility.unitsystem.geographic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 import com.synerset.unitility.unitsystem.common.AngleUnit;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
  * to DMS format (degrees minutes and seconds).
  * Latitude max/min values are not enforced here, for flexibility.
  */
-public class Latitude implements PhysicalQuantity<AngleUnit> {
+public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
 
     public static final Latitude MIN_EARTH_LATITUDE = Latitude.ofDegrees(-90);
     public static final Latitude MAX_EARTH_LATITUDE = Latitude.ofDegrees(90);
@@ -72,7 +72,6 @@ public class Latitude implements PhysicalQuantity<AngleUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Latitude withValue(double value) {
         return Latitude.of(value, unitType);
     }

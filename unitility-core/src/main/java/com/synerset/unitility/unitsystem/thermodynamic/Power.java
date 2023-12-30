@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class Power implements PhysicalQuantity<PowerUnit> {
+public class Power implements CalculableQuantity<PowerUnit, Power> {
     private final double value;
     private final double baseValue;
     private final PowerUnit unitType;
@@ -24,7 +24,7 @@ public class Power implements PhysicalQuantity<PowerUnit> {
         PowerUnit resolvedUnit = PowerUnits.fromSymbol(unitSymbol);
         return new Power(value, resolvedUnit);
     }
-    
+
     public static Power ofWatts(double value) {
         return new Power(value, PowerUnits.WATT);
     }
@@ -74,7 +74,6 @@ public class Power implements PhysicalQuantity<PowerUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Power withValue(double value) {
         return Power.of(value, unitType);
     }

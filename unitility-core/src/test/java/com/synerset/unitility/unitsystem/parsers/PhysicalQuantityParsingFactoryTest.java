@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.parsers;
 
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.Unit;
@@ -63,7 +64,7 @@ class PhysicalQuantityParsingFactoryTest {
     /**
      * Test class, non-existent in parsing registry, created to test failure cases.
      */
-    static class TestClass implements PhysicalQuantity<DistanceUnit> {
+    static class TestClass implements CalculableQuantity<DistanceUnit, TestClass> {
 
         @Override
         public double getValue() {
@@ -90,8 +91,9 @@ class PhysicalQuantityParsingFactoryTest {
             return null;
         }
 
+
         @Override
-        public <Q extends PhysicalQuantity<DistanceUnit>> Q withValue(double value) {
+        public TestClass withValue(double value) {
             return null;
         }
     }

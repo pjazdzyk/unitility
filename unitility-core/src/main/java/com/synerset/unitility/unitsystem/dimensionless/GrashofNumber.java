@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnit> {
+public class GrashofNumber implements CalculableQuantity<GrashofNumberUnit, GrashofNumber> {
     private final double value;
     private final double baseValue;
     private final GrashofNumberUnit unitType;
@@ -46,7 +46,6 @@ public class GrashofNumber implements PhysicalQuantity<GrashofNumberUnit> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public GrashofNumber withValue(double value) {
         return GrashofNumber.of(value);
     }
