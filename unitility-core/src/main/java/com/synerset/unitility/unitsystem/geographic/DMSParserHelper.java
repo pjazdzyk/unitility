@@ -19,18 +19,33 @@ class DMSParserHelper {
         }
 
         double degrees = parseToDouble(parts[0]);
+
         double minutes = 0;
         if (parts.length > 1) {
             minutes = parseToDouble(parts[1]);
         }
+
         double seconds = 0;
         if (parts.length > 2) {
             seconds = parseToDouble(parts[2]);
         }
 
-        double sign = determineSign(dmsFormat, degrees);
+        char directionChar = dmsFormat.charAt(dmsFormat.length() - 1);
+        double sign = determineSign(directionChar, degrees);
 
-        return sign * (Math.abs(degrees) + minutes / 60.0 + seconds / 3600.0);
+        return sign * dmsToDegrees(degrees, minutes, seconds);
+    }
+
+    public static double dmsToDegrees(double degrees, double minutes, double seconds) {
+        return Math.abs(degrees) + Math.abs(minutes) / 60.0 + Math.abs(seconds) / 3600.0;
+    }
+
+    public static double determineSign(char directionChar, double degrees) {
+        double sign = 1;
+        if (directionChar == 'S' || directionChar == 's' || directionChar == 'W' || directionChar == 'w' || degrees < 0) {
+            sign = -1;
+        }
+        return sign;
     }
 
     private static double parseToDouble(String doubleAsString) {
@@ -40,16 +55,6 @@ class DMSParserHelper {
             throw new UnitSystemParseException("Geo double parser: Invalid input, could not parse to double, input = "
                     + doubleAsString);
         }
-    }
-
-    private static double determineSign(String dmsString, double degrees) {
-        char directionChar = dmsString.charAt(dmsString.length() - 1);
-
-        double sign = 1;
-        if (directionChar == 'S' || directionChar == 's' || directionChar == 'W' || directionChar == 'w' || degrees < 0) {
-            sign = -1;
-        }
-        return sign;
     }
 
     private static void validateInputString(String inputString) {

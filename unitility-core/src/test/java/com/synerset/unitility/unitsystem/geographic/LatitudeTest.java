@@ -74,4 +74,28 @@ class LatitudeTest {
         assertThat(latInDmsVarDigits).isEqualTo("lat = 52°14'5.1\"N");
     }
 
+    @Test
+    @DisplayName("should create instance from DMS input")
+    void shouldCreateNewInstanceFromDMSFormat(){
+        // Given
+        String latitudeAsStringN = "52°14'5.1\"N";
+        String latitudeAsStringS = "52°14'5.1\"S";
+        String longitudeAsStringE = "52°14'5.1\"E";
+        String longitudeAsStringW = "52°14'5.1\"W";
+
+        // When
+        GeoQuantityParsingFactory parsingFactory = GeoQuantityParsingFactory.GEO_PARSING_FACTORY;
+        Latitude latitudeN = parsingFactory.parseFromDMSFormat(Latitude.class, latitudeAsStringN);
+        Latitude latitudeS = parsingFactory.parseFromDMSFormat(Latitude.class, latitudeAsStringS);
+        Longitude longitudeE = parsingFactory.parseFromDMSFormat(Longitude.class, longitudeAsStringE);
+        Longitude longitudeW = parsingFactory.parseFromDMSFormat(Longitude.class, longitudeAsStringW);
+
+        // Then
+        assertThat(latitudeN.getInDegrees()).isEqualTo(52.23475);
+        assertThat(latitudeS.getInDegrees()).isEqualTo(-52.23475);
+        assertThat(longitudeE.getInDegrees()).isEqualTo(52.23475);
+        assertThat(longitudeW.getInDegrees()).isEqualTo(-52.23475);
+
+    }
+
 }
