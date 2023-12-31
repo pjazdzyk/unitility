@@ -42,10 +42,10 @@ features, such as overloaded operators.
    5.1 [Jackson serializers / deserializers](#51-jackson-serializers-and-deserializers) <br>
    5.2 [Spring](#52-spring-boot-module) <br>
    5.3 [Quarkus](#53-quarkus-module) <br>
-6. [Creating custom quantities](#6-creating-custom-quantities) <br>
-   6.1 [Custom unit example](#61-custom-unit-example) <br>
-   6.2 [Registering custom quantity in Spring](#62-registering-custom-units-in-spring) <br>
-   6.3 [Registering custom quantity in Quarkus](#63-registering-custom-units-in-quarkus) <br>
+6. [Creating custom units and quantities](#6-creating-custom-quantities) <br>
+   6.1 [Custom unit](#61-custom-unit) <br>
+   6.2 [Registering custom quantity in Spring](#62-custom-physical-quantity) <br>
+   6.3 [Registering custom quantity in Quarkus](#63-registering-custom-quantities-in-spring) <br>
 7. [Compatibility with other JVM languages](#7-compatibility-with-other-jvm-languages) <br>
    7.1 [Groovy](#71-groovy---using-overloaded-operators) <br>
    7.2 [Kotlin](#72-kotlin---using-overloaded-operators) <br>
@@ -418,7 +418,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -443,7 +443,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -483,7 +483,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:
@@ -520,19 +520,41 @@ see a section: [Registering custom quantity in Quarkus](#63-registering-custom-u
 
 ## 6. CREATING CUSTOM QUANTITIES
 The Unitility includes a set of the most commonly used quantities and related units with an emphasis on thermodynamics. 
-However, the framework foundation can be successfully used to define almost any unit from economic sciences, biology, or 
-logistics, for example, the quantity of bottles in a package. Sooner or later, a developer might face a case where they 
-would like to add a new unit to the set. In case this is not urgent, please go to the [ISSUES](https://github.com/pjazdzyk/unitility/issues)
-page and let me know what is needed. I will try to update the package and release a new version as soon as possible. 
-If you can't wait, below are instructions on how to create a custom unit and also how to ensure that all your custom 
-units are registered correctly in Spring or Quarkus.
+However, the framework foundation can be successfully used to define almost any unit from economy, biology, electronics, 
+and even for logistics to represent the quantity of bottles in different sized packages. Sooner or later, a developer 
+might face a case where he would like to add a new unit or quantity to the library. I will be including requested units on
+a regular basis. If this is not urgent, please go to the [ISSUES](https://github.com/pjazdzyk/unitility/issues) page and let me know what is needed. If you can't 
+wait, below are instructions on how to create a custom unit and also how to ensure that all your custom units/quantities
+are registered correctly in Spring or Quarkus.
 
-### 6.1 Custom unit example
+### 6.1 Custom unit
+If you need to extend standard unit definitions for a given quantity, the simplest way is to create a new unit
+class extending the interface of the desired unit family. To present this, let's add a new unit of [Rankine](https://en.wikipedia.org/wiki/Rankine_scale)
+degree to Temperature family. Create class or enum (my preference) and extend [TemperatureUnits](https://github.com/pjazdzyk/unitility/blob/master/unitility-core/src/main/java/com/synerset/unitility/unitsystem/thermodynamic/Temperature.java)
+interface and implement required methods to convert from base unit to Rankine and vice versa.
+To ensure valid conversion with standard Temperature unit family, set the same base unit type as in the
+library default [TemperatureUnits](https://github.com/pjazdzyk/unitility/blob/master/unitility-core/src/main/java/com/synerset/unitility/unitsystem/thermodynamic/TemperatureUnits.java):
+```java
+@Override
+public TemperatureUnit getBaseUnit() {
+   return TemperatureUnits.KELVIN;
+}
+```
+After this is done, you can use your own custom unit in Temperature class and convert between standard library units
+and your own custom units:
+```java
+Temperature tempInC = Temperature.ofKelvins(100);                    // 100.00 K
+Temperature tempInR = Temperature.of(200, CustomTempUnits.RANKINE);  // eq. of 111.111 K
+Temperature totalTemp = temperatureInC.plus(temperatureInR);         // 211.111 K
+```
+Full code example of extending class is here [CLAZZ](class);
 
-In this section, we create our own custom Angle unit, which will include a new AngleUnit type: revolutions [rev]. 
-To do this, we need to create a new class, CustomAngle, and extend the PhysicalQuantity<AngleUnit> interface. Most of 
-the required methods are defined as default in the interface, which should be sufficient for most cases. However, a few 
-need to be implemented for the new unit, as shown in the example here:
+### 6.2 Custom physical quantity
+In this section, we create new CustomAngle quantity together with new CustomAngleUnit of **Revolutions [rev]**. 
+To do this, we need to create a new class, CustomAngle, and extend the CalculableQuantity<AngleUnit, CustomAngle> interface.
+CalculableQuantity is PhysicalQuantity with arithmetic operations handling.
+In typical case, most of the required methods are defined as default in the interface, which should be sufficient for most cases. 
+However, some needs to be implemented for the new unit, as shown in the example here:
 [CustomAngle](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/customunits/CustomAngle.java).
 
 In the next step, create your implementation of AngleUnit interface, which should include the way, how to
@@ -549,7 +571,7 @@ CustomAngle degrees = revolutions.toUnit(AngleUnits.DEGREES);   // CustomAngle{3
 CustomAngle resultingRevolutions = revolutions.plus(degrees);   // CustomAngle{2.0 rev}
 ```
 
-### 6.2 Registering custom units in SPRING
+### 6.3 Registering custom quantities in SPRING
 
 After creating a custom unit, to ensure that it is properly resolved from JSON or path/query params, the following steps
 must be taken to make it work. A complete example of a new custom unit properly registered in a Spring framework can be 
@@ -557,7 +579,7 @@ found here: [unitility-spring-example](https://github.com/pjazdzyk/unitility-spr
 
 As a first step, a new parsing factory has to be created, which must include currently supported quantities and custom
 user quantities:
-[CustomParsingFactory](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/CustomParsingRegistryWithAngle.java).
+[CustomParsingFactory](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/CustomParsingFactoryWithAngle.java).
 
 After a new parsing factory is created and all standard and new custom quantities parsers are properly registered,
 you can now create a configuration and register new JacksonModule and new Conveter in FormatterRegistry: 
@@ -584,12 +606,12 @@ public class CustomAngleController {
 }
 ```
 
-### 6.3 Registering custom units in Quarkus
+### 6.4 Registering custom quantities in Quarkus
 Registering custom unit in Quarkus is a bit different compared to Spring.
 A Complete example of new custom unit properly registered in a Quarkus framework can be
 found here: [unitility-quarkus-example](https://github.com/pjazdzyk/unitility-quarkus-example).
 In this case, a first step is the same, new parsing factory must be created to include currently supported 
-and new custom quantities created by user: [CustomParsingFactory](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/examples/newquantity/CustomParsingRegistryWithAngle.java).
+and new custom quantities created by user: [CustomParsingFactory](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/examples/newquantity/CustomParsingFactoryWithAngle.java).
 
 After a new parsing factory is created and all standard and new custom quantities parsers are properly registered,
 you can now create a new ObjectMapperCustomizer and register JacksonModule with new parsing factory: 
@@ -658,7 +680,7 @@ def isEqual = t1 == t1          // true
 ### 7.2 Kotlin - using overloaded operators
 Usage in Kotlin is analogous, please find the below some examples:
 ```kotlin
-    // Temperature examples
+// Temperature examples
 val t1 = Temperature.ofCelsius(20.0)
 val t2 = Temperature.ofCelsius(10.0)
 val t3 = Temperature.ofKelvins(303.15) // =30 oC
@@ -671,7 +693,8 @@ println(t4) // Temperature{30.0°C}
 println(t5) // Temperature{10.0°C}
 println(t6) // Temperature{35.5°C}
 
-// Adding & subtracting: Different units of the same quantity, resolving to unit type of the first addend.
+// Adding & subtracting: Different units of the same quantity,
+// resolving to a first addend unit type.
 val t7 = t1 + t3
 val t8 = t1 - t3
 println(t7) // Temperature{50.0°C}
@@ -702,10 +725,10 @@ Longitude, GeoCoordinate and GeoDistance. These classes allow representing coord
 distance between these coordinates.
 
 ### 8.1 Geographic Latitude, Longitude and GeoCoordinate
-The Latitude class includes methods that allow for easy conversion of latitude values to the Degrees-Minutes-Seconds 
-(DMS) format. This format provides a more human-readable representation of geographic coordinates, making it convenient
-for various applications where DMS notation is preferred. <br>
-The Longitude class, analogous to the Latitude class, represents a geographic longitude coordinate. It adheres to the 
+The **Latitude** class includes methods that allow for easy conversion to the Degrees-Minutes-Seconds 
+(DMS) format. This format provides a more popular representation of geographic coordinates, making it convenient
+for various applications where DMS notation is preferred. Latitude range is: -90 to 90 degrees. <br>
+The **Longitude** class, analogous to the Latitude class, represents a geographic longitude coordinate. It adheres to the 
 standard range of -180 to +180 degrees, covering the westernmost point at -180 degrees and the easternmost point 
 at +180 degrees.
 ```java
@@ -716,7 +739,14 @@ Longitude longitude = Longitude.ofDegrees(20.123);
 String latInDMS = latitude.toDMSFormat(2);          // Outputs: 20°7'22.8"S
 String latInENG = latitude.toEngineeringFormat();   // Outputs: -20.123 [°]
 ```
-The GeoCoordinate class combines both Latitude and Longitude to form a complete geographic coordinate. It facilitates 
+You can also create Latitude or Longitude instance providing degrees, minutes and seconds:
+```java
+// Instance from degrees, minutes, seconds
+Latitude latFromDMS = Latitude.ofDegMinSec(20, 7, 22.8, CardinalDirection.SOUTH);   // Latitude{-20.123°}
+Longitude longFromDMS = Longitude.ofDegMinSec(20, 7, 22.8, CardinalDirection.EAST); // Longitude{20.123°}
+```
+
+The **GeoCoordinate** class combines both Latitude and Longitude to form a complete geographic coordinate. It facilitates 
 easy management and manipulation of spatial data, allowing seamless integration into various applications requiring
 precise location information.
 
@@ -734,7 +764,7 @@ Latitude and Longitude do not enforce any angular value limit, but GeoCoordinate
 latitude and longitude values fall withing planet Earth's acceptable limits.
 
 ### 8.2 GeoDistance - spherical distance between two coordinates
-The GeoDistance class represents the geographic, spherical distance between two coordinates on Earth, considering 
+The **GeoDistance** class represents the spherical distance between two coordinates on Earth, considering 
 the curvature of the Earth. It incorporates calculations involving the start and target coordinates, true bearing, 
 and distance in specified units. The underlying [Haversine equations](https://en.wikipedia.org/wiki/Haversine_formula) 
 serve as the basis for the curved distance calculation. To create a GeoDistance object, you can initialize it with start
@@ -749,7 +779,7 @@ String distanceInEng = geoDistance.toEngineeringFormat();   // 6669.896095258197
 Angle trueBearing = geoDistance.getTrueBearing();           // Angle{-61.07915625042435°}
 ```
 Please note that true bearing is provided in range <-180,+180> degrees, and it is absolute value, to Earth's true north.
-Alternativley, GeoDistance can be initialized with starting coordinate, bearing and distance in that case, target
+Alternatively, GeoDistance can be initialized with starting coordinate, bearing and distance in that case, target
 coordinate will be calculated. Provided distance must be true, curved distance. 
 ```java
 GeoDistance toNewYork = GeoDistance.of(wroclaw, trueBearing, Distance.ofKilometers(6669.896095258197));

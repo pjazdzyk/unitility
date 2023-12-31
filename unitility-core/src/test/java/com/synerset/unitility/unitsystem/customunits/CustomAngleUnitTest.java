@@ -1,4 +1,4 @@
-package com.synerset.unitility.unitsystem;
+package com.synerset.unitility.unitsystem.customunits;
 
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.customunits.CustomAngleUnits;
