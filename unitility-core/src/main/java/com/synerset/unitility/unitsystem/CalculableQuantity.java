@@ -8,7 +8,7 @@ import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
  * @param <U> The type of unit associated with the quantity.
  * @param <Q> The type of {@link PhysicalQuantity} implementing this interface.
  */
-public interface CalculableQuantity<U extends Unit, Q extends PhysicalQuantity<U>> extends PhysicalQuantity<U> {
+public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity<U, Q>> extends PhysicalQuantity<U> {
 
     /**
      * Create a new physical quantity with new value of the same unit.
