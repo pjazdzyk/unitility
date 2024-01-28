@@ -565,7 +565,6 @@ Temperature tempInC = Temperature.ofKelvins(100);                    // 100.00 K
 Temperature tempInR = Temperature.of(200, CustomTempUnits.RANKINE);  // eq. of 111.111 K
 Temperature totalTemp = temperatureInC.plus(temperatureInR);         // 211.111 K
 ```
-Full code example of extending class is here [CLAZZ](class);
 
 ### 6.2 Custom physical quantity
 In this section, we create new CustomAngle quantity together with new CustomAngleUnit of **Revolutions [rev]**. 
