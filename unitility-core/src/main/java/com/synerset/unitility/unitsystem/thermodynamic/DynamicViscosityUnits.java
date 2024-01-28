@@ -57,7 +57,7 @@ public enum DynamicViscosityUnits implements DynamicViscosityUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
-                .removeParentheses()
+                .dropParentheses()
                 .toString();
     }
 

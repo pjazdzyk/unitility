@@ -57,7 +57,7 @@ public enum ThermalConductivityUnits implements ThermalConductivityUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
-                .removeParentheses()
+                .dropParentheses()
                 .dropDegreeSymbols()
                 .toString();
     }

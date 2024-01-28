@@ -60,13 +60,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.1.1/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.2.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>2.1.1</version>
+    <version>2.2.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -78,7 +78,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.1.1</version>
+    <version>2.2.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -86,7 +86,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.1.1</version>
+    <version>2.2.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -232,24 +232,26 @@ programming style using the io.vavr library.
 ### 4.2 Parsing quantities from string
 
 The physical quantity can be instantiated from a string representing the commonly used engineering style of writing 
-values with units: "{value}[{unit}]", for example, "20.5 [K]". To parse a valid string into a PhysicalQuantity, you need 
-to obtain an instance of the parsing factory provided in the core module. The default parsing factory includes parsers 
-for all supported physical quantities and their related units.
+values with units: "{value}[{unit}]", for example, "20.5 [K]", but it will also accept input without square brackets.
+To parse a valid string into a PhysicalQuantity, you need to obtain an instance of the parsing factory provided in the core module. 
+The default parsing factory includes parsers for all supported physical quantities and their related units.
 
 ```java
 // Create default parsing factory
-PhysicalQuantityParsingFactory parsingFactory = 
-        PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
+PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
 // Examples of string in engineering format with unit in square brackets
 String k1 = "15.1 [W p mxK)]";
 String k2 = "15.1 [W/(m.K)]";
 String k3 = "   1 5 ,  1 [   WpmK   ]";
+String k4 = "15.1 W/mK";
 // All above strings are properly resolved to Thermal Conductivity, even partially malformed k3.
-ThermalConductivity thermCond1 = parsingFactory.fromEngFormat(ThermalConductivity.class, k1); 
+ThermalConductivity thermCond1 = parsingFactory.parseFromEngFormat(ThermalConductivity.class, k1); 
 // will resolve to {15.1 W/(m·K)}
-ThermalConductivity thermCond2 = parsingFactory.fromEngFormat(ThermalConductivity.class, k2); 
+ThermalConductivity thermCond2 = parsingFactory.parseFromEngFormat(ThermalConductivity.class, k2); 
 // will resolve to {15.1 W/(m·K)}
-ThermalConductivity thermCond3 = parsingFactory.fromEngFormat(ThermalConductivity.class, k3); 
+ThermalConductivity thermCond3 = parsingFactory.parseFromEngFormat(ThermalConductivity.class, k3); 
+// will resolve to {15.1 W/(m·K)}
+ThermalConductivity thermCond4 = parsingRegistry.parseFromEngFormat(ThermalConductivity.class, k4);
 // will resolve to {15.1 W/(m·K)}
 ```
 
@@ -266,6 +268,20 @@ alternative ways of expressing units in an input string:
 
 Please note that this method of creating quantities is designed to be used for deserializers. <Br>
 **In your code, you should create units in a programmatic way, not parsing from strings.**
+
+IMPORTANT:
+When parsing from string values should be provided using dot "." as decimal separator.<br>
+DO NOT USE grouping separators. <br>
+This will parse properly:<br>
+```text
+1000000.00 [Pa]
+```
+But this will not: <br>
+```text
+1,000,0000.00 [Pa]
+```
+
+
 
 ### 4.3 Logical operations
 
@@ -383,7 +399,7 @@ with ready serializers/deserializers and integration with the most popular frame
 
 **IMPORTANT:** <br>
 **a)** JSON request body of PhysicalQuantity should follow the structure shown in the section below (5.1) <br>
-**b)** Sending request via path param or query param, **engineering format** should be used i.e.: 20.0[oC]<br>
+**b)** Sending request via path param or query param, should be used i.e.: 20.0oC, without square brackets or special characters.<br>
 
 ---
 
@@ -406,9 +422,11 @@ Json request body example:
 ```
 Using as path param:
 ```text
-http://localhost:8080/api/v1/temperatures/20.5[oC]
+/api/v1/temperatures/20.5C
 ```
-
+Make sure that quantities used in path variables or query parameters are without square brackets. Parsers are designed to
+filter them out, but some recent versions of Tomcat server have issues with "[]" so it is better to avoid using them.
+Other special characters can be easily replaced with simpler equivalents, as presented in the table in [section 4.2](#42-parsing-quantities-from-string).
 
 ## 5.1 Jackson serializers and deserializers
 The Jackson library is utilized in many frameworks, enabling the serialization of objects into a JSON structure and
@@ -418,7 +436,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>2.1.1</version>
+    <version>2.2.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -435,7 +453,7 @@ obtain the appropriate parser depending on the class type. This module is part o
 therefore, it does not need to be added explicitly if framework extensions are included in the project.
 
 ## 5.2 Spring Boot module
-Module tested for Spring Boot platform version: **3.1.5** <br>
+Module tested for Spring Boot platform version: **3.2.2** <br>
 Spring Boot module includes **unitility-jackson** and **unitility-core** modules, and it will automatically
 create required beans through the autoconfiguration dependency injection mechanism. To use Spring extension module, 
 add the following dependency:
@@ -443,7 +461,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.1.1</version>
+    <version>2.2.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -472,7 +490,7 @@ public class DefaultUnitsController {
 ```
 For special cases when custom unit is created, which is not a part of standard Unitiltiy package, additional configuration
 steps must be carried out to ensure that custom unit is properly resolved from JSON or path/query params. For more details
-see a section: [Registering custom quantity in Spring](#62-registering-custom-units-in-spring).<br>
+see a section: [Registering custom quantity in Spring](#63-registering-custom-quantities-in-spring).<br>
 
 ## 5.3 Quarkus module
 Module tested for Quarkus platform version: **3.5.1**<br>
@@ -483,7 +501,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.1.1</version>
+    <version>2.2.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:
@@ -516,16 +534,16 @@ public class DefaultUnitsResource {
 ```
 For special cases when custom unit is created, which is not a part of standard Unitiltiy package, additional configuration
 steps must be carried out to ensure that custom unit is properly resolved from JSON or path/query params. For more details
-see a section: [Registering custom quantity in Quarkus](#63-registering-custom-units-in-quarkus).
+see a section: [Registering custom quantity in Quarkus](#64-registering-custom-quantities-in-quarkus).
 
 ## 6. CREATING CUSTOM QUANTITIES
 The Unitility includes a set of the most commonly used quantities and related units with an emphasis on thermodynamics. 
 However, the framework foundation can be successfully used to define almost any unit from economy, biology, electronics, 
 and even for logistics to represent the quantity of bottles in different sized packages. Sooner or later, a developer 
 might face a case where he would like to add a new unit or quantity to the library. I will be including requested units on
-a regular basis. If this is not urgent, please go to the [ISSUES](https://github.com/pjazdzyk/unitility/issues) page and let me know what is needed. If you can't 
-wait, below are instructions on how to create a custom unit and also how to ensure that all your custom units/quantities
-are registered correctly in Spring or Quarkus.
+a regular basis. If this is not urgent, please go to the [ISSUES](https://github.com/pjazdzyk/unitility/issues) page and 
+let me know what is needed. If you can't wait, below are instructions on how to create a custom unit and also how to ensure 
+that all your custom units/quantities are registered correctly in Spring or Quarkus.
 
 ### 6.1 Custom unit
 If you need to extend standard unit definitions for a given quantity, the simplest way is to create a new unit
@@ -582,7 +600,7 @@ user quantities:
 [CustomParsingFactory](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/CustomParsingFactoryWithAngle.java).
 
 After a new parsing factory is created and all standard and new custom quantities parsers are properly registered,
-you can now create a configuration and register new JacksonModule and new Conveter in FormatterRegistry: 
+you can now create a configuration and register new JacksonModule and new Converter in FormatterRegistry: 
 [CustomAngleConfiguration](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/CustomAngleConfiguration.java).
 
 After this step is done, you can freely use your CustomAngle unit in your web application:
@@ -830,7 +848,7 @@ Latitude, Longitude can be used as JSON request body or as value in path variabl
 Latitude path param usage example:
 /routes/latitude/20°7'22.8"S/longitude/-14°7'12.4"W
 /routes/latitude/20o7min22.8secS/longitude/-14o7min12.4secW
-/routes/latitude/20.123[deg]/longitude/-14.123[deg]
+/routes/latitude/20.123deg/longitude/-14.123deg
 /routes/latitude/20.123/longitude/-14.123
 ```
 

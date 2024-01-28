@@ -3,6 +3,7 @@ package com.synerset.unitility.unitsystem;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.utils.DoubleParser;
 import com.synerset.unitility.unitsystem.utils.StringTransformer;
 
 import java.util.HashSet;
@@ -58,16 +59,24 @@ public interface PhysicalQuantityParsingFactory {
     default <U extends Unit, Q extends PhysicalQuantity<U>> Q parseFromEngFormat(Class<Q> targetClass,
                                                                                  String quantityInEngFormat) {
 
-        String preparedSource = StringTransformer.of(quantityInEngFormat)
+        String preparedQuantityAsString = StringTransformer.of(quantityInEngFormat)
                 .trimLowerAndClean()
+                .replaceCommaForDot()
+                .dropParentheses()
                 .toString();
 
-        String unitSymbol = null;
-        if (preparedSource.contains("[")) {
-            unitSymbol = extractSymbolFromEngFormat(targetClass, preparedSource);
+        int indexOfLastDigit = 0;
+        for (char letter : preparedQuantityAsString.toCharArray()) {
+            if (Character.isDigit(letter) || letter == '.' || letter == '-' || letter == 'e') {
+                indexOfLastDigit++;
+            } else break;
         }
-        double value = extractValueFromEngFormat(targetClass, preparedSource);
-        return parseFromSymbol(targetClass, value, unitSymbol);
+
+        String valuePart = preparedQuantityAsString.substring(0, indexOfLastDigit);
+        String symbolPart = preparedQuantityAsString.substring(indexOfLastDigit);
+        double value = DoubleParser.parseToDouble(valuePart);
+
+        return parseFromSymbol(targetClass, value, symbolPart);
     }
 
     /**
@@ -100,36 +109,6 @@ public interface PhysicalQuantityParsingFactory {
         }
     }
 
-    private double extractValueFromEngFormat(Class<?> targetClass, String inputString) {
-        String perparedString = StringTransformer.of(inputString)
-                .replaceCommaForDot()
-                .toString();
 
-        String extractedNumber;
-        if (perparedString.contains("[")) {
-            int endIndex = perparedString.indexOf('[');
-            extractedNumber = perparedString.substring(0, endIndex);
-        } else {
-            extractedNumber = perparedString;
-        }
-
-        try {
-            return Double.parseDouble(extractedNumber);
-        } catch (Exception e) {
-            throw new UnitSystemParseException("Could not extract number from input: " + perparedString
-                    + ", target class: " + targetClass.getSimpleName());
-        }
-    }
-
-    private String extractSymbolFromEngFormat(Class<?> targetClass, String input) {
-        int startIndex = input.indexOf('[');
-        int endIndex = input.indexOf(']', startIndex);
-        if (startIndex != -1 && endIndex != -1) {
-            return input.substring(startIndex + 1, endIndex);
-        } else {
-            throw new UnitSystemParseException("Invalid input string. Could not extract unit symbol from: " + input
-                    + ", target class: " + targetClass.getSimpleName());
-        }
-    }
 
 }

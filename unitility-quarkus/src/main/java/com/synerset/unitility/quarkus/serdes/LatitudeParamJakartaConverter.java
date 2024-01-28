@@ -1,5 +1,6 @@
 package com.synerset.unitility.quarkus.serdes;
 
+import com.synerset.unitility.jackson.serdes.SerdesHelpers;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
 import com.synerset.unitility.unitsystem.geographic.DMSValidator;
@@ -34,14 +35,14 @@ public class LatitudeParamJakartaConverter implements ParamConverter<Latitude> {
             throw new IllegalArgumentException("Jakarta param deserialization failure. Input cannot be null");
         }
 
-        if (latitudeAsString.contains("[")) {
-            return geoParsingRegistry.parseFromEngFormat(Latitude.class, latitudeAsString);
-        }
-
-        String preparedInput = ConverterHelpers.prepareInput(latitudeAsString);
+        String preparedInput = SerdesHelpers.prepareInput(latitudeAsString);
 
         if (preparedInput != null && DMSValidator.isValidDMSFormat(preparedInput)) {
             return geoParsingRegistry.parseFromDMSFormat(Latitude.class, preparedInput);
+        }
+
+        if (SerdesHelpers.containsNonDigitChars(latitudeAsString)) {
+            return geoParsingRegistry.parseFromEngFormat(Latitude.class, latitudeAsString);
         }
 
         double potentialDoubleValue = Double.parseDouble(preparedInput);

@@ -44,7 +44,7 @@ public class GeoQuantityParsingFactory implements PhysicalQuantityParsingFactory
 
         String preparedInput = StringTransformer.of(quantityInDMSFormat)
                 .trimLowerAndClean()
-                .removeParentheses()
+                .dropParentheses()
                 .replaceCommaForDot()
                 .unifyDMSNotationSymbols()
                 .toString();

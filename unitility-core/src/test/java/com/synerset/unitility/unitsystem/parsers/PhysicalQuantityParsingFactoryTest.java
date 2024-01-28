@@ -6,7 +6,6 @@ import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.common.DistanceUnit;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,7 +56,7 @@ class PhysicalQuantityParsingFactoryTest {
 
         // When
         // Then
-        assertThrows(UnitSystemParseException.class,
+        assertThrows(UnitSystemClassNotSupportedException.class,
                 () -> parsingRegistry.parseFromEngFormat(TestClass.class, "20C"));
     }
 

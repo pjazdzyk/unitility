@@ -1,5 +1,6 @@
 package com.synerset.unitility.spring.serdes;
 
+import com.synerset.unitility.jackson.serdes.SerdesHelpers;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
 import com.synerset.unitility.unitsystem.geographic.DMSValidator;
 import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
@@ -29,14 +30,14 @@ public class LongitudeWebMvcConverter implements Converter<String, Longitude> {
     @Override
     public Longitude convert(@NonNull String longitudeAsString) {
 
-        if (longitudeAsString.contains("[")) {
-            return geoParsingRegistry.parseFromEngFormat(Longitude.class, longitudeAsString);
-        }
-
-        String preparedInput = ConverterHelpers.prepareInput(longitudeAsString);
+        String preparedInput = SerdesHelpers.prepareInput(longitudeAsString);
 
         if (preparedInput != null && DMSValidator.isValidDMSFormat(preparedInput)) {
             return geoParsingRegistry.parseFromDMSFormat(Longitude.class, preparedInput);
+        }
+
+        if (SerdesHelpers.containsNonDigitChars(longitudeAsString)) {
+            return geoParsingRegistry.parseFromEngFormat(Longitude.class, longitudeAsString);
         }
 
         double potentialDoubleValue = Double.parseDouble(preparedInput);

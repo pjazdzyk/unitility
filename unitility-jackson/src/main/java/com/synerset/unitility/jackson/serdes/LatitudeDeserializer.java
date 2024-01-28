@@ -11,6 +11,7 @@ import com.synerset.unitility.unitsystem.geographic.Latitude;
 
 import java.io.IOException;
 
+import static com.synerset.unitility.jackson.serdes.SerdesHelpers.containsNonDigitChars;
 import static com.synerset.unitility.jackson.serdes.SerdesHelpers.prepareInput;
 
 public class LatitudeDeserializer extends JsonDeserializer<Latitude> {
@@ -33,15 +34,14 @@ public class LatitudeDeserializer extends JsonDeserializer<Latitude> {
         }
 
         String quantityValue = valueFieldNode.asText();
-
-        if (quantityValue != null && quantityValue.contains("[")) {
-            return deserializeFromEngineeringFormat(quantityValue);
-        }
-
         String preparedQuantityValue = prepareInput(quantityValue);
 
         if (preparedQuantityValue != null && DMSValidator.isValidDMSFormat(preparedQuantityValue)) {
             return deserializeFromDMSFormat(preparedQuantityValue);
+        }
+
+        if (quantityValue != null && containsNonDigitChars(quantityValue)) {
+            return deserializeFromEngineeringFormat(quantityValue);
         }
 
         return deserializeFromSymbolAndValue(quantityNode);

@@ -10,6 +10,8 @@ import com.synerset.unitility.unitsystem.Unit;
 
 import java.io.IOException;
 
+import static com.synerset.unitility.jackson.serdes.SerdesHelpers.containsNonDigitChars;
+
 /**
  * The {@link PhysicalQuantityDeserializer} class is a Jackson JSON deserializer for deserializing JSON representations
  * of {@link PhysicalQuantity} instances.
@@ -48,8 +50,8 @@ public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuan
         }
 
         String value = valueFieldNode.asText();
-        if (value.contains("[")) {
-            // In this case, symbol field will be ignored, unit in [] will take precedence
+        if (containsNonDigitChars(value)) {
+            // In this case, symbol field will be ignored. Unit symbol is assumed to be part of a value string.
             return deserializeFromEngineeringFormat(value);
         }
         return deserializeFromSymbolAndValue(node);

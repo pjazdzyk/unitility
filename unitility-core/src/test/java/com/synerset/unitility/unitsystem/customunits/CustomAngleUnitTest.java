@@ -1,7 +1,6 @@
 package com.synerset.unitility.unitsystem.customunits;
 
 import com.synerset.unitility.unitsystem.common.Angle;
-import com.synerset.unitility.unitsystem.customunits.CustomAngleUnits;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
