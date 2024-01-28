@@ -57,7 +57,7 @@ public enum SpecificHeatUnits implements SpecificHeatUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
-                .removeParentheses()
+                .dropParentheses()
                 .unifySymbolsOfAngle()
                 .toString();
     }

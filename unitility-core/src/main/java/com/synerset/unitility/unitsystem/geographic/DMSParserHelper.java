@@ -1,7 +1,8 @@
 package com.synerset.unitility.unitsystem.geographic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+
+import static com.synerset.unitility.unitsystem.utils.DoubleParser.parseToDouble;
 
 class DMSParserHelper {
 
@@ -46,15 +47,6 @@ class DMSParserHelper {
             sign = -1;
         }
         return sign;
-    }
-
-    private static double parseToDouble(String doubleAsString) {
-        try {
-            return Double.parseDouble(doubleAsString.trim().replace(",", "."));
-        } catch (NumberFormatException ex) {
-            throw new UnitSystemParseException("Geo double parser: Invalid input, could not parse to double, input = "
-                    + doubleAsString);
-        }
     }
 
     private static void validateInputString(String inputString) {

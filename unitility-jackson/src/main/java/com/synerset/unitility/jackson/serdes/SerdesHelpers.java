@@ -2,13 +2,13 @@ package com.synerset.unitility.jackson.serdes;
 
 import com.synerset.unitility.unitsystem.utils.StringTransformer;
 
-class SerdesHelpers {
+public class SerdesHelpers {
 
     private SerdesHelpers() {
         throw new IllegalStateException("Utility class");
     }
 
-    static String prepareInput(String quantityInput) {
+    public static String prepareInput(String quantityInput) {
         if (quantityInput == null) {
             return null;
         }
@@ -17,6 +17,15 @@ class SerdesHelpers {
                 .replaceCommaForDot()
                 .unifyDMSNotationSymbols()
                 .toString();
+    }
+
+    public static boolean containsNonDigitChars(String inputString) {
+        for (char nextChar : inputString.toCharArray()) {
+            if (Character.isAlphabetic(nextChar)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

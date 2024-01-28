@@ -1,5 +1,6 @@
 package com.synerset.unitility.spring.serdes;
 
+import com.synerset.unitility.jackson.serdes.SerdesHelpers;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
 import com.synerset.unitility.unitsystem.geographic.DMSValidator;
 import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
@@ -29,14 +30,14 @@ public class LatitudeWebMvcConverter implements Converter<String, Latitude> {
     @Override
     public Latitude convert(@NonNull String latitudeAsString) {
 
-        if (latitudeAsString.contains("[")) {
-            return geoParsingRegistry.parseFromEngFormat(Latitude.class, latitudeAsString);
-        }
-
-        String preparedInput = ConverterHelpers.prepareInput(latitudeAsString);
+        String preparedInput = SerdesHelpers.prepareInput(latitudeAsString);
 
         if (preparedInput != null && DMSValidator.isValidDMSFormat(preparedInput)) {
             return geoParsingRegistry.parseFromDMSFormat(Latitude.class, preparedInput);
+        }
+
+        if (SerdesHelpers.containsNonDigitChars(latitudeAsString)) {
+            return geoParsingRegistry.parseFromEngFormat(Latitude.class, latitudeAsString);
         }
 
         double potentialDoubleValue = Double.parseDouble(preparedInput);

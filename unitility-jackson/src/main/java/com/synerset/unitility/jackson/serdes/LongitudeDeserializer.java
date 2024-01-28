@@ -8,9 +8,11 @@ import com.synerset.unitility.unitsystem.common.AngleUnits;
 import com.synerset.unitility.unitsystem.geographic.DMSValidator;
 import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
-import com.synerset.unitility.unitsystem.utils.StringTransformer;
 
 import java.io.IOException;
+
+import static com.synerset.unitility.jackson.serdes.SerdesHelpers.containsNonDigitChars;
+import static com.synerset.unitility.jackson.serdes.SerdesHelpers.prepareInput;
 
 public class LongitudeDeserializer extends JsonDeserializer<Longitude> {
 
@@ -32,15 +34,14 @@ public class LongitudeDeserializer extends JsonDeserializer<Longitude> {
         }
 
         String quantityValue = valueFieldNode.asText();
-
-        if (quantityValue != null && quantityValue.contains("[")) {
-            return deserializeFromEngineeringFormat(quantityValue);
-        }
-
         String preparedQuantityValue = prepareInput(quantityValue);
 
         if (preparedQuantityValue != null && DMSValidator.isValidDMSFormat(preparedQuantityValue)) {
             return deserializeFromDMSFormat(preparedQuantityValue);
+        }
+
+        if (quantityValue != null && containsNonDigitChars(quantityValue)) {
+            return deserializeFromEngineeringFormat(quantityValue);
         }
 
         return deserializeFromSymbolAndValue(quantityNode);
@@ -64,17 +65,6 @@ public class LongitudeDeserializer extends JsonDeserializer<Longitude> {
             unitSymbol = AngleUnits.DEGREES.getSymbol();
         }
         return geoParsingFactory.parseFromSymbol(Longitude.class, value, unitSymbol);
-    }
-
-    private String prepareInput(String quantityInput) {
-        if (quantityInput == null) {
-            return null;
-        }
-        return StringTransformer.of(quantityInput)
-                .trimLowerAndClean()
-                .replaceCommaForDot()
-                .unifyDMSNotationSymbols()
-                .toString();
     }
 
 }

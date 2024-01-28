@@ -56,7 +56,7 @@ public enum MomentumUnits implements MomentumUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
-                .removeParentheses()
+                .dropParentheses()
                 .toString();
     }
     
