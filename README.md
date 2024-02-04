@@ -60,13 +60,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.2.0/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.3.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -78,7 +78,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -86,7 +86,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -237,22 +237,20 @@ To parse a valid string into a PhysicalQuantity, you need to obtain an instance 
 The default parsing factory includes parsers for all supported physical quantities and their related units.
 
 ```java
-// Create default parsing factory
-PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
+// Create default parsing registry
+PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
 // Examples of string in engineering format with unit in square brackets
 String k1 = "15.1 [W p mxK)]";
 String k2 = "15.1 [W/(m.K)]";
-String k3 = "   1 5 ,  1 [   WpmK   ]";
+String k3 = "   1 5 .  1 [   WpmK   ]";
 String k4 = "15.1 W/mK";
+String k5 = "15.1"; // This will be resolved to hard-coded default unit of W/mK
 // All above strings are properly resolved to Thermal Conductivity, even partially malformed k3.
-ThermalConductivity thermCond1 = parsingFactory.parseFromEngFormat(ThermalConductivity.class, k1); 
-// will resolve to {15.1 W/(m·K)}
-ThermalConductivity thermCond2 = parsingFactory.parseFromEngFormat(ThermalConductivity.class, k2); 
-// will resolve to {15.1 W/(m·K)}
-ThermalConductivity thermCond3 = parsingFactory.parseFromEngFormat(ThermalConductivity.class, k3); 
-// will resolve to {15.1 W/(m·K)}
-ThermalConductivity thermCond4 = parsingRegistry.parseFromEngFormat(ThermalConductivity.class, k4);
-// will resolve to {15.1 W/(m·K)}
+ThermalConductivity thermCond1 = parsingFactory.parse(ThermalConductivity.class, k1); // {15.1 W/(m·K)}
+ThermalConductivity thermCond2 = parsingFactory.parse(ThermalConductivity.class, k2); // {15.1 W/(m·K)}
+ThermalConductivity thermCond3 = parsingFactory.parse(ThermalConductivity.class, k3); // {15.1 W/(m·K)}
+ThermalConductivity thermCond4 = parsingFactory.parse(ThermalConductivity.class, k4); // {15.1 W/(m·K)}
+ThermalConductivity thermCond5 = parsingFactory.parse(ThermalConductivity.class, k5); // {15.1 W/(m·K)}
 ```
 
 Parsers are designed to interpret the numeric part as the value and the content within square brackets as the unit
@@ -280,7 +278,6 @@ But this will not: <br>
 ```text
 1,000,0000.00 [Pa]
 ```
-
 
 
 ### 4.3 Logical operations
@@ -424,7 +421,7 @@ Using as path param:
 ```text
 /api/v1/temperatures/20.5C
 ```
-Make sure that quantities used in path variables or query parameters are without square brackets. Parsers are designed to
+Make sure that quantities used in path variables or query parameters are **without** square brackets. Parsers are designed to
 filter them out, but some recent versions of Tomcat server have issues with "[]" so it is better to avoid using them.
 Other special characters can be easily replaced with simpler equivalents, as presented in the table in [section 4.2](#42-parsing-quantities-from-string).
 
@@ -436,7 +433,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -461,7 +458,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -501,7 +498,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:
@@ -838,9 +835,9 @@ from New York to Wellington, along with the updated bearing and calculated dista
 Parsers have been provided mostly for the purpose of deserialization in Spring Boot or Quarkus, but they can also be used directly 
 in the code:
 ```java
-GeoQuantityParsingFactory geoParsingFactory = PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
-Latitude parsedLat1 = geoParsingFactory.parseFromDMSFormat(Latitude.class, "20°7'22.8\"S");
-Latitude parsedLat2 = geoParsingFactory.parseFromDMSFormat(Latitude.class, "20deg 7min 22.8sec");
+hysicalQuantityParsingFactory geoParsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
+Latitude parsedLat1 = geoParsingFactory.parse(Latitude.class, "20°7'22.8\"S");
+Latitude parsedLat2 = geoParsingFactory.parse(Latitude.class, "20deg 7min 22.8sec");
 ```
 Latitude, Longitude can be used as JSON request body or as value in path variable / query param. Path param usage example:
 ```text
