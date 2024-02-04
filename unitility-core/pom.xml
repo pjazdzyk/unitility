@@ -13,10 +13,10 @@
 
     <name>Unitility Core</name>
     <description>
-        The core module of UNITILITY, the Physics Units of Measure Library for Java.
-        This module encompasses all supported physical quantity definitions, unit parsers, and resolvers.
-        The Core is crafted in pure Java, without a reliance on external frameworks, ensuring a straightforward,
-        thread-safe, and robust architecture.
+        The Java Physics Units of Measure Library - Unitility, core module.
+        This unique library offers new set of types that seamlessly integrate numerical values with their associated units.
+        This enables developers to conduct precise and efficient conversions across various units. Designed in plain Java,
+        the solution prioritizes speed and lightweight functionality, immutability and thread-safety.
     </description>
 
 </project>

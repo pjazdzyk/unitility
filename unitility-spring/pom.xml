@@ -13,9 +13,10 @@
 
     <name>Unitility Spring</name>
     <description>
-        The Spring extension module of UNITILITY, the Physics Units of Measure Library for Java.
-        This module integrates unitility-core and unitility-jackson, providing a configured Jackson module
-        and WebMvcConfigurer for automatic serialization / deserialization of all supported physical quantity types.
+        The Java Physics Units of Measure Library - Unitility, Spring extension.
+        This module integrates unitility-core and unitility-jackson. It provides a preconfigured Jackson module
+        and WebMvcConfigurer for automatic serialization/deserialization of all supported physical quantity types.
+        This configuration is automatically included through Spring's autoconfiguration.
     </description>
     <dependencies>
         <dependency>
