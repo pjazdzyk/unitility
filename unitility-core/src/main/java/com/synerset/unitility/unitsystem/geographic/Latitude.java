@@ -47,14 +47,14 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
     }
 
     public static Latitude ofDegMinSec(int degrees, int minutes, double seconds) {
-        double decimalDegrees = DMSParserHelper.dmsToDegrees(degrees, minutes, seconds);
+        double decimalDegrees = HaversineEquations.dmsToDegrees(degrees, minutes, seconds);
         double decimalDegreesWithSign = degrees > 0 ? decimalDegrees : decimalDegrees * -1;
         return ofDegrees(decimalDegreesWithSign);
     }
 
     public static Latitude ofDegMinSec(int degrees, int minutes, double seconds, CardinalDirection direction) {
-        double sign = DMSParserHelper.determineSign(direction.getDirectionChar(), degrees);
-        double decimalDegrees = DMSParserHelper.dmsToDegrees(degrees, minutes, seconds);
+        double sign = HaversineEquations.determineSign(direction.getDirectionChar(), degrees);
+        double decimalDegrees = HaversineEquations.dmsToDegrees(degrees, minutes, seconds);
         return ofDegrees(sign * decimalDegrees);
     }
 

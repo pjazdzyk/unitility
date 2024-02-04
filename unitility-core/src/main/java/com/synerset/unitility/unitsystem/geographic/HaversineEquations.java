@@ -3,7 +3,7 @@ package com.synerset.unitility.unitsystem.geographic;
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
 
-class HaversineEquations {
+public class HaversineEquations {
 
     private HaversineEquations() {
         throw new IllegalStateException("Utility class");
@@ -107,4 +107,30 @@ class HaversineEquations {
         return GeoCoordinate.of(Latitude.ofDegrees(latInDegrees), Longitude.ofDegrees(lonInDegrees));
     }
 
+    /**
+     * Converts degrees, minutes, seconds (DMS format) to decimal degrees.
+     *
+     * @param degrees the degrees component
+     * @param minutes the minutes component
+     * @param seconds the seconds component
+     * @return the total degrees as a double
+     */
+    public static double dmsToDegrees(double degrees, double minutes, double seconds) {
+        return Math.abs(degrees) + Math.abs(minutes) / 60.0 + Math.abs(seconds) / 3600.0;
+    }
+
+    /**
+     * Determines the sign for the degrees based on the direction character.
+     *
+     * @param directionChar the direction character (S, W, etc.)
+     * @param degrees the degrees value
+     * @return the sign (-1 if S/W, 1 otherwise)
+     */
+    public static double determineSign(char directionChar, double degrees) {
+        double sign = 1;
+        if (directionChar == 'S' || directionChar == 's' || directionChar == 'W' || directionChar == 'w' || degrees < 0) {
+            sign = -1;
+        }
+        return sign;
+    }
 }
