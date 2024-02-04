@@ -5,7 +5,6 @@ import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
-import com.synerset.unitility.unitsystem.geographic.DMSParserHelper;
 import com.synerset.unitility.unitsystem.geographic.DMSValidator;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
@@ -95,7 +94,7 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
             throw new UnitSystemParseException("Invalid longitude direction. Expected: W or E. Input: " + preparedInput);
         }
         
-        double valueInDegrees = DMSParserHelper.extractDegreesFromDMSFormat(preparedInput);
+        double valueInDegrees = ParsingHelpers.extractDegreesFromDMSFormat(preparedInput);
         return new Pair(valueInDegrees, AngleUnits.DEGREES.getSymbol());
     }
 
