@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.StringTransformer;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -47,6 +47,9 @@ public enum DistanceUnits implements DistanceUnit {
     }
 
     public static DistanceUnit fromSymbol(String rawSymbol) {
+        if (rawSymbol == null || rawSymbol.isBlank()) {
+            return getDefaultUnit();
+        }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (DistanceUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
@@ -54,7 +57,7 @@ public enum DistanceUnits implements DistanceUnit {
                 return unit;
             }
         }
-        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
                 + DistanceUnits.class.getSimpleName());
     }
 
@@ -62,6 +65,10 @@ public enum DistanceUnits implements DistanceUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .toString();
+    }
+
+    public static DistanceUnit getDefaultUnit() {
+        return METER;
     }
 
 }

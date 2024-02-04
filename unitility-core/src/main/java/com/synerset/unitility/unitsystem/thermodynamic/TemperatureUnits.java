@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.StringTransformer;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -42,6 +42,9 @@ public enum TemperatureUnits implements TemperatureUnit {
     }
 
     public static TemperatureUnit fromSymbol(String rawSymbol) {
+        if (rawSymbol == null || rawSymbol.isBlank()) {
+            return getDefaultUnit();
+        }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (TemperatureUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
@@ -49,7 +52,7 @@ public enum TemperatureUnits implements TemperatureUnit {
                 return unit;
             }
         }
-        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
                 + TemperatureUnits.class.getSimpleName());
     }
 
@@ -58,6 +61,10 @@ public enum TemperatureUnits implements TemperatureUnit {
                 .trimLowerAndClean()
                 .dropDegreeSymbols()
                 .toString();
+    }
+
+    public static TemperatureUnit getDefaultUnit() {
+        return CELSIUS;
     }
 
 }

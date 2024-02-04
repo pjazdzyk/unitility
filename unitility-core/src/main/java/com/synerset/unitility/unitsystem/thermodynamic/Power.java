@@ -11,6 +11,9 @@ public class Power implements CalculableQuantity<PowerUnit, Power> {
 
     public Power(double value, PowerUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = PowerUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

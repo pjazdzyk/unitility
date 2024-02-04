@@ -12,6 +12,9 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
 
     public Velocity(double value, VelocityUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = VelocityUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

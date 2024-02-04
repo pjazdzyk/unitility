@@ -12,6 +12,9 @@ public class Momentum implements CalculableQuantity<MomentumUnit, Momentum> {
 
     public Momentum(double value, MomentumUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = MomentumUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

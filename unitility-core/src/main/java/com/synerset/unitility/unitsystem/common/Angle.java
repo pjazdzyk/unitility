@@ -12,14 +12,19 @@ public class Angle implements CalculableQuantity<AngleUnit, Angle> {
 
     public Angle(double value, AngleUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = AngleUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
+
 
     // Static factory methods
     public static Angle of(double value, AngleUnit unit) {
         return new Angle(value, unit);
     }
+
     public static Angle of(double value, String unitSymbol) {
         AngleUnit resolvedUnit = AngleUnits.fromSymbol(unitSymbol);
         return new Angle(value, resolvedUnit);

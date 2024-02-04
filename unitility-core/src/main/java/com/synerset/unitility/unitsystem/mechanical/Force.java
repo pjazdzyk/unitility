@@ -12,6 +12,9 @@ public class Force implements CalculableQuantity<ForceUnit, Force> {
 
     public Force(double value, ForceUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = ForceUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

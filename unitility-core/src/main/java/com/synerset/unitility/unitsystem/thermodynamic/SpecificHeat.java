@@ -11,6 +11,9 @@ public class SpecificHeat implements CalculableQuantity<SpecificHeatUnit, Specif
 
     public SpecificHeat(double value, SpecificHeatUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = SpecificHeatUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

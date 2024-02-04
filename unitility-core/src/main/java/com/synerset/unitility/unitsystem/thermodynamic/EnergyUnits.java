@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.StringTransformer;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -48,6 +48,9 @@ public enum EnergyUnits implements EnergyUnit {
     }
 
     public static EnergyUnit fromSymbol(String rawSymbol) {
+        if (rawSymbol == null || rawSymbol.isBlank()) {
+            return getDefaultUnit();
+        }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (EnergyUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
@@ -55,7 +58,7 @@ public enum EnergyUnits implements EnergyUnit {
                 return unit;
             }
         }
-        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
                 + EnergyUnits.class.getSimpleName());
     }
 
@@ -64,5 +67,9 @@ public enum EnergyUnits implements EnergyUnit {
                 .trimLowerAndClean()
                 .toString();
     }
-    
+
+    public static EnergyUnit getDefaultUnit() {
+        return JOULE;
+    }
+
 }

@@ -1,13 +1,11 @@
 package com.synerset.unitility.quarkus;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.flows.MassFlow;
-import com.synerset.unitility.unitsystem.flows.VolumetricFlow;
-import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.flow.MassFlow;
+import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
@@ -16,6 +14,7 @@ import com.synerset.unitility.unitsystem.mechanical.Force;
 import com.synerset.unitility.unitsystem.mechanical.Momentum;
 import com.synerset.unitility.unitsystem.mechanical.Torque;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.ws.rs.ext.ParamConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,9 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SuppressWarnings("unchecked")
 class PhysicalQuantityJakartaProviderTest {
 
-    public static final PhysicalQuantityParsingFactory PARSING_REGISTRY = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
-    public static final GeoQuantityParsingFactory GEO_PARSING_REGISTRY = PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
-    public static final PhysicalQuantityJakartaProvider CONVERTER_PROVIDER = new PhysicalQuantityJakartaProvider(PARSING_REGISTRY, GEO_PARSING_REGISTRY);
+    public static final PhysicalQuantityParsingFactory PARSING_REGISTRY = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
+    public static final PhysicalQuantityJakartaProvider CONVERTER_PROVIDER = new PhysicalQuantityJakartaProvider(PARSING_REGISTRY);
     public static final double TEST_VALUE = 15.1;
 
     @ParameterizedTest

@@ -1,13 +1,12 @@
 package com.synerset.unitility.spring;
 
-import com.synerset.unitility.spring.serdes.PhysicalQuantityWebMvcConverter;
+import com.synerset.unitility.spring.serialization.PhysicalQuantityWebMvcConverter;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
-import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivity;
 import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivityUnit;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,7 +24,7 @@ class PhysicalQuantitySpringConverterTest {
     @Test
     void convert_shouldConvertStringToPhysicalQuantity() {
         // Given
-        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
+        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
 
         String input_1 = "20[BTU/(h·ft·°F)]";
         String input_2 = "20[BTU p (h x ft x oF)]";
@@ -60,11 +59,10 @@ class PhysicalQuantitySpringConverterTest {
                                                              PhysicalQuantity<?> expectedQuantity) {
 
         // Given
-        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
-        GeoQuantityParsingFactory geoParsingFactory = PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
+        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
         FormattingConversionService formatterRegistry = new WebConversionService(new DateTimeFormatters());
 
-        PhysicalQuantityWebMvcConfiguration config = new PhysicalQuantityWebMvcConfiguration(parsingFactory, geoParsingFactory);
+        PhysicalQuantityWebMvcConfiguration config = new PhysicalQuantityWebMvcConfiguration(parsingFactory);
         config.addFormatters(formatterRegistry);
 
         // When

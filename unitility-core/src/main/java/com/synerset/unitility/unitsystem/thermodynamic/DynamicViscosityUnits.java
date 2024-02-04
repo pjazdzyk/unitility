@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.StringTransformer;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -42,6 +42,9 @@ public enum DynamicViscosityUnits implements DynamicViscosityUnit {
     }
 
     public static DynamicViscosityUnit fromSymbol(String rawSymbol) {
+        if (rawSymbol == null || rawSymbol.isBlank()) {
+            return getDefaultUnit();
+        }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (DynamicViscosityUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
@@ -49,7 +52,7 @@ public enum DynamicViscosityUnits implements DynamicViscosityUnit {
                 return unit;
             }
         }
-        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
                 + DynamicViscosityUnits.class.getSimpleName());
     }
 
@@ -59,6 +62,10 @@ public enum DynamicViscosityUnits implements DynamicViscosityUnit {
                 .unifyMultiAndDiv()
                 .dropParentheses()
                 .toString();
+    }
+
+    public static DynamicViscosityUnit getDefaultUnit() {
+        return KILOGRAM_PER_METER_SECOND;
     }
 
 }
