@@ -1,11 +1,9 @@
 package com.synerset.unitility.spring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.unitility.jackson.modules.GeoQuantityJacksonModule;
-import com.synerset.unitility.jackson.modules.PhysicalQuantityJacksonModule;
+import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
-import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -28,12 +26,10 @@ class PhysicalQuantityJacksonConfiguration {
      * @return A {@link Jackson2ObjectMapperBuilderCustomizer}.
      */
     @Bean
-    Jackson2ObjectMapperBuilderCustomizer createPhysicalQuantityJacksonModule(@Qualifier("defaultParsingFactory") PhysicalQuantityParsingFactory parsingFactory,
-                                                                              @Qualifier("geoParsingFactory") GeoQuantityParsingFactory geoParsingFactory) {
+    Jackson2ObjectMapperBuilderCustomizer createPhysicalQuantityJacksonModule(@Qualifier("defaultParsingFactory") PhysicalQuantityParsingFactory parsingFactory) {
 
         return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.modules(
-                new PhysicalQuantityJacksonModule(parsingFactory),
-                new GeoQuantityJacksonModule(geoParsingFactory)
+                new PhysicalQuantityJacksonModule(parsingFactory)
         );
     }
 
@@ -45,12 +41,12 @@ class PhysicalQuantityJacksonConfiguration {
      */
     @Bean
     PhysicalQuantityParsingFactory defaultParsingFactory() {
-        return PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
+        return PhysicalQuantityParsingFactory.getDefaultParsingFactory();
     }
 
     @Bean
-    GeoQuantityParsingFactory geoParsingFactory() {
-        return PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
+    PhysicalQuantityParsingFactory geoParsingFactory() {
+        return PhysicalQuantityParsingFactory.getDefaultParsingFactory();
     }
 
 }

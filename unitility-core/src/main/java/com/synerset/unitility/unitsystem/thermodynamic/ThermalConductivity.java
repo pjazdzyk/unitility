@@ -11,6 +11,9 @@ public class ThermalConductivity implements CalculableQuantity<ThermalConductivi
 
     public ThermalConductivity(double value, ThermalConductivityUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = ThermalConductivityUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

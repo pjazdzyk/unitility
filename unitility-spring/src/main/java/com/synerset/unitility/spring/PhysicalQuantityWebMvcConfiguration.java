@@ -1,10 +1,7 @@
 package com.synerset.unitility.spring;
 
-import com.synerset.unitility.spring.serdes.LatitudeWebMvcConverter;
-import com.synerset.unitility.spring.serdes.LongitudeWebMvcConverter;
-import com.synerset.unitility.spring.serdes.PhysicalQuantityWebMvcConverter;
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
-import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.spring.serialization.PhysicalQuantityWebMvcConverter;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.format.FormatterRegistry;
@@ -21,13 +18,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 class PhysicalQuantityWebMvcConfiguration implements WebMvcConfigurer {
 
     private final PhysicalQuantityParsingFactory parsingFactory;
-    private final GeoQuantityParsingFactory geoParsingFactory;
-
-    PhysicalQuantityWebMvcConfiguration(@Qualifier("defaultParsingFactory") PhysicalQuantityParsingFactory parsingFactory,
-                                        @Qualifier("geoParsingFactory") GeoQuantityParsingFactory geoParsingFactory) {
+    PhysicalQuantityWebMvcConfiguration(@Qualifier("defaultParsingFactory") PhysicalQuantityParsingFactory parsingFactory) {
 
         this.parsingFactory = parsingFactory;
-        this.geoParsingFactory = geoParsingFactory;
     }
 
     /**
@@ -45,8 +38,6 @@ class PhysicalQuantityWebMvcConfiguration implements WebMvcConfigurer {
                         quantityClass,
                         new PhysicalQuantityWebMvcConverter<>(quantityClass, parsingFactory))
                 );
-        registry.addConverter(new LatitudeWebMvcConverter(geoParsingFactory));
-        registry.addConverter(new LongitudeWebMvcConverter(geoParsingFactory));
     }
 
 }

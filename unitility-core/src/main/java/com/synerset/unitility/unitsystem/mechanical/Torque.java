@@ -13,6 +13,9 @@ public class Torque implements CalculableQuantity<TorqueUnit, Torque> {
 
     public Torque(double value, TorqueUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = TorqueUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

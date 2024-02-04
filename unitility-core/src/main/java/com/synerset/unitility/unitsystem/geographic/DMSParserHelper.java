@@ -2,15 +2,15 @@ package com.synerset.unitility.unitsystem.geographic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
-import static com.synerset.unitility.unitsystem.utils.DoubleParser.parseToDouble;
+import static com.synerset.unitility.unitsystem.util.ParsingHelpers.parseToDouble;
 
-class DMSParserHelper {
+public class DMSParserHelper {
 
     private DMSParserHelper() {
         throw new IllegalStateException("Utility class");
     }
 
-    static double extractDegreesFromDMSFormat(String dmsFormat) {
+    public static double extractDegreesFromDMSFormat(String dmsFormat) {
         validateInputString(dmsFormat);
         String[] parts = dmsFormat.split("[o'\"nsew]");
 

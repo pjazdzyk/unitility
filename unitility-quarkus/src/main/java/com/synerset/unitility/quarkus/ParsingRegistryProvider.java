@@ -1,7 +1,6 @@
 package com.synerset.unitility.quarkus;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
-import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.enterprise.context.ApplicationScoped;
 
 /**
@@ -13,13 +12,7 @@ class ParsingRegistryProvider {
     @ApplicationScoped
     @DefaultParsingFactory
     PhysicalQuantityParsingFactory createParsingFactory() {
-        return PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
-    }
-
-    @ApplicationScoped
-    @GeoParsingFactory
-    GeoQuantityParsingFactory createGeoParsingFactory() {
-        return PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
+        return PhysicalQuantityParsingFactory.getDefaultParsingFactory();
     }
 
 }

@@ -10,10 +10,13 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
     private final double baseValue;
     private final VolumeUnit unitType;
 
-    public Volume(double value, VolumeUnit unit) {
+    public Volume(double value, VolumeUnit unitType) {
         this.value = value;
-        this.unitType = unit;
-        this.baseValue = unit.toValueInBaseUnit(value);
+        if(unitType == null){
+            unitType = VolumeUnits.getDefaultUnit();
+        }
+        this.unitType = unitType;
+        this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods

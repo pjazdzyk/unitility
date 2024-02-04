@@ -1,6 +1,6 @@
 package com.synerset.unitility.quarkus;
 
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,15 +13,12 @@ class ParsingRegistryProviderTest {
     void createParsingRegistryTest() {
         // Given
         ParsingRegistryProvider parsingRegistryProvider =  new ParsingRegistryProvider();
-        PhysicalQuantityParsingFactory expectedRegistry = PhysicalQuantityParsingFactory.DEFAULT_PARSING_FACTORY;
-        PhysicalQuantityParsingFactory expectedGeoRegistry = PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
+        PhysicalQuantityParsingFactory expectedRegistry = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
 
         // When
         PhysicalQuantityParsingFactory actualParsingRegistry = parsingRegistryProvider.createParsingFactory();
-        PhysicalQuantityParsingFactory actualGeoParsingRegistry = parsingRegistryProvider.createGeoParsingFactory();
 
         // Then
         assertThat(expectedRegistry.findAllRegisteredClasses()).isEqualTo(actualParsingRegistry.findAllRegisteredClasses());
-        assertThat(expectedGeoRegistry.findAllRegisteredClasses()).isEqualTo(actualGeoParsingRegistry.findAllRegisteredClasses());
     }
 }

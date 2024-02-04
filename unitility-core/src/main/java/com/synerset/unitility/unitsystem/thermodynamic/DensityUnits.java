@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.StringTransformer;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -42,6 +42,9 @@ public enum DensityUnits implements DensityUnit {
     }
 
     public static DensityUnit fromSymbol(String rawSymbol) {
+        if (rawSymbol == null || rawSymbol.isBlank()) {
+            return getDefaultUnit();
+        }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (DensityUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
@@ -49,7 +52,7 @@ public enum DensityUnits implements DensityUnit {
                 return unit;
             }
         }
-        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
                 + DensityUnits.class.getSimpleName());
     }
 
@@ -59,6 +62,10 @@ public enum DensityUnits implements DensityUnit {
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()
                 .toString();
+    }
+
+    public static DensityUnit getDefaultUnit() {
+        return KILOGRAM_PER_CUBIC_METER;
     }
 
 }

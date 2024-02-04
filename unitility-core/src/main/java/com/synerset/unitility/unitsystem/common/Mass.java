@@ -13,6 +13,9 @@ public class Mass implements CalculableQuantity<MassUnit, Mass> {
 
     public Mass(double value, MassUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = MassUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

@@ -2,9 +2,8 @@ package com.synerset.unitility.spring;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
-import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -20,9 +19,8 @@ class PhysicalQuantityJacksonConfigurationTest {
         // Given
         PhysicalQuantityJacksonConfiguration jacksonConfiguration = new PhysicalQuantityJacksonConfiguration();
         PhysicalQuantityParsingFactory parsingRegistry = jacksonConfiguration.defaultParsingFactory();
-        GeoQuantityParsingFactory geoParsingFactory = PhysicalQuantityParsingFactory.GEO_PARSING_FACTORY;
         Jackson2ObjectMapperBuilderCustomizer jacksonCustomizer
-                = jacksonConfiguration.createPhysicalQuantityJacksonModule(parsingRegistry, geoParsingFactory);
+                = jacksonConfiguration.createPhysicalQuantityJacksonModule(parsingRegistry);
         Jackson2ObjectMapperBuilder objectMapperBuilder = Jackson2ObjectMapperBuilder.json();
         String inputQuantity = "{\"value\":20.0,\"unit\":\"°C\"}";
 

@@ -20,6 +20,9 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
 
     public Longitude(double value, AngleUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = AngleUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

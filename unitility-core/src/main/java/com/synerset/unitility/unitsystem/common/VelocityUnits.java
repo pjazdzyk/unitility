@@ -1,7 +1,7 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
-import com.synerset.unitility.unitsystem.utils.StringTransformer;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -47,6 +47,9 @@ public enum VelocityUnits implements VelocityUnit {
     }
 
     public static VelocityUnit fromSymbol(String rawSymbol) {
+        if (rawSymbol == null || rawSymbol.isBlank()) {
+            return getDefaultUnit();
+        }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (VelocityUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
@@ -54,7 +57,7 @@ public enum VelocityUnits implements VelocityUnit {
                 return unit;
             }
         }
-        throw new UnitSystemArgumentException("Unsupported symbol: " + rawSymbol + ", class: "
+        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
                 + VelocityUnits.class.getSimpleName());
     }
 
@@ -63,6 +66,10 @@ public enum VelocityUnits implements VelocityUnit {
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
                 .toString();
+    }
+
+    public static VelocityUnits getDefaultUnit() {
+        return METER_PER_SECOND;
     }
 
 }

@@ -1,14 +1,9 @@
 package com.synerset.unitility.quarkus;
 
-import com.synerset.unitility.quarkus.serdes.LatitudeParamJakartaConverter;
-import com.synerset.unitility.quarkus.serdes.LongitudeParamJakartaConverter;
-import com.synerset.unitility.quarkus.serdes.PhysicalQuantityParamJakartaConverter;
+import com.synerset.unitility.quarkus.serialization.PhysicalQuantityParamJakartaConverter;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
-import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
-import com.synerset.unitility.unitsystem.geographic.Latitude;
-import com.synerset.unitility.unitsystem.geographic.Longitude;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.PathParam;
@@ -36,8 +31,7 @@ class PhysicalQuantityJakartaProvider implements ParamConverterProvider {
 
     private final Map<Class<?>, ParamConverter<?>> immutableConverterRegistry;
 
-    public PhysicalQuantityJakartaProvider(@DefaultParsingFactory PhysicalQuantityParsingFactory parsingRegistry,
-                                           @GeoParsingFactory GeoQuantityParsingFactory geoParsingFactory) {
+    public PhysicalQuantityJakartaProvider(@DefaultParsingFactory PhysicalQuantityParsingFactory parsingRegistry) {
 
         Map<Class<?>, ParamConverter<?>> registry = new ConcurrentHashMap<>();
         parsingRegistry.findAllRegisteredClasses()
@@ -45,8 +39,6 @@ class PhysicalQuantityJakartaProvider implements ParamConverterProvider {
                         quantityClass,
                         new PhysicalQuantityParamJakartaConverter<>(quantityClass, parsingRegistry))
                 );
-        registry.put(Latitude.class, new LatitudeParamJakartaConverter(geoParsingFactory));
-        registry.put(Longitude.class, new LongitudeParamJakartaConverter(geoParsingFactory));
         this.immutableConverterRegistry = Collections.unmodifiableMap(registry);
     }
 

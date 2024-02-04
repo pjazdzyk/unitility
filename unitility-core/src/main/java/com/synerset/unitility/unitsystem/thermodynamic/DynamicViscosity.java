@@ -12,6 +12,9 @@ public class DynamicViscosity implements CalculableQuantity<DynamicViscosityUnit
 
     public DynamicViscosity(double value, DynamicViscosityUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = DynamicViscosityUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

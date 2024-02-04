@@ -13,6 +13,9 @@ public class Area implements CalculableQuantity<AreaUnit, Area> {
 
     public Area(double value, AreaUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = AreaUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }

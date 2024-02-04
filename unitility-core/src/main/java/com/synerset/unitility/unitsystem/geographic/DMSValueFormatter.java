@@ -1,6 +1,6 @@
 package com.synerset.unitility.unitsystem.geographic;
 
-import com.synerset.unitility.unitsystem.utils.ValueFormatter;
+import com.synerset.unitility.unitsystem.util.ValueFormatter;
 
 class DMSValueFormatter {
 

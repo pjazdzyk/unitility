@@ -1,11 +1,9 @@
 package com.synerset.unitility.quarkus;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.unitility.jackson.modules.GeoQuantityJacksonModule;
-import com.synerset.unitility.jackson.modules.PhysicalQuantityJacksonModule;
+import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
-import com.synerset.unitility.unitsystem.PhysicalQuantityParsingFactory;
-import com.synerset.unitility.unitsystem.geographic.GeoQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import io.quarkus.jackson.ObjectMapperCustomizer;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -18,13 +16,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
 
     private final PhysicalQuantityParsingFactory parsingFactory;
-    private final GeoQuantityParsingFactory geoParsingFactory;
 
-    public PhysicalQuantityObjectMapperCustomizer(@DefaultParsingFactory PhysicalQuantityParsingFactory parsingFactory,
-                                                  @GeoParsingFactory GeoQuantityParsingFactory geoParsingFactory) {
+    public PhysicalQuantityObjectMapperCustomizer(@DefaultParsingFactory PhysicalQuantityParsingFactory parsingFactory) {
 
         this.parsingFactory = parsingFactory;
-        this.geoParsingFactory = geoParsingFactory;
     }
 
     /**
@@ -38,7 +33,6 @@ class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
     @Override
     public void customize(ObjectMapper objectMapper) {
         objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
-        objectMapper.registerModule(new GeoQuantityJacksonModule(geoParsingFactory));
     }
 
 }

@@ -2,6 +2,7 @@ package com.synerset.unitility.unitsystem.geographic;
 
 import com.synerset.unitility.unitsystem.common.AngleUnit;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
+import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -84,11 +85,11 @@ class LatitudeTest {
         String longitudeAsStringW = "52°14'5.1\"W";
 
         // When
-        GeoQuantityParsingFactory parsingFactory = GeoQuantityParsingFactory.GEO_PARSING_FACTORY;
-        Latitude latitudeN = parsingFactory.parseFromDMSFormat(Latitude.class, latitudeAsStringN);
-        Latitude latitudeS = parsingFactory.parseFromDMSFormat(Latitude.class, latitudeAsStringS);
-        Longitude longitudeE = parsingFactory.parseFromDMSFormat(Longitude.class, longitudeAsStringE);
-        Longitude longitudeW = parsingFactory.parseFromDMSFormat(Longitude.class, longitudeAsStringW);
+        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
+        Latitude latitudeN = parsingFactory.parse(Latitude.class, latitudeAsStringN);
+        Latitude latitudeS = parsingFactory.parse(Latitude.class, latitudeAsStringS);
+        Longitude longitudeE = parsingFactory.parse(Longitude.class, longitudeAsStringE);
+        Longitude longitudeW = parsingFactory.parse(Longitude.class, longitudeAsStringW);
 
         // Then
         assertThat(latitudeN.getInDegrees()).isEqualTo(52.23475);

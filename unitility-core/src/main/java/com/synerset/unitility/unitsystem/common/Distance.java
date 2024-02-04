@@ -13,6 +13,9 @@ public class Distance implements CalculableQuantity<DistanceUnit, Distance> {
 
     public Distance(double value, DistanceUnit unitType) {
         this.value = value;
+        if(unitType == null){
+            unitType = DistanceUnits.getDefaultUnit();
+        }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
