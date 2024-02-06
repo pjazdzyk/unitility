@@ -6,13 +6,14 @@ import java.util.Objects;
 
 public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, VolumetricFlow> {
 
+    public static final VolumetricFlow VOL_FLOW_MIN_LIMIT = VolumetricFlow.ofCubicMetersPerSecond(0);
     private final double value;
     private final double baseValue;
     private final VolumetricFlowUnit unitType;
 
     public VolumetricFlow(double value, VolumetricFlowUnit unitType) {
         this.value = value;
-        if(unitType == null){
+        if (unitType == null) {
             unitType = VolumetricFlowUnits.getDefaultUnit();
         }
         this.unitType = unitType;

@@ -6,13 +6,14 @@ import java.util.Objects;
 
 public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
 
+    public static final MassFlow MASS_FLOW_MIN_LIMIT = MassFlow.ofKilogramsPerSecond(0);
     private final double value;
     private final double baseValue;
     private final MassFlowUnit unitType;
 
     public MassFlow(double value, MassFlowUnit unitType) {
         this.value = value;
-        if(unitType == null){
+        if (unitType == null) {
             unitType = MassFlowUnits.getDefaultUnit();
         }
         this.unitType = unitType;
@@ -28,7 +29,7 @@ public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
         MassFlowUnit resolvedUnit = MassFlowUnits.fromSymbol(unitSymbol);
         return new MassFlow(value, resolvedUnit);
     }
-    
+
     public static MassFlow ofKilogramsPerSecond(double value) {
         return new MassFlow(value, MassFlowUnits.KILOGRAM_PER_SECOND);
     }

@@ -15,6 +15,7 @@
         <module>unitility-jackson</module>
         <module>unitility-spring</module>
         <module>unitility-quarkus</module>
+        <module>unitility-validation</module>
     </modules>
 
     <name>Unitility</name>
@@ -44,25 +45,36 @@
     <properties>
         <!-- MODULES VERSION -->
         <project.version>2.3.0</project.version>
+
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Jackson module -->
+        <jackson-databind.version>2.16.1</jackson-databind.version>
+        <!-- SpringBoot module -->
+        <spring-boot-starter-web.version>3.2.2</spring-boot-starter-web.version>
+        <!-- Quarkus module -->
+        <quarkus-version>3.7.1</quarkus-version>
+        <!-- Jakarta validation module -->
+        <jakarta.validation-api.version>3.1.0-M1</jakarta.validation-api.version>
+        <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+        <jakarta.el.version>5.0.0-M1</jakarta.el.version>
+
         <!-- Test dependencies versions -->
         <jacoco.version>0.8.11</jacoco.version>
         <junit-jupiter.version>5.10.1</junit-jupiter.version>
         <assertj-core.version>3.25.2</assertj-core.version>
-        <!-- Framework versions -->
-        <jackson-databind.version>2.16.1</jackson-databind.version>
-        <spring-boot-starter-web.version>3.2.2</spring-boot-starter-web.version>
-        <quarkus-version>3.7.1</quarkus-version>
-        <jandex-maven-plugin.version>3.1.6</jandex-maven-plugin.version>
+
         <!-- Plugin versions -->
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <maven-surefire-plugin.version>3.2.2</maven-surefire-plugin.version>
+        <jandex-maven-plugin.version>3.1.6</jandex-maven-plugin.version>
+
         <!-- Sonar Cloud Properties-->
         <sonar.organization>synerset</sonar.organization>
         <sonar.projectKey>pjazdzyk_unitility</sonar.projectKey>

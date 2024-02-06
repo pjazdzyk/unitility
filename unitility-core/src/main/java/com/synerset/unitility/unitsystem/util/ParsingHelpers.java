@@ -39,7 +39,7 @@ public class ParsingHelpers {
         try {
             return Double.parseDouble(doubleAsString);
         } catch (NumberFormatException ex) {
-            throw new UnitSystemParseException(addedMessage + " Invalid input, could not parse to double, input = "
+            throw new UnitSystemParseException(addedMessage + "Invalid input, could not parse to double, input = "
                     + doubleAsString);
         }
     }

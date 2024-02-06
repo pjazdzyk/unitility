@@ -1,0 +1,3 @@
+com.synerset.unitility.validation.PhysicalMaxValidator
+com.synerset.unitility.validation.PhysicalMinValidator
+com.synerset.unitility.validation.PhysicalRangeValidator

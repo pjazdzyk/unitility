@@ -62,7 +62,7 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
     }
 
     public static RelativeHumidityUnit getDefaultUnit() {
-        return PERCENT;
+        return DECIMAL;
     }
 
 }

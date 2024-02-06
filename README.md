@@ -40,8 +40,9 @@ features, such as overloaded operators.
    4.5 [Equality and sorting](#45-equality-and-sorting) <br>
 5. [Unitility extension modules](#5-unitility-extension-modules) <br>
    5.1 [Jackson serializers / deserializers](#51-jackson-serializers-and-deserializers) <br>
-   5.2 [Spring](#52-spring-boot-module) <br>
-   5.3 [Quarkus](#53-quarkus-module) <br>
+   5.2 [SpringBoot web extension](#52-spring-boot-module) <br>
+   5.3 [Quarkus web extension](#53-quarkus-module) <br>
+   5.4 [Jakarta Validation](#54) <br>
 6. [Creating custom units and quantities](#6-creating-custom-quantities) <br>
    6.1 [Custom unit](#61-custom-unit) <br>
    6.2 [Registering custom quantity in Spring](#62-custom-physical-quantity) <br>
@@ -270,13 +271,18 @@ Please note that this method of creating quantities is designed to be used for d
 IMPORTANT:
 When parsing from string values should be provided using dot "." as decimal separator.<br>
 DO NOT USE grouping separators. <br>
+
 This will parse properly:<br>
 ```text
-1000000.00 [Pa]
+1000000.00 [Pa] -> OK
+```
+This also ill parse properly:<br>
+```text
+1_000_000.00 [Pa] -> OK
 ```
 But this will not: <br>
 ```text
-1,000,0000.00 [Pa]
+1,000,0000.00 [Pa] -> will FAIL
 ```
 
 
@@ -526,12 +532,51 @@ public class DefaultUnitsResource {
         // Some code
         return temperature;
     }
-
 }
 ```
 For special cases when custom unit is created, which is not a part of standard Unitiltiy package, additional configuration
 steps must be carried out to ensure that custom unit is properly resolved from JSON or path/query params. For more details
 see a section: [Registering custom quantity in Quarkus](#64-registering-custom-quantities-in-quarkus).
+
+## 5.4 Jakarta validation
+The validation module encompasses preconfigured validator classes along with corresponding annotations designed for bean 
+validation purposes. The available annotations are as follows:
+- @PhysicalMin
+- @PhysicalMax
+- @PhysicalRange
+
+These annotations are designed to accept a string containing a value and its corresponding unit, representing a physical 
+quantity. The validator will utilize the default parsing factory utility to generate a PhysicalQuantity instance reflecting
+the provided limiting value. Subsequently, it will compare this instance to the validated quantity. Both quantities will 
+undergo comparison based on their base units, allowing users to conveniently specify limits in any of the supported units.
+
+By default, the provided limits are inclusive. To designate a value as exclusive, employ the parameter "inclusive = false".
+
+Validators will be automatically discovered via Spring Boot or Quarkus dependency injection mechanisms once the dependency
+is added to the pom.xml file or any other dependency management tool.
+
+Example of specifying minimum value limit, inclusive:
+```java
+    @GetMapping("/dry-air")
+    DryAirResponse getDryAir(@RequestParam @PhysicalMin("-150oC") Temperature temperature);
+```
+
+Example of specifying maximum value as exclusive limit:
+```java
+    @GetMapping("/dry-air")
+    DryAirResponse getDryAir(@RequestParam @PhysicalMax(value = "373.15K", inclusive = false) Temperature temperature);
+```
+
+Example of specifying range, where both limits are exclusive:
+```java
+    @GetMapping("/dry-air")
+    DryAirResponse getDryAir(@RequestParam @PhysicalRange(min = "-150oC", minIncl = false, max = "1000oC", maxIncl = false) Temperature temperature);
+```
+Keep in mind that validated class must be annotated with: @Validated annotation.
+
+Following dependencies MUST be added to the project in order to unitility-validation to work:
+- SpringBoot: **spring-boot-starter-validation**
+- Quarkus: 
 
 ## 6. CREATING CUSTOM QUANTITIES
 The Unitility includes a set of the most commonly used quantities and related units with an emphasis on thermodynamics. 
