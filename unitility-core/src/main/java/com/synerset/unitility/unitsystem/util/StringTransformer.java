@@ -38,6 +38,7 @@ public class StringTransformer {
                 inputString.trim()
                         .toLowerCase()
                         .replace(" ", "")
+                        .replace("_", "")
         );
     }
 

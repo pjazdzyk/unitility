@@ -37,6 +37,11 @@
                 <artifactId>unitility-spring</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.synerset</groupId>
+                <artifactId>unitility-validation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
