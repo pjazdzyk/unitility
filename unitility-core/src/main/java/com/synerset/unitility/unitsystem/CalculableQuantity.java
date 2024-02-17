@@ -176,7 +176,7 @@ public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity
             return getValue();
         }
         double thisValue = getValue();
-        if (thisValue == 0) {
+        if (inputQuantity.getValue() == 0) {
             throw new UnitSystemArgumentException("Divider quantity value cannot be zero.");
         }
         return thisValue / inputQuantity.getValue();
