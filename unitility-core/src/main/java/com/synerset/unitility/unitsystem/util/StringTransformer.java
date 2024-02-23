@@ -49,8 +49,10 @@ public class StringTransformer {
      */
     public StringTransformer unifyAerialAndVol() {
         return StringTransformer.of(
-                inputString.replace("³", "3")
-                        .replace("²", "2"));
+                inputString.replace("cfm", "ft3pmin")
+                        .replace("³", "3")
+                        .replace("²", "2")
+        );
     }
 
     /**

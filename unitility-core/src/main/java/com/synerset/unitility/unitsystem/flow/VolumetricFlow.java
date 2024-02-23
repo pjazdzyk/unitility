@@ -42,6 +42,10 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
         return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
     }
 
+    public static VolumetricFlow ofCubicFeetPerMinute(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.CUBIC_FEET_PER_MINUTE);
+    }
+
     public static VolumetricFlow ofLitresPerSecond(double value) {
         return new VolumetricFlow(value, VolumetricFlowUnits.LITRE_PER_SECOND);
     }
@@ -112,6 +116,10 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
         return toUnit(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
     }
 
+    public VolumetricFlow toCubicFeetPerMinute() {
+        return toUnit(VolumetricFlowUnits.CUBIC_FEET_PER_MINUTE);
+    }
+
     public VolumetricFlow toLitresPerSecond() {
         return toUnit(VolumetricFlowUnits.LITRE_PER_SECOND);
     }
@@ -147,6 +155,10 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
 
     public double getInCubicMetersPerHour() {
         return getInUnit(VolumetricFlowUnits.CUBIC_METERS_PER_HOUR);
+    }
+
+    public double getInCubicFeetPerMinute() {
+        return getInUnit(VolumetricFlowUnits.CUBIC_FEET_PER_MINUTE);
     }
 
     public double getInLitresPerSecond() {

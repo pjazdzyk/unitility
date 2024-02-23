@@ -10,6 +10,7 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
     CUBIC_METERS_PER_SECOND("m³/s", val -> val, val -> val),
     CUBIC_METERS_PER_MINUTE("m³/min", val -> val / 60.0, val -> val * 60.0),
     CUBIC_METERS_PER_HOUR("m³/h", val -> val / 3600.0, val -> val * 3600.0),
+    CUBIC_FEET_PER_MINUTE("ft³/min", val -> val / 2118.880003289315415, val -> val * 2118.880003289315415),
     LITRE_PER_SECOND("l/s", val -> val / 1000.0, val -> val * 1000.0),
     LITRE_PER_MINUTE("l/min", val -> val / 60000.0, val -> val * 60000.0),
     LITRE_PER_HOUR("l/h", val -> val / 3600000.0, val -> val * 3600000.0),
@@ -51,6 +52,7 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
         if (rawSymbol == null || rawSymbol.isBlank()) {
             return getDefaultUnit();
         }
+
         String requestedSymbol = unifySymbol(rawSymbol);
         for (VolumetricFlowUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
