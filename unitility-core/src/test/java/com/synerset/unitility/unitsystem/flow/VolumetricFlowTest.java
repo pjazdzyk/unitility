@@ -154,6 +154,24 @@ class VolumetricFlowTest {
     }
 
     @Test
+    @DisplayName("should convert to m³/s from ft³/min and vice versa")
+    void shouldProperlyConvertToMetersCubedPerSecondFromFeetPerMinute() {
+        // Given
+        VolumetricFlow initialFlowInM3PerSec = VolumetricFlow.ofCubicMetersPerSecond(1.0);
+
+        // When
+        VolumetricFlow actualFlowInCFM = initialFlowInM3PerSec.toUnit(VolumetricFlowUnits.CUBIC_FEET_PER_MINUTE);
+        double actualFlowInCFMVal = initialFlowInM3PerSec.getInCubicFeetPerMinute();
+        VolumetricFlow actualFlowInM3PerSec = actualFlowInCFM.toBaseUnit();
+
+        // Then
+        VolumetricFlow expectedFlowInCFM = VolumetricFlow.ofCubicFeetPerMinute(2118.880003289315415);
+        assertThat(actualFlowInCFM.getValue()).isEqualTo(actualFlowInCFMVal);
+        assertThat(actualFlowInCFM).isEqualTo(expectedFlowInCFM);
+        assertThat(actualFlowInM3PerSec).isEqualTo(initialFlowInM3PerSec);
+    }
+
+    @Test
     @DisplayName("should have m³/s as base unit")
     void shouldHaveCubicMetersPerSecondAsBaseUnit() {
         // Given

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
+import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
@@ -33,6 +34,9 @@ class PhysicalQuantityJacksonDeserializerTest {
         String bfFactor6 = "{\"value\":20,\"unit\":\"\"}";
         String bfFactor7 = "{\"value\":20,\"unit\":\"  Celcius   \"}";
         String bfFactor8 = "{\"value\":20}";
+        String volFlowCFM = "{\"value\":20.0,\"unit\":\"CFM\"}";
+        String volFlowFt3m = "{\"value\":20.0,\"unit\":\"ft3/min\"}";
+
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
@@ -45,11 +49,15 @@ class PhysicalQuantityJacksonDeserializerTest {
         BypassFactor actualBypassFactor6 = objectMapper.readValue(bfFactor6, BypassFactor.class);
         BypassFactor actualBypassFactor7 = objectMapper.readValue(bfFactor7, BypassFactor.class);
         BypassFactor actualBypassFactor8 = objectMapper.readValue(bfFactor8, BypassFactor.class);
+        VolumetricFlow actualVolFlowCFM = objectMapper.readValue(volFlowCFM, VolumetricFlow.class);
+        VolumetricFlow actualVolFlowFt3m = objectMapper.readValue(volFlowFt3m, VolumetricFlow.class);
 
         // Then
         Temperature expetedTemperature = Temperature.ofCelsius(20);
         ThermalConductivity expectedThermalCond = ThermalConductivity.ofBTUPerHourFeetFahrenheit(20);
         BypassFactor expectedBypassFactor = BypassFactor.of(20);
+        VolumetricFlow expectedVolFlow = VolumetricFlow.ofCubicFeetPerMinute(20);
+
         assertThat(actualTemp1).isEqualTo(expetedTemperature);
         assertThat(actualTemp2).isEqualTo(expetedTemperature);
         assertThat(actualTemp3).isEqualTo(expetedTemperature);
@@ -60,6 +68,8 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualBypassFactor6).isEqualTo(expectedBypassFactor);
         assertThat(actualBypassFactor7).isEqualTo(expectedBypassFactor);
         assertThat(actualBypassFactor8).isEqualTo(expectedBypassFactor);
+        assertThat(actualVolFlowCFM).isEqualTo(expectedVolFlow);
+        assertThat(actualVolFlowFt3m).isEqualTo(expectedVolFlow);
     }
 
     @Test
