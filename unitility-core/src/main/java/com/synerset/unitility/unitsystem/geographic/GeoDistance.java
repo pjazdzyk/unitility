@@ -104,7 +104,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
      * @return A new {@link GeoDistance} instance representing the progressed distance.
      */
     public GeoDistance with(Angle trueBearing, Distance byDistance) {
-        if (byDistance.equalsZero()) {
+        if (byDistance.isEqualZero()) {
             return this;
         }
         return GeoDistance.of(this.startCoordinate, trueBearing, byDistance);
@@ -118,7 +118,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
      * @return A new {@link GeoDistance} instance representing the progressed distance.
      */
     public GeoDistance with(Distance byDistance) {
-        if (byDistance.equalsZero()) {
+        if (byDistance.isEqualZero()) {
             return this;
         }
         return GeoDistance.of(this.startCoordinate, this.trueBearing, byDistance);
@@ -160,7 +160,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
      * @return A new {@link GeoDistance} instance representing the progressed distance.
      */
     public GeoDistance translate(Angle trueBearing, Distance byDistance) {
-        if (byDistance.equalsZero()) {
+        if (byDistance.isEqualZero()) {
             return this;
         }
         return GeoDistance.of(this.targetCoordinate, trueBearing, byDistance);
@@ -174,7 +174,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
      * @return A new {@link GeoDistance} instance representing the progressed distance.
      */
     public GeoDistance translate(Distance byDistance) {
-        if (byDistance.equalsZero()) {
+        if (byDistance.isEqualZero()) {
             return this;
         }
         return translate(this.trueBearing, byDistance);

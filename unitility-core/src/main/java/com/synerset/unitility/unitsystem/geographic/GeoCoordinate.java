@@ -174,8 +174,8 @@ public record GeoCoordinate(Latitude latitude, Longitude longitude, String name)
         if (inputGeoCoordinate == null) {
             return false;
         }
-        return latitude.equalsWithPrecision(inputGeoCoordinate.latitude, epsilon)
-                && longitude.equalsWithPrecision(inputGeoCoordinate.longitude, epsilon);
+        return latitude.isEqualWithPrecision(inputGeoCoordinate.latitude, epsilon)
+                && longitude.isEqualWithPrecision(inputGeoCoordinate.longitude, epsilon);
     }
 
     /**

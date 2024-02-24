@@ -30,7 +30,7 @@ public class PhysicalMaxValidator implements ConstraintValidator<PhysicalMax, Ph
         Class<? extends PhysicalQuantity> targetClass = validatedField.getClass();
 
         return maxInclusive
-                ? validatedField.equalsOrLowerThan(parsingFactory.parse(targetClass, maxQuantityAsString))
+                ? validatedField.isEqualOrLowerThan(parsingFactory.parse(targetClass, maxQuantityAsString))
                 : validatedField.isLowerThan(parsingFactory.parse(targetClass, maxQuantityAsString));
     }
 

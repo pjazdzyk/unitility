@@ -27,7 +27,7 @@ class PhysicalQuantityTest {
         Distance distanceInMiles = distanceInMeters.toUnit(DistanceUnits.MILE);
 
         // Then
-        assertThat(distanceInMeters.equalsWithPrecision(distanceInMiles, 1E-13)).isTrue();
+        assertThat(distanceInMeters.isEqualWithPrecision(distanceInMiles, 1E-13)).isTrue();
     }
 
     @Test
@@ -42,8 +42,8 @@ class PhysicalQuantityTest {
         // When
         boolean firstIsSmaller = smallerTemp.isLowerThan(greaterTemp);
         boolean secondIsGreater = greaterTemp.isGreaterThan(smallerTemp);
-        boolean firstIsEqualOrLower = smallerTemp.equalsOrLowerThan(smallerOrEqualTemp);
-        boolean secondIsEqualOrGreater = greaterTemp.equalsOrGreaterThan(greaterOrEqualTemp);
+        boolean firstIsEqualOrLower = smallerTemp.isEqualOrLowerThan(smallerOrEqualTemp);
+        boolean secondIsEqualOrGreater = greaterTemp.isEqualOrGreaterThan(greaterOrEqualTemp);
         boolean bothAreTheSame = greaterTemp.isGreaterThan(greaterTemp);
 
         // Then
@@ -67,19 +67,19 @@ class PhysicalQuantityTest {
         // Then
         assertThat(negativeTemp.isNegative()).isTrue();
         assertThat(negativeTemp.isNegativeOrZero()).isTrue();
-        assertThat(negativeTemp.equalsZero()).isFalse();
+        assertThat(negativeTemp.isEqualZero()).isFalse();
         assertThat(negativeTemp.isPositive()).isFalse();
         assertThat(negativeTemp.isPositiveOrZero()).isFalse();
 
         assertThat(zeroTemp.isNegative()).isFalse();
         assertThat(zeroTemp.isNegativeOrZero()).isTrue();
-        assertThat(zeroTemp.equalsZero()).isTrue();
+        assertThat(zeroTemp.isEqualZero()).isTrue();
         assertThat(zeroTemp.isPositive()).isFalse();
         assertThat(zeroTemp.isPositiveOrZero()).isTrue();
 
         assertThat(positiveTemp.isNegative()).isFalse();
         assertThat(positiveTemp.isNegativeOrZero()).isFalse();
-        assertThat(positiveTemp.equalsZero()).isFalse();
+        assertThat(positiveTemp.isEqualZero()).isFalse();
         assertThat(positiveTemp.isPositive()).isTrue();
         assertThat(positiveTemp.isPositiveOrZero()).isTrue();
 

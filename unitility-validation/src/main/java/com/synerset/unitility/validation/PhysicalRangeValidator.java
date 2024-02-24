@@ -47,7 +47,7 @@ public class PhysicalRangeValidator implements ConstraintValidator<PhysicalRange
                                             Class<? extends PhysicalQuantity> targetClass) {
 
         return minInclusive
-                ? validatedField.equalsOrGreaterThan(parsingFactory.parse(targetClass, minQuantityAsString))
+                ? validatedField.isEqualOrGreaterThan(parsingFactory.parse(targetClass, minQuantityAsString))
                 : validatedField.isGreaterThan(parsingFactory.parse(targetClass, minQuantityAsString));
     }
 
@@ -55,7 +55,7 @@ public class PhysicalRangeValidator implements ConstraintValidator<PhysicalRange
                                             Class<? extends PhysicalQuantity> targetClass) {
 
         return maxInclusive
-                ? validatedField.equalsOrLowerThan(parsingFactory.parse(targetClass, maxQuantityAsString))
+                ? validatedField.isEqualOrLowerThan(parsingFactory.parse(targetClass, maxQuantityAsString))
                 : validatedField.isLowerThan(parsingFactory.parse(targetClass, maxQuantityAsString));
     }
 
