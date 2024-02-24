@@ -29,7 +29,7 @@ public class PhysicalMinValidator implements ConstraintValidator<PhysicalMin, Ph
         Class<? extends PhysicalQuantity> targetClass = validatedField.getClass();
 
         return minInclusive
-                ? validatedField.equalsOrGreaterThan(parsingFactory.parse(targetClass, minQuantityAsString))
+                ? validatedField.isEqualOrGreaterThan(parsingFactory.parse(targetClass, minQuantityAsString))
                 : validatedField.isGreaterThan(parsingFactory.parse(targetClass, minQuantityAsString));
     }
 

@@ -90,7 +90,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is equal to or greater than the given quantity, false otherwise.
      */
-    default boolean equalsOrGreaterThan(PhysicalQuantity<U> quantity) {
+    default boolean isEqualOrGreaterThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -120,7 +120,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param quantity The other physical quantity for comparison.
      * @return True if this quantity is equal to or lower than the given quantity, false otherwise.
      */
-    default boolean equalsOrLowerThan(PhysicalQuantity<U> quantity) {
+    default boolean isEqualOrLowerThan(PhysicalQuantity<U> quantity) {
         if (Objects.isNull(quantity)) {
             return false;
         }
@@ -136,7 +136,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @param epsilon  The maximum difference allowed between the quantities.
      * @return True if this quantity is equal to the given quantity within the specified epsilon, false otherwise.
      */
-    default boolean equalsWithPrecision(PhysicalQuantity<U> quantity, double epsilon) {
+    default boolean isEqualWithPrecision(PhysicalQuantity<U> quantity, double epsilon) {
         if (this == quantity) {
             return true;
         }
@@ -194,7 +194,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return True if the value of the physical quantity is zero, false otherwise.
      */
-    default boolean equalsZero() {
+    default boolean isEqualZero() {
         return getValue() == 0;
     }
 
