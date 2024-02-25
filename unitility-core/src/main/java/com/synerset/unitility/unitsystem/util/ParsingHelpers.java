@@ -11,13 +11,17 @@ public class ParsingHelpers {
     }
 
     /**
-     * Checks if the given input string contains any non-digit characters.
+     * Checks if the given input string contains any non-digit characters. Letter "e" and "-"
+     * are not counted as they may be part of very large or very small numbers ie: 1E-13.
      *
      * @param inputString The string to check
      * @return True if the string contains any non-digit characters, false otherwise
      */
     public static boolean containsNonDigitChars(String inputString) {
-        for (char nextChar : inputString.toCharArray()) {
+        String preparedString = inputString.toLowerCase()
+                .replace("-", "")
+                .replace("e", "");
+        for (char nextChar : preparedString.toCharArray()) {
             if (Character.isAlphabetic(nextChar)) {
                 return true;
             }
