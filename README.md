@@ -575,8 +575,8 @@ Example of specifying range, where both limits are exclusive:
 Keep in mind that validated class must be annotated with: @Validated annotation.
 
 Following dependencies MUST be added to the project in order to unitility-validation to work:
-- SpringBoot: **spring-boot-starter-validation**
-- Quarkus: 
+- SpringBoot: **[spring-boot-starter-validation](https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation)**
+- Quarkus: **[quarkus-hibernate-validator](https://mvnrepository.com/artifact/io.quarkus/quarkus-hibernate-validator)**
 
 ## 6. CREATING CUSTOM QUANTITIES
 The Unitility includes a set of the most commonly used quantities and related units with an emphasis on thermodynamics. 
