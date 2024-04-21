@@ -104,6 +104,15 @@ public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity
         return divide(value);
     }
 
+    /**
+     * Takes ABS from current value in current unit. Effectively, makes always value a positive.
+     *
+     * @return A new physical quantity with the divided value.
+     */
+    default Q abs() {
+        return withValue(Math.abs(getValue()));
+    }
+
     // Handling PhysicalQuantity as input argument
 
     /**
