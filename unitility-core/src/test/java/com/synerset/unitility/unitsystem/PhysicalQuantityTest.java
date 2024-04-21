@@ -4,6 +4,8 @@ import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.common.DistanceUnits;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
+import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
+import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnit;
 import com.synerset.unitility.unitsystem.thermodynamic.Pressure;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import com.synerset.unitility.unitsystem.thermodynamic.ThermalDiffusivity;
@@ -83,6 +85,24 @@ class PhysicalQuantityTest {
         assertThat(positiveTemp.isPositive()).isTrue();
         assertThat(positiveTemp.isPositiveOrZero()).isTrue();
 
+    }
+
+    @Test
+    @DisplayName("should return true if value is closed to zero and false if it is not")
+    void isCloseToZero_shouldEvaluateIfCloseToZero(){
+        // Given
+        Temperature temperature = Temperature.ofCelsius(1E-13);
+        Pressure pressure = Pressure.ofPascal(0.001);
+
+        // When
+        boolean actualResult = temperature.isCloseToZero();
+        boolean closeToZeroTrue = pressure.isCloseToZero(0.1);
+        boolean closeToZeroFalse = pressure.isCloseToZero(0.0001);
+
+        // Then
+        assertThat(actualResult).isTrue();
+        assertThat(closeToZeroTrue).isTrue();
+        assertThat(closeToZeroFalse).isFalse();
     }
 
     // Transformations
@@ -231,6 +251,19 @@ class PhysicalQuantityTest {
         assertThat(actualTemperature).isEqualTo(expectedTemperature);
     }
 
+    @Test
+    @DisplayName("should change wrapped value to absolute abs(value)")
+    void abs_shouldChangeValueToAbsolute(){
+        // Given
+        Temperature temperature = Temperature.ofCelsius(-20);
+
+        // When
+        Temperature acutalTemperature = temperature.abs();
+
+        // Then
+        assertThat(acutalTemperature.getValue()).isEqualTo(20);
+    }
+
     // Others
 
     @Test
@@ -293,6 +326,22 @@ class PhysicalQuantityTest {
         assertThat(actualFormattedTempTwoDigits).isEqualTo("20.12 [°C]");
         assertThat(actualFormattedTempVariable).isEqualTo("t_a = 20.1234567 [°C]");
         assertThat(actualFormattedTempVariableDigits).isEqualTo("t_a = 20.12 [°C]");
+    }
+
+    @Test
+    @DisplayName("Should change from quantity sent as argument and convert value to that unit")
+    void toUnitFrom_shouldUseUnitFromFromOtherQuantity(){
+        // Given
+        VolumetricFlow volFlowM3h = VolumetricFlow.ofCubicMetersPerHour(3600);
+        VolumetricFlow volFlowM3s = VolumetricFlow.ofCubicMetersPerSecond(2);
+
+        // When
+        VolumetricFlow actualVolFlow = volFlowM3s.toUnitFrom(volFlowM3h);
+        VolumetricFlowUnit actualUnit = actualVolFlow.getUnitType();
+
+        // Then
+        assertThat(actualUnit).isEqualTo(volFlowM3h.getUnitType());
+        assertThat(actualVolFlow.getValue()).isEqualTo(7200);
     }
 
 }

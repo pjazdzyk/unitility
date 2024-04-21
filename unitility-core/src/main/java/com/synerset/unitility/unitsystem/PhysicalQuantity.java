@@ -66,6 +66,18 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         return targetUnit.fromValueInBaseUnit(getBaseValue());
     }
 
+    /**
+     * Returns {@link PhysicalQuantity} converted to unit of target quantity.
+     *
+     * @param targetUnit target physical quantity
+     * @return converted to unit of target quantity
+     */
+    @SuppressWarnings("unchecked")
+    default <Q extends PhysicalQuantity<U>> Q toUnitFrom(Q targetUnit) {
+        U targetUnitUnitT = targetUnit.getUnitType();
+        return (Q) toUnit(targetUnitUnitT);
+    }
+
     // Logical operations
 
     /**
@@ -198,6 +210,26 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         return getValue() == 0;
     }
 
+    /**
+     * Check if the physical quantity has a value close to zero. If the value is lover than 1E-12,
+     * method will return true.
+     *
+     * @return True if the value of the physical quantity is zero, false otherwise.
+     */
+    default boolean isCloseToZero() {
+        return Math.abs(getValue()) < 1E-12;
+    }
+
+    /**
+     * Check if the physical quantity has a value close to zero.
+     *
+     * @param epsilon if value is below this threshold, method will return {@code true}
+     * @return True if the value of the physical quantity is zero, false otherwise.
+     */
+    default boolean isCloseToZero(double epsilon) {
+        return Math.abs(getValue()) < epsilon;
+    }
+
     // Formatters for console output
 
     /**
@@ -255,6 +287,10 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
 
     @Override
     default int compareTo(PhysicalQuantity<U> other) {
+        if (other == null) {
+            throw new NullPointerException("Cannot compare to null");
+        }
+
         if (this == other) {
             return 0;
         }
