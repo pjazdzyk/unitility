@@ -4,7 +4,7 @@ import com.synerset.unitility.unitsystem.common.Velocity;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
+import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +13,12 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PhysicalRangeValidatorTest {
+
+    private final Validator validator = Validation.byDefaultProvider()
+            .configure()
+            .messageInterpolator(new ParameterMessageInterpolator())
+            .buildValidatorFactory()
+            .getValidator();
 
     private record ExclusiveSample(
             @PhysicalRange(min = "-1.1E-5m/s", minIncl = false, max = "36.0km/h", maxIncl = false) Velocity velocity
@@ -31,8 +37,6 @@ class PhysicalRangeValidatorTest {
         ExclusiveSample upperBound = new ExclusiveSample(Velocity.ofKilometersPerHour(36));
 
         // When
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         Set<ConstraintViolation<ExclusiveSample>> lowerBoundViolations = validator.validate(lowerBound);
         Set<ConstraintViolation<ExclusiveSample>> internalBoundViolations = validator.validate(insideRange);
         Set<ConstraintViolation<ExclusiveSample>> upperBoundViolations = validator.validate(upperBound);
@@ -52,8 +56,6 @@ class PhysicalRangeValidatorTest {
         InclusiveSample upperBound = new InclusiveSample(Velocity.ofKilometersPerHour(36));
 
         // When
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         Set<ConstraintViolation<InclusiveSample>> lowerBoundViolations = validator.validate(lowerBound);
         Set<ConstraintViolation<InclusiveSample>> internalBoundViolations = validator.validate(insideRange);
         Set<ConstraintViolation<InclusiveSample>> upperBoundViolations = validator.validate(upperBound);

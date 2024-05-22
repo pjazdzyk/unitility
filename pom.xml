@@ -52,20 +52,20 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Jackson module -->
-        <jackson-databind.version>2.16.1</jackson-databind.version>
+        <jackson-databind.version>2.17.1</jackson-databind.version>
         <!-- SpringBoot module -->
-        <spring-boot-starter-web.version>3.2.2</spring-boot-starter-web.version>
+        <spring-boot-starter-web.version>3.2.5</spring-boot-starter-web.version>
         <!-- Quarkus module -->
-        <quarkus-version>3.7.1</quarkus-version>
+        <quarkus-version>3.10.1</quarkus-version>
         <!-- Jakarta validation module -->
-        <jakarta.validation-api.version>3.1.0-M1</jakarta.validation-api.version>
+        <jakarta.validation-api.version>3.1.0</jakarta.validation-api.version>
         <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
-        <jakarta.el.version>5.0.0-M1</jakarta.el.version>
+        <jakarta.el.version>6.0.0</jakarta.el.version>
 
         <!-- Test dependencies versions -->
         <jacoco.version>0.8.11</jacoco.version>
-        <junit-jupiter.version>5.10.1</junit-jupiter.version>
-        <assertj-core.version>3.25.2</assertj-core.version>
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
+        <assertj-core.version>3.25.3</assertj-core.version>
 
         <!-- Plugin versions -->
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
