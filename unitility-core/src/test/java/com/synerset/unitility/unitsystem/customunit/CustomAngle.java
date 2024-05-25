@@ -1,12 +1,12 @@
 package com.synerset.unitility.unitsystem.customunit;
 
-import com.synerset.unitility.unitsystem.CalculableQuantity;
+import com.synerset.unitility.unitsystem.TrigonometricQuantity;
 import com.synerset.unitility.unitsystem.common.AngleUnit;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
 
 import java.util.Objects;
 
-public class CustomAngle implements CalculableQuantity<AngleUnit, CustomAngle> {
+public class CustomAngle implements TrigonometricQuantity<CustomAngle> {
 
     private final double value;
     private final double baseValue;

@@ -1,6 +1,7 @@
 package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
+import com.synerset.unitility.unitsystem.util.ValueFormatter;
 
 /**
  * Interface representing a calculable quantity with operations for basic arithmetics.
@@ -16,6 +17,7 @@ public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity
      * @param value The value for the new physical quantity.
      * @return A new physical quantity with the specified value.
      */
+    @Override
     Q withValue(double value);
 
     // Handling double as an input argument
@@ -113,6 +115,118 @@ public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity
         return withValue(Math.abs(getValue()));
     }
 
+    /**
+     * Multiplies the physical quantity by raising it to the power of the given exponent.<p>
+     * This method calculates the value of the physical quantity raised to the specified exponent
+     * and returns a new instance of the physical quantity with the updated value.
+     *
+     * @param exponent The exponent to which the current value is raised.
+     * @return A new physical quantity with the value raised to the given exponent.
+     */
+    default Q power(double exponent) {
+        double newValue = Math.pow(getValue(), exponent);
+        return withValue(newValue);
+    }
+
+    /**
+     * Calculates the square root of the physical quantity's value. <p>
+     * This method computes the square root of the current value of the physical quantity
+     * and returns a new instance of the physical quantity with the updated value.
+     *
+     * @return A new physical quantity with the value as the square root of the original value.
+     */
+    default Q sqrt() {
+        double newValue = Math.sqrt(getValue());
+        return withValue(newValue);
+    }
+
+    /**
+     * Calculates the natural logarithm of the physical quantity's value.
+     * This method computes the natural logarithm of the current value of the physical quantity
+     * and returns a new instance of the physical quantity with the updated value. <p>
+     * IMPORTANT: In some parts of the world (like Europe) natural logarithm is expressed as 'ln' symbol,
+     * and log means logarithm with base of 10. In this app, consistency with Math library was maintained,
+     * therefore log is natural logarithm (with e number in a base).
+     *
+     * @return A new physical quantity with the value as the natural logarithm of the original value.
+     * @throws UnitSystemArgumentException if the current value is not greater than zero.
+     */
+    default Q log() {
+        double value = getValue();
+        if (value <= 0) {
+            throw new UnitSystemArgumentException("Cannot calculate logarithm for non-positive value: " + value);
+        }
+        double newValue = Math.log(value);
+        return withValue(newValue);
+    }
+
+    /**
+     * Calculates the base-10 logarithm of the physical quantity's value.
+     * This method computes the base-10 logarithm of the current value of the physical quantity
+     * and returns a new instance of the physical quantity with the updated value.<p>
+     * IMPORTANT: In some parts of the world (like Europe) natural logarithm is expressed as 'ln' symbol,
+     * and log means logarithm with base of 10. In this app, consistency with Math library was maintained,
+     * therefore log is natural logarithm (with e number in a base).<p>
+     *
+     * @return A new physical quantity with the value as the base-10 logarithm of the original value.
+     * @throws UnitSystemArgumentException if the current value is not greater than zero.
+     */
+    default Q log10() {
+        double value = getValue();
+        if (value <= 0) {
+            throw new UnitSystemArgumentException("Cannot calculate logarithm for non-positive value: " + value);
+        }
+        double newValue = Math.log10(value);
+        return withValue(newValue);
+    }
+
+    // Ceiling, and rounding up
+
+    /**
+     * Returns a new physical quantity with the value rounded up to the nearest integer. <p>
+     * Examples: <p>
+     * ceil() for 10.123456 -> will result to 11 <p>
+     * ceil() for 0.123456 -> will result to 1 <p>
+     * ceil() for -10.123456- > will result to 10 (this one is contr intuitive)
+     *
+     * @return A new physical quantity with the value rounded up.
+     */
+    default Q ceil() {
+        double newValue = Math.ceil(getValue());
+        return withValue(newValue);
+    }
+
+    /**
+     * Returns a new physical quantity with the value rounded down to the nearest integer.<p>
+     * Examples: <p>
+     * floor() for 10.123456 -> will result to 10 <p>
+     * floor() for 0.123456 -> will result to 0 <p>
+     * floor() for -10.123456- > will result to -11 (this one is contr intuitive)
+     *
+     * @return A new physical quantity with the value rounded down.
+     */
+    default Q floor() {
+        double newValue = Math.floor(getValue());
+        return withValue(newValue);
+    }
+
+    /**
+     * Returns a new physical quantity with the value rounded in HALF_EVEN way to the specified number of relevant digits.
+     * Absolute value of an input argument for relevant digits is used.
+     * Examples: <p>
+     * roundHalfEven(0) for 10.123456 -> will result to 10 <p>
+     * roundHalfEven(1) for 0.153456 -> will result to 0.2 <p>
+     * roundHalfEven(2) for -10.123456- > will result to -10.12
+     *
+     * @param relevantDigits The number of relevant digits to round to.
+     * @return A new physical quantity with the value rounded to the specified number of relevant digits.
+     */
+    default Q roundHalfEven(int relevantDigits) {
+        String formattedValue = ValueFormatter.toStringWithRelevantDigits(getValue(), relevantDigits);
+        double newValue = Double.parseDouble(formattedValue);
+        return withValue(newValue);
+    }
+
     // Handling PhysicalQuantity as input argument
 
     /**
@@ -201,6 +315,22 @@ public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity
      */
     default <V extends Unit, T extends PhysicalQuantity<V>> double div(T inputQuantity) {
         return divide(inputQuantity);
+    }
+
+    /**
+     * Raises this physical quantity's value to the power of another physical quantity's value.<p>
+     * This method calculates the result of raising this quantity's value to the power of the value
+     * of the input quantity, and returns the result.
+     *
+     * @param inputQuantity The other physical quantity for raising to the power.
+     * @return The result of raising this quantity's value to the power of the other quantity's value.
+     */
+    default <V extends Unit, T extends PhysicalQuantity<V>> double power(T inputQuantity) {
+        if (inputQuantity == null) {
+            return getValue();
+        }
+        double thisValue = getValue();
+        return Math.pow(thisValue, inputQuantity.getValue());
     }
 
 }

@@ -12,6 +12,14 @@ import java.util.Objects;
 public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQuantity<U>> {
 
     /**
+     * Create a new physical quantity with new value of the same unit.
+     *
+     * @param value The value for the new physical quantity.
+     * @return A new physical quantity with the specified value.
+     */
+    PhysicalQuantity<U> withValue(double value);
+
+    /**
      * Get the value of the physical quantity.
      *
      * @return The value of the physical quantity.
