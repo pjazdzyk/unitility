@@ -1,10 +1,10 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.CalculableQuantity;
+import com.synerset.unitility.unitsystem.TrigonometricQuantity;
 
 import java.util.Objects;
 
-public class Angle implements CalculableQuantity<AngleUnit, Angle> {
+public class Angle implements TrigonometricQuantity<Angle> {
 
     private final double value;
     private final double baseValue;

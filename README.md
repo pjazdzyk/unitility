@@ -61,13 +61,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.3.0/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.4.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>2.3.0</version>
+    <version>2.4.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -79,7 +79,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.3.0</version>
+    <version>2.4.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -87,7 +87,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.3.0</version>
+    <version>2.4.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -318,7 +318,6 @@ Temperature temperatureToAdd = Temperature.ofKelvins(20 + 273.15);
 Temperature actualTemperature = sourceTemperature.add(temperatureToAdd); // results in: 40 °C
 ```
 
-
 Performing addition or subtraction will yield a PhysicalQuantity with the same unit. The algorithm will convert the unit
 of the addend quantity to match that of the augend, ensuring that the operation is conducted within a consistent unit.
 The unit of the resulting quantity will be set to match that of the augend.
@@ -341,6 +340,49 @@ double actualDivideResult = sourceTemperature.divide(pressure); // results in 40
 In the provided example, division and multiplication both yield a double value. This outcome arises from the current
 absence of a unit resolver within the developmental stage.
 The existing unit values are directly employed for multiplication or division operations.
+
+* natural logarithm, logarithm with base of 10
+
+```java
+Distance roadLength = Distance.ofKilometers(100);
+Distance reducedDistance1 = roadLength.log();      // 4.60517(..)
+Distance reducedDistance2 = roadLength.log10();    // 2.0
+```
+
+* trigonometric functions: sin(), cos(), tan(), ctg() including hyperbolic and reversed
+
+```java
+Angle exampleAngle = Angle.ofDegrees(90);
+Angle sinResult = exampleAngle.sin();       // 1
+Angle cosResult = exampleAngle.cos();       // 0
+
+Angle angle45 = exampleAngle.withValue(45);
+Angle tanResult = angle45.tan();            // 1
+Angle cotResult = angle45.cot();            // 1
+
+Angle angleRad1 = exampleAngle.toRadians().withValue(1);
+Angle aSinResult = angleRad1.asin();        // 1.570796(..)
+Angle aCosResult = angleRad1.acos();        // 0
+Angle aTanResult = angleRad1.atan();        // 0.785398(..)
+Angle aCotResult = angleRad1.acot();        // 0.785398(..)
+```
+Please keep in mind that not all values belong to the domain of a given trigonometric function. 
+Some might throw an exception if they hold invalid value for a specific function.
+Value will be automatically converted to radians before using Java Math trigonometric functions.
+
+* ceil, floor, roundHalfEven with relevant digits
+
+```java
+ThermalConductivity thermCond = ThermalConductivity.ofWattsPerMeterKelvin(0.00366);
+ThermalConductivity ceilResult = thermCond.ceil();                  // 1
+ThermalConductivity floorResult = thermCond.floor();                // 0
+ThermalConductivity roundedResult = thermCond.roundHalfEven(2);     // 0.0037
+```
+Please note that rounding function is based on concept of relevant digits. It is NOT a simple truncation to a specified
+number of decimal places. This function will evaluate where relevant digits starts and will attempt to keep the specified
+number by user. For an example for roundHalfEven(3) will output: <br>
+0.12345 -> roundHalfEven(3)  -> 0.123 <br>
+0.00012345 -> roundHalfEven(3)  -> 0.000123 <br>
 
 ### 4.5 Equality and sorting
 
@@ -439,7 +481,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>2.3.0</version>
+    <version>2.4.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -456,7 +498,7 @@ obtain the appropriate parser depending on the class type. This module is part o
 therefore, it does not need to be added explicitly if framework extensions are included in the project.
 
 ## 5.2 Spring Boot module
-Module tested for Spring Boot platform version: **3.2.2** <br>
+Module tested for Spring Boot version: **3.3.0** <br>
 Spring Boot module includes **unitility-jackson** and **unitility-core** modules, and it will automatically
 create required beans through the autoconfiguration dependency injection mechanism. To use Spring extension module, 
 add the following dependency:
@@ -464,7 +506,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.3.0</version>
+    <version>2.4.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -496,7 +538,7 @@ steps must be carried out to ensure that custom unit is properly resolved from J
 see a section: [Registering custom quantity in Spring](#63-registering-custom-quantities-in-spring).<br>
 
 ## 5.3 Quarkus module
-Module tested for Quarkus platform version: **3.5.1**<br>
+Module tested for Quarkus platform version: **3.11.0**<br>
 Quarkus module includes **unitility-jackson** and **unitility-core** modules, and it will be automatically
 discovered through Jandex index and will create required CDI beans. To use Quarkus extension module,
 add following dependency:
@@ -504,7 +546,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.3.0</version>
+    <version>2.4.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:
