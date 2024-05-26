@@ -7,40 +7,39 @@ import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import java.util.function.DoubleUnaryOperator;
 
 /**
- * Interface representing a calculable quantity with operations for basic arithmetics.
+ * Interface representing a calculable quantity with operations for basic arithmetic and trigonometric functions.
  *
  * @param <Q> The type of {@link PhysicalQuantity} implementing this interface.
  */
 public interface TrigonometricQuantity<Q extends CalculableQuantity<AngleUnit, Q>> extends CalculableQuantity<AngleUnit, Q> {
 
-    // Trigonometric
     /**
-     * Calculate the sine of the physical quantity's value in a current unit.<p>
-     * If the quantity is an instance of {@link AngleUnit} its value will be automatically
-     * converted to radians before calculating resulting value.
+     * Calculates the sine of the physical quantity's value in its current unit.
+     * If the quantity is an instance of {@link AngleUnit}, its value will be automatically
+     * converted to radians before calculating the resulting value.
      *
-     * @return A new physical quantity with the sine of the current value in a current unit.
+     * @return The sine of the current value.
      */
-    default Q sin() {
+    default double sin() {
         return applyTrigonometricFunction(Math::sin);
     }
 
     /**
-     * Calculate the hyperbolic sine of the physical quantity's value.
+     * Calculates the hyperbolic sine of the physical quantity's value.
      *
-     * @return A new physical quantity with the hyperbolic sine of the current value.
+     * @return The hyperbolic sine of the current value.
      */
-    default Q sinh() {
+    default double sinh() {
         return applyTrigonometricFunction(Math::sinh);
     }
 
     /**
-     * Calculate the arcsine of the physical quantity's value.
+     * Calculates the arcsine of the physical quantity's value.
      *
-     * @return A new physical quantity with the arcsine of the current value.
+     * @return The arcsine of the current value.
      * @throws UnitSystemArgumentException if the value is out of the range [-1, 1].
      */
-    default Q asin() {
+    default double asin() {
         double value = getValueInRadians();
         if (value < -1 || value > 1) {
             throw new UnitSystemArgumentException("Value out of range for arcsine. Valid range is [-1, 1].");
@@ -49,33 +48,30 @@ public interface TrigonometricQuantity<Q extends CalculableQuantity<AngleUnit, Q
     }
 
     /**
-     * Calculate the cosine of the physical quantity's value in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the cosine of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the cosine of the current value.
+     * @return The cosine of the current value.
      */
-    default Q cos() {
+    default double cos() {
         return applyTrigonometricFunction(Math::cos);
     }
 
     /**
-     * Calculate the hyperbolic cosine of the physical quantity's in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the hyperbolic cosine of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the hyperbolic cosine of the current value.
+     * @return The hyperbolic cosine of the current value.
      */
-    default Q cosh() {
+    default double cosh() {
         return applyTrigonometricFunction(Math::cosh);
     }
 
     /**
-     * Calculate the arccosine of the physical quantity's in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the arccosine of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the arccosine of the current value.
+     * @return The arccosine of the current value.
      * @throws UnitSystemArgumentException if the value is out of the range [-1, 1].
      */
-    default Q acos() {
+    default double acos() {
         double value = getValueInRadians();
         if (value < -1 || value > 1) {
             throw new UnitSystemArgumentException("Value out of range for arccosine. Valid range is [-1, 1].");
@@ -84,13 +80,12 @@ public interface TrigonometricQuantity<Q extends CalculableQuantity<AngleUnit, Q
     }
 
     /**
-     * Calculate the tangent of the physical quantity's in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the tangent of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the tangent of the current value.
+     * @return The tangent of the current value.
      * @throws UnitSystemArgumentException if the value is an odd multiple of π/2.
      */
-    default Q tan() {
+    default double tan() {
         double value = getValueInRadians();
         if (isMultipleOfPiOverTwo(value)) {
             throw new UnitSystemArgumentException("Tangent is undefined for odd multiples of π/2.");
@@ -99,81 +94,98 @@ public interface TrigonometricQuantity<Q extends CalculableQuantity<AngleUnit, Q
     }
 
     /**
-     * Calculate the hyperbolic tangent of the physical quantity's in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the hyperbolic tangent of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the hyperbolic tangent of the current value.
+     * @return The hyperbolic tangent of the current value.
      */
-    default Q tanh() {
+    default double tanh() {
         return applyTrigonometricFunction(Math::tanh);
     }
 
     /**
-     * Calculate the arctangent of the physical quantity's in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the arctangent of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the arctangent of the current value.
+     * @return The arctangent of the current value.
      */
-    default Q atan() {
+    default double atan() {
         return applyTrigonometricFunction(Math::atan);
     }
 
     /**
-     * Calculate the cotangent of the physical quantity's in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the cotangent of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the cotangent of the current value.
+     * @return The cotangent of the current value.
      * @throws UnitSystemArgumentException if the value is a multiple of π.
      */
-    default Q cot() {
+    default double cot() {
         double value = getValueInRadians();
         if (isMultipleOfPi(value)) {
             throw new UnitSystemArgumentException("Cotangent is undefined for multiples of π.");
         }
-        return withValue(1 / tan().getValue());
+        return 1 / tan();
     }
 
     /**
-     * Calculate the hyperbolic cotangent of the physical quantity's in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the hyperbolic cotangent of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the hyperbolic cotangent of the current value.
+     * @return The hyperbolic cotangent of the current value.
      * @throws UnitSystemArgumentException if the value is 0.
      */
-    default Q coth() {
+    default double coth() {
         double value = getValueInRadians();
         if (value == 0) {
             throw new UnitSystemArgumentException("Hyperbolic cotangent is undefined for 0.");
         }
-        return withValue(1 / tanh().getValue());
+        return 1 / tanh();
     }
 
     /**
-     * Calculate the arccotangent of the physical quantity's in a current unit.
-     * Use toUnit(Unit) if intended to convert value in other supported unit.
+     * Calculates the arccotangent of the physical quantity's value in its current unit.
      *
-     * @return A new physical quantity with the arccotangent of the current value.
+     * @return The arccotangent of the current value.
      */
-    default Q acot() {
-        return withValue(1 / atan().getValue());
+    default double acot() {
+        return 1 / atan();
     }
 
-    @SuppressWarnings("unchecked")
-    private Q applyTrigonometricFunction(DoubleUnaryOperator unaryOperator) {
-        PhysicalQuantity<AngleUnit> unitInRadians = toUnit(AngleUnits.RADIANS);
-        double resultingValue = unaryOperator.applyAsDouble(unitInRadians.getValue());
-        return (Q) unitInRadians.withValue(resultingValue).toUnit(getUnitType());
+    /**
+     * Applies a trigonometric function to the physical quantity's value.
+     *
+     * @param unaryOperator the trigonometric function to apply.
+     * @return The result of the trigonometric function.
+     */
+    private double applyTrigonometricFunction(DoubleUnaryOperator unaryOperator) {
+        double unitInRadians = getValueInRadians();
+        return unaryOperator.applyAsDouble(unitInRadians);
     }
 
+    /**
+     * Gets the value of the physical quantity in radians.
+     *
+     * @return The value in radians.
+     */
     private double getValueInRadians() {
         return toUnit(AngleUnits.RADIANS).getValue();
     }
 
+    /**
+     * Checks if the value is a multiple of π/2.
+     *
+     * @param value the value to check.
+     * @return True if the value is a multiple of π/2, false otherwise.
+     */
     private boolean isMultipleOfPiOverTwo(double value) {
         return Math.abs((value / (Math.PI / 2)) % 1) < 1e-10;
     }
 
+    /**
+     * Checks if the value is a multiple of π.
+     *
+     * @param value the value to check.
+     * @return True if the value is a multiple of π, false otherwise.
+     */
     private boolean isMultipleOfPi(double value) {
         return Math.abs((value / Math.PI) % 1) < 1e-10;
     }
+
 }
