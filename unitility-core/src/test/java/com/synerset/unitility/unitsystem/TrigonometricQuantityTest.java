@@ -17,10 +17,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(Math.PI / 2);
 
         // When
-        Angle sinAngle = angle.sin();
+        double sinAngle = angle.sin();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(Math.sin(Math.PI / 2));
+        double expectedAngle = Angle.ofRadians(Math.sin(Math.PI / 2)).getValue();
         assertThat(sinAngle).isEqualTo(expectedAngle);
     }
 
@@ -31,10 +31,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(0);
 
         // When
-        Angle cosAngle = angle.cos();
+        double cosAngle = angle.cos();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(Math.cos(0));
+        double expectedAngle = Angle.ofRadians(Math.cos(0)).getValue();
         assertThat(cosAngle).isEqualTo(expectedAngle);
     }
 
@@ -45,10 +45,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(Math.PI / 4);
 
         // When
-        Angle tanAngle = angle.tan();
+        double tanAngle = angle.tan();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(Math.tan(Math.PI / 4));
+        double expectedAngle = Angle.ofRadians(Math.tan(Math.PI / 4)).getValue();
         assertThat(tanAngle).isEqualTo(expectedAngle);
     }
 
@@ -59,10 +59,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(Math.sin(Math.PI / 6));
 
         // When
-        Angle asinAngle = angle.asin();
+        double asinAngle = angle.asin();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(Math.asin(Math.sin(Math.PI / 6)));
+        double expectedAngle = Angle.ofRadians(Math.asin(Math.sin(Math.PI / 6))).getValue();
         assertThat(asinAngle).isEqualTo(expectedAngle);
     }
 
@@ -84,10 +84,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(1);
 
         // When
-        Angle sinhAngle = angle.sinh();
+        double sinhAngle = angle.sinh();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(Math.sinh(1));
+        double expectedAngle = Angle.ofRadians(Math.sinh(1)).getValue();
         assertThat(sinhAngle).isEqualTo(expectedAngle);
     }
 
@@ -98,10 +98,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(1);
 
         // When
-        Angle coshAngle = angle.cosh();
+        double coshAngle = angle.cosh();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(Math.cosh(1));
+        double expectedAngle = Angle.ofRadians(Math.cosh(1)).getValue();
         assertThat(coshAngle).isEqualTo(expectedAngle);
     }
 
@@ -112,10 +112,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(Math.PI / 4);
 
         // When
-        Angle ctgAngle = angle.cot();
+        double ctgAngle = angle.cot();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(1 / Math.tan(Math.PI / 4));
+        double expectedAngle = Angle.ofRadians(1 / Math.tan(Math.PI / 4)).getValue();
         assertThat(ctgAngle).isEqualTo(expectedAngle);
     }
 
@@ -126,10 +126,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(1);
 
         // When
-        Angle ctghAngle = angle.coth();
+        double ctghAngle = angle.coth();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(1 / Math.tanh(1));
+        double expectedAngle = Angle.ofRadians(1 / Math.tanh(1)).getValue();
         assertThat(ctghAngle).isEqualTo(expectedAngle);
     }
 
@@ -140,10 +140,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(Math.cos(Math.PI / 3));
 
         // When
-        Angle acosAngle = angle.acos();
+        double acosAngle = angle.acos();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(Math.acos(Math.cos(Math.PI / 3)));
+        double expectedAngle = Angle.ofRadians(Math.acos(Math.cos(Math.PI / 3))).getValue();
         assertThat(acosAngle).isEqualTo(expectedAngle);
     }
 
@@ -154,10 +154,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(Math.tan(Math.PI / 4));
 
         // When
-        Angle atanAngle = angle.atan();
+        double atanAngle = angle.atan();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(Math.atan(Math.tan(Math.PI / 4)));
+        double expectedAngle = Angle.ofRadians(Math.atan(Math.tan(Math.PI / 4))).getValue();
         assertThat(atanAngle).isEqualTo(expectedAngle);
     }
 
@@ -168,10 +168,10 @@ class TrigonometricQuantityTest {
         Angle angle = Angle.ofRadians(Math.tan(Math.PI / 4));
 
         // When
-        Angle actgAngle = angle.acot();
+        double actgAngle = angle.acot();
 
         // Then
-        Angle expectedAngle = Angle.ofRadians(1 / Math.atan(Math.tan(Math.PI / 4)));
+        double expectedAngle = Angle.ofRadians(1 / Math.atan(Math.tan(Math.PI / 4))).getValue();
         assertThat(actgAngle).isEqualTo(expectedAngle);
     }
 }

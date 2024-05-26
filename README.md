@@ -353,18 +353,18 @@ Distance reducedDistance2 = roadLength.log10();    // 2.0
 
 ```java
 Angle exampleAngle = Angle.ofDegrees(90);
-Angle sinResult = exampleAngle.sin();       // 1
-Angle cosResult = exampleAngle.cos();       // 0
+double sinResult = exampleAngle.sin();       // 1
+double cosResult = exampleAngle.cos();       // 0
 
 Angle angle45 = exampleAngle.withValue(45);
-Angle tanResult = angle45.tan();            // 1
-Angle cotResult = angle45.cot();            // 1
+double tanResult = angle45.tan();            // 1
+double cotResult = angle45.cot();            // 1
 
 Angle angleRad1 = exampleAngle.toRadians().withValue(1);
-Angle aSinResult = angleRad1.asin();        // 1.570796(..)
-Angle aCosResult = angleRad1.acos();        // 0
-Angle aTanResult = angleRad1.atan();        // 0.785398(..)
-Angle aCotResult = angleRad1.acot();        // 0.785398(..)
+double aSinResult = angleRad1.asin();        // 1.570796(..)
+double aCosResult = angleRad1.acos();        // 0
+double aTanResult = angleRad1.atan();        // 0.785398(..)
+double aCotResult = angleRad1.acot();        // 0.785398(..)
 ```
 Please keep in mind that not all values belong to the domain of a given trigonometric function. 
 Some might throw an exception if they hold invalid value for a specific function.
