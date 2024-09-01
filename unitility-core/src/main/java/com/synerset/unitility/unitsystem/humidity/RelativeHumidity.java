@@ -68,6 +68,12 @@ public class RelativeHumidity implements CalculableQuantity<RelativeHumidityUnit
     }
 
     @Override
+    public RelativeHumidity toUnit(String targetUnit) {
+        RelativeHumidityUnit resolvedUnit = RelativeHumidityUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public RelativeHumidity withValue(double value) {
         return RelativeHumidity.of(value, unitType);
     }

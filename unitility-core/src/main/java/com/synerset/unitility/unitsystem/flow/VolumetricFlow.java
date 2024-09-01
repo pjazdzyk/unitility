@@ -99,6 +99,12 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
     }
 
     @Override
+    public VolumetricFlow toUnit(String targetUnit) {
+        VolumetricFlowUnit resolvedUnit = VolumetricFlowUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public VolumetricFlow withValue(double value) {
         return VolumetricFlow.of(value, unitType);
     }

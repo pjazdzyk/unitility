@@ -88,6 +88,12 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
     }
 
     @Override
+    public Pressure toUnit(String targetUnit) {
+        PressureUnit resolvedUnit = PressureUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Pressure withValue(double value) {
         return Pressure.of(value, unitType);
     }

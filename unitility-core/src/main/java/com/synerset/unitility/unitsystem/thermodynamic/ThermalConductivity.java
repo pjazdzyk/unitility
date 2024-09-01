@@ -69,6 +69,12 @@ public class ThermalConductivity implements CalculableQuantity<ThermalConductivi
     }
 
     @Override
+    public ThermalConductivity toUnit(String targetUnit) {
+        ThermalConductivityUnit resolvedUnit = ThermalConductivityUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public ThermalConductivity withValue(double value) {
         return ThermalConductivity.of(value, unitType);
     }

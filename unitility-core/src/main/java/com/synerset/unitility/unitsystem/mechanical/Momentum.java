@@ -70,6 +70,12 @@ public class Momentum implements CalculableQuantity<MomentumUnit, Momentum> {
     }
 
     @Override
+    public Momentum toUnit(String targetUnit) {
+        MomentumUnit resolvedUnit = MomentumUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Momentum withValue(double value) {
         return Momentum.of(value, unitType);
     }

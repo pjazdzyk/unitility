@@ -94,6 +94,12 @@ public class Energy implements CalculableQuantity<EnergyUnit, Energy> {
     }
 
     @Override
+    public Energy toUnit(String targetUnit) {
+        EnergyUnit resolvedUnit = EnergyUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Energy withValue(double value) {
         return Energy.of(value, unitType);
     }

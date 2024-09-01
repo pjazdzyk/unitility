@@ -91,6 +91,12 @@ public class Distance implements CalculableQuantity<DistanceUnit, Distance> {
     }
 
     @Override
+    public Distance toUnit(String targetUnit) {
+        DistanceUnit resolvedUnit = DistanceUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Distance withValue(double value) {
         return Distance.of(value, unitType);
     }

@@ -50,6 +50,11 @@ public class ReynoldsNumber implements CalculableQuantity<ReynoldsNumberUnit, Re
     }
 
     @Override
+    public ReynoldsNumber toUnit(String targetUnit) {
+        return this;
+    }
+
+    @Override
     public ReynoldsNumber withValue(double value) {
         return ReynoldsNumber.of(value);
     }

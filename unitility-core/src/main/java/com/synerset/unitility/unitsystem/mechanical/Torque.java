@@ -79,6 +79,12 @@ public class Torque implements CalculableQuantity<TorqueUnit, Torque> {
     }
 
     @Override
+    public Torque toUnit(String targetUnit) {
+        TorqueUnit resolvedUnit = TorqueUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Torque withValue(double value) {
         return Torque.of(value, unitType);
     }

@@ -34,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PhysicalQuantityParsingFactoryTest {
 
-    PhysicalQuantityParsingFactory PARSING_FACTORY = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
+    private static final PhysicalQuantityParsingFactory PARSING_FACTORY = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
 
     @Test
     @DisplayName("should create default parsing registry with registered parsers")
@@ -236,6 +236,11 @@ class PhysicalQuantityParsingFactoryTest {
 
         @Override
         public PhysicalQuantity<DistanceUnit> toUnit(DistanceUnit targetUnit) {
+            return null;
+        }
+
+        @Override
+        public PhysicalQuantity<DistanceUnit> toUnit(String targetUnit) {
             return null;
         }
 

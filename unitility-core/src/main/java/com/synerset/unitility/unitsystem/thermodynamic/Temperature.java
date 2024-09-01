@@ -71,6 +71,12 @@ public class Temperature implements CalculableQuantity<TemperatureUnit, Temperat
     }
 
     @Override
+    public Temperature toUnit(String targetUnit) {
+        TemperatureUnit resolvedUnit = TemperatureUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Temperature withValue(double value) {
         return Temperature.of(value, unitType);
     }

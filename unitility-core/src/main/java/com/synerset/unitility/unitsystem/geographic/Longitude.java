@@ -86,6 +86,12 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
     }
 
     @Override
+    public Longitude toUnit(String targetUnit) {
+        AngleUnit resolvedUnit = AngleUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Longitude withValue(double value) {
         return Longitude.of(value, unitType);
     }

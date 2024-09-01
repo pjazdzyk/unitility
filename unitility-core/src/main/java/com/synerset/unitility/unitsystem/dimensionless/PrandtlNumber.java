@@ -46,6 +46,11 @@ public class PrandtlNumber implements CalculableQuantity<PrandtlNumberUnit, Pran
     }
 
     @Override
+    public PrandtlNumber toUnit(String targetUnit) {
+        return this;
+    }
+
+    @Override
     public PrandtlNumber withValue(double value) {
         return PrandtlNumber.of(value);
     }

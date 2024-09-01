@@ -50,6 +50,11 @@ public class BypassFactor implements CalculableQuantity<BypassFactorUnit, Bypass
     }
 
     @Override
+    public BypassFactor toUnit(String targetUnit) {
+        return this;
+    }
+
+    @Override
     public BypassFactor withValue(double value) {
         return BypassFactor.of(value);
     }

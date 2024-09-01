@@ -46,6 +46,11 @@ public class GrashofNumber implements CalculableQuantity<GrashofNumberUnit, Gras
     }
 
     @Override
+    public GrashofNumber toUnit(String targetUnit) {
+        return this;
+    }
+
+    @Override
     public GrashofNumber withValue(double value) {
         return GrashofNumber.of(value);
     }

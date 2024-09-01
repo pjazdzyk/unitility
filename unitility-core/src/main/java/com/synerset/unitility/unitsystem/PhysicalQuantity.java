@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem;
 
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.ValueFormatter;
 
 import java.util.Objects;
@@ -54,6 +55,15 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A new physical quantity converted to the target unit.
      */
     PhysicalQuantity<U> toUnit(U targetUnit);
+
+    /**
+     * Convert the physical quantity to a target unit.
+     *
+     * @param targetUnit The target unit to convert to provided unit as string.
+     * @return A new physical quantity converted to the target unit.
+     * @throws UnitSystemParseException in case of invalid symbol.
+     */
+    PhysicalQuantity<U> toUnit(String targetUnit);
 
     /**
      * Get the symbol of the unit associated with the physical quantity.

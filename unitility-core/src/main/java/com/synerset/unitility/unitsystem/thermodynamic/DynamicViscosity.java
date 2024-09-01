@@ -70,6 +70,12 @@ public class DynamicViscosity implements CalculableQuantity<DynamicViscosityUnit
     }
 
     @Override
+    public DynamicViscosity toUnit(String targetUnit) {
+        DynamicViscosityUnit resolvedUnit = DynamicViscosityUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public DynamicViscosity withValue(double value) {
         return DynamicViscosity.of(value, unitType);
     }

@@ -67,6 +67,12 @@ public class Density implements CalculableQuantity<DensityUnit, Density> {
     }
 
     @Override
+    public Density toUnit(String targetUnit) {
+        DensityUnit resolvedUnit = DensityUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Density withValue(double value) {
         return Density.of(value, unitType);
     }

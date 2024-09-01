@@ -75,6 +75,12 @@ public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
     }
 
     @Override
+    public MassFlow toUnit(String targetUnit) {
+        MassFlowUnit resolvedUnit = MassFlowUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public MassFlow withValue(double value) {
         return MassFlow.of(value, unitType);
     }

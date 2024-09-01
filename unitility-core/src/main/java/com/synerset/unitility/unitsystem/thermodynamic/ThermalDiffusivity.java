@@ -66,6 +66,12 @@ public class ThermalDiffusivity implements CalculableQuantity<ThermalDiffusivity
     }
 
     @Override
+    public ThermalDiffusivity toUnit(String targetUnit) {
+        ThermalDiffusivityUnit resolvedUnit = ThermalDiffusivityUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public ThermalDiffusivity withValue(double value) {
         return ThermalDiffusivity.of(value, unitType);
     }

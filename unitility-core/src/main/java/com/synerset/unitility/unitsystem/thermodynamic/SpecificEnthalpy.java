@@ -69,6 +69,12 @@ public class SpecificEnthalpy implements CalculableQuantity<SpecificEnthalpyUnit
     }
 
     @Override
+    public SpecificEnthalpy toUnit(String targetUnit) {
+        SpecificEnthalpyUnit resolvedUnit = SpecificEnthalpyUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public SpecificEnthalpy withValue(double value) {
         return SpecificEnthalpy.of(value, unitType);
     }
