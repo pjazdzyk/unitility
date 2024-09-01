@@ -87,6 +87,12 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
     }
 
     @Override
+    public Latitude toUnit(String targetUnit) {
+        AngleUnit resolvedUnit = AngleUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Latitude withValue(double value) {
         return Latitude.of(value, unitType);
     }

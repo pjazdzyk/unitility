@@ -2,7 +2,9 @@ package com.synerset.unitility.unitsystem;
 
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.common.DistanceUnits;
+import com.synerset.unitility.unitsystem.common.Volume;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnit;
 import com.synerset.unitility.unitsystem.thermodynamic.Pressure;
@@ -14,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PhysicalQuantityTest {
 
@@ -104,7 +107,6 @@ class PhysicalQuantityTest {
     }
 
     // Others
-
     @Test
     @DisplayName("should return property unit symbol")
     void getUnitSymbol_shouldReturnPropertyUnitSymbol() {
@@ -181,6 +183,21 @@ class PhysicalQuantityTest {
         // Then
         assertThat(actualUnit).isEqualTo(volFlowM3h.getUnitType());
         assertThat(actualVolFlow.getValue()).isEqualTo(7200);
+    }
+
+    @Test
+    @DisplayName("Should convert value to provided target unit as string")
+    void toUnit_shouldConvertValueToProvidedTargetUnit(){
+        // Given
+        Volume volumeInM3 = Volume.ofCubicMeters(1);
+
+        // When
+        Volume volumeInCm3 = volumeInM3.toUnit(" c m 3 ");
+
+        // Then
+        assertThat(volumeInCm3.getValue()).isEqualTo(1000);
+        assertThatThrownBy(() -> volumeInCm3.toUnit("kg")).isInstanceOf(UnitSystemParseException.class);
+
     }
 
 }

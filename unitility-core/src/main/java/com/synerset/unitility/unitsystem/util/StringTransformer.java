@@ -65,6 +65,7 @@ public class StringTransformer {
                 inputString.replace(".", "")
                         .replace("·", "")
                         .replace("x", "")
+                        .replace("*", "")
                         .replace("/", "p"));
     }
 

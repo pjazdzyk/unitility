@@ -90,6 +90,12 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
     }
 
     @Override
+    public Volume toUnit(String targetUnit) {
+        VolumeUnit resolvedUnit = VolumeUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Volume withValue(double value) {
         return Volume.of(value, unitType);
     }

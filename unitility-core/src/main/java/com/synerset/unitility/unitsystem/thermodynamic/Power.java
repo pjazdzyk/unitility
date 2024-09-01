@@ -77,6 +77,12 @@ public class Power implements CalculableQuantity<PowerUnit, Power> {
     }
 
     @Override
+    public Power toUnit(String targetUnit) {
+        PowerUnit resolvedUnit = PowerUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Power withValue(double value) {
         return Power.of(value, unitType);
     }

@@ -69,6 +69,12 @@ public class SpecificHeat implements CalculableQuantity<SpecificHeatUnit, Specif
     }
 
     @Override
+    public SpecificHeat toUnit(String targetUnit) {
+        SpecificHeatUnit resolvedUnit = SpecificHeatUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public SpecificHeat withValue(double value) {
         return SpecificHeat.of(value, unitType);
     }

@@ -82,6 +82,12 @@ public class Force implements CalculableQuantity<ForceUnit, Force> {
     }
 
     @Override
+    public Force toUnit(String targetUnit) {
+        ForceUnit resolvedUnit = ForceUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Force withValue(double value) {
         return Force.of(value, unitType);
     }

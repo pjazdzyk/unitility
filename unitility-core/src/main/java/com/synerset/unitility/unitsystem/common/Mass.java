@@ -13,7 +13,7 @@ public class Mass implements CalculableQuantity<MassUnit, Mass> {
 
     public Mass(double value, MassUnit unitType) {
         this.value = value;
-        if(unitType == null){
+        if (unitType == null) {
             unitType = MassUnits.getDefaultUnit();
         }
         this.unitType = unitType;
@@ -29,7 +29,7 @@ public class Mass implements CalculableQuantity<MassUnit, Mass> {
         MassUnit resolvedUnit = MassUnits.fromSymbol(unitSymbol);
         return new Mass(value, resolvedUnit);
     }
-    
+
     public static Mass ofKilograms(double value) {
         return new Mass(value, MassUnits.KILOGRAM);
     }
@@ -80,6 +80,12 @@ public class Mass implements CalculableQuantity<MassUnit, Mass> {
         double valueInKilogram = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInKilogram);
         return Mass.of(valueInTargetUnit, targetUnit);
+    }
+
+    @Override
+    public Mass toUnit(String targetUnit) {
+        MassUnit resolvedUnit = MassUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
     }
 
     @Override

@@ -90,6 +90,12 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
     }
 
     @Override
+    public Velocity toUnit(String targetUnit) {
+        VelocityUnit resolvedUnit = VelocityUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Velocity withValue(double value) {
         return Velocity.of(value, unitType);
     }

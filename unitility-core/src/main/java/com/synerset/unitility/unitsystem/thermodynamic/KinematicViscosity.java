@@ -66,6 +66,12 @@ public class KinematicViscosity implements CalculableQuantity<KinematicViscosity
     }
 
     @Override
+    public KinematicViscosity toUnit(String targetUnit) {
+        KinematicViscosityUnit resolvedUnit = KinematicViscosityUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public KinematicViscosity withValue(double value) {
         return KinematicViscosity.of(value, unitType);
     }

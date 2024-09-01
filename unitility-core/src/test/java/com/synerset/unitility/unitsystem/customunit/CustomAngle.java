@@ -57,6 +57,12 @@ public class CustomAngle implements TrigonometricQuantity<CustomAngle> {
     }
 
     @Override
+    public CustomAngle toUnit(String targetUnit) {
+        AngleUnit resolvedUnit = CustomAngleUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public CustomAngle withValue(double value) {
         return CustomAngle.of(value, unitType);
     }

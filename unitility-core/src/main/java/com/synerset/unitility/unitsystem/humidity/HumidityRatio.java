@@ -67,6 +67,12 @@ public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, Humi
     }
 
     @Override
+    public HumidityRatio toUnit(String targetUnit) {
+        HumidityRatioUnit resolvedUnit = HumidityRatioUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public HumidityRatio withValue(double value) {
         return HumidityRatio.of(value, unitType);
     }

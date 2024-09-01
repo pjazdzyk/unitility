@@ -19,7 +19,6 @@ public class Angle implements TrigonometricQuantity<Angle> {
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
-
     // Static factory methods
     public static Angle of(double value, AngleUnit unit) {
         return new Angle(value, unit);
@@ -64,6 +63,12 @@ public class Angle implements TrigonometricQuantity<Angle> {
         double valueInDegrees = unitType.toValueInBaseUnit(value);
         double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInDegrees);
         return Angle.of(valueInTargetUnit, targetUnit);
+    }
+
+    @Override
+    public Angle toUnit(String targetUnit) {
+        AngleUnit resolvedUnit = AngleUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
     }
 
     @Override

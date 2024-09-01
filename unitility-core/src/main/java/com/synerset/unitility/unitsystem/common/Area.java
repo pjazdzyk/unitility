@@ -103,6 +103,12 @@ public class Area implements CalculableQuantity<AreaUnit, Area> {
     }
 
     @Override
+    public Area toUnit(String targetUnit) {
+        AreaUnit resolvedUnit = AreaUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public Area withValue(double value) {
         return Area.of(value, unitType);
     }

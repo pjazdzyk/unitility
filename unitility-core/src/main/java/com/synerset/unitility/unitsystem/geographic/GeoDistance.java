@@ -269,6 +269,12 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
     }
 
     @Override
+    public GeoDistance toUnit(String targetUnit) {
+        DistanceUnit resolvedUnit = DistanceUnits.fromSymbol(targetUnit);
+        return toUnit(resolvedUnit);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
