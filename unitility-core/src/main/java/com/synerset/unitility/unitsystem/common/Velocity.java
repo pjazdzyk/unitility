@@ -72,7 +72,7 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
     }
 
     @Override
-    public VelocityUnit getUnitType() {
+    public VelocityUnit getUnit() {
         return unitType;
     }
 
@@ -171,7 +171,7 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Velocity inputQuantity = (Velocity) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

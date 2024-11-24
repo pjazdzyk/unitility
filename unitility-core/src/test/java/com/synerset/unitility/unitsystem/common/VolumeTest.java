@@ -144,7 +144,7 @@ class VolumeTest {
 
         // When
         Volume volumeInGallons = Volume.ofGallons(100);
-        VolumeUnit actualBaseUnit = volumeInGallons.getUnitType().getBaseUnit();
+        VolumeUnit actualBaseUnit = volumeInGallons.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

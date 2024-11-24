@@ -199,7 +199,7 @@ class AreaTest {
 
         // When
         Area areaInSquareYards = Area.ofSquareYards(10);
-        AreaUnit actualBaseUnit = areaInSquareYards.getUnitType().getBaseUnit();
+        AreaUnit actualBaseUnit = areaInSquareYards.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

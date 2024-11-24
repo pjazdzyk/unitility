@@ -39,6 +39,10 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
         return new Pressure(value, PressureUnits.HECTOPASCAL);
     }
 
+    public static Pressure ofKiloPascal(double value) {
+        return new Pressure(value, PressureUnits.KILOPASCAL);
+    }
+
     public static Pressure ofMegaPascal(double value) {
         return new Pressure(value, PressureUnits.MEGAPASCAL);
     }
@@ -70,7 +74,7 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
     }
 
     @Override
-    public PressureUnit getUnitType() {
+    public PressureUnit getUnit() {
         return unitType;
     }
 
@@ -107,6 +111,10 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
         return toUnit(PressureUnits.HECTOPASCAL);
     }
 
+    public Pressure toKiloPascal() {
+        return toUnit(PressureUnits.KILOPASCAL);
+    }
+
     public Pressure toMegaPascal() {
         return toUnit(PressureUnits.MEGAPASCAL);
     }
@@ -136,6 +144,10 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
         return getInUnit(PressureUnits.HECTOPASCAL);
     }
 
+    public double getInKiloPascals() {
+        return getInUnit(PressureUnits.KILOPASCAL);
+    }
+
     public double getInMegaPascals() {
         return getInUnit(PressureUnits.MEGAPASCAL);
     }
@@ -161,7 +173,7 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pressure inputQuantity = (Pressure) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

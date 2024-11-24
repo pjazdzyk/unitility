@@ -49,7 +49,7 @@ public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, Humi
     }
 
     @Override
-    public HumidityRatioUnit getUnitType() {
+    public HumidityRatioUnit getUnit() {
         return unitType;
     }
 
@@ -100,7 +100,7 @@ public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, Humi
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         HumidityRatio inputQuantity = (HumidityRatio) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

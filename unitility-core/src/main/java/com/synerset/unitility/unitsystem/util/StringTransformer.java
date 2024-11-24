@@ -118,6 +118,31 @@ public class StringTransformer {
     }
 
     /**
+     * Removes hyphen from the input string.
+     *
+     * @return A new StringTransformer instance with the transformed string.
+     */
+    public StringTransformer dropHyphens() {
+        return StringTransformer.of(
+                inputString.replace("-", "")
+        );
+    }
+
+    /**
+     * Removes hyphen from the input string.
+     *
+     * @return A new StringTransformer instance with the transformed string.
+     */
+    public StringTransformer dropWvAndDaSuffixes() {
+        return StringTransformer.of(
+                inputString.replace("\\.wv","")
+                        .replace("wv","")
+                        .replace("\\.da", "")
+                        .replace("da", "")
+        );
+    }
+
+    /**
      * Replaces commas with dots in the input string.
      *
      * @return A new StringTransformer instance with the transformed string.

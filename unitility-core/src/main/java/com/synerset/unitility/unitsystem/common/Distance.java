@@ -73,7 +73,7 @@ public class Distance implements CalculableQuantity<DistanceUnit, Distance> {
     }
 
     @Override
-    public DistanceUnit getUnitType() {
+    public DistanceUnit getUnit() {
         return unitType;
     }
 
@@ -172,7 +172,7 @@ public class Distance implements CalculableQuantity<DistanceUnit, Distance> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Distance inputQuantity = (Distance) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

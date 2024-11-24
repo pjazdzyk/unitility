@@ -54,7 +54,7 @@ class MomentumTest {
 
         // When
         Momentum momentumInPoundFeetPerSecond = Momentum.ofPoundFeetPerSecond(10);
-        MomentumUnit actualBaseUnit = momentumInPoundFeetPerSecond.getUnitType().getBaseUnit();
+        MomentumUnit actualBaseUnit = momentumInPoundFeetPerSecond.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

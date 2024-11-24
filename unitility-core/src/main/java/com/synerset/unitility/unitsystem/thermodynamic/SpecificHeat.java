@@ -51,7 +51,7 @@ public class SpecificHeat implements CalculableQuantity<SpecificHeatUnit, Specif
     }
 
     @Override
-    public SpecificHeatUnit getUnitType() {
+    public SpecificHeatUnit getUnit() {
         return unitType;
     }
 
@@ -110,7 +110,7 @@ public class SpecificHeat implements CalculableQuantity<SpecificHeatUnit, Specif
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SpecificHeat inputQuantity = (SpecificHeat) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

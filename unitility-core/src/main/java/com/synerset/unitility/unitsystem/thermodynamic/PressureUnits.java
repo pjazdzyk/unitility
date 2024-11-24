@@ -9,6 +9,7 @@ public enum PressureUnits implements PressureUnit {
 
     PASCAL("Pa", val -> val, val -> val),
     HECTOPASCAL("hPa", val -> val * 1.0E2, val -> val / 1.0E2),
+    KILOPASCAL("kPa", val -> val * 1.0E3, val -> val / 1.0E3),
     MEGAPASCAL("MPa", val -> val * 1.0E6, val -> val / 1.0E6),
     BAR("bar", val -> val * 1.0E5, val -> val / 1.0E5),
     MILLIBAR("mbar", val -> val * 100, val -> val / 100),

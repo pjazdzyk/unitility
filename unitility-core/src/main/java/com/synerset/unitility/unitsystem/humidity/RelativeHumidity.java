@@ -50,7 +50,7 @@ public class RelativeHumidity implements CalculableQuantity<RelativeHumidityUnit
     }
 
     @Override
-    public RelativeHumidityUnit getUnitType() {
+    public RelativeHumidityUnit getUnit() {
         return unitType;
     }
 
@@ -101,7 +101,7 @@ public class RelativeHumidity implements CalculableQuantity<RelativeHumidityUnit
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RelativeHumidity inputQuantity = (RelativeHumidity) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

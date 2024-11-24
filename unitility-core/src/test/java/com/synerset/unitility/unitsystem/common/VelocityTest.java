@@ -144,7 +144,7 @@ class VelocityTest {
 
         // When
         Velocity velocityInMilesPerHour = Velocity.ofMilesPerHour(2);
-        VelocityUnit actualBaseUnit = velocityInMilesPerHour.getUnitType().getBaseUnit();
+        VelocityUnit actualBaseUnit = velocityInMilesPerHour.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

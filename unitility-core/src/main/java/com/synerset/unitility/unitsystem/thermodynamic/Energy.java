@@ -76,7 +76,7 @@ public class Energy implements CalculableQuantity<EnergyUnit, Energy> {
     }
 
     @Override
-    public EnergyUnit getUnitType() {
+    public EnergyUnit getUnit() {
         return unitType;
     }
 
@@ -183,7 +183,7 @@ public class Energy implements CalculableQuantity<EnergyUnit, Energy> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Energy inputQuantity = (Energy) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

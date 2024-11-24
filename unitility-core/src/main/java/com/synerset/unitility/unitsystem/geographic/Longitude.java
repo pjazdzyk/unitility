@@ -68,7 +68,7 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
     }
 
     @Override
-    public AngleUnit getUnitType() {
+    public AngleUnit getUnit() {
         return unitType;
     }
 
@@ -136,7 +136,7 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Longitude inputQuantity = (Longitude) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
@@ -146,7 +146,7 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
 
     @Override
     public String toString() {
-        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
+        String separator = getUnit().getSymbol().contains("°") ? "" : " ";
         return "Longitude{" + value + separator + unitType.getSymbol() + '}';
     }
 

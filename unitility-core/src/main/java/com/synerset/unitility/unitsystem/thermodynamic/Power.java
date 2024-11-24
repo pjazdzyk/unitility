@@ -59,7 +59,7 @@ public class Power implements CalculableQuantity<PowerUnit, Power> {
     }
 
     @Override
-    public PowerUnit getUnitType() {
+    public PowerUnit getUnit() {
         return unitType;
     }
 
@@ -134,7 +134,7 @@ public class Power implements CalculableQuantity<PowerUnit, Power> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Power inputQuantity = (Power) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

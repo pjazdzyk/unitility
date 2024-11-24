@@ -52,7 +52,7 @@ public class DynamicViscosity implements CalculableQuantity<DynamicViscosityUnit
     }
 
     @Override
-    public DynamicViscosityUnit getUnitType() {
+    public DynamicViscosityUnit getUnit() {
         return unitType;
     }
 
@@ -111,7 +111,7 @@ public class DynamicViscosity implements CalculableQuantity<DynamicViscosityUnit
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DynamicViscosity inputQuantity = (DynamicViscosity) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

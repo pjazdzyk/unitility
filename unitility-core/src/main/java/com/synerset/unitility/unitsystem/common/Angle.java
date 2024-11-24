@@ -48,7 +48,7 @@ public class Angle implements TrigonometricQuantity<Angle> {
     }
 
     @Override
-    public AngleUnit getUnitType() {
+    public AngleUnit getUnit() {
         return unitType;
     }
 
@@ -99,7 +99,7 @@ public class Angle implements TrigonometricQuantity<Angle> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Angle inputQuantity = (Angle) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
@@ -109,7 +109,7 @@ public class Angle implements TrigonometricQuantity<Angle> {
 
     @Override
     public String toString() {
-        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
+        String separator = getUnit().getSymbol().contains("°") ? "" : " ";
         return "Angle{" + value + separator + unitType.getSymbol() + '}';
     }
 

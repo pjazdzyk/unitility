@@ -65,7 +65,7 @@ public class Mass implements CalculableQuantity<MassUnit, Mass> {
     }
 
     @Override
-    public MassUnit getUnitType() {
+    public MassUnit getUnit() {
         return unitType;
     }
 
@@ -148,7 +148,7 @@ public class Mass implements CalculableQuantity<MassUnit, Mass> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Mass inputQuantity = (Mass) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

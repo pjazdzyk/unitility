@@ -57,7 +57,7 @@ public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
     }
 
     @Override
-    public MassFlowUnit getUnitType() {
+    public MassFlowUnit getUnit() {
         return unitType;
     }
 
@@ -124,7 +124,7 @@ public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MassFlow inputQuantity = (MassFlow) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

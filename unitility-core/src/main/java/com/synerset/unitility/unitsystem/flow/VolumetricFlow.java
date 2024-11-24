@@ -81,7 +81,7 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
     }
 
     @Override
-    public VolumetricFlowUnit getUnitType() {
+    public VolumetricFlowUnit getUnit() {
         return unitType;
     }
 
@@ -196,7 +196,7 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VolumetricFlow inputQuantity = (VolumetricFlow) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

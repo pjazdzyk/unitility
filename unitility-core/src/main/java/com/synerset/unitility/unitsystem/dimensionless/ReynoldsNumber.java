@@ -35,7 +35,7 @@ public class ReynoldsNumber implements CalculableQuantity<ReynoldsNumberUnit, Re
     }
 
     @Override
-    public ReynoldsNumberUnit getUnitType() {
+    public ReynoldsNumberUnit getUnit() {
         return unitType;
     }
 

@@ -90,7 +90,7 @@ class PowerTest {
 
         // When
         Power powerWatt = Power.ofWatts(10);
-        PowerUnit actualBaseUnit = powerWatt.getUnitType().getBaseUnit();
+        PowerUnit actualBaseUnit = powerWatt.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

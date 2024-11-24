@@ -69,7 +69,7 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
     }
 
     @Override
-    public AngleUnit getUnitType() {
+    public AngleUnit getUnit() {
         return unitType;
     }
 
@@ -137,7 +137,7 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Latitude inputQuantity = (Latitude) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
@@ -147,7 +147,7 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
 
     @Override
     public String toString() {
-        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
+        String separator = getUnit().getSymbol().contains("°") ? "" : " ";
         return "Latitude{" + value + separator + unitType.getSymbol() + '}';
     }
 

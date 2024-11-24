@@ -1,40 +1,40 @@
-package com.synerset.unitility.unitsystem.humidity;
+package com.synerset.unitility.unitsystem.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class RelativeHumidityTest {
+class RatioTest {
     @Test
     @DisplayName("should convert % to decimal and vice versa")
     void shouldProperlyConvertPascalToPsi() {
         // Given
-        RelativeHumidity initialHumidity = RelativeHumidity.ofPercentage(50.5);
+        Ratio initialRatio = Ratio.ofPercentage(50.5);
 
         // When
-        RelativeHumidity actualInDecimal = initialHumidity.toUnit(RelativeHumidityUnits.DECIMAL);
-        double actualInDecimalVal = initialHumidity.getInDecimal();
-        RelativeHumidity actualInPercent = actualInDecimal.toBaseUnit();
+        Ratio actualInDecimal = initialRatio.toUnit(RatioUnits.DECIMAL);
+        double actualInDecimalVal = initialRatio.getInDecimal();
+        Ratio actualInPercent = actualInDecimal.toBaseUnit();
         double actualInPercentVal = actualInDecimal.getInPercent();
 
         // Then
-        RelativeHumidity expectedInDecimal = RelativeHumidity.ofDecimal(0.505);
+        Ratio expectedInDecimal = Ratio.ofDecimal(0.505);
         assertThat(actualInDecimal.getValue()).isEqualTo(actualInDecimalVal);
         assertThat(actualInPercent.getValue()).isEqualTo(actualInPercentVal);
         assertThat(actualInDecimal).isEqualTo(expectedInDecimal);
-        assertThat(actualInPercent).isEqualTo(initialHumidity);
+        assertThat(actualInPercent).isEqualTo(initialRatio);
     }
 
     @Test
     @DisplayName("should have % as base unit")
     void shouldHavePercentAsBaseUnit() {
         // Given
-        RelativeHumidityUnit expectedBaseUnit = RelativeHumidityUnits.PERCENT;
+        RatioUnit expectedBaseUnit = RatioUnits.PERCENT;
 
         // When
-        RelativeHumidity relativeHumidityInDecimal = RelativeHumidity.ofDecimal(0.1);
-        RelativeHumidityUnit actualBaseUnit = relativeHumidityInDecimal.getUnit().getBaseUnit();
+        Ratio ratioInDecimal = Ratio.ofDecimal(0.1);
+        RatioUnit actualBaseUnit = ratioInDecimal.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
@@ -44,10 +44,10 @@ class RelativeHumidityTest {
     @DisplayName("should return valid result from to() and getIn() methods")
     void shouldReturnValidResultFromToAndGetInMethods() {
         // Given
-        RelativeHumidity expected = RelativeHumidity.ofPercentage(10.1);
+        Ratio expected = Ratio.ofPercentage(10.1);
 
         // When
-        RelativeHumidity actual = expected.toDecimal()
+        Ratio actual = expected.toDecimal()
                 .toPercent();
 
         double actualValue = expected.getInPercent();

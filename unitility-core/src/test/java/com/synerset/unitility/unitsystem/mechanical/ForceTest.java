@@ -107,7 +107,7 @@ class ForceTest {
 
         // When
         Force forceInNewton = Force.ofNewtons(10);
-        ForceUnit actualBaseUnit = forceInNewton.getUnitType().getBaseUnit();
+        ForceUnit actualBaseUnit = forceInNewton.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

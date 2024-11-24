@@ -31,7 +31,7 @@ public class GrashofNumber implements CalculableQuantity<GrashofNumberUnit, Gras
     }
 
     @Override
-    public GrashofNumberUnit getUnitType() {
+    public GrashofNumberUnit getUnit() {
         return unitType;
     }
 

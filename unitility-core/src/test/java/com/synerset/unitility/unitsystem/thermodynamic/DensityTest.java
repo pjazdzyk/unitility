@@ -54,7 +54,7 @@ class DensityTest {
 
         // When
         Density densityInLbPerFt3 = Density.ofPoundPerCubicFoot(10);
-        DensityUnit actualBaseUnit = densityInLbPerFt3.getUnitType().getBaseUnit();
+        DensityUnit actualBaseUnit = densityInLbPerFt3.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

@@ -90,7 +90,7 @@ class TorqueTest {
 
         // When
         Torque torqueInNewtonMeters = Torque.ofNewtonMeters(10);
-        TorqueUnit actualBaseUnit = torqueInNewtonMeters.getUnitType().getBaseUnit();
+        TorqueUnit actualBaseUnit = torqueInNewtonMeters.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

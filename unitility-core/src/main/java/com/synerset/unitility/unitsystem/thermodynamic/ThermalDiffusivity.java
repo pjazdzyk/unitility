@@ -48,7 +48,7 @@ public class ThermalDiffusivity implements CalculableQuantity<ThermalDiffusivity
     }
 
     @Override
-    public ThermalDiffusivityUnit getUnitType() {
+    public ThermalDiffusivityUnit getUnit() {
         return unitType;
     }
 
@@ -99,7 +99,7 @@ public class ThermalDiffusivity implements CalculableQuantity<ThermalDiffusivity
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ThermalDiffusivity inputQuantity = (ThermalDiffusivity) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

@@ -53,7 +53,7 @@ public class Temperature implements CalculableQuantity<TemperatureUnit, Temperat
     }
 
     @Override
-    public TemperatureUnit getUnitType() {
+    public TemperatureUnit getUnit() {
         return unitType;
     }
 
@@ -113,7 +113,7 @@ public class Temperature implements CalculableQuantity<TemperatureUnit, Temperat
         if (o == null || getClass() != o.getClass()) return false;
         Temperature inputQuantity = (Temperature) o;
         return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(),
-                inputQuantity.getUnitType().getBaseUnit());
+                inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
@@ -123,7 +123,7 @@ public class Temperature implements CalculableQuantity<TemperatureUnit, Temperat
 
     @Override
     public String toString() {
-        String separator = getUnitType().getSymbol().contains("°") ? "" : " ";
+        String separator = getUnit().getSymbol().contains("°") ? "" : " ";
         return "Temperature{" + value + separator + unitType.getSymbol() + '}';
     }
 

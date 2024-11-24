@@ -27,7 +27,7 @@ class HumidityRatioTest {
         assertThat(actualInLbPerLb.getValue()).isEqualTo(actualInLbPerLbVal);
         assertThat(actualInKgPerKg.getValue()).isEqualTo(actualInKgPerKgVal);
         assertThat(actualInLbPerLb.getValue()).isEqualTo(expectedInLbPerLb.getValue(), withPrecision(1E-9));
-        assertThat(actualInKgPerKg.getUnitType()).isEqualTo(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
+        assertThat(actualInKgPerKg.getUnit()).isEqualTo(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
         assertThat(initialHumidityRatio).isEqualTo(HumidityRatio.ofKilogramPerKilogram(initialValue));
     }
 
@@ -39,7 +39,7 @@ class HumidityRatioTest {
 
         // When
         HumidityRatio humidityKgPerKg = HumidityRatio.ofPoundPerPound(10);
-        HumidityRatioUnit actualBaseUnit = humidityKgPerKg.getUnitType().getBaseUnit();
+        HumidityRatioUnit actualBaseUnit = humidityKgPerKg.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

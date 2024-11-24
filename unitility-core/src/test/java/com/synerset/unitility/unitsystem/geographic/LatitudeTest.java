@@ -37,7 +37,7 @@ class LatitudeTest {
 
         // When
         Latitude angleInRadians = Latitude.ofRadians(10);
-        AngleUnit actualBaseUnit = angleInRadians.getUnitType().getBaseUnit();
+        AngleUnit actualBaseUnit = angleInRadians.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

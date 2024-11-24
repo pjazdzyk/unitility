@@ -51,7 +51,7 @@ public class ThermalConductivity implements CalculableQuantity<ThermalConductivi
     }
 
     @Override
-    public ThermalConductivityUnit getUnitType() {
+    public ThermalConductivityUnit getUnit() {
         return unitType;
     }
 
@@ -110,7 +110,7 @@ public class ThermalConductivity implements CalculableQuantity<ThermalConductivi
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ThermalConductivity inputQuantity = (ThermalConductivity) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

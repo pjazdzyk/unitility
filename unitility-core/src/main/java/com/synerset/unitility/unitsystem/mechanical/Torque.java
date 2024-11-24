@@ -61,7 +61,7 @@ public class Torque implements CalculableQuantity<TorqueUnit, Torque> {
     }
 
     @Override
-    public TorqueUnit getUnitType() {
+    public TorqueUnit getUnit() {
         return unitType;
     }
 
@@ -136,7 +136,7 @@ public class Torque implements CalculableQuantity<TorqueUnit, Torque> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Torque inputQuantity = (Torque) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

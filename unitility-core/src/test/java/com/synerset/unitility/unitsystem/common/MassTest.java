@@ -108,7 +108,7 @@ class MassTest {
 
         // When
         Mass massInLb = Mass.ofPounds(10);
-        MassUnit actualBaseUnit = massInLb.getUnitType().getBaseUnit();
+        MassUnit actualBaseUnit = massInLb.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

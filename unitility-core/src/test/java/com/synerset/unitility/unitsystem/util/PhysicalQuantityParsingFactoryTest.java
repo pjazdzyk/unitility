@@ -175,6 +175,7 @@ class PhysicalQuantityParsingFactoryTest {
         ThermalDiffusivity actualThermDiff = PARSING_FACTORY.parse(ThermalDiffusivity.class, singleValueInput);
         Latitude actualLatitude = PARSING_FACTORY.parse(Latitude.class, singleValueInput);
         Longitude actualLongitude = PARSING_FACTORY.parse(Longitude.class, singleValueInput);
+        Ratio actualRatio = PARSING_FACTORY.parse(Ratio.class, singleValueInput);
 
         // Then
         assertThat(actualAngle).isEqualTo(Angle.of(expectedValue, AngleUnits.getDefaultUnit()));
@@ -207,6 +208,7 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualThermDiff).isEqualTo(ThermalDiffusivity.of(expectedValue, ThermalDiffusivityUnits.getDefaultUnit()));
         assertThat(actualLatitude).isEqualTo(Latitude.of(expectedValue, AngleUnits.getDefaultUnit()));
         assertThat(actualLongitude).isEqualTo(Longitude.of(expectedValue, AngleUnits.getDefaultUnit()));
+        assertThat(actualRatio).isEqualTo(Ratio.of(expectedValue, RatioUnits.getDefaultUnit()));
     }
 
     /**
@@ -225,7 +227,7 @@ class PhysicalQuantityParsingFactoryTest {
         }
 
         @Override
-        public DistanceUnit getUnitType() {
+        public DistanceUnit getUnit() {
             return null;
         }
 

@@ -39,7 +39,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      *
      * @return The unit associated with the physical quantity.
      */
-    U getUnitType();
+    U getUnit();
 
     /**
      * Convert the physical quantity to its base unit.
@@ -71,7 +71,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return The symbol of the unit associated with the physical quantity.
      */
     default String getUnitSymbol() {
-        return getUnitType().getSymbol();
+        return getUnit().getSymbol();
     }
 
     /**
@@ -92,7 +92,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      */
     @SuppressWarnings("unchecked")
     default <Q extends PhysicalQuantity<U>> Q toUnitFrom(Q targetUnit) {
-        U targetUnitUnitT = targetUnit.getUnitType();
+        U targetUnitUnitT = targetUnit.getUnit();
         return (Q) toUnit(targetUnitUnitT);
     }
 
@@ -175,7 +175,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         }
         PhysicalQuantity<U> thisInBaseUnit = this.toBaseUnit();
         PhysicalQuantity<U> inputInBaseUnit = quantity.toBaseUnit();
-        if (thisInBaseUnit.getUnitType() != inputInBaseUnit.getUnitType()) {
+        if (thisInBaseUnit.getUnit() != inputInBaseUnit.getUnit()) {
             return false;
         }
         double thisValue = thisInBaseUnit.getValue();
@@ -303,6 +303,15 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
         return variableName + " = " + toEngineeringFormat(relevantDigits);
     }
 
+    /**
+     * Returns quantity name derived from it class name by default, for ie: Temperature.class -> Temperature.
+     *
+     * @return quantity type name
+     */
+    default String getQuantityTypeName() {
+        return this.getClass().getSimpleName().split("\\.")[0];
+    }
+
     @Override
     default int compareTo(PhysicalQuantity<U> other) {
         if (other == null) {
@@ -313,7 +322,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
             return 0;
         }
         // Convert both quantities to the same unit for comparison
-        PhysicalQuantity<U> thisInOtherUnit = this.toUnit(other.getUnitType());
+        PhysicalQuantity<U> thisInOtherUnit = this.toUnit(other.getUnit());
 
         // Compare the values of the two quantities
         double thisValue = thisInOtherUnit.getValue();

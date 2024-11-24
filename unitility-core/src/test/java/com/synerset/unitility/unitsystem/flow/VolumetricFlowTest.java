@@ -179,7 +179,7 @@ class VolumetricFlowTest {
 
         // When
         VolumetricFlow volumetricFlowInGalPerHr = VolumetricFlow.ofGallonsPerHour(10);
-        VolumetricFlowUnit actualBaseUnit = volumetricFlowInGalPerHr.getUnitType().getBaseUnit();
+        VolumetricFlowUnit actualBaseUnit = volumetricFlowInGalPerHr.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

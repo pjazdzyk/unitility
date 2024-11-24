@@ -239,7 +239,7 @@ public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity
         if (inputQuantity == null) {
             return withValue(getValue());
         }
-        U sourceUnit = this.getUnitType();
+        U sourceUnit = this.getUnit();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() + inputInSourceUnits.getValue();
         return withValue(newValue);
@@ -255,7 +255,7 @@ public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity
         if (inputQuantity == null) {
             return withValue(getValue());
         }
-        U sourceUnit = this.getUnitType();
+        U sourceUnit = this.getUnit();
         PhysicalQuantity<U> inputInSourceUnits = inputQuantity.toUnit(sourceUnit);
         double newValue = this.getValue() - inputInSourceUnits.getValue();
         return withValue(newValue);

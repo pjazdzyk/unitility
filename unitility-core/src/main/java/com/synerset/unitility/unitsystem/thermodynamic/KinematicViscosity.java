@@ -48,7 +48,7 @@ public class KinematicViscosity implements CalculableQuantity<KinematicViscosity
     }
 
     @Override
-    public KinematicViscosityUnit getUnitType() {
+    public KinematicViscosityUnit getUnit() {
         return unitType;
     }
 
@@ -100,7 +100,7 @@ public class KinematicViscosity implements CalculableQuantity<KinematicViscosity
         if (o == null || getClass() != o.getClass()) return false;
         KinematicViscosity inputQuantity = (KinematicViscosity) o;
         return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(),
-                inputQuantity.getUnitType().getBaseUnit());
+                inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

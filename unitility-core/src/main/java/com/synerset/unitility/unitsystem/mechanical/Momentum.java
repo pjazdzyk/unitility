@@ -52,7 +52,7 @@ public class Momentum implements CalculableQuantity<MomentumUnit, Momentum> {
     }
 
     @Override
-    public MomentumUnit getUnitType() {
+    public MomentumUnit getUnit() {
         return unitType;
     }
 
@@ -111,7 +111,7 @@ public class Momentum implements CalculableQuantity<MomentumUnit, Momentum> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Momentum inputQuantity = (Momentum) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

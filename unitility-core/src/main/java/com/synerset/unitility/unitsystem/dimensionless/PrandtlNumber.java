@@ -31,7 +31,7 @@ public class PrandtlNumber implements CalculableQuantity<PrandtlNumberUnit, Pran
     }
 
     @Override
-    public PrandtlNumberUnit getUnitType() {
+    public PrandtlNumberUnit getUnit() {
         return unitType;
     }
 

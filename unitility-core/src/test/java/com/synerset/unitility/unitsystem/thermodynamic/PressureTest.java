@@ -118,6 +118,24 @@ class PressureTest {
     }
 
     @Test
+    @DisplayName("should convert Pa to kPa and vice versa")
+    void shouldProperlyConvertPascalToKiloPascal() {
+        // Given
+        Pressure initialPressure = Pressure.ofPascal(100000.0);
+
+        // When
+        Pressure actualInKpa = initialPressure.toUnit(PressureUnits.KILOPASCAL);
+        double actualInKpaValue = initialPressure.getInKiloPascals();
+        Pressure actualInPascal = actualInKpa.toBaseUnit();
+
+        // Then
+        Pressure expectedInTorr = Pressure.ofKiloPascal(100);
+        assertThat(actualInKpa.getValue()).isEqualTo(actualInKpaValue);
+        assertThat(actualInKpa.getValue()).isEqualTo(expectedInTorr.getValue(), withPrecision(1E-15));
+        assertThat(actualInPascal).isEqualTo(initialPressure);
+    }
+
+    @Test
     @DisplayName("should have Pa as base unit")
     void shouldHavePascalAsBaseUnit() {
         // Given
@@ -125,7 +143,7 @@ class PressureTest {
 
         // When
         Pressure pressureInPsi = Pressure.ofPsi(10);
-        PressureUnit actualBaseUnit = pressureInPsi.getUnitType().getBaseUnit();
+        PressureUnit actualBaseUnit = pressureInPsi.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);

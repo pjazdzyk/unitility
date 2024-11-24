@@ -85,7 +85,7 @@ public class Area implements CalculableQuantity<AreaUnit, Area> {
     }
 
     @Override
-    public AreaUnit getUnitType() {
+    public AreaUnit getUnit() {
         return unitType;
     }
 
@@ -208,7 +208,7 @@ public class Area implements CalculableQuantity<AreaUnit, Area> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Area inputQuantity = (Area) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

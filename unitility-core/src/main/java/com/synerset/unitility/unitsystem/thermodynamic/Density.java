@@ -49,7 +49,7 @@ public class Density implements CalculableQuantity<DensityUnit, Density> {
     }
 
     @Override
-    public DensityUnit getUnitType() {
+    public DensityUnit getUnit() {
         return unitType;
     }
 
@@ -104,7 +104,7 @@ public class Density implements CalculableQuantity<DensityUnit, Density> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Density inputQuantity = (Density) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

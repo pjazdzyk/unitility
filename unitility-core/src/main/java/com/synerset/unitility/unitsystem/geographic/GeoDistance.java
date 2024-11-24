@@ -37,7 +37,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
 
     public GeoDistance(GeoCoordinate startCoordinate, Angle trueBearing, Distance distance) {
         this.distance = distance;
-        this.unitType = distance.getUnitType();
+        this.unitType = distance.getUnit();
         this.startCoordinate = startCoordinate;
         this.trueBearing = trueBearing;
         this.targetCoordinate = HaversineEquations.calcTargetCoordinate(startCoordinate, this.trueBearing, this.distance);
@@ -254,7 +254,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
     }
 
     @Override
-    public DistanceUnit getUnitType() {
+    public DistanceUnit getUnit() {
         return unitType;
     }
 

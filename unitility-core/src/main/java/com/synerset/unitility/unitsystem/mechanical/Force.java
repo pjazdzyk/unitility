@@ -64,7 +64,7 @@ public class Force implements CalculableQuantity<ForceUnit, Force> {
     }
 
     @Override
-    public ForceUnit getUnitType() {
+    public ForceUnit getUnit() {
         return unitType;
     }
 
@@ -147,7 +147,7 @@ public class Force implements CalculableQuantity<ForceUnit, Force> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Force inputQuantity = (Force) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnitType().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

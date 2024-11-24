@@ -58,6 +58,7 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
+                .dropHyphens()
                 .toString();
     }
 

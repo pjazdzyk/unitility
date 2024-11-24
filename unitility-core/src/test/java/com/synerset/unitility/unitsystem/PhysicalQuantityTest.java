@@ -178,10 +178,10 @@ class PhysicalQuantityTest {
 
         // When
         VolumetricFlow actualVolFlow = volFlowM3s.toUnitFrom(volFlowM3h);
-        VolumetricFlowUnit actualUnit = actualVolFlow.getUnitType();
+        VolumetricFlowUnit actualUnit = actualVolFlow.getUnit();
 
         // Then
-        assertThat(actualUnit).isEqualTo(volFlowM3h.getUnitType());
+        assertThat(actualUnit).isEqualTo(volFlowM3h.getUnit());
         assertThat(actualVolFlow.getValue()).isEqualTo(7200);
     }
 
@@ -198,6 +198,19 @@ class PhysicalQuantityTest {
         assertThat(volumeInCm3.getValue()).isEqualTo(1000);
         assertThatThrownBy(() -> volumeInCm3.toUnit("kg")).isInstanceOf(UnitSystemParseException.class);
 
+    }
+
+    @Test
+    @DisplayName("Should return return quantity name")
+    void getQuantityTypeName_shouldReturnQuantityTypename(){
+        // Given
+        Temperature temperature = Temperature.ofCelsius(29);
+
+        // When
+        String actualName = temperature.getQuantityTypeName();
+
+        // Then
+        assertThat(actualName).isEqualTo("Temperature");
     }
 
 }
