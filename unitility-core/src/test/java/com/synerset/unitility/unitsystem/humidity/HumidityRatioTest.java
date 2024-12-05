@@ -32,6 +32,28 @@ class HumidityRatioTest {
     }
 
     @Test
+    @DisplayName("should convert from g/kg to kg/kg and vice versa")
+    void shouldProperlyConvertFromGkgToKgKgAndViceVersa() {
+        // When
+        double initialValue = 0.015;
+        HumidityRatio initialHumidityRatio = HumidityRatio.of(initialValue, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
+
+        // Then
+        HumidityRatio actualInGPerKg = initialHumidityRatio.toUnit(HumidityRatioUnits.GRAM_PER_KILOGRAM);
+        // Going back again to base value
+        HumidityRatio actualInKgPerKg = actualInGPerKg.toBaseUnit();
+        // Checking values
+        double gramPerKilogram1 = actualInGPerKg.getGramPerKilogram();
+        double gramPerKilogram2 = initialHumidityRatio.toGramPerKilogram().getValue();
+
+        HumidityRatio expectedInGramPerKilogram = HumidityRatio.of(15, HumidityRatioUnits.GRAM_PER_KILOGRAM);
+        assertThat(actualInKgPerKg.getValue()).isEqualTo(initialValue);
+        assertThat(actualInGPerKg).isEqualTo(expectedInGramPerKilogram);
+        assertThat(actualInKgPerKg.getValue()).isEqualTo(initialHumidityRatio.getValue());
+        assertThat(gramPerKilogram1).isEqualTo(gramPerKilogram2);
+    }
+
+    @Test
     @DisplayName("should have kg/kg as base unit")
     void shouldHaveKilogramPerKilogramBaseUnit() {
         // Given

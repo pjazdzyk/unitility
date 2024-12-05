@@ -34,6 +34,10 @@ public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, Humi
         return new HumidityRatio(value, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
     }
 
+    public static HumidityRatio ofGramPerKilogram(double value) {
+        return new HumidityRatio(value, HumidityRatioUnits.GRAM_PER_KILOGRAM);
+    }
+
     public static HumidityRatio ofPoundPerPound(double value) {
         return new HumidityRatio(value, HumidityRatioUnits.POUND_PER_POUND);
     }
@@ -82,6 +86,10 @@ public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, Humi
         return toUnit(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
     }
 
+    public HumidityRatio toGramPerKilogram() {
+        return toUnit(HumidityRatioUnits.GRAM_PER_KILOGRAM);
+    }
+
     public HumidityRatio toPoundPerPound() {
         return toUnit(HumidityRatioUnits.POUND_PER_POUND);
     }
@@ -89,6 +97,10 @@ public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, Humi
     // Get value in target unit
     public double getInKilogramPerKilogram() {
         return getInUnit(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
+    }
+
+    public double getGramPerKilogram() {
+        return getInUnit(HumidityRatioUnits.GRAM_PER_KILOGRAM);
     }
 
     public double getInPoundPerPound() {
