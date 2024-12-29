@@ -61,13 +61,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.4.2/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.5.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>2.4.2</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -79,7 +79,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.4.2</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -87,7 +87,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.4.2</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -129,6 +129,7 @@ units and at least one Imperial unit.
   gallon [gal]
 * Mass: kilogram [kg], gram [g], milligram [mg], tonne [t], ounce [oz], pound [lb]
 * Angle: degrees [°], radians [rad]
+* Ratio: Percent [%], Decimal [-]
 
 #### MECHANICAL:
 
@@ -481,7 +482,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>2.4.2</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -506,7 +507,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.4.2</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -546,7 +547,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.4.2</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:

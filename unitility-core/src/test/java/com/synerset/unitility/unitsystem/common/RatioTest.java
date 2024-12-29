@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.common;
 
+import com.synerset.unitility.unitsystem.flow.MassFlow;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,6 +56,24 @@ class RatioTest {
         // Then
         assertThat(actual).isEqualTo(expected);
         assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
+    @Test
+    @DisplayName("should return valid result from two PhysicalQuantity passed as arguments")
+    void shouldReturnValidResultFromTwoPhysicalQuantityPassedAsArguments() {
+        // Given
+        MassFlow inletMassFlow = MassFlow.ofKilogramsPerSecond(1);
+        MassFlow outletMassFlow = MassFlow.ofKilogramsPerSecond(2);
+
+        // When
+        Ratio flowRatio = Ratio.from(inletMassFlow, outletMassFlow);
+        Ratio flowRatioFromValues = Ratio.from(1, 2);
+
+        // Then
+        assertThat(flowRatio).isNotNull();
+        assertThat(flowRatioFromValues).isEqualTo(flowRatio);
+        assertThat(flowRatio.getInPercent()).isEqualTo(50);
+        assertThat(flowRatio.getInDecimal()).isEqualTo(0.5);
     }
 
 }

@@ -1,13 +1,14 @@
 package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.CalculableQuantity;
+import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.Unit;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 
 import java.util.Objects;
 
 public class Ratio implements CalculableQuantity<RatioUnit, Ratio> {
 
-    public static final Ratio RH_MIN_LIMIT = Ratio.ofPercentage(0);
-    public static final Ratio RH_MAX_LIMIT = Ratio.ofPercentage(100);
     private final double value;
     private final double baseValue;
     private final RatioUnit unitType;
@@ -37,6 +38,24 @@ public class Ratio implements CalculableQuantity<RatioUnit, Ratio> {
 
     public static Ratio ofDecimal(double value) {
         return new Ratio(value, RatioUnits.DECIMAL);
+    }
+
+    public static <U extends Unit, Q extends PhysicalQuantity<U>> Ratio from(Q firstQuantity, Q secondQuantity) {
+        Objects.requireNonNull(firstQuantity);
+        Objects.requireNonNull(secondQuantity);
+        double firstValue = firstQuantity.toBaseUnit().getValue();
+        double secondValue = secondQuantity.toBaseUnit().getValue();
+        if(secondValue == 0.0){
+            throw new UnitSystemArgumentException("Second quantity at base unit cannot be 0 to calculate actual Ratio. Second quantity: " + secondQuantity);
+        }
+        return Ratio.ofDecimal(firstValue/secondValue);
+    }
+
+    public static Ratio from(double firstValue, double secondValue) {
+        if(secondValue == 0.0){
+            throw new UnitSystemArgumentException("Second quantity at base unit cannot be 0 to calculate actual Ratio. Second value: " + secondValue);
+        }
+        return Ratio.ofDecimal(firstValue/secondValue);
     }
 
     @Override
