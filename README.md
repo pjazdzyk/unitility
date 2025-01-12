@@ -42,7 +42,7 @@ features, such as overloaded operators.
    5.1 [Jackson serializers / deserializers](#51-jackson-serializers-and-deserializers) <br>
    5.2 [SpringBoot web extension](#52-spring-boot-module) <br>
    5.3 [Quarkus web extension](#53-quarkus-module) <br>
-   5.4 [Jakarta Validation](#54) <br>
+   5.4 [Jakarta Validation](#54-jakarta-validation) <br>
 6. [Creating custom units and quantities](#6-creating-custom-quantities) <br>
    6.1 [Custom unit](#61-custom-unit) <br>
    6.2 [Registering custom quantity in Spring](#62-custom-physical-quantity) <br>
