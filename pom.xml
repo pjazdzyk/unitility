@@ -44,7 +44,7 @@
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>2.5.0</project.version>
+        <project.version>2.6.0</project.version>
 
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>
@@ -54,18 +54,18 @@
         <!-- Jackson module -->
         <jackson-databind.version>2.18.2</jackson-databind.version>
         <!-- SpringBoot module -->
-        <spring-boot-starter-web.version>3.4.1</spring-boot-starter-web.version>
+        <spring-boot-starter-web.version>3.4.2</spring-boot-starter-web.version>
         <!-- Quarkus module -->
-        <quarkus-version>3.17.5</quarkus-version>
+        <quarkus-version>3.18.2</quarkus-version>
         <!-- Jakarta validation module -->
-        <jakarta.validation-api.version>3.1.0</jakarta.validation-api.version>
+        <jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
         <jakarta.el.version>6.0.1</jakarta.el.version>
         <hibernate-validator.version>8.0.2.Final</hibernate-validator.version>
 
         <!-- Test dependencies versions -->
         <jacoco.version>0.8.12</jacoco.version>
         <junit-jupiter.version>5.11.4</junit-jupiter.version>
-        <assertj-core.version>3.27.0</assertj-core.version>
+        <assertj-core.version>3.27.3</assertj-core.version>
 
         <!-- Plugin versions -->
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>

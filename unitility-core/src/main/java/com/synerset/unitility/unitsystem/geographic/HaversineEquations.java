@@ -12,9 +12,51 @@ public class HaversineEquations {
     static final Distance MEAN_EARTH_RADIUS = Distance.ofMeters(6_371_000);
 
     /**
+     * Converts a signed bearing (-180 to +180 degrees) to a true bearing (0 to 360 degrees).
+     *
+     * @param signedBearing the signed bearing angle (-180 to +180 degrees)
+     * @return the equivalent true bearing (0 to 360 degrees)
+     */
+    static Angle toTrueBearing(Angle signedBearing) {
+        double trueBearingValue = toTrueBearing(signedBearing.getValue());
+        return Angle.ofDegrees(trueBearingValue);
+    }
+
+    /**
+     * Converts a signed bearing value in degrees to a true bearing.
+     *
+     * @param signedBearingValueDeg the signed bearing value (-180 to +180 degrees)
+     * @return the equivalent true bearing value (0 to 360 degrees)
+     */
+    static double toTrueBearing(double signedBearingValueDeg) {
+        return (signedBearingValueDeg + 360) % 360;
+    }
+
+    /**
+     * Converts a true bearing (0 to 360 degrees) to a signed bearing (-180 to +180 degrees).
+     *
+     * @param trueBearing the true bearing angle (0 to 360 degrees)
+     * @return the equivalent signed bearing (-180 to +180 degrees)
+     */
+    static Angle toSignedBearing(Angle trueBearing) {
+        double signedBearingValue = toSignedBearing(trueBearing.getValue());
+        return Angle.ofDegrees(signedBearingValue);
+    }
+
+    /**
+     * Converts a true bearing value in degrees to a signed bearing.
+     *
+     * @param trueBearingValueDeg the true bearing value (0 to 360 degrees)
+     * @return the equivalent signed bearing value (-180 to +180 degrees)
+     */
+    static double toSignedBearing(double trueBearingValueDeg) {
+        return (trueBearingValueDeg > 180) ? trueBearingValueDeg - 360 : trueBearingValueDeg;
+    }
+
+    /**
      * Calculates the bearing {@link Angle} between two geographic coordinates in range: [-180, 180]
      *
-     * @param startCoordinate The starting {@link GeoCoordinate}.
+     * @param startCoordinate  The starting {@link GeoCoordinate}.
      * @param targetCoordinate The target {@link GeoCoordinate}.
      * @return The bearing angle as an {@link Angle}.
      */
@@ -41,7 +83,7 @@ public class HaversineEquations {
     /**
      * Calculates the spherical {@link Distance} between two geographic coordinates using the Haversine formula.
      *
-     * @param startCoordinate The starting {@link GeoCoordinate}.
+     * @param startCoordinate  The starting {@link GeoCoordinate}.
      * @param targetCoordinate The target {@link GeoCoordinate}.
      * @return The spherical distance as a {@link Distance}.
      */
@@ -71,9 +113,9 @@ public class HaversineEquations {
     /**
      * Calculates the target {@link GeoCoordinate} based on the initial coordinate, bearing, and distance change.
      *
-     * @param fromCoordinate   The initial {@link GeoCoordinate}.
-     * @param bearing          The bearing angle as an {@link Angle}.
-     * @param distanceChange   The change in distance as a {@link Distance}.
+     * @param fromCoordinate The initial {@link GeoCoordinate}.
+     * @param bearing        The bearing angle as an {@link Angle}.
+     * @param distanceChange The change in distance as a {@link Distance}.
      * @return The target {@link GeoCoordinate}.
      */
     static GeoCoordinate calcTargetCoordinate(GeoCoordinate fromCoordinate, Angle bearing, Distance distanceChange) {
@@ -83,7 +125,7 @@ public class HaversineEquations {
         double trueBearing = bearing.getInRadians();
 
         double newLat = Math.asin(Math.sin(lat1) * Math.cos(distanceByEarthRadius) +
-                Math.cos(lat1) * Math.sin(distanceByEarthRadius) * Math.cos(trueBearing));
+                                  Math.cos(lat1) * Math.sin(distanceByEarthRadius) * Math.cos(trueBearing));
 
         double newLon = lon1 + Math.atan2(
                 Math.sin(trueBearing) * Math.sin(distanceByEarthRadius) * Math.cos(lat1),
@@ -98,7 +140,7 @@ public class HaversineEquations {
             lonInDegrees = 180 - (Math.abs(lonInDegrees)) % 180;
         } else if (lonInDegrees > 180) {
             lonInDegrees = (180 - (Math.abs(lonInDegrees)) % 180) * -1;
-        } else{
+        } else {
             lonInDegrees = (lonInDegrees) % 180;
         }
 
@@ -123,7 +165,7 @@ public class HaversineEquations {
      * Determines the sign for the degrees based on the direction character.
      *
      * @param directionChar the direction character (S, W, etc.)
-     * @param degrees the degrees value
+     * @param degrees       the degrees value
      * @return the sign (-1 if S/W, 1 otherwise)
      */
     public static double determineSign(char directionChar, double degrees) {

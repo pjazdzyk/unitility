@@ -1,6 +1,5 @@
 package com.synerset.unitility.unitsystem.geographic;
 
-import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.common.DistanceUnits;
 import org.junit.jupiter.api.DisplayName;
@@ -80,9 +79,9 @@ class GeoDistanceTest {
 
         // When
         GeoDistance travelDistance = GeoDistance.of(wroclaw, newYork, DistanceUnits.KILOMETER);
-        System.out.println(travelDistance.getTrueBearing());
+        System.out.println(travelDistance.getBearing());
         GeoDistance changedRoute = travelDistance.with(wellington);
-        System.out.println(changedRoute.getTrueBearing());
+        System.out.println(changedRoute.getBearing());
 
         // Then
         assertThat(changedRoute.getInKilometers()).isEqualTo(18005.619822652574);
@@ -98,14 +97,14 @@ class GeoDistanceTest {
 
         // When
         GeoDistance travelDistance = GeoDistance.of(wroclaw, newYork, DistanceUnits.KILOMETER);
-        GeoDistance changedRoute = travelDistance.with(Angle.ofDegrees(65.74497889266877), Distance.ofKilometers(18005.619822652574));
+        GeoDistance changedRoute = travelDistance.with(Bearing.ofSigned(65.74497889266877), Distance.ofKilometers(18005.619822652574));
         GeoCoordinate actualStartCoordinate = changedRoute.getStartCoordinate();
         GeoCoordinate actualTargetCoordinate = changedRoute.getTargetCoordinate();
 
         // Then
         assertThat(actualStartCoordinate).isEqualTo(wroclaw);
         assertThat(actualTargetCoordinate.equalsWithPrecision(wellington, 1E-13)).isTrue();
-        assertThat(changedRoute.getTrueBearing()).isEqualTo(Angle.ofDegrees(65.74497889266877));
+        assertThat(changedRoute.getBearing()).isEqualTo(Bearing.ofSigned((65.74497889266877)));
         assertThat(changedRoute.getDistance()).isEqualTo(Distance.ofKilometers(18005.619822652574));
         assertThat(changedRoute.toMile().getDistance()).isEqualTo(Distance.ofMiles(11188.173456173803));
     }
@@ -121,7 +120,7 @@ class GeoDistanceTest {
         // When
         GeoDistance travelDistance = GeoDistance.of(wroclaw, newYork, DistanceUnits.KILOMETER);
         GeoDistance changedRoute = travelDistance.translate(wellington);
-        Angle trueBearing = changedRoute.getTrueBearing();
+        Bearing trueBearing = changedRoute.getBearing();
         System.out.println(trueBearing);
         System.out.println(changedRoute.getDistance());
         System.out.println(changedRoute.getStartCoordinate());
@@ -138,11 +137,10 @@ class GeoDistanceTest {
         GeoCoordinate wroclaw = GeoCoordinate.of(Latitude.ofDegrees(51.102772), Longitude.ofDegrees(16.885802));
         GeoCoordinate newYork = GeoCoordinate.of(Latitude.ofDegrees(40.712671), Longitude.ofDegrees(-74.004655));
         GeoCoordinate wellington = GeoCoordinate.of(Latitude.ofDegrees(-41.289463), Longitude.ofDegrees(174.774913));
-        GeoCoordinate prague = GeoCoordinate.of(Latitude.ofDegrees(50.052494), Longitude.ofDegrees(14.486350), "prague");
 
         // When
         GeoDistance travelDistance = GeoDistance.of(wroclaw, newYork, DistanceUnits.KILOMETER);
-        GeoDistance changedRoute = travelDistance.translate(Angle.ofDegrees(-114.74106142958847),
+        GeoDistance changedRoute = travelDistance.translate(Bearing.ofSigned(-114.74106142958847),
                 Distance.ofKilometers(14403.693472915034));
         GeoCoordinate actualStartCoordinate = changedRoute.getStartCoordinate();
         GeoCoordinate actualTargetCoordinate = changedRoute.getTargetCoordinate();
@@ -151,7 +149,7 @@ class GeoDistanceTest {
         assertThat(actualStartCoordinate).isEqualTo(newYork);
         System.out.println(actualTargetCoordinate.toDecimalDegrees());
         assertThat(actualTargetCoordinate.equalsWithPrecision(wellington, 1E-13)).isTrue();
-        assertThat(changedRoute.getTrueBearing()).isEqualTo(Angle.ofDegrees(-114.74106142958847));
+        assertThat(changedRoute.getBearing()).isEqualTo(Bearing.ofSigned(-114.74106142958847));
         assertThat(changedRoute.getDistance()).isEqualTo(Distance.ofKilometers(14403.693472915034));
     }
 
@@ -182,37 +180,37 @@ class GeoDistanceTest {
         assertThat(routeWroToNY.getTargetCoordinate()).isEqualTo(newYork);
 
         // Route from NewYork to Santiago
-        Angle bearingToSantiago = HaversineEquations.calcBearing(newYork, santiago);
+        Bearing bearingToSantiago = Bearing.ofSigned(HaversineEquations.calcBearing(newYork, santiago));
         Distance distanceToSantiago = HaversineEquations.calcSphericalDistance(newYork, santiago);
         GeoDistance routeNySantg = routeWroToNY.translate(bearingToSantiago, distanceToSantiago);
         assertThat(routeNySantg.getTargetCoordinate().equalsWithPrecision(santiago, 1E-13)).isTrue();
 
         // Route back from Sanitago to New York
-        Angle bearingBackToNyFromSant = HaversineEquations.calcBearing(santiago, newYork);
+        Bearing bearingBackToNyFromSant = Bearing.ofSigned(HaversineEquations.calcBearing(santiago, newYork));
         Distance distanceBackToNYFromSant = HaversineEquations.calcSphericalDistance(santiago, newYork);
         GeoDistance routeToNyFromSant = routeNySantg.translate(bearingBackToNyFromSant, distanceBackToNYFromSant);
         assertThat(routeToNyFromSant.getTargetCoordinate().equalsWithPrecision(newYork, 1E-13)).isTrue();
 
         // Route from Santiago to Wellington
-        Angle bearingToWellington = HaversineEquations.calcBearing(santiago, wellington);
+        Bearing bearingToWellington = Bearing.ofSigned(HaversineEquations.calcBearing(santiago, wellington));
         Distance distanceWellington = HaversineEquations.calcSphericalDistance(santiago, wellington);
         GeoDistance routeSantWell = routeNySantg.translate(bearingToWellington, distanceWellington);
         assertThat(routeSantWell.getTargetCoordinate().equalsWithPrecision(wellington, 1E-13)).isTrue();
 
         // Route back from Wellington to Santiago
-        Angle bearingToBackToSantiago = HaversineEquations.calcBearing(wellington, santiago);
+        Bearing bearingToBackToSantiago = Bearing.ofSigned(HaversineEquations.calcBearing(wellington, santiago));
         Distance distanceBackToSantiago = HaversineEquations.calcSphericalDistance(wellington, santiago);
         GeoDistance routeBackToStg = routeSantWell.translate(bearingToBackToSantiago, distanceBackToSantiago);
         assertThat(routeBackToStg.getTargetCoordinate().equalsWithPrecision(santiago, 1E-13)).isTrue();
 
         // Route from Wellington to Wroclaw
-        Angle bearingToWroclaw = HaversineEquations.calcBearing(wellington, wroclaw);
+        Bearing bearingToWroclaw = Bearing.ofSigned(HaversineEquations.calcBearing(wellington, wroclaw));
         Distance distanceWroclaw = HaversineEquations.calcSphericalDistance(wellington, wroclaw);
         GeoDistance routeWellWro = routeSantWell.translate(bearingToWroclaw, distanceWroclaw);
         assertThat(routeWellWro.getTargetCoordinate().equalsWithPrecision(wroclaw, 1E-13)).isTrue();
 
         // Route from wellington to NewYork
-        Angle bearingToNewYork = HaversineEquations.calcBearing(wellington, newYork);
+        Bearing bearingToNewYork = Bearing.ofSigned(HaversineEquations.calcBearing(wellington, newYork));
         Distance distanceToNewYork = HaversineEquations.calcSphericalDistance(wellington, newYork);
         GeoDistance routeWellNy = routeSantWell.translate(bearingToNewYork, distanceToNewYork);
         assertThat(routeWellNy.getTargetCoordinate().equalsWithPrecision(newYork, 1E-13)).isTrue();
