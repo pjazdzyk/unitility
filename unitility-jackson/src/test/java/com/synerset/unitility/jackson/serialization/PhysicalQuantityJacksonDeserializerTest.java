@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
+import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
@@ -39,6 +40,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         String volFlowFt3m = "{\"value\":20.0,\"unit\":\"ft3/min\"}";
         String humRatio = "{\"value\":2.0,\"unit\":\"kg.wv/kg.da\"}";
         String humRatio2 = "{\"value\":2.0,\"unit\":\"kgwv/kgda\"}";
+        String bearing = "{\"value\":270.0}";
 
 
         // When
@@ -56,6 +58,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         VolumetricFlow actualVolFlowFt3m = objectMapper.readValue(volFlowFt3m, VolumetricFlow.class);
         HumidityRatio actualHumidityRatio = objectMapper.readValue(humRatio, HumidityRatio.class);
         HumidityRatio actualHumidityRatio2 = objectMapper.readValue(humRatio2, HumidityRatio.class);
+        Bearing actualBearing = objectMapper.readValue(bearing, Bearing.class);
 
         // Then
         Temperature expetedTemperature = Temperature.ofCelsius(20);
@@ -78,6 +81,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualVolFlowFt3m).isEqualTo(expectedVolFlow);
         assertThat(actualHumidityRatio).isEqualTo(expectedHumRatio);
         assertThat(actualHumidityRatio2).isEqualTo(expectedHumRatio);
+        assertThat(actualBearing).isEqualTo(Bearing.of(270));
     }
 
     @Test

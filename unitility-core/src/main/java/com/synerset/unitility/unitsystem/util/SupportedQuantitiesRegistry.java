@@ -11,6 +11,7 @@ import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnits;
+import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.GeoDistance;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
@@ -76,7 +77,8 @@ public class SupportedQuantitiesRegistry {
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),
-                Map.entry(GeoDistance.class, () -> Arrays.asList(DistanceUnits.values()))
+                Map.entry(GeoDistance.class, () -> Arrays.asList(DistanceUnits.values())),
+                Map.entry(Bearing.class, () -> Arrays.asList(AngleUnits.values()))
         );
     }
 
