@@ -14,6 +14,7 @@ import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnits;
+import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
@@ -129,7 +130,6 @@ class PhysicalQuantityParsingFactoryTest {
         // Given
         String lat1 = "52°14'5.123\"E";
         String lon1 = "21°4'3.986\"N";
-        String lat2 = "52";
         String lon2 = "21°4'3.986\"N";
         // When // Then
         assertThrows(UnitSystemParseException.class, () -> PARSING_FACTORY.parse(Latitude.class, lat1));
@@ -176,6 +176,7 @@ class PhysicalQuantityParsingFactoryTest {
         Latitude actualLatitude = PARSING_FACTORY.parse(Latitude.class, singleValueInput);
         Longitude actualLongitude = PARSING_FACTORY.parse(Longitude.class, singleValueInput);
         Ratio actualRatio = PARSING_FACTORY.parse(Ratio.class, singleValueInput);
+        Bearing actualBearing = PARSING_FACTORY.parse(Bearing.class, singleValueInput);
 
         // Then
         assertThat(actualAngle).isEqualTo(Angle.of(expectedValue, AngleUnits.getDefaultUnit()));
@@ -209,6 +210,7 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualLatitude).isEqualTo(Latitude.of(expectedValue, AngleUnits.getDefaultUnit()));
         assertThat(actualLongitude).isEqualTo(Longitude.of(expectedValue, AngleUnits.getDefaultUnit()));
         assertThat(actualRatio).isEqualTo(Ratio.of(expectedValue, RatioUnits.getDefaultUnit()));
+        assertThat(actualBearing).isEqualTo(Bearing.of(expectedValue));
     }
 
     /**

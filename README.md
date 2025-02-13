@@ -878,13 +878,30 @@ GeoCoordinate newYork = GeoCoordinate.of(Latitude.ofDegrees(40.712671), Longitud
 GeoDistance geoDistance = GeoDistance.ofKilometers(wroclaw, newYork);
 
 String distanceInEng = geoDistance.toEngineeringFormat();   // 6669.896095258197 [km]
-Angle trueBearing = geoDistance.getTrueBearing();           // Angle{-61.07915625042435°}
+Bearing trueBearing = geoDistance.getBearing();             // Bearing{298.920844°}
 ```
-Please note that true bearing is provided in range <-180,+180> degrees, and it is absolute value, to Earth's true north.
+Please note that true bearing is provided in range <0,365> degrees, and it is absolute value, to Earth's true north.
+Bearing class wraps also value of equivalent relative signed bearing <-180, 180>, which can be accessed through
+method:
+```java
+double signedBearing = geoDistance.getBearing().getSignedValueInDegrees(); // -61.079156250424376
+```
+Bearing can be created as default clockwise <0° - 365°> true north or as absolute direction <-180°, 180°>:
+```java
+Bearing bearing = Bearing.of(270); 
+Bearing bearing1 = Bearing.ofSigned(-90);
+```
+Or created from other bearing:
+```java
+Bearing bearingFromCardinalDir = Bearing.of(CardinalDirection.NORTH, Bearing.ofSigned(-10)); // Bearing{350.0°}
+Bearing bearing = Bearing.of(270);
+Bearing bearingFromOtherBearing = bearing.from(Bearing.ofSigned(20)); // Bearing{290.0°}
+```
+
 Alternatively, GeoDistance can be initialized with starting coordinate, bearing and distance in that case, target
 coordinate will be calculated. Provided distance must be true, curved distance. 
 ```java
-GeoDistance toNewYork = GeoDistance.of(wroclaw, trueBearing, Distance.ofKilometers(6669.896095258197));
+GeoDistance toNewYork = GeoDistance.of(wroclaw, bearing, Distance.ofKilometers(6669.896095258197));
 String targetCoordinate = toNewYork.getTargetCoordinate().toDecimalDegrees();   // 40.712671, -74.004655
 ```
 As you can see the results, we have set heading towards New York from Wrocław with previously calculated curved distance
@@ -905,7 +922,6 @@ String wellingtonCoordinate = toWellington.getTargetCoordinate().toDecimalDegree
 ```
 Previously, toNewYork represented the distance from Wrocław to New York. Following this change, it now represents the 
 distance from Wrocław to Wellington, along with the updated bearing and calculated distance. <br>
-
 
 b) Methods named translate() will now accept a new target coordinate or bearing and distance. They set the previous target 
 coordinate as the current start coordinate and calculate the distance to the new coordinates, whether specified or calculated.
@@ -1015,8 +1031,8 @@ Example: GeoDistance in a case where the start coordinate, true bearing, and dis
         },
         "name": "MyStartLoc"
     }, 
-    "trueBearing": {
-        "value": -20.123,
+    "bearing": {
+        "value": 339.877,
         "unit": "deg"
     }, 
     "distance": {
@@ -1031,7 +1047,7 @@ field "**unit**" is optional, it is omitted when value is provided as DMS or ENG
 double, unit will be automatically resolved to decimal degrees.
 - GeoCoordinate: fields "**latitude**" and "**longitude**" are mandatory, "**name**" is optional.
 - GeoDistance: field "**startCoordinate**" is mandatory. For variant with two coordinates "**targetCoordinate**" must be provided,
-if not available the "**trueBearing**" and "**distance**" must be provided.
+if not available the "**bearing**" and "**distance**" must be provided.
 
 Arithmetic transformations: <br>
 For Latitude, Longitude, and GeoDistance, arithmetic operations function in the same manner as for other PhysicalQuantities.

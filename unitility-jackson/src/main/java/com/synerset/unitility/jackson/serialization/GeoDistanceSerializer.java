@@ -34,7 +34,7 @@ public class GeoDistanceSerializer extends StdSerializer<GeoDistance> {
         jsonGenerator.writeFieldName(FieldNames.JSON_FIELD_TARGET_COORD);
         serializerProvider.defaultSerializeValue(geoDistance.getTargetCoordinate(), jsonGenerator);
         jsonGenerator.writeFieldName(FieldNames.JSON_FIELD_TRUE_BEARING);
-        serializerProvider.defaultSerializeValue(geoDistance.getTrueBearing(), jsonGenerator);
+        serializerProvider.defaultSerializeValue(geoDistance.getBearing(), jsonGenerator);
         jsonGenerator.writeFieldName(FieldNames.JSON_FIELD_DISTANCE);
         serializerProvider.defaultSerializeValue(geoDistance.getDistance(), jsonGenerator);
         jsonGenerator.writeEndObject();

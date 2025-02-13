@@ -8,6 +8,7 @@ import com.synerset.unitility.unitsystem.dimensionless.PrandtlNumber;
 import com.synerset.unitility.unitsystem.dimensionless.ReynoldsNumber;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
+import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
@@ -66,7 +67,8 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(ThermalDiffusivity.class, ThermalDiffusivity::of),
                 // Geographic
                 Map.entry(Latitude.class, Latitude::of),
-                Map.entry(Longitude.class, Longitude::of)
+                Map.entry(Longitude.class, Longitude::of),
+                Map.entry(Bearing.class, Bearing::of)
         );
     }
 

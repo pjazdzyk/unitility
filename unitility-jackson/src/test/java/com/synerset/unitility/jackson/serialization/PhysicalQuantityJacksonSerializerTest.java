@@ -61,7 +61,7 @@ class PhysicalQuantityJacksonSerializerTest {
                         "\"longitude\":{\"value\":-20.0,\"unit\":\"°\"},\"name\":null}," +
                         "\"targetCoordinate\":{\"latitude\":{\"value\":40.0,\"unit\":\"°\"}," +
                         "\"longitude\":{\"value\":60.0,\"unit\":\"°\"},\"name\":null}," +
-                        "\"trueBearing\":{\"value\":53.48552291856691,\"unit\":\"°\"}," +
+                        "\"trueBearing\":{\"value\":53.485522918566915,\"unit\":\"°\"}," +
                         "\"distance\":{\"value\":7764.473273338867,\"unit\":\"km\"}}"
         );
     }

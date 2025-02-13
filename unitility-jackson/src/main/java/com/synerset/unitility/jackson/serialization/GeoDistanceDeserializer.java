@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.common.DistanceUnit;
 import com.synerset.unitility.unitsystem.common.DistanceUnits;
+import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.GeoCoordinate;
 import com.synerset.unitility.unitsystem.geographic.GeoDistance;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
@@ -56,7 +56,7 @@ public class GeoDistanceDeserializer extends JsonDeserializer<GeoDistance> {
             return GeoDistance.ofKilometers(startCoordinate, targetCoordinate);
         }
 
-        Angle trueBearing = node.get(FieldNames.JSON_FIELD_TRUE_BEARING).traverse(parser.getCodec()).readValueAs(Angle.class);
+        Bearing trueBearing = node.get(FieldNames.JSON_FIELD_TRUE_BEARING).traverse(parser.getCodec()).readValueAs(Bearing.class);
         Distance distance = node.get(FieldNames.JSON_FIELD_DISTANCE).traverse(parser.getCodec()).readValueAs(Distance.class);
 
         return GeoDistance.of(startCoordinate, trueBearing, distance);

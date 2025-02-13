@@ -17,7 +17,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
     private final DistanceUnit unitType;
     private final GeoCoordinate startCoordinate;
     private final GeoCoordinate targetCoordinate;
-    private final Angle trueBearing;
+    private final Bearing bearing;
     private final Distance distance;
 
     /**
@@ -31,16 +31,17 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
         this.unitType = unitType;
         this.startCoordinate = startCoordinate;
         this.targetCoordinate = targetCoordinate;
-        this.trueBearing = HaversineEquations.calcBearing(startCoordinate, targetCoordinate);
+        Angle signedBearing = HaversineEquations.calcBearing(startCoordinate, targetCoordinate);
+        this.bearing = Bearing.ofSigned(signedBearing);
         this.distance = HaversineEquations.calcSphericalDistance(startCoordinate, targetCoordinate).toUnit(unitType);
     }
 
-    public GeoDistance(GeoCoordinate startCoordinate, Angle trueBearing, Distance distance) {
+    public GeoDistance(GeoCoordinate startCoordinate, Bearing bearing, Distance distance) {
         this.distance = distance;
         this.unitType = distance.getUnit();
         this.startCoordinate = startCoordinate;
-        this.trueBearing = trueBearing;
-        this.targetCoordinate = HaversineEquations.calcTargetCoordinate(startCoordinate, this.trueBearing, this.distance);
+        this.bearing = bearing;
+        this.targetCoordinate = HaversineEquations.calcTargetCoordinate(startCoordinate, bearing.getSigned(), this.distance);
     }
 
     // Static factory methods
@@ -61,12 +62,12 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
      * Creates a new GeoDistance instance with the specified start coordinate, true bearing, and distance.
      *
      * @param startCoordinate The starting {@link GeoCoordinate}.
-     * @param trueBearing     The true bearing {@link Angle} in range (-180, 180)
+     * @param bearing         The bearing {@link Bearing} in range (0, 360)
      * @param distance        The {@link Distance} between start and target coordinates.
      * @return A new {@link GeoDistance} instance.
      */
-    public static GeoDistance of(GeoCoordinate startCoordinate, Angle trueBearing, Distance distance) {
-        return new GeoDistance(startCoordinate, trueBearing, distance);
+    public static GeoDistance of(GeoCoordinate startCoordinate, Bearing bearing, Distance distance) {
+        return new GeoDistance(startCoordinate, bearing, distance);
     }
 
     /**
@@ -97,17 +98,17 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
 
     /**
      * Progresses from the current START {@link GeoCoordinate} to a new TARGET {@link GeoCoordinate} by a specified
-     * true bearing as {@link Angle} {-180deg,+180deg} and {@link Distance}.
+     * true bearing as {@link Bearing} {0deg - 360deg} and {@link Distance}.
      *
-     * @param trueBearing The true bearing {@link Angle}.
+     * @param bearing The true bearing {@link Bearing}.
      * @param byDistance  The {@link Distance} to progress by.
      * @return A new {@link GeoDistance} instance representing the progressed distance.
      */
-    public GeoDistance with(Angle trueBearing, Distance byDistance) {
+    public GeoDistance with(Bearing bearing, Distance byDistance) {
         if (byDistance.isEqualZero()) {
             return this;
         }
-        return GeoDistance.of(this.startCoordinate, trueBearing, byDistance);
+        return GeoDistance.of(this.startCoordinate, bearing, byDistance);
     }
 
     /**
@@ -121,7 +122,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
         if (byDistance.isEqualZero()) {
             return this;
         }
-        return GeoDistance.of(this.startCoordinate, this.trueBearing, byDistance);
+        return GeoDistance.of(this.startCoordinate, this.bearing, byDistance);
     }
 
     /**
@@ -153,17 +154,17 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
 
     /**
      * Progresses from the current TARGET {@link GeoCoordinate} to a new TARGET {@link GeoCoordinate} by a specified
-     * true bearing as {@link Angle} {-180deg,+180deg} and {@link Distance}.
+     * true bearing as {@link Bearing} {0deg - 360deg} and {@link Distance}.
      *
-     * @param trueBearing The true bearing {@link Angle}.
+     * @param bearing The true bearing {@link Bearing}.
      * @param byDistance  The {@link Distance} to progress by.
      * @return A new {@link GeoDistance} instance representing the progressed distance.
      */
-    public GeoDistance translate(Angle trueBearing, Distance byDistance) {
+    public GeoDistance translate(Bearing bearing, Distance byDistance) {
         if (byDistance.isEqualZero()) {
             return this;
         }
-        return GeoDistance.of(this.targetCoordinate, trueBearing, byDistance);
+        return GeoDistance.of(this.targetCoordinate, bearing, byDistance);
     }
 
     /**
@@ -177,7 +178,7 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
         if (byDistance.isEqualZero()) {
             return this;
         }
-        return translate(this.trueBearing, byDistance);
+        return translate(this.bearing, byDistance);
     }
 
     /**
@@ -193,8 +194,8 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
         return GeoDistance.of(this.targetCoordinate, targetCoordinate, this.unitType);
     }
 
-    public Angle getTrueBearing() {
-        return this.trueBearing;
+    public Bearing getBearing() {
+        return this.bearing;
     }
 
     public GeoCoordinate getStartCoordinate() {
@@ -280,8 +281,8 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
         if (o == null || getClass() != o.getClass()) return false;
         GeoDistance that = (GeoDistance) o;
         return Objects.equals(unitType.getBaseUnit(), that.unitType.getBaseUnit())
-                && startCoordinate.equals(that.startCoordinate)
-                && targetCoordinate.equals(that.targetCoordinate);
+               && startCoordinate.equals(that.startCoordinate)
+               && targetCoordinate.equals(that.targetCoordinate);
     }
 
     @Override
@@ -292,10 +293,10 @@ public class GeoDistance implements CalculableQuantity<DistanceUnit, GeoDistance
     @Override
     public String toString() {
         return "GeoDistance{" +
-                "unitType=" + unitType +
-                ", startCoordinate=" + startCoordinate +
-                ", targetCoordinate=" + targetCoordinate +
-                ", distance=" + distance +
-                '}';
+               "unitType=" + unitType +
+               ", startCoordinate=" + startCoordinate +
+               ", targetCoordinate=" + targetCoordinate +
+               ", distance=" + distance +
+               '}';
     }
 }
