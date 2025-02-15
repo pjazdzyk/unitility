@@ -24,7 +24,7 @@ class BearingTest {
         assertThat(bearing.getValue()).isEqualTo(trueBearingValue);
         assertThat(bearing.getBaseValue()).isEqualTo(trueBearingValue);
         assertThat(bearing.getUnit()).isEqualTo(AngleUnits.DEGREES);
-        assertThat(bearing.getSignedValueInDegrees()).isEqualTo(-90.0);
+        assertThat(bearing.getSignedValue()).isEqualTo(-90.0);
     }
 
     @Test

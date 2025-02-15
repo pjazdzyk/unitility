@@ -21,7 +21,7 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
 
     public Latitude(double value, AngleUnit unitType) {
         this.value = value;
-        if(unitType == null){
+        if (unitType == null) {
             unitType = AngleUnits.getDefaultUnit();
         }
         this.unitType = unitType;
@@ -52,8 +52,8 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
         return ofDegrees(decimalDegreesWithSign);
     }
 
-    public static Latitude ofDegMinSec(int degrees, int minutes, double seconds, CardinalDirection direction) {
-        double sign = HaversineEquations.determineSign(direction.getDirectionChar(), degrees);
+    public static Latitude ofDegMinSec(int degrees, int minutes, double seconds, PrimaryDirection direction) {
+        double sign = HaversineEquations.determineSign(direction.getDirectionSymbol(), degrees);
         double decimalDegrees = HaversineEquations.dmsToDegrees(degrees, minutes, seconds);
         return ofDegrees(sign * decimalDegrees);
     }

@@ -12,48 +12,6 @@ public class HaversineEquations {
     static final Distance MEAN_EARTH_RADIUS = Distance.ofMeters(6_371_000);
 
     /**
-     * Converts a signed bearing (-180 to +180 degrees) to a true bearing (0 to 360 degrees).
-     *
-     * @param signedBearing the signed bearing angle (-180 to +180 degrees)
-     * @return the equivalent true bearing (0 to 360 degrees)
-     */
-    static Angle toTrueBearing(Angle signedBearing) {
-        double trueBearingValue = toTrueBearing(signedBearing.getValue());
-        return Angle.ofDegrees(trueBearingValue);
-    }
-
-    /**
-     * Converts a signed bearing value in degrees to a true bearing.
-     *
-     * @param signedBearingValueDeg the signed bearing value (-180 to +180 degrees)
-     * @return the equivalent true bearing value (0 to 360 degrees)
-     */
-    static double toTrueBearing(double signedBearingValueDeg) {
-        return (signedBearingValueDeg + 360) % 360;
-    }
-
-    /**
-     * Converts a true bearing (0 to 360 degrees) to a signed bearing (-180 to +180 degrees).
-     *
-     * @param trueBearing the true bearing angle (0 to 360 degrees)
-     * @return the equivalent signed bearing (-180 to +180 degrees)
-     */
-    static Angle toSignedBearing(Angle trueBearing) {
-        double signedBearingValue = toSignedBearing(trueBearing.getValue());
-        return Angle.ofDegrees(signedBearingValue);
-    }
-
-    /**
-     * Converts a true bearing value in degrees to a signed bearing.
-     *
-     * @param trueBearingValueDeg the true bearing value (0 to 360 degrees)
-     * @return the equivalent signed bearing value (-180 to +180 degrees)
-     */
-    static double toSignedBearing(double trueBearingValueDeg) {
-        return (trueBearingValueDeg > 180) ? trueBearingValueDeg - 360 : trueBearingValueDeg;
-    }
-
-    /**
      * Calculates the bearing {@link Angle} between two geographic coordinates in range: [-180, 180]
      *
      * @param startCoordinate  The starting {@link GeoCoordinate}.
@@ -164,13 +122,13 @@ public class HaversineEquations {
     /**
      * Determines the sign for the degrees based on the direction character.
      *
-     * @param directionChar the direction character (S, W, etc.)
-     * @param degrees       the degrees value
+     * @param directionSymbol the direction character (S, W, etc.)
+     * @param degrees         the degrees value
      * @return the sign (-1 if S/W, 1 otherwise)
      */
-    public static double determineSign(char directionChar, double degrees) {
+    public static double determineSign(String directionSymbol, double degrees) {
         double sign = 1;
-        if (directionChar == 'S' || directionChar == 's' || directionChar == 'W' || directionChar == 'w' || degrees < 0) {
+        if (directionSymbol.equalsIgnoreCase("S") || directionSymbol.equalsIgnoreCase("W") || degrees < 0) {
             sign = -1;
         }
         return sign;
