@@ -156,20 +156,6 @@ class CalculableQuantityTest {
         assertThat(acutalTemperature.getValue()).isEqualTo(20);
     }
 
-    @Test
-    @DisplayName("Power to exponent: should correctly raise quantity to the power of the given exponent")
-    void power_shouldRaiseQuantityToExponent() {
-        // Given
-        Temperature temperature = Temperature.ofCelsius(2);
-
-        // When
-        Temperature poweredTemperature = temperature.power(3);
-
-        // Then
-        Temperature expectedTemperature = Temperature.ofCelsius(8);
-        assertThat(poweredTemperature).isEqualTo(expectedTemperature);
-    }
-
     // Square Root
 
     @Test
@@ -241,6 +227,71 @@ class CalculableQuantityTest {
 
     }
 
+    @Test
+    @DisplayName("Logarithm with custom base: should throw exception when calculating logarithm with non-positive value or base")
+    void logBase_shouldThrowExceptionForNonPositiveValueOrBase() {
+        // Given
+        Temperature temperaturePositive = Temperature.ofCelsius(10); // Valid positive temperature
+        Temperature temperatureNegative = Temperature.ofCelsius(-10); // Invalid negative temperature
+        double validBase = 2; // Valid base
+        double invalidBase = -2; // Invalid base (negative)
+
+        // Then for non-positive value
+        assertThatThrownBy(() -> temperatureNegative.logBase(validBase))
+                .isInstanceOf(UnitSystemArgumentException.class)
+                .hasMessageContaining("Cannot calculate logarithm for non-positive value");
+
+        // Then for non-positive base
+        assertThatThrownBy(() -> temperaturePositive.logBase(invalidBase))
+                .isInstanceOf(UnitSystemArgumentException.class)
+                .hasMessageContaining("Cannot calculate logarithm for non-positive value");
+
+        // Then for zero value
+        assertThatThrownBy(() -> temperaturePositive.logBase(0))
+                .isInstanceOf(UnitSystemArgumentException.class)
+                .hasMessageContaining("Cannot calculate logarithm for non-positive value");
+
+        // Then for zero base
+        assertThatThrownBy(() -> temperaturePositive.logBase(0))
+                .isInstanceOf(UnitSystemArgumentException.class)
+                .hasMessageContaining("Cannot calculate logarithm for non-positive value");
+    }
+
+    @Test
+    @DisplayName("Logarithm with custom base: should calculate correctly for valid value and base")
+    void logBase_shouldCalculateCorrectlyForValidValueAndBase() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(100); // Valid positive temperature
+        double base = 10; // Valid base
+
+        // When
+        Temperature result = temperature.logBase(base);
+
+        // Then
+        // We expect log base 10 of 100, which should be 2.0
+        assertThat(result.getValue()).isEqualTo(Math.log(100) / Math.log(base));
+    }
+
+    @Test
+    @DisplayName("Logarithm with custom base: should calculate correctly for different valid bases")
+    void logBase_shouldCalculateCorrectlyForDifferentBases() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(16); // Valid positive temperature
+        double base2 = 2; // Base 2
+        double base4 = 4; // Base 4
+
+        // When
+        Temperature resultBase2 = temperature.logBase(base2);
+        Temperature resultBase4 = temperature.logBase(base4);
+
+        // Then
+        // We expect log base 2 of 16, which should be 4.0
+        assertThat(resultBase2.getValue()).isEqualTo(Math.log(16) / Math.log(base2));
+
+        // We expect log base 4 of 16, which should be 2.0
+        assertThat(resultBase4.getValue()).isEqualTo(Math.log(16) / Math.log(base4));
+    }
+
     // Ceiling, and rounding up
 
     @Test
@@ -298,6 +349,37 @@ class CalculableQuantityTest {
         assertThat(roundTemp1).isEqualTo(Temperature.ofCelsius(10.0));
         assertThat(roundTemp2).isEqualTo(Temperature.ofCelsius(0.2));
         assertThat(roundTemp3).isEqualTo(Temperature.ofCelsius(-10.12));
+    }
+
+    // Power
+
+    @Test
+    @DisplayName("Power to exponent: should correctly raise quantity to the power of the given exponent")
+    void power_shouldRaiseQuantityToExponent() {
+        // Given
+        Temperature temperature = Temperature.ofCelsius(2);
+
+        // When
+        Temperature poweredTemperature = temperature.power(3);
+
+        // Then
+        Temperature expectedTemperature = Temperature.ofCelsius(8);
+        assertThat(poweredTemperature).isEqualTo(expectedTemperature);
+    }
+
+    @Test
+    @DisplayName("Power: should correctly raise the quantity's value to the power of another quantity's value")
+    void pow_shouldCalculatePower() {
+        // Given
+        Temperature temperatureBase = Temperature.ofCelsius(2); // Base temperature value 2
+        Temperature temperatureExponent = Temperature.ofCelsius(3); // Exponent temperature value 3
+
+        // When
+        double result = temperatureBase.power(temperatureExponent);
+
+        // Then
+        double expectedResult = Math.pow(2, 3); // Expected result 2^3 = 8
+        assertThat(result).isEqualTo(expectedResult);
     }
 
 }

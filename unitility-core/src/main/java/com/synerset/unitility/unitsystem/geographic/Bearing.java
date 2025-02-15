@@ -41,7 +41,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(trueBearingValueDeg);
-        this.signedValue = HaversineEquations.toSignedBearing(baseValue);
+        this.signedValue = BearingMapper.toSignedBearing(baseValue);
     }
 
     // Static factory methods
@@ -103,9 +103,9 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
      *                          (can be positive or negative)
      * @return a new {@link Bearing} instance representing the calculated bearing
      */
-    public static Bearing of(CardinalDirection cardinalDirection, Bearing relativeBearing) {
+    public static Bearing of(GeoDirection cardinalDirection, Bearing relativeBearing) {
         double trueBearing = cardinalDirection.getTrueBearing().getValue();
-        double signedRelativeBearing = relativeBearing.getSignedValueInDegrees();
+        double signedRelativeBearing = relativeBearing.getSignedValue();
         double newTrueBearing = trueBearing + signedRelativeBearing;
         newTrueBearing = (newTrueBearing + 360) % 360;
         return Bearing.of(newTrueBearing);
@@ -122,7 +122,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
      * @param cardinalDirection the cardinal direction (e.g., NORTH, EAST, SOUTH, WEST)
      * @return the corresponding {@link Bearing} instance for the given cardinal direction
      */
-    public static Bearing of(CardinalDirection cardinalDirection) {
+    public static Bearing of(GeoDirection cardinalDirection) {
         return cardinalDirection.getTrueBearing();
     }
 
@@ -209,7 +209,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
      * @return a new Bearing instance with the corresponding true bearing value in degrees
      */
     public static Bearing ofSigned(double signedBearingDeg) {
-        double trueBearingValue = HaversineEquations.toTrueBearing(signedBearingDeg);
+        double trueBearingValue = BearingMapper.toTrueBearing(signedBearingDeg);
         return new Bearing(trueBearingValue, AngleUnits.DEGREES);
     }
 
@@ -227,7 +227,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
         if (signedBearing == null) {
             throw new UnitSystemArgumentException("Bearing: Argument of signedBearing cannot be null.");
         }
-        double trueBearingValue = HaversineEquations.toTrueBearing(signedBearing.getInDegrees());
+        double trueBearingValue = BearingMapper.toTrueBearing(signedBearing.getInDegrees());
         return new Bearing(trueBearingValue, AngleUnits.DEGREES);
     }
 
@@ -240,7 +240,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
         return this.toUnit(AngleUnits.DEGREES).getValue();
     }
 
-    public double getSignedValueInDegrees() {
+    public double getSignedValue() {
         return signedValue;
     }
 
@@ -250,7 +250,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
 
     public Bearing from(Bearing relativeBearing) {
         double currentTrueBearing = this.getValue();
-        double signedRelativeBearing = relativeBearing.getSignedValueInDegrees();
+        double signedRelativeBearing = relativeBearing.getSignedValue();
         double newTrueBearing = currentTrueBearing + signedRelativeBearing;
         newTrueBearing = (newTrueBearing + 360) % 360;
         return Bearing.of(newTrueBearing);

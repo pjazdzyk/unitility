@@ -20,7 +20,7 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
 
     public Longitude(double value, AngleUnit unitType) {
         this.value = value;
-        if(unitType == null){
+        if (unitType == null) {
             unitType = AngleUnits.getDefaultUnit();
         }
         this.unitType = unitType;
@@ -51,8 +51,8 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
         return ofDegrees(decimalDegreesWithSign);
     }
 
-    public static Longitude ofDegMinSec(int degrees, int minutes, double seconds, CardinalDirection direction) {
-        double sign = HaversineEquations.determineSign(direction.getDirectionChar(), degrees);
+    public static Longitude ofDegMinSec(int degrees, int minutes, double seconds, PrimaryDirection direction) {
+        double sign = HaversineEquations.determineSign(direction.getDirectionSymbol(), degrees);
         double decimalDegrees = HaversineEquations.dmsToDegrees(degrees, minutes, seconds);
         return ofDegrees(sign * decimalDegrees);
     }

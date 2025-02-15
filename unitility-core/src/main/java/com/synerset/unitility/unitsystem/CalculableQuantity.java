@@ -180,6 +180,23 @@ public interface CalculableQuantity<U extends Unit, Q extends CalculableQuantity
         return withValue(newValue);
     }
 
+    /**
+     * Calculates the custom base logarithm of the physical quantity's value.
+     * This method computes the custom base logarithm of the current value of the physical quantity
+     * and returns a new instance of the physical quantity with the updated value.<p>
+     *
+     * @return A new physical quantity with the value as the custom base logarithm of the original value.
+     * @throws UnitSystemArgumentException if the current value or base is negative or zero
+     */
+    default Q logBase(double base) {
+        double value = getValue();
+        if (value <= 0 || base <= 0) {
+            throw new UnitSystemArgumentException("Cannot calculate logarithm for non-positive value: " + value + ", base: " + base);
+        }
+        double newValue = Math.log(value) / Math.log(base);
+        return withValue(newValue);
+    }
+
     // Ceiling, and rounding up
 
     /**

@@ -1,11 +1,11 @@
-# UNITILITY - The Physics Unit Conversion Solution for Java
+# UNITILITY - The Ultimate Units of Measurement and Physical Quantity Converter
 
 Introducing <strong>UNITILITY</strong> - the Java library designed to simplify physics units conversion.
 With a wide range of value objects that represent commonly used physical quantities, this solution is built using plain
 Java for optimal speed and lightweight functionality.
-Whether you're looking to convert units within the same type or customize to meet your specific needs, UNITILITY offers
-quick and easy usage in your project, without any heavy frameworks,
-or external libraries.<p>
+Whether you're looking to convert units within the same type or customize to meet your specific needs, the UNITILITY **core** 
+module offers quick and easy usage in your project, without requiring heavy frameworks or external libraries.
+Additional framework support is available through the extension modules. <br>
 **<span style="color: green;"> - Thread-Safe Architecture:</span>** Developed to ensure thread safety,
 allowing for concurrent access without compromising data integrity through the utilization of immutable objects. <br>
 **<span style="color: teal;"> - Kotlin and Groovy friendly:</span>** Developed to take some advantages of Kotlin and Groovy 
@@ -37,7 +37,9 @@ features, such as overloaded operators.
    4.2 [Parsing quantities from string](#42-parsing-quantities-from-string) <br>
    4.3 [Logic operations](#43-logical-operations) <br>
    4.4 [Arithmetic operations](#44-arithmetic-operations) <br>
-   4.5 [Equality and sorting](#45-equality-and-sorting) <br>
+   4.5 [Power and logarithmic operations](#45-power-and-logarithmic-operations) <br>
+   4.6 [Trigonometric operations](#46-trigonometric-operations) <br>
+   4.7 [Equality and sorting](#47-equality-and-sorting) <br>
 5. [Unitility extension modules](#5-unitility-extension-modules) <br>
    5.1 [Jackson serializers / deserializers](#51-jackson-serializers-and-deserializers) <br>
    5.2 [SpringBoot web extension](#52-spring-boot-module) <br>
@@ -52,8 +54,9 @@ features, such as overloaded operators.
    7.2 [Kotlin](#72-kotlin---using-overloaded-operators) <br>
 8. [Special types: geographic](#8-special-types-geographic) <br>
    8.1 [Latitude, Longitude, GeoCoordinate](#81-geographic-latitude-longitude-and-geocoordinate) <br>
-   8.2 [GeoDistance (Haversine equations)](#82-geodistance---spherical-distance-between-two-coordinates) <br>
-   8.3 [Parsing geographic quantities and JSON structures](#83-parsing-geographic-quantities-and-json-structures) <br>
+   8.2 [Bearing](#82-bearing) <br>
+   8.3 [GeoDistance (Haversine equations)](#83-geodistance---spherical-distance-between-two-coordinates) <br>
+   8.4 [Parsing geographic quantities and JSON structures](#84-parsing-geographic-quantities-and-json-structures) <br>
 9. [Collaboration, attribution and citation](#9-collaboration-attribution-and-citation) <br>
 10. [Acknowledgments](#10-acknowledgments) <br>
 
@@ -61,13 +64,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.5.0/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.6.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -79,7 +82,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -87,7 +90,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -140,8 +143,8 @@ units and at least one Imperial unit.
 #### THERMODYNAMIC:
 
 * Temperature: Kelvin [K], Celsius [°C], Fahrenheit [°F]
-* Pressure: Pascal [Pa], Hectopascal [hPa], Megapascal [MPa], Bar [bar], Milli Bar [mbar] PSI [psi], Torr [Torr]
-* Energy: Joule [J], Milli joule [mJ], Kilojoule [kJ], Megajoule [MJ], BTU [BTU], Calorie [cal], Kilocalorie [kcal], Watt
+* Pressure: Pascal [Pa], Hectopascal [hPa], Kilopascal [kPa], Megapascal [MPa], Bar [bar], Milli Bar [mbar] PSI [psi], Torr [Torr]
+* Energy: Joule [J], Milli joule [mJ], Kilojoule [kJ], Megajoule [MJ], British Thermal Unit [BTU], Calorie [cal], Kilocalorie [kcal], Watt
   hour [Wh], Kilowatt hour [kWh]
 * Power: Watt [W], Kilowatt [kW], Megawatt [MW], BTU/hour [BTU/h], Horse Power [HP]
 * Specific heat: Joules per kilogram Kelvin [J/(kg·K)], Kilojoules per kilogram Kelvin [kJ/(kg·K)], BTU per pound
@@ -163,7 +166,7 @@ units and at least one Imperial unit.
 
 #### HUMID AIR SPECIFIC:
 
-* Humidity ratio: Kilogram per kilogram [kg/kg], Pound per pound [lb/lb]
+* Humidity ratio: Kilogram per kilogram [kg/kg], Gram per kilogram [g/kg], Pound per pound [lb/lb]
 * Relative humidity: Percent [%], Decimal [-]
 
 #### DIMENSIONLESS:
@@ -175,6 +178,7 @@ units and at least one Imperial unit.
 
 * Latitude: degrees [°], radians [rad]
 * Longitude: degrees [°], radians [rad]
+* Bearing: degrees [°]
 * GeoCoordinate: [latitude, longitude]
 * GeoDistance: meter [m], kilometer [km], mile [mi], nautical mile [nmi] <br>
 
@@ -265,6 +269,8 @@ alternative ways of expressing units in an input string:
 | degrees symbol    | °   | o, deg  | 20°, 20o, 20deg    |
 | multiplication    | ·   | x  or . | Pa·m, Pa x m, Pa.m | 
 | division          | /   | p       | m/s, mps           |
+| square            | ²   | 2       | m², m2             |
+| cubic             | ³   | 3       | m³, m3             |
 
 Please note that this method of creating quantities is designed to be used for deserializers. <Br>
 **In your code, you should create units in a programmatic way, not parsing from strings.**
@@ -307,7 +313,6 @@ unit with the source unit to ensure a valid comparison.
 
 ### 4.4 Arithmetic operations
 
-
 The developer's choice determines whether calculations are performed using double values or with physical quantity
 objects through the available transformation methods:
 
@@ -342,15 +347,53 @@ In the provided example, division and multiplication both yield a double value. 
 absence of a unit resolver within the developmental stage.
 The existing unit values are directly employed for multiplication or division operations.
 
-* natural logarithm, logarithm with base of 10
+* ceil, floor, roundHalfEven with relevant digits:
+
+```java
+ThermalConductivity thermCond = ThermalConductivity.ofWattsPerMeterKelvin(0.00366);
+ThermalConductivity ceilResult = thermCond.ceil();                  // 1
+ThermalConductivity floorResult = thermCond.floor();                // 0
+ThermalConductivity roundedResult = thermCond.roundHalfEven(2);     // 0.0037
+```
+Please note that rounding function is based on concept of relevant digits. It is NOT a simple truncation to a specified
+number of decimal places. This function will evaluate where relevant digits starts and will attempt to keep the specified
+number by user. For an example for roundHalfEven(3) will output: <br>
+0.12345 -> roundHalfEven(3)  -> 0.123 <br>
+0.00012345 -> roundHalfEven(3)  -> 0.000123 <br>
+
+### 4.5 Power and logarithmic operations
+
+Unitility supports power and logarithmic operations. Please note that if you use another PhysicalQuantity as an argument, 
+the method will resolve it to a double type (since squared units are not supported).
+
+* natural logarithm, logarithm with base of 10, custom base logarithm of 3:
 
 ```java
 Distance roadLength = Distance.ofKilometers(100);
-Distance reducedDistance1 = roadLength.log();      // 4.60517(..)
-Distance reducedDistance2 = roadLength.log10();    // 2.0
+Distance reducedDistance1 = roadLength.log();         // Distance{4.60517(..)}
+Distance reducedDistance2 = roadLength.log10();       // Distance{2.0}
+
+Distance myDistance = Distance.ofKilometers(19683);
+Distance reducedMyDistance = myDistance.logBase(3);   // Distance{9.0}
 ```
 
-* trigonometric functions: sin(), cos(), tan(), ctg() including hyperbolic and reversed
+* power of exponent 2:
+
+```java
+Distance roadLength = Distance.ofKilometers(2);     
+Distance reducedDistance1 = roadLength.power(2);       // Distance{4.0}
+```
+
+As previously stated, if other physicalQuantity instance is being passed as argument, it will be resolved to double:
+
+```java
+double leghtValue = roadLength.power(Distance.ofKilometers(2));  // 2.0
+```
+
+### 4.6 Trigonometric operations
+
+AngleUnit type physical quantities support trigonometric functions such as sin(), cos(), tan(), and cot(), 
+including their hyperbolic and inverse variants. Here's an example of usage:
 
 ```java
 Angle exampleAngle = Angle.ofDegrees(90);
@@ -367,25 +410,11 @@ double aCosResult = angleRad1.acos();        // 0
 double aTanResult = angleRad1.atan();        // 0.785398(..)
 double aCotResult = angleRad1.acot();        // 0.785398(..)
 ```
-Please keep in mind that not all values belong to the domain of a given trigonometric function. 
+Please keep in mind that not all values belong to the domain of a given trigonometric function.
 Some might throw an exception if they hold invalid value for a specific function.
 Value will be automatically converted to radians before using Java Math trigonometric functions.
 
-* ceil, floor, roundHalfEven with relevant digits
-
-```java
-ThermalConductivity thermCond = ThermalConductivity.ofWattsPerMeterKelvin(0.00366);
-ThermalConductivity ceilResult = thermCond.ceil();                  // 1
-ThermalConductivity floorResult = thermCond.floor();                // 0
-ThermalConductivity roundedResult = thermCond.roundHalfEven(2);     // 0.0037
-```
-Please note that rounding function is based on concept of relevant digits. It is NOT a simple truncation to a specified
-number of decimal places. This function will evaluate where relevant digits starts and will attempt to keep the specified
-number by user. For an example for roundHalfEven(3) will output: <br>
-0.12345 -> roundHalfEven(3)  -> 0.123 <br>
-0.00012345 -> roundHalfEven(3)  -> 0.000123 <br>
-
-### 4.5 Equality and sorting
+### 4.7 Equality and sorting
 
 Each PhysicalQuantity class has implemented the equals and hashCode methods and implements the Comparable interface, 
 including additional methods that might be helpful during development. <br>
@@ -482,7 +511,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -499,7 +528,6 @@ obtain the appropriate parser depending on the class type. This module is part o
 therefore, it does not need to be added explicitly if framework extensions are included in the project.
 
 ## 5.2 Spring Boot module
-Module tested for Spring Boot version: **3.3.0** <br>
 Spring Boot module includes **unitility-jackson** and **unitility-core** modules, and it will automatically
 create required beans through the autoconfiguration dependency injection mechanism. To use Spring extension module, 
 add the following dependency:
@@ -507,7 +535,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -539,7 +567,6 @@ steps must be carried out to ensure that custom unit is properly resolved from J
 see a section: [Registering custom quantity in Spring](#63-registering-custom-quantities-in-spring).<br>
 
 ## 5.3 Quarkus module
-Module tested for Quarkus platform version: **3.11.0**<br>
 Quarkus module includes **unitility-jackson** and **unitility-core** modules, and it will be automatically
 discovered through Jandex index and will create required CDI beans. To use Quarkus extension module,
 add following dependency:
@@ -547,7 +574,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.5.0</version>
+    <version>2.6.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:
@@ -844,8 +871,8 @@ String latInENG = latitude.toEngineeringFormat();   // Outputs: -20.123 [°]
 You can also create Latitude or Longitude instance providing degrees, minutes and seconds:
 ```java
 // Instance from degrees, minutes, seconds
-Latitude latFromDMS = Latitude.ofDegMinSec(20, 7, 22.8, CardinalDirection.SOUTH);   // Latitude{-20.123°}
-Longitude longFromDMS = Longitude.ofDegMinSec(20, 7, 22.8, CardinalDirection.EAST); // Longitude{20.123°}
+Latitude latFromDMS = Latitude.ofDegMinSec(20, 7, 22.8, PrimaryDirection.SOUTH);   // Latitude{-20.123°}
+Longitude longFromDMS = Longitude.ofDegMinSec(20, 7, 22.8, PrimaryDirection.EAST); // Longitude{20.123°}
 ```
 
 The **GeoCoordinate** class combines both Latitude and Longitude to form a complete geographic coordinate. It facilitates 
@@ -865,7 +892,29 @@ String geoCoordDEC = coordinateExample.toDecimalDegrees();        // -20.12, 20.
 Latitude and Longitude do not enforce any angular value limit, but GeoCoordinate will do. Make sure that your
 latitude and longitude values fall withing planet Earth's acceptable limits.
 
-### 8.2 GeoDistance - spherical distance between two coordinates
+### 8.2 Bearing
+The Bearing class represents a direction relative to the Earth's true north, encapsulating both the true bearing and the
+signed relative bearing. The true bearing is provided as an absolute value in the range of <0, 360> degrees, while the 
+relative signed bearing falls within the range of <-180, 180>. This class allows you to easily work with bearings, whether 
+you're converting between true or signed bearings, or working with cardinal directions. <br>
+
+Here are a few examples of how to create new Bearing instances:
+```java
+Bearing bearing = Bearing.of(270);
+Bearing bearingSigned = Bearing.ofSigned(-90);
+// You can also access current bearing from GeoDistance (defined above, from Wrocław to New York) instance:
+double signedBearingValue = geoDistance.getBearing().getSignedValue(); // -61.07916, be default Bearing is always in degrees
+double trueBearing = geoDistance.getBearing().getValue(); // 298.920844°, be default Bearing is always in degrees
+```
+Bearing can be also created from other Bearing instance or provided cardinal direction constant:
+```java
+Bearing bearingNorth = Bearing.of(CardinalDirection.NORTH); // Bearing{0.0°}
+Bearing bearingNorthWithOffset = Bearing.of(CardinalDirection.NORTH, Bearing.ofSigned(-10)); // Bearing{350.0°}
+Bearing bearing = Bearing.of(270);
+Bearing bearingFromOtherBearing = bearing.from(Bearing.ofSigned(20)); // Bearing{290.0°}
+```
+
+### 8.3 GeoDistance - spherical distance between two coordinates
 The **GeoDistance** class represents the spherical distance between two coordinates on Earth, considering 
 the curvature of the Earth. It incorporates calculations involving the start and target coordinates, true bearing, 
 and distance in specified units. The underlying [Haversine equations](https://en.wikipedia.org/wiki/Haversine_formula) 
@@ -874,32 +923,14 @@ and target coordinates along with the desired unit type for representing the dis
 ```java
 GeoCoordinate wroclaw = GeoCoordinate.of(Latitude.ofDegrees(51.102772), Longitude.ofDegrees(16.885802));
 GeoCoordinate newYork = GeoCoordinate.of(Latitude.ofDegrees(40.712671), Longitude.ofDegrees(-74.004655));
-
 GeoDistance geoDistance = GeoDistance.ofKilometers(wroclaw, newYork);
-
 String distanceInEng = geoDistance.toEngineeringFormat();   // 6669.896095258197 [km]
 Bearing trueBearing = geoDistance.getBearing();             // Bearing{298.920844°}
 ```
-Please note that true bearing is provided in range <0,365> degrees, and it is absolute value, to Earth's true north.
-Bearing class wraps also value of equivalent relative signed bearing <-180, 180>, which can be accessed through
-method:
-```java
-double signedBearing = geoDistance.getBearing().getSignedValueInDegrees(); // -61.079156250424376
-```
-Bearing can be created as default clockwise <0° - 365°> true north or as absolute direction <-180°, 180°>:
-```java
-Bearing bearing = Bearing.of(270); 
-Bearing bearing1 = Bearing.ofSigned(-90);
-```
-Or created from other bearing:
-```java
-Bearing bearingFromCardinalDir = Bearing.of(CardinalDirection.NORTH, Bearing.ofSigned(-10)); // Bearing{350.0°}
-Bearing bearing = Bearing.of(270);
-Bearing bearingFromOtherBearing = bearing.from(Bearing.ofSigned(20)); // Bearing{290.0°}
-```
 
-Alternatively, GeoDistance can be initialized with starting coordinate, bearing and distance in that case, target
-coordinate will be calculated. Provided distance must be true, curved distance. 
+GeoDistance can be initialized with a starting coordinate, bearing, and distance. 
+In this case, the target coordinate will be computed based on the given parameters. 
+**The provided distance MUST represent the true geodesic (curved) distance along the Earth's surface.**
 ```java
 GeoDistance toNewYork = GeoDistance.of(wroclaw, bearing, Distance.ofKilometers(6669.896095258197));
 String targetCoordinate = toNewYork.getTargetCoordinate().toDecimalDegrees();   // 40.712671, -74.004655
@@ -912,10 +943,10 @@ The GeoDistance class supports two methods to simulate distance change:<br>
 a) methods named: with(), which accepts new target coordinate or bearing and distance, retaining current starting point
 coordinate and calculates distance to the new coordinates (specified or calculated):
 ```java
+// Creating geo coordinate representing city of Wellington
 GeoCoordinate wellington = GeoCoordinate.of(Latitude.ofDegrees(-41.289463), Longitude.ofDegrees(174.774913));
-
+// Setting new target to Wellington, current start is not changed (New York)
 GeoDistance toWellington = toNewYork.with(wellington);
-
 Distance distance = toWellington.getDistance();                                      // 18005.6198226 km
 String wroclawCoordinate = toWellington.getStartCoordinate().toDecimalDegrees();     // 51.102772, 16.885802
 String wellingtonCoordinate = toWellington.getTargetCoordinate().toDecimalDegrees(); // -41.289463, 174.774913
@@ -923,11 +954,13 @@ String wellingtonCoordinate = toWellington.getTargetCoordinate().toDecimalDegree
 Previously, toNewYork represented the distance from Wrocław to New York. Following this change, it now represents the 
 distance from Wrocław to Wellington, along with the updated bearing and calculated distance. <br>
 
-b) Methods named translate() will now accept a new target coordinate or bearing and distance. They set the previous target 
-coordinate as the current start coordinate and calculate the distance to the new coordinates, whether specified or calculated.
-```java
-GeoDistance toWellingtonBis = toNewYork.translate(wellington);
+b) methods named translate() will accept a new target coordinate or a bearing and distance. The previous target coordinate 
+will be set as the starting coordinate, and the distance to the new coordinates, whether explicitly specified or derived, will be 
+calculated.
 
+```java
+// Previous target is now current start (Wrocław), and current target is set from an argument (Wellington)
+GeoDistance toWellingtonBis = toNewYork.translate(wellington);
 Distance distanceBis = toWellingtonBis.getDistance();                                      // 14403.6934729 km
 String wroclawCoordinateBis = toWellingtonBis.getStartCoordinate().toDecimalDegrees();     // 40.712671, -74.004655
 String wellingtonCoordinateBis = toWellingtonBis.getTargetCoordinate().toDecimalDegrees(); // -41.289463, 174.774913
@@ -935,7 +968,7 @@ String wellingtonCoordinateBis = toWellingtonBis.getTargetCoordinate().toDecimal
 Previously, toNewYork represented the distance from Wrocław to New York. After this change, it now represents the distance
 from New York to Wellington, along with the updated bearing and calculated distance. <br>
 
-### 8.3 Parsing geographic quantities and JSON structures
+### 8.4 Parsing geographic quantities and JSON structures
 Parsers have been provided mostly for the purpose of deserialization in Spring Boot or Quarkus, but they can also be used directly 
 in the code:
 ```java
@@ -1098,10 +1131,10 @@ Small shield with referenced most recent version tag:<br>
 ```
 
 Tech shield with version tag for manual adjustment (you can indicate which version you actually use): <br>
-[![Unitility](https://img.shields.io/badge/UNITILITY-v2.1.1-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v2.6.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 
 ```markdown
-[![Unitility](https://img.shields.io/badge/UNITILITY-v2.1.1-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v2.6.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 ```
 
 ## 10. ACKNOWLEDGMENTS

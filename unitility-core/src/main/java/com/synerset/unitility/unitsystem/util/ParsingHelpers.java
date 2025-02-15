@@ -94,7 +94,7 @@ public class ParsingHelpers {
         }
 
         char directionChar = dmsFormat.charAt(dmsFormat.length() - 1);
-        double sign = HaversineEquations.determineSign(directionChar, degrees);
+        double sign = HaversineEquations.determineSign(String.valueOf(directionChar), degrees);
 
         return sign * HaversineEquations.dmsToDegrees(degrees, minutes, seconds);
     }
