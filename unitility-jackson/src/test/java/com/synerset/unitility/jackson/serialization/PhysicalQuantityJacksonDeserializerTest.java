@@ -42,7 +42,6 @@ class PhysicalQuantityJacksonDeserializerTest {
         String humRatio2 = "{\"value\":2.0,\"unit\":\"kgwv/kgda\"}";
         String bearing = "{\"value\":270.0}";
 
-
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
         Temperature actualTemp2 = objectMapper.readValue(tempInput2, Temperature.class);
