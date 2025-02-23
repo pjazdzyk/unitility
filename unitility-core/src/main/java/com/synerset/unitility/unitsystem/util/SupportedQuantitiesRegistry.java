@@ -3,10 +3,7 @@ package com.synerset.unitility.unitsystem.util;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.common.*;
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.dimensionless.GrashofNumber;
-import com.synerset.unitility.unitsystem.dimensionless.PrandtlNumber;
-import com.synerset.unitility.unitsystem.dimensionless.ReynoldsNumber;
+import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
@@ -56,6 +53,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(GrashofNumber.class, Collections::emptyList),
                 Map.entry(PrandtlNumber.class, Collections::emptyList),
                 Map.entry(ReynoldsNumber.class, Collections::emptyList),
+                Map.entry(FrictionFactor.class, Collections::emptyList),
                 // Flows
                 Map.entry(MassFlow.class, () -> Arrays.asList(MassFlowUnits.values())),
                 Map.entry(VolumetricFlow.class, () -> Arrays.asList(VolumetricFlowUnits.values())),
