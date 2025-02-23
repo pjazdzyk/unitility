@@ -44,6 +44,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Width.class, () -> Arrays.asList(DistanceUnits.values())),
                 Map.entry(Height.class, () -> Arrays.asList(DistanceUnits.values())),
                 Map.entry(Diameter.class, () -> Arrays.asList(DistanceUnits.values())),
+                Map.entry(Perimeter.class, () -> Arrays.asList(DistanceUnits.values())),
                 Map.entry(Mass.class, () -> Arrays.asList(MassUnits.values())),
                 Map.entry(Velocity.class, () -> Arrays.asList(VelocityUnits.values())),
                 Map.entry(Volume.class, () -> Arrays.asList(VolumeUnits.values())),

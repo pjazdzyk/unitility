@@ -149,6 +149,7 @@ class PhysicalQuantityParsingFactoryTest {
         Width actualWidth = PARSING_FACTORY.parse(Width.class, singleValueInput);
         Height actualHeight = PARSING_FACTORY.parse(Height.class, singleValueInput);
         Diameter actualDiameter = PARSING_FACTORY.parse(Diameter.class, singleValueInput);
+        Perimeter actualPerimeter = PARSING_FACTORY.parse(Perimeter.class, singleValueInput);
         Mass actualMass = PARSING_FACTORY.parse(Mass.class, singleValueInput);
         Velocity actualVelocity = PARSING_FACTORY.parse(Velocity.class, singleValueInput);
         Volume actualVolume = PARSING_FACTORY.parse(Volume.class, singleValueInput);
@@ -188,6 +189,7 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualWidth).isEqualTo(Width.of(expectedValue, DistanceUnits.getDefaultUnit()));
         assertThat(actualHeight).isEqualTo(Height.of(expectedValue, DistanceUnits.getDefaultUnit()));
         assertThat(actualDiameter).isEqualTo(Diameter.of(expectedValue, DistanceUnits.getDefaultUnit()));
+        assertThat(actualPerimeter).isEqualTo(Perimeter.of(expectedValue, DistanceUnits.getDefaultUnit()));
         assertThat(actualMass).isEqualTo(Mass.of(expectedValue, MassUnits.getDefaultUnit()));
         assertThat(actualVelocity).isEqualTo(Velocity.of(expectedValue, VelocityUnits.getDefaultUnit()));
         assertThat(actualVolume).isEqualTo(Volume.of(expectedValue, VolumeUnits.getDefaultUnit()));
