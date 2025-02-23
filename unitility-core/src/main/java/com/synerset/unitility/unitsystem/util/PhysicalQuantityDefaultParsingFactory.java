@@ -2,10 +2,7 @@ package com.synerset.unitility.unitsystem.util;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.common.*;
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.dimensionless.GrashofNumber;
-import com.synerset.unitility.unitsystem.dimensionless.PrandtlNumber;
-import com.synerset.unitility.unitsystem.dimensionless.ReynoldsNumber;
+import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.geographic.Bearing;
@@ -47,6 +44,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(GrashofNumber.class, (value, symbol) -> GrashofNumber.of(value)),
                 Map.entry(PrandtlNumber.class, (value, symbol) -> PrandtlNumber.of(value)),
                 Map.entry(ReynoldsNumber.class, (value, symbol) -> ReynoldsNumber.of(value)),
+                Map.entry(FrictionFactor.class, (value, symbol) -> FrictionFactor.of(value)),
                 // Flows
                 Map.entry(MassFlow.class, MassFlow::of),
                 Map.entry(VolumetricFlow.class, VolumetricFlow::of),

@@ -4,10 +4,7 @@ import com.synerset.unitility.unitsystem.CalculableQuantity;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.common.*;
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.dimensionless.GrashofNumber;
-import com.synerset.unitility.unitsystem.dimensionless.PrandtlNumber;
-import com.synerset.unitility.unitsystem.dimensionless.ReynoldsNumber;
+import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
@@ -159,6 +156,7 @@ class PhysicalQuantityParsingFactoryTest {
         GrashofNumber actualGrNumber = PARSING_FACTORY.parse(GrashofNumber.class, singleValueInput);
         PrandtlNumber actualPrNumber = PARSING_FACTORY.parse(PrandtlNumber.class, singleValueInput);
         ReynoldsNumber actualReNumber = PARSING_FACTORY.parse(ReynoldsNumber.class, singleValueInput);
+        FrictionFactor actualFrictionFactor = PARSING_FACTORY.parse(FrictionFactor.class, singleValueInput);
         MassFlow actualMassFlow = PARSING_FACTORY.parse(MassFlow.class, singleValueInput);
         VolumetricFlow actualVolFlow = PARSING_FACTORY.parse(VolumetricFlow.class, singleValueInput);
         HumidityRatio actualHumRatio = PARSING_FACTORY.parse(HumidityRatio.class, singleValueInput);
@@ -197,6 +195,7 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualGrNumber).isEqualTo(GrashofNumber.of(expectedValue));
         assertThat(actualPrNumber).isEqualTo(PrandtlNumber.of(expectedValue));
         assertThat(actualReNumber).isEqualTo(ReynoldsNumber.of(expectedValue));
+        assertThat(actualFrictionFactor).isEqualTo(FrictionFactor.of(expectedValue));
         assertThat(actualMassFlow).isEqualTo(MassFlow.of(expectedValue, MassFlowUnits.getDefaultUnit()));
         assertThat(actualVolFlow).isEqualTo(VolumetricFlow.of(expectedValue, VolumetricFlowUnits.getDefaultUnit()));
         assertThat(actualHumRatio).isEqualTo(HumidityRatio.of(expectedValue, HumidityRatioUnits.getDefaultUnit()));
