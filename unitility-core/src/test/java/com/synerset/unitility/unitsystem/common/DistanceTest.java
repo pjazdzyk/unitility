@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class DistanceTest {
 
     @Test
-    @DisplayName("should convert to m from mm and vice versa")
+    @DisplayName("Distance: should convert to m from mm and vice versa")
     void shouldProperlyConvertToMetersFromMillimeters() {
         // Given
         Distance initialDistanceInMillimeters = Distance.ofMillimeters(1000.0);
@@ -28,7 +28,7 @@ class DistanceTest {
     }
 
     @Test
-    @DisplayName("should convert to m from cm and vice versa")
+    @DisplayName("Distance: should convert to m from cm and vice versa")
     void shouldProperlyConvertToMetersFromCentimeters() {
         // Given
         Distance initialDistanceInCentimeters = Distance.ofCentimeters(100.0);
@@ -46,7 +46,7 @@ class DistanceTest {
     }
 
     @Test
-    @DisplayName("should convert to m from km and vice versa")
+    @DisplayName("Distance: should convert to m from km and vice versa")
     void shouldProperlyConvertToMetersFromKilometers() {
         // Given
         Distance initialDistanceInKilometers = Distance.ofKilometers(1.0);
@@ -64,7 +64,7 @@ class DistanceTest {
     }
 
     @Test
-    @DisplayName("should convert to m from mi and vice versa")
+    @DisplayName("Distance: should convert to m from mi and vice versa")
     void shouldProperlyConvertToMetersFromMile() {
         // Given
         Distance initialDistanceInMiles = Distance.ofMiles(1.0);
@@ -82,7 +82,7 @@ class DistanceTest {
     }
 
     @Test
-    @DisplayName("should convert to m from ft and vice versa")
+    @DisplayName("Distance: should convert to m from ft and vice versa")
     void shouldProperlyConvertToMetersFromFeet() {
         // Given
         Distance initialDistanceInFeet = Distance.ofFeet(10.0);
@@ -100,7 +100,7 @@ class DistanceTest {
     }
 
     @Test
-    @DisplayName("should convert to m from ft and vice versa")
+    @DisplayName("Distance: should convert to m from ft and vice versa")
     void shouldProperlyConvertToMetersFromInch() {
         // Given
         Distance initialDistanceInInch = Distance.ofInches(10.0);
@@ -118,21 +118,21 @@ class DistanceTest {
     }
 
     @Test
-    @DisplayName("should have m as base unit")
+    @DisplayName("Distance: should have m as base unit")
     void shouldHaveMetersAsBaseUnit() {
         // Given
         DistanceUnit expectedBaseUnit = DistanceUnits.METER;
 
         // When
-        Distance DistanceInMiles = Distance.ofMiles(10);
-        DistanceUnit actualBaseUnit = DistanceInMiles.getUnit().getBaseUnit();
+        Distance distanceInMiles = Distance.ofMiles(10);
+        DistanceUnit actualBaseUnit = distanceInMiles.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
     }
 
     @Test
-    @DisplayName("should return valid result from to() and getIn() methods")
+    @DisplayName("Distance: should return valid result from to() and getIn() methods")
     void shouldReturnValidResultFromToAndGetInMethods() {
         // Given
         Distance expected = Distance.ofMeters(10.1);
@@ -155,7 +155,7 @@ class DistanceTest {
     }
 
     @Test
-    @DisplayName("should convert to m from nmi and vice versa")
+    @DisplayName("Distance: should convert to m from nmi and vice versa")
     void shouldProperlyConvertToMetersFromNauticalMile() {
         // Given
         Distance initialDistanceInMiles = Distance.ofNauticalMiles(1.0);
