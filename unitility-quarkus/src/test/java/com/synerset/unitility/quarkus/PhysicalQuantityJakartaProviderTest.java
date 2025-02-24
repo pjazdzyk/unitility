@@ -10,6 +10,7 @@ import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
+import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
 import com.synerset.unitility.unitsystem.mechanical.Force;
 import com.synerset.unitility.unitsystem.mechanical.Momentum;
 import com.synerset.unitility.unitsystem.mechanical.Torque;
@@ -81,7 +82,8 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(Temperature.class, "15.1 [°F]", Temperature.ofFahrenheit(TEST_VALUE)),
                 Arguments.of(ThermalConductivity.class, "15.1 [W/(m·K)]", ThermalConductivity.ofWattsPerMeterKelvin(TEST_VALUE)),
                 Arguments.of(ThermalDiffusivity.class, "15.1 [ft²/s]", ThermalDiffusivity.ofSquareFeetPerSecond(TEST_VALUE)),
-                Arguments.of(BypassFactor.class, "15.1", BypassFactor.of(TEST_VALUE))
+                Arguments.of(BypassFactor.class, "15.1", BypassFactor.of(TEST_VALUE)),
+                Arguments.of(LinearResistance.class, "15.1 [inH₂O/100ft]", LinearResistance.ofInchOfWaterPer100Feet(TEST_VALUE))
         );
     }
 
@@ -128,6 +130,8 @@ class PhysicalQuantityJakartaProviderTest {
         String tempInput2 = "  15.1  [  o   C   ]";
         String dynVisInput = "15,1 [ kg p (m x s) ]";
         String thermalDiffInput = "15,1 [ ft2 / s ]";
+        String linearResistance = "15,1 [ in h2o p 100 ft ]";
+        String linearResistance2 = "15,1 [ pa p m ]";
 
         ParamConverter<Temperature> tempConverter =
                 CONVERTER_PROVIDER.getConverter(Temperature.class, null, null);
@@ -138,17 +142,24 @@ class PhysicalQuantityJakartaProviderTest {
         ParamConverter<ThermalDiffusivity> thermalDiffParamConverter =
                 CONVERTER_PROVIDER.getConverter(ThermalDiffusivity.class, null, null);
 
+        ParamConverter<LinearResistance> linearResistanceParamConverter =
+                CONVERTER_PROVIDER.getConverter(LinearResistance.class, null, null);
+
         // When
         Temperature actualTemperature1 = tempConverter.fromString(tempInput1);
         Temperature actualTemperature2 = tempConverter.fromString(tempInput2);
         DynamicViscosity actualDynamicViscosity = dynamicViscosityParamConverter.fromString(dynVisInput);
         ThermalDiffusivity actualThermalDiffusivity = thermalDiffParamConverter.fromString(thermalDiffInput);
+        LinearResistance actualLinearResistance = linearResistanceParamConverter.fromString(linearResistance);
+        LinearResistance actualLinearResistance2 = linearResistanceParamConverter.fromString(linearResistance2);
 
         // Then
         assertThat(actualTemperature1).isEqualTo(Temperature.ofCelsius(15.1));
         assertThat(actualTemperature2).isEqualTo(Temperature.ofCelsius(15.1));
         assertThat(actualDynamicViscosity).isEqualTo(DynamicViscosity.ofKiloGramPerMeterSecond(15.1));
         assertThat(actualThermalDiffusivity).isEqualTo(ThermalDiffusivity.ofSquareFeetPerSecond(15.1));
+        assertThat(actualLinearResistance).isEqualTo(LinearResistance.ofInchOfWaterPer100Feet(15.1));
+        assertThat(actualLinearResistance2).isEqualTo(LinearResistance.ofPascalPerMeter(15.1));
 
     }
 

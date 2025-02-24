@@ -16,6 +16,8 @@ import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatioUnits;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidityUnits;
+import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
+import com.synerset.unitility.unitsystem.hydraulic.LinearResistanceUnits;
 import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 
@@ -61,6 +63,8 @@ public class SupportedQuantitiesRegistry {
                 // Humidity
                 Map.entry(HumidityRatio.class, () -> Arrays.asList(HumidityRatioUnits.values())),
                 Map.entry(RelativeHumidity.class, () -> Arrays.asList(RelativeHumidityUnits.values())),
+                // Hydraulic
+                Map.entry(LinearResistance.class, () -> Arrays.asList(LinearResistanceUnits.values())),
                 // Mechanical
                 Map.entry(Force.class, () -> Arrays.asList(ForceUnits.values())),
                 Map.entry(Momentum.class, () -> Arrays.asList(MomentumUnits.values())),

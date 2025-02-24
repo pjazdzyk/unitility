@@ -10,6 +10,7 @@ import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
+import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
 import com.synerset.unitility.unitsystem.mechanical.Force;
 import com.synerset.unitility.unitsystem.mechanical.Momentum;
 import com.synerset.unitility.unitsystem.mechanical.Torque;
@@ -52,6 +53,8 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 // Humidity
                 Map.entry(HumidityRatio.class, HumidityRatio::of),
                 Map.entry(RelativeHumidity.class, RelativeHumidity::of),
+                // Hydraulic
+                Map.entry(LinearResistance.class, LinearResistance::of),
                 // Mechanical
                 Map.entry(Force.class, Force::of),
                 Map.entry(Momentum.class, Momentum::of),
