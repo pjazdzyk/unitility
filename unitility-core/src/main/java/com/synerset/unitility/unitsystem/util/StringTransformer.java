@@ -52,6 +52,7 @@ public class StringTransformer {
                 inputString.replace("cfm", "ft3pmin")
                         .replace("³", "3")
                         .replace("²", "2")
+                        .replace("₂", "2")
         );
     }
 
