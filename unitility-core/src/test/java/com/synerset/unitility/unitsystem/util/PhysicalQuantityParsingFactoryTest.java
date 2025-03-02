@@ -153,6 +153,7 @@ class PhysicalQuantityParsingFactoryTest {
         Diameter actualDiameter = PARSING_FACTORY.parse(Diameter.class, singleValueInput);
         Perimeter actualPerimeter = PARSING_FACTORY.parse(Perimeter.class, singleValueInput);
         Mass actualMass = PARSING_FACTORY.parse(Mass.class, singleValueInput);
+        LinearMassDensity actualLinearMassDensity = PARSING_FACTORY.parse(LinearMassDensity.class, singleValueInput);
         Velocity actualVelocity = PARSING_FACTORY.parse(Velocity.class, singleValueInput);
         Volume actualVolume = PARSING_FACTORY.parse(Volume.class, singleValueInput);
         BypassFactor actualBfFactor = PARSING_FACTORY.parse(BypassFactor.class, singleValueInput);
@@ -194,6 +195,7 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualDiameter).isEqualTo(Diameter.of(expectedValue, DistanceUnits.getDefaultUnit()));
         assertThat(actualPerimeter).isEqualTo(Perimeter.of(expectedValue, DistanceUnits.getDefaultUnit()));
         assertThat(actualMass).isEqualTo(Mass.of(expectedValue, MassUnits.getDefaultUnit()));
+        assertThat(actualLinearMassDensity).isEqualTo(LinearMassDensity.of(expectedValue, LinearMassDensityUnits.getDefaultUnit()));
         assertThat(actualVelocity).isEqualTo(Velocity.of(expectedValue, VelocityUnits.getDefaultUnit()));
         assertThat(actualVolume).isEqualTo(Volume.of(expectedValue, VolumeUnits.getDefaultUnit()));
         assertThat(actualBfFactor).isEqualTo(BypassFactor.of(expectedValue));
