@@ -16,8 +16,10 @@ import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatioUnits;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidityUnits;
+import com.synerset.unitility.unitsystem.hydraulic.FrictionFactor;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistanceUnits;
+import com.synerset.unitility.unitsystem.hydraulic.LocalLossFactor;
 import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 
@@ -57,7 +59,6 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(GrashofNumber.class, Collections::emptyList),
                 Map.entry(PrandtlNumber.class, Collections::emptyList),
                 Map.entry(ReynoldsNumber.class, Collections::emptyList),
-                Map.entry(FrictionFactor.class, Collections::emptyList),
                 // Flows
                 Map.entry(MassFlow.class, () -> Arrays.asList(MassFlowUnits.values())),
                 Map.entry(VolumetricFlow.class, () -> Arrays.asList(VolumetricFlowUnits.values())),
@@ -66,6 +67,8 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(RelativeHumidity.class, () -> Arrays.asList(RelativeHumidityUnits.values())),
                 // Hydraulic
                 Map.entry(LinearResistance.class, () -> Arrays.asList(LinearResistanceUnits.values())),
+                Map.entry(FrictionFactor.class, Collections::emptyList),
+                Map.entry(LocalLossFactor.class, Collections::emptyList),
                 // Mechanical
                 Map.entry(Force.class, () -> Arrays.asList(ForceUnits.values())),
                 Map.entry(Momentum.class, () -> Arrays.asList(MomentumUnits.values())),

@@ -18,8 +18,7 @@ import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatioUnits;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidityUnits;
-import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
-import com.synerset.unitility.unitsystem.hydraulic.LinearResistanceUnits;
+import com.synerset.unitility.unitsystem.hydraulic.*;
 import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 import org.junit.jupiter.api.DisplayName;
@@ -160,12 +159,15 @@ class PhysicalQuantityParsingFactoryTest {
         GrashofNumber actualGrNumber = PARSING_FACTORY.parse(GrashofNumber.class, singleValueInput);
         PrandtlNumber actualPrNumber = PARSING_FACTORY.parse(PrandtlNumber.class, singleValueInput);
         ReynoldsNumber actualReNumber = PARSING_FACTORY.parse(ReynoldsNumber.class, singleValueInput);
-        FrictionFactor actualFrictionFactor = PARSING_FACTORY.parse(FrictionFactor.class, singleValueInput);
         MassFlow actualMassFlow = PARSING_FACTORY.parse(MassFlow.class, singleValueInput);
         VolumetricFlow actualVolFlow = PARSING_FACTORY.parse(VolumetricFlow.class, singleValueInput);
         HumidityRatio actualHumRatio = PARSING_FACTORY.parse(HumidityRatio.class, singleValueInput);
         RelativeHumidity actualRelHum = PARSING_FACTORY.parse(RelativeHumidity.class, singleValueInput);
+
         LinearResistance actualLinearResistance = PARSING_FACTORY.parse(LinearResistance.class, singleValueInput);
+        FrictionFactor actualFrictionFactor = PARSING_FACTORY.parse(FrictionFactor.class, singleValueInput);
+        LocalLossFactor actualLocalLossFactor = PARSING_FACTORY.parse(LocalLossFactor.class, singleValueInput);
+
         Force actualForce = PARSING_FACTORY.parse(Force.class, singleValueInput);
         Momentum actualMomentum = PARSING_FACTORY.parse(Momentum.class, singleValueInput);
         Torque actualTorque = PARSING_FACTORY.parse(Torque.class, singleValueInput);
@@ -202,12 +204,15 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualGrNumber).isEqualTo(GrashofNumber.of(expectedValue));
         assertThat(actualPrNumber).isEqualTo(PrandtlNumber.of(expectedValue));
         assertThat(actualReNumber).isEqualTo(ReynoldsNumber.of(expectedValue));
-        assertThat(actualFrictionFactor).isEqualTo(FrictionFactor.of(expectedValue));
         assertThat(actualMassFlow).isEqualTo(MassFlow.of(expectedValue, MassFlowUnits.getDefaultUnit()));
         assertThat(actualVolFlow).isEqualTo(VolumetricFlow.of(expectedValue, VolumetricFlowUnits.getDefaultUnit()));
         assertThat(actualHumRatio).isEqualTo(HumidityRatio.of(expectedValue, HumidityRatioUnits.getDefaultUnit()));
         assertThat(actualRelHum).isEqualTo(RelativeHumidity.of(expectedValue, RelativeHumidityUnits.getDefaultUnit()));
+        // Hydraulic
+        assertThat(actualFrictionFactor).isEqualTo(FrictionFactor.of(expectedValue));
         assertThat(actualLinearResistance).isEqualTo(LinearResistance.of(expectedValue, LinearResistanceUnits.getDefaultUnit()));
+        assertThat(actualLocalLossFactor).isEqualTo(LocalLossFactor.of(expectedValue));
+
         assertThat(actualForce).isEqualTo(Force.of(expectedValue, ForceUnits.getDefaultUnit()));
         assertThat(actualMomentum).isEqualTo(Momentum.of(expectedValue, MomentumUnits.getDefaultUnit()));
         assertThat(actualTorque).isEqualTo(Torque.of(expectedValue, TorqueUnits.getDefaultUnit()));
