@@ -16,7 +16,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInLiter.toBaseUnit();
-        Volume actualInLiter = actualInCubicMeter.toUnit(VolumeUnits.LITER);
+        Volume actualInLiter = actualInCubicMeter.toUnit(VolumeUnits.LITRE);
         double actualInLiterVal = actualInCubicMeter.getInLiters();
         double actualInCubicMeterVal = initialVolumeInLiter.getInCubicMeters();
 
@@ -32,7 +32,7 @@ class VolumeTest {
     @DisplayName("should convert to m³ from cm3 and vice versa")
     void shouldProperlyConvertToCubicMeterFromCubicCentimeter() {
         // Given
-        Volume initialVolumeInCubicCentimeters = Volume.ofCubicCentimeters(1000.0);
+        Volume initialVolumeInCubicCentimeters = Volume.ofCubicCentimeters(1);
 
         // When
         Volume actualInCubicMeter = initialVolumeInCubicCentimeters.toBaseUnit();
@@ -40,7 +40,7 @@ class VolumeTest {
         double actualInCubicCMVal = actualInCubicMeter.getInCubicCentimeters();
 
         // Then
-        Volume expectedInCubicMeter = Volume.ofCubicMeters(1.0);
+        Volume expectedInCubicMeter = Volume.ofCubicMeters(0.000001);
         assertThat(actualInCubicCM.getValue()).isEqualTo(actualInCubicCMVal);
         assertThat(actualInCubicMeter).isEqualTo(expectedInCubicMeter);
         assertThat(actualInCubicCM).isEqualTo(initialVolumeInCubicCentimeters);
@@ -68,7 +68,7 @@ class VolumeTest {
     @DisplayName("should convert to m³ from mL and vice versa")
     void shouldProperlyConvertToCubicMeterFromMilliliter() {
         // Given
-        Volume initialVolumeInMilliliter = Volume.ofMilliLiters(1000_000.0);
+        Volume initialVolumeInMilliliter = Volume.ofMilliLiters(1);
 
         // When
         Volume actualInCubicMeter = initialVolumeInMilliliter.toBaseUnit();
@@ -76,7 +76,7 @@ class VolumeTest {
         double actualInMilliliterVal = actualInCubicMeter.getInMilliLiters();
 
         // Then
-        Volume expectedInCubicMeter = Volume.ofCubicMeters(100);
+        Volume expectedInCubicMeter = Volume.ofCubicMeters(0.000001);
         assertThat(actualInMilliliter.getValue()).isEqualTo(actualInMilliliterVal);
         assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeter.getValue(), withPrecision(1E-15));
         assertThat(actualInMilliliter).isEqualTo(initialVolumeInMilliliter);
@@ -172,5 +172,40 @@ class VolumeTest {
         assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
-}
+    @Test
+    @DisplayName("should convert to m³ from ft³ and vice versa")
+    void shouldProperlyConvertToCubicMetersFromCubicFeet() {
+        // Given
+        Volume initialVolumeInCubicFeet = Volume.ofCubicFeet(1000.0);
 
+        // When
+        Volume actualInCubicMeter = initialVolumeInCubicFeet.toBaseUnit();
+        Volume actualInCubicFeet = actualInCubicMeter.toUnit(VolumeUnits.CUBIC_FEET);
+        double actualInCubicFeetVal = actualInCubicMeter.getInCubicFeet();
+
+        // Then
+        Volume expectedInCubicMeters = Volume.ofCubicMeters(28.316846592);
+        assertThat(actualInCubicFeet.getValue()).isEqualTo(actualInCubicFeetVal);
+        assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeters.getValue(), withPrecision(1E-5));
+        assertThat(actualInCubicFeet).isEqualTo(initialVolumeInCubicFeet);
+    }
+
+    @Test
+    @DisplayName("should convert to m³ from dm³ and vice versa")
+    void shouldProperlyConvertToCubicMeterFromCubicDecimeter() {
+        // Given
+        Volume initialVolumeInCubicDecimeter = Volume.ofCubicDecimeters(1000.0);
+
+        // When
+        Volume actualInCubicMeter = initialVolumeInCubicDecimeter.toBaseUnit();
+        Volume actualInCubicDecimeter = actualInCubicMeter.toUnit(VolumeUnits.CUBIC_DECIMETER);
+        double actualInCubicDecimeterVal = actualInCubicMeter.getInCubicDecimeters();
+
+        // Then
+        Volume expectedInCubicMeter = Volume.ofCubicMeters(1.0);
+        assertThat(actualInCubicDecimeter.getValue()).isEqualTo(actualInCubicDecimeterVal);
+        assertThat(actualInCubicMeter).isEqualTo(expectedInCubicMeter);
+        assertThat(actualInCubicDecimeter).isEqualTo(initialVolumeInCubicDecimeter);
+    }
+
+}

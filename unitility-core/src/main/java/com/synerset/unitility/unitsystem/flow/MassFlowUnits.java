@@ -9,7 +9,7 @@ public enum MassFlowUnits implements MassFlowUnit {
 
     KILOGRAM_PER_SECOND("kg/s", val -> val, val -> val),
     KILOGRAM_PER_HOUR("kg/h", val -> val / 3600.0, val -> val * 3600.0),
-    TONNE_PER_HOUR("t/h", val -> val * (10.0 / 36.0), val -> val / (10.0 / 36.0)),
+    TONNE_PER_HOUR("t/h", val -> val * (1000.0 / 3600.0), val -> val / (1000.0 / 3600.0)),
     POUND_PER_SECOND("lb/s", val -> val * 0.45359237, val -> val / 0.45359237);
 
     private final String symbol;

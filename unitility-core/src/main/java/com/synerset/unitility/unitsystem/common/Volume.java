@@ -28,17 +28,21 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
         VolumeUnit resolvedUnit = VolumeUnits.fromSymbol(unitSymbol);
         return new Volume(value, resolvedUnit);
     }
-    
+
     public static Volume ofCubicMeters(double value) {
         return new Volume(value, VolumeUnits.CUBIC_METER);
     }
 
     public static Volume ofLiters(double value) {
-        return new Volume(value, VolumeUnits.LITER);
+        return new Volume(value, VolumeUnits.LITRE);
     }
 
     public static Volume ofCubicCentimeters(double value) {
         return new Volume(value, VolumeUnits.CUBIC_CENTIMETER);
+    }
+
+    public static Volume ofCubicDecimeters(double value) {
+        return new Volume(value, VolumeUnits.CUBIC_DECIMETER);
     }
 
     public static Volume ofHectoLiters(double value) {
@@ -59,6 +63,10 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
 
     public static Volume ofGallons(double value) {
         return new Volume(value, VolumeUnits.GALLON);
+    }
+
+    public static Volume ofCubicFeet(double value) { // New method
+        return new Volume(value, VolumeUnits.CUBIC_FEET);
     }
 
     @Override
@@ -106,11 +114,15 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
     }
 
     public Volume toLiter() {
-        return toUnit(VolumeUnits.LITER);
+        return toUnit(VolumeUnits.LITRE);
     }
 
     public Volume toCubicCentimeter() {
         return toUnit(VolumeUnits.CUBIC_CENTIMETER);
+    }
+
+    public Volume toCubicDecimeter() {
+        return toUnit(VolumeUnits.CUBIC_DECIMETER);
     }
 
     public Volume toHectoLiter() {
@@ -133,17 +145,25 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
         return toUnit(VolumeUnits.GALLON);
     }
 
+    public Volume toCubicFeet() { // New method
+        return toUnit(VolumeUnits.CUBIC_FEET);
+    }
+
     // Get value in target unit
     public double getInCubicMeters() {
         return getInUnit(VolumeUnits.CUBIC_METER);
     }
 
     public double getInLiters() {
-        return getInUnit(VolumeUnits.LITER);
+        return getInUnit(VolumeUnits.LITRE);
     }
 
     public double getInCubicCentimeters() {
         return getInUnit(VolumeUnits.CUBIC_CENTIMETER);
+    }
+
+    public double getInCubicDecimeters() {
+        return getInUnit(VolumeUnits.CUBIC_DECIMETER);
     }
 
     public double getInHectoLiters() {
@@ -166,12 +186,17 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
         return getInUnit(VolumeUnits.GALLON);
     }
 
+    public double getInCubicFeet() { // New method
+        return getInUnit(VolumeUnits.CUBIC_FEET);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Volume inputQuantity = (Volume) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0
+               && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override
@@ -184,4 +209,3 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
         return "Volume{" + value + " " + unitType.getSymbol() + '}';
     }
 }
-
