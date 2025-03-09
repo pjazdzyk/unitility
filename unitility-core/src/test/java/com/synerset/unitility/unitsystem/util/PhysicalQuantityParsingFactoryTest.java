@@ -176,7 +176,9 @@ class PhysicalQuantityParsingFactoryTest {
         Energy actualEnergy = PARSING_FACTORY.parse(Energy.class, singleValueInput);
         KinematicViscosity actualKinVis = PARSING_FACTORY.parse(KinematicViscosity.class, singleValueInput);
         Power actualPower = PARSING_FACTORY.parse(Power.class, singleValueInput);
+
         Pressure actualPressure = PARSING_FACTORY.parse(Pressure.class, singleValueInput);
+
         SpecificEnthalpy actualSpecEnthalpy = PARSING_FACTORY.parse(SpecificEnthalpy.class, singleValueInput);
         SpecificHeat actualSpecHeat = PARSING_FACTORY.parse(SpecificHeat.class, singleValueInput);
         Temperature actualTemperature = PARSING_FACTORY.parse(Temperature.class, singleValueInput);
@@ -267,7 +269,6 @@ class PhysicalQuantityParsingFactoryTest {
         public PhysicalQuantity<DistanceUnit> toUnit(String targetUnit) {
             return null;
         }
-
 
         @Override
         public TestClass withValue(double value) {

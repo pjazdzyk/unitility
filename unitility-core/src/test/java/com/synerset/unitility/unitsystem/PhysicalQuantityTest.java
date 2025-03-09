@@ -195,7 +195,7 @@ class PhysicalQuantityTest {
         Volume volumeInCm3 = volumeInM3.toUnit(" c m 3 ");
 
         // Then
-        assertThat(volumeInCm3.getValue()).isEqualTo(1000);
+        assertThat(volumeInCm3.getValue()).isEqualTo(1000000);
         assertThatThrownBy(() -> volumeInCm3.toUnit("kg")).isInstanceOf(UnitSystemParseException.class);
 
     }

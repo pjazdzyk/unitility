@@ -14,9 +14,9 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
     LITRE_PER_SECOND("l/s", val -> val / 1000.0, val -> val * 1000.0),
     LITRE_PER_MINUTE("l/min", val -> val / 60000.0, val -> val * 60000.0),
     LITRE_PER_HOUR("l/h", val -> val / 3600000.0, val -> val * 3600000.0),
-    GALLONS_PER_SECOND("gal/s", val -> val / 0.2641720523581484, val -> val * 0.2641720523581484),
-    GALLONS_PER_MINUTE("gal/min", val -> val / 15.850610141490908, val -> val * 15.850610141490908),
-    GALLONS_PER_HOUR("gal/h", val -> val / 951.0366084894545, val -> val * 951.0366084894545);
+    GALLONS_PER_SECOND("gal/s", val -> val / 264.17205236, val -> val * 264.17205236),
+    GALLONS_PER_MINUTE("gal/min", val -> val / 15850.323141, val -> val * 15850.323141),
+    GALLONS_PER_HOUR("gal/h", val -> val / 951019.38849, val -> val * 951019.38849);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
