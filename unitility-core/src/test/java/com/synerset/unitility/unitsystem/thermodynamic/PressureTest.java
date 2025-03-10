@@ -150,6 +150,114 @@ class PressureTest {
     }
 
     @Test
+    @DisplayName("should convert mH₂O_10 to Pa and vice versa")
+    void shouldProperlyConvertMetreOfWater10ToPa() {
+        // Given
+        Pressure initialPressure = Pressure.ofMetreOfWater10(1.0);
+
+        // When
+        Pressure actualInPa = initialPressure.toUnit(PressureUnits.PASCAL);
+        double actualInPaVal = initialPressure.getInPascals();
+        Pressure actualInMetreOfWater10 = actualInPa.toUnit(PressureUnits.METRE_OF_WATER_10);
+
+        // Then
+        Pressure expectedInPa = Pressure.ofPascal(9802.19483921956398939);
+        assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
+        assertThat(actualInMetreOfWater10.getValue()).isEqualTo(initialPressure.getValue());
+        assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));
+    }
+
+    @Test
+    @DisplayName("should convert mH₂O_60 to Pa and vice versa")
+    void shouldProperlyConvertMetreOfWater60ToPa() {
+        // Given
+        Pressure initialPressure = Pressure.ofMetreOfWater60(1.0);
+
+        // When
+        Pressure actualInPa = initialPressure.toUnit(PressureUnits.PASCAL);
+        double actualInPaVal = initialPressure.getInPascals();
+        Pressure actualInMetreOfWater60 = actualInPa.toUnit(PressureUnits.METRE_OF_WATER_60);
+
+        // Then
+        Pressure expectedInPa = Pressure.ofPascal(9636.71656869821414767);
+        assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
+        assertThat(actualInMetreOfWater60.getValue()).isEqualTo(initialPressure.getValue());
+        assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));
+    }
+
+    @Test
+    @DisplayName("should convert mH₂O_95 to Pa and vice versa")
+    void shouldProperlyConvertMetreOfWater95ToPa() {
+        // Given
+        Pressure initialPressure = Pressure.ofMetreOfWater95(1.0);
+
+        // When
+        Pressure actualInPa = initialPressure.toUnit(PressureUnits.PASCAL);
+        double actualInPaVal = initialPressure.getInPascals();
+        Pressure actualInMetreOfWater95 = actualInPa.toUnit(PressureUnits.METRE_OF_WATER_95);
+
+        // Then
+        Pressure expectedInPa = Pressure.ofPascal(9426.82921524257130525);
+        assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
+        assertThat(actualInMetreOfWater95.getValue()).isEqualTo(initialPressure.getValue());
+        assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));
+    }
+
+    @Test
+    @DisplayName("should convert mmHg_10 to Pa and vice versa")
+    void shouldProperlyConvertMillimetreOfMercury10ToPa() {
+        // Given
+        Pressure initialPressure = Pressure.ofMillimetreOfMercury10(1.0);
+
+        // When
+        Pressure actualInPa = initialPressure.toUnit(PressureUnits.PASCAL);
+        double actualInPaVal = initialPressure.getInPascals();
+        Pressure actualInMillimetreOfMercury10 = actualInPa.toUnit(PressureUnits.MILLIMETRE_OF_MERCURY_10);
+
+        // Then
+        Pressure expectedInPa = Pressure.ofPascal(133.0762405);
+        assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
+        assertThat(actualInMillimetreOfMercury10.getValue()).isEqualTo(initialPressure.getValue());
+        assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));
+    }
+
+    @Test
+    @DisplayName("should convert mmHg_60 to Pa and vice versa")
+    void shouldProperlyConvertMillimetreOfMercury60ToPa() {
+        // Given
+        Pressure initialPressure = Pressure.ofMillimetreOfMercury60(1.0);
+
+        // When
+        Pressure actualInPa = initialPressure.toUnit(PressureUnits.PASCAL);
+        double actualInPaVal = initialPressure.getInPascals();
+        Pressure actualInMillimetreOfMercury60 = actualInPa.toUnit(PressureUnits.MILLIMETRE_OF_MERCURY_60);
+
+        // Then
+        Pressure expectedInPa = Pressure.ofPascal(131.8798292);
+        assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
+        assertThat(actualInMillimetreOfMercury60.getValue()).isEqualTo(initialPressure.getValue());
+        assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));
+    }
+
+    @Test
+    @DisplayName("should convert mmHg_95 to Pa and vice versa")
+    void shouldProperlyConvertMillimetreOfMercury95ToPa() {
+        // Given
+        Pressure initialPressure = Pressure.ofMillimetreOfMercury95(1.0);
+
+        // When
+        Pressure actualInPa = initialPressure.toUnit(PressureUnits.PASCAL);
+        double actualInPaVal = initialPressure.getInPascals();
+        Pressure actualInMillimetreOfMercury95 = actualInPa.toUnit(PressureUnits.MILLIMETRE_OF_MERCURY_95);
+
+        // Then
+        Pressure expectedInPa = Pressure.ofPascal(131.0560706);
+        assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
+        assertThat(actualInMillimetreOfMercury95.getValue()).isEqualTo(initialPressure.getValue());
+        assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));
+    }
+
+    @Test
     @DisplayName("should return valid result from to() and getIn() methods")
     void shouldReturnValidResultFromToAndGetInMethods() {
         // Given
@@ -160,15 +268,36 @@ class PressureTest {
                 .toMegaPascal()
                 .toBar()
                 .toMilliBar()
+                .toKiloPascal()
                 .toPsi()
                 .toTorr()
+                .toMetreOfWater10()
+                .toMetreOfWater60()
+                .toMetreOfWater95()
+                .toMillimetreOfMercury10()
+                .toMillimetreOfMercury60()
+                .toMillimetreOfMercury95()
                 .toPascal();
 
-        double actualValue = expected.getInPascals();
-
         // Then
-        assertThat(actual).isEqualTo(expected);
-        assertThat(actualValue).isEqualTo(expected.getValue());
+        assertThat(actual.getInPascals()).isEqualTo(expected.getValue(), withPrecision(1E-11));
+    }
+
+    @Test
+    @DisplayName("should properly parse to Pressure from string")
+    void shouldProperlyParseToPressureFromString() {
+        String pEmpty = "mH2O";
+        String p10 = "mH2O_10";
+        String p60bis = "mH2O 60";
+        String pHgEmpty = "mmHg";
+        String pHg10 = "mmHg_10";
+
+        assertThat(Pressure.of(1, pEmpty)).isEqualTo(Pressure.ofMetreOfWater10(1));
+        assertThat(Pressure.of(1, p10)).isEqualTo(Pressure.ofMetreOfWater10(1));
+        assertThat(Pressure.of(1, p60bis)).isEqualTo(Pressure.ofMetreOfWater60(1));
+        assertThat(Pressure.of(1, pHgEmpty)).isEqualTo(Pressure.ofMillimetreOfMercury10(1));
+        assertThat(Pressure.of(1, pHg10)).isEqualTo(Pressure.ofMillimetreOfMercury10(1));
+
     }
 
 }
