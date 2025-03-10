@@ -101,15 +101,15 @@ class VolumeTest {
     }
 
     @Test
-    @DisplayName("should convert to m³ from gal and vice versa")
+    @DisplayName("should convert to m³ from gal_US and vice versa")
     void shouldProperlyConvertToCubicMeterFromGallon() {
         // Given
-        Volume initialVolumeInGallon = Volume.ofGallons(1000.0);
+        Volume initialVolumeInGallon = Volume.ofGallonsUS(1000.0);
 
         // When
         Volume actualInCubicMeter = initialVolumeInGallon.toBaseUnit();
-        Volume actualInGallon = actualInCubicMeter.toUnit(VolumeUnits.GALLON);
-        double actualInGallonVal = actualInCubicMeter.getInGallons();
+        Volume actualInGallon = actualInCubicMeter.toUnit(VolumeUnits.GALLON_US);
+        double actualInGallonVal = actualInCubicMeter.getInGallonsUS();
 
         // Then
         Volume expectedInCubicMeter = Volume.ofCubicMeters(3.785411784);
@@ -143,33 +143,11 @@ class VolumeTest {
         VolumeUnit expectedBaseUnit = VolumeUnits.CUBIC_METER;
 
         // When
-        Volume volumeInGallons = Volume.ofGallons(100);
+        Volume volumeInGallons = Volume.ofGallonsUS(100);
         VolumeUnit actualBaseUnit = volumeInGallons.getUnit().getBaseUnit();
 
         // Then
         assertThat(actualBaseUnit).isEqualTo(expectedBaseUnit);
-    }
-
-    @Test
-    @DisplayName("should return valid result from to() and getIn() methods")
-    void shouldReturnValidResultFromToAndGetInMethods() {
-        // Given
-        Volume expected = Volume.ofCubicMeters(10.1);
-
-        // When
-        Volume actual = expected.toLiter()
-                .toCubicCentimeter()
-                .toHectoLiter()
-                .toMilliLiter()
-                .toOunce()
-                .toPint()
-                .toGallon()
-                .toCubicMeter();
-        double actualValue = expected.getInCubicMeters();
-
-        // Then
-        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
-        assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
     @Test
@@ -206,6 +184,44 @@ class VolumeTest {
         assertThat(actualInCubicDecimeter.getValue()).isEqualTo(actualInCubicDecimeterVal);
         assertThat(actualInCubicMeter).isEqualTo(expectedInCubicMeter);
         assertThat(actualInCubicDecimeter).isEqualTo(initialVolumeInCubicDecimeter);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods")
+    void shouldReturnValidResultFromToAndGetInMethods() {
+        // Given
+        Volume expected = Volume.ofCubicMeters(10.1);
+
+        // When
+        Volume actual = expected.toLiter()
+                .toCubicCentimeter()
+                .toHectoLiter()
+                .toMilliLiter()
+                .toGallonUS()
+                .toGallonUK()
+                .toOunce()
+                .toPint()
+                .toGallonUS()
+                .toCubicMeter();
+        double actualValue = expected.getInCubicMeters();
+
+        // Then
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-13));
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
+
+    @Test
+    @DisplayName("should properly parse to Volume from string")
+    void shouldProperlyParseToVolumeFromString() {
+        String galEmpty = "gal";
+        String galUK = "gal_Uk";
+        String galUs = "gal us";
+
+        assertThat(Volume.of(1, galEmpty)).isEqualTo(Volume.ofGallonsUK(1));
+        assertThat(Volume.of(1, galUK)).isEqualTo(Volume.ofGallonsUK(1));
+        assertThat(Volume.of(1, galUs)).isEqualTo(Volume.ofGallonsUS(1));
+
     }
 
 }

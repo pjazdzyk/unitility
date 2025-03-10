@@ -14,9 +14,12 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
     LITRE_PER_SECOND("l/s", val -> val / 1000.0, val -> val * 1000.0),
     LITRE_PER_MINUTE("l/min", val -> val / 60000.0, val -> val * 60000.0),
     LITRE_PER_HOUR("l/h", val -> val / 3600000.0, val -> val * 3600000.0),
-    GALLONS_PER_SECOND("gal/s", val -> val / 264.17205236, val -> val * 264.17205236),
-    GALLONS_PER_MINUTE("gal/min", val -> val / 15850.323141, val -> val * 15850.323141),
-    GALLONS_PER_HOUR("gal/h", val -> val / 951019.38849, val -> val * 951019.38849);
+    GALLONS_PER_SECOND_US("gal/s_US", val -> val / 264.17205236, val -> val * 264.17205236),
+    GALLONS_PER_MINUTE_US("gal/min_US", val -> val / 15850.323141, val -> val * 15850.323141),
+    GALLONS_PER_HOUR_US("gal/h_US", val -> val / 951019.38849, val -> val * 951019.38849),
+    GALLONS_PER_SECOND_UK("gal/s_UK", val -> val / 219.9692483, val -> val * 219.9692483),
+    GALLONS_PER_MINUTE_UK("gal/min_UK", val -> val / 13198.154898, val -> val * 13198.154898),
+    GALLONS_PER_HOUR_UK("gal/h_UK", val -> val / 791889.29388, val -> val * 791889.29388);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -55,13 +58,12 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
 
         String requestedSymbol = unifySymbol(rawSymbol);
         for (VolumetricFlowUnit unit : values()) {
-            String currentSymbol = unifySymbol(unit.getSymbol());
-            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
+            if (hasMatchBeenFound(unit, requestedSymbol)) {
                 return unit;
             }
         }
         throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + VolumetricFlowUnits.class.getSimpleName());
+                                           + VolumetricFlowUnits.class.getSimpleName());
     }
 
     private static String unifySymbol(String inputString) {
@@ -70,6 +72,16 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()
                 .toString();
+    }
+
+    private static boolean hasMatchBeenFound(VolumetricFlowUnit currentUnit, String requestedSymbol) {
+        String currentSymbol = unifySymbol(currentUnit.getSymbol());
+        if (currentUnit == VolumetricFlowUnits.GALLONS_PER_HOUR_UK || currentUnit == VolumetricFlowUnits.GALLONS_PER_MINUTE_UK
+            || currentUnit == VolumetricFlowUnits.GALLONS_PER_SECOND_UK) {
+            String truncatedSymbol = currentSymbol.replace("uk", "");
+            return truncatedSymbol.equalsIgnoreCase(requestedSymbol) || currentSymbol.equalsIgnoreCase(requestedSymbol);
+        }
+        return currentSymbol.equalsIgnoreCase(requestedSymbol);
     }
 
     public static VolumetricFlowUnit getDefaultUnit() {

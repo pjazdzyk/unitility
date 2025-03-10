@@ -61,8 +61,12 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
         return new Volume(value, VolumeUnits.PINT);
     }
 
-    public static Volume ofGallons(double value) {
-        return new Volume(value, VolumeUnits.GALLON);
+    public static Volume ofGallonsUS(double value) {
+        return new Volume(value, VolumeUnits.GALLON_US);
+    }
+
+    public static Volume ofGallonsUK(double value) {
+        return new Volume(value, VolumeUnits.GALLON_UK);
     }
 
     public static Volume ofCubicFeet(double value) { // New method
@@ -141,8 +145,12 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
         return toUnit(VolumeUnits.PINT);
     }
 
-    public Volume toGallon() {
-        return toUnit(VolumeUnits.GALLON);
+    public Volume toGallonUS() {
+        return toUnit(VolumeUnits.GALLON_US);
+    }
+
+    public Volume toGallonUK() {
+        return toUnit(VolumeUnits.GALLON_UK);
     }
 
     public Volume toCubicFeet() { // New method
@@ -182,8 +190,12 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
         return getInUnit(VolumeUnits.PINT);
     }
 
-    public double getInGallons() {
-        return getInUnit(VolumeUnits.GALLON);
+    public double getInGallonsUS() {
+        return getInUnit(VolumeUnits.GALLON_US);
+    }
+
+    public double getInGallonsUK() {
+        return getInUnit(VolumeUnits.GALLON_UK);
     }
 
     public double getInCubicFeet() { // New method
