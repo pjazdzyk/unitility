@@ -14,7 +14,7 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
 
     public Pressure(double value, PressureUnit unitType) {
         this.value = value;
-        if(unitType == null){
+        if (unitType == null) {
             unitType = PressureUnits.getDefaultUnit();
         }
         this.unitType = unitType;
@@ -61,6 +61,30 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
 
     public static Pressure ofTorr(double value) {
         return new Pressure(value, PressureUnits.TORR);
+    }
+
+    public static Pressure ofMetreOfWater10(double value) {
+        return new Pressure(value, PressureUnits.METRE_OF_WATER_10);
+    }
+
+    public static Pressure ofMetreOfWater60(double value) {
+        return new Pressure(value, PressureUnits.METRE_OF_WATER_60);
+    }
+
+    public static Pressure ofMetreOfWater95(double value) {
+        return new Pressure(value, PressureUnits.METRE_OF_WATER_95);
+    }
+
+    public static Pressure ofMillimetreOfMercury10(double value) {
+        return new Pressure(value, PressureUnits.MILLIMETRE_OF_MERCURY_10);
+    }
+
+    public static Pressure ofMillimetreOfMercury60(double value) {
+        return new Pressure(value, PressureUnits.MILLIMETRE_OF_MERCURY_60);
+    }
+
+    public static Pressure ofMillimetreOfMercury95(double value) {
+        return new Pressure(value, PressureUnits.MILLIMETRE_OF_MERCURY_95);
     }
 
     @Override
@@ -135,6 +159,30 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
         return toUnit(PressureUnits.TORR);
     }
 
+    public Pressure toMetreOfWater10() {
+        return toUnit(PressureUnits.METRE_OF_WATER_10);
+    }
+
+    public Pressure toMetreOfWater60() {
+        return toUnit(PressureUnits.METRE_OF_WATER_60);
+    }
+
+    public Pressure toMetreOfWater95() {
+        return toUnit(PressureUnits.METRE_OF_WATER_95);
+    }
+
+    public Pressure toMillimetreOfMercury10() {
+        return toUnit(PressureUnits.MILLIMETRE_OF_MERCURY_10);
+    }
+
+    public Pressure toMillimetreOfMercury60() {
+        return toUnit(PressureUnits.MILLIMETRE_OF_MERCURY_60);
+    }
+
+    public Pressure toMillimetreOfMercury95() {
+        return toUnit(PressureUnits.MILLIMETRE_OF_MERCURY_95);
+    }
+
     // Get value in target unit
     public double getInPascals() {
         return getInUnit(PressureUnits.PASCAL);
@@ -166,6 +214,30 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
 
     public double getInTorr() {
         return getInUnit(PressureUnits.TORR);
+    }
+
+    public double getInMetreOfWater10() {
+        return getInUnit(PressureUnits.METRE_OF_WATER_10);
+    }
+
+    public double getInMetreOfWater60() {
+        return getInUnit(PressureUnits.METRE_OF_WATER_60);
+    }
+
+    public double getInMetreOfWater95() {
+        return getInUnit(PressureUnits.METRE_OF_WATER_95);
+    }
+
+    public double getInMillimetreOfMercury10() {
+        return getInUnit(PressureUnits.MILLIMETRE_OF_MERCURY_10);
+    }
+
+    public double getInMillimetreOfMercury60() {
+        return getInUnit(PressureUnits.MILLIMETRE_OF_MERCURY_60);
+    }
+
+    public double getInMillimetreOfMercury95() {
+        return getInUnit(PressureUnits.MILLIMETRE_OF_MERCURY_95);
     }
 
     @Override
