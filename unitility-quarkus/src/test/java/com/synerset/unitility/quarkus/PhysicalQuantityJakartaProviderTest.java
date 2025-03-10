@@ -65,7 +65,7 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(Velocity.class, "15.1 [m/s]", Velocity.ofMetersPerSecond(TEST_VALUE)),
                 Arguments.of(Volume.class, "15.1 [m³]", Volume.ofCubicMeters(TEST_VALUE)),
                 Arguments.of(MassFlow.class, "15.1 [kg/s]", MassFlow.ofKilogramsPerSecond(TEST_VALUE)),
-                Arguments.of(VolumetricFlow.class, "15.1 [gal/h]", VolumetricFlow.ofGallonsPerHour(TEST_VALUE)),
+                Arguments.of(VolumetricFlow.class, "15.1 [gal/h_UK]", VolumetricFlow.ofGallonsPerHourUK(TEST_VALUE)),
                 Arguments.of(HumidityRatio.class, "15.1 [kg/kg]", HumidityRatio.ofKilogramPerKilogram(TEST_VALUE)),
                 Arguments.of(RelativeHumidity.class, "15.1 [%]", RelativeHumidity.ofPercentage(TEST_VALUE)),
                 Arguments.of(Force.class, "15.1 [dyn]", Force.ofDynes(TEST_VALUE)),

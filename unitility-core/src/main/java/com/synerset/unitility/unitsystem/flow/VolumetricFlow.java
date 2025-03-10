@@ -58,16 +58,28 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
         return new VolumetricFlow(value, VolumetricFlowUnits.LITRE_PER_HOUR);
     }
 
-    public static VolumetricFlow ofGallonsPerSecond(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_SECOND);
+    public static VolumetricFlow ofGallonsPerSecondUS(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_SECOND_US);
     }
 
-    public static VolumetricFlow ofGallonsPerMinute(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_MINUTE);
+    public static VolumetricFlow ofGallonsPerMinuteUS(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_MINUTE_US);
     }
 
-    public static VolumetricFlow ofGallonsPerHour(double value) {
-        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_HOUR);
+    public static VolumetricFlow ofGallonsPerHourUS(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_HOUR_US);
+    }
+
+    public static VolumetricFlow ofGallonsPerSecondUK(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_SECOND_UK);
+    }
+
+    public static VolumetricFlow ofGallonsPerMinuteUK(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_MINUTE_UK);
+    }
+
+    public static VolumetricFlow ofGallonsPerHourUK(double value) {
+        return new VolumetricFlow(value, VolumetricFlowUnits.GALLONS_PER_HOUR_UK);
     }
 
     @Override
@@ -138,16 +150,28 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
         return toUnit(VolumetricFlowUnits.LITRE_PER_HOUR);
     }
 
-    public VolumetricFlow toGallonsPerSecond() {
-        return toUnit(VolumetricFlowUnits.GALLONS_PER_SECOND);
+    public VolumetricFlow toGallonsPerSecondUS() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_SECOND_US);
     }
 
-    public VolumetricFlow toGallonsPerMinute() {
-        return toUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE);
+    public VolumetricFlow toGallonsPerMinuteUS() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE_US);
     }
 
-    public VolumetricFlow toGallonsPerHour() {
-        return toUnit(VolumetricFlowUnits.GALLONS_PER_HOUR);
+    public VolumetricFlow toGallonsPerHourUS() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_HOUR_US);
+    }
+
+    public VolumetricFlow toGallonsPerSecondUK() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_SECOND_UK);
+    }
+
+    public VolumetricFlow toGallonsPerMinuteUK() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE_UK);
+    }
+
+    public VolumetricFlow toGallonsPerHourUK() {
+        return toUnit(VolumetricFlowUnits.GALLONS_PER_HOUR_UK);
     }
 
     // Get value in target unit
@@ -179,16 +203,28 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
         return getInUnit(VolumetricFlowUnits.LITRE_PER_HOUR);
     }
 
-    public double getInGallonsPerSecond() {
-        return getInUnit(VolumetricFlowUnits.GALLONS_PER_SECOND);
+    public double getInGallonsPerSecondUS() {
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_SECOND_US);
     }
 
-    public double getInGallonsPerMinute() {
-        return getInUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE);
+    public double getInGallonsPerMinuteUS() {
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE_US);
     }
 
-    public double getInGallonsPerHour() {
-        return getInUnit(VolumetricFlowUnits.GALLONS_PER_HOUR);
+    public double getInGallonsPerHourUS() {
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_HOUR_US);
+    }
+
+    public double getInGallonsPerSecondUK() {
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_SECOND_UK);
+    }
+
+    public double getInGallonsPerMinuteUK() {
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_MINUTE_UK);
+    }
+
+    public double getInGallonsPerHourUK() {
+        return getInUnit(VolumetricFlowUnits.GALLONS_PER_HOUR_UK);
     }
 
     @Override

@@ -16,7 +16,8 @@ public enum VolumeUnits implements VolumeUnit {
     MILLILITRE("ml", val -> val * 0.000001, val -> val * 1000000.0),
     OUNCE("fl.oz", val -> val * 0.0000295735295625, val -> val / 0.0000295735295625),
     PINT("pt", val -> val * 0.000473176473, val -> val / 0.000473176473),
-    GALLON("gal", val -> val * 0.003785411784, val -> val / 0.003785411784);
+    GALLON_US("gal_US", val -> val * 0.003785411784, val -> val / 0.003785411784),
+    GALLON_UK("gal_UK", val -> val * 0.00454608999999, val -> val / 0.00454608999999);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -54,8 +55,7 @@ public enum VolumeUnits implements VolumeUnit {
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (VolumeUnit unit : values()) {
-            String currentSymbol = unifySymbol(unit.getSymbol());
-            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
+            if (hasMatchBeenFound(unit, requestedSymbol)) {
                 return unit;
             }
         }
@@ -69,6 +69,15 @@ public enum VolumeUnits implements VolumeUnit {
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()
                 .toString();
+    }
+
+    private static boolean hasMatchBeenFound(VolumeUnit currentUnit, String requestedSymbol) {
+        String currentSymbol = unifySymbol(currentUnit.getSymbol());
+        if (currentUnit == VolumeUnits.GALLON_UK) {
+            String truncatedSymbol = currentSymbol.replace("uk", "");
+            return truncatedSymbol.equalsIgnoreCase(requestedSymbol) || currentSymbol.equalsIgnoreCase(requestedSymbol);
+        }
+        return currentSymbol.equalsIgnoreCase(requestedSymbol);
     }
 
     public static VolumeUnit getDefaultUnit() {
