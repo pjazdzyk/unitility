@@ -38,6 +38,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         String bfFactor8 = "{\"value\":20}";
         String volFlowCFM = "{\"value\":20.0,\"unit\":\"CFM\"}";
         String volFlowFt3m = "{\"value\":20.0,\"unit\":\"ft3/min\"}";
+        String volFlowm3Min = "{\"value\":20.0,\"unit\":\"m3/min\"}";
         String humRatio = "{\"value\":2.0,\"unit\":\"kg.wv/kg.da\"}";
         String humRatio2 = "{\"value\":2.0,\"unit\":\"kgwv/kgda\"}";
         String bearing = "{\"value\":270.0}";
@@ -55,6 +56,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         BypassFactor actualBypassFactor8 = objectMapper.readValue(bfFactor8, BypassFactor.class);
         VolumetricFlow actualVolFlowCFM = objectMapper.readValue(volFlowCFM, VolumetricFlow.class);
         VolumetricFlow actualVolFlowFt3m = objectMapper.readValue(volFlowFt3m, VolumetricFlow.class);
+        VolumetricFlow actualVolFlowM3m = objectMapper.readValue(volFlowm3Min, VolumetricFlow.class);
         HumidityRatio actualHumidityRatio = objectMapper.readValue(humRatio, HumidityRatio.class);
         HumidityRatio actualHumidityRatio2 = objectMapper.readValue(humRatio2, HumidityRatio.class);
         Bearing actualBearing = objectMapper.readValue(bearing, Bearing.class);
@@ -64,6 +66,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         ThermalConductivity expectedThermalCond = ThermalConductivity.ofBTUPerHourFeetFahrenheit(20);
         BypassFactor expectedBypassFactor = BypassFactor.of(20);
         VolumetricFlow expectedVolFlow = VolumetricFlow.ofCubicFeetPerMinute(20);
+        VolumetricFlow expectedVolFlowM3min = VolumetricFlow.ofCubicMetersPerMinute(20);
         HumidityRatio expectedHumRatio = HumidityRatio.ofKilogramPerKilogram(2.0);
 
         assertThat(actualTemp1).isEqualTo(expetedTemperature);
@@ -78,6 +81,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualBypassFactor8).isEqualTo(expectedBypassFactor);
         assertThat(actualVolFlowCFM).isEqualTo(expectedVolFlow);
         assertThat(actualVolFlowFt3m).isEqualTo(expectedVolFlow);
+        assertThat(actualVolFlowM3m).isEqualTo(expectedVolFlowM3min);
         assertThat(actualHumidityRatio).isEqualTo(expectedHumRatio);
         assertThat(actualHumidityRatio2).isEqualTo(expectedHumRatio);
         assertThat(actualBearing).isEqualTo(Bearing.of(270));
