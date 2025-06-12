@@ -70,8 +70,8 @@ public class Force implements CalculableQuantity<ForceUnit, Force> {
 
     @Override
     public Force toBaseUnit() {
-        double valueInNewtons = unitType.toValueInBaseUnit(value);
-        return of(valueInNewtons, ForceUnits.NEWTON);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

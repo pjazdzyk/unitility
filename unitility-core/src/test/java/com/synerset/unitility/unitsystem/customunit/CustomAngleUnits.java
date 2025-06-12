@@ -7,7 +7,7 @@ import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import java.util.function.DoubleUnaryOperator;
 
 public enum CustomAngleUnits implements AngleUnit {
-    REVOLUTIONS("rev", val -> val * 360, val -> val / 360);
+    REVOLUTIONS("rev", val -> val * 2 * Math.PI, val -> val / (2 * Math.PI));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -26,7 +26,7 @@ public enum CustomAngleUnits implements AngleUnit {
 
     @Override
     public AngleUnit getBaseUnit() {
-        return AngleUnits.DEGREES;
+        return AngleUnits.RADIANS;
     }
 
     @Override

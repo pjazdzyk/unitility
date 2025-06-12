@@ -65,8 +65,8 @@ public class Power implements CalculableQuantity<PowerUnit, Power> {
 
     @Override
     public Power toBaseUnit() {
-        double valueInWatts = unitType.toValueInBaseUnit(value);
-        return Power.of(valueInWatts, PowerUnits.WATT);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

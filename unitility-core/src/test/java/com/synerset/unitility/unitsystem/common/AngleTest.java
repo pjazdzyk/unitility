@@ -27,13 +27,13 @@ class AngleTest {
     }
 
     @Test
-    @DisplayName("should have DEGREES as base unit")
+    @DisplayName("should have RADIANS as base unit")
     void shouldHaveDegreesAsBaseUnit() {
         // Given
-        AngleUnit expectedBaseUnit = AngleUnits.DEGREES;
+        AngleUnit expectedBaseUnit = AngleUnits.RADIANS;
 
         // When
-        Angle angleInRadians = Angle.ofRadians(10);
+        Angle angleInRadians = Angle.ofDegrees(10);
         AngleUnit actualBaseUnit = angleInRadians.getUnit().getBaseUnit();
 
         // Then

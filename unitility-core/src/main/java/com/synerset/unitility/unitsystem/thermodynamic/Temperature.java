@@ -59,8 +59,8 @@ public class Temperature implements CalculableQuantity<TemperatureUnit, Temperat
 
     @Override
     public Temperature toBaseUnit() {
-        double valueInKelvin = unitType.toValueInBaseUnit(value);
-        return of(valueInKelvin, TemperatureUnits.KELVIN);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

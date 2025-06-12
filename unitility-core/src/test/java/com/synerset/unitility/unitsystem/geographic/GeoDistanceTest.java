@@ -313,8 +313,8 @@ class GeoDistanceTest {
 
         // Then
         assertThat(geoDistanceA.getDistance()).isEqualTo(Distance.ofKilometers(6669.896095258197));
-        assertThat(increasedDistance.getDistance()).isEqualTo(Distance.ofKilometers(5000 + 6669.896095258197));
-        assertThat(evenMoreIncreasedDistance.getDistance()).isEqualTo(Distance.ofKilometers(5000 + 1000 + 6669.896095258197));
+        assertThat(increasedDistance.getDistance().getValue()).isEqualTo(Distance.ofKilometers(5000 + 6669.896095258197).getValue(), withPrecision(1E-11));
+        assertThat(evenMoreIncreasedDistance.getDistance().getValue()).isEqualTo(Distance.ofKilometers(5000 + 1000 + 6669.896095258197).getValue(), withPrecision(1E-11));
     }
 
 }

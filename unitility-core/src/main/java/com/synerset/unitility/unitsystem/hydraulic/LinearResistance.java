@@ -59,8 +59,8 @@ public class LinearResistance implements CalculableQuantity<LinearResistanceUnit
 
     @Override
     public LinearResistance toBaseUnit() {
-        double valueInPascal = unitType.toValueInBaseUnit(value);
-        return of(valueInPascal, LinearResistanceUnits.PASCAL_PER_METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

@@ -90,8 +90,8 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
 
     @Override
     public Volume toBaseUnit() {
-        double valueInCubicMeter = unitType.toValueInBaseUnit(value);
-        return of(valueInCubicMeter, VolumeUnits.CUBIC_METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

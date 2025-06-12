@@ -63,8 +63,8 @@ public class LinearMassDensity implements CalculableQuantity<LinearMassDensityUn
 
     @Override
     public LinearMassDensity toBaseUnit() {
-        double valueInKgPerM = unitType.toValueInBaseUnit(value);
-        return of(valueInKgPerM, LinearMassDensityUnits.KILOGRAM_PER_METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

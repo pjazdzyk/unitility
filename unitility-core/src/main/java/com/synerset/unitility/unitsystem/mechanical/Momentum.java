@@ -58,8 +58,8 @@ public class Momentum implements CalculableQuantity<MomentumUnit, Momentum> {
 
     @Override
     public Momentum toBaseUnit() {
-        double valueInKilogramMeterPerSecond = unitType.toValueInBaseUnit(value);
-        return Momentum.of(valueInKilogramMeterPerSecond, MomentumUnits.KILOGRAM_METER_PER_SECOND);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

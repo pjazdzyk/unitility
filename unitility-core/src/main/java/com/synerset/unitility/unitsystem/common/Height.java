@@ -80,8 +80,8 @@ public class Height implements CalculableQuantity<DistanceUnit, Height> {
 
     @Override
     public Height toBaseUnit() {
-        double valueInMeters = unitType.toValueInBaseUnit(value);
-        return Height.of(valueInMeters, DistanceUnits.METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

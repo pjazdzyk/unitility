@@ -63,8 +63,8 @@ public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
 
     @Override
     public MassFlow toBaseUnit() {
-        double valueInKilogramsPerSecond = unitType.toValueInBaseUnit(value);
-        return of(valueInKilogramsPerSecond, MassFlowUnits.KILOGRAM_PER_SECOND);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override
