@@ -43,7 +43,7 @@ public enum DynamicViscosityUnits implements DynamicViscosityUnit {
 
     public static DynamicViscosityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return KILOGRAM_PER_METER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (DynamicViscosityUnit unit : values()) {
@@ -62,10 +62,6 @@ public enum DynamicViscosityUnits implements DynamicViscosityUnit {
                 .unifyMultiAndDiv()
                 .dropParentheses()
                 .toString();
-    }
-
-    public static DynamicViscosityUnit getDefaultUnit() {
-        return KILOGRAM_PER_METER_SECOND;
     }
 
 }

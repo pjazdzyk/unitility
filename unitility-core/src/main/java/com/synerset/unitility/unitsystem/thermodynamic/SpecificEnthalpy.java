@@ -12,7 +12,7 @@ public class SpecificEnthalpy implements CalculableQuantity<SpecificEnthalpyUnit
     public SpecificEnthalpy(double value, SpecificEnthalpyUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = SpecificEnthalpyUnits.getDefaultUnit();
+            unitType = SpecificEnthalpyUnits.JOULE_PER_KILOGRAM;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

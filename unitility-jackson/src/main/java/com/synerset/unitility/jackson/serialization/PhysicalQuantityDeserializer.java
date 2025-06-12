@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.util.ParsingHelpers;
@@ -43,6 +44,11 @@ public class PhysicalQuantityDeserializer<U extends Unit, Q extends PhysicalQuan
     public Q deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
+
+        if(node.getNodeType().equals(JsonNodeType.NUMBER)) {
+            return parsingFactory.parseValueWithDefaultUnit(quantityClass, node.asDouble());
+        }
+
         JsonNode valueFieldNode = node.get(FieldNames.JSON_FIELD_VALUE);
         JsonNode symbolFieldNode = node.get(FieldNames.JSON_FIELD_UNIT_SYMBOL);
 

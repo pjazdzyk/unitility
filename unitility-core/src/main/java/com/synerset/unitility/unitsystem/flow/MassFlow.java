@@ -14,7 +14,7 @@ public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
     public MassFlow(double value, MassFlowUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = MassFlowUnits.getDefaultUnit();
+            unitType = MassFlowUnits.KILOGRAM_PER_HOUR;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

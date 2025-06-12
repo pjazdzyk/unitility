@@ -42,7 +42,7 @@ public enum MomentumUnits implements MomentumUnit {
 
     public static MomentumUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return KILOGRAM_METER_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (MomentumUnit unit : values()) {
@@ -61,10 +61,6 @@ public enum MomentumUnits implements MomentumUnit {
                 .unifyMultiAndDiv()
                 .dropParentheses()
                 .toString();
-    }
-
-    public static MomentumUnit getDefaultUnit() {
-        return KILOGRAM_METER_PER_SECOND;
     }
 
 }

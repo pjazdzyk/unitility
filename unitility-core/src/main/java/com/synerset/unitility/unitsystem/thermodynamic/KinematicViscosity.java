@@ -13,7 +13,7 @@ public class KinematicViscosity implements CalculableQuantity<KinematicViscosity
     public KinematicViscosity(double value, KinematicViscosityUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = KinematicViscosityUnits.getDefaultUnit();
+            unitType = KinematicViscosityUnits.SQUARE_METER_PER_SECOND;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

@@ -13,7 +13,7 @@ public class Energy implements CalculableQuantity<EnergyUnit, Energy> {
     public Energy(double value, EnergyUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = EnergyUnits.getDefaultUnit();
+            unitType = EnergyUnits.JOULE;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

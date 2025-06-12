@@ -15,7 +15,7 @@ public class Length implements CalculableQuantity<DistanceUnit, Length> {
     public Length(double value, DistanceUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = DistanceUnits.getDefaultUnit();
+            unitType = DistanceUnits.METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

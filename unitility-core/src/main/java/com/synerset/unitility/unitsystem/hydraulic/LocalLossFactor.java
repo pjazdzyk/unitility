@@ -12,15 +12,15 @@ public class LocalLossFactor implements CalculableQuantity<LocalLossFactorUnit, 
     private final double baseValue;
     private final LocalLossFactorUnit unitType;
 
-    public LocalLossFactor(double value) {
+    public LocalLossFactor(double value, LocalLossFactorUnits unitType) {
         this.value = value;
-        this.unitType = LocalLossFactorUnits.DIMENSIONLESS;
+        this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
     public static LocalLossFactor of(double value) {
-        return new LocalLossFactor(value);
+        return new LocalLossFactor(value, LocalLossFactorUnits.DIMENSIONLESS);
     }
 
     @Override

@@ -53,7 +53,7 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
 
     public static VolumetricFlowUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return CUBIC_METERS_PER_SECOND;
         }
 
         String requestedSymbol = unifySymbol(rawSymbol);
@@ -84,8 +84,5 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
         return currentSymbol.equalsIgnoreCase(requestedSymbol);
     }
 
-    public static VolumetricFlowUnit getDefaultUnit() {
-        return CUBIC_METERS_PER_HOUR;
-    }
 
 }

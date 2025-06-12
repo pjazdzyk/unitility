@@ -51,7 +51,7 @@ public enum VolumeUnits implements VolumeUnit {
 
     public static VolumeUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return CUBIC_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (VolumeUnit unit : values()) {
@@ -80,7 +80,4 @@ public enum VolumeUnits implements VolumeUnit {
         return currentSymbol.equalsIgnoreCase(requestedSymbol);
     }
 
-    public static VolumeUnit getDefaultUnit() {
-        return CUBIC_METER;
-    }
 }

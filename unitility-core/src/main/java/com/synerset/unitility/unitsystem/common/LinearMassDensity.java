@@ -14,7 +14,7 @@ public class LinearMassDensity implements CalculableQuantity<LinearMassDensityUn
     public LinearMassDensity(double value, LinearMassDensityUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = LinearMassDensityUnits.getDefaultUnit();
+            unitType = LinearMassDensityUnits.KILOGRAM_PER_METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

@@ -13,7 +13,7 @@ public class Angle implements TrigonometricQuantity<Angle> {
     public Angle(double value, AngleUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = AngleUnits.getDefaultUnit();
+            unitType = AngleUnits.RADIANS;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

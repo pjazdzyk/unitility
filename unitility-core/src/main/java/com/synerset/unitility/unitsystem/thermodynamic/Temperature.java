@@ -14,7 +14,7 @@ public class Temperature implements CalculableQuantity<TemperatureUnit, Temperat
     public Temperature(double value, TemperatureUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = TemperatureUnits.getDefaultUnit();
+            unitType = TemperatureUnits.KELVIN;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

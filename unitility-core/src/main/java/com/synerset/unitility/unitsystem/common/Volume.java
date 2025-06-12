@@ -13,7 +13,7 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
     public Volume(double value, VolumeUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = VolumeUnits.getDefaultUnit();
+            unitType = VolumeUnits.CUBIC_METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

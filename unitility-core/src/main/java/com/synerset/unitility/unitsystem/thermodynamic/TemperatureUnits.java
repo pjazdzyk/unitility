@@ -43,7 +43,7 @@ public enum TemperatureUnits implements TemperatureUnit {
 
     public static TemperatureUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return KELVIN;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (TemperatureUnit unit : values()) {
@@ -61,10 +61,6 @@ public enum TemperatureUnits implements TemperatureUnit {
                 .trimLowerAndClean()
                 .dropDegreeSymbols()
                 .toString();
-    }
-
-    public static TemperatureUnit getDefaultUnit() {
-        return CELSIUS;
     }
 
 }

@@ -43,7 +43,7 @@ public enum SpecificHeatUnits implements SpecificHeatUnit {
 
     public static SpecificHeatUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return JOULES_PER_KILOGRAM_KELVIN;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (SpecificHeatUnit unit : values()) {
@@ -63,10 +63,6 @@ public enum SpecificHeatUnits implements SpecificHeatUnit {
                 .dropParentheses()
                 .unifySymbolsOfAngle()
                 .toString();
-    }
-
-    public static SpecificHeatUnit getDefaultUnit() {
-        return JOULES_PER_KILOGRAM_KELVIN;
     }
 
 }

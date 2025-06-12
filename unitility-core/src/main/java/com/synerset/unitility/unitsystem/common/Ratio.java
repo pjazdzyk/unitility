@@ -16,7 +16,7 @@ public class Ratio implements CalculableQuantity<RatioUnit, Ratio> {
     public Ratio(double value, RatioUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = RatioUnits.getDefaultUnit();
+            unitType = RatioUnits.DECIMAL;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

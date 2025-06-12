@@ -43,7 +43,7 @@ public enum DensityUnits implements DensityUnit {
 
     public static DensityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return KILOGRAM_PER_CUBIC_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (DensityUnit unit : values()) {
@@ -62,10 +62,6 @@ public enum DensityUnits implements DensityUnit {
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()
                 .toString();
-    }
-
-    public static DensityUnit getDefaultUnit() {
-        return KILOGRAM_PER_CUBIC_METER;
     }
 
 }

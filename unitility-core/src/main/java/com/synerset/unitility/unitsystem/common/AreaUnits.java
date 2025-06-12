@@ -51,7 +51,7 @@ public enum AreaUnits implements AreaUnit {
 
     public static AreaUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return SQUARE_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (AreaUnit unit : values()) {
@@ -71,8 +71,5 @@ public enum AreaUnits implements AreaUnit {
                 .toString();
     }
 
-    public static AreaUnit getDefaultUnit() {
-        return SQUARE_METER;
-    }
 
 }

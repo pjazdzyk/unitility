@@ -37,7 +37,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
     public Bearing(double trueBearingValueDeg, AngleUnit unitType) {
         this.value = trueBearingValueDeg;
         if (unitType == null) {
-            unitType = AngleUnits.getDefaultUnit();
+            unitType = AngleUnits.DEGREES;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(trueBearingValueDeg);
