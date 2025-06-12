@@ -15,7 +15,7 @@ public class RelativeHumidity implements CalculableQuantity<RelativeHumidityUnit
     public RelativeHumidity(double value, RelativeHumidityUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = RelativeHumidityUnits.getDefaultUnit();
+            unitType = RelativeHumidityUnits.DECIMAL;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

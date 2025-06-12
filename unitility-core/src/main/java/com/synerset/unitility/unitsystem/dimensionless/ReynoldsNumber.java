@@ -13,15 +13,15 @@ public class ReynoldsNumber implements CalculableQuantity<ReynoldsNumberUnit, Re
     private final double baseValue;
     private final ReynoldsNumberUnit unitType;
 
-    public ReynoldsNumber(double value) {
+    public ReynoldsNumber(double value, ReynoldsNumberUnit unitType) {
         this.value = value;
-        this.unitType = ReynoldsNumberUnits.DIMENSIONLESS;
+        this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
     public static ReynoldsNumber of(double value) {
-        return new ReynoldsNumber(value);
+        return new ReynoldsNumber(value,  ReynoldsNumberUnits.DIMENSIONLESS);
     }
 
     @Override

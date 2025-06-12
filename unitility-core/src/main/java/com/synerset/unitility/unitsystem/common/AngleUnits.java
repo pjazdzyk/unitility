@@ -42,7 +42,7 @@ public enum AngleUnits implements AngleUnit {
 
     public static AngleUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return RADIANS;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (AngleUnit unit : values()) {
@@ -62,7 +62,4 @@ public enum AngleUnits implements AngleUnit {
                 .toString();
     }
 
-    public static AngleUnit getDefaultUnit() {
-        return DEGREES;
-    }
 }

@@ -49,7 +49,7 @@ public enum EnergyUnits implements EnergyUnit {
 
     public static EnergyUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return JOULE;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (EnergyUnit unit : values()) {
@@ -66,10 +66,6 @@ public enum EnergyUnits implements EnergyUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .toString();
-    }
-
-    public static EnergyUnit getDefaultUnit() {
-        return JOULE;
     }
 
 }

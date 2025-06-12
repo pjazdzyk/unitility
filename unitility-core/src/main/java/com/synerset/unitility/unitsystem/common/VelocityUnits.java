@@ -48,7 +48,7 @@ public enum VelocityUnits implements VelocityUnit {
 
     public static VelocityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return METER_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (VelocityUnit unit : values()) {
@@ -68,8 +68,5 @@ public enum VelocityUnits implements VelocityUnit {
                 .toString();
     }
 
-    public static VelocityUnits getDefaultUnit() {
-        return METER_PER_SECOND;
-    }
 
 }

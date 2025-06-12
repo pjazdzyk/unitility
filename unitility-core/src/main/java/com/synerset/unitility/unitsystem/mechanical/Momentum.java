@@ -13,7 +13,7 @@ public class Momentum implements CalculableQuantity<MomentumUnit, Momentum> {
     public Momentum(double value, MomentumUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = MomentumUnits.getDefaultUnit();
+            unitType = MomentumUnits.KILOGRAM_METER_PER_SECOND;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

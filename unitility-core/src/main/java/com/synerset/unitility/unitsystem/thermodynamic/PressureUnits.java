@@ -55,7 +55,7 @@ public enum PressureUnits implements PressureUnit {
 
     public static PressureUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return PASCAL;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (PressureUnit unit : values()) {
@@ -81,10 +81,6 @@ public enum PressureUnits implements PressureUnit {
             return truncatedSymbol.equalsIgnoreCase(requestedSymbol) || currentSymbol.equalsIgnoreCase(requestedSymbol);
         }
         return currentSymbol.equalsIgnoreCase(requestedSymbol);
-    }
-
-    public static PressureUnit getDefaultUnit() {
-        return PASCAL;
     }
 
 }

@@ -44,7 +44,7 @@ public enum MassFlowUnits implements MassFlowUnit {
 
     public static MassFlowUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return KILOGRAM_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (MassFlowUnit unit : values()) {
@@ -64,8 +64,5 @@ public enum MassFlowUnits implements MassFlowUnit {
                 .toString();
     }
 
-    public static MassFlowUnit getDefaultUnit() {
-        return KILOGRAM_PER_SECOND;
-    }
 
 }

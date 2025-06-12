@@ -43,7 +43,7 @@ public enum HumidityRatioUnits implements HumidityRatioUnit {
 
     public static HumidityRatioUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return KILOGRAM_PER_KILOGRAM;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (HumidityRatioUnit unit : values()) {
@@ -62,10 +62,6 @@ public enum HumidityRatioUnits implements HumidityRatioUnit {
                 .dropWvAndDaSuffixes()
                 .unifyMultiAndDiv()
                 .toString();
-    }
-
-    public static HumidityRatioUnit getDefaultUnit() {
-        return KILOGRAM_PER_KILOGRAM;
     }
 
 }

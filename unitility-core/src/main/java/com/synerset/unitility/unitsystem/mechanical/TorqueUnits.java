@@ -45,7 +45,7 @@ public enum TorqueUnits implements TorqueUnit {
 
     public static TorqueUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return NEWTON_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (TorqueUnit unit : values()) {
@@ -63,10 +63,6 @@ public enum TorqueUnits implements TorqueUnit {
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
                 .toString();
-    }
-
-    public static TorqueUnit getDefaultUnit() {
-        return NEWTON_METER;
     }
 
 }

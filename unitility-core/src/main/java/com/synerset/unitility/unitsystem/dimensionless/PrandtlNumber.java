@@ -9,15 +9,15 @@ public class PrandtlNumber implements CalculableQuantity<PrandtlNumberUnit, Pran
     private final double baseValue;
     private final PrandtlNumberUnits unitType;
 
-    public PrandtlNumber(double value) {
+    public PrandtlNumber(double value, PrandtlNumberUnits unitType) {
         this.value = value;
-        this.unitType = PrandtlNumberUnits.DIMENSIONLESS;
+        this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
     public static PrandtlNumber of(double value) {
-        return new PrandtlNumber(value);
+        return new PrandtlNumber(value, PrandtlNumberUnits.DIMENSIONLESS);
     }
 
     @Override

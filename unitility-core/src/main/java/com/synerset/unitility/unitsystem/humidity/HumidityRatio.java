@@ -14,7 +14,7 @@ public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, Humi
     public HumidityRatio(double value, HumidityRatioUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = HumidityRatioUnits.getDefaultUnit();
+            unitType = HumidityRatioUnits.KILOGRAM_PER_KILOGRAM;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

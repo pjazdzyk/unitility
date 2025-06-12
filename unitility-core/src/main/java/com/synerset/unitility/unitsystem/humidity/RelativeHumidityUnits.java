@@ -42,7 +42,7 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
 
     public static RelativeHumidityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return DECIMAL;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (RelativeHumidityUnit unit : values()) {
@@ -60,10 +60,6 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
                 .trimLowerAndClean()
                 .dropHyphens()
                 .toString();
-    }
-
-    public static RelativeHumidityUnit getDefaultUnit() {
-        return DECIMAL;
     }
 
 }

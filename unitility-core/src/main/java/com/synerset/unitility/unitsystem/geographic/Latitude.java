@@ -22,7 +22,7 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
     public Latitude(double value, AngleUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = AngleUnits.getDefaultUnit();
+            unitType = AngleUnits.DEGREES;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

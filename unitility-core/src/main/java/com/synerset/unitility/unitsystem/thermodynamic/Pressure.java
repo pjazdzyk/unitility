@@ -15,7 +15,7 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
     public Pressure(double value, PressureUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = PressureUnits.getDefaultUnit();
+            unitType = PressureUnits.PASCAL;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
