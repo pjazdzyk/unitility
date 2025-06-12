@@ -63,6 +63,7 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(Distance.class, "15.1 [mi]", Distance.ofMiles(TEST_VALUE)),
                 Arguments.of(Mass.class, "15.1 [g]", Mass.ofGrams(TEST_VALUE)),
                 Arguments.of(Velocity.class, "15.1 [m/s]", Velocity.ofMetersPerSecond(TEST_VALUE)),
+                Arguments.of(AngularVelocity.class, "15.1 [rad/s]", AngularVelocity.ofRadiansPerSecond(TEST_VALUE)),
                 Arguments.of(Volume.class, "15.1 [m³]", Volume.ofCubicMeters(TEST_VALUE)),
                 Arguments.of(MassFlow.class, "15.1 [kg/s]", MassFlow.ofKilogramsPerSecond(TEST_VALUE)),
                 Arguments.of(VolumetricFlow.class, "15.1 [gal/h_UK]", VolumetricFlow.ofGallonsPerHourUK(TEST_VALUE)),
