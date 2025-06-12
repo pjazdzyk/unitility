@@ -104,8 +104,8 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
 
     @Override
     public Pressure toBaseUnit() {
-        double valueInPascal = unitType.toValueInBaseUnit(value);
-        return of(valueInPascal, PressureUnits.PASCAL);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

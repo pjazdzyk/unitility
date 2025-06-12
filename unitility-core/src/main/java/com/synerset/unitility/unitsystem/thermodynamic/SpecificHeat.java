@@ -57,8 +57,8 @@ public class SpecificHeat implements CalculableQuantity<SpecificHeatUnit, Specif
 
     @Override
     public SpecificHeat toBaseUnit() {
-        double valueInJoulePerKiloGramKelvin = unitType.toValueInBaseUnit(value);
-        return of(valueInJoulePerKiloGramKelvin, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

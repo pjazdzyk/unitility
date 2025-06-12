@@ -54,8 +54,8 @@ public class KinematicViscosity implements CalculableQuantity<KinematicViscosity
 
     @Override
     public KinematicViscosity toBaseUnit() {
-        double valueInSquareMeterPerSecond = unitType.toValueInBaseUnit(value);
-        return KinematicViscosity.of(valueInSquareMeterPerSecond, KinematicViscosityUnits.SQUARE_METER_PER_SECOND);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

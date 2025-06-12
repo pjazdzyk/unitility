@@ -57,8 +57,8 @@ public class SpecificEnthalpy implements CalculableQuantity<SpecificEnthalpyUnit
 
     @Override
     public SpecificEnthalpy toBaseUnit() {
-        double valueInJoulePerKilogram = unitType.toValueInBaseUnit(value);
-        return of(valueInJoulePerKilogram, SpecificEnthalpyUnits.JOULE_PER_KILOGRAM);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 class LatitudeTest {
 
@@ -33,7 +34,7 @@ class LatitudeTest {
     @DisplayName("should have DEGREES as base unit")
     void shouldHaveDegreesAsBaseUnit() {
         // Given
-        AngleUnit expectedBaseUnit = AngleUnits.DEGREES;
+        AngleUnit expectedBaseUnit = AngleUnits.RADIANS;
 
         // When
         Latitude angleInRadians = Latitude.ofRadians(10);
@@ -54,7 +55,7 @@ class LatitudeTest {
         double actualValue = expected.getInDegrees();
 
         // Then
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-11));
         assertThat(actualValue).isEqualTo(expected.getValue());
     }
 

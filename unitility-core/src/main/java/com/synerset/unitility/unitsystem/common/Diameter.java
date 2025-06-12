@@ -84,8 +84,8 @@ public class Diameter implements CalculableQuantity<DistanceUnit, Diameter> {
 
     @Override
     public Diameter toBaseUnit() {
-        double valueInMeters = unitType.toValueInBaseUnit(value);
-        return Diameter.of(valueInMeters, DistanceUnits.METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

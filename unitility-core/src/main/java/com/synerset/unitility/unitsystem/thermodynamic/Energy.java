@@ -82,8 +82,8 @@ public class Energy implements CalculableQuantity<EnergyUnit, Energy> {
 
     @Override
     public Energy toBaseUnit() {
-        double valueInJoules = unitType.toValueInBaseUnit(value);
-        return Energy.of(valueInJoules, EnergyUnits.JOULE);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

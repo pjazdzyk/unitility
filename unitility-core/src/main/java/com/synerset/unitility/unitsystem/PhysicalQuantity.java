@@ -81,7 +81,7 @@ public interface PhysicalQuantity<U extends Unit> extends Comparable<PhysicalQua
      * @return A value converted to target unit.
      */
     default double getInUnit(U targetUnit) {
-        return targetUnit.fromValueInBaseUnit(getBaseValue());
+        return toUnit(targetUnit).getValue();
     }
 
     /**

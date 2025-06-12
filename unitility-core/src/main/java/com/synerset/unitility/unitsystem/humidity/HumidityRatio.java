@@ -59,8 +59,8 @@ public class HumidityRatio implements CalculableQuantity<HumidityRatioUnit, Humi
 
     @Override
     public HumidityRatio toBaseUnit() {
-        double valueInKgKg = unitType.toValueInBaseUnit(value);
-        return HumidityRatio.of(valueInKgKg, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

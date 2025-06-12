@@ -91,8 +91,8 @@ public class Area implements CalculableQuantity<AreaUnit, Area> {
 
     @Override
     public Area toBaseUnit() {
-        double valueInSquareMeters = unitType.toValueInBaseUnit(value);
-        return of(valueInSquareMeters, AreaUnits.SQUARE_METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

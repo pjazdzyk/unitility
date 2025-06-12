@@ -71,8 +71,8 @@ public class Mass implements CalculableQuantity<MassUnit, Mass> {
 
     @Override
     public Mass toBaseUnit() {
-        double valueInKilogram = unitType.toValueInBaseUnit(value);
-        return of(valueInKilogram, MassUnits.KILOGRAM);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

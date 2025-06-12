@@ -78,8 +78,8 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
 
     @Override
     public Velocity toBaseUnit() {
-        double valueInMetersPerSecond = unitType.toValueInBaseUnit(value);
-        return of(valueInMetersPerSecond, VelocityUnits.METER_PER_SECOND);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

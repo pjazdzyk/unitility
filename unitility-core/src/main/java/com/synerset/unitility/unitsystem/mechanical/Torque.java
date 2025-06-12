@@ -67,8 +67,8 @@ public class Torque implements CalculableQuantity<TorqueUnit, Torque> {
 
     @Override
     public Torque toBaseUnit() {
-        double valueInNewtonMeters = unitType.toValueInBaseUnit(value);
-        return of(valueInNewtonMeters, TorqueUnits.NEWTON_METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

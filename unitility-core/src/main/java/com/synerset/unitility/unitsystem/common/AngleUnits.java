@@ -7,8 +7,8 @@ import java.util.function.DoubleUnaryOperator;
 
 public enum AngleUnits implements AngleUnit {
 
-    DEGREES("°", val -> val, val -> val),
-    RADIANS("rad", Math::toDegrees, Math::toRadians);
+    RADIANS("rad", val -> val, val -> val),
+    DEGREES("°", Math::toRadians, Math::toDegrees);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -27,7 +27,7 @@ public enum AngleUnits implements AngleUnit {
 
     @Override
     public AngleUnits getBaseUnit() {
-        return DEGREES;
+        return RADIANS;
     }
 
     @Override
