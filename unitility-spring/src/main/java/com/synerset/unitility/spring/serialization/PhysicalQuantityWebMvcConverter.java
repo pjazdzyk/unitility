@@ -25,9 +25,9 @@ public class PhysicalQuantityWebMvcConverter<U extends Unit, Q extends PhysicalQ
     /**
      * Converts a string to a PhysicalQuantity instance using the {@link PhysicalQuantityParsingFactory}.
      * Spring calls this method to convert a string input to a PhysicalQuantity instance using the
-     * {@link PhysicalQuantityParsingFactory}.
+     * {@link PhysicalQuantityParsingFactory}. This will handle single value (number only) quantities as well.
      *
-     * @param source The string representation of the PhysicalQuantity.
+     * @param source The string representation of the PhysicalQuantity (single value, or value with unit symbol).
      * @return A PhysicalQuantity instance.
      */
     @Override

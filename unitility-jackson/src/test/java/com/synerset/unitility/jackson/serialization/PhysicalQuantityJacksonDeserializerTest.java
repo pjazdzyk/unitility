@@ -3,12 +3,12 @@ package com.synerset.unitility.jackson.serialization;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
+import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModulePlainSIValue;
+import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
-import com.synerset.unitility.unitsystem.geographic.Bearing;
-import com.synerset.unitility.unitsystem.geographic.Latitude;
-import com.synerset.unitility.unitsystem.geographic.Longitude;
+import com.synerset.unitility.unitsystem.geographic.*;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import com.synerset.unitility.unitsystem.thermodynamic.TemperatureUnits;
@@ -198,6 +198,27 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualLon7).isEqualTo(Longitude.ofDegrees(-21.222));
         assertThat(actualLat8).isEqualTo(Latitude.ofDegrees(-21.222));
         assertThat(actualLon8).isEqualTo(Longitude.ofDegrees(-21.222));
+    }
+
+    @Test
+    void deserialize_shouldDeserializeFormPlainSiValue() throws JsonProcessingException {
+        // Given
+        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new PhysicalQuantityJacksonModulePlainSIValue(parsingFactory));
+
+        // When
+        Temperature temperature = objectMapper.readValue("293.15", Temperature.class);
+        Angle angle = objectMapper.readValue("-0.311", Angle.class);
+        Latitude latitude = objectMapper.readValue("-21.222", Latitude.class);
+        GeoCoordinate geoCoordinate = objectMapper.readValue("{\"latitude\":-17.8189874285686,\"longitude\":-17.8189874285686,\"name\":null}", GeoCoordinate.class);
+
+        // Then
+        assertThat(temperature).isEqualTo(Temperature.ofCelsius(20));
+        assertThat(angle).isEqualTo(Angle.ofDegrees(-17.8189874285686));
+        assertThat(latitude).isEqualTo(Latitude.ofDegrees(-21.222));
+        assertThat(geoCoordinate).isEqualTo(GeoCoordinate.of(Latitude.ofDegrees(-17.8189874285686), Longitude.ofDegrees(-17.8189874285686)));
+
     }
 
 }
