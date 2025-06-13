@@ -5,13 +5,18 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.FOOT_POUND_FORCE_PER_NEWTON_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.GRAVITY_SI;
+import static com.synerset.unitility.unitsystem.util.Constants.INCH_POUND_FORCE_PER_NEWTON_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.MILLI;
+
 public enum TorqueUnits implements TorqueUnit {
 
     NEWTON_METER("N·m", val -> val, val -> val),
-    MILLINEWTON_METER("mN·m", val -> val * 0.001, val -> val * 1000),
-    KILOPOND_METER("kp·m", val -> val * 9.80665, val -> val / 9.80665),
-    FOOT_POUND("ft·lb", val -> val * 1.3558179483314004, val -> val / 1.3558179483314004),
-    INCH_POUND("in·lb", val -> val * 0.1129848290276167, val -> val / 0.1129848290276167);
+    MILLINEWTON_METER("mN·m", val -> val * MILLI, val -> val / MILLI),
+    KILOPOND_METER("kp·m", val -> val * GRAVITY_SI, val -> val / GRAVITY_SI),
+    FOOT_POUND("ft·lb", val -> val * FOOT_POUND_FORCE_PER_NEWTON_METER, val -> val / FOOT_POUND_FORCE_PER_NEWTON_METER),
+    INCH_POUND("in·lb", val -> val * INCH_POUND_FORCE_PER_NEWTON_METER, val -> val / INCH_POUND_FORCE_PER_NEWTON_METER);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

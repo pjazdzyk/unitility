@@ -5,12 +5,16 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.DEGREES_PER_RADIAN;
+import static com.synerset.unitility.unitsystem.util.Constants.RADIANS_PER_REVOLUTION;
+import static com.synerset.unitility.unitsystem.util.Constants.SECONDS_PER_MINUTE;
+
 public enum AngularVelocityUnits implements AngularVelocityUnit {
 
     RADIANS_PER_SECOND("rad/s", val -> val, val -> val),
-    REVOLUTIONS_PER_SECOND("rps", val -> val / (1.0 / 2.0 / Math.PI), val -> val * (1.0 / 2.0 / Math.PI)),
-    REVOLUTIONS_PER_MINUTE("rpm", val -> val / (60.0 / 2.0 / Math.PI), val -> val * (60.0 / 2.0 / Math.PI)),
-    DEGREES_PER_SECOND("°/s", val -> val / (360.0 / 2.0 / Math.PI), val -> val * (360.0 / 2.0 / Math.PI));
+    REVOLUTIONS_PER_SECOND("rps", val -> val * RADIANS_PER_REVOLUTION, val -> val / RADIANS_PER_REVOLUTION),
+    REVOLUTIONS_PER_MINUTE("rpm", val -> val * (RADIANS_PER_REVOLUTION / SECONDS_PER_MINUTE), val -> val / (RADIANS_PER_REVOLUTION / SECONDS_PER_MINUTE)),
+    DEGREES_PER_SECOND("°/s", val -> val / DEGREES_PER_RADIAN, val -> val * DEGREES_PER_RADIAN),;
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;

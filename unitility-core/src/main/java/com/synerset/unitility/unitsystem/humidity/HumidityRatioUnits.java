@@ -5,11 +5,14 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.KILO;
+import static com.synerset.unitility.unitsystem.util.Constants.POUNDS_PER_KILOGRAM;
+
 public enum HumidityRatioUnits implements HumidityRatioUnit {
 
     KILOGRAM_PER_KILOGRAM("kg/kg", val -> val, val -> val),
-    GRAM_PER_KILOGRAM("g/kg", val -> val / 1000, val -> val * 1000),
-    POUND_PER_POUND("lb/lb", val -> val / 2.20462262184878, val -> val * 2.20462262184878);
+    GRAM_PER_KILOGRAM("g/kg", val -> val / KILO, val -> val * KILO),
+    POUND_PER_POUND("lb/lb", val -> val / POUNDS_PER_KILOGRAM, val -> val * POUNDS_PER_KILOGRAM),;
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

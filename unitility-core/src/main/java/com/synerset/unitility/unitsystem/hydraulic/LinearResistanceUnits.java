@@ -5,11 +5,14 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.PASCAL_PER_INCH_OF_MERCURY_PER_100_FEET;
+import static com.synerset.unitility.unitsystem.util.Constants.PASCAL_PER_INCH_OF_WATER_PER_100_FEET;
+
 public enum LinearResistanceUnits implements LinearResistanceUnit {
 
     PASCAL_PER_METER("Pa/m", val -> val, val -> val),
-    INCH_OF_WATER_PER_100_FEET("inH₂O/100ft", val -> val * 8.16722, val -> val / 8.16722),
-    INCH_OF_MERCURY_PER_100_FEET("inHg/100ft", val -> val * 111.10166332193331, val -> val / 111.10166332193331);
+    INCH_OF_WATER_PER_100_FEET("inH₂O/100ft", val -> val * PASCAL_PER_INCH_OF_WATER_PER_100_FEET, val -> val / PASCAL_PER_INCH_OF_WATER_PER_100_FEET),
+    INCH_OF_MERCURY_PER_100_FEET("inHg/100ft", val -> val * PASCAL_PER_INCH_OF_MERCURY_PER_100_FEET, val -> val / PASCAL_PER_INCH_OF_MERCURY_PER_100_FEET);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

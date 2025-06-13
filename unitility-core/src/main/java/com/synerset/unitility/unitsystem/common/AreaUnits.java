@@ -5,19 +5,30 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_ACRES_PER_SQUARE_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_CENTI;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_DECA;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_FEET_PER_SQUARE_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_HECTO;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_INCHES_PER_SQUARE_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_KILO;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_MILES_PER_SQUARE_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_MILLI;
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_YARD_PER_SQUARE_METER;
+
 public enum AreaUnits implements AreaUnit {
 
     SQUARE_METER("m²", val -> val, val -> val),
-    SQUARE_KILOMETER("km²", val -> val * 1_000_000, val -> val / 1_000_000),
-    SQUARE_CENTIMETER("cm²", val -> val / 10_000, val -> val * 10_000),
-    SQUARE_MILLIMETER("mm²", val -> val / 1_000_000, val -> val * 1_000_000),
-    ARE("a", val -> val * 100, val -> val / 100),
-    HECTARE("ha", val -> val * 10_000, val -> val / 10_000),
-    SQUARE_INCH("in²", val -> val * 0.00064516, val -> val / 0.00064516),
-    SQUARE_FOOT("ft²", val -> val * 0.09290304, val -> val / 0.09290304),
-    SQUARE_YARD("yd²", val -> val * 0.83612736, val -> val / 0.83612736),
-    ACRE("ac", val -> val * 4046.8564224, val -> val / 4046.8564224),
-    SQUARE_MILE("mi²", val -> val * 2589988.110336, val -> val / 2589988.110336);
+    SQUARE_KILOMETER("km²", val -> val * SQUARE_KILO, val -> val / SQUARE_KILO),
+    SQUARE_CENTIMETER("cm²", val -> val * SQUARE_CENTI, val -> val / SQUARE_CENTI),
+    SQUARE_MILLIMETER("mm²", val -> val * SQUARE_MILLI, val -> val / SQUARE_MILLI),
+    ARE("a", val -> val * SQUARE_DECA, val -> val / SQUARE_DECA),
+    HECTARE("ha", val -> val * SQUARE_HECTO, val -> val / SQUARE_HECTO),
+    SQUARE_INCH("in²", val -> val / SQUARE_INCHES_PER_SQUARE_METER, val -> val * SQUARE_INCHES_PER_SQUARE_METER),
+    SQUARE_FOOT("ft²", val -> val / SQUARE_FEET_PER_SQUARE_METER, val -> val * SQUARE_FEET_PER_SQUARE_METER ),
+    SQUARE_YARD("yd²", val -> val / SQUARE_YARD_PER_SQUARE_METER, val -> val * SQUARE_YARD_PER_SQUARE_METER),
+    ACRE("ac", val -> val / SQUARE_ACRES_PER_SQUARE_METER, val -> val * SQUARE_ACRES_PER_SQUARE_METER),
+    SQUARE_MILE("mi²", val -> val / SQUARE_MILES_PER_SQUARE_METER, val -> val * SQUARE_MILES_PER_SQUARE_METER);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

@@ -5,11 +5,15 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.CELSIUS_KELVIN_OFFSET;
+import static com.synerset.unitility.unitsystem.util.Constants.FAHRENHEIT_CELSIUS_OFFSET;
+import static com.synerset.unitility.unitsystem.util.Constants.FAHRENHEIT_CELSIUS_RATIO;
+
 public enum TemperatureUnits implements TemperatureUnit {
 
     KELVIN("K", val -> val, val -> val),
-    CELSIUS("°C", val -> val + 273.15, val -> val - 273.15),
-    FAHRENHEIT("°F", val -> (val - 32.0) * (5.0 / 9.0) + 273.15, val -> (val - 273.15) * (9.0 / 5.0) + 32.0);
+    CELSIUS("°C", val -> val + CELSIUS_KELVIN_OFFSET, val -> val - CELSIUS_KELVIN_OFFSET),
+    FAHRENHEIT("°F", val -> (val - FAHRENHEIT_CELSIUS_OFFSET) / FAHRENHEIT_CELSIUS_RATIO + CELSIUS_KELVIN_OFFSET, val -> (val - CELSIUS_KELVIN_OFFSET) * FAHRENHEIT_CELSIUS_RATIO + FAHRENHEIT_CELSIUS_OFFSET);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

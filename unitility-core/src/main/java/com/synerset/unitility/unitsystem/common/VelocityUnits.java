@@ -5,16 +5,26 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.CENTI;
+import static com.synerset.unitility.unitsystem.util.Constants.FEET_PER_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.INCHES_PER_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.KILO;
+import static com.synerset.unitility.unitsystem.util.Constants.KNOT_FOR_METER_PER_SECOND;
+import static com.synerset.unitility.unitsystem.util.Constants.MACH_METERS_PER_SECOND;
+import static com.synerset.unitility.unitsystem.util.Constants.METERS_PER_MILE;
+import static com.synerset.unitility.unitsystem.util.Constants.MILES_PER_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.SECONDS_PER_HOUR;
+
 public enum VelocityUnits implements VelocityUnit {
 
     METER_PER_SECOND("m/s", val -> val, val -> val),
-    CENTIMETER_PER_SECOND("cm/s", val -> val / 100.0, val -> val * 100.0),
-    KILOMETER_PER_HOUR("km/h", val -> val / 3.6, val -> val * 3.6),
-    INCH_PER_SECOND("in/s", val -> val * 0.0254, val -> val / 0.0254),
-    FEET_PER_SECOND("ft/s", val -> val * 0.3048, val -> val / 0.3048),
-    MILES_PER_HOUR("mph", val -> val * 0.44704, val -> val / 0.44704),
-    KNOT("kn", val -> val * 0.514444444444444, val -> val / 0.514444444444444),
-    MACH("Mach", val -> val * 340.29, val -> val / 340.29);
+    CENTIMETER_PER_SECOND("cm/s", val -> val * CENTI, val -> val / CENTI),
+    KILOMETER_PER_HOUR("km/h", val -> val * (KILO / SECONDS_PER_HOUR), val -> val / (KILO / SECONDS_PER_HOUR)),
+    INCH_PER_SECOND("in/s", val -> val / INCHES_PER_METER, val -> val * INCHES_PER_METER),
+    FEET_PER_SECOND("ft/s", val -> val / FEET_PER_METER, val -> val * FEET_PER_METER),
+    MILES_PER_HOUR("mph", val -> val / (SECONDS_PER_HOUR / METERS_PER_MILE), val -> val * (SECONDS_PER_HOUR / METERS_PER_MILE)),
+    KNOT("kn", val -> val * KNOT_FOR_METER_PER_SECOND, val -> val / KNOT_FOR_METER_PER_SECOND),
+    MACH("Mach", val -> val * MACH_METERS_PER_SECOND, val -> val / MACH_METERS_PER_SECOND);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

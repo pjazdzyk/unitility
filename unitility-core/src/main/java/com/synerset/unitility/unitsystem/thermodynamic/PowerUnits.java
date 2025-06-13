@@ -5,13 +5,19 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.WATTS_PER_IMPERIAL_HORSEPOWER;
+import static com.synerset.unitility.unitsystem.util.Constants.JOULES_PER_BTU;
+import static com.synerset.unitility.unitsystem.util.Constants.KILO;
+import static com.synerset.unitility.unitsystem.util.Constants.MEGA;
+import static com.synerset.unitility.unitsystem.util.Constants.SECONDS_PER_HOUR;
+
 public enum PowerUnits implements PowerUnit {
 
     WATT("W", val -> val, val -> val),
-    KILOWATT("kW", val -> val * 1000.0, val -> val / 1000.0),
-    MEGAWATT("MW", val -> val * 1_000_000, val -> val / 1_000_000),
-    BTU_PER_HOUR("BTU/h", val -> val * 0.2930710701722222, val -> val / 0.2930710701722222),
-    HORSE_POWER("HP", val -> val * 745.69987158227022, val -> val / 745.69987158227022);
+    KILOWATT("kW", val -> val * KILO, val -> val / KILO),
+    MEGAWATT("MW", val -> val * MEGA, val -> val / MEGA),
+    BTU_PER_HOUR("BTU/h", val -> val * (JOULES_PER_BTU / SECONDS_PER_HOUR), val -> val / (JOULES_PER_BTU / SECONDS_PER_HOUR)),
+    HORSE_POWER("HP", val -> val * WATTS_PER_IMPERIAL_HORSEPOWER, val -> val / WATTS_PER_IMPERIAL_HORSEPOWER);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

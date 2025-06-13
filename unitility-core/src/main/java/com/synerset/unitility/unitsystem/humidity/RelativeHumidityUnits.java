@@ -5,10 +5,12 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.HECTO;
+
 public enum RelativeHumidityUnits implements RelativeHumidityUnit {
 
     PERCENT("%", val -> val, val -> val),
-    DECIMAL("", val -> val * 100, val -> val / 100);
+    DECIMAL("", val -> val * HECTO, val -> val / HECTO);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

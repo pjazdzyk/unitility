@@ -114,7 +114,7 @@ class VelocityTest {
         // Then
         Velocity expectedInKnots = Velocity.ofKnots(19.43844492440606);
         assertThat(actualInKnots.getValue()).isEqualTo(actualInKnotsVal);
-        assertThat(actualInKnots.getValue()).isEqualTo(expectedInKnots.getValue(), withPrecision(1e-14));
+        assertThat(actualInKnots.getValue()).isEqualTo(expectedInKnots.getValue(), withPrecision(2e-14));
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
     }
 

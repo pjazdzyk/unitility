@@ -5,21 +5,29 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.CUBIC_FEET_PER_CUBIC_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.GALLONS_UK_PER_CUBIC_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.GALLONS_US_PER_CUBIC_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.LITERS_PER_CUBIC_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.SECONDS_PER_HOUR;
+import static com.synerset.unitility.unitsystem.util.Constants.SECONDS_PER_MINUTE;
+
 public enum VolumetricFlowUnits implements VolumetricFlowUnit {
 
+
     CUBIC_METERS_PER_SECOND("m³/s", val -> val, val -> val),
-    CUBIC_METERS_PER_MINUTE("m³/min", val -> val / 60.0, val -> val * 60.0),
-    CUBIC_METERS_PER_HOUR("m³/h", val -> val / 3600.0, val -> val * 3600.0),
-    CUBIC_FEET_PER_MINUTE("ft³/min", val -> val / 2118.880003289315415, val -> val * 2118.880003289315415),
-    LITRE_PER_SECOND("l/s", val -> val / 1000.0, val -> val * 1000.0),
-    LITRE_PER_MINUTE("l/min", val -> val / 60000.0, val -> val * 60000.0),
-    LITRE_PER_HOUR("l/h", val -> val / 3600000.0, val -> val * 3600000.0),
-    GALLONS_PER_SECOND_US("gal/s_US", val -> val / 264.17205236, val -> val * 264.17205236),
-    GALLONS_PER_MINUTE_US("gal/min_US", val -> val / 15850.323141, val -> val * 15850.323141),
-    GALLONS_PER_HOUR_US("gal/h_US", val -> val / 951019.38849, val -> val * 951019.38849),
-    GALLONS_PER_SECOND_UK("gal/s_UK", val -> val / 219.9692483, val -> val * 219.9692483),
-    GALLONS_PER_MINUTE_UK("gal/min_UK", val -> val / 13198.154898, val -> val * 13198.154898),
-    GALLONS_PER_HOUR_UK("gal/h_UK", val -> val / 791889.29388, val -> val * 791889.29388);
+    CUBIC_METERS_PER_MINUTE("m³/min", val -> val / SECONDS_PER_MINUTE, val -> val * SECONDS_PER_MINUTE),
+    CUBIC_METERS_PER_HOUR("m³/h", val -> val / SECONDS_PER_HOUR, val -> val * SECONDS_PER_HOUR),
+    CUBIC_FEET_PER_MINUTE("ft³/min", val -> val / (CUBIC_FEET_PER_CUBIC_METER * SECONDS_PER_MINUTE), val -> val * (CUBIC_FEET_PER_CUBIC_METER * SECONDS_PER_MINUTE)),
+    LITRE_PER_SECOND("l/s", val -> val / LITERS_PER_CUBIC_METER, val -> val * LITERS_PER_CUBIC_METER),
+    LITRE_PER_MINUTE("l/min", val -> val / (LITERS_PER_CUBIC_METER * SECONDS_PER_MINUTE), val -> val * (LITERS_PER_CUBIC_METER * SECONDS_PER_MINUTE)),
+    LITRE_PER_HOUR("l/h", val -> val / (LITERS_PER_CUBIC_METER * SECONDS_PER_HOUR), val -> val * (LITERS_PER_CUBIC_METER * SECONDS_PER_HOUR)),
+    GALLONS_PER_SECOND_US("gal/s_US", val -> val / GALLONS_US_PER_CUBIC_METER, val -> val * GALLONS_US_PER_CUBIC_METER),
+    GALLONS_PER_MINUTE_US("gal/min_US", val -> val / (GALLONS_US_PER_CUBIC_METER * SECONDS_PER_MINUTE), val -> val * (GALLONS_US_PER_CUBIC_METER * SECONDS_PER_MINUTE)),
+    GALLONS_PER_HOUR_US("gal/h_US", val -> val / (GALLONS_US_PER_CUBIC_METER * SECONDS_PER_HOUR), val -> val * (GALLONS_US_PER_CUBIC_METER * SECONDS_PER_HOUR)),
+    GALLONS_PER_SECOND_UK("gal/s_UK", val -> val / GALLONS_UK_PER_CUBIC_METER, val -> val * GALLONS_UK_PER_CUBIC_METER),
+    GALLONS_PER_MINUTE_UK("gal/min_UK", val -> val / (GALLONS_UK_PER_CUBIC_METER * SECONDS_PER_MINUTE), val -> val * (GALLONS_UK_PER_CUBIC_METER * SECONDS_PER_MINUTE)),
+    GALLONS_PER_HOUR_UK("gal/h_UK", val -> val / (GALLONS_UK_PER_CUBIC_METER * SECONDS_PER_HOUR), val -> val * (GALLONS_UK_PER_CUBIC_METER * SECONDS_PER_HOUR));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

@@ -5,14 +5,21 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.KILO;
+import static com.synerset.unitility.unitsystem.util.Constants.KILOGRAMS_PER_OUNCE;
+import static com.synerset.unitility.unitsystem.util.Constants.KILOGRAMS_PER_POUND;
+import static com.synerset.unitility.unitsystem.util.Constants.MILLI;
+import static com.synerset.unitility.unitsystem.util.Constants.OUNCES_PER_KILOGRAM;
+import static com.synerset.unitility.unitsystem.util.Constants.POUNDS_PER_KILOGRAM;
+
 public enum MassUnits implements MassUnit {
 
     KILOGRAM("kg", val -> val, val -> val),
-    GRAM("g", val -> val * 0.001, val -> val / 0.001),
-    MILLIGRAM("mg", val -> val * 0.000001, val -> val / 0.000001),
-    TONNE_SI("t", val -> val * 1000.0, val -> val / 1000.0),
-    OUNCE("oz", val -> val * 0.028349523125, val -> val / 0.028349523125),
-    POUND("lb", val -> val * 0.45359237, val -> val / 0.45359237);
+    GRAM("g", val -> val / KILO, val -> val * KILO),
+    MILLIGRAM("mg", val -> val / KILO * MILLI, val -> val * KILO / MILLI),
+    TONNE_SI("t", val -> val * KILO, val -> val / KILO),
+    OUNCE("oz", val -> val * KILOGRAMS_PER_OUNCE, val -> val / KILOGRAMS_PER_OUNCE),
+    POUND("lb", val -> val * KILOGRAMS_PER_POUND, val -> val / KILOGRAMS_PER_POUND);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

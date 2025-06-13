@@ -5,14 +5,20 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.CENTI;
+import static com.synerset.unitility.unitsystem.util.Constants.GRAVITY_SI;
+import static com.synerset.unitility.unitsystem.util.Constants.KILO;
+import static com.synerset.unitility.unitsystem.util.Constants.POUNDAL_PER_NEWTON_HISTORICAL;
+import static com.synerset.unitility.unitsystem.util.Constants.POUND_FORCE_PER_NEWTON;
+
 public enum ForceUnits implements ForceUnit {
 
     NEWTON("N", val -> val, val -> val),
-    KILONEWTON("kN", val -> val * 1000.0, val -> val / 1000.0),
-    KILOPOND("kp", val -> val * 9.80665, val -> val / 9.80665),
-    DYNE("dyn", val -> val * 0.00001, val -> val / 0.00001),
-    POUND_FORCE("lbf", val -> val * 4.4482216152605, val -> val / 4.4482216152605),
-    POUNDAL("pdl", val -> val * 0.138254954376, val -> val / 0.138254954376);
+    KILONEWTON("kN", val -> val * KILO, val -> val / KILO),
+    KILOPOND("kp", val -> val * GRAVITY_SI, val -> val / GRAVITY_SI),
+    DYNE("dyn", val -> val * (CENTI / KILO), val -> val / (CENTI / KILO)),
+    POUND_FORCE("lbf", val -> val * POUND_FORCE_PER_NEWTON, val -> val / POUND_FORCE_PER_NEWTON),
+    POUNDAL("pdl", val -> val * POUNDAL_PER_NEWTON_HISTORICAL, val -> val / POUNDAL_PER_NEWTON_HISTORICAL);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

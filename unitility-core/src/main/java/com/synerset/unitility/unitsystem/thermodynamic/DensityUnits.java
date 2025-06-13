@@ -5,11 +5,15 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.CUBIC_FEET_PER_CUBIC_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.CUBIC_INCHES_PER_CUBIC_METER;
+import static com.synerset.unitility.unitsystem.util.Constants.KILOGRAMS_PER_POUND;
+
 public enum DensityUnits implements DensityUnit {
 
     KILOGRAM_PER_CUBIC_METER("kg/m³", val -> val, val -> val),
-    POUND_PER_CUBIC_FOOT("lb/ft³", val -> val * 16.0184633739599, val -> val / 16.0184633739599),
-    POUND_PER_CUBIC_INCH("lb/in³", val -> val / 0.000036127292218, val -> val * 0.000036127292218);
+    POUND_PER_CUBIC_FOOT("lb/ft³", val -> val * (CUBIC_FEET_PER_CUBIC_METER * KILOGRAMS_PER_POUND), val -> val / (CUBIC_FEET_PER_CUBIC_METER * KILOGRAMS_PER_POUND)),
+    POUND_PER_CUBIC_INCH("lb/in³", val -> val * (CUBIC_INCHES_PER_CUBIC_METER * KILOGRAMS_PER_POUND), val -> val / (CUBIC_INCHES_PER_CUBIC_METER * KILOGRAMS_PER_POUND));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

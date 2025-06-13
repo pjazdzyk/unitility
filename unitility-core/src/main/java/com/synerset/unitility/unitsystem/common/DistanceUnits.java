@@ -5,16 +5,24 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.CENTI;
+import static com.synerset.unitility.unitsystem.util.Constants.KILO;
+import static com.synerset.unitility.unitsystem.util.Constants.METERS_PER_FOOT;
+import static com.synerset.unitility.unitsystem.util.Constants.METERS_PER_INCH;
+import static com.synerset.unitility.unitsystem.util.Constants.METERS_PER_MILE;
+import static com.synerset.unitility.unitsystem.util.Constants.METERS_PER_NAUTICAL_MILE;
+import static com.synerset.unitility.unitsystem.util.Constants.MILLI;
+
 public enum DistanceUnits implements DistanceUnit {
 
     METER("m", val -> val, val -> val),
-    CENTIMETER("cm", val -> val / 100, val -> val * 100),
-    MILLIMETER("mm", val -> val / 1000, val -> val * 1000),
-    KILOMETER("km", val -> val * 1000, val -> val / 1000),
-    MILE("mi", val -> val * 1609.344, val -> val / 1609.344),
-    NAUTICAL_MILE("nmi", val -> val * 1852, val -> val / 1852),
-    FEET("ft", val -> val * 0.3048, val -> val / 0.3048),
-    INCH("in", val -> val * 0.0254, val -> val / 0.0254);
+    CENTIMETER("cm", val -> val * CENTI, val -> val / CENTI),
+    MILLIMETER("mm", val -> val * MILLI, val -> val / MILLI),
+    KILOMETER("km", val -> val * KILO, val -> val / KILO),
+    MILE("mi", val -> val * METERS_PER_MILE, val -> val / METERS_PER_MILE),
+    NAUTICAL_MILE("nmi", val -> val * METERS_PER_NAUTICAL_MILE, val -> val / METERS_PER_NAUTICAL_MILE),
+    FEET("ft", val -> val * METERS_PER_FOOT, val -> val / METERS_PER_FOOT),
+    INCH("in", val -> val * METERS_PER_INCH, val -> val / METERS_PER_INCH);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

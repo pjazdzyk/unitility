@@ -5,9 +5,11 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
+import static com.synerset.unitility.unitsystem.util.Constants.SQUARE_FEET_PER_SQUARE_METER;
+
 public enum KinematicViscosityUnits implements KinematicViscosityUnit {
     SQUARE_METER_PER_SECOND("m²/s", val -> val, val -> val),
-    SQUARE_FOOT_PER_SECOND("ft²/s", val -> val * 0.09290304, val -> val / 0.09290304);
+    SQUARE_FOOT_PER_SECOND("ft²/s", val -> val / SQUARE_FEET_PER_SQUARE_METER, val -> val * SQUARE_FEET_PER_SQUARE_METER);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
