@@ -30,7 +30,7 @@ public class AngularVelocity implements CalculableQuantity<AngularVelocityUnit, 
     }
 
     public static AngularVelocity ofRadiansPerSecond(double value) {
-        return new AngularVelocity(value, AngularVelocityUnits.RADIAN_PER_SECOND);
+        return new AngularVelocity(value, AngularVelocityUnits.RADIANS_PER_SECOND);
     }
 
     public static AngularVelocity ofRevolutionsPerMinute(double value) {
@@ -63,7 +63,7 @@ public class AngularVelocity implements CalculableQuantity<AngularVelocityUnit, 
     @Override
     public AngularVelocity toBaseUnit() {
         double valueInMetersPerSecond = unitType.toValueInBaseUnit(value);
-        return of(valueInMetersPerSecond, AngularVelocityUnits.RADIAN_PER_SECOND);
+        return of(valueInMetersPerSecond, AngularVelocityUnits.RADIANS_PER_SECOND);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class AngularVelocity implements CalculableQuantity<AngularVelocityUnit, 
 
     // Convert to target unit
     public AngularVelocity toRadiansPerSecond() {
-        return toUnit(AngularVelocityUnits.RADIAN_PER_SECOND);
+        return toUnit(AngularVelocityUnits.RADIANS_PER_SECOND);
     }
 
     public AngularVelocity toRevolutionsPerMinute() {
@@ -103,7 +103,7 @@ public class AngularVelocity implements CalculableQuantity<AngularVelocityUnit, 
 
     // Get value in target unit
     public double getInRadiansPerSecond() {
-        return getInUnit(AngularVelocityUnits.RADIAN_PER_SECOND);
+        return getInUnit(AngularVelocityUnits.RADIANS_PER_SECOND);
     }
 
     public double getInRevolutionsPerMinute() {

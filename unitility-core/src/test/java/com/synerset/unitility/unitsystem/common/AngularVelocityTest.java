@@ -71,7 +71,7 @@ class AngularVelocityTest {
     @DisplayName("should have rad/s as base unit")
     void shouldHaveRadiansPerSecondAsBaseUnit() {
         // Given
-        AngularVelocityUnit expectedBaseUnit = AngularVelocityUnits.RADIAN_PER_SECOND;
+        AngularVelocityUnit expectedBaseUnit = AngularVelocityUnits.RADIANS_PER_SECOND;
 
         // When
         AngularVelocity velocityInMilesPerHour = AngularVelocity.ofRevolutionsPerMinute(60);
