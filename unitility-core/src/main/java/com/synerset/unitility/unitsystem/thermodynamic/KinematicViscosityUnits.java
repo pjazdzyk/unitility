@@ -43,7 +43,7 @@ public enum KinematicViscosityUnits implements KinematicViscosityUnit {
 
     public static KinematicViscosityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return SQUARE_METER_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (KinematicViscosityUnit unit : values()) {
@@ -62,10 +62,6 @@ public enum KinematicViscosityUnits implements KinematicViscosityUnit {
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()
                 .toString();
-    }
-
-    public static KinematicViscosityUnit getDefaultUnit() {
-        return SQUARE_METER_PER_SECOND;
     }
 
 }

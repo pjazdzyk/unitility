@@ -14,7 +14,7 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
     public VolumetricFlow(double value, VolumetricFlowUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = VolumetricFlowUnits.getDefaultUnit();
+            unitType = VolumetricFlowUnits.CUBIC_METERS_PER_SECOND;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -99,8 +99,8 @@ public class VolumetricFlow implements CalculableQuantity<VolumetricFlowUnit, Vo
 
     @Override
     public VolumetricFlow toBaseUnit() {
-        double valueInCubicMetersPerSecond = unitType.toValueInBaseUnit(value);
-        return of(valueInCubicMetersPerSecond, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

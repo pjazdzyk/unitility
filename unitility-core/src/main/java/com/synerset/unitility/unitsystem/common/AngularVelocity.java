@@ -13,7 +13,7 @@ public class AngularVelocity implements CalculableQuantity<AngularVelocityUnit, 
     public AngularVelocity(double value, AngularVelocityUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = AngularVelocityUnits.getDefaultUnit();
+            unitType = AngularVelocityUnits.RADIANS_PER_SECOND;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

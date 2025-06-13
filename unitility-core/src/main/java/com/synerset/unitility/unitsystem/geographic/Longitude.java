@@ -1,6 +1,7 @@
 package com.synerset.unitility.unitsystem.geographic;
 
 import com.synerset.unitility.unitsystem.CalculableQuantity;
+import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.AngleUnit;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
 
@@ -21,10 +22,10 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
     public Longitude(double value, AngleUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = AngleUnits.getDefaultUnit();
+            unitType = AngleUnits.DEGREES;
         }
         this.unitType = unitType;
-        this.baseValue = unitType.toValueInBaseUnit(value);
+        this.baseValue = Angle.of(value, unitType).getInDegrees();
     }
 
     // Static factory methods
@@ -80,8 +81,7 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
 
     @Override
     public Longitude toUnit(AngleUnit targetUnit) {
-        double valueInDegrees = unitType.toValueInBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInDegrees);
+        double valueInTargetUnit = Angle.of(value, unitType).toUnit(targetUnit).getValue();
         return Longitude.of(valueInTargetUnit, targetUnit);
     }
 
@@ -136,7 +136,7 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Longitude inputQuantity = (Longitude) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.getInDegrees(), this.getInDegrees()) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
     }
 
     @Override

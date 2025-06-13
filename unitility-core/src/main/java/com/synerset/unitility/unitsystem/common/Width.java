@@ -15,7 +15,7 @@ public class Width implements CalculableQuantity<DistanceUnit, Width> {
     public Width(double value, DistanceUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = DistanceUnits.getDefaultUnit();
+            unitType = DistanceUnits.METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -84,8 +84,8 @@ public class Width implements CalculableQuantity<DistanceUnit, Width> {
 
     @Override
     public Width toBaseUnit() {
-        double valueInMeters = unitType.toValueInBaseUnit(value);
-        return Width.of(valueInMeters, DistanceUnits.METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

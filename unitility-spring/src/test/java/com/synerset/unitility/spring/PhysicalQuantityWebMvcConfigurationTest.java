@@ -18,13 +18,17 @@ class PhysicalQuantityWebMvcConfigurationTest {
         PhysicalQuantityParsingFactory parsingRegistry = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
         PhysicalQuantityWebMvcConfiguration webMvcConfiguration = new PhysicalQuantityWebMvcConfiguration(parsingRegistry);
         String inputQuantity = "20[oC]";
+        String inputSingleValueQuantity = "20"; // Will be resolved to basic SI temperature unit: Kelvins
 
         // When
         webMvcConfiguration.addFormatters(formatterRegistry);
         Temperature actualTemperature = formatterRegistry.convert(inputQuantity, Temperature.class);
+        Temperature actualTemperatureFromSingleValue = formatterRegistry.convert(inputSingleValueQuantity, Temperature.class);
 
         // Then
         assertThat(actualTemperature).isEqualTo(Temperature.ofCelsius(20));
+        assertThat(actualTemperatureFromSingleValue).isEqualTo(Temperature.ofKelvins(20));
 
     }
+
 }

@@ -9,17 +9,12 @@ import com.synerset.unitility.unitsystem.geographic.DMSValidator;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 
 public abstract class PhysicalQuantityAbstractParsingFactory implements PhysicalQuantityParsingFactory {
-
-    public <U extends Unit, Q extends PhysicalQuantity<U>> Q parseValueAndSymbol(Class<Q> targetClass,
-                                                                                 double value,
-                                                                                 String symbolAsString) {
-        validateIfClassIsRegistered(targetClass);
-        return targetClass.cast(getClassRegistry().get(targetClass).apply(value, symbolAsString));
-    }
 
     public <U extends Unit, Q extends PhysicalQuantity<U>> Q parse(Class<Q> targetClass, String quantityAsString) {
 
@@ -37,8 +32,41 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
             extractedPair = extractValueAndSymbol(preparedInput);
         }
 
-        return parseValueAndSymbol(targetClass, extractedPair.value, extractedPair.symbol);
+        return extractedPair.symbol == null || extractedPair.symbol.isBlank()
+                ? parseValueWithDefaultUnit(targetClass, extractedPair.value)
+                : parseValueAndSymbol(targetClass, extractedPair.value, extractedPair.symbol);
+    }
 
+    public <U extends Unit, Q extends PhysicalQuantity<U>> Q parseValueAndSymbol(Class<Q> targetClass,
+                                                                                 double value,
+                                                                                 String symbolAsString) {
+        validateIfClassIsRegistered(targetClass);
+        return targetClass.cast(getClassRegistry().get(targetClass).apply(value, symbolAsString));
+    }
+
+    public <U extends Unit, Q extends PhysicalQuantity<U>> Q parseValueWithDefaultUnit(Class<Q> targetClass, double value) {
+        validateIfClassIsRegistered(targetClass);
+
+        U defaultUnit = getDefaultUnit(targetClass);
+
+        Constructor<?>[] constructors = targetClass.getConstructors();
+
+        for (Constructor<?> constructor : constructors) {
+            Class<?>[] paramTypes = constructor.getParameterTypes();
+            if (paramTypes.length == 2
+                    && paramTypes[0] == double.class
+                    && paramTypes[1].isAssignableFrom(defaultUnit.getClass())) {
+                try {
+                    @SuppressWarnings("unchecked")
+                    Constructor<Q> typedConstructor = (Constructor<Q>) constructor;
+                    return typedConstructor.newInstance(value, defaultUnit);
+                } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                    throw new RuntimeException("Failed to instantiate quantity: " + e.getMessage(), e);
+                }
+            }
+        }
+
+        throw new RuntimeException("No suitable constructor found for: " + targetClass.getSimpleName());
     }
 
 
@@ -69,7 +97,7 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
     private Pair extractValueAndSymbol(String preparedInput){
         int indexOfLastDigit = 0;
 
-        // Calculates where value ends in the input string. "e" is for case of scientific notation: -1.12345E-5
+        // Calculates where the value ends in the input string. The "e" is for case of scientific notation: -1.12345E-5
         for (char letter : preparedInput.toCharArray()) {
             if (Character.isDigit(letter) || letter == '.' || letter == '-' || letter == 'e') {
                 indexOfLastDigit++;
@@ -93,7 +121,7 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
         } else if (Longitude.class.isAssignableFrom(targetClass) && (preparedInput.contains("n") || preparedInput.contains("s"))) {
             throw new UnitSystemParseException("Invalid longitude direction. Expected: W or E. Input: " + preparedInput);
         }
-        
+
         double valueInDegrees = ParsingHelpers.extractDegreesFromDMSFormat(preparedInput);
         return new Pair(valueInDegrees, AngleUnits.DEGREES.getSymbol());
     }

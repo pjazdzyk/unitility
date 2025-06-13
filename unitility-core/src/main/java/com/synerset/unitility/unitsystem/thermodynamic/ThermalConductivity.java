@@ -12,7 +12,7 @@ public class ThermalConductivity implements CalculableQuantity<ThermalConductivi
     public ThermalConductivity(double value, ThermalConductivityUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = ThermalConductivityUnits.getDefaultUnit();
+            unitType = ThermalConductivityUnits.WATTS_PER_METER_KELVIN;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -57,8 +57,8 @@ public class ThermalConductivity implements CalculableQuantity<ThermalConductivi
 
     @Override
     public ThermalConductivity toBaseUnit() {
-        double valueInWattsPerMeterKelvin = unitType.toValueInBaseUnit(value);
-        return of(valueInWattsPerMeterKelvin, ThermalConductivityUnits.WATTS_PER_METER_KELVIN);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

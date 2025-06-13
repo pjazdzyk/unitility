@@ -46,7 +46,7 @@ public enum LinearResistanceUnits implements LinearResistanceUnit {
 
     public static LinearResistanceUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return PASCAL_PER_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (LinearResistanceUnit unit : values()) {
@@ -67,7 +67,4 @@ public enum LinearResistanceUnits implements LinearResistanceUnit {
                 .toString();
     }
 
-    public static LinearResistanceUnit getDefaultUnit() {
-        return PASCAL_PER_METER;  // Default to Pa/m
-    }
 }

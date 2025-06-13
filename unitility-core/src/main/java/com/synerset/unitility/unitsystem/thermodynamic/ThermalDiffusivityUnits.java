@@ -44,7 +44,7 @@ public enum ThermalDiffusivityUnits implements ThermalDiffusivityUnit {
 
     public static ThermalDiffusivityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return SQUARE_METER_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (ThermalDiffusivityUnit unit : values()) {
@@ -63,10 +63,6 @@ public enum ThermalDiffusivityUnits implements ThermalDiffusivityUnit {
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()
                 .toString();
-    }
-
-    public static ThermalDiffusivityUnit getDefaultUnit() {
-        return SQUARE_METER_PER_SECOND;
     }
 
 }

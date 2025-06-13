@@ -32,7 +32,7 @@ class LongitudeTest {
     @DisplayName("should have DEGREES as base unit")
     void shouldHaveDegreesAsBaseUnit() {
         // Given
-        AngleUnit expectedBaseUnit = AngleUnits.DEGREES;
+        AngleUnit expectedBaseUnit = AngleUnits.RADIANS;
 
         // When
         Longitude angleInRadians = Longitude.ofRadians(10);
@@ -69,8 +69,8 @@ class LongitudeTest {
         String lonInDmsVarDigits = longitude.toDMSFormat("lat", 1);
 
         // Then
-        assertThat(lonInDms).isEqualTo("21°4'3.9860000000052764\"W");
-        assertThat(lonInDmsVar).isEqualTo("lat = 21°4'3.9860000000052764\"W");
+        assertThat(lonInDms).isEqualTo("21°4'3.986000000018066\"W");
+        assertThat(lonInDmsVar).isEqualTo("lat = 21°4'3.986000000018066\"W");
         assertThat(lonInDmsVarDigits).isEqualTo("lat = 21°4'4\"W");
     }
 

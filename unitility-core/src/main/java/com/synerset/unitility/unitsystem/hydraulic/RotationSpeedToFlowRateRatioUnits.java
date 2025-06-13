@@ -45,7 +45,7 @@ public enum RotationSpeedToFlowRateRatioUnits implements RotationSpeedToFlowRate
 
     public static RotationSpeedToFlowRateRatioUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (RotationSpeedToFlowRateRatioUnit unit : values()) {
@@ -64,9 +64,5 @@ public enum RotationSpeedToFlowRateRatioUnits implements RotationSpeedToFlowRate
                 .unifyAerialAndVol()
                 .unifyMultiAndDiv()
                 .toString();
-    }
-
-    public static RotationSpeedToFlowRateRatioUnit getDefaultUnit() {
-        return RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND;  // Default to Pa/m
     }
 }

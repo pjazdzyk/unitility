@@ -15,7 +15,7 @@ public class Perimeter implements CalculableQuantity<DistanceUnit, Perimeter> {
     public Perimeter(double value, DistanceUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = DistanceUnits.getDefaultUnit();
+            unitType = DistanceUnits.METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -80,8 +80,8 @@ public class Perimeter implements CalculableQuantity<DistanceUnit, Perimeter> {
 
     @Override
     public Perimeter toBaseUnit() {
-        double valueInMeters = unitType.toValueInBaseUnit(value);
-        return Perimeter.of(valueInMeters, DistanceUnits.METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

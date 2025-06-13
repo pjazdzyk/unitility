@@ -13,7 +13,7 @@ public class ThermalDiffusivity implements CalculableQuantity<ThermalDiffusivity
     public ThermalDiffusivity(double value, ThermalDiffusivityUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = ThermalDiffusivityUnits.getDefaultUnit();
+            unitType = ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -54,8 +54,8 @@ public class ThermalDiffusivity implements CalculableQuantity<ThermalDiffusivity
 
     @Override
     public ThermalDiffusivity toBaseUnit() {
-        double valueInSquareMeterPerSecond = unitType.toValueInBaseUnit(value);
-        return of(valueInSquareMeterPerSecond, ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

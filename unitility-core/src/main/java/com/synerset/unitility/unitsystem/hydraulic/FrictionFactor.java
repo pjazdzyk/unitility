@@ -10,15 +10,15 @@ public class FrictionFactor implements CalculableQuantity<FrictionFactorUnit, Fr
     private final double baseValue;
     private final FrictionFactorUnit unitType;
 
-    public FrictionFactor(double value) {
+    public FrictionFactor(double value, FrictionFactorUnit unitType) {
         this.value = value;
-        this.unitType = FrictionFactorUnits.DIMENSIONLESS;
+        this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
     public static FrictionFactor of(double value) {
-        return new FrictionFactor(value);
+        return new FrictionFactor(value, FrictionFactorUnits.DIMENSIONLESS);
     }
 
     @Override

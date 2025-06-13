@@ -50,7 +50,7 @@ public enum CurvatureUnits implements CurvatureUnit {
 
     public static CurvatureUnits fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return RADIANS_PER_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (CurvatureUnits unit : values()) {
@@ -68,9 +68,5 @@ public enum CurvatureUnits implements CurvatureUnit {
                 .trimLowerAndClean()
                 .unifySymbolsOfAngle()
                 .toString();
-    }
-
-    public static CurvatureUnits getDefaultUnit() {
-        return RADIANS_PER_METER;
     }
 }

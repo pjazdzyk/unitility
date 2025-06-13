@@ -14,7 +14,7 @@ public class Distance implements CalculableQuantity<DistanceUnit, Distance> {
     public Distance(double value, DistanceUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = DistanceUnits.getDefaultUnit();
+            unitType = DistanceUnits.METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -79,8 +79,8 @@ public class Distance implements CalculableQuantity<DistanceUnit, Distance> {
 
     @Override
     public Distance toBaseUnit() {
-        double valueInMeters = unitType.toValueInBaseUnit(value);
-        return Distance.of(valueInMeters, DistanceUnits.METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

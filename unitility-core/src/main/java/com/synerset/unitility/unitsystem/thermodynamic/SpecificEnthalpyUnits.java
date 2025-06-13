@@ -46,7 +46,7 @@ public enum SpecificEnthalpyUnits implements SpecificEnthalpyUnit {
 
     public static SpecificEnthalpyUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return JOULE_PER_KILOGRAM;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (SpecificEnthalpyUnit unit : values()) {
@@ -64,10 +64,6 @@ public enum SpecificEnthalpyUnits implements SpecificEnthalpyUnit {
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
                 .toString();
-    }
-
-    public static SpecificEnthalpyUnit getDefaultUnit() {
-        return KILOJOULE_PER_KILOGRAM;
     }
 
 }

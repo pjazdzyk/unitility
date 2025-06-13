@@ -53,7 +53,7 @@ public enum MassUnits implements MassUnit {
 
     public static MassUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return KILOGRAM;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (MassUnit unit : values()) {
@@ -72,9 +72,6 @@ public enum MassUnits implements MassUnit {
                 .toString();
     }
 
-    public static MassUnit getDefaultUnit() {
-        return KILOGRAM;
-    }
 
 
 }

@@ -14,7 +14,7 @@ public class Temperature implements CalculableQuantity<TemperatureUnit, Temperat
     public Temperature(double value, TemperatureUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = TemperatureUnits.getDefaultUnit();
+            unitType = TemperatureUnits.KELVIN;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -59,8 +59,8 @@ public class Temperature implements CalculableQuantity<TemperatureUnit, Temperat
 
     @Override
     public Temperature toBaseUnit() {
-        double valueInKelvin = unitType.toValueInBaseUnit(value);
-        return of(valueInKelvin, TemperatureUnits.KELVIN);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

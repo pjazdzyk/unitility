@@ -13,7 +13,7 @@ public class LinearResistance implements CalculableQuantity<LinearResistanceUnit
     public LinearResistance(double value, LinearResistanceUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = LinearResistanceUnits.getDefaultUnit();
+            unitType = LinearResistanceUnits.PASCAL_PER_METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -59,8 +59,8 @@ public class LinearResistance implements CalculableQuantity<LinearResistanceUnit
 
     @Override
     public LinearResistance toBaseUnit() {
-        double valueInPascal = unitType.toValueInBaseUnit(value);
-        return of(valueInPascal, LinearResistanceUnits.PASCAL_PER_METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

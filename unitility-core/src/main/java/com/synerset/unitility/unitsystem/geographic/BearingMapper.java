@@ -36,7 +36,7 @@ public class BearingMapper {
      * @return the equivalent signed bearing (-180 to +180 degrees)
      */
     static Angle toSignedBearing(Angle trueBearing) {
-        double signedBearingValue = BearingMapper.toSignedBearing(trueBearing.getValue());
+        double signedBearingValue = BearingMapper.toSignedBearing(trueBearing.getInDegrees());
         return Angle.ofDegrees(signedBearingValue);
     }
 

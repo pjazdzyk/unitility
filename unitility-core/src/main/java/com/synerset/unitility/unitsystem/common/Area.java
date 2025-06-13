@@ -14,7 +14,7 @@ public class Area implements CalculableQuantity<AreaUnit, Area> {
     public Area(double value, AreaUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = AreaUnits.getDefaultUnit();
+            unitType = AreaUnits.SQUARE_METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -91,8 +91,8 @@ public class Area implements CalculableQuantity<AreaUnit, Area> {
 
     @Override
     public Area toBaseUnit() {
-        double valueInSquareMeters = unitType.toValueInBaseUnit(value);
-        return of(valueInSquareMeters, AreaUnits.SQUARE_METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

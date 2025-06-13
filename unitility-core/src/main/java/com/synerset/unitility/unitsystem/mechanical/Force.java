@@ -13,7 +13,7 @@ public class Force implements CalculableQuantity<ForceUnit, Force> {
     public Force(double value, ForceUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = ForceUnits.getDefaultUnit();
+            unitType = ForceUnits.NEWTON;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -70,8 +70,8 @@ public class Force implements CalculableQuantity<ForceUnit, Force> {
 
     @Override
     public Force toBaseUnit() {
-        double valueInNewtons = unitType.toValueInBaseUnit(value);
-        return of(valueInNewtons, ForceUnits.NEWTON);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

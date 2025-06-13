@@ -51,7 +51,7 @@ public enum PowerUnits implements PowerUnit {
 
     public static PowerUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return WATT;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (PowerUnit unit : values()) {
@@ -69,10 +69,6 @@ public enum PowerUnits implements PowerUnit {
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
                 .toString();
-    }
-
-    public static PowerUnit getDefaultUnit() {
-        return WATT;
     }
 
 }

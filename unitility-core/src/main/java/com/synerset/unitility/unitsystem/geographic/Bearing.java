@@ -31,21 +31,21 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
      * If the provided unit type is null, the default angle unit is used (usually degrees).
      * </p>
      *
-     * @param trueBearingValueDeg the true bearing value in degrees (0 to 360 degrees)
+     * @param trueBearingValue the true bearing value in degrees (0 to 360 degrees)
      * @param unitType            the unit type for the bearing value (e.g., degrees, radians)
      */
-    public Bearing(double trueBearingValueDeg, AngleUnit unitType) {
-        this.value = trueBearingValueDeg;
+    public Bearing(double trueBearingValue, AngleUnit unitType) {
+        this.value = trueBearingValue;
         if (unitType == null) {
-            unitType = AngleUnits.getDefaultUnit();
+            unitType = AngleUnits.DEGREES;
         }
         this.unitType = unitType;
-        this.baseValue = unitType.toValueInBaseUnit(trueBearingValueDeg);
+        // To enforce degrees as base Bearing unit
+        this.baseValue = Angle.of(trueBearingValue, unitType).getInDegrees();
         this.signedValue = BearingMapper.toSignedBearing(baseValue);
     }
 
     // Static factory methods
-
     /**
      * Creates a Bearing instance from a true bearing value in degrees.
      * <p>
@@ -268,8 +268,12 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
 
     @Override
     public Bearing toBaseUnit() {
-        double degrees = unitType.toValueInBaseUnit(value);
-        return new Bearing(degrees, AngleUnits.DEGREES);
+        double valueInRadians = unitType.toValueInBaseUnit(value);
+        // Because base unit is located within unit type, not in quantity type, to enforce different base unit
+        // behavior of this method is different, compared to other quantities. At first, radians are result of
+        // toBaseUnit() calculations, which we use to create Bearing.
+        return new Bearing(valueInRadians, AngleUnits.RADIANS)
+                .toUnit(AngleUnits.DEGREES);
     }
 
     @Override
@@ -295,7 +299,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bearing inputQuantity = (Bearing) o;
-        return Double.compare(inputQuantity.toBaseUnit().getValue(), baseValue) == 0 && Objects.equals(unitType.getBaseUnit(), inputQuantity.getUnit().getBaseUnit());
+        return Double.compare(inputQuantity.getInDegrees(), this.getInDegrees()) == 0;
     }
 
     @Override

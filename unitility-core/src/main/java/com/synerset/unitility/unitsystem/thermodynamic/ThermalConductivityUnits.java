@@ -46,7 +46,7 @@ public enum ThermalConductivityUnits implements ThermalConductivityUnit {
 
     public static ThermalConductivityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return WATTS_PER_METER_KELVIN;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (ThermalConductivityUnit unit : values()) {
@@ -66,10 +66,6 @@ public enum ThermalConductivityUnits implements ThermalConductivityUnit {
                 .dropParentheses()
                 .dropDegreeSymbols()
                 .toString();
-    }
-
-    public static ThermalConductivityUnit getDefaultUnit() {
-        return WATTS_PER_METER_KELVIN;
     }
 
 }

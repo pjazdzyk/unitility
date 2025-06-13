@@ -43,11 +43,15 @@ class PhysicalQuantityParsingFactoryTest {
         Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> registryMap = PARSING_FACTORY.getClassRegistry();
         Set<Class<PhysicalQuantity<Unit>>> registeredClasses = PARSING_FACTORY.findAllRegisteredClasses();
         boolean status = PARSING_FACTORY.containsClass(Temperature.class);
+        int registeredDefaultUnitsCount = PARSING_FACTORY.findAllDefaultUnits().size();
 
         // Then
         assertThat(PARSING_FACTORY).isNotNull();
         assertThat(registryMap).isNotNull().isNotEmpty().containsKey(Temperature.class);
-        assertThat(registeredClasses).isNotNull().isNotEmpty().hasSizeGreaterThan(27);
+        assertThat(registeredClasses).isNotNull()
+                .isNotEmpty()
+                .hasSize(registeredDefaultUnitsCount)
+                .hasSizeGreaterThan(43);
         assertThat(status).isTrue();
     }
 
@@ -193,52 +197,52 @@ class PhysicalQuantityParsingFactoryTest {
         Bearing actualBearing = PARSING_FACTORY.parse(Bearing.class, singleValueInput);
 
         // Then
-        assertThat(actualAngle).isEqualTo(Angle.of(expectedValue, AngleUnits.getDefaultUnit()));
-        assertThat(actualArea).isEqualTo(Area.of(expectedValue, AreaUnits.getDefaultUnit()));
-        assertThat(actualDistance).isEqualTo(Distance.of(expectedValue, DistanceUnits.getDefaultUnit()));
-        assertThat(actualLength).isEqualTo(Length.of(expectedValue, DistanceUnits.getDefaultUnit()));
-        assertThat(actualWidth).isEqualTo(Width.of(expectedValue, DistanceUnits.getDefaultUnit()));
-        assertThat(actualHeight).isEqualTo(Height.of(expectedValue, DistanceUnits.getDefaultUnit()));
-        assertThat(actualDiameter).isEqualTo(Diameter.of(expectedValue, DistanceUnits.getDefaultUnit()));
-        assertThat(actualPerimeter).isEqualTo(Perimeter.of(expectedValue, DistanceUnits.getDefaultUnit()));
-        assertThat(actualMass).isEqualTo(Mass.of(expectedValue, MassUnits.getDefaultUnit()));
-        assertThat(actualLinearMassDensity).isEqualTo(LinearMassDensity.of(expectedValue, LinearMassDensityUnits.getDefaultUnit()));
-        assertThat(actualVelocity).isEqualTo(Velocity.of(expectedValue, VelocityUnits.getDefaultUnit()));
-        assertThat(actualAngularVelocity).isEqualTo(AngularVelocity.of(expectedValue, AngularVelocityUnits.getDefaultUnit()));
-        assertThat(actualVolume).isEqualTo(Volume.of(expectedValue, VolumeUnits.getDefaultUnit()));
+        assertThat(actualAngle).isEqualTo(Angle.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Angle.class)));
+        assertThat(actualArea).isEqualTo(Area.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Area.class)));
+        assertThat(actualDistance).isEqualTo(Distance.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Distance.class)));
+        assertThat(actualLength).isEqualTo(Length.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Length.class)));
+        assertThat(actualWidth).isEqualTo(Width.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Width.class)));
+        assertThat(actualHeight).isEqualTo(Height.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Height.class)));
+        assertThat(actualDiameter).isEqualTo(Diameter.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Diameter.class)));
+        assertThat(actualPerimeter).isEqualTo(Perimeter.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Perimeter.class)));
+        assertThat(actualMass).isEqualTo(Mass.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Mass.class)));
+        assertThat(actualLinearMassDensity).isEqualTo(LinearMassDensity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(LinearMassDensity.class)));
+        assertThat(actualVelocity).isEqualTo(Velocity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Velocity.class)));
+        assertThat(actualAngularVelocity).isEqualTo(AngularVelocity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(AngularVelocity.class)));
+        assertThat(actualVolume).isEqualTo(Volume.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Volume.class)));
         assertThat(actualBfFactor).isEqualTo(BypassFactor.of(expectedValue));
         assertThat(actualGrNumber).isEqualTo(GrashofNumber.of(expectedValue));
         assertThat(actualPrNumber).isEqualTo(PrandtlNumber.of(expectedValue));
         assertThat(actualReNumber).isEqualTo(ReynoldsNumber.of(expectedValue));
-        assertThat(actualMassFlow).isEqualTo(MassFlow.of(expectedValue, MassFlowUnits.getDefaultUnit()));
-        assertThat(actualVolFlow).isEqualTo(VolumetricFlow.of(expectedValue, VolumetricFlowUnits.getDefaultUnit()));
-        assertThat(actualHumRatio).isEqualTo(HumidityRatio.of(expectedValue, HumidityRatioUnits.getDefaultUnit()));
-        assertThat(actualRelHum).isEqualTo(RelativeHumidity.of(expectedValue, RelativeHumidityUnits.getDefaultUnit()));
-        assertThat(actualCurvature).isEqualTo(Curvature.of(expectedValue, CurvatureUnits.getDefaultUnit()));
+        assertThat(actualMassFlow).isEqualTo(MassFlow.of(expectedValue, PARSING_FACTORY.getDefaultUnit(MassFlow.class)));
+        assertThat(actualVolFlow).isEqualTo(VolumetricFlow.of(expectedValue, PARSING_FACTORY.getDefaultUnit(VolumetricFlow.class)));
+        assertThat(actualHumRatio).isEqualTo(HumidityRatio.of(expectedValue, PARSING_FACTORY.getDefaultUnit(HumidityRatio.class)));
+        assertThat(actualRelHum).isEqualTo(RelativeHumidity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(RelativeHumidity.class)));
+        assertThat(actualCurvature).isEqualTo(Curvature.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Curvature.class)));
         // Hydraulic
         assertThat(actualFrictionFactor).isEqualTo(FrictionFactor.of(expectedValue));
-        assertThat(actualLinearResistance).isEqualTo(LinearResistance.of(expectedValue, LinearResistanceUnits.getDefaultUnit()));
+        assertThat(actualLinearResistance).isEqualTo(LinearResistance.of(expectedValue, PARSING_FACTORY.getDefaultUnit(LinearResistance.class)));
         assertThat(actualLocalLossFactor).isEqualTo(LocalLossFactor.of(expectedValue));
-        assertThat(actualRotationSpeedToFlowRateRatio).isEqualTo(RotationSpeedToFlowRateRatio.of(expectedValue, RotationSpeedToFlowRateRatioUnits.getDefaultUnit()));
+        assertThat(actualRotationSpeedToFlowRateRatio).isEqualTo(RotationSpeedToFlowRateRatio.of(expectedValue, PARSING_FACTORY.getDefaultUnit(RotationSpeedToFlowRateRatio.class)));
 
 
-        assertThat(actualForce).isEqualTo(Force.of(expectedValue, ForceUnits.getDefaultUnit()));
-        assertThat(actualMomentum).isEqualTo(Momentum.of(expectedValue, MomentumUnits.getDefaultUnit()));
-        assertThat(actualTorque).isEqualTo(Torque.of(expectedValue, TorqueUnits.getDefaultUnit()));
-        assertThat(actualDensity).isEqualTo(Density.of(expectedValue, DensityUnits.getDefaultUnit()));
-        assertThat(actualDynVis).isEqualTo(DynamicViscosity.of(expectedValue, DynamicViscosityUnits.getDefaultUnit()));
-        assertThat(actualEnergy).isEqualTo(Energy.of(expectedValue, EnergyUnits.getDefaultUnit()));
-        assertThat(actualKinVis).isEqualTo(KinematicViscosity.of(expectedValue, KinematicViscosityUnits.getDefaultUnit()));
-        assertThat(actualPower).isEqualTo(Power.of(expectedValue, PowerUnits.getDefaultUnit()));
-        assertThat(actualPressure).isEqualTo(Pressure.of(expectedValue, PressureUnits.getDefaultUnit()));
-        assertThat(actualSpecEnthalpy).isEqualTo(SpecificEnthalpy.of(expectedValue, SpecificEnthalpyUnits.getDefaultUnit()));
-        assertThat(actualSpecHeat).isEqualTo(SpecificHeat.of(expectedValue, SpecificHeatUnits.getDefaultUnit()));
-        assertThat(actualTemperature).isEqualTo(Temperature.of(expectedValue, TemperatureUnits.getDefaultUnit()));
-        assertThat(actualThermCond).isEqualTo(ThermalConductivity.of(expectedValue, ThermalConductivityUnits.getDefaultUnit()));
-        assertThat(actualThermDiff).isEqualTo(ThermalDiffusivity.of(expectedValue, ThermalDiffusivityUnits.getDefaultUnit()));
-        assertThat(actualLatitude).isEqualTo(Latitude.of(expectedValue, AngleUnits.getDefaultUnit()));
-        assertThat(actualLongitude).isEqualTo(Longitude.of(expectedValue, AngleUnits.getDefaultUnit()));
-        assertThat(actualRatio).isEqualTo(Ratio.of(expectedValue, RatioUnits.getDefaultUnit()));
+        assertThat(actualForce).isEqualTo(Force.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Force.class)));
+        assertThat(actualMomentum).isEqualTo(Momentum.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Momentum.class)));
+        assertThat(actualTorque).isEqualTo(Torque.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Torque.class)));
+        assertThat(actualDensity).isEqualTo(Density.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Density.class)));
+        assertThat(actualDynVis).isEqualTo(DynamicViscosity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(DynamicViscosity.class)));
+        assertThat(actualEnergy).isEqualTo(Energy.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Energy.class)));
+        assertThat(actualKinVis).isEqualTo(KinematicViscosity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(KinematicViscosity.class)));
+        assertThat(actualPower).isEqualTo(Power.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Power.class)));
+        assertThat(actualPressure).isEqualTo(Pressure.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Pressure.class)));
+        assertThat(actualSpecEnthalpy).isEqualTo(SpecificEnthalpy.of(expectedValue, PARSING_FACTORY.getDefaultUnit(SpecificEnthalpy.class)));
+        assertThat(actualSpecHeat).isEqualTo(SpecificHeat.of(expectedValue, PARSING_FACTORY.getDefaultUnit(SpecificHeat.class)));
+        assertThat(actualTemperature).isEqualTo(Temperature.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Temperature.class)));
+        assertThat(actualThermCond).isEqualTo(ThermalConductivity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(ThermalConductivity.class)));
+        assertThat(actualThermDiff).isEqualTo(ThermalDiffusivity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(ThermalDiffusivity.class)));
+        assertThat(actualLatitude).isEqualTo(Latitude.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Latitude.class)));
+        assertThat(actualLongitude).isEqualTo(Longitude.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Longitude.class)));
+        assertThat(actualRatio).isEqualTo(Ratio.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Ratio.class)));
         assertThat(actualBearing).isEqualTo(Bearing.of(expectedValue));
     }
 

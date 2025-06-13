@@ -14,15 +14,15 @@ public class BypassFactor implements CalculableQuantity<BypassFactorUnit, Bypass
     private final double baseValue;
     private final BypassFactorUnit unitType;
 
-    public BypassFactor(double value) {
+    public BypassFactor(double value, BypassFactorUnit unitType) {
         this.value = value;
-        this.unitType = BypassFactorUnits.DIMENSIONLESS;
+        this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
     public static BypassFactor of(double value) {
-        return new BypassFactor(value);
+        return new BypassFactor(value, BypassFactorUnits.DIMENSIONLESS);
     }
 
     @Override

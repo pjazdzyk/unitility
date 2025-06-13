@@ -9,15 +9,15 @@ public class GrashofNumber implements CalculableQuantity<GrashofNumberUnit, Gras
     private final double baseValue;
     private final GrashofNumberUnit unitType;
 
-    public GrashofNumber(double value) {
+    public GrashofNumber(double value, GrashofNumberUnit unitType) {
         this.value = value;
-        this.unitType = GrashofNumberUnits.DIMENSIONLESS;
+        this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
     public static GrashofNumber of(double value) {
-        return new GrashofNumber(value);
+        return new GrashofNumber(value, GrashofNumberUnits.DIMENSIONLESS);
     }
 
     @Override

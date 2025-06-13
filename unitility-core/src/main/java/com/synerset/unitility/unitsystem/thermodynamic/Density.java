@@ -14,7 +14,7 @@ public class Density implements CalculableQuantity<DensityUnit, Density> {
     public Density(double value, DensityUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = DensityUnits.getDefaultUnit();
+            unitType = DensityUnits.KILOGRAM_PER_CUBIC_METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -55,8 +55,8 @@ public class Density implements CalculableQuantity<DensityUnit, Density> {
 
     @Override
     public Density toBaseUnit() {
-        double valueInKGpM3 = unitType.toValueInBaseUnit(value);
-        return of(valueInKGpM3, DensityUnits.KILOGRAM_PER_CUBIC_METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

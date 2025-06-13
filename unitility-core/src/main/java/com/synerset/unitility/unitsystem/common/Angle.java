@@ -13,7 +13,7 @@ public class Angle implements TrigonometricQuantity<Angle> {
     public Angle(double value, AngleUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = AngleUnits.getDefaultUnit();
+            unitType = AngleUnits.RADIANS;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -54,14 +54,14 @@ public class Angle implements TrigonometricQuantity<Angle> {
 
     @Override
     public Angle toBaseUnit() {
-        double degrees = unitType.toValueInBaseUnit(value);
-        return of(degrees, AngleUnits.DEGREES);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override
     public Angle toUnit(AngleUnit targetUnit) {
-        double valueInDegrees = unitType.toValueInBaseUnit(value);
-        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInDegrees);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        double valueInTargetUnit = targetUnit.fromValueInBaseUnit(valueInBaseUnit);
         return Angle.of(valueInTargetUnit, targetUnit);
     }
 

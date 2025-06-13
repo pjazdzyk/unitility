@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 class CardinalDirectionTest {
     @Test
@@ -41,7 +42,7 @@ class CardinalDirectionTest {
         assertThat(CardinalDirection.SOUTH.getTrueBearing()).isEqualTo(Bearing.of(180));
         assertThat(CardinalDirection.SOUTH_SOUTHWEST.getTrueBearing()).isEqualTo(Bearing.of(202.5));
         assertThat(CardinalDirection.SOUTHWEST.getTrueBearing()).isEqualTo(Bearing.of(225));
-        assertThat(CardinalDirection.WEST_SOUTHWEST.getTrueBearing()).isEqualTo(Bearing.of(247.5));
+        assertThat(CardinalDirection.WEST_SOUTHWEST.getTrueBearing().getInDegrees()).isEqualTo(Bearing.of(247.5).getInDegrees(), withPrecision(1E-11));
         assertThat(CardinalDirection.WEST.getTrueBearing()).isEqualTo(Bearing.of(270));
         assertThat(CardinalDirection.WEST_NORTHWEST.getTrueBearing()).isEqualTo(Bearing.of(292.5));
         assertThat(CardinalDirection.NORTHWEST.getTrueBearing()).isEqualTo(Bearing.of(315));

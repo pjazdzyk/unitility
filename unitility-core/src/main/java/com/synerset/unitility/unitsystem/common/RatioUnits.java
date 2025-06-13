@@ -44,7 +44,7 @@ public enum RatioUnits implements RatioUnit {
 
     public static RatioUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return PERCENT;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (RatioUnit unit : values()) {
@@ -64,8 +64,5 @@ public enum RatioUnits implements RatioUnit {
                 .toString();
     }
 
-    public static RatioUnit getDefaultUnit() {
-        return DECIMAL;
-    }
 
 }

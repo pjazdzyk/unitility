@@ -12,7 +12,7 @@ public class SpecificHeat implements CalculableQuantity<SpecificHeatUnit, Specif
     public SpecificHeat(double value, SpecificHeatUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = SpecificHeatUnits.getDefaultUnit();
+            unitType = SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -57,8 +57,8 @@ public class SpecificHeat implements CalculableQuantity<SpecificHeatUnit, Specif
 
     @Override
     public SpecificHeat toBaseUnit() {
-        double valueInJoulePerKiloGramKelvin = unitType.toValueInBaseUnit(value);
-        return of(valueInJoulePerKiloGramKelvin, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

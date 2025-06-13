@@ -15,7 +15,7 @@ public class RelativeHumidity implements CalculableQuantity<RelativeHumidityUnit
     public RelativeHumidity(double value, RelativeHumidityUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = RelativeHumidityUnits.getDefaultUnit();
+            unitType = RelativeHumidityUnits.DECIMAL;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -56,8 +56,8 @@ public class RelativeHumidity implements CalculableQuantity<RelativeHumidityUnit
 
     @Override
     public RelativeHumidity toBaseUnit() {
-        double valueInPascal = unitType.toValueInBaseUnit(value);
-        return of(valueInPascal, RelativeHumidityUnits.PERCENT);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

@@ -52,7 +52,7 @@ public enum ForceUnits implements ForceUnit {
 
     public static ForceUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return NEWTON;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (ForceUnit unit : values()) {
@@ -69,10 +69,6 @@ public enum ForceUnits implements ForceUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .toString();
-    }
-
-    public static ForceUnit getDefaultUnit() {
-        return NEWTON;
     }
 
 }

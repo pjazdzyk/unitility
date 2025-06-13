@@ -48,7 +48,7 @@ public enum LinearMassDensityUnits implements LinearMassDensityUnit {
 
     public static LinearMassDensityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return KILOGRAM_PER_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (LinearMassDensityUnit unit : values()) {
@@ -68,8 +68,5 @@ public enum LinearMassDensityUnits implements LinearMassDensityUnit {
                 .toString();
     }
 
-    public static LinearMassDensityUnit getDefaultUnit() {
-        return KILOGRAM_PER_METER;
-    }
 
 }

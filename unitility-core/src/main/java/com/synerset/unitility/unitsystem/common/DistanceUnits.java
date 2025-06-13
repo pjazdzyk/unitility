@@ -56,7 +56,7 @@ public enum DistanceUnits implements DistanceUnit {
 
     public static DistanceUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (DistanceUnit unit : values()) {
@@ -75,8 +75,5 @@ public enum DistanceUnits implements DistanceUnit {
                 .toString();
     }
 
-    public static DistanceUnit getDefaultUnit() {
-        return METER;
-    }
 
 }

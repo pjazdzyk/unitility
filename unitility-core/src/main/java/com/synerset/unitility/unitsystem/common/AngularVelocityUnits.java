@@ -47,7 +47,7 @@ public enum AngularVelocityUnits implements AngularVelocityUnit {
 
     public static AngularVelocityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return getDefaultUnit();
+            return AngularVelocityUnits.RADIANS_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (AngularVelocityUnit unit : values()) {
@@ -67,8 +67,5 @@ public enum AngularVelocityUnits implements AngularVelocityUnit {
                 .toString();
     }
 
-    public static AngularVelocityUnits getDefaultUnit() {
-        return RADIANS_PER_SECOND;
-    }
 
 }

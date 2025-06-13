@@ -30,7 +30,7 @@
     </developers>
     <description>
         The Java Physics Units of Measure Library - Unitility.
-        This unique library offers new set of types that seamlessly integrate numerical values with their associated units.
+        This unique library offers a new set of types that seamlessly integrate numerical values with their associated units.
         This enables developers to conduct precise and efficient conversions across various units. Designed in plain Java,
         the solution prioritizes speed and lightweight functionality, immutability and thread-safety.
     </description>
@@ -45,11 +45,11 @@
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>2.8.0</project.version>
+        <project.version>2.9.0</project.version>
 
         <!-- Maven Properties -->
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Jackson module -->

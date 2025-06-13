@@ -14,7 +14,7 @@ public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
     public MassFlow(double value, MassFlowUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = MassFlowUnits.getDefaultUnit();
+            unitType = MassFlowUnits.KILOGRAM_PER_HOUR;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -63,8 +63,8 @@ public class MassFlow implements CalculableQuantity<MassFlowUnit, MassFlow> {
 
     @Override
     public MassFlow toBaseUnit() {
-        double valueInKilogramsPerSecond = unitType.toValueInBaseUnit(value);
-        return of(valueInKilogramsPerSecond, MassFlowUnits.KILOGRAM_PER_SECOND);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

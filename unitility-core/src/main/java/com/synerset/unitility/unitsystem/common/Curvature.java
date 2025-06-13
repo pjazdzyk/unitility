@@ -13,7 +13,7 @@ public class Curvature implements CalculableQuantity<CurvatureUnit, Curvature> {
     public Curvature(double value, CurvatureUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = CurvatureUnits.getDefaultUnit();
+            unitType = CurvatureUnits.RADIANS_PER_METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

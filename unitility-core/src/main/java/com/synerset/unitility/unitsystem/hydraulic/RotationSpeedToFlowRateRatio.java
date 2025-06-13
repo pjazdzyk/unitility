@@ -15,7 +15,7 @@ public class RotationSpeedToFlowRateRatio implements CalculableQuantity<Rotation
     public RotationSpeedToFlowRateRatio(double value, RotationSpeedToFlowRateRatioUnit unitType) {
         this.value = value;
         if (unitType == null) {
-            unitType = RotationSpeedToFlowRateRatioUnits.getDefaultUnit();
+            unitType = RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);

@@ -15,7 +15,7 @@ public class Diameter implements CalculableQuantity<DistanceUnit, Diameter> {
     public Diameter(double value, DistanceUnit unitType) {
         this.value = value;
         if(unitType == null){
-            unitType = DistanceUnits.getDefaultUnit();
+            unitType = DistanceUnits.METER;
         }
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
@@ -84,8 +84,8 @@ public class Diameter implements CalculableQuantity<DistanceUnit, Diameter> {
 
     @Override
     public Diameter toBaseUnit() {
-        double valueInMeters = unitType.toValueInBaseUnit(value);
-        return Diameter.of(valueInMeters, DistanceUnits.METER);
+        double valueInBaseUnit = unitType.toValueInBaseUnit(value);
+        return of(valueInBaseUnit, unitType.getBaseUnit());
     }
 
     @Override

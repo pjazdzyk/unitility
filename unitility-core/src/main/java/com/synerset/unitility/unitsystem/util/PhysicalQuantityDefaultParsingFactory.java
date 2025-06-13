@@ -1,25 +1,14 @@
 package com.synerset.unitility.unitsystem.util;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
+import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.common.*;
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.dimensionless.GrashofNumber;
-import com.synerset.unitility.unitsystem.dimensionless.PrandtlNumber;
-import com.synerset.unitility.unitsystem.dimensionless.ReynoldsNumber;
-import com.synerset.unitility.unitsystem.flow.MassFlow;
-import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
-import com.synerset.unitility.unitsystem.geographic.Bearing;
-import com.synerset.unitility.unitsystem.geographic.Latitude;
-import com.synerset.unitility.unitsystem.geographic.Longitude;
-import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
-import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
-import com.synerset.unitility.unitsystem.hydraulic.FrictionFactor;
-import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
-import com.synerset.unitility.unitsystem.hydraulic.LocalLossFactor;
-import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
-import com.synerset.unitility.unitsystem.mechanical.Force;
-import com.synerset.unitility.unitsystem.mechanical.Momentum;
-import com.synerset.unitility.unitsystem.mechanical.Torque;
+import com.synerset.unitility.unitsystem.dimensionless.*;
+import com.synerset.unitility.unitsystem.flow.*;
+import com.synerset.unitility.unitsystem.geographic.*;
+import com.synerset.unitility.unitsystem.humidity.*;
+import com.synerset.unitility.unitsystem.hydraulic.*;
+import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 
 import java.util.Map;
@@ -29,11 +18,13 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
 
     private static final PhysicalQuantityParsingFactory PARSING_FACTORY = new PhysicalQuantityDefaultParsingFactory();
 
-    private final Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> immutableRegistry;
+    private final Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> immutableParsingRegistry;
+
+    private final Map<Class<?>, Unit> immutableDefaultUnitRegistry;
 
     private PhysicalQuantityDefaultParsingFactory() {
         // Initializing immutable registry
-        this.immutableRegistry = Map.ofEntries(
+        this.immutableParsingRegistry = Map.ofEntries(
                 // Common
                 Map.entry(Angle.class, Angle::of),
                 Map.entry(Area.class, Area::of),
@@ -87,11 +78,79 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Longitude.class, Longitude::of),
                 Map.entry(Bearing.class, Bearing::of)
         );
+
+        // Initializing immutable default unit registry
+        this.immutableDefaultUnitRegistry = Map.ofEntries(
+                // Common
+                Map.entry(Angle.class, AngleUnits.RADIANS),
+                Map.entry(Area.class, AreaUnits.SQUARE_METER),
+                Map.entry(Distance.class, DistanceUnits.METER),
+                Map.entry(Length.class, DistanceUnits.METER),
+                Map.entry(Width.class, DistanceUnits.METER),
+                Map.entry(Height.class, DistanceUnits.METER),
+                Map.entry(Diameter.class, DistanceUnits.METER),
+                Map.entry(Perimeter.class, DistanceUnits.METER),
+                Map.entry(Mass.class, MassUnits.KILOGRAM),
+                Map.entry(LinearMassDensity.class, LinearMassDensityUnits.KILOGRAM_PER_METER),
+                Map.entry(Velocity.class, VelocityUnits.METER_PER_SECOND),
+                Map.entry(AngularVelocity.class, AngularVelocityUnits.RADIANS_PER_SECOND),
+                Map.entry(Volume.class, VolumeUnits.CUBIC_METER),
+                Map.entry(Ratio.class, RatioUnits.PERCENT),
+                Map.entry(Curvature.class, CurvatureUnits.RADIANS_PER_METER),
+                // Dimensionless
+                Map.entry(BypassFactor.class, BypassFactorUnits.DIMENSIONLESS),
+                Map.entry(GrashofNumber.class, GrashofNumberUnits.DIMENSIONLESS),
+                Map.entry(PrandtlNumber.class, PrandtlNumberUnits.DIMENSIONLESS),
+                Map.entry(ReynoldsNumber.class, ReynoldsNumberUnits.DIMENSIONLESS),
+                // Flows
+                Map.entry(MassFlow.class, MassFlowUnits.KILOGRAM_PER_SECOND),
+                Map.entry(VolumetricFlow.class, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND),
+                // Humidity
+                Map.entry(HumidityRatio.class, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM),
+                Map.entry(RelativeHumidity.class, RelativeHumidityUnits.DECIMAL),
+                // Hydraulic
+                Map.entry(LinearResistance.class, LinearResistanceUnits.PASCAL_PER_METER),
+                Map.entry(FrictionFactor.class, FrictionFactorUnits.DIMENSIONLESS),
+                Map.entry(LocalLossFactor.class, LocalLossFactorUnits.DIMENSIONLESS),
+                Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND),
+                // Mechanical
+                Map.entry(Force.class, ForceUnits.NEWTON),
+                Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),
+                Map.entry(Torque.class, TorqueUnits.NEWTON_METER),
+                // Thermodynamic
+                Map.entry(Density.class, DensityUnits.KILOGRAM_PER_CUBIC_METER),
+                Map.entry(DynamicViscosity.class, DynamicViscosityUnits.PASCAL_SECOND),
+                Map.entry(Energy.class, EnergyUnits.JOULE),
+                Map.entry(KinematicViscosity.class, KinematicViscosityUnits.SQUARE_METER_PER_SECOND),
+                Map.entry(Power.class, PowerUnits.WATT),
+                Map.entry(Pressure.class, PressureUnits.PASCAL),
+                Map.entry(SpecificEnthalpy.class, SpecificEnthalpyUnits.JOULE_PER_KILOGRAM),
+                Map.entry(SpecificHeat.class, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN),
+                Map.entry(Temperature.class, TemperatureUnits.KELVIN),
+                Map.entry(ThermalConductivity.class, ThermalConductivityUnits.WATTS_PER_METER_KELVIN),
+                Map.entry(ThermalDiffusivity.class, ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND),
+                // Geographic
+                Map.entry(Latitude.class, AngleUnits.DEGREES),
+                Map.entry(Longitude.class, AngleUnits.DEGREES),
+                Map.entry(Bearing.class, AngleUnits.DEGREES)
+        );
     }
 
     @Override
     public Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> getClassRegistry() {
-        return immutableRegistry;
+        return immutableParsingRegistry;
+    }
+
+    @Override
+    public <U extends Unit, Q extends PhysicalQuantity<U>> U getDefaultUnit(Class<Q> targetClass) {
+        @SuppressWarnings("unchecked")
+        U defaultUnit = (U) immutableDefaultUnitRegistry.get(targetClass);
+        return defaultUnit;
+    }
+
+    @Override
+    public Map<Class<?>, Unit> findAllDefaultUnits() {
+        return immutableDefaultUnitRegistry;
     }
 
     static PhysicalQuantityParsingFactory getInstance() {
