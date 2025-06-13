@@ -40,6 +40,7 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
             unitType = AngleUnits.DEGREES;
         }
         this.unitType = unitType;
+        // To enforce degrees as base Bearing unit
         this.baseValue = Angle.of(trueBearingValue, unitType).getInDegrees();
         this.signedValue = BearingMapper.toSignedBearing(baseValue);
     }
@@ -267,10 +268,11 @@ public class Bearing implements TrigonometricQuantity<Bearing> {
 
     @Override
     public Bearing toBaseUnit() {
-        double radians = unitType.toValueInBaseUnit(value);
-        // Radians are the default unit in AngleUnits, but because we want to keep degrees all over the Bearing class,
-        // and keep architecture uniformity, toValueInBaseUnit will result in Radians, but the result is returned in degrees anyway.
-        return new Bearing(radians, AngleUnits.RADIANS)
+        double valueInRadians = unitType.toValueInBaseUnit(value);
+        // Because base unit is located within unit type, not in quantity type, to enforce different base unit
+        // behavior of this method is different, compared to other quantities. At first, radians are result of
+        // toBaseUnit() calculations, which we use to create Bearing.
+        return new Bearing(valueInRadians, AngleUnits.RADIANS)
                 .toUnit(AngleUnits.DEGREES);
     }
 

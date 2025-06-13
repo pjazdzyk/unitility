@@ -15,22 +15,23 @@ class RelativeHumidityTest {
         // When
         RelativeHumidity actualInDecimal = initialHumidity.toUnit(RelativeHumidityUnits.DECIMAL);
         double actualInDecimalVal = initialHumidity.getInDecimal();
-        RelativeHumidity actualInPercent = actualInDecimal.toBaseUnit();
+
+        RelativeHumidity actualInBaseUnit = initialHumidity.toBaseUnit();
         double actualInPercentVal = actualInDecimal.getInPercent();
 
         // Then
         RelativeHumidity expectedInDecimal = RelativeHumidity.ofDecimal(0.505);
         assertThat(actualInDecimal.getValue()).isEqualTo(actualInDecimalVal);
-        assertThat(actualInPercent.getValue()).isEqualTo(actualInPercentVal);
+        assertThat(actualInBaseUnit.getValue()).isEqualTo(actualInDecimalVal);
         assertThat(actualInDecimal).isEqualTo(expectedInDecimal);
-        assertThat(actualInPercent).isEqualTo(initialHumidity);
+        assertThat(actualInBaseUnit).isEqualTo(initialHumidity);
     }
 
     @Test
     @DisplayName("should have % as base unit")
     void shouldHavePercentAsBaseUnit() {
         // Given
-        RelativeHumidityUnit expectedBaseUnit = RelativeHumidityUnits.PERCENT;
+        RelativeHumidityUnit expectedBaseUnit = RelativeHumidityUnits.DECIMAL;
 
         // When
         RelativeHumidity relativeHumidityInDecimal = RelativeHumidity.ofDecimal(0.1);

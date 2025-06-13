@@ -7,8 +7,8 @@ import java.util.function.DoubleUnaryOperator;
 
 public enum RelativeHumidityUnits implements RelativeHumidityUnit {
 
-    PERCENT("%", val -> val, val -> val),
-    DECIMAL("", val -> val * 100, val -> val / 100);
+    DECIMAL("", val -> val, val -> val),
+    PERCENT("%", val -> val / 100, val -> val * 100);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -27,7 +27,7 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
 
     @Override
     public RelativeHumidityUnit getBaseUnit() {
-        return PERCENT;
+        return DECIMAL;
     }
 
     @Override
