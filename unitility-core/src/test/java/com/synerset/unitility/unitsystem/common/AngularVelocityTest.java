@@ -11,7 +11,7 @@ class AngularVelocityTest {
     @DisplayName("should convert rad/s to rpm and vice versa")
     void shouldProperlyConvertRadiansPerSecondToRevolutionsPerMinute() {
         // Given
-        AngularVelocity initialAngularVelocity = AngularVelocity.ofRadiansPerSecond(Math.PI*2/60.0);
+        AngularVelocity initialAngularVelocity = AngularVelocity.ofRadiansPerSecond(Math.PI*2.0/60.0);
 
         // When
         AngularVelocity actualInRevolutionsPerMinute = initialAngularVelocity.toUnit(AngularVelocityUnits.REVOLUTIONS_PER_MINUTE);
@@ -31,7 +31,7 @@ class AngularVelocityTest {
     @DisplayName("should convert rad/s to rpm and vice versa")
     void shouldProperlyConvertRadiansPerSecondToRevolutionsPerSecond() {
         // Given
-        AngularVelocity initialAngularVelocity = AngularVelocity.ofRadiansPerSecond(Math.PI*2/60.0);
+        AngularVelocity initialAngularVelocity = AngularVelocity.ofRadiansPerSecond(Math.PI*2.0/60.0);
 
         // When
         AngularVelocity actualInRevolutionsPerSecond = initialAngularVelocity.toUnit(AngularVelocityUnits.REVOLUTIONS_PER_SECOND);
@@ -51,7 +51,7 @@ class AngularVelocityTest {
     @DisplayName("should convert rad/s to °/s and vice versa")
     void shouldProperlyConvertRadiansPerSecondToDegreesPerSecond() {
         // Given
-        AngularVelocity initialAngularVelocity = AngularVelocity.ofRadiansPerSecond(Math.PI*2/60.0);
+        AngularVelocity initialAngularVelocity = AngularVelocity.ofRadiansPerSecond(Math.PI*2.0/60.0);
 
         // When
         AngularVelocity actualInDegreesPerSecond = initialAngularVelocity.toUnit(AngularVelocityUnits.DEGREES_PER_SECOND);
@@ -74,7 +74,7 @@ class AngularVelocityTest {
         AngularVelocityUnit expectedBaseUnit = AngularVelocityUnits.RADIANS_PER_SECOND;
 
         // When
-        AngularVelocity velocityInMilesPerHour = AngularVelocity.ofRevolutionsPerMinute(60);
+        AngularVelocity velocityInMilesPerHour = AngularVelocity.ofRevolutionsPerMinute(60.0);
         AngularVelocityUnit actualBaseUnit = velocityInMilesPerHour.getUnit().getBaseUnit();
 
         // Then
@@ -85,7 +85,7 @@ class AngularVelocityTest {
     @DisplayName("should return valid result from to() and getIn() methods")
     void shouldReturnValidResultFromToAndGetInMethods() {
         // Given
-        AngularVelocity expected = AngularVelocity.ofRadiansPerSecond(Math.PI*2/60.0);
+        AngularVelocity expected = AngularVelocity.ofRadiansPerSecond(Math.PI*2.0/60.0);
 
         // When
         AngularVelocity actual = expected.toRevolutionsPerMinute()

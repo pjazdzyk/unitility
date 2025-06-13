@@ -8,9 +8,9 @@ import java.util.function.DoubleUnaryOperator;
 public enum AngularVelocityUnits implements AngularVelocityUnit {
 
     RADIANS_PER_SECOND("rad/s", val -> val, val -> val),
-    REVOLUTIONS_PER_SECOND("rps", val -> val / (1.0 / 2 / Math.PI), val -> val * (1.0 / 2 / Math.PI)),
+    REVOLUTIONS_PER_SECOND("rps", val -> val / (1.0 / 2.0 / Math.PI), val -> val * (1.0 / 2.0 / Math.PI)),
     REVOLUTIONS_PER_MINUTE("rpm", val -> val / (60.0 / 2.0 / Math.PI), val -> val * (60.0 / 2.0 / Math.PI)),
-    DEGREES_PER_SECOND("°/s", val -> val / (180.0 / Math.PI), val -> val * (180.0 / Math.PI));
+    DEGREES_PER_SECOND("°/s", val -> val / (360.0 / 2.0 / Math.PI), val -> val * (360.0 / 2.0 / Math.PI));
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
