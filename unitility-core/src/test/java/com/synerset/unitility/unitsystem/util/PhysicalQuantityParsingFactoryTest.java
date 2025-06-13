@@ -169,6 +169,7 @@ class PhysicalQuantityParsingFactoryTest {
         LinearResistance actualLinearResistance = PARSING_FACTORY.parse(LinearResistance.class, singleValueInput);
         FrictionFactor actualFrictionFactor = PARSING_FACTORY.parse(FrictionFactor.class, singleValueInput);
         LocalLossFactor actualLocalLossFactor = PARSING_FACTORY.parse(LocalLossFactor.class, singleValueInput);
+        RotationSpeedToFlowRateRatio actualRotationSpeedToFlowRateRatio = PARSING_FACTORY.parse(RotationSpeedToFlowRateRatio.class, singleValueInput);
 
         Force actualForce = PARSING_FACTORY.parse(Force.class, singleValueInput);
         Momentum actualMomentum = PARSING_FACTORY.parse(Momentum.class, singleValueInput);
@@ -218,6 +219,8 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualFrictionFactor).isEqualTo(FrictionFactor.of(expectedValue));
         assertThat(actualLinearResistance).isEqualTo(LinearResistance.of(expectedValue, LinearResistanceUnits.getDefaultUnit()));
         assertThat(actualLocalLossFactor).isEqualTo(LocalLossFactor.of(expectedValue));
+        assertThat(actualRotationSpeedToFlowRateRatio).isEqualTo(RotationSpeedToFlowRateRatio.of(expectedValue, RotationSpeedToFlowRateRatioUnits.getDefaultUnit()));
+
 
         assertThat(actualForce).isEqualTo(Force.of(expectedValue, ForceUnits.getDefaultUnit()));
         assertThat(actualMomentum).isEqualTo(Momentum.of(expectedValue, MomentumUnits.getDefaultUnit()));

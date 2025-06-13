@@ -20,6 +20,8 @@ import com.synerset.unitility.unitsystem.hydraulic.FrictionFactor;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistanceUnits;
 import com.synerset.unitility.unitsystem.hydraulic.LocalLossFactor;
+import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
+import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatioUnits;
 import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 
@@ -71,6 +73,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(LinearResistance.class, () -> Arrays.asList(LinearResistanceUnits.values())),
                 Map.entry(FrictionFactor.class, Collections::emptyList),
                 Map.entry(LocalLossFactor.class, Collections::emptyList),
+                Map.entry(RotationSpeedToFlowRateRatio.class, () -> Arrays.asList(RotationSpeedToFlowRateRatioUnits.values())),
                 // Mechanical
                 Map.entry(Force.class, () -> Arrays.asList(ForceUnits.values())),
                 Map.entry(Momentum.class, () -> Arrays.asList(MomentumUnits.values())),

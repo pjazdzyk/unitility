@@ -185,6 +185,7 @@ units and at least one Imperial unit.
 * LinearResistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
 * FrictionFactor: [-]
 * LocalLossFactor: [-]
+* Rotation Speed To Flow Rate Ratio: (Radians per second) per (meter per second) [(rad/s)/(m3/s)], (revolutions per minute) per (gallons per minute) [rpm/(gal_US/min)]
 
 #### DIMENSIONLESS:
 

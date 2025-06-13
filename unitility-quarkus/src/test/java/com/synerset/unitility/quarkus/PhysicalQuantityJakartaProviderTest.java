@@ -11,6 +11,7 @@ import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
+import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
 import com.synerset.unitility.unitsystem.mechanical.Force;
 import com.synerset.unitility.unitsystem.mechanical.Momentum;
 import com.synerset.unitility.unitsystem.mechanical.Torque;
@@ -85,7 +86,8 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(ThermalDiffusivity.class, "15.1 [ft²/s]", ThermalDiffusivity.ofSquareFeetPerSecond(TEST_VALUE)),
                 Arguments.of(BypassFactor.class, "15.1", BypassFactor.of(TEST_VALUE)),
                 Arguments.of(LinearResistance.class, "15.1 [inH₂O/100ft]", LinearResistance.ofInchOfWaterPer100Feet(TEST_VALUE)),
-                Arguments.of(Curvature.class, "15.1 [rad/m]", Curvature.ofRadiansPerMeter(TEST_VALUE))
+                Arguments.of(Curvature.class, "15.1 [rad/m]", Curvature.ofRadiansPerMeter(TEST_VALUE)),
+                Arguments.of(RotationSpeedToFlowRateRatio.class, "15.1 [(rad/s)/(m3/s)]", RotationSpeedToFlowRateRatio.ofRadianPerSecondPerCubicMeterPerSecond(TEST_VALUE))
         );
     }
 

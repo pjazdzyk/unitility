@@ -16,6 +16,7 @@ import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.hydraulic.FrictionFactor;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
 import com.synerset.unitility.unitsystem.hydraulic.LocalLossFactor;
+import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
 import com.synerset.unitility.unitsystem.mechanical.Force;
 import com.synerset.unitility.unitsystem.mechanical.Momentum;
 import com.synerset.unitility.unitsystem.mechanical.Torque;
@@ -64,6 +65,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(LinearResistance.class, LinearResistance::of),
                 Map.entry(FrictionFactor.class, (value, symbol) -> FrictionFactor.of(value)),
                 Map.entry(LocalLossFactor.class, (value, symbol) -> LocalLossFactor.of(value)),
+                Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatio::of),
                 // Mechanical
                 Map.entry(Force.class, Force::of),
                 Map.entry(Momentum.class, Momentum::of),
