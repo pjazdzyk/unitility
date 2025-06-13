@@ -87,7 +87,7 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(BypassFactor.class, "15.1", BypassFactor.of(TEST_VALUE)),
                 Arguments.of(LinearResistance.class, "15.1 [inH₂O/100ft]", LinearResistance.ofInchOfWaterPer100Feet(TEST_VALUE)),
                 Arguments.of(Curvature.class, "15.1 [rad/m]", Curvature.ofRadiansPerMeter(TEST_VALUE)),
-                Arguments.of(RotationSpeedToFlowRateRatio.class, "15.1 [(rad/s)/(m3/s)]", RotationSpeedToFlowRateRatio.ofRadianPerSecondPerCubicMeterPerSecond(TEST_VALUE))
+                Arguments.of(RotationSpeedToFlowRateRatio.class, "15.1 [rad·s⁻¹/m³·s⁻¹]", RotationSpeedToFlowRateRatio.ofRadianPerSecondPerCubicMeterPerSecond(TEST_VALUE))
         );
     }
 

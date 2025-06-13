@@ -10,8 +10,8 @@ import static com.synerset.unitility.unitsystem.util.Constants.RADIANS_PER_REVOL
 
 public enum RotationSpeedToFlowRateRatioUnits implements RotationSpeedToFlowRateRatioUnit {
 
-    RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND("(rad/s)/(m3/s)", val -> val, val -> val),
-    RPM_PER_GPM("rpm/(gal_US/min)", val -> val * (GALLONS_US_PER_CUBIC_METER * RADIANS_PER_REVOLUTION), val -> val / (GALLONS_US_PER_CUBIC_METER * RADIANS_PER_REVOLUTION));
+    RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND("rad·s⁻¹/m³·s⁻¹", val -> val, val -> val),
+    RPM_PER_GPM("rpm/gpm", val -> val * (GALLONS_US_PER_CUBIC_METER * RADIANS_PER_REVOLUTION), val -> val / (GALLONS_US_PER_CUBIC_METER * RADIANS_PER_REVOLUTION));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
