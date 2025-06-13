@@ -84,7 +84,8 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(ThermalConductivity.class, "15.1 [W/(m·K)]", ThermalConductivity.ofWattsPerMeterKelvin(TEST_VALUE)),
                 Arguments.of(ThermalDiffusivity.class, "15.1 [ft²/s]", ThermalDiffusivity.ofSquareFeetPerSecond(TEST_VALUE)),
                 Arguments.of(BypassFactor.class, "15.1", BypassFactor.of(TEST_VALUE)),
-                Arguments.of(LinearResistance.class, "15.1 [inH₂O/100ft]", LinearResistance.ofInchOfWaterPer100Feet(TEST_VALUE))
+                Arguments.of(LinearResistance.class, "15.1 [inH₂O/100ft]", LinearResistance.ofInchOfWaterPer100Feet(TEST_VALUE)),
+                Arguments.of(Curvature.class, "15.1 [rad/m]", Curvature.ofRadiansPerMeter(TEST_VALUE))
         );
     }
 

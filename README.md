@@ -141,6 +141,7 @@ units and at least one Imperial unit.
 * LinearMassDensity: Kilogram per metre [kg/m], Tonne per metre [t/m], Ounce per foot [oz/ft], Pound per foot [lb/ft]
 * Velocity: Meter per second [m/s], centimeter per second [cm/s], kilometer per hour [km/h], inch per second, [in/s], feet per second [ft/s], mile per hour [mph], knot [kn], Mach [Mach]
 * AngularVelocity: Radians per second [rad/s], revolutions per minute, [rpm], revolutions per second [rps], degrees per second [°/s]
+* Curvature: Radians per meter [rad/m], radians per foot [rad/ft], degrees per meter [°/m], degrees per foot [°/ft], degrees per hundred feet [°/100ft]
 
 #### MECHANICAL:
 

@@ -164,6 +164,7 @@ class PhysicalQuantityParsingFactoryTest {
         VolumetricFlow actualVolFlow = PARSING_FACTORY.parse(VolumetricFlow.class, singleValueInput);
         HumidityRatio actualHumRatio = PARSING_FACTORY.parse(HumidityRatio.class, singleValueInput);
         RelativeHumidity actualRelHum = PARSING_FACTORY.parse(RelativeHumidity.class, singleValueInput);
+        Curvature actualCurvature = PARSING_FACTORY.parse(Curvature.class, singleValueInput);
 
         LinearResistance actualLinearResistance = PARSING_FACTORY.parse(LinearResistance.class, singleValueInput);
         FrictionFactor actualFrictionFactor = PARSING_FACTORY.parse(FrictionFactor.class, singleValueInput);
@@ -212,6 +213,7 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualVolFlow).isEqualTo(VolumetricFlow.of(expectedValue, VolumetricFlowUnits.getDefaultUnit()));
         assertThat(actualHumRatio).isEqualTo(HumidityRatio.of(expectedValue, HumidityRatioUnits.getDefaultUnit()));
         assertThat(actualRelHum).isEqualTo(RelativeHumidity.of(expectedValue, RelativeHumidityUnits.getDefaultUnit()));
+        assertThat(actualCurvature).isEqualTo(Curvature.of(expectedValue, CurvatureUnits.getDefaultUnit()));
         // Hydraulic
         assertThat(actualFrictionFactor).isEqualTo(FrictionFactor.of(expectedValue));
         assertThat(actualLinearResistance).isEqualTo(LinearResistance.of(expectedValue, LinearResistanceUnits.getDefaultUnit()));

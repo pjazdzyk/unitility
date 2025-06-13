@@ -48,6 +48,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(AngularVelocity.class, AngularVelocity::of),
                 Map.entry(Volume.class, Volume::of),
                 Map.entry(Ratio.class, Ratio::of),
+                Map.entry(Curvature.class, Curvature::of),
                 // Dimensionless
                 Map.entry(BypassFactor.class, (value, symbol) -> BypassFactor.of(value)),
                 Map.entry(GrashofNumber.class, (value, symbol) -> GrashofNumber.of(value)),
