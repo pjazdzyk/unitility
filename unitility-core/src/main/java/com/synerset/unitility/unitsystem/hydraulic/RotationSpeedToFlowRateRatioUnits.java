@@ -5,13 +5,10 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.GALLONS_US_PER_CUBIC_METER;
-import static com.synerset.unitility.unitsystem.util.Constants.RADIANS_PER_REVOLUTION;
-
 public enum RotationSpeedToFlowRateRatioUnits implements RotationSpeedToFlowRateRatioUnit {
 
     RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND("rad·s⁻¹/m³·s⁻¹", val -> val, val -> val),
-    RPM_PER_GPM("rpm/gpm", val -> val * (GALLONS_US_PER_CUBIC_METER * RADIANS_PER_REVOLUTION), val -> val / (GALLONS_US_PER_CUBIC_METER * RADIANS_PER_REVOLUTION));
+    RPM_PER_GPM("rpm/gpm", val -> val * (2 * Math.PI / 0.003785411784), val -> val / (2 * Math.PI / 0.003785411784));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
