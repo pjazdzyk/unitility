@@ -1,8 +1,6 @@
 package com.synerset.unitility.unitsystem.hydraulic;
 
 import com.synerset.unitility.unitsystem.CalculableQuantity;
-import com.synerset.unitility.unitsystem.common.Curvature;
-import com.synerset.unitility.unitsystem.common.CurvatureUnits;
 
 import java.util.Objects;
 
