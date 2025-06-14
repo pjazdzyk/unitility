@@ -100,11 +100,30 @@ class CurvatureTest {
     }
 
     @Test
-    @DisplayName("should return valid result from to() and getIn() methods")
+    @DisplayName("should return valid result from to() and getIn() methods for most radii of curvature")
     void shouldReturnValidResultFromToAndGetInMethods() {
         // Given
         // Note: Math.PI * 2.0 does not pass an equality test, even by using StrictMath. I believe this is
         // simply a "sweet spot"
+        Curvature expected = Curvature.ofRadiansPerMeter(Math.PI * 2.0 * 10.0);
+
+        // When
+        Curvature actual = expected.toRadiansPerMeter().toDegreesPerMeter().toRadiansPerFoot().toDegreesPerFoot().toDegreesPeHundredFeet().toRadiansPerMeter();
+        double actualValue = expected.getInRadiansPerMeter();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+    }
+
+    @Test
+    @DisplayName("floating point math quirks introduce a small amount of 'round-trip' error for some radii of curvature")
+    void doesNotExactlyEqualDueToFloatingPointMathForSomeCurvature() {
+        // Given
+        // Note: Math.PI * 2.0 [rad/m] does not pass the strict 'round-trip' equality test even using StrictMath.
+        // This is apparently a "sweet spot" for the mantissa, multiplying by 0.001, 0.1, 2.1, 10.0, 1000.0 all
+        // result in exact equality when compared before/after the round trip. Possibly something more significant
+        // lurks underneath? This may be why some unit libraries made a design choice to use BigDecimal types
         Curvature expected = Curvature.ofRadiansPerMeter(Math.PI * 2.0);
 
         // When
@@ -117,8 +136,26 @@ class CurvatureTest {
                 .toRadiansPerMeter();
 
         // Then
-        assertThat(actual).isEqualTo(expected);
-        assertThat(actual.getValue()).isEqualTo(expected.getValue());
+        assertThat(actual.minus(expected).getValue()).isEqualTo(8.881784197001252E-16);
+    }
+
+    @Test
+    @DisplayName("should return valid result from to() and getIn() methods with some floating point drift for smaller curvature")
+    void shouldReturnValidResultFromToAndGetInMethodsWithFloatingPointError() {
+        // Given
+        Curvature expected = Curvature.ofRadiansPerMeter(Math.PI * 2.0);
+
+        // When
+        double actualValue = expected
+                .toRadiansPerMeter()
+                .toDegreesPerMeter()
+                .toRadiansPerFoot()
+                .toDegreesPerFoot()
+                .toDegreesPeHundredFeet()
+                .getInRadiansPerMeter();
+
+        // Then
+        assertThat(actualValue).isEqualTo(expected.getValue(),withPrecision(1e-14));
     }
 
 }

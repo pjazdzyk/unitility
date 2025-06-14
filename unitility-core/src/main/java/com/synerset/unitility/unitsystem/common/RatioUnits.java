@@ -5,12 +5,10 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.HECTO;
-
 public enum RatioUnits implements RatioUnit {
 
     PERCENT("%", val -> val, val -> val),
-    DECIMAL("", val -> val * HECTO, val -> val / HECTO);
+    DECIMAL("", val -> val * 100, val -> val / 100);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

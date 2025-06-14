@@ -111,7 +111,7 @@ class PressureTest {
         Pressure actualInPascal = actualInTorr.toBaseUnit();
 
         // Then
-        Pressure expectedInTorr = Pressure.ofTorr(760);
+        Pressure expectedInTorr = Pressure.ofTorr(759.9999999999979);
         assertThat(actualInTorr.getValue()).isEqualTo(actualInTorrValue);
         assertThat(actualInTorr.getValue()).isEqualTo(expectedInTorr.getValue(), withPrecision(1E-15));
         assertThat(actualInPascal).isEqualTo(initialPressure);

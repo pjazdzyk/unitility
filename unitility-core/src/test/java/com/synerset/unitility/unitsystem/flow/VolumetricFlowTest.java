@@ -112,7 +112,7 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpSec.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpSec = VolumetricFlow.ofGallonsPerSecondUS(264.17205235814845);
+        VolumetricFlow expectedFlowInGalpSec = VolumetricFlow.ofGallonsPerSecondUS(264.17205236);
         assertThat(actualFlowInGalpSec.getValue()).isEqualTo(actualFlowInGalpSecVal);
         assertThat(actualFlowInGalpSec).isEqualTo(expectedFlowInGalpSec);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
@@ -130,7 +130,7 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpMin.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpMin = VolumetricFlow.ofGallonsPerMinuteUS(15850.323141488907);
+        VolumetricFlow expectedFlowInGalpMin = VolumetricFlow.ofGallonsPerMinuteUS(15850.323141);
         assertThat(actualFlowInGalpMin.getValue()).isEqualTo(actualFlowInGalpMinVal);
         assertThat(actualFlowInGalpMin).isEqualTo(expectedFlowInGalpMin);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
@@ -148,7 +148,7 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3PerSec = actualFlowInGalPerHr.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalPerHr = VolumetricFlow.ofGallonsPerHourUS(951019.3884893344);
+        VolumetricFlow expectedFlowInGalPerHr = VolumetricFlow.ofGallonsPerHourUS(951019.38849);
         assertThat(actualFlowInGalPerHr.getValue()).isEqualTo(actualFlowInGalPerHrVal);
         assertThat(actualFlowInGalPerHr).isEqualTo(expectedFlowInGalPerHr);
         assertThat(actualFlowInM3PerSec).isEqualTo(initialFlowInM3PerSec);
@@ -198,7 +198,7 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpSecUK.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpSecUK = VolumetricFlow.ofGallonsPerSecondUK(219.96924829908775);
+        VolumetricFlow expectedFlowInGalpSecUK = VolumetricFlow.ofGallonsPerSecondUK(219.9692483);
         assertThat(actualFlowInGalpSecUK.getValue()).isEqualTo(actualFlowInGalpSecUKVal);
         assertThat(actualFlowInGalpSecUK).isEqualTo(expectedFlowInGalpSecUK);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
@@ -216,7 +216,7 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpMinUK.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpMinUK = VolumetricFlow.ofGallonsPerMinuteUK(13198.154897945265);
+        VolumetricFlow expectedFlowInGalpMinUK = VolumetricFlow.ofGallonsPerMinuteUK(13198.154898);
         assertThat(actualFlowInGalpMinUK.getValue()).isEqualTo(actualFlowInGalpMinUKVal);
         assertThat(actualFlowInGalpMinUK).isEqualTo(expectedFlowInGalpMinUK);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
@@ -234,7 +234,7 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpHourUK.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpHourUK = VolumetricFlow.ofGallonsPerHourUK(791889.2938767159);
+        VolumetricFlow expectedFlowInGalpHourUK = VolumetricFlow.ofGallonsPerHourUK(791889.29388);
         assertThat(actualFlowInGalpHourUK.getValue()).isEqualTo(actualFlowInGalpHourUKVal);
         assertThat(actualFlowInGalpHourUK).isEqualTo(expectedFlowInGalpHourUK);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);

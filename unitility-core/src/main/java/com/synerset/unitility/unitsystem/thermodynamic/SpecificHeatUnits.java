@@ -5,14 +5,11 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.IMPERIAL_SPECIFIC_HEAT_RATIO;
-import static com.synerset.unitility.unitsystem.util.Constants.KILO;
-
 public enum SpecificHeatUnits implements SpecificHeatUnit {
 
     JOULES_PER_KILOGRAM_KELVIN("J/(kg·K)", val -> val, val -> val),
-    KILOJOULES_PER_KILOGRAM_KELVIN("kJ/(kg·K)", val -> val * KILO, val -> val / KILO),
-    BTU_PER_POUND_FAHRENHEIT("BTU/(lb·°F)", val -> val * IMPERIAL_SPECIFIC_HEAT_RATIO, val -> val / IMPERIAL_SPECIFIC_HEAT_RATIO);
+    KILOJOULES_PER_KILOGRAM_KELVIN("kJ/(kg·K)", val -> val * 1000, val -> val / 1000),
+    BTU_PER_POUND_FAHRENHEIT("BTU/(lb·°F)", val -> val * 4186.7999934703, val -> val / 4186.7999934703);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

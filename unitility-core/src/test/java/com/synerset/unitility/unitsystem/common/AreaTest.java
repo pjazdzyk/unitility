@@ -132,7 +132,7 @@ class AreaTest {
         // Then
         Area expectedInSquareFeet = Area.ofSquareFeet(1076.391041670972);
         assertThat(actualInSquareFeet.getValue()).isEqualTo(actualInSquareFeetVal);
-        assertThat(actualInSquareFeet.getValue()).isEqualTo(expectedInSquareFeet.getValue(), withPrecision(1E-12));
+        assertThat(actualInSquareFeet.getValue()).isEqualTo(expectedInSquareFeet.getValue(), withPrecision(1E-15));
         assertThat(actualInSquareMeters.getValue()).isEqualTo(initialArea.getValue(), withPrecision(1E-14));
     }
 
@@ -226,7 +226,7 @@ class AreaTest {
         double actualValue = expected.getInSquareMeters();
 
         // Then
-        assertThat(actual.getUnit()).isEqualTo(expected.getUnit());
+        assertThat(actual).isEqualTo(expected);
         assertThat(actualValue).isEqualTo(expected.getValue());
     }
 }

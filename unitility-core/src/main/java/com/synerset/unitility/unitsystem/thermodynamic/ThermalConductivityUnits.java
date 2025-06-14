@@ -5,14 +5,11 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.IMPERIAL_THERMAL_CONDUCTIVITY_RATIO;
-import static com.synerset.unitility.unitsystem.util.Constants.KILO;
-
 public enum ThermalConductivityUnits implements ThermalConductivityUnit {
 
     WATTS_PER_METER_KELVIN("W/(m·K)", val -> val, val -> val),
-    KILOWATTS_PER_METER_KELVIN("kW/(m·K)", val -> val * KILO, val -> val / KILO),
-    BTU_PER_HOUR_FOOT_FAHRENHEIT("BTU/(h·ft·°F)", val -> val * IMPERIAL_THERMAL_CONDUCTIVITY_RATIO, val -> val / IMPERIAL_THERMAL_CONDUCTIVITY_RATIO);
+    KILOWATTS_PER_METER_KELVIN("kW/(m·K)", val -> val * 1000.0, val -> val / 1000.0),
+    BTU_PER_HOUR_FOOT_FAHRENHEIT("BTU/(h·ft·°F)", val -> val * 1.7307352822121, val -> val / 1.7307352822121);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

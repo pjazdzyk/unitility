@@ -5,16 +5,12 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.KILO;
-import static com.synerset.unitility.unitsystem.util.Constants.OUNCE_PER_FOOT_FOR_KILOGRAM_PER_METER;
-import static com.synerset.unitility.unitsystem.util.Constants.POUND_PER_FOOT_FOR_KILOGRAM_PER_METER;
-
 public enum LinearMassDensityUnits implements LinearMassDensityUnit {
 
     KILOGRAM_PER_METER("kg/m", val -> val, val -> val),
-    TONNE_PER_METER("t/m", val -> val * KILO, val -> val / KILO),
-    OUNCE_PER_FOOT("oz/ft", val -> val / OUNCE_PER_FOOT_FOR_KILOGRAM_PER_METER, val -> val * OUNCE_PER_FOOT_FOR_KILOGRAM_PER_METER),
-    POUND_PER_FOOT("lb/ft", val -> val / POUND_PER_FOOT_FOR_KILOGRAM_PER_METER, val -> val * POUND_PER_FOOT_FOR_KILOGRAM_PER_METER);
+    TONNE_PER_METER("t/m", val -> val * 1000.0, val -> val / 1000.0),
+    OUNCE_PER_FOOT("oz/ft", val -> val * (0.028349523125 / 0.3048), val -> val / (0.028349523125 / 0.3048)),
+    POUND_PER_FOOT("lb/ft", val -> val * (0.45359237 / 0.3048), val -> val / (0.45359237 / 0.3048));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

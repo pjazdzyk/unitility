@@ -5,17 +5,12 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.KILO;
-import static com.synerset.unitility.unitsystem.util.Constants.KILOGRAMS_PER_POUND;
-import static com.synerset.unitility.unitsystem.util.Constants.SECONDS_PER_HOUR;
-import static com.synerset.unitility.unitsystem.util.Constants.SECONDS_PER_MINUTE;
-
 public enum MassFlowUnits implements MassFlowUnit {
 
     KILOGRAM_PER_SECOND("kg/s", val -> val, val -> val),
-    KILOGRAM_PER_HOUR("kg/h", val -> val / SECONDS_PER_HOUR, val -> val * SECONDS_PER_HOUR),
-    TONNE_PER_HOUR("t/h", val -> val * (KILO / SECONDS_PER_HOUR), val -> val / (KILO / SECONDS_PER_HOUR)),
-    POUND_PER_SECOND("lb/s", val -> val * KILOGRAMS_PER_POUND, val -> val / KILOGRAMS_PER_POUND);
+    KILOGRAM_PER_HOUR("kg/h", val -> val / 3600.0, val -> val * 3600.0),
+    TONNE_PER_HOUR("t/h", val -> val * (1000.0 / 3600.0), val -> val / (1000.0 / 3600.0)),
+    POUND_PER_SECOND("lb/s", val -> val * 0.45359237, val -> val / 0.45359237);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

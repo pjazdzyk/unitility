@@ -1,18 +1,15 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
-import com.synerset.unitility.unitsystem.util.Constants;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.KILO;
-
 public enum SpecificEnthalpyUnits implements SpecificEnthalpyUnit {
 
     JOULE_PER_KILOGRAM("J/kg", val -> val, val -> val),
-    KILOJOULE_PER_KILOGRAM("kJ/kg", val -> val * KILO, val -> val / KILO),
-    BTU_PER_POUND("BTU/lb", val -> val * Constants.BTU_PER_POUND, val -> val / Constants.BTU_PER_POUND);
+    KILOJOULE_PER_KILOGRAM("kJ/kg", val -> val * 1000, val -> val / 1000),
+    BTU_PER_POUND("BTU/lb", val -> val * 2326, val -> val / 2326.0);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

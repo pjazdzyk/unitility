@@ -5,14 +5,10 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.CENTI;
-import static com.synerset.unitility.unitsystem.util.Constants.KILO;
-import static com.synerset.unitility.unitsystem.util.Constants.POUNDAL_PER_NEWTON_HISTORICAL;
-
 public enum MomentumUnits implements MomentumUnit {
     KILOGRAM_METER_PER_SECOND("kg·m/s", val -> val, val -> val),
-    POUND_FEET_PER_SECOND("lb·ft/s", val -> val * POUNDAL_PER_NEWTON_HISTORICAL, val -> val / POUNDAL_PER_NEWTON_HISTORICAL),
-    GRAM_CENTIMETRE_PER_SECOND("g·cm/s", val -> val * CENTI / KILO, val -> val / CENTI * KILO);
+    POUND_FEET_PER_SECOND("lb·ft/s", val -> val * 0.138254954376, val -> val / 0.138254954376),
+    GRAM_CENTIMETRE_PER_SECOND("g·cm/s", val -> val * 0.00001, val -> val / 0.00001);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

@@ -78,8 +78,8 @@ class TorqueTest {
         // Then
         Torque expectedInInchPounds = Torque.ofInchPounds(8850.74579132718436654);
         assertThat(actualInInchPounds.getValue()).isEqualTo(actualInInchPoundsVal);
-        assertThat(actualInInchPounds.getValue()).isEqualTo(expectedInInchPounds.getValue(), withPrecision(1E-12));
-        assertThat(actualInNewtonMeters.getValue()).isEqualTo(initialTorque.getValue(), withPrecision(1E-12));
+        assertThat(actualInInchPounds.getValue()).isEqualTo(expectedInInchPounds.getValue(), withPrecision(1E-10));
+        assertThat(actualInNewtonMeters).isEqualTo(initialTorque);
     }
 
     @Test

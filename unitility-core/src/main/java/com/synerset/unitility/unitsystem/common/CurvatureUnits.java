@@ -5,18 +5,16 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.HECTO;
-import static com.synerset.unitility.unitsystem.util.Constants.METERS_PER_FOOT;
 import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
 
 public enum CurvatureUnits implements CurvatureUnit {
 
     RADIANS_PER_METER("rad/m", val -> val, val -> val),
+    RADIANS_PER_FOOT("rad/ft", val -> val / 0.3048, val -> val * 0.3048),
     DEGREES_PER_METER("°/m", Math::toRadians, Math::toDegrees),
-    RADIANS_PER_FOOT("rad/ft", val -> val / METERS_PER_FOOT, val -> val * METERS_PER_FOOT),
-    DEGREES_PER_FOOT("°/ft", val -> toRadians(val) / METERS_PER_FOOT, val -> toDegrees(val) *  METERS_PER_FOOT),
-    DEGREES_PER_HUNDRED_FEET("°/100ft", val -> toRadians(val) / (METERS_PER_FOOT / HECTO), val -> toDegrees(val) * (METERS_PER_FOOT / HECTO));
+    DEGREES_PER_FOOT("°/ft", val -> toRadians(val) / 0.3048, val -> toDegrees(val) * 0.3048),
+    DEGREES_PER_HUNDRED_FEET("°/100ft", val -> toRadians(val) / 0.3048 * 100.0, val -> toDegrees(val) * 0.3048 /100.0);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

@@ -5,37 +5,23 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static com.synerset.unitility.unitsystem.util.Constants.DENSITY_MERCURY_10;
-import static com.synerset.unitility.unitsystem.util.Constants.DENSITY_MERCURY_60;
-import static com.synerset.unitility.unitsystem.util.Constants.DENSITY_MERCURY_95;
-import static com.synerset.unitility.unitsystem.util.Constants.DENSITY_WATER_10;
-import static com.synerset.unitility.unitsystem.util.Constants.DENSITY_WATER_60;
-import static com.synerset.unitility.unitsystem.util.Constants.DENSITY_WATER_95;
-import static com.synerset.unitility.unitsystem.util.Constants.GRAVITY_SI;
-import static com.synerset.unitility.unitsystem.util.Constants.HECTO;
-import static com.synerset.unitility.unitsystem.util.Constants.KILO;
-import static com.synerset.unitility.unitsystem.util.Constants.MEGA;
-import static com.synerset.unitility.unitsystem.util.Constants.MILLI;
-import static com.synerset.unitility.unitsystem.util.Constants.PASCAL_PER_PSI;
-import static com.synerset.unitility.unitsystem.util.Constants.PASCAL_PER_TORR;
-
 public enum PressureUnits implements PressureUnit {
 
     PASCAL("Pa", val -> val, val -> val),
-    HECTOPASCAL("hPa", val -> val * HECTO, val -> val / HECTO),
-    KILOPASCAL("kPa", val -> val * KILO, val -> val / KILO),
-    MEGAPASCAL("MPa", val -> val * MEGA, val -> val / MEGA),
-    BAR("bar", val -> val * HECTO * KILO, val -> val / (HECTO * KILO)),
-    MILLIBAR("mbar", val -> val * HECTO, val -> val / HECTO),
-    TORR("Torr", val -> val * PASCAL_PER_TORR, val -> val / PASCAL_PER_TORR),
-    PSI("psi", val -> val * PASCAL_PER_PSI, val -> val / PASCAL_PER_PSI),
+    HECTOPASCAL("hPa", val -> val * 1.0E2, val -> val / 1.0E2),
+    KILOPASCAL("kPa", val -> val * 1.0E3, val -> val / 1.0E3),
+    MEGAPASCAL("MPa", val -> val * 1.0E6, val -> val / 1.0E6),
+    BAR("bar", val -> val * 1.0E5, val -> val / 1.0E5),
+    MILLIBAR("mbar", val -> val * 100, val -> val / 100),
+    TORR("Torr", val -> val * 133.322368421053, val -> val / 133.322368421053),
+    PSI("psi", val -> val * 6894.757293168, val -> val / 6894.757293168),
     // Pressure units based on formula P = rho * g * h
-    METRE_OF_WATER_10("mH₂O_10", val -> val * DENSITY_WATER_10 * GRAVITY_SI, val -> val / (DENSITY_WATER_10 * GRAVITY_SI)),
-    METRE_OF_WATER_60("mH₂O_60", val -> val * DENSITY_WATER_60 * GRAVITY_SI, val -> val / (DENSITY_WATER_60 * GRAVITY_SI)),
-    METRE_OF_WATER_95("mH₂O_95", val -> val * DENSITY_WATER_95 * GRAVITY_SI, val -> val / (DENSITY_WATER_95 * GRAVITY_SI)),
-    MILLIMETRE_OF_MERCURY_10("mmHg_10", val -> val * DENSITY_MERCURY_10 * GRAVITY_SI * MILLI, val -> val / (DENSITY_MERCURY_10 * GRAVITY_SI * MILLI)),
-    MILLIMETRE_OF_MERCURY_60("mmHg_60", val -> val * DENSITY_MERCURY_60 * GRAVITY_SI * MILLI, val -> val / (DENSITY_MERCURY_60 * GRAVITY_SI * MILLI)),
-    MILLIMETRE_OF_MERCURY_95("mmHg_95", val -> val * DENSITY_MERCURY_95 * GRAVITY_SI * MILLI, val -> val / (DENSITY_MERCURY_95 * GRAVITY_SI * MILLI));
+    METRE_OF_WATER_10("mH₂O_10", val -> val * 999.5457000320766 * 9.80665, val -> val / (999.5457000320766 * 9.80665)),
+    METRE_OF_WATER_60("mH₂O_60", val -> val * 982.6716124974598 * 9.80665, val -> val / (982.6716124974598 * 9.80665)),
+    METRE_OF_WATER_95("mH₂O_95", val -> val * 961.269058775685 * 9.80665, val -> val / (961.269058775685 * 9.80665)),
+    MILLIMETRE_OF_MERCURY_10("mmHg_10", val -> val * 13570 * 9.80665 * 0.001, val -> val / (13570 * 9.80665 * 0.001)),
+    MILLIMETRE_OF_MERCURY_60("mmHg_60", val -> val * 13448 * 9.80665 * 0.001, val -> val / (13448 * 9.80665 * 0.001)),
+    MILLIMETRE_OF_MERCURY_95("mmHg_95", val -> val * 13364 * 9.80665 * 0.001, val -> val / (13364 * 9.80665 * 0.001));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
