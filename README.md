@@ -139,6 +139,9 @@ units and at least one Imperial unit.
 * Angle: degrees [°], radians [rad]
 * Ratio: Percent [%], Decimal [-]
 * LinearMassDensity: Kilogram per metre [kg/m], Tonne per metre [t/m], Ounce per foot [oz/ft], Pound per foot [lb/ft]
+* Velocity: Meter per second [m/s], centimeter per second [cm/s], kilometer per hour [km/h], inch per second, [in/s], feet per second [ft/s], mile per hour [mph], knot [kn], Mach [Mach]
+* AngularVelocity: Radians per second [rad/s], revolutions per minute, [rpm], revolutions per second [rps], degrees per second [°/s]
+* Curvature: Radians per meter [rad/m], radians per foot [rad/ft], degrees per meter [°/m], degrees per foot [°/ft], degrees per hundred feet [°/100ft]
 
 #### MECHANICAL:
 
@@ -182,6 +185,7 @@ units and at least one Imperial unit.
 * LinearResistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
 * FrictionFactor: [-]
 * LocalLossFactor: [-]
+* Rotation Speed To Flow Rate Ratio: Radians per second per meter per second [rad·s⁻¹/m³·s⁻¹], revolutions per minute per gallons per minute [rpm/gpm]
 
 #### DIMENSIONLESS:
 

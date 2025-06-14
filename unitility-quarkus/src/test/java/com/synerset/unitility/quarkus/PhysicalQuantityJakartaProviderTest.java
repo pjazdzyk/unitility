@@ -11,6 +11,7 @@ import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
+import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
 import com.synerset.unitility.unitsystem.mechanical.Force;
 import com.synerset.unitility.unitsystem.mechanical.Momentum;
 import com.synerset.unitility.unitsystem.mechanical.Torque;
@@ -63,6 +64,7 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(Distance.class, "15.1 [mi]", Distance.ofMiles(TEST_VALUE)),
                 Arguments.of(Mass.class, "15.1 [g]", Mass.ofGrams(TEST_VALUE)),
                 Arguments.of(Velocity.class, "15.1 [m/s]", Velocity.ofMetersPerSecond(TEST_VALUE)),
+                Arguments.of(AngularVelocity.class, "15.1 [rad/s]", AngularVelocity.ofRadiansPerSecond(TEST_VALUE)),
                 Arguments.of(Volume.class, "15.1 [m³]", Volume.ofCubicMeters(TEST_VALUE)),
                 Arguments.of(MassFlow.class, "15.1 [kg/s]", MassFlow.ofKilogramsPerSecond(TEST_VALUE)),
                 Arguments.of(VolumetricFlow.class, "15.1 [gal/h_UK]", VolumetricFlow.ofGallonsPerHourUK(TEST_VALUE)),
@@ -83,7 +85,9 @@ class PhysicalQuantityJakartaProviderTest {
                 Arguments.of(ThermalConductivity.class, "15.1 [W/(m·K)]", ThermalConductivity.ofWattsPerMeterKelvin(TEST_VALUE)),
                 Arguments.of(ThermalDiffusivity.class, "15.1 [ft²/s]", ThermalDiffusivity.ofSquareFeetPerSecond(TEST_VALUE)),
                 Arguments.of(BypassFactor.class, "15.1", BypassFactor.of(TEST_VALUE)),
-                Arguments.of(LinearResistance.class, "15.1 [inH₂O/100ft]", LinearResistance.ofInchOfWaterPer100Feet(TEST_VALUE))
+                Arguments.of(LinearResistance.class, "15.1 [inH₂O/100ft]", LinearResistance.ofInchOfWaterPer100Feet(TEST_VALUE)),
+                Arguments.of(Curvature.class, "15.1 [rad/m]", Curvature.ofRadiansPerMeter(TEST_VALUE)),
+                Arguments.of(RotationSpeedToFlowRateRatio.class, "15.1 [rad·s⁻¹/m³·s⁻¹]", RotationSpeedToFlowRateRatio.ofRadianPerSecondPerCubicMeterPerSecond(TEST_VALUE))
         );
     }
 

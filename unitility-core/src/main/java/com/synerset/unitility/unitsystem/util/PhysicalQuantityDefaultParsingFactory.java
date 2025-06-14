@@ -37,8 +37,10 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Mass.class, Mass::of),
                 Map.entry(LinearMassDensity.class, LinearMassDensity::of),
                 Map.entry(Velocity.class, Velocity::of),
+                Map.entry(AngularVelocity.class, AngularVelocity::of),
                 Map.entry(Volume.class, Volume::of),
                 Map.entry(Ratio.class, Ratio::of),
+                Map.entry(Curvature.class, Curvature::of),
                 // Dimensionless
                 Map.entry(BypassFactor.class, (value, symbol) -> BypassFactor.of(value)),
                 Map.entry(GrashofNumber.class, (value, symbol) -> GrashofNumber.of(value)),
@@ -54,6 +56,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(LinearResistance.class, LinearResistance::of),
                 Map.entry(FrictionFactor.class, (value, symbol) -> FrictionFactor.of(value)),
                 Map.entry(LocalLossFactor.class, (value, symbol) -> LocalLossFactor.of(value)),
+                Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatio::of),
                 // Mechanical
                 Map.entry(Force.class, Force::of),
                 Map.entry(Momentum.class, Momentum::of),
@@ -90,8 +93,10 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Mass.class, MassUnits.KILOGRAM),
                 Map.entry(LinearMassDensity.class, LinearMassDensityUnits.KILOGRAM_PER_METER),
                 Map.entry(Velocity.class, VelocityUnits.METER_PER_SECOND),
+                Map.entry(AngularVelocity.class, AngularVelocityUnits.RADIANS_PER_SECOND),
                 Map.entry(Volume.class, VolumeUnits.CUBIC_METER),
                 Map.entry(Ratio.class, RatioUnits.PERCENT),
+                Map.entry(Curvature.class, CurvatureUnits.RADIANS_PER_METER),
                 // Dimensionless
                 Map.entry(BypassFactor.class, BypassFactorUnits.DIMENSIONLESS),
                 Map.entry(GrashofNumber.class, GrashofNumberUnits.DIMENSIONLESS),
@@ -107,6 +112,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(LinearResistance.class, LinearResistanceUnits.PASCAL_PER_METER),
                 Map.entry(FrictionFactor.class, FrictionFactorUnits.DIMENSIONLESS),
                 Map.entry(LocalLossFactor.class, LocalLossFactorUnits.DIMENSIONLESS),
+                Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND),
                 // Mechanical
                 Map.entry(Force.class, ForceUnits.NEWTON),
                 Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),
