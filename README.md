@@ -47,6 +47,8 @@ features, such as overloaded operators.
    4.7 [Equality and sorting](#47-equality-and-sorting) <br>
 5. [Unitility extension modules](#5-unitility-extension-modules) <br>
    5.1 [Jackson serializers / deserializers](#51-jackson-serializers-and-deserializers) <br>
+   &nbsp; 5.1.1 [Default ser-de](#511-default-ser-de) <br>
+   &nbsp; 5.1.2 [Plain SI value ser-de](#512-plain-si-value-ser-de) <br>
    5.2 [SpringBoot web extension](#52-spring-boot-module) <br>
    5.3 [Quarkus web extension](#53-quarkus-module) <br>
    5.4 [Jakarta Validation](#54-jakarta-validation) <br>
@@ -268,7 +270,7 @@ String k1 = "15.1 [W p mxK)]";
 String k2 = "15.1 [W/(m.K)]";
 String k3 = "   1 5 .  1 [   WpmK   ]";
 String k4 = "15.1 W/mK";
-String k5 = "15.1"; // This will be resolved to hard-coded default unit of W/mK
+String k5 = "15.1"; // This will be resolved to default SI unit of W/mK
 // All above strings are properly resolved to Thermal Conductivity, even partially malformed k3.
 ThermalConductivity thermCond1 = parsingFactory.parse(ThermalConductivity.class, k1); // {15.1 W/(m·K)}
 ThermalConductivity thermCond2 = parsingFactory.parse(ThermalConductivity.class, k2); // {15.1 W/(m·K)}
@@ -281,14 +283,15 @@ Parsers are designed to interpret the numeric part as the value and the content 
 symbol. Parsers allow for a limited deviation in input style, as illustrated in the example below. The table presents 
 alternative ways of expressing units in an input string:
 
-| NAME              | DEF | ALT     | EXAMPLES           |
-|-------------------|-----|---------|--------------------|
-| decimal separator | .   | ,       | 20.1 or 20,1       |
-| degrees symbol    | °   | o, deg  | 20°, 20o, 20deg    |
-| multiplication    | ·   | x  or . | Pa·m, Pa x m, Pa.m | 
-| division          | /   | p       | m/s, mps           |
-| square            | ²   | 2       | m², m2             |
-| cubic             | ³   | 3       | m³, m3             |
+| NAME               | DEF | ALT     | EXAMPLES           |
+|--------------------|-----|---------|--------------------|
+| decimal separator  | .   | ,       | 20.1 or 20,1       |
+| degrees symbol     | °   | o, deg  | 20°, 20o, 20deg    |
+| multiplication     | ·   | x  or . | Pa·m, Pa x m, Pa.m | 
+| division           | /   | p       | m/s, mps           |
+| square             | ²   | 2       | m², m2             |
+| cubic              | ³   | 3       | m³, m3             |
+| negative exponents | ⁻¹  | -1      | m⁻¹, m-1           |
 
 Please note that this method of creating quantities is designed to be used for deserializers. <Br>
 **In your code, you should create units in a programmatic way, not parsing from strings.**
@@ -309,7 +312,6 @@ But this will not: <br>
 ```text
 1,000,0000.00 [Pa] -> will FAIL
 ```
-
 
 ### 4.3 Logical operations
 
@@ -522,7 +524,9 @@ filter them out, but some recent versions of Tomcat server have issues with "[]"
 Other special characters can be easily replaced with simpler equivalents, as presented in the table in [section 4.2](#42-parsing-quantities-from-string).
 
 ## 5.1 Jackson serializers and deserializers
-The Jackson library is utilized in many frameworks, enabling the serialization of objects into a JSON structure and
+### 5.1.1 Default ser-de
+
+The Jackson library is used in many frameworks, enabling the serialization of objects into a JSON structure and
 deserialization back to Java objects. To include this module in your project, use the following dependency:
 
 ```xml
@@ -539,11 +543,66 @@ PhysicalQuantity JSON structure for valid serialization / deserialization has be
   "unit": "oC"
 }
 ```
+Let's assume we have an object aggregating PhysicalQuantity objects: azimuth as Angle.ofDegrees(90) and length
+Distance.ofKilometers(1.0). Serialized structure will result as shown below:
+```json
+{
+  "length": {"value": 1, "unit": "km"},
+  "azimuth": {"value": 90, "unit": "°"}
+}
+```
 
 The Jackson module provides a configured SimpleModule with registered StdSerializer and JsonDeserializer instances. 
 Each PhysicalQuantity class has its own defined deserializer. Deserializers use PhysicalQuantityParsingFactory to
-obtain the appropriate parser depending on the class type. This module is part of the Spring and Quarkus modules, 
+get the appropriate parser depending on the class type. This module is part of the Spring and Quarkus modules, 
 therefore, it does not need to be added explicitly if framework extensions are included in the project.
+
+### 5.1.2 Plain SI value ser-de
+An additional set of ser-de has been provided for all cases where unit symbol is not required in the response structure,
+allowing for smaller, flat and more convenient response payloads. As a consequence, physical quantity value is converted
+to its SI base unit value during serialization. And per analogy, it is expected that incoming values for a deserialization
+process represent value in base SI unit.
+
+Using the same example with length and azimuth, the serialized structure will result as shown below:
+```json
+{
+  "length": 1000.0,               // km were serialized with value in meters
+  "azimuth": 1.5707963267948966   // degrees were serialized with value in radians
+}
+```
+Please note that values are serialized in SI base unit (meters for length, and radians for azimuth).
+
+To change default serde for plain SI values, you have tu manually register predefined JacksonModule: 
+`PhysicalQuantityJacksonModulePlainSIValue` in the instance of the `ObjectMapper`. If you already added SpringBoot or Quarkus
+Unitility modules, default Unitility Jackson serde is provided automatically via an autoconfiguration pattern.
+In both cases, PlanSiValue Jackson module must be programmatically registered. 
+
+The Last registered module will be used for handling PhysicalQuantity serialization and deserialization. 
+
+Spring Boot example:
+```java
+@Configuration
+public class CustomModuleConfiguration {
+    @Autowired
+    void registerPlanSiValueModule(ObjectMapper objectMapper, @Qualifier("defaultParsingFactory") PhysicalQuantityParsingFactory parsingFactory) {
+        objectMapper.registerModule(new PhysicalQuantityJacksonModulePlainSIValue(parsingFactory));
+    }
+}
+```
+
+Quarkus example:
+```java
+@ApplicationScoped
+class PhysicalQuantityObjectMapperCustomizer implements ObjectMapperCustomizer {
+    @Override
+    public void customize(ObjectMapper objectMapper, @DefaultParsingFactory PhysicalQuantityParsingFactory parsingFactory) {
+        objectMapper.registerModule(new PhysicalQuantityJacksonModulePlainSIValue(parsingFactory));
+    }
+}
+```
+This behavior of which unit should be chosen for deserialization of single value is mostly governed by `PhysicalQuantityParsingFactory`.
+It is possible for developers to create their own implementation of PhysicalQuantityParsingFactory. Method `getDefaultUnit(Class<Q> targetClass)` is
+used to determine default unit for a single value quantity. 
 
 ## 5.2 Spring Boot module
 Spring Boot module includes **unitility-jackson** and **unitility-core** modules, and it will automatically
@@ -1156,8 +1215,10 @@ Tech shield with version tag for manual adjustment (you can indicate which versi
 ```
 
 ## 10. ACKNOWLEDGMENTS
+Special thank you to [msummersgill](https://github.com/msummersgill) for your valuable contributions, ideas, and improvements!  
+Your support is greatly appreciated.
 
-Special thanks to Kret11, VeloxDigits, Olin44, and others for all discussions on architecture we had.<br>
+Thanks to Kret11, VeloxDigits, Olin44, and others for all discussions on architecture we had.<br>
 I extend my heartfelt gratitude to the [Silesian University of Technology](https://www.polsl.pl/en/) for imparting
 invaluable knowledge to me.<br>
 Thanks to [Mathieu Soysal](https://github.com/MathieuSoysal) for

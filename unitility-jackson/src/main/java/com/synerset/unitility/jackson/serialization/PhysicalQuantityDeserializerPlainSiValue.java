@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * The {@link PhysicalQuantityDeserializerPlainSiValue} class is a Jackson JSON deserializer for deserializing JSON representations
- * of {@link PhysicalQuantity} instances.
+ * of {@link PhysicalQuantity} instances. Deserializer dedicated for handling plain SI single value quantity representation.
  *
  * @param <U> The type of unit associated with the PhysicalQuantity.
  * @param <Q> The type of PhysicalQuantity.

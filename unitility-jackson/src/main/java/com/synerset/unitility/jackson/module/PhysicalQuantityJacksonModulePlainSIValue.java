@@ -11,7 +11,8 @@ import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 
 /**
  * The PhysicalQuantityJacksonModule class is a Jackson module that provides plain SI serializers and deserializers for
- * handling {@link PhysicalQuantity} instances during JSON serialization and deserialization.
+ * handling {@link PhysicalQuantity} instances during JSON serialization and deserialization. Module dedicated for handling
+ * plain SI single value quantity representation.
  */
 public class PhysicalQuantityJacksonModulePlainSIValue extends SimpleModule {
 
