@@ -1,20 +1,21 @@
-package com.synerset.unitility.unitsystem.humidity;
+package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum RelativeHumidityUnits implements RelativeHumidityUnit {
+public enum AngularVelocityUnits implements AngularVelocityUnit {
 
-    DECIMAL("", val -> val, val -> val),
-    PERCENT("%", val -> val / 100, val -> val * 100);
-
+    RADIANS_PER_SECOND("rad/s", val -> val, val -> val),
+    REVOLUTIONS_PER_SECOND("rps", val -> val / (1.0 / 2.0 / Math.PI), val -> val * (1.0 / 2.0 / Math.PI)),
+    REVOLUTIONS_PER_MINUTE("rpm", val -> val / (60.0 / 2.0 / Math.PI), val -> val * (60.0 / 2.0 / Math.PI)),
+    DEGREES_PER_SECOND("°/s", val -> val / (360.0 / 2.0 / Math.PI), val -> val * (360.0 / 2.0 / Math.PI));
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    RelativeHumidityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    AngularVelocityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -26,8 +27,8 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
     }
 
     @Override
-    public RelativeHumidityUnit getBaseUnit() {
-        return DECIMAL;
+    public AngularVelocityUnit getBaseUnit() {
+        return RADIANS_PER_SECOND;
     }
 
     @Override
@@ -40,26 +41,28 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static RelativeHumidityUnit fromSymbol(String rawSymbol) {
+    public static AngularVelocityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return DECIMAL;
+            return AngularVelocityUnits.RADIANS_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (RelativeHumidityUnit unit : values()) {
+        for (AngularVelocityUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
         throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + HumidityRatioUnits.class.getSimpleName());
+                + AngularVelocityUnits.class.getSimpleName());
     }
 
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
-                .dropHyphens()
+                .unifySymbolsOfAngle()
+                .unifyMultiAndDiv()
                 .toString();
     }
+
 
 }

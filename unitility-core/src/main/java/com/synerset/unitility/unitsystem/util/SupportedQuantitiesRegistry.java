@@ -20,6 +20,8 @@ import com.synerset.unitility.unitsystem.hydraulic.FrictionFactor;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistance;
 import com.synerset.unitility.unitsystem.hydraulic.LinearResistanceUnits;
 import com.synerset.unitility.unitsystem.hydraulic.LocalLossFactor;
+import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
+import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatioUnits;
 import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 
@@ -52,8 +54,10 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Mass.class, () -> Arrays.asList(MassUnits.values())),
                 Map.entry(LinearMassDensity.class, () -> Arrays.asList(LinearMassDensityUnits.values())),
                 Map.entry(Velocity.class, () -> Arrays.asList(VelocityUnits.values())),
+                Map.entry(AngularVelocity.class, () -> Arrays.asList(AngularVelocityUnits.values())),
                 Map.entry(Volume.class, () -> Arrays.asList(VolumeUnits.values())),
                 Map.entry(Ratio.class, () -> Arrays.asList(RatioUnits.values())),
+                Map.entry(Curvature.class, () -> Arrays.asList(CurvatureUnits.values())),
                 // Dimensionless
                 Map.entry(BypassFactor.class, Collections::emptyList),
                 Map.entry(GrashofNumber.class, Collections::emptyList),
@@ -69,6 +73,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(LinearResistance.class, () -> Arrays.asList(LinearResistanceUnits.values())),
                 Map.entry(FrictionFactor.class, Collections::emptyList),
                 Map.entry(LocalLossFactor.class, Collections::emptyList),
+                Map.entry(RotationSpeedToFlowRateRatio.class, () -> Arrays.asList(RotationSpeedToFlowRateRatioUnits.values())),
                 // Mechanical
                 Map.entry(Force.class, () -> Arrays.asList(ForceUnits.values())),
                 Map.entry(Momentum.class, () -> Arrays.asList(MomentumUnits.values())),

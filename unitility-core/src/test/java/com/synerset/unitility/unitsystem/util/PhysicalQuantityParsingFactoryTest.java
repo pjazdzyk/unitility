@@ -8,16 +8,12 @@ import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
-import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
-import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnits;
 import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
-import com.synerset.unitility.unitsystem.humidity.HumidityRatioUnits;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
-import com.synerset.unitility.unitsystem.humidity.RelativeHumidityUnits;
 import com.synerset.unitility.unitsystem.hydraulic.*;
 import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
@@ -51,7 +47,7 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(registeredClasses).isNotNull()
                 .isNotEmpty()
                 .hasSize(registeredDefaultUnitsCount)
-                .hasSizeGreaterThan(40);
+                .hasSizeGreaterThan(43);
         assertThat(status).isTrue();
     }
 
@@ -158,6 +154,7 @@ class PhysicalQuantityParsingFactoryTest {
         Mass actualMass = PARSING_FACTORY.parse(Mass.class, singleValueInput);
         LinearMassDensity actualLinearMassDensity = PARSING_FACTORY.parse(LinearMassDensity.class, singleValueInput);
         Velocity actualVelocity = PARSING_FACTORY.parse(Velocity.class, singleValueInput);
+        AngularVelocity actualAngularVelocity = PARSING_FACTORY.parse(AngularVelocity.class, singleValueInput);
         Volume actualVolume = PARSING_FACTORY.parse(Volume.class, singleValueInput);
         BypassFactor actualBfFactor = PARSING_FACTORY.parse(BypassFactor.class, singleValueInput);
         GrashofNumber actualGrNumber = PARSING_FACTORY.parse(GrashofNumber.class, singleValueInput);
@@ -167,10 +164,12 @@ class PhysicalQuantityParsingFactoryTest {
         VolumetricFlow actualVolFlow = PARSING_FACTORY.parse(VolumetricFlow.class, singleValueInput);
         HumidityRatio actualHumRatio = PARSING_FACTORY.parse(HumidityRatio.class, singleValueInput);
         RelativeHumidity actualRelHum = PARSING_FACTORY.parse(RelativeHumidity.class, singleValueInput);
+        Curvature actualCurvature = PARSING_FACTORY.parse(Curvature.class, singleValueInput);
 
         LinearResistance actualLinearResistance = PARSING_FACTORY.parse(LinearResistance.class, singleValueInput);
         FrictionFactor actualFrictionFactor = PARSING_FACTORY.parse(FrictionFactor.class, singleValueInput);
         LocalLossFactor actualLocalLossFactor = PARSING_FACTORY.parse(LocalLossFactor.class, singleValueInput);
+        RotationSpeedToFlowRateRatio actualRotationSpeedToFlowRateRatio = PARSING_FACTORY.parse(RotationSpeedToFlowRateRatio.class, singleValueInput);
 
         Force actualForce = PARSING_FACTORY.parse(Force.class, singleValueInput);
         Momentum actualMomentum = PARSING_FACTORY.parse(Momentum.class, singleValueInput);
@@ -205,6 +204,7 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualMass).isEqualTo(Mass.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Mass.class)));
         assertThat(actualLinearMassDensity).isEqualTo(LinearMassDensity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(LinearMassDensity.class)));
         assertThat(actualVelocity).isEqualTo(Velocity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Velocity.class)));
+        assertThat(actualAngularVelocity).isEqualTo(AngularVelocity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(AngularVelocity.class)));
         assertThat(actualVolume).isEqualTo(Volume.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Volume.class)));
         assertThat(actualBfFactor).isEqualTo(BypassFactor.of(expectedValue));
         assertThat(actualGrNumber).isEqualTo(GrashofNumber.of(expectedValue));
@@ -214,10 +214,13 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(actualVolFlow).isEqualTo(VolumetricFlow.of(expectedValue, PARSING_FACTORY.getDefaultUnit(VolumetricFlow.class)));
         assertThat(actualHumRatio).isEqualTo(HumidityRatio.of(expectedValue, PARSING_FACTORY.getDefaultUnit(HumidityRatio.class)));
         assertThat(actualRelHum).isEqualTo(RelativeHumidity.of(expectedValue, PARSING_FACTORY.getDefaultUnit(RelativeHumidity.class)));
+        assertThat(actualCurvature).isEqualTo(Curvature.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Curvature.class)));
         // Hydraulic
         assertThat(actualFrictionFactor).isEqualTo(FrictionFactor.of(expectedValue));
         assertThat(actualLinearResistance).isEqualTo(LinearResistance.of(expectedValue, PARSING_FACTORY.getDefaultUnit(LinearResistance.class)));
         assertThat(actualLocalLossFactor).isEqualTo(LocalLossFactor.of(expectedValue));
+        assertThat(actualRotationSpeedToFlowRateRatio).isEqualTo(RotationSpeedToFlowRateRatio.of(expectedValue, PARSING_FACTORY.getDefaultUnit(RotationSpeedToFlowRateRatio.class)));
+
 
         assertThat(actualForce).isEqualTo(Force.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Force.class)));
         assertThat(actualMomentum).isEqualTo(Momentum.of(expectedValue, PARSING_FACTORY.getDefaultUnit(Momentum.class)));

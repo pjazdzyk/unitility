@@ -1,20 +1,20 @@
-package com.synerset.unitility.unitsystem.humidity;
+package com.synerset.unitility.unitsystem.hydraulic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum RelativeHumidityUnits implements RelativeHumidityUnit {
+public enum RotationSpeedToFlowRateRatioUnits implements RotationSpeedToFlowRateRatioUnit {
 
-    DECIMAL("", val -> val, val -> val),
-    PERCENT("%", val -> val / 100, val -> val * 100);
+    RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND("rad·s⁻¹/m³·s⁻¹", val -> val, val -> val),
+    RPM_PER_GPM("rpm/gpm", val -> val * (2 * Math.PI / 0.003785411784), val -> val / (2 * Math.PI / 0.003785411784));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    RelativeHumidityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    RotationSpeedToFlowRateRatioUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -26,8 +26,8 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
     }
 
     @Override
-    public RelativeHumidityUnit getBaseUnit() {
-        return DECIMAL;
+    public RotationSpeedToFlowRateRatioUnit getBaseUnit() {
+        return RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND;
     }
 
     @Override
@@ -40,26 +40,30 @@ public enum RelativeHumidityUnits implements RelativeHumidityUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static RelativeHumidityUnit fromSymbol(String rawSymbol) {
+    public static RotationSpeedToFlowRateRatioUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return DECIMAL;
+            return RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (RelativeHumidityUnit unit : values()) {
+        for (RotationSpeedToFlowRateRatioUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
         throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + HumidityRatioUnits.class.getSimpleName());
+                + RotationSpeedToFlowRateRatioUnits.class.getSimpleName());
     }
 
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
-                .dropHyphens()
+                .replace("1/s", "s-1")
+                .replace("1ps", "s-1")
+                .unifyAerialAndVol()
+                .dropParentheses()
+                .unifyNegativeExponents()
+                .unifyMultiAndDiv()
                 .toString();
     }
-
 }
