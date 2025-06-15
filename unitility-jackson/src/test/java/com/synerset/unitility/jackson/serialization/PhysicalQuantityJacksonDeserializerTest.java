@@ -5,11 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModulePlainSIValue;
 import com.synerset.unitility.unitsystem.common.Angle;
+import com.synerset.unitility.unitsystem.common.AngularVelocity;
+import com.synerset.unitility.unitsystem.common.Curvature;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.geographic.*;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
+import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import com.synerset.unitility.unitsystem.thermodynamic.TemperatureUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivity;
@@ -44,6 +47,14 @@ class PhysicalQuantityJacksonDeserializerTest {
         String humRatio2 = "{\"value\":2.0,\"unit\":\"kgwv/kgda\"}";
         String bearing = "{\"value\":270.0}";
         String distance = "1.0";
+        String curvatureInput1 = "{\"value\":0.1,\"unit\":\"°/ft\"}";
+        String curvatureInput2 = "{\"value\":0.1,\"unit\":\"deg  /ft\"}"; ;
+        String curvatureInput3 = "{\"value\":0.1,\"unit\":\"degpft\"}";
+        String angularVelInput1 = "{\"value\":0.1,\"unit\":\"deg p s\"}";
+        String angularVelInput2 = "{\"value\":0.1,\"unit\":\"rps\"}";
+        String rotSpeedToFlowRateRatio1 = "{\"value\":0.1,\"unit\":\"rad·s⁻¹/m³·s-1\"}";
+        String rotSpeedToFlowRateRatio2 = "{\"value\":0.1,\"unit\":\"(    rad x 1ps) / (m3 · s-1) \"}";
+        String rotSpeedToFlowRateRatio3 = "{\"value\":0.1,\"unit\":\"radx1pspm3xs-1\"}";
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
@@ -63,6 +74,14 @@ class PhysicalQuantityJacksonDeserializerTest {
         HumidityRatio actualHumidityRatio2 = objectMapper.readValue(humRatio2, HumidityRatio.class);
         Bearing actualBearing = objectMapper.readValue(bearing, Bearing.class);
         Distance actualDistance = objectMapper.readValue(distance, Distance.class);
+        Curvature actualCurvature1 = objectMapper.readValue(curvatureInput1, Curvature.class);
+        Curvature actualCurvature2 = objectMapper.readValue(curvatureInput2, Curvature.class);
+        Curvature actualCurvature3 = objectMapper.readValue(curvatureInput3, Curvature.class);
+        AngularVelocity actualAngularVel1 = objectMapper.readValue(angularVelInput1, AngularVelocity.class);
+        AngularVelocity actualAngularVel2 = objectMapper.readValue(angularVelInput2, AngularVelocity.class);
+        RotationSpeedToFlowRateRatio actualRotSpeedToFlowRatio1 = objectMapper.readValue(rotSpeedToFlowRateRatio1, RotationSpeedToFlowRateRatio.class);
+        RotationSpeedToFlowRateRatio actualRotSpeedToFlowRatio2 = objectMapper.readValue(rotSpeedToFlowRateRatio2, RotationSpeedToFlowRateRatio.class);
+        RotationSpeedToFlowRateRatio actualRotSpeedToFlowRatio3 = objectMapper.readValue(rotSpeedToFlowRateRatio3, RotationSpeedToFlowRateRatio.class);
 
         // Then
         Temperature expetedTemperature = Temperature.ofCelsius(20);
@@ -72,6 +91,10 @@ class PhysicalQuantityJacksonDeserializerTest {
         VolumetricFlow expectedVolFlowM3min = VolumetricFlow.ofCubicMetersPerMinute(20);
         HumidityRatio expectedHumRatio = HumidityRatio.ofKilogramPerKilogram(2.0);
         Distance expectedDistance = Distance.ofMeters(1.0);
+        Curvature expectedCurvature = Curvature.ofDegreesPerFoot(0.1);
+        AngularVelocity expectedAngularVel1 = AngularVelocity.ofDegreesPerSecond(0.1);
+        AngularVelocity expectedAngularVel2 = AngularVelocity.ofRevolutionsPerSecond(0.1);
+        RotationSpeedToFlowRateRatio expectedRotSpeedToFlowRatio = objectMapper.readValue(rotSpeedToFlowRateRatio1, RotationSpeedToFlowRateRatio.class);
 
         assertThat(actualTemp1).isEqualTo(expetedTemperature);
         assertThat(actualTemp2).isEqualTo(expetedTemperature);
@@ -90,6 +113,14 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualHumidityRatio2).isEqualTo(expectedHumRatio);
         assertThat(actualBearing).isEqualTo(Bearing.of(270));
         assertThat(actualDistance).isEqualTo(expectedDistance);
+        assertThat(actualCurvature1).isEqualTo(expectedCurvature);
+        assertThat(actualCurvature2).isEqualTo(expectedCurvature);
+        assertThat(actualCurvature3).isEqualTo(expectedCurvature);
+        assertThat(actualAngularVel1).isEqualTo(expectedAngularVel1);
+        assertThat(actualAngularVel2).isEqualTo(expectedAngularVel2);
+        assertThat(actualRotSpeedToFlowRatio1).isEqualTo(expectedRotSpeedToFlowRatio);
+        assertThat(actualRotSpeedToFlowRatio2).isEqualTo(expectedRotSpeedToFlowRatio);
+        assertThat(actualRotSpeedToFlowRatio3).isEqualTo(expectedRotSpeedToFlowRatio);
     }
 
     @Test

@@ -71,6 +71,7 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
                 .unifyAerialAndVol()
+                .replace("cfm", "ft3pmin")
                 .toString();
     }
 

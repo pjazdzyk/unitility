@@ -65,6 +65,7 @@ public enum CurvatureUnits implements CurvatureUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifySymbolsOfAngle()
+                .unifyMultiAndDiv()
                 .toString();
     }
 }

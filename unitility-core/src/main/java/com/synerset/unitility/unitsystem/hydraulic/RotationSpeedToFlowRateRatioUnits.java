@@ -58,7 +58,11 @@ public enum RotationSpeedToFlowRateRatioUnits implements RotationSpeedToFlowRate
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
+                .replace("1/s", "s-1")
+                .replace("1ps", "s-1")
                 .unifyAerialAndVol()
+                .dropParentheses()
+                .unifyNegativeExponents()
                 .unifyMultiAndDiv()
                 .toString();
     }

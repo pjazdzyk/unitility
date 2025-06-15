@@ -49,10 +49,23 @@ public class StringTransformer {
      */
     public StringTransformer unifyAerialAndVol() {
         return StringTransformer.of(
-                inputString.replace("cfm", "ft3pmin")
-                        .replace("³", "3")
+                inputString.replace("³", "3")
                         .replace("²", "2")
                         .replace("₂", "2")
+        );
+    }
+
+    /**
+     * Replaces superscript negative exponents with simplified equivalents.
+     *
+     * @return A new StringTransformer instance with the transformed string.
+     */
+    public StringTransformer unifyNegativeExponents() {
+        return StringTransformer.of(
+                inputString.replace("^", "")
+                        .replace("⁻¹", "-1")
+                        .replace("⁻²", "-2")
+                        .replace("⁻³", "-3")
         );
     }
 
@@ -136,8 +149,8 @@ public class StringTransformer {
      */
     public StringTransformer dropWvAndDaSuffixes() {
         return StringTransformer.of(
-                inputString.replace("\\.wv","")
-                        .replace("wv","")
+                inputString.replace("\\.wv", "")
+                        .replace("wv", "")
                         .replace("\\.da", "")
                         .replace("da", "")
         );
@@ -172,6 +185,19 @@ public class StringTransformer {
         }
 
         return StringTransformer.of(transformedString);
+    }
+
+    /**
+     * To allow linking custom definition in transforming a chain.
+     *
+     * @param target      string to be replaced
+     * @param replacement replacement string
+     * @return A new StringTransformer instance with the transformed string.
+     */
+    public StringTransformer replace(CharSequence target, CharSequence replacement) {
+        return StringTransformer.of(
+                inputString.replace(target, replacement)
+        );
     }
 
     /**

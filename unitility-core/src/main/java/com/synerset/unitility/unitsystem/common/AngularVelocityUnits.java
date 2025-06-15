@@ -59,6 +59,7 @@ public enum AngularVelocityUnits implements AngularVelocityUnit {
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
+                .unifySymbolsOfAngle()
                 .unifyMultiAndDiv()
                 .toString();
     }
