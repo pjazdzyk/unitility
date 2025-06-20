@@ -1,0 +1,42 @@
+name: Create Maven settings.xml
+description: Action which creates Maven settings.xml
+inputs:
+  nexus_username:
+    description: Artifact repository username
+    required: true
+  nexus_password:
+    description: Artifact repository password
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Create and set up Maven settings.xml file
+      shell: bash
+      run: |
+        echo '<?xml version="1.0" encoding="UTF-8"?>
+              <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+
+                <pluginGroups></pluginGroups>
+                <proxies></proxies>
+                <servers>
+                  <server>
+                    <id>central</id>
+                    <username>${{ inputs.nexus_username }}</username>
+                    <password>${{ inputs.nexus_password }}</password>
+                  </server>
+                </servers>
+                <mirrors>
+                 <mirror>
+                    <id>maven-default-http-blocker</id>
+                   <mirrorOf>external:http:*</mirrorOf>
+                   <name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+                   <url>http://0.0.0.0/</url>
+                   <blocked>true</blocked>
+                  </mirror>
+               </mirrors>
+               <profiles>
+               </profiles>
+               </settings>' > ~/.m2/settings.xml
