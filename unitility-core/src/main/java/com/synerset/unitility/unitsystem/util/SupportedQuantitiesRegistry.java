@@ -59,6 +59,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Ratio.class, () -> Arrays.asList(RatioUnits.values())),
                 Map.entry(Curvature.class, () -> Arrays.asList(CurvatureUnits.values())),
                 // Dimensionless
+                Map.entry(GenericDimensionless.class, Collections::emptyList),
                 Map.entry(BypassFactor.class, Collections::emptyList),
                 Map.entry(GrashofNumber.class, Collections::emptyList),
                 Map.entry(PrandtlNumber.class, Collections::emptyList),
