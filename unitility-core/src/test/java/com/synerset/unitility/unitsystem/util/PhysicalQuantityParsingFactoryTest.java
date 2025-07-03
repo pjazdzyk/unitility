@@ -39,7 +39,7 @@ class PhysicalQuantityParsingFactoryTest {
         Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> registryMap = PARSING_FACTORY.getClassRegistry();
         Set<Class<PhysicalQuantity<Unit>>> registeredClasses = PARSING_FACTORY.findAllRegisteredClasses();
         boolean status = PARSING_FACTORY.containsClass(Temperature.class);
-        int registeredDefaultUnitsCount = PARSING_FACTORY.findAllDefaultUnits().size();
+        int registeredDefaultUnitsCount = PARSING_FACTORY.getDefaultUnitRegistry().size();
 
         // Then
         assertThat(PARSING_FACTORY).isNotNull();

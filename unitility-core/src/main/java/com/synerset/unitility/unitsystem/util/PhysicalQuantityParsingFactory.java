@@ -87,7 +87,7 @@ public interface PhysicalQuantityParsingFactory {
      *
      * @return A map where the key is the physical quantity class and the value is its default unit.
      */
-    Map<Class<?>, Unit> findAllDefaultUnits();
+    Map<Class<?>, Unit> getDefaultUnitRegistry();
 
     static PhysicalQuantityParsingFactory getDefaultParsingFactory(){
         return PhysicalQuantityDefaultParsingFactory.getInstance();

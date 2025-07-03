@@ -144,14 +144,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
     }
 
     @Override
-    public <U extends Unit, Q extends PhysicalQuantity<U>> U getDefaultUnit(Class<Q> targetClass) {
-        @SuppressWarnings("unchecked")
-        U defaultUnit = (U) immutableDefaultUnitRegistry.get(targetClass);
-        return defaultUnit;
-    }
-
-    @Override
-    public Map<Class<?>, Unit> findAllDefaultUnits() {
+    public Map<Class<?>, Unit> getDefaultUnitRegistry() {
         return immutableDefaultUnitRegistry;
     }
 
