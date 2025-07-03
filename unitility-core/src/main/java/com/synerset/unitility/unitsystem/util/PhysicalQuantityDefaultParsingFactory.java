@@ -42,6 +42,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Ratio.class, Ratio::of),
                 Map.entry(Curvature.class, Curvature::of),
                 // Dimensionless
+                Map.entry(GenericDimensionless.class, (value, symbol) -> GenericDimensionless.of(value)),
                 Map.entry(BypassFactor.class, (value, symbol) -> BypassFactor.of(value)),
                 Map.entry(GrashofNumber.class, (value, symbol) -> GrashofNumber.of(value)),
                 Map.entry(PrandtlNumber.class, (value, symbol) -> PrandtlNumber.of(value)),
@@ -98,6 +99,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Ratio.class, RatioUnits.PERCENT),
                 Map.entry(Curvature.class, CurvatureUnits.RADIANS_PER_METER),
                 // Dimensionless
+                Map.entry(GenericDimensionless.class, GenericDimensionlessUnits.DIMENSIONLESS),
                 Map.entry(BypassFactor.class, BypassFactorUnits.DIMENSIONLESS),
                 Map.entry(GrashofNumber.class, GrashofNumberUnits.DIMENSIONLESS),
                 Map.entry(PrandtlNumber.class, PrandtlNumberUnits.DIMENSIONLESS),
@@ -142,14 +144,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
     }
 
     @Override
-    public <U extends Unit, Q extends PhysicalQuantity<U>> U getDefaultUnit(Class<Q> targetClass) {
-        @SuppressWarnings("unchecked")
-        U defaultUnit = (U) immutableDefaultUnitRegistry.get(targetClass);
-        return defaultUnit;
-    }
-
-    @Override
-    public Map<Class<?>, Unit> findAllDefaultUnits() {
+    public Map<Class<?>, Unit> getDefaultUnitRegistry() {
         return immutableDefaultUnitRegistry;
     }
 

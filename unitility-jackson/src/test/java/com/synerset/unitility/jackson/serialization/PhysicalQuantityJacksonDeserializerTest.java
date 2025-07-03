@@ -9,6 +9,7 @@ import com.synerset.unitility.unitsystem.common.AngularVelocity;
 import com.synerset.unitility.unitsystem.common.Curvature;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
+import com.synerset.unitility.unitsystem.dimensionless.GenericDimensionless;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.geographic.*;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
@@ -55,6 +56,8 @@ class PhysicalQuantityJacksonDeserializerTest {
         String rotSpeedToFlowRateRatio1 = "{\"value\":0.1,\"unit\":\"rad·s⁻¹/m³·s-1\"}";
         String rotSpeedToFlowRateRatio2 = "{\"value\":0.1,\"unit\":\"(    rad x 1ps) / (m3 · s-1) \"}";
         String rotSpeedToFlowRateRatio3 = "{\"value\":0.1,\"unit\":\"radx1pspm3xs-1\"}";
+        String expectedGenericDimensionless1 = "{\"value\":20,\"unit\":\"\"}";
+        String expectedGenericDimensionless2 = "{\"value\":20}";
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
@@ -82,6 +85,8 @@ class PhysicalQuantityJacksonDeserializerTest {
         RotationSpeedToFlowRateRatio actualRotSpeedToFlowRatio1 = objectMapper.readValue(rotSpeedToFlowRateRatio1, RotationSpeedToFlowRateRatio.class);
         RotationSpeedToFlowRateRatio actualRotSpeedToFlowRatio2 = objectMapper.readValue(rotSpeedToFlowRateRatio2, RotationSpeedToFlowRateRatio.class);
         RotationSpeedToFlowRateRatio actualRotSpeedToFlowRatio3 = objectMapper.readValue(rotSpeedToFlowRateRatio3, RotationSpeedToFlowRateRatio.class);
+        GenericDimensionless actualGenericDimensionless1 = objectMapper.readValue(expectedGenericDimensionless1, GenericDimensionless.class);
+        GenericDimensionless actualGenericDimensionless2 = objectMapper.readValue(expectedGenericDimensionless2, GenericDimensionless.class);
 
         // Then
         Temperature expetedTemperature = Temperature.ofCelsius(20);
@@ -121,6 +126,8 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualRotSpeedToFlowRatio1).isEqualTo(expectedRotSpeedToFlowRatio);
         assertThat(actualRotSpeedToFlowRatio2).isEqualTo(expectedRotSpeedToFlowRatio);
         assertThat(actualRotSpeedToFlowRatio3).isEqualTo(expectedRotSpeedToFlowRatio);
+        assertThat(actualGenericDimensionless1).isEqualTo(GenericDimensionless.of(20));
+        assertThat(actualGenericDimensionless2).isEqualTo(GenericDimensionless.of(20));
     }
 
     @Test

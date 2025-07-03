@@ -14,9 +14,25 @@
     <name>Unitility Core</name>
     <description>
         The Java Physics Units of Measure Library - Unitility, core module.
-        This unique library offers new set of types that seamlessly integrate numerical values with their associated units.
+        This unique library offers a new set of types that seamlessly integrate numerical values with their associated units.
         This enables developers to conduct precise and efficient conversions across various units. Designed in plain Java,
         the solution prioritizes speed and lightweight functionality, immutability and thread-safety.
     </description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Automatic-Module-Name>com.synerset.unitility.core</Automatic-Module-Name>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

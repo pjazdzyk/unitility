@@ -69,12 +69,10 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
         throw new RuntimeException("No suitable constructor found for: " + targetClass.getSimpleName());
     }
 
-
     @Override
     public boolean containsClass(Class<?> targetClass) {
         return getClassRegistry().containsKey(targetClass);
     }
-
 
     @Override
     @SuppressWarnings("unchecked")
@@ -88,6 +86,13 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
         if (!containsClass(targetClass)) {
             throw new UnitSystemClassNotSupportedException("Class not found in the registry: " + targetClass.getSimpleName());
         }
+    }
+
+    @Override
+    public <U extends Unit, Q extends PhysicalQuantity<U>> U getDefaultUnit(Class<Q> targetClass) {
+        @SuppressWarnings("unchecked")
+        U defaultUnit = (U) getDefaultUnitRegistry().get(targetClass);
+        return defaultUnit;
     }
 
     private boolean isGeoQuantity(Class<?> targetClass){

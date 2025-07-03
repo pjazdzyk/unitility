@@ -45,7 +45,7 @@
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>2.9.0</project.version>
+        <project.version>2.10.0</project.version>
 
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>
@@ -122,7 +122,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
+                <version>${maven-javadoc-plugin.version}</version> <configuration>
+                <failOnError>false</failOnError>
+                <failOnWarnings>false</failOnWarnings>
+            </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
