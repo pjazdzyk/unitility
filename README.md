@@ -759,11 +759,11 @@ To do this, we need to create a new class, CustomAngle, and extend the Calculabl
 CalculableQuantity is PhysicalQuantity with arithmetic operations handling.
 In typical case, most of the required methods are defined as default in the interface, which should be sufficient for most cases. 
 However, some needs to be implemented for the new unit, as shown in the example here:
-[CustomAngle](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/customunits/CustomAngle.java).
+[CustomAngle](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/customunit/CustomAngle.java).
 
 In the next step, create your implementation of AngleUnit interface, which should include the way, how to
 convert one unit from another. Here is an example based on enum to introduce revolution unit: 
-[CustomAngleUnits](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/customunits/CustomAngleUnits.java).
+[CustomAngleUnits](https://github.com/pjazdzyk/unitility-spring-example/blob/master/src/main/java/com/synerset/unitility/spring/examples/newquantity/customunit/CustomAngleUnits.java).
 
 After this is done, we can create and use our custom angles:
 ```java
@@ -815,14 +815,14 @@ Registering custom unit in Quarkus is a bit different compared to Spring.
 A Complete example of new custom unit properly registered in a Quarkus framework can be
 found here: [unitility-quarkus-example](https://github.com/pjazdzyk/unitility-quarkus-example).
 In this case, a first step is the same, new parsing factory must be created to include currently supported 
-and new custom quantities created by user: [CustomParsingFactory](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/examples/newquantity/CustomParsingFactoryWithAngle.java).
+and new custom quantities created by user: [CustomParsingFactory](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/example/newquantity/CustomParsingFactoryWithAngle.java).
 
 After a new parsing factory is created and all standard and new custom quantities parsers are properly registered,
 you can now create a new ObjectMapperCustomizer and register JacksonModule with new parsing factory: 
-[CustomObjectMapperCustomizer](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/examples/newquantity/CustomAngleObjectMapperCustomizer.java).
+[CustomObjectMapperCustomizer](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/example/newquantity/CustomAngleObjectMapperCustomizer.java).
 
 The Last step is to define new PathParamConverterProvider and register ParamConverters for all custom quantities:
-[CustomAngleParamProvider](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/examples/newquantity/CustomAngleProvider.java).
+[CustomAngleParamProvider](https://github.com/pjazdzyk/unitility-quarkus-example/blob/master/src/main/java/com/synerset/unitility/quarkus/example/newquantity/CustomAngleProvider.java).
 
 After this step is done, you can freely use your CustomAngle unit in your web application:
 ```java
