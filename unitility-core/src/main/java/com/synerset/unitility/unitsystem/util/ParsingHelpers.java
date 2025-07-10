@@ -74,7 +74,7 @@ public class ParsingHelpers {
             throw new UnitSystemArgumentException("Geo parser: Invalid input. Argument cannot be null or blank.");
         }
 
-        String[] parts = dmsFormat.split("[o'\"nsew]");
+        String[] parts = dmsFormat.split("[o°'\"nsew]");
 
         if (parts.length == 0) {
             throw new UnitSystemArgumentException("Geo DMS parser: Input string could not be parsed: input = "
