@@ -14,6 +14,7 @@ import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.geographic.*;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
+import com.synerset.unitility.unitsystem.hydraulic.SDR;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import com.synerset.unitility.unitsystem.thermodynamic.TemperatureUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivity;
@@ -58,6 +59,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         String rotSpeedToFlowRateRatio3 = "{\"value\":0.1,\"unit\":\"radx1pspm3xs-1\"}";
         String expectedGenericDimensionless1 = "{\"value\":20,\"unit\":\"\"}";
         String expectedGenericDimensionless2 = "{\"value\":20}";
+        String expectedSDR = "{\"value\":27.6}";
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
@@ -87,6 +89,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         RotationSpeedToFlowRateRatio actualRotSpeedToFlowRatio3 = objectMapper.readValue(rotSpeedToFlowRateRatio3, RotationSpeedToFlowRateRatio.class);
         GenericDimensionless actualGenericDimensionless1 = objectMapper.readValue(expectedGenericDimensionless1, GenericDimensionless.class);
         GenericDimensionless actualGenericDimensionless2 = objectMapper.readValue(expectedGenericDimensionless2, GenericDimensionless.class);
+        SDR actualSDR = objectMapper.readValue(expectedSDR, SDR.class);
 
         // Then
         Temperature expetedTemperature = Temperature.ofCelsius(20);
@@ -100,6 +103,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         AngularVelocity expectedAngularVel1 = AngularVelocity.ofDegreesPerSecond(0.1);
         AngularVelocity expectedAngularVel2 = AngularVelocity.ofRevolutionsPerSecond(0.1);
         RotationSpeedToFlowRateRatio expectedRotSpeedToFlowRatio = objectMapper.readValue(rotSpeedToFlowRateRatio1, RotationSpeedToFlowRateRatio.class);
+        SDR expectedSdr = SDR.of(27.6);
 
         assertThat(actualTemp1).isEqualTo(expetedTemperature);
         assertThat(actualTemp2).isEqualTo(expetedTemperature);
@@ -128,6 +132,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualRotSpeedToFlowRatio3).isEqualTo(expectedRotSpeedToFlowRatio);
         assertThat(actualGenericDimensionless1).isEqualTo(GenericDimensionless.of(20));
         assertThat(actualGenericDimensionless2).isEqualTo(GenericDimensionless.of(20));
+        assertThat(actualSDR).isEqualTo(expectedSdr);
     }
 
     @Test

@@ -58,6 +58,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(FrictionFactor.class, (value, symbol) -> FrictionFactor.of(value)),
                 Map.entry(LocalLossFactor.class, (value, symbol) -> LocalLossFactor.of(value)),
                 Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatio::of),
+                Map.entry(SDR.class, SDR::of),
                 // Mechanical
                 Map.entry(Force.class, Force::of),
                 Map.entry(Momentum.class, Momentum::of),
@@ -119,6 +120,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Force.class, ForceUnits.NEWTON),
                 Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),
                 Map.entry(Torque.class, TorqueUnits.NEWTON_METER),
+                Map.entry(SDR.class, RatioUnits.DECIMAL),
                 // Thermodynamic
                 Map.entry(Density.class, DensityUnits.KILOGRAM_PER_CUBIC_METER),
                 Map.entry(DynamicViscosity.class, DynamicViscosityUnits.PASCAL_SECOND),
