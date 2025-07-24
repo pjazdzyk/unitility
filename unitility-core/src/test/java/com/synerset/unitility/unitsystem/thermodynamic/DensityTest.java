@@ -40,7 +40,7 @@ class DensityTest {
         Density actualInKilogramPerCubicMeter = actualInPoundsPerCubicInch.toBaseUnit();
 
         // Then
-        Density expectedInPoundsPerCubicInch = Density.of(0.0000433527506616, DensityUnits.POUND_PER_CUBIC_INCH);
+        Density expectedInPoundsPerCubicInch = Density.ofPoundPerCubicInch(0.0000433527506616);
         assertThat(actualInPoundsPerCubicInch.getValue()).isEqualTo(actualInPoundsPerCubicInchVal);
         assertThat(actualInPoundsPerCubicInch.getValue()).isEqualTo(expectedInPoundsPerCubicInch.getValue(), withPrecision(1E-16));
         assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(1.2, withPrecision(1E-16));
