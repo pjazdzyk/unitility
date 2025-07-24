@@ -9,7 +9,8 @@ public enum DensityUnits implements DensityUnit {
 
     KILOGRAM_PER_CUBIC_METER("kg/m³", val -> val, val -> val),
     POUND_PER_CUBIC_FOOT("lb/ft³", val -> val * 16.0184633739599, val -> val / 16.0184633739599),
-    POUND_PER_CUBIC_INCH("lb/in³", val -> val / 0.000036127292218, val -> val * 0.000036127292218);
+    POUND_PER_CUBIC_INCH("lb/in³", val -> val / 0.000036127292218, val -> val * 0.000036127292218),
+    POUND_PER_GALLON_US("lb/gal_US", val -> val / 0.0083454063545262, val -> val * 0.0083454063545262);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
