@@ -38,6 +38,14 @@ public class Density implements CalculableQuantity<DensityUnit, Density> {
         return new Density(value, DensityUnits.POUND_PER_CUBIC_FOOT);
     }
 
+    public static Density ofPoundPerCubicInch(double value) {
+        return new Density(value, DensityUnits.POUND_PER_CUBIC_INCH);
+    }
+
+    public static Density ofPoundPerGallonUS(double value) {
+        return new Density(value, DensityUnits.POUND_PER_GALLON_US);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -86,6 +94,14 @@ public class Density implements CalculableQuantity<DensityUnit, Density> {
         return toUnit(DensityUnits.POUND_PER_CUBIC_FOOT);
     }
 
+    public Density toPoundPerCubicInch() {
+        return toUnit(DensityUnits.POUND_PER_CUBIC_INCH);
+    }
+
+    public Density toPoundPerGallonUS() {
+        return toUnit(DensityUnits.POUND_PER_GALLON_US);
+    }
+
     // Get value in target unit
     public double getInKilogramsPerCubicMeters() {
         return getInUnit(DensityUnits.KILOGRAM_PER_CUBIC_METER);
@@ -97,6 +113,10 @@ public class Density implements CalculableQuantity<DensityUnit, Density> {
 
     public double getInPoundsPerCubicInches() {
         return getInUnit(DensityUnits.POUND_PER_CUBIC_INCH);
+    }
+
+    public double getInPoundsPerGallonUS() {
+        return getInUnit(DensityUnits.POUND_PER_GALLON_US);
     }
 
     @Override

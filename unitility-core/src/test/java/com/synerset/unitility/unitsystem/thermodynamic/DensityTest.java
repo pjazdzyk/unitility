@@ -40,10 +40,30 @@ class DensityTest {
         Density actualInKilogramPerCubicMeter = actualInPoundsPerCubicInch.toBaseUnit();
 
         // Then
-        Density expectedInPoundsPerCubicInch = Density.of(0.0000433527506616, DensityUnits.POUND_PER_CUBIC_INCH);
+        Density expectedInPoundsPerCubicInch = Density.ofPoundPerCubicInch(0.0000433527506616);
         assertThat(actualInPoundsPerCubicInch.getValue()).isEqualTo(actualInPoundsPerCubicInchVal);
         assertThat(actualInPoundsPerCubicInch.getValue()).isEqualTo(expectedInPoundsPerCubicInch.getValue(), withPrecision(1E-16));
         assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(1.2, withPrecision(1E-16));
+    }
+
+    @Test
+    @DisplayName("should convert kg/m³ to lb/gal_us and vice versa")
+    void shouldProperlyConvertKilogramsPerCubicMeterToPoundPerGallonUS() {
+        // Given
+        Density initialDensity = Density.ofKilogramPerCubicMeter(1000);
+
+        // When
+        Density actualInPoundsPerGallonUS = initialDensity.toUnit(DensityUnits.POUND_PER_GALLON_US);
+        double actualInPoundsPerGallonUSVal = initialDensity.getInPoundsPerGallonUS();
+        Density actualInKilogramPerCubicMeter = actualInPoundsPerGallonUS.toBaseUnit();
+        double actualInKilogramPerCubicMeterVal = actualInPoundsPerGallonUS.getInKilogramsPerCubicMeters();
+
+        // Then
+        Density expectedInPoundsPerGallonUS = Density.ofPoundPerGallonUS(8.3454063545262);
+        assertThat(actualInPoundsPerGallonUS.getValue()).isEqualTo(actualInPoundsPerGallonUSVal);
+        assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(actualInKilogramPerCubicMeterVal);
+        assertThat(actualInPoundsPerGallonUS.getValue()).isEqualTo(expectedInPoundsPerGallonUS.getValue(), withPrecision(1E-16));
+        assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(1000, withPrecision(1E-13));
     }
 
     @Test
@@ -68,6 +88,8 @@ class DensityTest {
 
         // When
         Density actual = expected.toPoundPerCubicFoot()
+                .toPoundPerCubicInch()
+                .toPoundPerGallonUS()
                 .toKilogramPerCubicMeter();
 
         double actualValue = expected.getInKilogramsPerCubicMeters();
