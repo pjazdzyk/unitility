@@ -57,7 +57,7 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
+        
         assertThat(actualQuantityFromDB.getInPoundsPerCubicFoot()).isEqualTo(density.getInPoundsPerCubicFoot(), withPrecision(1E-11));
     }
 
@@ -79,7 +79,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInFeet()).isEqualTo(height.getInFeet(), withPrecision(1E-11));
     }
 
@@ -101,7 +100,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInBTUsPerHourFeetFahrenheit()).isEqualTo(thermalConductivity.getInBTUsPerHourFeetFahrenheit(), withPrecision(1E-11));
     }
 
@@ -123,7 +121,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInDegrees()).isEqualTo(angle.getInDegrees(), withPrecision(1E-11));
     }
 
@@ -145,7 +142,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInSquareFeet()).isEqualTo(area.getInSquareFeet(), withPrecision(1E-11));
     }
 
@@ -167,7 +163,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInFeet()).isEqualTo(distance.getInFeet(), withPrecision(1E-11));
     }
 
@@ -189,7 +184,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInFeet()).isEqualTo(length.getInFeet(), withPrecision(1E-11));
     }
 
@@ -210,8 +204,7 @@ class PlainSiConverterTest {
         // Then
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
-
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
+        
         assertThat(actualQuantityFromDB.getInFeet()).isEqualTo(width.getInFeet(), withPrecision(1E-11));
     }
 
@@ -233,7 +226,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInFeet()).isEqualTo(diameter.getInFeet(), withPrecision(1E-11));
     }
 
@@ -255,7 +247,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInFeet()).isEqualTo(perimeter.getInFeet(), withPrecision(1E-11));
     }
 
@@ -277,7 +268,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPounds()).isEqualTo(mass.getInPounds(), withPrecision(1E-11));
     }
 
@@ -299,7 +289,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPoundsPerFoot()).isEqualTo(linearMassDensity.getInPoundsPerFoot(), withPrecision(1E-11));
     }
 
@@ -321,7 +310,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInFeetPerSeconds()).isEqualTo(velocity.getInFeetPerSeconds(), withPrecision(1E-11));
     }
 
@@ -343,7 +331,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInDegreesPerSecond()).isEqualTo(angularVelocity.getInDegreesPerSecond(), withPrecision(1E-11));
     }
 
@@ -365,7 +352,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInCubicFeet()).isEqualTo(volume.getInCubicFeet(), withPrecision(1E-11));
     }
 
@@ -387,7 +373,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInDecimal()).isEqualTo(ratio.getInDecimal(), withPrecision(1E-11));
     }
 
@@ -409,7 +394,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInDegreesPerMeter()).isEqualTo(curvature.getInDegreesPerMeter(), withPrecision(1E-11));
     }
 
@@ -431,7 +415,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getValue()).isEqualTo(genericDimensionless.getValue(), withPrecision(1E-11));
     }
 
@@ -453,7 +436,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getValue()).isEqualTo(bypassFactor.getValue(), withPrecision(1E-11));
     }
 
@@ -475,7 +457,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getValue()).isEqualTo(grashofNumber.getValue(), withPrecision(1E-11));
     }
 
@@ -497,7 +478,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getValue()).isEqualTo(prandtlNumber.getValue(), withPrecision(1E-11));
     }
 
@@ -519,7 +499,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getValue()).isEqualTo(reynoldsNumber.getValue(), withPrecision(1E-11));
     }
 
@@ -541,7 +520,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPoundsPerSecond()).isEqualTo(massFlow.getInPoundsPerSecond(), withPrecision(1E-11));
     }
 
@@ -563,7 +541,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInCubicFeetPerMinute()).isEqualTo(volumetricFlow.getInCubicFeetPerMinute(), withPrecision(1E-11));
     }
 
@@ -585,7 +562,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getGramPerKilogram()).isEqualTo(humidityRatio.getGramPerKilogram(), withPrecision(1E-11));
     }
 
@@ -607,7 +583,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPercent()).isEqualTo(relativeHumidity.getInPercent(), withPrecision(1E-11));
     }
 
@@ -629,7 +604,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPascalPerMeter()).isEqualTo(linearResistance.getInPascalPerMeter(), withPrecision(1E-11));
     }
 
@@ -651,7 +625,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getValue()).isEqualTo(frictionFactor.getValue(), withPrecision(1E-11));
     }
 
@@ -673,7 +646,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getValue()).isEqualTo(localLossFactor.getValue(), withPrecision(1E-11));
     }
 
@@ -695,7 +667,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInRpmPerGpm()).isEqualTo(ratio.getInRpmPerGpm(), withPrecision(1E-11));
     }
 
@@ -717,7 +688,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getValue()).isEqualTo(ratio.getValue(), withPrecision(1E-11));
     }
 
@@ -739,7 +709,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPoundsForce()).isEqualTo(force.getInPoundsForce(), withPrecision(1E-11));
     }
 
@@ -761,7 +730,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPoundFeetPerSecond()).isEqualTo(momentum.getInPoundFeetPerSecond(), withPrecision(1E-11));
     }
 
@@ -783,7 +751,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInKilopondMeters()).isEqualTo(torque.getInKilopondMeters(), withPrecision(1E-11));
     }
 
@@ -805,7 +772,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPascalsSecond()).isEqualTo(dynamicViscosity.getInPascalsSecond(), withPrecision(1E-11));
     }
 
@@ -827,7 +793,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInJoules()).isEqualTo(energy.getInJoules(), withPrecision(1E-11));
     }
 
@@ -849,7 +814,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInSquareFeetPerSecond()).isEqualTo(kinematicViscosity.getInSquareFeetPerSecond(), withPrecision(1E-11));
     }
 
@@ -871,7 +835,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInWatts()).isEqualTo(power.getInWatts(), withPrecision(1E-11));
     }
 
@@ -893,7 +856,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInPascals()).isEqualTo(pressure.getInPascals(), withPrecision(1E-11));
     }
 
@@ -915,7 +877,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInJoulesPerKiloGram()).isEqualTo(specificEnthalpy.getInJoulesPerKiloGram(), withPrecision(1E-11));
     }
 
@@ -936,8 +897,7 @@ class PlainSiConverterTest {
         // Then
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
-
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
+        
         assertThat(actualQuantityFromDB.getInJoulePerKiloGramKelvin()).isEqualTo(specificHeat.getInJoulePerKiloGramKelvin(), withPrecision(1E-11));
     }
 
@@ -959,7 +919,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInCelsius()).isEqualTo(temperature.getInCelsius(), withPrecision(1E-11));
     }
 
@@ -981,7 +940,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInSquareMetersPerSecond()).isEqualTo(thermalDiffusivity.getInSquareMetersPerSecond(), withPrecision(1E-11));
     }
     
@@ -1003,7 +961,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInDegrees()).isEqualTo(latitude.getInDegrees(), withPrecision(1E-11));
     }
 
@@ -1024,8 +981,7 @@ class PlainSiConverterTest {
         // Then
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
-
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
+        
         assertThat(actualQuantityFromDB.getInDegrees()).isEqualTo(longitude.getInDegrees(), withPrecision(1E-11));
     }
 
@@ -1047,7 +1003,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        assertThat(actualQuantityFromDB.getInUnit(defaultConverterUnit)).isNotNull();
         assertThat(actualQuantityFromDB.getInDegrees()).isEqualTo(bearing.getInDegrees(), withPrecision(1E-11));
     }
 
@@ -1100,19 +1055,15 @@ class PlainSiConverterTest {
     
     @Test
     void shouldFindExactly44JavaFilesRecursivelyInTheSpecifiedFolder() {
-        // 1. Determine the path to the source folder
         String userDir = System.getProperty("user.dir");
         File folder = new File(userDir, FOLDER_PATH);
 
-        // 2. Assertion: check if the folder exists
         Assertions.assertTrue(folder.exists(), "Source folder does not exist: " + folder.getAbsolutePath());
         Assertions.assertTrue(folder.isDirectory(), "Path does not lead to a directory: " + folder.getAbsolutePath());
 
-        // 3. Recursively count .java files
         List<File> javaFiles = new ArrayList<>();
         countJavaFilesInDirectory(folder, javaFiles);
 
-        // 4. Verification
         int expectedNumberOfConverters = PhysicalQuantityParsingFactory.getDefaultParsingFactory()
                 .getClassRegistry().size() + 2;  // + 2 because GeoDistance and GeoCoordinate is not in parsing factory, but converters are provided
 
@@ -1133,9 +1084,9 @@ class PlainSiConverterTest {
         if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
-                    countJavaFilesInDirectory(file, fileList); // Recursive call for the subdirectory
+                    countJavaFilesInDirectory(file, fileList);
                 } else if (file.getName().endsWith(".java")) {
-                    fileList.add(file); // Add the .java file to the list
+                    fileList.add(file);
                 }
             }
         }

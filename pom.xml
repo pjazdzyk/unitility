@@ -54,28 +54,28 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Jackson module -->
-        <jackson-databind.version>2.18.3</jackson-databind.version>
+        <jackson-databind.version>2.19.2</jackson-databind.version>
         <!-- SpringBoot module -->
-        <spring-boot-starter-web.version>3.4.4</spring-boot-starter-web.version>
+        <spring-boot-starter-web.version>3.5.4</spring-boot-starter-web.version>
         <!-- Quarkus module -->
-        <quarkus-version>3.20.0</quarkus-version>
+        <quarkus-version>3.24.5</quarkus-version>
         <!-- Jakarta validation module -->
         <jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
         <jakarta.el.version>6.0.1</jakarta.el.version>
-        <hibernate-validator.version>8.0.2.Final</hibernate-validator.version>
+        <hibernate-validator.version>9.0.1.Final</hibernate-validator.version>
 
         <!-- Test dependencies versions -->
         <jacoco.version>0.8.13</jacoco.version>
-        <junit-jupiter.version>5.12.1</junit-jupiter.version>
+        <junit-jupiter.version>5.13.4</junit-jupiter.version>
         <assertj-core.version>3.27.3</assertj-core.version>
 
         <!-- Plugin versions -->
-        <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
+        <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
-        <jandex-maven-plugin.version>3.2.7</jandex-maven-plugin.version>
+        <jandex-maven-plugin.version>3.4.0</jandex-maven-plugin.version>
 
         <!-- Sonar Cloud Properties-->
         <sonar.organization>synerset</sonar.organization>
