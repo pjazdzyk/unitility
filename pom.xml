@@ -16,6 +16,7 @@
         <module>unitility-spring</module>
         <module>unitility-quarkus</module>
         <module>unitility-validation</module>
+        <module>unitility-persistence</module>
     </modules>
 
     <name>Unitility</name>
@@ -45,7 +46,7 @@
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>2.10.0</project.version>
+        <project.version>2.11.0</project.version>
 
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>

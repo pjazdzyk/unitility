@@ -83,7 +83,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
 
         // Initializing immutable default unit registry
         this.immutableDefaultUnitRegistry = Map.ofEntries(
-                // Common
+                // Common (15)
                 Map.entry(Angle.class, AngleUnits.RADIANS),
                 Map.entry(Area.class, AreaUnits.SQUARE_METER),
                 Map.entry(Distance.class, DistanceUnits.METER),
@@ -99,29 +99,29 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Volume.class, VolumeUnits.CUBIC_METER),
                 Map.entry(Ratio.class, RatioUnits.PERCENT),
                 Map.entry(Curvature.class, CurvatureUnits.RADIANS_PER_METER),
-                // Dimensionless
+                // Dimensionless (5)
                 Map.entry(GenericDimensionless.class, GenericDimensionlessUnits.DIMENSIONLESS),
                 Map.entry(BypassFactor.class, BypassFactorUnits.DIMENSIONLESS),
                 Map.entry(GrashofNumber.class, GrashofNumberUnits.DIMENSIONLESS),
                 Map.entry(PrandtlNumber.class, PrandtlNumberUnits.DIMENSIONLESS),
                 Map.entry(ReynoldsNumber.class, ReynoldsNumberUnits.DIMENSIONLESS),
-                // Flows
+                // Flows (2)
                 Map.entry(MassFlow.class, MassFlowUnits.KILOGRAM_PER_SECOND),
                 Map.entry(VolumetricFlow.class, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND),
-                // Humidity
+                // Humidity (2)
                 Map.entry(HumidityRatio.class, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM),
                 Map.entry(RelativeHumidity.class, RelativeHumidityUnits.DECIMAL),
-                // Hydraulic
+                // Hydraulic (5)
                 Map.entry(LinearResistance.class, LinearResistanceUnits.PASCAL_PER_METER),
                 Map.entry(FrictionFactor.class, FrictionFactorUnits.DIMENSIONLESS),
                 Map.entry(LocalLossFactor.class, LocalLossFactorUnits.DIMENSIONLESS),
                 Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND),
-                // Mechanical
+                Map.entry(SDR.class, RatioUnits.DECIMAL),
+                // Mechanical (3)
                 Map.entry(Force.class, ForceUnits.NEWTON),
                 Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),
                 Map.entry(Torque.class, TorqueUnits.NEWTON_METER),
-                Map.entry(SDR.class, RatioUnits.DECIMAL),
-                // Thermodynamic
+                // Thermodynamic (11)
                 Map.entry(Density.class, DensityUnits.KILOGRAM_PER_CUBIC_METER),
                 Map.entry(DynamicViscosity.class, DynamicViscosityUnits.PASCAL_SECOND),
                 Map.entry(Energy.class, EnergyUnits.JOULE),
@@ -133,7 +133,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Temperature.class, TemperatureUnits.KELVIN),
                 Map.entry(ThermalConductivity.class, ThermalConductivityUnits.WATTS_PER_METER_KELVIN),
                 Map.entry(ThermalDiffusivity.class, ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND),
-                // Geographic
+                // Geographic (3)
                 Map.entry(Latitude.class, AngleUnits.DEGREES),
                 Map.entry(Longitude.class, AngleUnits.DEGREES),
                 Map.entry(Bearing.class, AngleUnits.DEGREES)
