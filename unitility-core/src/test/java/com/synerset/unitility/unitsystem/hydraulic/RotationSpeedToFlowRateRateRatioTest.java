@@ -1,8 +1,5 @@
 package com.synerset.unitility.unitsystem.hydraulic;
 
-import com.synerset.unitility.unitsystem.common.Curvature;
-import com.synerset.unitility.unitsystem.common.CurvatureUnit;
-import com.synerset.unitility.unitsystem.common.CurvatureUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

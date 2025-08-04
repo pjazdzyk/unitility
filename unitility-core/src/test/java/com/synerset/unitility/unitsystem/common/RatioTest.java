@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RatioTest {
     @Test
     @DisplayName("should convert % to decimal and vice versa")
-    void shouldProperlyConvertPascalToPsi() {
+    void shouldProperlyConvertPercentToDecimalAndViceVersa() {
         // Given
         Ratio initialRatio = Ratio.ofPercentage(50.5);
 

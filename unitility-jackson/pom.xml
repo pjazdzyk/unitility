@@ -18,6 +18,9 @@
         Jackson SimpleModule tailored for ObjectMapper setup. This module is specifically designed to handle Unitility
         types seamlessly during serialization and deserialization processes.
     </description>
+    <properties>
+
+    </properties>
 
     <dependencies>
         <dependency>
@@ -29,6 +32,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson-databind.version}</version>
             <scope>provided</scope>
         </dependency>

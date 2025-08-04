@@ -106,7 +106,7 @@ public class Ratio implements CalculableQuantity<RatioUnit, Ratio> {
         return toUnit(RatioUnits.DECIMAL);
     }
 
-    // Get value in target unit
+    // Get value in the target unit
     public double getInPercent() {
         return getInUnit(RatioUnits.PERCENT);
     }

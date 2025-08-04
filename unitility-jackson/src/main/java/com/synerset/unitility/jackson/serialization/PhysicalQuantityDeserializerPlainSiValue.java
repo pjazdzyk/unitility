@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.util.ParsingHelpers;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 
 import java.io.IOException;
