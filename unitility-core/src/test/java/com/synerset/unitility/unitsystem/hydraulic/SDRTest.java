@@ -1,6 +1,9 @@
 package com.synerset.unitility.unitsystem.hydraulic;
 
-import com.synerset.unitility.unitsystem.common.*;
+import com.synerset.unitility.unitsystem.common.Diameter;
+import com.synerset.unitility.unitsystem.common.Distance;
+import com.synerset.unitility.unitsystem.common.Height;
+import com.synerset.unitility.unitsystem.common.RatioUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package com.synerset.unitility.persistence.converter.plainsivalue.common;
 
-import com.synerset.unitility.unitsystem.common.Width;
 import com.synerset.unitility.unitsystem.common.DistanceUnit;
+import com.synerset.unitility.unitsystem.common.Width;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
