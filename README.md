@@ -62,8 +62,10 @@ features, such as overloaded operators.
    8.2 [Bearing](#82-bearing) <br>
    8.3 [GeoDistance (Haversine equations)](#83-geodistance---spherical-distance-between-two-coordinates) <br>
    8.4 [Parsing geographic quantities and JSON structures](#84-parsing-geographic-quantities-and-json-structures) <br>
-9. [Collaboration, attribution and citation](#9-collaboration-attribution-and-citation) <br>
-10. [Acknowledgments](#10-acknowledgments) <br>
+9. [Persistence](#9-persistence) <br>
+   9.1 [Attribute Converters - Default SI](#91-attribute-converters---default-si) <br>
+10. [Collaboration, attribution and citation](#10-collaboration-attribution-and-citation) <br>
+11. [Acknowledgments](#11-acknowledgments) <br>
 
 ## 1. INSTALLATION
 
@@ -1181,7 +1183,7 @@ PhysicalQuantity is composed of value and unit, and in some cases eg: geographic
 To simplify persisting Entities in a database using Hibernate or other ORMs implementing JPA specification, a set of converters
 has been provided to speed up the development process.
 
-### 9.1 Attribute Converters
+### 9.1 Attribute Converters - Default SI
 At this moment there is only one set of converters available, utilizing "plain SI" strategy. It means, that for standard
 value-unit quantities, only the value converted to SI base unit is persisted in the database column, allowing for fast and
 efficient data storage.
