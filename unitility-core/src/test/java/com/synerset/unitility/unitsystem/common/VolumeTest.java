@@ -158,7 +158,7 @@ class VolumeTest {
 
         // When
         Volume actualInCubicMeter = initialVolumeInCubicFeet.toBaseUnit();
-        Volume actualInCubicFeet = actualInCubicMeter.toUnit(VolumeUnits.CUBIC_FEET);
+        Volume actualInCubicFeet = actualInCubicMeter.toUnit(VolumeUnits.CUBIC_FOOT);
         double actualInCubicFeetVal = actualInCubicMeter.getInCubicFeet();
 
         // Then
