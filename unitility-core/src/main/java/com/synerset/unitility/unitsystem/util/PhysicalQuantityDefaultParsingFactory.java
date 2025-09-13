@@ -42,6 +42,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Height.class, Height::of),
                 Map.entry(Diameter.class, Diameter::of),
                 Map.entry(Perimeter.class, Perimeter::of),
+                Map.entry(Thickness.class, Thickness::of),
                 Map.entry(Mass.class, Mass::of),
                 Map.entry(LinearMassDensity.class, LinearMassDensity::of),
                 Map.entry(Velocity.class, Velocity::of),
@@ -67,6 +68,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(LocalLossFactor.class, (value, symbol) -> LocalLossFactor.of(value)),
                 Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatio::of),
                 Map.entry(SDR.class, SDR::of),
+                Map.entry(AbsoluteRoughness.class, AbsoluteRoughness::of),
                 // Mechanical
                 Map.entry(Force.class, Force::of),
                 Map.entry(Momentum.class, Momentum::of),
@@ -100,6 +102,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Height.class, DistanceUnits.METER),
                 Map.entry(Diameter.class, DistanceUnits.METER),
                 Map.entry(Perimeter.class, DistanceUnits.METER),
+                Map.entry(Thickness.class, DistanceUnits.METER),
                 Map.entry(Mass.class, MassUnits.KILOGRAM),
                 Map.entry(LinearMassDensity.class, LinearMassDensityUnits.KILOGRAM_PER_METER),
                 Map.entry(Velocity.class, VelocityUnits.METER_PER_SECOND),
@@ -125,6 +128,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(LocalLossFactor.class, LocalLossFactorUnits.DIMENSIONLESS),
                 Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND),
                 Map.entry(SDR.class, RatioUnits.DECIMAL),
+                Map.entry(AbsoluteRoughness.class, DistanceUnits.METER),
                 // Mechanical (3)
                 Map.entry(Force.class, ForceUnits.NEWTON),
                 Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),

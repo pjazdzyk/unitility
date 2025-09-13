@@ -254,6 +254,48 @@ class PlainSiConverterTest {
     }
 
     @Test
+    @DisplayName("Thickness Plain SI Converter: should successfully convert Thickness")
+    void shouldSuccessfullyConvertThicknessTest() {
+        // Given
+        Thickness thickness = Thickness.ofFeet(20.0);
+        DistanceUnit defaultConverterUnit = ThicknessPlainSiConverter.DEFAULT_SI_UNIT;
+        double expectedValueFromDB = thickness.getInUnit(defaultConverterUnit);
+
+        ThicknessPlainSiConverter converter = new ThicknessPlainSiConverter();
+
+        // When
+        Double actualValueToBePersistedInDB = converter.convertToDatabaseColumn(thickness);
+        Thickness actualQuantityFromDB = converter.convertToEntityAttribute(expectedValueFromDB);
+
+        // Then
+        assertThat(actualValueToBePersistedInDB).isNotNull();
+        assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
+
+        assertThat(actualQuantityFromDB.getInFeet()).isEqualTo(thickness.getInFeet(), withPrecision(1E-11));
+    }
+
+    @Test
+    @DisplayName("AbsoluteRoughness Plain SI Converter: should successfully convert AbsoluteRoughness")
+    void shouldSuccessfullyConvertAbsoluteRoughnessTest() {
+        // Given
+        AbsoluteRoughness absoluteRoughness = AbsoluteRoughness.ofFeet(20.0);
+        DistanceUnit defaultConverterUnit = AbsoluteRoughnessPlainSiConverter.DEFAULT_SI_UNIT;
+        double expectedValueFromDB = absoluteRoughness.getInUnit(defaultConverterUnit);
+
+        AbsoluteRoughnessPlainSiConverter converter = new AbsoluteRoughnessPlainSiConverter();
+
+        // When
+        Double actualValueToBePersistedInDB = converter.convertToDatabaseColumn(absoluteRoughness);
+        AbsoluteRoughness actualQuantityFromDB = converter.convertToEntityAttribute(expectedValueFromDB);
+
+        // Then
+        assertThat(actualValueToBePersistedInDB).isNotNull();
+        assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
+
+        assertThat(actualQuantityFromDB.getInFeet()).isEqualTo(absoluteRoughness.getInFeet(), withPrecision(1E-11));
+    }
+
+    @Test
     @DisplayName("Mass Plain SI Converter: should successfully convert Mass")
     void shouldSuccessfullyConvertMassTest() {
         // Given

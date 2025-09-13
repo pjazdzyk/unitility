@@ -46,6 +46,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Height.class, () -> Arrays.asList(DistanceUnits.values())),
                 Map.entry(Diameter.class, () -> Arrays.asList(DistanceUnits.values())),
                 Map.entry(Perimeter.class, () -> Arrays.asList(DistanceUnits.values())),
+                Map.entry(Thickness.class, () -> Arrays.asList(DistanceUnits.values())),
                 Map.entry(Mass.class, () -> Arrays.asList(MassUnits.values())),
                 Map.entry(LinearMassDensity.class, () -> Arrays.asList(LinearMassDensityUnits.values())),
                 Map.entry(Velocity.class, () -> Arrays.asList(VelocityUnits.values())),
@@ -71,6 +72,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(LocalLossFactor.class, Collections::emptyList),
                 Map.entry(RotationSpeedToFlowRateRatio.class, () -> Arrays.asList(RotationSpeedToFlowRateRatioUnits.values())),
                 Map.entry(SDR.class, () -> Arrays.asList(RatioUnits.values())),
+                Map.entry(AbsoluteRoughness.class, () -> Arrays.asList(DistanceUnits.values())),
                 // Mechanical
                 Map.entry(Force.class, () -> Arrays.asList(ForceUnits.values())),
                 Map.entry(Momentum.class, () -> Arrays.asList(MomentumUnits.values())),
