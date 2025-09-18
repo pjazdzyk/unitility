@@ -49,6 +49,10 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
         return new Velocity(value, VelocityUnits.FEET_PER_SECOND);
     }
 
+    public static Velocity ofFeetPerMinute(double value) {
+        return new Velocity(value, VelocityUnits.FEET_PER_MINUTE);
+    }
+
     public static Velocity ofMilesPerHour(double value) {
         return new Velocity(value, VelocityUnits.MILES_PER_HOUR);
     }
@@ -121,6 +125,10 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
         return toUnit(VelocityUnits.FEET_PER_SECOND);
     }
 
+    public Velocity toFeetPerMinute() {
+        return toUnit(VelocityUnits.FEET_PER_MINUTE);
+    }
+
     public Velocity toMilesPerHour() {
         return toUnit(VelocityUnits.MILES_PER_HOUR);
     }
@@ -152,6 +160,10 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
 
     public double getInFeetPerSeconds() {
         return getInUnit(VelocityUnits.FEET_PER_SECOND);
+    }
+
+    public double getInFeetPerMinutes() {
+        return getInUnit(VelocityUnits.FEET_PER_MINUTE);
     }
 
     public double getInMilesPerHours() {

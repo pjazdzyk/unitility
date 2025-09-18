@@ -70,7 +70,7 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
     }
 
     public static Volume ofCubicFeet(double value) { // New method
-        return new Volume(value, VolumeUnits.CUBIC_FEET);
+        return new Volume(value, VolumeUnits.CUBIC_FOOT);
     }
 
     @Override
@@ -154,7 +154,7 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
     }
 
     public Volume toCubicFeet() { // New method
-        return toUnit(VolumeUnits.CUBIC_FEET);
+        return toUnit(VolumeUnits.CUBIC_FOOT);
     }
 
     // Get value in target unit
@@ -199,7 +199,7 @@ public class Volume implements CalculableQuantity<VolumeUnit, Volume> {
     }
 
     public double getInCubicFeet() { // New method
-        return getInUnit(VolumeUnits.CUBIC_FEET);
+        return getInUnit(VolumeUnits.CUBIC_FOOT);
     }
 
     @Override
