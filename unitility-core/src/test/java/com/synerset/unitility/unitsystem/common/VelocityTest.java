@@ -83,6 +83,28 @@ class VelocityTest {
     }
 
     @Test
+    @DisplayName("should convert m/s to ft/min and vice versa")
+    void shouldProperlyConvertMetersPerSecondToFeetPerMinute() {
+        // Given
+        Velocity initialVelocity = Velocity.ofMetersPerSecond(10.0);
+
+        // When
+        Velocity actualInFeetPerMinute = initialVelocity.toUnit(VelocityUnits.FEET_PER_MINUTE);
+        double actualInFeetPerMinuteVal = initialVelocity.getInFeetPerMinutes();
+        Velocity actualInMetersPerSecond = actualInFeetPerMinute.toBaseUnit();
+
+        // Then
+        // 10 m/s = 10 * 196.8503937 ≈ 1968.503937 ft/min
+        Velocity expectedInFeetPerMinute = Velocity.ofFeetPerMinute(1968.503937007874);
+
+        assertThat(actualInFeetPerMinute.getValue()).isEqualTo(actualInFeetPerMinuteVal);
+        assertThat(actualInFeetPerMinute.getValue())
+                .isEqualTo(expectedInFeetPerMinute.getValue(), withPrecision(1e-12));
+        assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);
+    }
+
+
+    @Test
     @DisplayName("should convert m/s to mph and vice versa")
     void shouldProperlyConvertMetersPerSecondToMilesPerHour() {
         // Given

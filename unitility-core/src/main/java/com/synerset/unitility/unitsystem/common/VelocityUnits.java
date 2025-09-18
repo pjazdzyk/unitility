@@ -12,6 +12,7 @@ public enum VelocityUnits implements VelocityUnit {
     KILOMETER_PER_HOUR("km/h", val -> val / 3.6, val -> val * 3.6),
     INCH_PER_SECOND("in/s", val -> val * 0.0254, val -> val / 0.0254),
     FEET_PER_SECOND("ft/s", val -> val * 0.3048, val -> val / 0.3048),
+    FEET_PER_MINUTE("ft/min", val -> val * 0.00508, val -> val / 0.00508),
     MILES_PER_HOUR("mph", val -> val * 0.44704, val -> val / 0.44704),
     KNOT("kn", val -> val * 0.514444444444444, val -> val / 0.514444444444444),
     MACH("Mach", val -> val * 340.29, val -> val / 340.29);
