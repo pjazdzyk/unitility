@@ -10,6 +10,8 @@ public enum VolumeUnits implements VolumeUnit {
     CUBIC_METER("m³", val -> val, val -> val),
     CUBIC_CENTIMETER("cm³", val -> val * 0.000001, val -> val * 1000000.0),
     CUBIC_DECIMETER("dm³", val -> val * 0.001, val -> val * 1000.0),
+    @Deprecated(forRemoval = true)
+    CUBIC_FEET("ft³", val -> val * 0.0283168466, val -> val / 0.0283168466),
     CUBIC_FOOT("ft³", val -> val * 0.0283168466, val -> val / 0.0283168466),
     LITRE("l", val -> val * 0.001, val -> val * 1000.0),
     HECTOLITRE("hl", val -> val * 0.1, val -> val * 10.0),
