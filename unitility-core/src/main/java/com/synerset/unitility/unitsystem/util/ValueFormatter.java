@@ -2,10 +2,12 @@ package com.synerset.unitility.unitsystem.util;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 /**
  * The ValueFormatter class provides utility methods for formatting double values with a specified number of
  * relevant digits and decimal places.
+ * Set decimal '.' and grouping ',' separators of 'format()' for float numbers.(','  is used for decimal locale separators in USA/TR )
  */
 public class ValueFormatter {
 
@@ -46,7 +48,12 @@ public class ValueFormatter {
         if (numDecimalPlaces > 0) {
             formatString = "#." + "#".repeat(numDecimalPlaces);
         }
-        DecimalFormat decimalFormat = new DecimalFormat(formatString);
+        // Set locale decimal and grouping separators.
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        symbols.setGroupingSeparator(',');
+        
+        DecimalFormat decimalFormat = new DecimalFormat(formatString, symbols);
         decimalFormat.setRoundingMode(RoundingMode.HALF_EVEN);
         return decimalFormat.format(value);
     }
