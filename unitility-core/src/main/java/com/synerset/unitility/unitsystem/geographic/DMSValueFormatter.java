@@ -12,16 +12,16 @@ class DMSValueFormatter {
     static String latitudeToDmsFormat(Latitude latitude, int relevantDigits) {
         double latitudeInDegrees = latitude.getInDegrees();
         char directionSymbol = (latitudeInDegrees < 0) ? 'S' : 'N';
-        return createDMSNotation(latitudeInDegrees, directionSymbol, relevantDigits);
+        return createDMSNotation(latitudeInDegrees, directionSymbol, relevantDigits, 2);
     }
 
     static String longitudeToDmsFormat(Longitude longitude, int relevantDigits) {
         double longitudeInDegrees = longitude.getInDegrees();
         char directionSymbol = (longitudeInDegrees < 0) ? 'W' : 'E';
-        return createDMSNotation(longitudeInDegrees, directionSymbol, relevantDigits);
+        return createDMSNotation(longitudeInDegrees, directionSymbol, relevantDigits, 3);
     }
 
-    private static String createDMSNotation(double coordinateInDegrees, char directionSymbol, int relevantDigits) {
+    private static String createDMSNotation(double coordinateInDegrees, char directionSymbol, int relevantDigits, int degreePadding) {
         coordinateInDegrees = Math.abs(coordinateInDegrees);
 
         int degrees = (int) coordinateInDegrees;
@@ -31,9 +31,10 @@ class DMSValueFormatter {
 
         String secondsWithRelDigits = relevantDigits > 0
                 ? ValueFormatter.toStringWithRelevantDigits(seconds, relevantDigits)
-                : String.valueOf(seconds);
+                : String.format("%.2f", seconds);
 
-        return String.format("%d°%d'%s\"%c", degrees, minutes, secondsWithRelDigits, directionSymbol);
+        String degreesFormatted = String.format("%0" + degreePadding + "d", degrees);
+
+        return String.format("%s°%d'%s\"%c", degreesFormatted, minutes, secondsWithRelDigits, directionSymbol);
     }
-
 }

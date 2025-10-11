@@ -193,11 +193,11 @@ class PhysicalQuantityJacksonDeserializerTest {
         objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
 
         String lat1 = "{\"value\":\"52°14'5.123\\\"N\"}";
-        String lon1 = "{\"value\":\"21°4'3.986\\\"W\"}";
+        String lon1 = "{\"value\":\"021°4'3.986\\\"W\"}";
         String lat2 = "{\"value\":\" 52o 14min 5.123sec N\"}";
         String lon2 = "{\"value\":\"21deg 4' 3.986\\\"   w\"}";
         String lat3 = "{\"value\":\"52°14'5.123\\\"N\"}";
-        String lon3 = "{\"value\":\"-21°4'3.986\\\"\"}";
+        String lon3 = "{\"value\":\"-021°4'3.986\\\"\"}";
         String lat4 = "{\"value\":\"52°14'N\"}";
         String lon4 = "{\"value\":\"21°4'W\"}";
         String lat5 = "{\"value\":\"52°N\"}";

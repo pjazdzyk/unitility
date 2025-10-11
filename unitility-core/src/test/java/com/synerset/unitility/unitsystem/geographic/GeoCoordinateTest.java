@@ -21,9 +21,9 @@ class GeoCoordinateTest {
         String actualDmsOutputVarTruncated = geoCoordinate.toDMSFormat("sea_quest", 3);
 
         // Then
-        assertThat(actualDmsOutput).isEqualTo("52°14'2.796000000004142\"S, 21°34'1.595999999998412\"W");
-        assertThat(actualDmsOutputVar).isEqualTo("sea_quest = 52°14'2.796000000004142\"S, 21°34'1.595999999998412\"W");
-        assertThat(actualDmsOutputVarTruncated).isEqualTo("sea_quest = 52°14'2.796\"S, 21°34'1.596\"W");
+        assertThat(actualDmsOutput).isEqualTo("52°14'2.80\"S, 021°34'1.60\"W");
+        assertThat(actualDmsOutputVar).isEqualTo("sea_quest = 52°14'2.80\"S, 021°34'1.60\"W");
+        assertThat(actualDmsOutputVarTruncated).isEqualTo("sea_quest = 52°14'2.796\"S, 021°34'1.596\"W");
 
         assertThat(geoCoordinate.name()).isEqualTo("name");
         assertThat(geoCoordinate.latitude()).isEqualTo(latitude);

@@ -69,9 +69,9 @@ class LongitudeTest {
         String lonInDmsVarDigits = longitude.toDMSFormat("lat", 1);
 
         // Then
-        assertThat(lonInDms).isEqualTo("21°4'3.986000000018066\"W");
-        assertThat(lonInDmsVar).isEqualTo("lat = 21°4'3.986000000018066\"W");
-        assertThat(lonInDmsVarDigits).isEqualTo("lat = 21°4'4\"W");
+        assertThat(lonInDms).isEqualTo("021°4'3.99\"W");
+        assertThat(lonInDmsVar).isEqualTo("lat = 021°4'3.99\"W");
+        assertThat(lonInDmsVarDigits).isEqualTo("lat = 021°4'4\"W");
     }
 
 }

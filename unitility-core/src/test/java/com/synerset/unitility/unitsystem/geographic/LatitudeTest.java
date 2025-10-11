@@ -68,21 +68,21 @@ class LatitudeTest {
         // When
         String latInDms = latitude.toDMSFormat();
         String latInDmsVar = latitude.toDMSFormat("lat");
-        String latInDmsVarDigits = latitude.toDMSFormat("lat", 1);
+        String latInDmsVarDigits = latitude.toDMSFormat("lat", 3);
 
         // Then
-        assertThat(latInDms).isEqualTo("52°14'5.123000000003799\"N");
-        assertThat(latInDmsVar).isEqualTo("lat = 52°14'5.123000000003799\"N");
-        assertThat(latInDmsVarDigits).isEqualTo("lat = 52°14'5.1\"N");
+        assertThat(latInDms).isEqualTo("52°14'5.12\"N");
+        assertThat(latInDmsVar).isEqualTo("lat = 52°14'5.12\"N");
+        assertThat(latInDmsVarDigits).isEqualTo("lat = 52°14'5.123\"N");
     }
 
     @Test
     @DisplayName("should create instance from DMS input")
     void shouldCreateNewInstanceFromDMSFormat(){
         // Given
-        String latitudeAsStringN = "52°14'5.1\"N";
+        String latitudeAsStringN = "02°14'5.1\"N";
         String latitudeAsStringS = "52°14'5.1\"S";
-        String longitudeAsStringE = "52°14'5.1\"E";
+        String longitudeAsStringE = "002°14'5.1\"E";
         String longitudeAsStringW = "52°14'5.1\"W";
 
         // When
@@ -93,9 +93,9 @@ class LatitudeTest {
         Longitude longitudeW = parsingFactory.parse(Longitude.class, longitudeAsStringW);
 
         // Then
-        assertThat(latitudeN.getInDegrees()).isEqualTo(52.23475);
+        assertThat(latitudeN.getInDegrees()).isEqualTo(2.23475);
         assertThat(latitudeS.getInDegrees()).isEqualTo(-52.23475);
-        assertThat(longitudeE.getInDegrees()).isEqualTo(52.23475);
+        assertThat(longitudeE.getInDegrees()).isEqualTo(2.23475);
         assertThat(longitudeW.getInDegrees()).isEqualTo(-52.23475);
 
     }
