@@ -11,19 +11,19 @@ class GeoCoordinateTest {
     @DisplayName("should output coordinates in DMS format")
     void toDMSFormat_shouldOutputInDegreeMinutesSecondsFormat() {
         // Given
-        Latitude latitude = Latitude.ofDegrees(-52.23411);
-        Longitude longitude = Longitude.ofDegrees(-21.56711);
+        Latitude latitude = Latitude.ofDegrees(-0.023411888);
+        Longitude longitude = Longitude.ofDegrees(-1.56711888);
 
         // When
         GeoCoordinate geoCoordinate = GeoCoordinate.of(latitude, longitude, "name");
         String actualDmsOutput = geoCoordinate.toDMSFormat();
         String actualDmsOutputVar = geoCoordinate.toDMSFormat("sea_quest");
-        String actualDmsOutputVarTruncated = geoCoordinate.toDMSFormat("sea_quest", 3);
+        String actualDmsOutputVarTruncated = geoCoordinate.toDMSFormat("sea_quest", 0.001);
 
         // Then
-        assertThat(actualDmsOutput).isEqualTo("52°14'2.80\"S, 021°34'1.60\"W");
-        assertThat(actualDmsOutputVar).isEqualTo("sea_quest = 52°14'2.80\"S, 021°34'1.60\"W");
-        assertThat(actualDmsOutputVarTruncated).isEqualTo("sea_quest = 52°14'2.796\"S, 021°34'1.596\"W");
+        assertThat(actualDmsOutput).isEqualTo("00°01'24.28\"S, 001°34'1.63\"W");
+        assertThat(actualDmsOutputVar).isEqualTo("sea_quest = 00°01'24.28\"S, 001°34'1.63\"W");
+        assertThat(actualDmsOutputVarTruncated).isEqualTo("sea_quest = 00°01'24.283\"S, 001°34'1.628\"W");
 
         assertThat(geoCoordinate.name()).isEqualTo("name");
         assertThat(geoCoordinate.latitude()).isEqualTo(latitude);

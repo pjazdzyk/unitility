@@ -69,11 +69,11 @@ public record GeoCoordinate(Latitude latitude, Longitude longitude, String name)
      * Returns the geographic coordinate in Degrees, Minutes, Seconds (DMS) format with a specified number of relevant digits.
      * Example, for relevant digits = 2: 52°14'5.12"N, -10°13'2.12"W.
      *
-     * @param relevantDigits The number of relevant digits to include in the output.
+     * @param secondsPrecision The precision of expected seconds to be provided as 'epsilon' eg: 0.01.
      * @return The geographic coordinate in DMS format with the specified number of relevant digits.
      */
-    public String toDMSFormat(int relevantDigits) {
-        return latitude.toDMSFormat(relevantDigits) + ", " + longitude.toDMSFormat(relevantDigits);
+    public String toDMSFormat(double secondsPrecision) {
+        return latitude.toDMSFormat(secondsPrecision) + ", " + longitude.toDMSFormat(secondsPrecision);
     }
 
     /**
@@ -81,11 +81,11 @@ public record GeoCoordinate(Latitude latitude, Longitude longitude, String name)
      * Example, for relevant digits = 2: variable = 52°14'5.12"N, -10°13'2.12"W.
      *
      * @param variableName   The variable name to be used in the output.
-     * @param relevantDigits The number of relevant digits to include in the output.
+     * @param secondsPrecision The precision of expected seconds to be provided as 'epsilon' eg: 0.01.
      * @return The geographic coordinate in DMS format with the specified variable name and number of relevant digits.
      */
-    public String toDMSFormat(String variableName, int relevantDigits) {
-        return variableName + " = " + toDMSFormat(relevantDigits);
+    public String toDMSFormat(String variableName, double secondsPrecision) {
+        return variableName + " = " + toDMSFormat(secondsPrecision);
     }
 
     // Console output in decimal degrees format, Google Maps outputs coords this way\

@@ -68,7 +68,7 @@ class LatitudeTest {
         // When
         String latInDms = latitude.toDMSFormat();
         String latInDmsVar = latitude.toDMSFormat("lat");
-        String latInDmsVarDigits = latitude.toDMSFormat("lat", 3);
+        String latInDmsVarDigits = latitude.toDMSFormat("lat", 0.001);
 
         // Then
         assertThat(latInDms).isEqualTo("52°14'5.12\"N");

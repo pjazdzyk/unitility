@@ -98,19 +98,19 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
 
     // Console output in DMS (degrees, minutes, seconds) format
     public String toDMSFormat() {
-        return DMSValueFormatter.longitudeToDmsFormat(this, -1);
+        return DMSValueFormatter.longitudeToDmsFormat(this, DMSValueFormatter.DEFAULT_ICAO_SECONDS_PRECISION);
     }
 
     public String toDMSFormat(String variableName) {
         return variableName + " = " + toDMSFormat();
     }
 
-    public String toDMSFormat(int relevantDigits) {
-        return DMSValueFormatter.longitudeToDmsFormat(this, relevantDigits);
+    public String toDMSFormat(double secondsPrecision) {
+        return DMSValueFormatter.longitudeToDmsFormat(this, secondsPrecision);
     }
 
-    public String toDMSFormat(String variableName, int relevantDigits) {
-        return variableName + " = " + toDMSFormat(relevantDigits);
+    public String toDMSFormat(String variableName, double secondsPrecision) {
+        return variableName + " = " + toDMSFormat(secondsPrecision);
     }
 
     // Convert to target unit
