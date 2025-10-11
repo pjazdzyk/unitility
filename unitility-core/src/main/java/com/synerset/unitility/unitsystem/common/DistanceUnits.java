@@ -16,7 +16,6 @@ public enum DistanceUnits implements DistanceUnit {
     NAUTICAL_MILE("nmi", val -> val * 1852, val -> val / 1852),
     FEET("ft", val -> val * 0.3048, val -> val / 0.3048),
     INCH("in", val -> val * 0.0254, val -> val / 0.0254),
-
     YARD("yd", val -> val * 0.9144, val -> val / 0.9144),
     DECAMETER("dam", val -> val * Constants.DECA, val -> val / Constants.DECA),
     HECTOMETER("hm", val -> val * Constants.HECTO, val -> val / Constants.HECTO),
