@@ -2,6 +2,10 @@ package com.synerset.unitility.unitsystem.util;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
+import com.synerset.unitility.unitsystem.acoustic.SoundPower;
+import com.synerset.unitility.unitsystem.acoustic.SoundPowerUnits;
+import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
+import com.synerset.unitility.unitsystem.acoustic.SoundPressureUnits;
 import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
@@ -17,6 +21,8 @@ import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidityUnits;
 import com.synerset.unitility.unitsystem.hydraulic.*;
 import com.synerset.unitility.unitsystem.mechanical.*;
+import com.synerset.unitility.unitsystem.oscillation.Frequency;
+import com.synerset.unitility.unitsystem.oscillation.FrequencyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 
 import java.util.Map;
@@ -88,28 +94,33 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 // Geographic
                 Map.entry(Latitude.class, Latitude::of),
                 Map.entry(Longitude.class, Longitude::of),
-                Map.entry(Bearing.class, Bearing::of)
+                Map.entry(Bearing.class, Bearing::of),
+                // Acoustic
+                Map.entry(SoundPower.class, SoundPower::of),
+                Map.entry(SoundPressure.class, SoundPressure::of),
+                // Oscillation
+                Map.entry(Frequency.class, Frequency::of)
         );
 
         // Initializing immutable default unit registry
         this.immutableDefaultUnitRegistry = Map.ofEntries(
-                // Common (15)
+                // Common (16)
                 Map.entry(Angle.class, AngleUnits.RADIANS),
+                Map.entry(AngularVelocity.class, AngularVelocityUnits.RADIANS_PER_SECOND),
                 Map.entry(Area.class, AreaUnits.SQUARE_METER),
+                Map.entry(Curvature.class, CurvatureUnits.RADIANS_PER_METER),
                 Map.entry(Distance.class, DistanceUnits.METER),
+                Map.entry(Diameter.class, DistanceUnits.METER),
+                Map.entry(Height.class, DistanceUnits.METER),
                 Map.entry(Length.class, DistanceUnits.METER),
                 Map.entry(Width.class, DistanceUnits.METER),
-                Map.entry(Height.class, DistanceUnits.METER),
-                Map.entry(Diameter.class, DistanceUnits.METER),
-                Map.entry(Perimeter.class, DistanceUnits.METER),
-                Map.entry(Thickness.class, DistanceUnits.METER),
-                Map.entry(Mass.class, MassUnits.KILOGRAM),
                 Map.entry(LinearMassDensity.class, LinearMassDensityUnits.KILOGRAM_PER_METER),
-                Map.entry(Velocity.class, VelocityUnits.METER_PER_SECOND),
-                Map.entry(AngularVelocity.class, AngularVelocityUnits.RADIANS_PER_SECOND),
-                Map.entry(Volume.class, VolumeUnits.CUBIC_METER),
+                Map.entry(Mass.class, MassUnits.KILOGRAM),
+                Map.entry(Perimeter.class, DistanceUnits.METER),
                 Map.entry(Ratio.class, RatioUnits.PERCENT),
-                Map.entry(Curvature.class, CurvatureUnits.RADIANS_PER_METER),
+                Map.entry(Thickness.class, DistanceUnits.METER),
+                Map.entry(Velocity.class, VelocityUnits.METER_PER_SECOND),
+                Map.entry(Volume.class, VolumeUnits.CUBIC_METER),
                 // Dimensionless (5)
                 Map.entry(GenericDimensionless.class, GenericDimensionlessUnits.DIMENSIONLESS),
                 Map.entry(BypassFactor.class, BypassFactorUnits.DIMENSIONLESS),
@@ -123,12 +134,12 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(HumidityRatio.class, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM),
                 Map.entry(RelativeHumidity.class, RelativeHumidityUnits.DECIMAL),
                 // Hydraulic (5)
-                Map.entry(LinearResistance.class, LinearResistanceUnits.PASCAL_PER_METER),
+                Map.entry(AbsoluteRoughness.class, DistanceUnits.METER),
                 Map.entry(FrictionFactor.class, FrictionFactorUnits.DIMENSIONLESS),
+                Map.entry(LinearResistance.class, LinearResistanceUnits.PASCAL_PER_METER),
                 Map.entry(LocalLossFactor.class, LocalLossFactorUnits.DIMENSIONLESS),
                 Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND),
                 Map.entry(SDR.class, RatioUnits.DECIMAL),
-                Map.entry(AbsoluteRoughness.class, DistanceUnits.METER),
                 // Mechanical (3)
                 Map.entry(Force.class, ForceUnits.NEWTON),
                 Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),
@@ -148,7 +159,12 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 // Geographic (3)
                 Map.entry(Latitude.class, AngleUnits.DEGREES),
                 Map.entry(Longitude.class, AngleUnits.DEGREES),
-                Map.entry(Bearing.class, AngleUnits.DEGREES)
+                Map.entry(Bearing.class, AngleUnits.DEGREES),
+                // Acoustic (2)
+                Map.entry(SoundPower.class, SoundPowerUnits.WATT),
+                Map.entry(SoundPressure.class, SoundPressureUnits.PASCAL),
+                // Oscillation (1)
+                Map.entry(Frequency.class, FrequencyUnits.HERTZ)
         );
     }
 

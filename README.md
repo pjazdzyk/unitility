@@ -184,14 +184,21 @@ units and at least one Imperial unit.
 
 #### HYDRAULIC:
 
-* LinearResistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
-* FrictionFactor: [-]
-* LocalLossFactor: [-]
-* Rotation Speed To Flow Rate Ratio: Radians per second per meter per second [rad·s⁻¹/m³·s⁻¹], revolutions per minute per gallons per minute [rpm/gpm]
+* Linear resistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
+* Friction factor: [-]
+* LocalLoss factor: [-]
+* Rotation speed To Flow Rate Ratio: Radians per second per meter per second [rad·s⁻¹/m³·s⁻¹], revolutions per minute per gallons per minute [rpm/gpm]
 
 #### DIMENSIONLESS:
 
 * Grashof number, Prandtl number, Reynolds number, Bypass factor
+
+#### ACOUSTIC:
+* Sound power: Watt [W], Decibel [dB]
+* Sound pressure: Pascal [Pa], Decibel [dB]
+
+#### OSCILLATION:
+* Frequency: Hertz [Hz], Kilohertz [kHz], Megahertz [MHz], Gigahertz [GHz], Cycles per minute [cpm]
 
 #### SPECIAL TYPES:
 #### Geographic:
@@ -199,8 +206,8 @@ units and at least one Imperial unit.
 * Latitude: degrees [°], radians [rad]
 * Longitude: degrees [°], radians [rad]
 * Bearing: degrees [°]
-* GeoCoordinate: [latitude, longitude]
-* GeoDistance: meter [m], kilometer [km], mile [mi], nautical mile [nmi] <br>
+* Geo coordinate: [latitude, longitude]
+* Geo distance: meter [m], kilometer [km], mile [mi], nautical mile [nmi] <br>
 
 All Geographic quantities can be constructed from DMS format (degrees-minutes-seconds), for i.e.: 20°7'22.8"S.
 

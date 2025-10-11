@@ -2,6 +2,10 @@ package com.synerset.unitility.unitsystem.util;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
+import com.synerset.unitility.unitsystem.acoustic.SoundPower;
+import com.synerset.unitility.unitsystem.acoustic.SoundPowerUnits;
+import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
+import com.synerset.unitility.unitsystem.acoustic.SoundPressureUnits;
 import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
@@ -18,6 +22,8 @@ import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidityUnits;
 import com.synerset.unitility.unitsystem.hydraulic.*;
 import com.synerset.unitility.unitsystem.mechanical.*;
+import com.synerset.unitility.unitsystem.oscillation.Frequency;
+import com.synerset.unitility.unitsystem.oscillation.FrequencyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 
 import java.util.*;
@@ -93,7 +99,12 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(GeoDistance.class, () -> Arrays.asList(DistanceUnits.values())),
-                Map.entry(Bearing.class, () -> Arrays.asList(AngleUnits.values()))
+                Map.entry(Bearing.class, () -> Arrays.asList(AngleUnits.values())),
+                // Acoustic
+                Map.entry(SoundPower.class, () -> Arrays.asList(SoundPowerUnits.values())),
+                Map.entry(SoundPressure.class, () -> Arrays.asList(SoundPressureUnits.values())),
+                // Oscillation
+                Map.entry(Frequency.class, () -> Arrays.asList(FrequencyUnits.values()))
         );
     }
 

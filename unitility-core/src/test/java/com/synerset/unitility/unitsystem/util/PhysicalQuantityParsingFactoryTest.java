@@ -37,7 +37,7 @@ class PhysicalQuantityParsingFactoryTest {
     private static final PhysicalQuantityParsingFactory PARSING_FACTORY = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
 
     @Test
-    @DisplayName("should create default parsing registry with registered parsers")
+    @DisplayName("ParsingFactory: should create default parsing registry with registered parsers")
     void getClassRegistry_shouldCreateRegistry() {
         // Given
         // When
@@ -52,19 +52,19 @@ class PhysicalQuantityParsingFactoryTest {
         assertThat(registeredClasses).isNotNull()
                 .isNotEmpty()
                 .hasSize(registeredDefaultUnitsCount)
-                .hasSizeGreaterThan(43);
+                .hasSizeGreaterThan(50);
         assertThat(status).isTrue();
     }
 
     @Test
-    @DisplayName("should be immutable map, clear should not be possible")
+    @DisplayName("ParsingFactory: should be immutable map, clear should not be possible")
     void getClassRegistry_shouldBeImmutableMap() {
         Map<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>> classRegistry = PARSING_FACTORY.getClassRegistry();
         assertThrows(UnsupportedOperationException.class, classRegistry::clear);
     }
 
     @Test
-    @DisplayName("should fail when attempt to parse for not registered class")
+    @DisplayName("ParsingFactory: should fail when attempt to parse for not registered class")
     void createFromSymbol_shouldFailIfQueriedForNonSupportedClass() {
         // When
         // Then
@@ -73,7 +73,7 @@ class PhysicalQuantityParsingFactoryTest {
     }
 
     @Test
-    @DisplayName("should fail when attempt to parse from invalid string")
+    @DisplayName("ParsingFactory: should fail when attempt to parse from invalid string")
     void parse_shouldFailIfQueriedForNonSupportedClass() {
         // When
         // Then
@@ -82,7 +82,7 @@ class PhysicalQuantityParsingFactoryTest {
     }
 
     @Test
-    @DisplayName("should parse from DMS format to latitude or longitude")
+    @DisplayName("ParsingFactory: should parse from DMS format to latitude or longitude")
     void parse_shouldParseFromDMSFormatToLatitudeOrLongitude() {
         // Given
         String lat1 = "52°14'5.123\"N";
@@ -128,7 +128,7 @@ class PhysicalQuantityParsingFactoryTest {
     }
 
     @Test
-    @DisplayName("should fail on invalid or malformed DMS format")
+    @DisplayName("ParsingFactory: should fail on invalid or malformed DMS format")
     void parse_shouldFailOnInvalidOrMalformedDMSFormat() {
         // Given
         String lat1 = "52°14'5.123\"E";
@@ -141,7 +141,7 @@ class PhysicalQuantityParsingFactoryTest {
     }
 
     @Test
-    @DisplayName("should parse from single value only and resolve to quantity with default unit")
+    @DisplayName("ParsingFactory: should parse from single value only and resolve to quantity with default unit")
     void parse_shouldParseWithoutSymbolAndResolveToDefaultUnit() {
         // Given
         String singleValueInput = "-10.5E-5";

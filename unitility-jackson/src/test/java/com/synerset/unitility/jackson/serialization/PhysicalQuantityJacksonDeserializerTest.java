@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModulePlainSIValue;
+import com.synerset.unitility.unitsystem.acoustic.SoundPower;
+import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.AngularVelocity;
 import com.synerset.unitility.unitsystem.common.Curvature;
@@ -25,6 +27,7 @@ import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatStream;
 
 class PhysicalQuantityJacksonDeserializerTest {
 
@@ -63,6 +66,8 @@ class PhysicalQuantityJacksonDeserializerTest {
         String expectedGenericDimensionless1 = "{\"value\":20,\"unit\":\"\"}";
         String expectedGenericDimensionless2 = "{\"value\":20}";
         String expectedSDR = "{\"value\":27.6}";
+        String expectedSoundPower = "{\"value\": 10,\"unit\":\"db l \"}";
+        String expectedSoundPressure = "{\"value\": 10,\"unit\":\"db a \"}";
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
@@ -93,6 +98,8 @@ class PhysicalQuantityJacksonDeserializerTest {
         GenericDimensionless actualGenericDimensionless1 = objectMapper.readValue(expectedGenericDimensionless1, GenericDimensionless.class);
         GenericDimensionless actualGenericDimensionless2 = objectMapper.readValue(expectedGenericDimensionless2, GenericDimensionless.class);
         SDR actualSDR = objectMapper.readValue(expectedSDR, SDR.class);
+        SoundPower actualSoundPower = objectMapper.readValue(expectedSoundPower, SoundPower.class);
+        SoundPressure actualSoundPressure = objectMapper.readValue(expectedSoundPressure, SoundPressure.class);
 
         // Then
         Temperature expetedTemperature = Temperature.ofCelsius(20);
@@ -136,6 +143,8 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualGenericDimensionless1).isEqualTo(GenericDimensionless.of(20));
         assertThat(actualGenericDimensionless2).isEqualTo(GenericDimensionless.of(20));
         assertThat(actualSDR).isEqualTo(expectedSdr);
+        assertThat(actualSoundPower).isEqualTo(SoundPower.ofDecibels(10));
+        assertThat(actualSoundPressure).isEqualTo(SoundPressure.ofDecibels(10));
     }
 
     @Test

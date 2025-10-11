@@ -1,5 +1,7 @@
 package com.synerset.unitility.persistence.converter.plainsivalue;
 
+import com.synerset.unitility.persistence.converter.plainsivalue.acoustic.SoundPowerPlainSIConverter;
+import com.synerset.unitility.persistence.converter.plainsivalue.acoustic.SoundPressurePlainSIConverter;
 import com.synerset.unitility.persistence.converter.plainsivalue.common.*;
 import com.synerset.unitility.persistence.converter.plainsivalue.dimensionless.*;
 import com.synerset.unitility.persistence.converter.plainsivalue.flow.MassFlowPlainSiConverter;
@@ -11,7 +13,10 @@ import com.synerset.unitility.persistence.converter.plainsivalue.hydraulic.*;
 import com.synerset.unitility.persistence.converter.plainsivalue.mechanical.ForcePlainSiConverter;
 import com.synerset.unitility.persistence.converter.plainsivalue.mechanical.MomentumPlainSiConverter;
 import com.synerset.unitility.persistence.converter.plainsivalue.mechanical.TorquePlainSiConverter;
+import com.synerset.unitility.persistence.converter.plainsivalue.oscillation.FrequencyPlainSIConverter;
 import com.synerset.unitility.persistence.converter.plainsivalue.thermodynamic.*;
+import com.synerset.unitility.unitsystem.acoustic.SoundPower;
+import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
 import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
@@ -25,6 +30,8 @@ import com.synerset.unitility.unitsystem.humidity.RelativeHumidity;
 import com.synerset.unitility.unitsystem.humidity.RelativeHumidityUnit;
 import com.synerset.unitility.unitsystem.hydraulic.*;
 import com.synerset.unitility.unitsystem.mechanical.*;
+import com.synerset.unitility.unitsystem.oscillation.Frequency;
+import com.synerset.unitility.unitsystem.oscillation.FrequencyUnit;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.Assertions;
@@ -60,7 +67,6 @@ class PlainSiConverterTest {
         assertThat(actualValueToBePersistedInDB).isNotNull();
         assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
 
-        
         assertThat(actualQuantityFromDB.getInPoundsPerCubicFoot()).isEqualTo(density.getInPoundsPerCubicFoot(), withPrecision(1E-11));
     }
 
@@ -1073,6 +1079,69 @@ class PlainSiConverterTest {
     }
 
     @Test
+    @DisplayName("Force Plain SI Converter: should successfully convert SoundPower")
+    void shouldSuccessfullyConvertSoundPower() {
+        // Given
+        SoundPower quantity = SoundPower.ofDecibels(100.0);
+        PowerUnit defaultUnit = SoundPowerPlainSIConverter.DEFAULT_SI_UNIT;
+        double expectedValueFromDB = quantity.getInUnit(defaultUnit);
+
+        SoundPowerPlainSIConverter converter = new SoundPowerPlainSIConverter();
+
+        // When
+        Double actualValueToBePersistedInDB = converter.convertToDatabaseColumn(quantity);
+        SoundPower actualQuantityFromDB = converter.convertToEntityAttribute(expectedValueFromDB);
+
+        // Then
+        assertThat(actualValueToBePersistedInDB).isNotNull();
+        assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
+
+        assertThat(actualQuantityFromDB.getInDecibels()).isEqualTo(quantity.getInDecibels(), withPrecision(1E-11));
+    }
+
+    @Test
+    @DisplayName("Force Plain SI Converter: should successfully convert SoundPressure")
+    void shouldSuccessfullyConvertSoundPressure() {
+        // Given
+        SoundPressure quantity = SoundPressure.ofDecibels(100.0);
+        PressureUnit defaultUnit = SoundPressurePlainSIConverter.DEFAULT_SI_UNIT;
+        double expectedValueFromDB = quantity.getInUnit(defaultUnit);
+
+        SoundPressurePlainSIConverter converter = new SoundPressurePlainSIConverter();
+
+        // When
+        Double actualValueToBePersistedInDB = converter.convertToDatabaseColumn(quantity);
+        SoundPressure actualQuantityFromDB = converter.convertToEntityAttribute(expectedValueFromDB);
+
+        // Then
+        assertThat(actualValueToBePersistedInDB).isNotNull();
+        assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
+
+        assertThat(actualQuantityFromDB.getInDecibels()).isEqualTo(quantity.getInDecibels(), withPrecision(1E-11));
+    }
+
+    @Test
+    @DisplayName("Force Plain SI Converter: should successfully convert Frequency")
+    void shouldSuccessfullyConvertFrequency() {
+        // Given
+        Frequency quantity = Frequency.ofGigaHertz(1);
+        FrequencyUnit defaultUnit = FrequencyPlainSIConverter.DEFAULT_SI_UNIT;
+        double expectedValueFromDB = quantity.getInUnit(defaultUnit);
+
+        FrequencyPlainSIConverter converter = new FrequencyPlainSIConverter();
+
+        // When
+        Double actualValueToBePersistedInDB = converter.convertToDatabaseColumn(quantity);
+        Frequency actualQuantityFromDB = converter.convertToEntityAttribute(expectedValueFromDB);
+
+        // Then
+        assertThat(actualValueToBePersistedInDB).isNotNull();
+        assertThat(actualValueToBePersistedInDB).isEqualTo(expectedValueFromDB, withPrecision(1E-11));
+
+        assertThat(actualQuantityFromDB.getInKiloHertz()).isEqualTo(quantity.getInKiloHertz(), withPrecision(1E-11));
+    }
+
+    @Test
     @DisplayName("GeoDistance Converter: should successfully convert geo distance")
     void shouldSuccessfullyConvertGeoDistance() {
         // Given
@@ -1099,7 +1168,8 @@ class PlainSiConverterTest {
     }
     
     @Test
-    void shouldFindExactly44JavaFilesRecursivelyInTheSpecifiedFolder() {
+    @DisplayName("Number of converters should match number of registered quantity classes.")
+    void shouldFindRequiredCountOfJavaFilesRecursivelyInTheSpecifiedFolder() {
         String userDir = System.getProperty("user.dir");
         File folder = new File(userDir, FOLDER_PATH);
 
