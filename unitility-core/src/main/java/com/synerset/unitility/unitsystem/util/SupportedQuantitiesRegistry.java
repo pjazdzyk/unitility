@@ -8,6 +8,7 @@ import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
 import com.synerset.unitility.unitsystem.acoustic.SoundPressureUnits;
 import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.dimensionless.*;
+import com.synerset.unitility.unitsystem.electric.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
@@ -42,7 +43,7 @@ public class SupportedQuantitiesRegistry {
 
     private SupportedQuantitiesRegistry() {
         // Initializing immutable registry
-        this.immutableRegistry = Map.ofEntries(
+        this.immutableRegistry = Map.<Class<?>, Supplier<List<? extends Unit>>>ofEntries(
                 // Common
                 Map.entry(Angle.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Area.class, () -> Arrays.asList(AreaUnits.values())),
@@ -105,7 +106,14 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(SoundPower.class, () -> Arrays.asList(SoundPowerUnits.values())),
                 Map.entry(SoundPressure.class, () -> Arrays.asList(SoundPressureUnits.values())),
                 // Oscillation
-                Map.entry(Frequency.class, () -> Arrays.asList(FrequencyUnits.values()))
+                Map.entry(Frequency.class, () -> Arrays.asList(FrequencyUnits.values())),
+                // Electric (6)
+                Map.entry(Capacitance.class, () -> Arrays.asList(CapacitanceUnits.values())),
+                Map.entry(Charge.class, () -> Arrays.asList(ChargeUnits.values())),
+                Map.entry(Conductance.class, () -> Arrays.asList(ConductanceUnits.values())),
+                Map.entry(Current.class, () -> Arrays.asList(CurrentUnits.values())),
+                Map.entry(Resistance.class, () -> Arrays.asList(ResistanceUnits.values())),
+                Map.entry(Voltage.class, () -> Arrays.asList(VoltageUnits.values()))
         );
     }
 

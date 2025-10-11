@@ -152,6 +152,15 @@ units and at least one Imperial unit.
 * Momentum: Kilogram meter per second [kg·m/s], Gram centimeter per second [g·cm/s], Pound feet per second [lb·ft/s]
 * Torque: Newton meter [N·m], Millinewton meter [mN·m], Kilopond meter [kp·m], Foot pound [ft·lb], Inch pound [in·lb]
 
+#### ELECTRIC:
+
+* Capacitance: farad [F], microfarad [µF], nanofarad [nF], picofarad [pF]
+* Charge: coulomb [C], millicoulomb [mC], microcoulomb [µC], nanocoulomb [nC], picocoulomb [pC], kilocoulomb [kC], megacoulomb [MC]
+* Conductance: siemens [S], millisiemens [mS], microsiemens [µS], nanosiemens [nS], picosiemens [pS], kilosiemens [kS]
+* Current: ampere [A], milliampere [mA], microampere [µA], nanoampere [nA], kiloampere [kA], megaampere [MA]
+* Resistance: ohm [Ω], milliohm [mΩ]], kiloohm [kΩ]], megaohm [MΩ]]
+* Voltage: volt [V], millivolt [mV], microvolt [µV], nanovolt [nV], kilovolt [kV], megavolt [MV]
+
 #### THERMODYNAMIC:
 
 * Temperature: Kelvin [K], Celsius [°C], Fahrenheit [°F]
@@ -300,6 +309,9 @@ alternative ways of expressing units in an input string:
 | square             | ²   | 2       | m², m2             |
 | cubic              | ³   | 3       | m³, m3             |
 | negative exponents | ⁻¹  | -1      | m⁻¹, m-1           |
+
+IMPORTANT! In case quantity includes both milli and Mega, parser works in CASE SENSITIVE mode. And in such case
+for mega you have to provide "MV" for mega volts, and "mV" for milli volts.
 
 Please note that this method of creating quantities is designed to be used for deserializers. <Br>
 **In your code, you should create units in a programmatic way, not parsing from strings.**

@@ -29,6 +29,19 @@ public class StringTransformer {
     }
 
     /**
+     * Trims the input string, and removes spaces.
+     *
+     * @return A new StringTransformer instance with the transformed string.
+     */
+    public StringTransformer trimAndClean() {
+        return StringTransformer.of(
+                inputString.trim()
+                        .replace(" ", "")
+                        .replace("_", "")
+        );
+    }
+
+    /**
      * Trims the input string, converts to lowercase, and removes spaces.
      *
      * @return A new StringTransformer instance with the transformed string.

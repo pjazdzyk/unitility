@@ -217,8 +217,7 @@ public class DataSize implements CalculableQuantity<DataSizeUnit, DataSize> {
 
     @Override
     public String toString() {
-        String separator = getUnit().getSymbol().equals("b") ? "" : " ";
-        return "DataSize{" + value + separator + unitType.getSymbol() + '}';
+        return "DataSize{" + value + unitType.getSymbol() + '}';
     }
 
 }

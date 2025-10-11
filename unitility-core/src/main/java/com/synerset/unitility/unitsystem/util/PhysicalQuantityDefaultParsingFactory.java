@@ -8,6 +8,7 @@ import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
 import com.synerset.unitility.unitsystem.acoustic.SoundPressureUnits;
 import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.dimensionless.*;
+import com.synerset.unitility.unitsystem.electric.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
@@ -38,7 +39,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
 
     private PhysicalQuantityDefaultParsingFactory() {
         // Initializing immutable registry
-        this.immutableParsingRegistry = Map.ofEntries(
+        this.immutableParsingRegistry = Map.<Class<?>, BiFunction<Double, String, ? extends PhysicalQuantity<?>>>ofEntries(
                 // Common
                 Map.entry(Angle.class, Angle::of),
                 Map.entry(Area.class, Area::of),
@@ -100,11 +101,18 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(SoundPower.class, SoundPower::of),
                 Map.entry(SoundPressure.class, SoundPressure::of),
                 // Oscillation
-                Map.entry(Frequency.class, Frequency::of)
+                Map.entry(Frequency.class, Frequency::of),
+                // Electric
+                Map.entry(Capacitance.class, Capacitance::of),
+                Map.entry(Charge.class, Charge::of),
+                Map.entry(Conductance.class, Conductance::of),
+                Map.entry(Current.class, Current::of),
+                Map.entry(Resistance.class, Resistance::of),
+                Map.entry(Voltage.class, Voltage::of)
         );
 
         // Initializing immutable default unit registry
-        this.immutableDefaultUnitRegistry = Map.ofEntries(
+        this.immutableDefaultUnitRegistry = Map.<Class<?>, Unit>ofEntries(
                 // Common (16)
                 Map.entry(Angle.class, AngleUnits.RADIANS),
                 Map.entry(AngularVelocity.class, AngularVelocityUnits.RADIANS_PER_SECOND),
@@ -166,7 +174,14 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(SoundPower.class, SoundPowerUnits.WATT),
                 Map.entry(SoundPressure.class, SoundPressureUnits.PASCAL),
                 // Oscillation (1)
-                Map.entry(Frequency.class, FrequencyUnits.HERTZ)
+                Map.entry(Frequency.class, FrequencyUnits.HERTZ),
+                // Electric (6)
+                Map.entry(Capacitance.class, CapacitanceUnits.FARAD),
+                Map.entry(Charge.class, ChargeUnits.COULOMB),
+                Map.entry(Conductance.class, ConductanceUnits.SIEMENS),
+                Map.entry(Current.class, CurrentUnits.AMPERE),
+                Map.entry(Resistance.class, ResistanceUnits.OHM),
+                Map.entry(Voltage.class, VoltageUnits.VOLT)
         );
     }
 
