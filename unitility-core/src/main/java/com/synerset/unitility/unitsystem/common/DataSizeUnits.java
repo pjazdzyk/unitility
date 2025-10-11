@@ -1,31 +1,25 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Constants;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum DistanceUnits implements DistanceUnit {
+public enum DataSizeUnits implements DataSizeUnit {
 
-    METER("m", val -> val, val -> val),
-    CENTIMETER("cm", val -> val * Constants.CENTI, val -> val / Constants.CENTI),
-    MILLIMETER("mm", val -> val * Constants.MILLI, val -> val / Constants.MILLI),
-    KILOMETER("km", val -> val * Constants.KILO, val -> val / Constants.KILO),
-    MILE("mi", val -> val * 1609.344, val -> val / 1609.344),
-    NAUTICAL_MILE("nmi", val -> val * 1852, val -> val / 1852),
-    FEET("ft", val -> val * 0.3048, val -> val / 0.3048),
-    INCH("in", val -> val * 0.0254, val -> val / 0.0254),
-    YARD("yd", val -> val * 0.9144, val -> val / 0.9144),
-    DECAMETER("dam", val -> val * Constants.DECA, val -> val / Constants.DECA),
-    HECTOMETER("hm", val -> val * Constants.HECTO, val -> val / Constants.HECTO),
-    DATAMILE("datmi", val -> val * 1828.8, val -> val / 1828.8);
+    BYTE("B", val -> val, val -> val),
+    BIT("bit", val -> val / 8.0, val -> val * 8.0),
+    KILOBYTE("KB", val -> val * 1024.0, val -> val / 1024.0),
+    MEGABYTE("MB", val -> val * Math.pow(1024.0, 2), val -> val / Math.pow(1024.0, 2)),
+    GIGABYTE("GB", val -> val * Math.pow(1024.0, 3), val -> val / Math.pow(1024.0, 3)),
+    TERABYTE("TB", val -> val * Math.pow(1024.0, 4), val -> val / Math.pow(1024.0, 4)),
+    PETABYTE("PB", val -> val * Math.pow(1024.0, 5), val -> val / Math.pow(1024.0, 5)); // Max safe unit to fit in double (1 PB = 2^50 Bytes)
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    DistanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    DataSizeUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -37,8 +31,8 @@ public enum DistanceUnits implements DistanceUnit {
     }
 
     @Override
-    public DistanceUnit getBaseUnit() {
-        return METER;
+    public DataSizeUnits getBaseUnit() {
+        return BYTE;
     }
 
     @Override
@@ -51,29 +45,24 @@ public enum DistanceUnits implements DistanceUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static DistanceUnit fromSymbol(String rawSymbol) {
+    public static DataSizeUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return METER;
+            return BYTE;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (DistanceUnit unit : values()) {
+        for (DataSizeUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
         throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + DistanceUnits.class.getSimpleName());
+                + DataSizeUnits.class.getSimpleName());
     }
 
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
-                .replace("da", "dam")
-                .replace("dm", "datmi")
-                .replace("datami", "datmi")
                 .toString();
     }
-
-
 }

@@ -56,6 +56,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Volume.class, Volume::of),
                 Map.entry(Ratio.class, Ratio::of),
                 Map.entry(Curvature.class, Curvature::of),
+                Map.entry(DataSize.class, DataSize::of),
                 // Dimensionless
                 Map.entry(GenericDimensionless.class, (value, symbol) -> GenericDimensionless.of(value)),
                 Map.entry(BypassFactor.class, (value, symbol) -> BypassFactor.of(value)),
@@ -121,6 +122,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Thickness.class, DistanceUnits.METER),
                 Map.entry(Velocity.class, VelocityUnits.METER_PER_SECOND),
                 Map.entry(Volume.class, VolumeUnits.CUBIC_METER),
+                Map.entry(DataSize.class, DataSizeUnits.BYTE),
                 // Dimensionless (5)
                 Map.entry(GenericDimensionless.class, GenericDimensionlessUnits.DIMENSIONLESS),
                 Map.entry(BypassFactor.class, BypassFactorUnits.DIMENSIONLESS),

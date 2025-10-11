@@ -6,10 +6,7 @@ import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModulePlainSIValue;
 import com.synerset.unitility.unitsystem.acoustic.SoundPower;
 import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
-import com.synerset.unitility.unitsystem.common.Angle;
-import com.synerset.unitility.unitsystem.common.AngularVelocity;
-import com.synerset.unitility.unitsystem.common.Curvature;
-import com.synerset.unitility.unitsystem.common.Distance;
+import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
 import com.synerset.unitility.unitsystem.dimensionless.GenericDimensionless;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
@@ -68,6 +65,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         String expectedSDR = "{\"value\":27.6}";
         String expectedSoundPower = "{\"value\": 10,\"unit\":\"db l \"}";
         String expectedSoundPressure = "{\"value\": 10,\"unit\":\"db a \"}";
+        String expectedDataSize = "{\"value\": 10,\"unit\":\" mb \"}";
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
@@ -100,6 +98,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         SDR actualSDR = objectMapper.readValue(expectedSDR, SDR.class);
         SoundPower actualSoundPower = objectMapper.readValue(expectedSoundPower, SoundPower.class);
         SoundPressure actualSoundPressure = objectMapper.readValue(expectedSoundPressure, SoundPressure.class);
+        DataSize actualDataSize = objectMapper.readValue(expectedDataSize, DataSize.class);
 
         // Then
         Temperature expetedTemperature = Temperature.ofCelsius(20);
@@ -145,6 +144,7 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualSDR).isEqualTo(expectedSdr);
         assertThat(actualSoundPower).isEqualTo(SoundPower.ofDecibels(10));
         assertThat(actualSoundPressure).isEqualTo(SoundPressure.ofDecibels(10));
+        assertThat(actualDataSize).isEqualTo(DataSize.ofMegabytes(10));
     }
 
     @Test

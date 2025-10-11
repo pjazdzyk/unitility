@@ -60,6 +60,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Volume.class, () -> Arrays.asList(VolumeUnits.values())),
                 Map.entry(Ratio.class, () -> Arrays.asList(RatioUnits.values())),
                 Map.entry(Curvature.class, () -> Arrays.asList(CurvatureUnits.values())),
+                Map.entry(DataSize.class, () -> Arrays.asList(DataSizeUnits.values())),
                 // Dimensionless
                 Map.entry(GenericDimensionless.class, Collections::emptyList),
                 Map.entry(BypassFactor.class, Collections::emptyList),
