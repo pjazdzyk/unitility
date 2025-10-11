@@ -30,7 +30,7 @@ public class Diameter implements CalculableQuantity<DistanceUnit, Diameter> {
         DistanceUnit resolvedUnit = DistanceUnits.fromSymbol(unitSymbol);
         return new Diameter(value, resolvedUnit);
     }
-    
+
     public static Diameter ofMeters(double value) {
         return new Diameter(value, DistanceUnits.METER);
     }
@@ -61,6 +61,22 @@ public class Diameter implements CalculableQuantity<DistanceUnit, Diameter> {
 
     public static Diameter ofInches(double value) {
         return new Diameter(value, DistanceUnits.INCH);
+    }
+
+    public static Diameter ofYards(double value) {
+        return new Diameter(value, DistanceUnits.YARD);
+    }
+
+    public static Diameter ofDecameters(double value) {
+        return new Diameter(value, DistanceUnits.DECAMETER);
+    }
+
+    public static Diameter ofHectometers(double value) {
+        return new Diameter(value, DistanceUnits.HECTOMETER);
+    }
+
+    public static Diameter ofDataMiles(double value) {
+        return new Diameter(value, DistanceUnits.DATAMILE);
     }
 
     public static Diameter of(PhysicalQuantity<? extends DistanceUnit> distanceType){
@@ -139,6 +155,22 @@ public class Diameter implements CalculableQuantity<DistanceUnit, Diameter> {
         return toUnit(DistanceUnits.INCH);
     }
 
+    public Diameter toYard() {
+        return toUnit(DistanceUnits.YARD);
+    }
+
+    public Diameter toDecameter() {
+        return toUnit(DistanceUnits.DECAMETER);
+    }
+
+    public Diameter toHectometer() {
+        return toUnit(DistanceUnits.HECTOMETER);
+    }
+
+    public Diameter toDataMile() {
+        return toUnit(DistanceUnits.DATAMILE);
+    }
+
     // Get value in target unit
     public double getInMeters() {
         return getInUnit(DistanceUnits.METER);
@@ -172,6 +204,22 @@ public class Diameter implements CalculableQuantity<DistanceUnit, Diameter> {
         return getInUnit(DistanceUnits.INCH);
     }
 
+    public double getInYards() {
+        return getInUnit(DistanceUnits.YARD);
+    }
+
+    public double getInDecameters() {
+        return getInUnit(DistanceUnits.DECAMETER);
+    }
+
+    public double getInHectometers() {
+        return getInUnit(DistanceUnits.HECTOMETER);
+    }
+
+    public double getInDataMiles() {
+        return getInUnit(DistanceUnits.DATAMILE);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -189,5 +237,4 @@ public class Diameter implements CalculableQuantity<DistanceUnit, Diameter> {
     public String toString() {
         return "Diameter{" + value + " " + unitType.getSymbol() + '}';
     }
-
 }

@@ -63,6 +63,22 @@ public class Perimeter implements CalculableQuantity<DistanceUnit, Perimeter> {
         return new Perimeter(value, DistanceUnits.INCH);
     }
 
+    public static Perimeter ofYards(double value) {
+        return new Perimeter(value, DistanceUnits.YARD);
+    }
+
+    public static Perimeter ofDecameters(double value) {
+        return new Perimeter(value, DistanceUnits.DECAMETER);
+    }
+
+    public static Perimeter ofHectometers(double value) {
+        return new Perimeter(value, DistanceUnits.HECTOMETER);
+    }
+
+    public static Perimeter ofDataMiles(double value) {
+        return new Perimeter(value, DistanceUnits.DATAMILE);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -135,6 +151,22 @@ public class Perimeter implements CalculableQuantity<DistanceUnit, Perimeter> {
         return toUnit(DistanceUnits.INCH);
     }
 
+    public Perimeter toYard() {
+        return toUnit(DistanceUnits.YARD);
+    }
+
+    public Perimeter toDecameter() {
+        return toUnit(DistanceUnits.DECAMETER);
+    }
+
+    public Perimeter toHectometer() {
+        return toUnit(DistanceUnits.HECTOMETER);
+    }
+
+    public Perimeter toDataMile() {
+        return toUnit(DistanceUnits.DATAMILE);
+    }
+
     // Get value in target unit
     public double getInMeters() {
         return getInUnit(DistanceUnits.METER);
@@ -166,6 +198,22 @@ public class Perimeter implements CalculableQuantity<DistanceUnit, Perimeter> {
 
     public double getInInches() {
         return getInUnit(DistanceUnits.INCH);
+    }
+
+    public double getInYards() {
+        return getInUnit(DistanceUnits.YARD);
+    }
+
+    public double getInDecameters() {
+        return getInUnit(DistanceUnits.DECAMETER);
+    }
+
+    public double getInHectometers() {
+        return getInUnit(DistanceUnits.HECTOMETER);
+    }
+
+    public double getInDataMiles() {
+        return getInUnit(DistanceUnits.DATAMILE);
     }
 
     public static Perimeter of(PhysicalQuantity<? extends DistanceUnit> distanceType) {

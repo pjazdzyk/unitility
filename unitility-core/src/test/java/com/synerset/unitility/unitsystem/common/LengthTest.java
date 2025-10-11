@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LengthTest {
 
     @Test
-    @DisplayName("should convert to m from mm and vice versa")
+    @DisplayName("Length: should convert to m from mm and vice versa")
     void shouldProperlyConvertToMetersFromMillimeters() {
         // Given
         Length initialLengthInMillimeters = Length.ofMillimeters(1000.0);
@@ -170,6 +170,102 @@ class LengthTest {
         assertThat(actualInMiles.getValue()).isEqualTo(actualInMilesVal);
         assertThat(actualInMeters).isEqualTo(expectedInMeters);
         assertThat(actualInMiles).isEqualTo(initialLengthInMiles);
+    }
+
+    @Test
+    @DisplayName("Length: should convert to m from yd and vice versa")
+    void shouldProperlyConvertToMetersFromYard() {
+        // Given
+        Length initialLengthInYards = Length.ofYards(10.0);
+
+        // When
+        Length actualInMeters = initialLengthInYards.toBaseUnit();
+        Length actualInYards = actualInMeters.toUnit(DistanceUnits.YARD);
+        double actualInYardsVal = actualInMeters.getInYards();
+
+        // Then
+        Length expectedInMeters = Length.ofMeters(9.144); // 10 * 0.9144
+        assertThat(actualInYards.getValue()).isEqualTo(actualInYardsVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInYards).isEqualTo(initialLengthInYards);
+    }
+
+    @Test
+    @DisplayName("Length: should convert to m from dam and vice versa")
+    void shouldProperlyConvertToMetersFromDecameter() {
+        // Given
+        Length initialLengthInDecameters = Length.ofDecameters(5.0);
+
+        // When
+        Length actualInMeters = initialLengthInDecameters.toBaseUnit();
+        Length actualInDecameters = actualInMeters.toUnit(DistanceUnits.DECAMETER);
+        double actualInDecametersVal = actualInMeters.getInDecameters();
+
+        // Then
+        Length expectedInMeters = Length.ofMeters(50.0); // 5 * 10.0
+        assertThat(actualInDecameters.getValue()).isEqualTo(actualInDecametersVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInDecameters).isEqualTo(initialLengthInDecameters);
+    }
+
+    @Test
+    @DisplayName("Length: should convert to m from hm and vice versa")
+    void shouldProperlyConvertToMetersFromHectometer() {
+        // Given
+        Length initialLengthInHectometers = Length.ofHectometers(2.5);
+
+        // When
+        Length actualInMeters = initialLengthInHectometers.toBaseUnit();
+        Length actualInHectometers = actualInMeters.toUnit(DistanceUnits.HECTOMETER);
+        double actualInHectometersVal = actualInMeters.getInHectometers();
+
+        // Then
+        Length expectedInMeters = Length.ofMeters(250.0); // 2.5 * 100.0
+        assertThat(actualInHectometers.getValue()).isEqualTo(actualInHectometersVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInHectometers).isEqualTo(initialLengthInHectometers);
+    }
+
+    @Test
+    @DisplayName("Length: should convert to m from datmi and vice versa")
+    void shouldProperlyConvertToMetersFromDataMile() {
+        // Given
+        Length initialLengthInDataMiles = Length.ofDataMiles(1.0);
+
+        // When
+        Length actualInMeters = initialLengthInDataMiles.toBaseUnit();
+        Length actualInDataMiles = actualInMeters.toUnit(DistanceUnits.DATAMILE);
+        double actualInDataMilesVal = actualInMeters.getInDataMiles();
+
+        // Then
+        Length expectedInMeters = Length.ofMeters(1828.8); // 1 * 1828.8
+        assertThat(actualInDataMiles.getValue()).isEqualTo(actualInDataMilesVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInDataMiles).isEqualTo(initialLengthInDataMiles);
+    }
+
+    @Test
+    @DisplayName("Length: should return valid result from to() and getIn() methods including new units")
+    void shouldReturnValidResultFromToAndGetInMethodsIncludingNewUnits() {
+        // Given
+        Length expected = Length.ofMeters(1828.8);
+
+        // When
+        Length actual = expected.toMeter()
+                .toYard()
+                .toDecameter()
+                .toHectometer()
+                .toDataMile()
+                .toMeter();
+
+        double actualValue = expected.getInMeters();
+        double actualValueInDataMiles = expected.getInDataMiles();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+
+        assertThat(actualValueInDataMiles).isEqualTo(1.0);
     }
 
 }

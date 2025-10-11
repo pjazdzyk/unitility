@@ -172,4 +172,100 @@ class HeightTest {
         assertThat(actualInMiles).isEqualTo(initialLengthInMiles);
     }
 
+    @Test
+    @DisplayName("Height: should convert to m from yd and vice versa")
+    void shouldProperlyConvertToMetersFromYard() {
+        // Given
+        Height initialLengthInYards = Height.ofYards(10.0);
+
+        // When
+        Height actualInMeters = initialLengthInYards.toBaseUnit();
+        Height actualInYards = actualInMeters.toUnit(DistanceUnits.YARD);
+        double actualInYardsVal = actualInMeters.getInYards();
+
+        // Then
+        Height expectedInMeters = Height.ofMeters(9.144); // 10 * 0.9144
+        assertThat(actualInYards.getValue()).isEqualTo(actualInYardsVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInYards).isEqualTo(initialLengthInYards);
+    }
+
+    @Test
+    @DisplayName("Height: should convert to m from dam and vice versa")
+    void shouldProperlyConvertToMetersFromDecameter() {
+        // Given
+        Height initialLengthInDecameters = Height.ofDecameters(5.0);
+
+        // When
+        Height actualInMeters = initialLengthInDecameters.toBaseUnit();
+        Height actualInDecameters = actualInMeters.toUnit(DistanceUnits.DECAMETER);
+        double actualInDecametersVal = actualInMeters.getInDecameters();
+
+        // Then
+        Height expectedInMeters = Height.ofMeters(50.0); // 5 * 10.0
+        assertThat(actualInDecameters.getValue()).isEqualTo(actualInDecametersVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInDecameters).isEqualTo(initialLengthInDecameters);
+    }
+
+    @Test
+    @DisplayName("Height: should convert to m from hm and vice versa")
+    void shouldProperlyConvertToMetersFromHectometer() {
+        // Given
+        Height initialLengthInHectometers = Height.ofHectometers(2.5);
+
+        // When
+        Height actualInMeters = initialLengthInHectometers.toBaseUnit();
+        Height actualInHectometers = actualInMeters.toUnit(DistanceUnits.HECTOMETER);
+        double actualInHectometersVal = actualInMeters.getInHectometers();
+
+        // Then
+        Height expectedInMeters = Height.ofMeters(250.0); // 2.5 * 100.0
+        assertThat(actualInHectometers.getValue()).isEqualTo(actualInHectometersVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInHectometers).isEqualTo(initialLengthInHectometers);
+    }
+
+    @Test
+    @DisplayName("Height: should convert to m from datmi and vice versa")
+    void shouldProperlyConvertToMetersFromDataMile() {
+        // Given
+        Height initialLengthInDataMiles = Height.ofDataMiles(1.0);
+
+        // When
+        Height actualInMeters = initialLengthInDataMiles.toBaseUnit();
+        Height actualInDataMiles = actualInMeters.toUnit(DistanceUnits.DATAMILE);
+        double actualInDataMilesVal = actualInMeters.getInDataMiles();
+
+        // Then
+        Height expectedInMeters = Height.ofMeters(1828.8); // 1 * 1828.8
+        assertThat(actualInDataMiles.getValue()).isEqualTo(actualInDataMilesVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInDataMiles).isEqualTo(initialLengthInDataMiles);
+    }
+
+    @Test
+    @DisplayName("Height: should return valid result from to() and getIn() methods including new units")
+    void shouldReturnValidResultFromToAndGetInMethodsIncludingNewUnits() {
+        // Given
+        Height expected = Height.ofMeters(1828.8);
+
+        // When
+        Height actual = expected.toMeter()
+                .toYard()
+                .toDecameter()
+                .toHectometer()
+                .toDataMile()
+                .toMeter();
+
+        double actualValue = expected.getInMeters();
+        double actualValueInDataMiles = expected.getInDataMiles();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+
+        assertThat(actualValueInDataMiles).isEqualTo(1.0);
+    }
+
 }
