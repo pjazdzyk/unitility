@@ -1,7 +1,6 @@
 package com.synerset.unitility.unitsystem.acoustic;
 
 import com.synerset.unitility.unitsystem.CalculableQuantity;
-import com.synerset.unitility.unitsystem.thermodynamic.PowerUnit;
 import com.synerset.unitility.unitsystem.thermodynamic.PressureUnit;
 
 import java.util.Objects;

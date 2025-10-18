@@ -2,10 +2,9 @@ package com.synerset.unitility.unitsystem.util;
 
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
-import com.synerset.unitility.unitsystem.common.AngleUnits;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemClassNotSupportedException;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
-import com.synerset.unitility.unitsystem.geographic.DMSValidator;
+import com.synerset.unitility.unitsystem.geographic.GeoParsingHelpers;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
 
@@ -18,23 +17,27 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
 
     public <U extends Unit, Q extends PhysicalQuantity<U>> Q parse(Class<Q> targetClass, String quantityAsString) {
 
+        if(quantityAsString == null || quantityAsString.trim().isEmpty()){
+            throw new UnitSystemParseException("Quantity parsing error. Input string quantity cannot be null or empty.");
+        }
+
         String preparedInput = StringTransformer.of(quantityAsString)
                 .trimLowerAndClean()
                 .replaceCommaForDot()
                 .dropParentheses()
                 .toString();
 
-        Pair extractedPair;
+        ValueSymbolPair extractedPair;
 
-        if (isGeoQuantity(targetClass) && DMSValidator.isValidDMSFormat(preparedInput)) {
-            extractedPair = extractValueAndSymbolFromDMSFormat(targetClass, preparedInput);
+        if (isGeoQuantity(targetClass) && GeoParsingHelpers.isDMSFormatOrSimilar(preparedInput)) {
+            extractedPair = GeoParsingHelpers.extractValueAndSymbolFromDMSFormat(targetClass, preparedInput);
         } else{
             extractedPair = extractValueAndSymbol(preparedInput);
         }
 
-        return extractedPair.symbol == null || extractedPair.symbol.isBlank()
-                ? parseValueWithDefaultUnit(targetClass, extractedPair.value)
-                : parseValueAndSymbol(targetClass, extractedPair.value, extractedPair.symbol);
+        return extractedPair.symbol() == null || extractedPair.symbol().isBlank()
+                ? parseValueWithDefaultUnit(targetClass, extractedPair.value())
+                : parseValueAndSymbol(targetClass, extractedPair.value(), extractedPair.symbol());
     }
 
     public <U extends Unit, Q extends PhysicalQuantity<U>> Q parseValueAndSymbol(Class<Q> targetClass,
@@ -99,7 +102,7 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
         return Latitude.class.isAssignableFrom(targetClass) || Longitude.class.isAssignableFrom(targetClass);
     }
 
-    private Pair extractValueAndSymbol(String preparedInput){
+    private ValueSymbolPair extractValueAndSymbol(String preparedInput){
         int indexOfLastDigit = 0;
 
         // Calculates where the value ends in the input string. The "e" is for case of scientific notation: -1.12345E-5
@@ -113,24 +116,7 @@ public abstract class PhysicalQuantityAbstractParsingFactory implements Physical
         String symbolPart = preparedInput.substring(indexOfLastDigit);
         double value = ParsingHelpers.parseToDouble(valuePart);
 
-        return new Pair(value, symbolPart);
+        return new ValueSymbolPair(value, symbolPart);
     }
-
-    private Pair extractValueAndSymbolFromDMSFormat(Class<?> targetClass, String partiallyPreparedInput){
-        String preparedInput = StringTransformer.of(partiallyPreparedInput)
-                .unifyDMSNotationSymbols()
-                .toString();
-
-        if (Latitude.class.isAssignableFrom(targetClass) && (preparedInput.contains("e") || preparedInput.contains("w"))) {
-            throw new UnitSystemParseException("Invalid latitude direction. Expected: N or S. Input: " + preparedInput);
-        } else if (Longitude.class.isAssignableFrom(targetClass) && (preparedInput.contains("n") || preparedInput.contains("s"))) {
-            throw new UnitSystemParseException("Invalid longitude direction. Expected: W or E. Input: " + preparedInput);
-        }
-
-        double valueInDegrees = ParsingHelpers.extractDegreesFromDMSFormat(preparedInput);
-        return new Pair(valueInDegrees, AngleUnits.DEGREES.getSymbol());
-    }
-
-    record Pair(Double value, String symbol) {}
 
 }

@@ -131,13 +131,21 @@ class PhysicalQuantityParsingFactoryTest {
     @DisplayName("ParsingFactory: should fail on invalid or malformed DMS format")
     void parse_shouldFailOnInvalidOrMalformedDMSFormat() {
         // Given
+        // Malformed because it's latitude (52°...) but direction 'E' is only valid for longitude
         String lat1 = "52°14'5.123\"E";
+
+        // Malformed because it's longitude (21°...) but direction 'N' is only valid for latitude
         String lon1 = "21°4'3.986\"N";
+
+        // Duplicate of lon1, same reason: longitude cannot have 'N' direction
         String lon2 = "21°4'3.986\"N";
-        // When // Then
+
+        // Expect UnitSystemParseException because the strings are malformed
         assertThrows(UnitSystemParseException.class, () -> PARSING_FACTORY.parse(Latitude.class, lat1));
         assertThrows(UnitSystemParseException.class, () -> PARSING_FACTORY.parse(Longitude.class, lon1));
         assertThrows(UnitSystemParseException.class, () -> PARSING_FACTORY.parse(Longitude.class, lon2));
+
+        assertThrows(UnitSystemParseException.class, () -> PARSING_FACTORY.parse(Longitude.class, null));
     }
 
     @Test

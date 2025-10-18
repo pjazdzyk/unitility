@@ -2,17 +2,16 @@ package com.synerset.unitility.unitsystem.geographic;
 
 import com.synerset.unitility.unitsystem.common.AngleUnit;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
-import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.withPrecision;
+import static org.assertj.core.api.Assertions.*;
 
 class LatitudeTest {
 
     @Test
-    @DisplayName("should properly convert degrees to radians and vice versa")
+    @DisplayName("Latitude: should properly convert degrees to radians and vice versa")
     void shouldProperlyConvertFromDegreeToRadian() {
         // Given
         Latitude initialAngleInDegrees = Latitude.ofDegrees(45);
@@ -31,7 +30,7 @@ class LatitudeTest {
     }
 
     @Test
-    @DisplayName("should have DEGREES as base unit")
+    @DisplayName("Latitude: should have DEGREES as base unit")
     void shouldHaveDegreesAsBaseUnit() {
         // Given
         AngleUnit expectedBaseUnit = AngleUnits.RADIANS;
@@ -45,7 +44,7 @@ class LatitudeTest {
     }
 
     @Test
-    @DisplayName("should return valid result from to() and getIn() methods")
+    @DisplayName("Latitude: should return valid result from to() and getIn() methods")
     void shouldReturnValidResultFromToAndGetInMethods() {
         // Given
         Latitude expected = Latitude.ofDegrees(10.1);
@@ -60,43 +59,51 @@ class LatitudeTest {
     }
 
     @Test
-    @DisplayName("should output latitude in DMS format")
-    void toDmsFormat_shouldOutputValidDMSFormat() {
+    @DisplayName("Latitude: should output latitude in DMS format")
+    void toDmsFormat_shouldOutputValidDMSSFormat() {
         // Given
         Latitude latitude = Latitude.ofDegrees(52.23475638888889);
 
         // When
-        String latInDms = latitude.toDMSFormat();
-        String latInDmsVar = latitude.toDMSFormat("lat");
-        String latInDmsVarDigits = latitude.toDMSFormat("lat", 0.001);
+        String latInDms = latitude.toDMSsFormat();
+        String latInDmsVar = latitude.toDMSsFormat("lat");
+        String latInDmsVarDigits = latitude.toDMSsFormat("lat", 0.001);
 
         // Then
-        assertThat(latInDms).isEqualTo("52°14'5.12\"N");
-        assertThat(latInDmsVar).isEqualTo("lat = 52°14'5.12\"N");
-        assertThat(latInDmsVarDigits).isEqualTo("lat = 52°14'5.123\"N");
+        assertThat(latInDms).isEqualTo("52°14'05.12\"N");
+        assertThat(latInDmsVar).isEqualTo("lat = 52°14'05.12\"N");
+        assertThat(latInDmsVarDigits).isEqualTo("lat = 52°14'05.123\"N");
     }
 
     @Test
-    @DisplayName("should create instance from DMS input")
-    void shouldCreateNewInstanceFromDMSFormat(){
+    @DisplayName("Latitude: should create instance from DMS input")
+    void shouldCreateNewInstanceFromDMSFormat() {
         // Given
         String latitudeAsStringN = "02°14'5.1\"N";
         String latitudeAsStringS = "52°14'5.1\"S";
-        String longitudeAsStringE = "002°14'5.1\"E";
-        String longitudeAsStringW = "52°14'5.1\"W";
-
         // When
-        PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
-        Latitude latitudeN = parsingFactory.parse(Latitude.class, latitudeAsStringN);
-        Latitude latitudeS = parsingFactory.parse(Latitude.class, latitudeAsStringS);
-        Longitude longitudeE = parsingFactory.parse(Longitude.class, longitudeAsStringE);
-        Longitude longitudeW = parsingFactory.parse(Longitude.class, longitudeAsStringW);
+        Latitude latitudeN = Latitude.ofDMSFormat(latitudeAsStringN);
+        Latitude latitudeS = Latitude.ofDMSFormat(latitudeAsStringS);
 
         // Then
         assertThat(latitudeN.getInDegrees()).isEqualTo(2.23475);
         assertThat(latitudeS.getInDegrees()).isEqualTo(-52.23475);
-        assertThat(longitudeE.getInDegrees()).isEqualTo(2.23475);
-        assertThat(longitudeW.getInDegrees()).isEqualTo(-52.23475);
+
+        assertThatThrownBy(() -> Latitude.ofDMSFormat("90NN")).isInstanceOf(UnitSystemArgumentException.class);
+        assertThatThrownBy(() -> Latitude.ofDMSFormat(null)).isInstanceOf(UnitSystemArgumentException.class);
+
+    }
+
+    @Test
+    @DisplayName("Latitude: should create instance from minutes degrees seconds")
+    void shouldCreateNewInstanceFromDegreesMinutesSeconds() {
+        // When
+        Latitude latitudeN = Latitude.ofDegMinSec(2, 14, 5.1);
+        Latitude latitudeS = Latitude.ofDegMinSec(-52, 14, 5.1);
+
+        // Then
+        assertThat(latitudeN.getInDegrees()).isEqualTo(2.23475);
+        assertThat(latitudeS.getInDegrees()).isEqualTo(-52.23475);
 
     }
 

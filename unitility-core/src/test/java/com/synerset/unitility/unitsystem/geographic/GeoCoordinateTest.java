@@ -8,22 +8,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GeoCoordinateTest {
 
     @Test
-    @DisplayName("should output coordinates in DMS format")
-    void toDMSFormat_shouldOutputInDegreeMinutesSecondsFormat() {
+    @DisplayName("GeoCoordinate: should output coordinates in DMS format")
+    void toDMSsFormat_shouldOutputInDegreeMinutesSecondsFormat() {
         // Given
         Latitude latitude = Latitude.ofDegrees(-0.023411888);
         Longitude longitude = Longitude.ofDegrees(-1.56711888);
 
         // When
         GeoCoordinate geoCoordinate = GeoCoordinate.of(latitude, longitude, "name");
-        String actualDmsOutput = geoCoordinate.toDMSFormat();
-        String actualDmsOutputVar = geoCoordinate.toDMSFormat("sea_quest");
-        String actualDmsOutputVarTruncated = geoCoordinate.toDMSFormat("sea_quest", 0.001);
+        String actualDmsOutput = geoCoordinate.toDMSsFormat();
+        String actualDmsOutputVar = geoCoordinate.toDMSsFormat("sea_quest");
+        String actualDmsOutputVarTruncated = geoCoordinate.toDMSsFormat("sea_quest", 0.001);
 
         // Then
-        assertThat(actualDmsOutput).isEqualTo("00°01'24.28\"S, 001°34'1.63\"W");
-        assertThat(actualDmsOutputVar).isEqualTo("sea_quest = 00°01'24.28\"S, 001°34'1.63\"W");
-        assertThat(actualDmsOutputVarTruncated).isEqualTo("sea_quest = 00°01'24.283\"S, 001°34'1.628\"W");
+        assertThat(actualDmsOutput).isEqualTo("00°01'24.28\"S, 001°34'01.63\"W");
+        assertThat(actualDmsOutputVar).isEqualTo("sea_quest = 00°01'24.28\"S, 001°34'01.63\"W");
+        assertThat(actualDmsOutputVarTruncated).isEqualTo("sea_quest = 00°01'24.283\"S, 001°34'01.628\"W");
 
         assertThat(geoCoordinate.name()).isEqualTo("name");
         assertThat(geoCoordinate.latitude()).isEqualTo(latitude);
@@ -31,7 +31,7 @@ class GeoCoordinateTest {
     }
 
     @Test
-    @DisplayName("should output coordinates in decimal degrees format")
+    @DisplayName("GeoCoordinate: should output coordinates in decimal degrees format")
     void toDecimalDegrees_shouldOutputInDecimalDegreesFormat() {
         // Given
         Latitude latitude = Latitude.ofDegrees(-52.2341122);
@@ -50,7 +50,7 @@ class GeoCoordinateTest {
     }
 
     @Test
-    @DisplayName("should output cin engineering format")
+    @DisplayName("GeoCoordinate: should output cin engineering format")
     void toEngineeringFormat_shouldOutputInEngineeringFormat() {
         // Given
         Latitude latitude = Latitude.ofDegrees(-52.2341122);
@@ -69,7 +69,7 @@ class GeoCoordinateTest {
     }
 
     @Test
-    @DisplayName("should be equals for defined precision")
+    @DisplayName("GeoCoordinate: should be equals for defined precision")
     void equalsWithPrecision_shouldBeEqualForPrecision() {
         // Given
         Latitude latitude1 = Latitude.ofDegrees(-52.236);
@@ -85,6 +85,19 @@ class GeoCoordinateTest {
 
         // Then
         assertThat(actualResult).isTrue();
+
+    }
+
+    @Test
+    @DisplayName("GeoCoordinate: should create geo coordinate from DMS format")
+    void shouldCreateGeoCoordinateFromDMSFormat() {
+        String latitudeAsStringN = "02°14'5.1\"N";
+        String longitudeAsStringW = "002°14'5.10000000000000001\"W";
+
+        GeoCoordinate geoCoordinate = GeoCoordinate.ofDMSFormat(latitudeAsStringN, longitudeAsStringW);
+
+        assertThat(geoCoordinate.latitude()).isEqualTo(Latitude.ofDegrees(2.23475));
+        assertThat(geoCoordinate.longitude()).isEqualTo(Longitude.ofDegrees(-2.23475));
 
     }
 }

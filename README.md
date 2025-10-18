@@ -951,39 +951,57 @@ Longitude, GeoCoordinate and GeoDistance. These classes allow representing coord
 distance between these coordinates.
 
 ### 8.1 Geographic Latitude, Longitude and GeoCoordinate
-The **Latitude** class includes methods that allow for easy conversion to the Degrees-Minutes-Seconds 
-(DMS) format. This format provides a more popular representation of geographic coordinates, making it convenient
-for various applications where DMS notation is preferred. Latitude range is: -90 to 90 degrees. <br>
-The **Longitude** class, analogous to the Latitude class, represents a geographic longitude coordinate. It adheres to the 
-standard range of -180 to +180 degrees, covering the westernmost point at -180 degrees and the easternmost point 
-at +180 degrees.
+The **Latitude** class includes methods that allow for easy conversion to the ICAO Annex 15 compliant Degrees-Minutes-Seconds
+(DMS) format with a default resolution of 0.01 seconds. This format provides a standardized representation of geographic
+coordinates, making it convenient for aviation and other applications where ICAO-compliant DMS notation is required.
+Latitude range is: -90 to 90 degrees. <br>
+The **Longitude** class, analogous to the Latitude class, represents a geographic longitude coordinate. It adheres to the
+standard range of -180 to +180 degrees, covering the westernmost point at -180 degrees and the easternmost point
+at +180 degrees. Like Latitude, it supports ICAO Annex 15 compliant DMS formatting with configurable resolution.
+
 ```java
 // Latitude and Longitude types are based on Angular units
 Latitude latitude = Latitude.ofDegrees(-20.123);
 Longitude longitude = Longitude.ofDegrees(20.123);
-// Both can be reduced to a string in DMS format or in ENG format:
-String latInDMS = latitude.toDMSFormat(2);          // Outputs: 20°7'22.8"S
+
+// ICAO Annex 15 compliant DMS formatting with 0.01 seconds resolution
+String latInDMS = latitude.toDMSFormat();           // Outputs: 20°07'22.80"S
+String lonInDMS = longitude.toDMSFormat();          // Outputs: 020°07'22.80"E
+
+// Custom resolution DMS formatting
+String latInDMSHighPrec = latitude.toDMSFormat(0.001); // Outputs: 20°07'22.800"S
+String lonInDMSLowPrec = longitude.toDMSFormat(0.1);   // Outputs: 020°07'22.8"E
+
+// Engineering format
 String latInENG = latitude.toEngineeringFormat();   // Outputs: -20.123 [°]
 ```
 You can also create Latitude or Longitude instance providing degrees, minutes and seconds:
 ```java
 // Instance from degrees, minutes, seconds
-Latitude latFromDMS = Latitude.ofDegMinSec(20, 7, 22.8, PrimaryDirection.SOUTH);   // Latitude{-20.123°}
-Longitude longFromDMS = Longitude.ofDegMinSec(20, 7, 22.8, PrimaryDirection.EAST); // Longitude{20.123°}
+Latitude latFromDMS = Latitude.ofDegMinSec(20, 7, 22.8);     // Latitude{-20.123°}
+Longitude longFromDMS = Longitude.ofDegMinSec(20, 7, 22.8);  // Longitude{20.123°}
+
+// From ICAO DMS string format
+Latitude latFromICAO = Latitude.ofDMSFormat("20°07'22.80\"S");
+Longitude lonFromICAO = Longitude.ofDMSFormat("020°07'22.80\"E");
 ```
 
-The **GeoCoordinate** class combines both Latitude and Longitude to form a complete geographic coordinate. It facilitates 
+The **GeoCoordinate** class combines both Latitude and Longitude to form a complete geographic coordinate. It facilitates
 easy management and manipulation of spatial data, allowing seamless integration into various applications requiring
-precise location information.
+precise location information. All DMS outputs are ICAO Annex 15 compliant by default.
 
 ```java
 // GeoCoordinate class represents a coordinate of specific point in the globe, using Latitude and Longitude and optional name
 GeoCoordinate coordinateExample = GeoCoordinate.of(latitude, longitude, "my location");
-// GeoCoordinate can be reduced to DMS format, ENG format, or decimal degrees format
-// Decimal degrees format with coma separating latitude from longitude is for ie: how Google Maps output cords
-String geoCoordDMS = coordinateExample.toDMSFormat();             // 20°7'22.8"S, 20°7'22.8"E
-String geoCoordEND = coordinateExample.toEngineeringFormat();     // -20.12 [°], 20.12 [°]
-String geoCoordDEC = coordinateExample.toDecimalDegrees();        // -20.12, 20.12
+
+// GeoCoordinate can be reduced to ICAO DMS format, ENG format, or decimal degrees format
+String geoCoordDMS = coordinateExample.toDMSFormat();             // 20°07'22.80"S, 020°07'22.80"E
+String geoCoordDMSHighPrec = coordinateExample.toDMSFormat(0.001); // 20°07'22.800"S, 020°07'22.800"E
+String geoCoordEND = coordinateExample.toEngineeringFormat();     // -20.123 [°], 20.123 [°]
+String geoCoordDEC = coordinateExample.toDecimalDegrees();        // -20.123, 20.123
+
+// Create from ICAO DMS strings
+GeoCoordinate icaoCoord = GeoCoordinate.ofDMSFormat("20°07'22.80\"S", "020°07'22.80\"E");
 ```
 
 Latitude and Longitude do not enforce any angular value limit, but GeoCoordinate will do. Make sure that your
