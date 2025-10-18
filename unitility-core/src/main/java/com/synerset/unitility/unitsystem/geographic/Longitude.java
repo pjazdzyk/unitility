@@ -4,6 +4,8 @@ import com.synerset.unitility.unitsystem.CalculableQuantity;
 import com.synerset.unitility.unitsystem.common.Angle;
 import com.synerset.unitility.unitsystem.common.AngleUnit;
 import com.synerset.unitility.unitsystem.common.AngleUnits;
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemArgumentException;
+import com.synerset.unitility.unitsystem.util.ValueSymbolPair;
 
 import java.util.Objects;
 
@@ -58,6 +60,50 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
         return ofDegrees(sign * decimalDegrees);
     }
 
+    /**
+     * Creates a {@link Longitude} instance by parsing a coordinate string expressed
+     * in <b>ICAO-compliant DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
+     * <p>
+     * The input must follow the conventions defined in
+     * <b>ICAO Annex 15 — Aeronautical Information Services</b>, where longitude
+     * is expressed in degrees (°), minutes (′), and seconds (″) of arc,
+     * followed by an <b>East (E)</b> or <b>West (W)</b> direction indicator.
+     * <p>
+     * This method automatically validates and parses DMS-formatted strings such as:
+     * <ul>
+     *   <li>{@code 021°04'03.98"E}</li>
+     *   <li>{@code 21°4'3.9"E}</li>
+     *   <li>{@code 21deg4min3.98secW}</li>
+     * </ul>
+     * Optional degrees, minutes, or seconds symbols are supported (°, o, deg, ', min, ″, sec, etc.).
+     * The seconds component may include decimal precision (e.g., 0.01″).
+     * <p>
+     * If the input does not conform to a valid DMS structure or is {@code null},
+     * a {@link UnitSystemArgumentException} is thrown.
+     *
+     * <h4>Examples:</h4>
+     * <pre>{@code
+     * Longitude lon1 = Longitude.ofDMSFormat("021°04'03.98\"E");  // Valid, ICAO precision
+     * Longitude lon2 = Longitude.ofDMSFormat("21°4'3.9\"W");      // Valid, lower precision
+     * Longitude lon3 = Longitude.ofDMSFormat("21deg4min3.98secE"); // Valid, alternate format
+     * Longitude.ofDMSFormat("21°4'3.9");  // X Invalid — missing direction (E/W)
+     * }</pre>
+     *
+     * @param dmsFormat the DMS_S-formatted longitude string to parse (e.g. {@code "021°04'03.98\"E"})
+     * @return a {@link Longitude} instance representing the parsed coordinate
+     * @throws UnitSystemArgumentException if {@code dmsFormat} is {@code null} or malformed
+     * @see GeoParsingHelpers#isDMSFormatOrSimilar(String)
+     * @see GeoParsingHelpers#extractValueAndSymbolFromDMSFormat(Class, String)
+     * @see DMSCoordinateFormatter
+     */
+    public static Longitude ofDMSFormat(String dmsFormat) {
+        if (dmsFormat == null || !GeoParsingHelpers.isDMSFormatOrSimilar(dmsFormat)) {
+            throw new UnitSystemArgumentException("Longitude input DMS format is invalid: " + dmsFormat);
+        }
+        ValueSymbolPair valueSymbolPair = GeoParsingHelpers.extractValueAndSymbolFromDMSFormat(Longitude.class, dmsFormat);
+        return of(valueSymbolPair.value(), valueSymbolPair.symbol());
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -96,21 +142,71 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
         return Longitude.of(value, unitType);
     }
 
-    // Console output in DMS (degrees, minutes, seconds) format
-    public String toDMSFormat() {
-        return DMSValueFormatter.longitudeToDmsFormat(this, -1);
+    // Formatted in DMS_s (degrees, minutes, seconds) format
+    /**
+     * Returns the longitude formatted in ICAO-compliant <b>DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
+     * <p>
+     * This format follows the conventions defined in <b>ICAO Annex 15 — Aeronautical Information Services</b>, where
+     * geographical coordinates are expressed in degrees, minutes, and seconds of arc. The seconds component is
+     * typically represented to a precision of <b>0.01″ (hundredth of a second)</b> by default.
+     * <p>
+     * Example output: {@code 021°04'03.98"E}
+     * <ul>
+     *   <li>Degrees (°) and minutes (′) are integer values.</li>
+     *   <li>Seconds (″) may contain decimals depending on the specified resolution.</li>
+     *   <li>Direction (E/W) is mandatory for longitude.</li>
+     * </ul>
+     *
+     * @return DMS_S-formatted longitude string using the default ICAO seconds resolution (0.01″)
+     */
+    public String toDMSsFormat() {
+        return DMSCoordinateFormatter.longitudeToDMSSFormat(this, DMSCoordinateFormatter.DEFAULT_ICAO_SECONDS_RESOLUTION);
     }
 
-    public String toDMSFormat(String variableName) {
-        return variableName + " = " + toDMSFormat();
+    /**
+     * Returns the longitude formatted in ICAO-compliant <b>DMS_S</b> format,
+     * prefixed with the provided variable name.
+     * <p>
+     * Example output: {@code LON = 021°04'03.98"E}
+     *
+     * @param variableName a label to prepend before the coordinate, typically a variable name such as "LON"
+     * @return formatted DMS_S longitude string prefixed with the given variable name
+     */
+    public String toDMSsFormat(String variableName) {
+        return variableName + " = " + toDMSsFormat();
     }
 
-    public String toDMSFormat(int relevantDigits) {
-        return DMSValueFormatter.longitudeToDmsFormat(this, relevantDigits);
+    /**
+     * Returns the longitude formatted in ICAO-compliant <b>DMS_S</b> format using a custom
+     * seconds resolution.
+     * <p>
+     * The seconds resolution defines how precisely the seconds component is rounded or displayed. For example:
+     * <ul>
+     *   <li>{@code secondsResolution = 0.1} → seconds rounded to one decimal place</li>
+     *   <li>{@code secondsResolution = 0.01} → seconds rounded to two decimals (default ICAO precision)</li>
+     *   <li>{@code secondsResolution = 1} → seconds displayed as whole numbers</li>
+     * </ul>
+     * Example output with {@code secondsResolution = 0.1}: {@code 021°04'03.9"E}
+     *
+     * @param secondsResolutions the rounding resolution for seconds, typically {@code 0.01}
+     * @return formatted DMS_S longitude string using the given seconds resolution
+     */
+    public String toDMSsFormat(double secondsResolutions) {
+        return DMSCoordinateFormatter.longitudeToDMSSFormat(this, secondsResolutions);
     }
 
-    public String toDMSFormat(String variableName, int relevantDigits) {
-        return variableName + " = " + toDMSFormat(relevantDigits);
+    /**
+     * Returns the longitude formatted in ICAO-compliant <b>DMS_S</b> format using a custom
+     * seconds resolution, and prefixed with the provided variable name.
+     * <p>
+     * Example output: {@code LON = 021°04'03.98"E}
+     *
+     * @param variableName a label to prepend before the coordinate, e.g. {@code "LON"}
+     * @param secondsResolutions the rounding resolution for seconds, typically {@code 0.01}
+     * @return formatted DMS_S longitude string with variable name and custom seconds resolution
+     */
+    public String toDMSsFormat(String variableName, double secondsResolutions) {
+        return variableName + " = " + toDMSsFormat(secondsResolutions);
     }
 
     // Convert to target unit

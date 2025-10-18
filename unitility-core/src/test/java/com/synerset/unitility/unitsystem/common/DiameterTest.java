@@ -172,4 +172,100 @@ class DiameterTest {
         assertThat(actualInMiles).isEqualTo(initialLengthInMiles);
     }
 
+    @Test
+    @DisplayName("Diameter: should convert to m from yd and vice versa")
+    void shouldProperlyConvertToMetersFromYard() {
+        // Given
+        Diameter initialLengthInYards = Diameter.ofYards(10.0);
+
+        // When
+        Diameter actualInMeters = initialLengthInYards.toBaseUnit();
+        Diameter actualInYards = actualInMeters.toUnit(DistanceUnits.YARD);
+        double actualInYardsVal = actualInMeters.getInYards();
+
+        // Then
+        Diameter expectedInMeters = Diameter.ofMeters(9.144); // 10 * 0.9144
+        assertThat(actualInYards.getValue()).isEqualTo(actualInYardsVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInYards).isEqualTo(initialLengthInYards);
+    }
+
+    @Test
+    @DisplayName("Diameter: should convert to m from dam and vice versa")
+    void shouldProperlyConvertToMetersFromDecameter() {
+        // Given
+        Diameter initialLengthInDecameters = Diameter.ofDecameters(5.0);
+
+        // When
+        Diameter actualInMeters = initialLengthInDecameters.toBaseUnit();
+        Diameter actualInDecameters = actualInMeters.toUnit(DistanceUnits.DECAMETER);
+        double actualInDecametersVal = actualInMeters.getInDecameters();
+
+        // Then
+        Diameter expectedInMeters = Diameter.ofMeters(50.0); // 5 * 10.0
+        assertThat(actualInDecameters.getValue()).isEqualTo(actualInDecametersVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInDecameters).isEqualTo(initialLengthInDecameters);
+    }
+
+    @Test
+    @DisplayName("Diameter: should convert to m from hm and vice versa")
+    void shouldProperlyConvertToMetersFromHectometer() {
+        // Given
+        Diameter initialLengthInHectometers = Diameter.ofHectometers(2.5);
+
+        // When
+        Diameter actualInMeters = initialLengthInHectometers.toBaseUnit();
+        Diameter actualInHectometers = actualInMeters.toUnit(DistanceUnits.HECTOMETER);
+        double actualInHectometersVal = actualInMeters.getInHectometers();
+
+        // Then
+        Diameter expectedInMeters = Diameter.ofMeters(250.0); // 2.5 * 100.0
+        assertThat(actualInHectometers.getValue()).isEqualTo(actualInHectometersVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInHectometers).isEqualTo(initialLengthInHectometers);
+    }
+
+    @Test
+    @DisplayName("Diameter: should convert to m from datmi and vice versa")
+    void shouldProperlyConvertToMetersFromDataMile() {
+        // Given
+        Diameter initialLengthInDataMiles = Diameter.ofDataMiles(1.0);
+
+        // When
+        Diameter actualInMeters = initialLengthInDataMiles.toBaseUnit();
+        Diameter actualInDataMiles = actualInMeters.toUnit(DistanceUnits.DATAMILE);
+        double actualInDataMilesVal = actualInMeters.getInDataMiles();
+
+        // Then
+        Diameter expectedInMeters = Diameter.ofMeters(1828.8); // 1 * 1828.8
+        assertThat(actualInDataMiles.getValue()).isEqualTo(actualInDataMilesVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInDataMiles).isEqualTo(initialLengthInDataMiles);
+    }
+
+    @Test
+    @DisplayName("Diameter: should return valid result from to() and getIn() methods including new units")
+    void shouldReturnValidResultFromToAndGetInMethodsIncludingNewUnits() {
+        // Given
+        Diameter expected = Diameter.ofMeters(1828.8);
+
+        // When
+        Diameter actual = expected.toMeter()
+                .toYard()
+                .toDecameter()
+                .toHectometer()
+                .toDataMile()
+                .toMeter();
+
+        double actualValue = expected.getInMeters();
+        double actualValueInDataMiles = expected.getInDataMiles();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+
+        assertThat(actualValueInDataMiles).isEqualTo(1.0);
+    }
+
 }

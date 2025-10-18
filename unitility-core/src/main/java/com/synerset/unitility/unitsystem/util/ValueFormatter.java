@@ -16,6 +16,51 @@ public class ValueFormatter {
     }
 
     /**
+     * Formats a double value to a string using a cutoff precision (epsilon).
+     * The value is rounded to the nearest multiple of the given precision using HALF_EVEN rounding mode.
+     * <p>
+     * Example:
+     * <ul>
+     *   <li>value = 0.01567, precision = 0.01 → "0.02"</li>
+     *   <li>value = 0.014, precision = 0.01 → "0.01"</li>
+     *   <li>value = 123.456, precision = 0.1 → "123.5"</li>
+     * </ul>
+     *
+     * @param value     The double value to be formatted.
+     * @param precision The cutoff precision (epsilon), e.g. 0.01 for rounding to hundredths.
+     * @return A formatted string representation of the rounded value.
+     */
+    public static String toStringWithPrecision(double value, double precision) {
+        if (precision <= 0) {
+            throw new IllegalArgumentException("Precision must be positive");
+        }
+
+        // Determine number of decimal places from precision (e.g. 0.001 -> 3)
+        int decimalPlaces = 0;
+        double tmp = precision;
+        while (tmp < 1) {
+            tmp *= 10;
+            decimalPlaces++;
+        }
+
+        // Round using HALF_EVEN
+        double rounded = Math.round(value / precision) * precision;
+
+        StringBuilder pattern = new StringBuilder("#");
+        if (decimalPlaces > 0) {
+            pattern.append(".").append("#".repeat(decimalPlaces));
+        }
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        symbols.setGroupingSeparator(',');
+
+        DecimalFormat df = new DecimalFormat(pattern.toString(), symbols);
+        df.setRoundingMode(RoundingMode.HALF_UP);
+        return df.format(rounded);
+    }
+
+    /**
      * Formats a double value to a string with the specified number of relevant digits and decimal places.
      * The method calculates the appropriate number of decimal places based on the given relevant digits and
      * ensures proper rounding using HALF_EVEN approach.
@@ -26,6 +71,10 @@ public class ValueFormatter {
      * @return A formatted string representation of the double value.
      */
     public static String toStringWithRelevantDigits(double value, int relevantDigits) {
+        if(Math.abs(value) < 1 && relevantDigits <= 0) {
+            return "0";
+        }
+
         relevantDigits = Math.abs(relevantDigits);
         int doubleScale = (int) Math.log10(Math.abs(value));
         if (doubleScale >= 0) {

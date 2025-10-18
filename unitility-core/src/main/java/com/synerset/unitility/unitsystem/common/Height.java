@@ -30,7 +30,7 @@ public class Height implements CalculableQuantity<DistanceUnit, Height> {
         DistanceUnit resolvedUnit = DistanceUnits.fromSymbol(unitSymbol);
         return new Height(value, resolvedUnit);
     }
-    
+
     public static Height ofMeters(double value) {
         return new Height(value, DistanceUnits.METER);
     }
@@ -61,6 +61,22 @@ public class Height implements CalculableQuantity<DistanceUnit, Height> {
 
     public static Height ofInches(double value) {
         return new Height(value, DistanceUnits.INCH);
+    }
+
+    public static Height ofYards(double value) {
+        return new Height(value, DistanceUnits.YARD);
+    }
+
+    public static Height ofDecameters(double value) {
+        return new Height(value, DistanceUnits.DECAMETER);
+    }
+
+    public static Height ofHectometers(double value) {
+        return new Height(value, DistanceUnits.HECTOMETER);
+    }
+
+    public static Height ofDataMiles(double value) {
+        return new Height(value, DistanceUnits.DATAMILE);
     }
 
     @Override
@@ -102,7 +118,6 @@ public class Height implements CalculableQuantity<DistanceUnit, Height> {
         return Height.of(value, unitType);
     }
 
-    // Convert to target unit
     public Height toMeter() {
         return toUnit(DistanceUnits.METER);
     }
@@ -135,7 +150,22 @@ public class Height implements CalculableQuantity<DistanceUnit, Height> {
         return toUnit(DistanceUnits.INCH);
     }
 
-    // Get value in target unit
+    public Height toYard() {
+        return toUnit(DistanceUnits.YARD);
+    }
+
+    public Height toDecameter() {
+        return toUnit(DistanceUnits.DECAMETER);
+    }
+
+    public Height toHectometer() {
+        return toUnit(DistanceUnits.HECTOMETER);
+    }
+
+    public Height toDataMile() {
+        return toUnit(DistanceUnits.DATAMILE);
+    }
+
     public double getInMeters() {
         return getInUnit(DistanceUnits.METER);
     }
@@ -168,6 +198,22 @@ public class Height implements CalculableQuantity<DistanceUnit, Height> {
         return getInUnit(DistanceUnits.INCH);
     }
 
+    public double getInYards() {
+        return getInUnit(DistanceUnits.YARD);
+    }
+
+    public double getInDecameters() {
+        return getInUnit(DistanceUnits.DECAMETER);
+    }
+
+    public double getInHectometers() {
+        return getInUnit(DistanceUnits.HECTOMETER);
+    }
+
+    public double getInDataMiles() {
+        return getInUnit(DistanceUnits.DATAMILE);
+    }
+
     public static Height of(PhysicalQuantity<? extends DistanceUnit> distanceType){
         return Height.of(distanceType.getValue(), distanceType.getUnit());
     }
@@ -189,5 +235,4 @@ public class Height implements CalculableQuantity<DistanceUnit, Height> {
     public String toString() {
         return "Height{" + value + " " + unitType.getSymbol() + '}';
     }
-
 }

@@ -71,13 +71,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/2.11.2/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/3.0.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>2.11.2</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -89,7 +89,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.11.2</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -97,7 +97,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.11.2</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -132,24 +132,34 @@ units and at least one Imperial unit.
 
 #### COMMON:
 
-* Distance, Length, Width, Height, Diameter: meter [m], centimetre [cm], millimetre [mm], kilometre [km], mile [mi], nautical mile [nmi], feet [ft], inch [in]
+* Distance, Length, Width, Height, Diameter, Thickness, Perimeter: meter [m], centimetre [cm], millimetre [mm], kilometre [km], mile [mi], nautical mile [nmi], feet [ft], inch [in], yard [yd], decameter [dam], hectometer[hm], data mile [datmi],
 * Area: square meter [m²], square kilometre [km²], square centimetre [cm²], square millimetre [mm²], are [a],
   hectare [ha], square inch [in²], square foot [ft²], square yard [yd²], acre [ac], square mile [mi²]
 * Volume: cubic meter [m³], cubic centimetre [L], liter [L], hectolitre [hL], millilitre [mL], ounce [fl.oz], pint [pt],
   gallon (US) [gal_us], gallon (UK) [gal_uk]
 * Mass: kilogram [kg], gram [g], milligram [mg], tonne [t], ounce [oz], pound [lb]
 * Angle: degrees [°], radians [rad]
-* Ratio: Percent [%], Decimal [-]
+* Ratio: percent [%], Decimal [-]
 * LinearMassDensity: Kilogram per metre [kg/m], Tonne per metre [t/m], Ounce per foot [oz/ft], Pound per foot [lb/ft]
-* Velocity: Meter per second [m/s], centimeter per second [cm/s], kilometer per hour [km/h], inch per second, [in/s], feet per second [ft/s], mile per hour [mph], knot [kn], Mach [Mach]
-* AngularVelocity: Radians per second [rad/s], revolutions per minute, [rpm], revolutions per second [rps], degrees per second [°/s]
-* Curvature: Radians per meter [rad/m], radians per foot [rad/ft], degrees per meter [°/m], degrees per foot [°/ft], degrees per hundred feet [°/100ft]
+* Velocity: meter per second [m/s], centimeter per second [cm/s], kilometer per hour [km/h], inch per second, [in/s], feet per second [ft/s], mile per hour [mph], knot [kn], Mach [Mach]
+* AngularVelocity: radians per second [rad/s], revolutions per minute, [rpm], revolutions per second [rps], degrees per second [°/s]
+* Curvature: radians per meter [rad/m], radians per foot [rad/ft], degrees per meter [°/m], degrees per foot [°/ft], degrees per hundred feet [°/100ft]
+* Data size: bits [bit], bytes [b], kilobytes[kb], megabytes [mb], gigabyte [gb], terabyte [tb], petabyte [pb]
 
 #### MECHANICAL:
 
 * Force: newton [N], kilonewton [kN], kilopond [kp], dyne [dyn], pound force [lbf], poundal [pdl]
 * Momentum: Kilogram meter per second [kg·m/s], Gram centimeter per second [g·cm/s], Pound feet per second [lb·ft/s]
 * Torque: Newton meter [N·m], Millinewton meter [mN·m], Kilopond meter [kp·m], Foot pound [ft·lb], Inch pound [in·lb]
+
+#### ELECTRIC:
+
+* Capacitance: farad [F], microfarad [µF], nanofarad [nF], picofarad [pF]
+* Charge: coulomb [C], millicoulomb [mC], microcoulomb [µC], nanocoulomb [nC], picocoulomb [pC], kilocoulomb [kC], megacoulomb [MC]
+* Conductance: siemens [S], millisiemens [mS], microsiemens [µS], nanosiemens [nS], picosiemens [pS], kilosiemens [kS]
+* Current: ampere [A], milliampere [mA], microampere [µA], nanoampere [nA], kiloampere [kA], megaampere [MA]
+* Resistance: ohm [Ω], milliohm [mΩ]], kiloohm [kΩ]], megaohm [MΩ]]
+* Voltage: volt [V], millivolt [mV], microvolt [µV], nanovolt [nV], kilovolt [kV], megavolt [MV]
 
 #### THERMODYNAMIC:
 
@@ -184,14 +194,21 @@ units and at least one Imperial unit.
 
 #### HYDRAULIC:
 
-* LinearResistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
-* FrictionFactor: [-]
-* LocalLossFactor: [-]
-* Rotation Speed To Flow Rate Ratio: Radians per second per meter per second [rad·s⁻¹/m³·s⁻¹], revolutions per minute per gallons per minute [rpm/gpm]
+* Linear resistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
+* Friction factor: [-]
+* LocalLoss factor: [-]
+* Rotation speed To Flow Rate Ratio: Radians per second per meter per second [rad·s⁻¹/m³·s⁻¹], revolutions per minute per gallons per minute [rpm/gpm]
 
 #### DIMENSIONLESS:
 
 * Grashof number, Prandtl number, Reynolds number, Bypass factor
+
+#### ACOUSTIC:
+* Sound power: Watt [W], Decibel [dB]
+* Sound pressure: Pascal [Pa], Decibel [dB]
+
+#### OSCILLATION:
+* Frequency: Hertz [Hz], Kilohertz [kHz], Megahertz [MHz], Gigahertz [GHz], Cycles per minute [cpm]
 
 #### SPECIAL TYPES:
 #### Geographic:
@@ -199,8 +216,8 @@ units and at least one Imperial unit.
 * Latitude: degrees [°], radians [rad]
 * Longitude: degrees [°], radians [rad]
 * Bearing: degrees [°]
-* GeoCoordinate: [latitude, longitude]
-* GeoDistance: meter [m], kilometer [km], mile [mi], nautical mile [nmi] <br>
+* Geo coordinate: [latitude, longitude]
+* Geo distance: meter [m], kilometer [km], mile [mi], nautical mile [nmi] <br>
 
 All Geographic quantities can be constructed from DMS format (degrees-minutes-seconds), for i.e.: 20°7'22.8"S.
 
@@ -292,6 +309,9 @@ alternative ways of expressing units in an input string:
 | square             | ²   | 2       | m², m2             |
 | cubic              | ³   | 3       | m³, m3             |
 | negative exponents | ⁻¹  | -1      | m⁻¹, m-1           |
+
+IMPORTANT! In case quantity includes both milli and Mega, parser works in CASE SENSITIVE mode. And in such case
+for mega you have to provide "MV" for mega volts, and "mV" for milli volts.
 
 Please note that this method of creating quantities is designed to be used for deserializers. <Br>
 **In your code, you should create units in a programmatic way, not parsing from strings.**
@@ -533,7 +553,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>2.11.2</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -612,7 +632,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>2.11.2</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -651,7 +671,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>2.11.2</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:
@@ -931,39 +951,57 @@ Longitude, GeoCoordinate and GeoDistance. These classes allow representing coord
 distance between these coordinates.
 
 ### 8.1 Geographic Latitude, Longitude and GeoCoordinate
-The **Latitude** class includes methods that allow for easy conversion to the Degrees-Minutes-Seconds 
-(DMS) format. This format provides a more popular representation of geographic coordinates, making it convenient
-for various applications where DMS notation is preferred. Latitude range is: -90 to 90 degrees. <br>
-The **Longitude** class, analogous to the Latitude class, represents a geographic longitude coordinate. It adheres to the 
-standard range of -180 to +180 degrees, covering the westernmost point at -180 degrees and the easternmost point 
-at +180 degrees.
+The **Latitude** class includes methods that allow for easy conversion to the ICAO Annex 15 compliant Degrees-Minutes-Seconds
+(DMS) format with a default resolution of 0.01 seconds. This format provides a standardized representation of geographic
+coordinates, making it convenient for aviation and other applications where ICAO-compliant DMS notation is required.
+Latitude range is: -90 to 90 degrees. <br>
+The **Longitude** class, analogous to the Latitude class, represents a geographic longitude coordinate. It adheres to the
+standard range of -180 to +180 degrees, covering the westernmost point at -180 degrees and the easternmost point
+at +180 degrees. Like Latitude, it supports ICAO Annex 15 compliant DMS formatting with configurable resolution.
+
 ```java
 // Latitude and Longitude types are based on Angular units
 Latitude latitude = Latitude.ofDegrees(-20.123);
 Longitude longitude = Longitude.ofDegrees(20.123);
-// Both can be reduced to a string in DMS format or in ENG format:
-String latInDMS = latitude.toDMSFormat(2);          // Outputs: 20°7'22.8"S
+
+// ICAO Annex 15 compliant DMS formatting with 0.01 seconds resolution
+String latInDMS = latitude.toDMSFormat();           // Outputs: 20°07'22.80"S
+String lonInDMS = longitude.toDMSFormat();          // Outputs: 020°07'22.80"E
+
+// Custom resolution DMS formatting
+String latInDMSHighPrec = latitude.toDMSFormat(0.001); // Outputs: 20°07'22.800"S
+String lonInDMSLowPrec = longitude.toDMSFormat(0.1);   // Outputs: 020°07'22.8"E
+
+// Engineering format
 String latInENG = latitude.toEngineeringFormat();   // Outputs: -20.123 [°]
 ```
 You can also create Latitude or Longitude instance providing degrees, minutes and seconds:
 ```java
 // Instance from degrees, minutes, seconds
-Latitude latFromDMS = Latitude.ofDegMinSec(20, 7, 22.8, PrimaryDirection.SOUTH);   // Latitude{-20.123°}
-Longitude longFromDMS = Longitude.ofDegMinSec(20, 7, 22.8, PrimaryDirection.EAST); // Longitude{20.123°}
+Latitude latFromDMS = Latitude.ofDegMinSec(20, 7, 22.8);     // Latitude{-20.123°}
+Longitude longFromDMS = Longitude.ofDegMinSec(20, 7, 22.8);  // Longitude{20.123°}
+
+// From ICAO DMS string format
+Latitude latFromICAO = Latitude.ofDMSFormat("20°07'22.80\"S");
+Longitude lonFromICAO = Longitude.ofDMSFormat("020°07'22.80\"E");
 ```
 
-The **GeoCoordinate** class combines both Latitude and Longitude to form a complete geographic coordinate. It facilitates 
+The **GeoCoordinate** class combines both Latitude and Longitude to form a complete geographic coordinate. It facilitates
 easy management and manipulation of spatial data, allowing seamless integration into various applications requiring
-precise location information.
+precise location information. All DMS outputs are ICAO Annex 15 compliant by default.
 
 ```java
 // GeoCoordinate class represents a coordinate of specific point in the globe, using Latitude and Longitude and optional name
 GeoCoordinate coordinateExample = GeoCoordinate.of(latitude, longitude, "my location");
-// GeoCoordinate can be reduced to DMS format, ENG format, or decimal degrees format
-// Decimal degrees format with coma separating latitude from longitude is for ie: how Google Maps output cords
-String geoCoordDMS = coordinateExample.toDMSFormat();             // 20°7'22.8"S, 20°7'22.8"E
-String geoCoordEND = coordinateExample.toEngineeringFormat();     // -20.12 [°], 20.12 [°]
-String geoCoordDEC = coordinateExample.toDecimalDegrees();        // -20.12, 20.12
+
+// GeoCoordinate can be reduced to ICAO DMS format, ENG format, or decimal degrees format
+String geoCoordDMS = coordinateExample.toDMSFormat();             // 20°07'22.80"S, 020°07'22.80"E
+String geoCoordDMSHighPrec = coordinateExample.toDMSFormat(0.001); // 20°07'22.800"S, 020°07'22.800"E
+String geoCoordEND = coordinateExample.toEngineeringFormat();     // -20.123 [°], 20.123 [°]
+String geoCoordDEC = coordinateExample.toDecimalDegrees();        // -20.123, 20.123
+
+// Create from ICAO DMS strings
+GeoCoordinate icaoCoord = GeoCoordinate.ofDMSFormat("20°07'22.80\"S", "020°07'22.80\"E");
 ```
 
 Latitude and Longitude do not enforce any angular value limit, but GeoCoordinate will do. Make sure that your
@@ -1253,10 +1291,10 @@ Small shield with referenced most recent version tag:<br>
 ```
 
 Tech shield with version tag for manual adjustment (you can indicate which version you actually use): <br>
-[![Unitility](https://img.shields.io/badge/UNITILITY-v2.11.2-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v3.0.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 
 ```markdown
-[![Unitility](https://img.shields.io/badge/UNITILITY-v2.11.2-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v3.0.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 ```
 
 ## 11. ACKNOWLEDGMENTS

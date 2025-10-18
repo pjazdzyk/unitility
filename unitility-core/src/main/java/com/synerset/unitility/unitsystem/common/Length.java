@@ -30,7 +30,7 @@ public class Length implements CalculableQuantity<DistanceUnit, Length> {
         DistanceUnit resolvedUnit = DistanceUnits.fromSymbol(unitSymbol);
         return new Length(value, resolvedUnit);
     }
-    
+
     public static Length ofMeters(double value) {
         return new Length(value, DistanceUnits.METER);
     }
@@ -61,6 +61,22 @@ public class Length implements CalculableQuantity<DistanceUnit, Length> {
 
     public static Length ofInches(double value) {
         return new Length(value, DistanceUnits.INCH);
+    }
+
+    public static Length ofYards(double value) {
+        return new Length(value, DistanceUnits.YARD);
+    }
+
+    public static Length ofDecameters(double value) {
+        return new Length(value, DistanceUnits.DECAMETER);
+    }
+
+    public static Length ofHectometers(double value) {
+        return new Length(value, DistanceUnits.HECTOMETER);
+    }
+
+    public static Length ofDataMiles(double value) {
+        return new Length(value, DistanceUnits.DATAMILE);
     }
 
     public static Length of(PhysicalQuantity<? extends DistanceUnit> distanceType){
@@ -139,6 +155,22 @@ public class Length implements CalculableQuantity<DistanceUnit, Length> {
         return toUnit(DistanceUnits.INCH);
     }
 
+    public Length toYard() {
+        return toUnit(DistanceUnits.YARD);
+    }
+
+    public Length toDecameter() {
+        return toUnit(DistanceUnits.DECAMETER);
+    }
+
+    public Length toHectometer() {
+        return toUnit(DistanceUnits.HECTOMETER);
+    }
+
+    public Length toDataMile() {
+        return toUnit(DistanceUnits.DATAMILE);
+    }
+
     // Get value in target unit
     public double getInMeters() {
         return getInUnit(DistanceUnits.METER);
@@ -172,6 +204,22 @@ public class Length implements CalculableQuantity<DistanceUnit, Length> {
         return getInUnit(DistanceUnits.INCH);
     }
 
+    public double getInYards() {
+        return getInUnit(DistanceUnits.YARD);
+    }
+
+    public double getInDecameters() {
+        return getInUnit(DistanceUnits.DECAMETER);
+    }
+
+    public double getInHectometers() {
+        return getInUnit(DistanceUnits.HECTOMETER);
+    }
+
+    public double getInDataMiles() {
+        return getInUnit(DistanceUnits.DATAMILE);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -189,5 +237,4 @@ public class Length implements CalculableQuantity<DistanceUnit, Length> {
     public String toString() {
         return "Length{" + value + " " + unitType.getSymbol() + '}';
     }
-
 }

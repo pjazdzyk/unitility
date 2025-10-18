@@ -13,6 +13,7 @@ Example: "I need to convert between grains per pound and kg/kg but Unitility doe
 **Describe the solution you'd like**  
 A clear and concise description of what you would like to see implemented.  
 Example: "Add a `GrainsPerPound` unit and extend `HumidityRatio` to support parsing from this unit."
+Provide information what is current behaviour, and what is the expected result.
 
 **Describe alternatives you've considered**  
 Have you tried working around the issue?  
@@ -20,3 +21,4 @@ Example: "I wrote a custom unit / custom parsing factory, but it would be great 
 
 **Additional context**  
 Include any references, code snippets, or use cases that explain why this feature is valuable.
+Provide list of physical quantities or additional units you need, so they could be added in next release.

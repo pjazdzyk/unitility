@@ -172,4 +172,100 @@ class WidthTest {
         assertThat(actualInMiles).isEqualTo(initialLengthInMiles);
     }
 
+    @Test
+    @DisplayName("Width: should convert to m from yd and vice versa")
+    void shouldProperlyConvertToMetersFromYard() {
+        // Given
+        Width initialLengthInYards = Width.ofYards(10.0);
+
+        // When
+        Width actualInMeters = initialLengthInYards.toBaseUnit();
+        Width actualInYards = actualInMeters.toUnit(DistanceUnits.YARD);
+        double actualInYardsVal = actualInMeters.getInYards();
+
+        // Then
+        Width expectedInMeters = Width.ofMeters(9.144); // 10 * 0.9144
+        assertThat(actualInYards.getValue()).isEqualTo(actualInYardsVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInYards).isEqualTo(initialLengthInYards);
+    }
+
+    @Test
+    @DisplayName("Width: should convert to m from dam and vice versa")
+    void shouldProperlyConvertToMetersFromDecameter() {
+        // Given
+        Width initialLengthInDecameters = Width.ofDecameters(5.0);
+
+        // When
+        Width actualInMeters = initialLengthInDecameters.toBaseUnit();
+        Width actualInDecameters = actualInMeters.toUnit(DistanceUnits.DECAMETER);
+        double actualInDecametersVal = actualInMeters.getInDecameters();
+
+        // Then
+        Width expectedInMeters = Width.ofMeters(50.0); // 5 * 10.0
+        assertThat(actualInDecameters.getValue()).isEqualTo(actualInDecametersVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInDecameters).isEqualTo(initialLengthInDecameters);
+    }
+
+    @Test
+    @DisplayName("Width: should convert to m from hm and vice versa")
+    void shouldProperlyConvertToMetersFromHectometer() {
+        // Given
+        Width initialLengthInHectometers = Width.ofHectometers(2.5);
+
+        // When
+        Width actualInMeters = initialLengthInHectometers.toBaseUnit();
+        Width actualInHectometers = actualInMeters.toUnit(DistanceUnits.HECTOMETER);
+        double actualInHectometersVal = actualInMeters.getInHectometers();
+
+        // Then
+        Width expectedInMeters = Width.ofMeters(250.0); // 2.5 * 100.0
+        assertThat(actualInHectometers.getValue()).isEqualTo(actualInHectometersVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInHectometers).isEqualTo(initialLengthInHectometers);
+    }
+
+    @Test
+    @DisplayName("Width: should convert to m from datmi and vice versa")
+    void shouldProperlyConvertToMetersFromDataMile() {
+        // Given
+        Width initialLengthInDataMiles = Width.ofDataMiles(1.0);
+
+        // When
+        Width actualInMeters = initialLengthInDataMiles.toBaseUnit();
+        Width actualInDataMiles = actualInMeters.toUnit(DistanceUnits.DATAMILE);
+        double actualInDataMilesVal = actualInMeters.getInDataMiles();
+
+        // Then
+        Width expectedInMeters = Width.ofMeters(1828.8); // 1 * 1828.8
+        assertThat(actualInDataMiles.getValue()).isEqualTo(actualInDataMilesVal);
+        assertThat(actualInMeters).isEqualTo(expectedInMeters);
+        assertThat(actualInDataMiles).isEqualTo(initialLengthInDataMiles);
+    }
+
+    @Test
+    @DisplayName("Width: should return valid result from to() and getIn() methods including new units")
+    void shouldReturnValidResultFromToAndGetInMethodsIncludingNewUnits() {
+        // Given
+        Width expected = Width.ofMeters(1828.8);
+
+        // When
+        Width actual = expected.toMeter()
+                .toYard()
+                .toDecameter()
+                .toHectometer()
+                .toDataMile()
+                .toMeter();
+
+        double actualValue = expected.getInMeters();
+        double actualValueInDataMiles = expected.getInDataMiles();
+
+        // Then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(actualValue).isEqualTo(expected.getValue());
+
+        assertThat(actualValueInDataMiles).isEqualTo(1.0);
+    }
+
 }

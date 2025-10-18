@@ -1,5 +1,6 @@
 package com.synerset.unitility.unitsystem.common;
 
+import com.synerset.unitility.unitsystem.Constants;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
 
@@ -8,13 +9,17 @@ import java.util.function.DoubleUnaryOperator;
 public enum DistanceUnits implements DistanceUnit {
 
     METER("m", val -> val, val -> val),
-    CENTIMETER("cm", val -> val / 100, val -> val * 100),
-    MILLIMETER("mm", val -> val / 1000, val -> val * 1000),
-    KILOMETER("km", val -> val * 1000, val -> val / 1000),
+    CENTIMETER("cm", val -> val * Constants.CENTI, val -> val / Constants.CENTI),
+    MILLIMETER("mm", val -> val * Constants.MILLI, val -> val / Constants.MILLI),
+    KILOMETER("km", val -> val * Constants.KILO, val -> val / Constants.KILO),
     MILE("mi", val -> val * 1609.344, val -> val / 1609.344),
     NAUTICAL_MILE("nmi", val -> val * 1852, val -> val / 1852),
     FEET("ft", val -> val * 0.3048, val -> val / 0.3048),
-    INCH("in", val -> val * 0.0254, val -> val / 0.0254);
+    INCH("in", val -> val * 0.0254, val -> val / 0.0254),
+    YARD("yd", val -> val * 0.9144, val -> val / 0.9144),
+    DECAMETER("dam", val -> val * Constants.DECA, val -> val / Constants.DECA),
+    HECTOMETER("hm", val -> val * Constants.HECTO, val -> val / Constants.HECTO),
+    DATAMILE("datmi", val -> val * 1828.8, val -> val / 1828.8);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -64,6 +69,9 @@ public enum DistanceUnits implements DistanceUnit {
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
+                .replace("da", "dam")
+                .replace("dm", "datmi")
+                .replace("datami", "datmi")
                 .toString();
     }
 

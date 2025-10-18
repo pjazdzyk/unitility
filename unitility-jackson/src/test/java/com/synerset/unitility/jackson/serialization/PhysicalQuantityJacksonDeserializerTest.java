@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModulePlainSIValue;
-import com.synerset.unitility.unitsystem.common.Angle;
-import com.synerset.unitility.unitsystem.common.AngularVelocity;
-import com.synerset.unitility.unitsystem.common.Curvature;
-import com.synerset.unitility.unitsystem.common.Distance;
+import com.synerset.unitility.unitsystem.acoustic.SoundPower;
+import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
+import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
 import com.synerset.unitility.unitsystem.dimensionless.GenericDimensionless;
+import com.synerset.unitility.unitsystem.electric.*;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.GeoCoordinate;
@@ -53,7 +53,8 @@ class PhysicalQuantityJacksonDeserializerTest {
         String bearing = "{\"value\":270.0}";
         String distance = "1.0";
         String curvatureInput1 = "{\"value\":0.1,\"unit\":\"°/ft\"}";
-        String curvatureInput2 = "{\"value\":0.1,\"unit\":\"deg  /ft\"}"; ;
+        String curvatureInput2 = "{\"value\":0.1,\"unit\":\"deg  /ft\"}";
+        ;
         String curvatureInput3 = "{\"value\":0.1,\"unit\":\"degpft\"}";
         String angularVelInput1 = "{\"value\":0.1,\"unit\":\"deg p s\"}";
         String angularVelInput2 = "{\"value\":0.1,\"unit\":\"rps\"}";
@@ -63,6 +64,15 @@ class PhysicalQuantityJacksonDeserializerTest {
         String expectedGenericDimensionless1 = "{\"value\":20,\"unit\":\"\"}";
         String expectedGenericDimensionless2 = "{\"value\":20}";
         String expectedSDR = "{\"value\":27.6}";
+        String expectedSoundPower = "{\"value\": 10,\"unit\":\"db l \"}";
+        String expectedSoundPressure = "{\"value\": 10,\"unit\":\"db a \"}";
+        String expectedDataSize = "{\"value\": 10,\"unit\":\" mb \"}";
+        String expectedCapacitance = "{\"value\": 10,\"unit\":\" Mf \"}";
+        String expectedCharge = "{\"value\": 10,\"unit\":\" MC \"}";
+        String expectedElResistance = "{\"value\": 10,\"unit\":\" Mohm \"}";
+        String expectedCurrent = "{\"value\": 10,\"unit\":\" ua \"}";
+        String expectedConductance = "{\"value\": 10,\"unit\":\" u  s \"}";
+        String expectedVoltage = "{\"value\": 10,\"unit\":\" Mv \"}";
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
@@ -93,6 +103,15 @@ class PhysicalQuantityJacksonDeserializerTest {
         GenericDimensionless actualGenericDimensionless1 = objectMapper.readValue(expectedGenericDimensionless1, GenericDimensionless.class);
         GenericDimensionless actualGenericDimensionless2 = objectMapper.readValue(expectedGenericDimensionless2, GenericDimensionless.class);
         SDR actualSDR = objectMapper.readValue(expectedSDR, SDR.class);
+        SoundPower actualSoundPower = objectMapper.readValue(expectedSoundPower, SoundPower.class);
+        SoundPressure actualSoundPressure = objectMapper.readValue(expectedSoundPressure, SoundPressure.class);
+        DataSize actualDataSize = objectMapper.readValue(expectedDataSize, DataSize.class);
+        Capacitance actualCapacitance = objectMapper.readValue(expectedCapacitance, Capacitance.class);
+        Charge actualCharge = objectMapper.readValue(expectedCharge, Charge.class);
+        Resistance actualElResistance = objectMapper.readValue(expectedElResistance, Resistance.class);
+        Current actualCurrent = objectMapper.readValue(expectedCurrent, Current.class);
+        Conductance actualConductance = objectMapper.readValue(expectedConductance, Conductance.class);
+        Voltage actualVoltage = objectMapper.readValue(expectedVoltage, Voltage.class);
 
         // Then
         Temperature expetedTemperature = Temperature.ofCelsius(20);
@@ -136,6 +155,16 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualGenericDimensionless1).isEqualTo(GenericDimensionless.of(20));
         assertThat(actualGenericDimensionless2).isEqualTo(GenericDimensionless.of(20));
         assertThat(actualSDR).isEqualTo(expectedSdr);
+        assertThat(actualSoundPower).isEqualTo(SoundPower.ofDecibels(10));
+        assertThat(actualSoundPressure).isEqualTo(SoundPressure.ofDecibels(10));
+        assertThat(actualDataSize).isEqualTo(DataSize.ofMegabytes(10));
+        assertThat(actualCapacitance).isEqualTo(Capacitance.ofMegafarads(10));
+        assertThat(actualCharge).isEqualTo(Charge.ofMegacoulombs(10));
+        assertThat(actualElResistance).isEqualTo(Resistance.ofMegaohms(10));
+        assertThat(actualCurrent).isEqualTo(Current.ofMicroamperes(10));
+        assertThat(actualConductance).isEqualTo(Conductance.ofMicroseimens(10));
+        assertThat(actualVoltage).isEqualTo(Voltage.ofMegavolts(10));
+
     }
 
     @Test
@@ -184,11 +213,11 @@ class PhysicalQuantityJacksonDeserializerTest {
         objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
 
         String lat1 = "{\"value\":\"52°14'5.123\\\"N\"}";
-        String lon1 = "{\"value\":\"21°4'3.986\\\"W\"}";
+        String lon1 = "{\"value\":\"021°4'3.986\\\"W\"}";
         String lat2 = "{\"value\":\" 52o 14min 5.123sec N\"}";
         String lon2 = "{\"value\":\"21deg 4' 3.986\\\"   w\"}";
         String lat3 = "{\"value\":\"52°14'5.123\\\"N\"}";
-        String lon3 = "{\"value\":\"-21°4'3.986\\\"\"}";
+        String lon3 = "{\"value\":\"-021°4'3.986\\\"\"}";
         String lat4 = "{\"value\":\"52°14'N\"}";
         String lon4 = "{\"value\":\"21°4'W\"}";
         String lat5 = "{\"value\":\"52°N\"}";
