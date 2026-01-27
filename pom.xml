@@ -46,7 +46,7 @@
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>3.0.0</project.version>
+        <project.version>3.0.1</project.version>
 
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>
@@ -67,7 +67,7 @@
         <!-- Test dependencies versions -->
         <jacoco.version>0.8.13</jacoco.version>
         <junit-jupiter.version>6.0.0</junit-jupiter.version>
-        <assertj-core.version>3.27.6</assertj-core.version>
+        <assertj-core.version>3.27.7</assertj-core.version>
 
         <!-- Plugin versions -->
         <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
