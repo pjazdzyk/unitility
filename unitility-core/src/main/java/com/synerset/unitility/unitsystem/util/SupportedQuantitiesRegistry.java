@@ -69,6 +69,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(GrashofNumber.class, Collections::emptyList),
                 Map.entry(PrandtlNumber.class, Collections::emptyList),
                 Map.entry(ReynoldsNumber.class, Collections::emptyList),
+                Map.entry(CompressibilityFactor.class, () -> Arrays.asList(CompressibilityFactorUnits.values())),
                 // Flows
                 Map.entry(MassFlow.class, () -> Arrays.asList(MassFlowUnits.values())),
                 Map.entry(VolumetricFlow.class, () -> Arrays.asList(VolumetricFlowUnits.values())),

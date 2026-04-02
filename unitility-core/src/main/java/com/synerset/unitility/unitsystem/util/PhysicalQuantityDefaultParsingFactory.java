@@ -67,6 +67,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(GrashofNumber.class, (value, symbol) -> GrashofNumber.of(value)),
                 Map.entry(PrandtlNumber.class, (value, symbol) -> PrandtlNumber.of(value)),
                 Map.entry(ReynoldsNumber.class, (value, symbol) -> ReynoldsNumber.of(value)),
+                Map.entry(CompressibilityFactor.class, (value, symbol) -> CompressibilityFactor.of(value)),
                 // Flows
                 Map.entry(MassFlow.class, MassFlow::of),
                 Map.entry(VolumetricFlow.class, VolumetricFlow::of),
@@ -136,12 +137,13 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Velocity.class, VelocityUnits.METER_PER_SECOND),
                 Map.entry(Volume.class, VolumeUnits.CUBIC_METER),
                 Map.entry(DataSize.class, DataSizeUnits.BYTE),
-                // Dimensionless (5)
+                // Dimensionless (6)
                 Map.entry(GenericDimensionless.class, GenericDimensionlessUnits.DIMENSIONLESS),
                 Map.entry(BypassFactor.class, BypassFactorUnits.DIMENSIONLESS),
                 Map.entry(GrashofNumber.class, GrashofNumberUnits.DIMENSIONLESS),
                 Map.entry(PrandtlNumber.class, PrandtlNumberUnits.DIMENSIONLESS),
                 Map.entry(ReynoldsNumber.class, ReynoldsNumberUnits.DIMENSIONLESS),
+                Map.entry(CompressibilityFactor.class, CompressibilityFactorUnits.DIMENSIONLESS),
                 // Flows (2)
                 Map.entry(MassFlow.class, MassFlowUnits.KILOGRAM_PER_SECOND),
                 Map.entry(VolumetricFlow.class, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND),
