@@ -27,6 +27,8 @@ import com.synerset.unitility.unitsystem.oscillation.Frequency;
 import com.synerset.unitility.unitsystem.oscillation.FrequencyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 import com.synerset.unitility.unitsystem.thermodynamic.IsothermalCompressibility;
+import com.synerset.unitility.unitsystem.thermodynamic.MolarEnthalpy;
+import com.synerset.unitility.unitsystem.thermodynamic.MolarEnthalpyUnits;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -102,6 +104,8 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(ThermalDiffusivity.class, () -> Arrays.asList(ThermalDiffusivityUnits.values())),
                 Map.entry(IsothermalCompressibility.class, () -> Arrays.asList(IsothermalCompressibilityUnits.values())),
                 Map.entry(MolarVolume.class, () -> Arrays.asList(MolarVolumeUnits.values())),
+                Map.entry(MolarEnthalpy.class, () -> Arrays.asList(MolarEnthalpyUnits.values())),
+                Map.entry(MolarEntropy.class, () -> Arrays.asList(MolarEntropyUnits.values())),
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),

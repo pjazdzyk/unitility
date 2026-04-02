@@ -29,6 +29,9 @@ import com.synerset.unitility.unitsystem.thermodynamic.SpecificEntropy;
 import com.synerset.unitility.unitsystem.thermodynamic.SpecificEntropyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.IsothermalCompressibility;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarVolume;
+import com.synerset.unitility.unitsystem.thermodynamic.MolarEnthalpy;
+import com.synerset.unitility.unitsystem.thermodynamic.MolarEntropy;
+import com.synerset.unitility.unitsystem.thermodynamic.MolarEntropyUnits;
 
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -101,6 +104,8 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(ThermalDiffusivity.class, ThermalDiffusivity::of),
                 Map.entry(IsothermalCompressibility.class, IsothermalCompressibility::of),
                 Map.entry(MolarVolume.class, MolarVolume::of),
+                Map.entry(MolarEnthalpy.class, MolarEnthalpy::of),
+                Map.entry(MolarEntropy.class, MolarEntropy::of),
                 // Geographic
                 Map.entry(Latitude.class, Latitude::of),
                 Map.entry(Longitude.class, Longitude::of),
@@ -178,6 +183,8 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(ThermalDiffusivity.class, ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND),
                 Map.entry(IsothermalCompressibility.class, IsothermalCompressibilityUnits.INVERSE_PASCAL),
                 Map.entry(MolarVolume.class, MolarVolumeUnits.CUBIC_METER_PER_MOLE),
+                Map.entry(MolarEnthalpy.class, MolarEnthalpyUnits.JOULE_PER_MOLE),
+                Map.entry(MolarEntropy.class, MolarEntropyUnits.JOULE_PER_MOLE_KELVIN),
                 // Geographic (3)
                 Map.entry(Latitude.class, AngleUnits.DEGREES),
                 Map.entry(Longitude.class, AngleUnits.DEGREES),
