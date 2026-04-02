@@ -101,6 +101,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(ThermalConductivity.class, () -> Arrays.asList(ThermalConductivityUnits.values())),
                 Map.entry(ThermalDiffusivity.class, () -> Arrays.asList(ThermalDiffusivityUnits.values())),
                 Map.entry(IsothermalCompressibility.class, () -> Arrays.asList(IsothermalCompressibilityUnits.values())),
+                Map.entry(MolarVolume.class, () -> Arrays.asList(MolarVolumeUnits.values())),
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),

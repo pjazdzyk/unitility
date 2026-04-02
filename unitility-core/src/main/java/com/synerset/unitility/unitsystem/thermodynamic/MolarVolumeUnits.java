@@ -5,22 +5,22 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum IsothermalCompressibilityUnits implements IsothermalCompressibilityUnit {
+public enum MolarVolumeUnits implements MolarVolumeUnit {
 
-    INVERSE_PASCAL("1/Pa", val -> val, val -> val),
-    INVERSE_KILOPASCAL("1/kPa", val -> val / 1000.0, val -> val * 1000.0),
-    INVERSE_MEGAPASCAL("1/MPa", val -> val / 1_000_000.0, val -> val * 1_000_000.0),
-    INVERSE_BAR("1/bar", val -> val / 100_000.0, val -> val * 100_000.0),
-    INVERSE_PSI("1/psi", val -> val / 6894.757293168, val -> val * 6894.757293168),
-    INVERSE_ATMOSPHERE("1/atm", val -> val / 101325.0, val -> val * 101325.0);
-
+    CUBIC_METER_PER_MOLE("m³/mol", val -> val, val -> val),
+    LITER_PER_MOLE("L/mol", val -> val * 0.001, val -> val / 0.001),
+    CUBIC_DECIMETER_PER_MOLE("dm³/mol", val -> val * 0.001, val -> val / 0.001),
+    CUBIC_CENTIMETER_PER_MOLE("cm³/mol", val -> val * 1e-6, val -> val / 1e-6),
+    MILLILITER_PER_MOLE("mL/mol", val -> val * 1e-6, val -> val / 1e-6),
+    CUBIC_FOOT_PER_POUND_MOLE("ft³/lbmol", val -> val * 0.00006242796, val -> val / 0.00006242796),
+    CUBIC_INCH_PER_POUND_MOLE("in³/lbmol", val -> val * 0.00000003612729, val -> val / 0.00000003612729);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    IsothermalCompressibilityUnits(String symbol, DoubleUnaryOperator toBaseConverter,
-                                   DoubleUnaryOperator fromBaseToUnitConverter) {
+    MolarVolumeUnits(String symbol, DoubleUnaryOperator toBaseConverter,
+                     DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -32,8 +32,8 @@ public enum IsothermalCompressibilityUnits implements IsothermalCompressibilityU
     }
 
     @Override
-    public IsothermalCompressibilityUnit getBaseUnit() {
-        return INVERSE_PASCAL;
+    public MolarVolumeUnit getBaseUnit() {
+        return CUBIC_METER_PER_MOLE;
     }
 
     @Override
@@ -46,12 +46,12 @@ public enum IsothermalCompressibilityUnits implements IsothermalCompressibilityU
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static IsothermalCompressibilityUnit fromSymbol(String rawSymbol) {
+    public static MolarVolumeUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return INVERSE_PASCAL;
+            return CUBIC_METER_PER_MOLE;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (IsothermalCompressibilityUnit unit : values()) {
+        for (MolarVolumeUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
@@ -64,6 +64,7 @@ public enum IsothermalCompressibilityUnits implements IsothermalCompressibilityU
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
+                .unifyAerialAndVol()
                 .toString();
     }
 }
