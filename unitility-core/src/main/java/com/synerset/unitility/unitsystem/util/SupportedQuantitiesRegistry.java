@@ -106,6 +106,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(MolarVolume.class, () -> Arrays.asList(MolarVolumeUnits.values())),
                 Map.entry(MolarEnthalpy.class, () -> Arrays.asList(MolarEnthalpyUnits.values())),
                 Map.entry(MolarEntropy.class, () -> Arrays.asList(MolarEntropyUnits.values())),
+                Map.entry(SpecificVolume.class, () -> Arrays.asList(SpecificVolumeUnits.values())),
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),

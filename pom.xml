@@ -24,7 +24,7 @@
     <developers>
         <developer>
             <name>Piotr Jażdżyk</name>
-            <email>piotr.jazdzyk@o2.pl</email>
+            <email>info@synerset.com</email>
             <organization>SYNERSET</organization>
             <organizationUrl>https://www.synerset.com</organizationUrl>
         </developer>
@@ -46,7 +46,7 @@
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>3.0.1</project.version>
+        <project.version>3.1.0</project.version>
 
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>
