@@ -26,7 +26,7 @@ class SupportedQuantitiesRegistryTest {
         Set<PhysicalQuantityInfo> allSupportedQuantities = QUANTITY_REGISTRY.findAllSupportedQuantities();
 
         // Then
-        assertThat(allSupportedQuantities).isNotNull().isNotEmpty().hasSize(59);
+        assertThat(allSupportedQuantities).isNotNull().isNotEmpty().hasSize(60);
     }
 
     @Test

@@ -93,6 +93,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Power.class, () -> Arrays.asList(PowerUnits.values())),
                 Map.entry(Pressure.class, () -> Arrays.asList(PressureUnits.values())),
                 Map.entry(SpecificEnthalpy.class, () -> Arrays.asList(SpecificEnthalpyUnits.values())),
+                Map.entry(SpecificEntropy.class, () -> Arrays.asList(SpecificEntropyUnits.values())),
                 Map.entry(SpecificHeat.class, () -> Arrays.asList(SpecificHeatUnits.values())),
                 Map.entry(Temperature.class, () -> Arrays.asList(TemperatureUnits.values())),
                 Map.entry(ThermalConductivity.class, () -> Arrays.asList(ThermalConductivityUnits.values())),

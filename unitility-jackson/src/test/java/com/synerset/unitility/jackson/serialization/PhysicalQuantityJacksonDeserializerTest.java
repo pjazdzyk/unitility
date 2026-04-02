@@ -18,6 +18,7 @@ import com.synerset.unitility.unitsystem.geographic.Longitude;
 import com.synerset.unitility.unitsystem.humidity.HumidityRatio;
 import com.synerset.unitility.unitsystem.hydraulic.RotationSpeedToFlowRateRatio;
 import com.synerset.unitility.unitsystem.hydraulic.SDR;
+import com.synerset.unitility.unitsystem.thermodynamic.*;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import com.synerset.unitility.unitsystem.thermodynamic.TemperatureUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.ThermalConductivity;
@@ -73,6 +74,9 @@ class PhysicalQuantityJacksonDeserializerTest {
         String expectedCurrent = "{\"value\": 10,\"unit\":\" ua \"}";
         String expectedConductance = "{\"value\": 10,\"unit\":\" u  s \"}";
         String expectedVoltage = "{\"value\": 10,\"unit\":\" Mv \"}";
+        String specificEntropyInput1 = "{\"value\": 20.0,\"unit\":\"J/kg·K\"}";
+        String specificEntropyInput2 = "{\"value\": 20.0,\"unit\":\"kJ/kg·K\"}";
+        String specificEntropyInput3 = "{\"value\": 20.0,\"unit\":\"MJ/t·K\"}";
 
         // When
         Temperature actualTemp1 = objectMapper.readValue(tempInput1, Temperature.class);
@@ -164,6 +168,16 @@ class PhysicalQuantityJacksonDeserializerTest {
         assertThat(actualCurrent).isEqualTo(Current.ofMicroamperes(10));
         assertThat(actualConductance).isEqualTo(Conductance.ofMicroseimens(10));
         assertThat(actualVoltage).isEqualTo(Voltage.ofMegavolts(10));
+
+        // Test SpecificEntropy deserialization
+        SpecificEntropy actualSpecificEntropy1 = objectMapper.readValue(specificEntropyInput1, SpecificEntropy.class);
+        SpecificEntropy actualSpecificEntropy2 = objectMapper.readValue(specificEntropyInput2, SpecificEntropy.class);
+        SpecificEntropy actualSpecificEntropy3 = objectMapper.readValue(specificEntropyInput3, SpecificEntropy.class);
+
+        // Then
+        assertThat(actualSpecificEntropy1).isEqualTo(SpecificEntropy.ofJoulePerKilogramKelvin(20.0));
+        assertThat(actualSpecificEntropy2).isEqualTo(SpecificEntropy.ofKiloJoulePerKilogramKelvin(20.0));
+        assertThat(actualSpecificEntropy3).isEqualTo(SpecificEntropy.ofMegaJoulePerTonneKelvin(20.0));
 
     }
 

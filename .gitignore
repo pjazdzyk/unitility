@@ -86,3 +86,5 @@ nb-configuration.xml
 *.sample
 *.sns
 *.sms
+
+plans/

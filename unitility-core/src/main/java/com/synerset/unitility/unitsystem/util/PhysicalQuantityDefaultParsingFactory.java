@@ -25,6 +25,8 @@ import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.oscillation.Frequency;
 import com.synerset.unitility.unitsystem.oscillation.FrequencyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
+import com.synerset.unitility.unitsystem.thermodynamic.SpecificEntropy;
+import com.synerset.unitility.unitsystem.thermodynamic.SpecificEntropyUnits;
 
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -89,6 +91,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Power.class, Power::of),
                 Map.entry(Pressure.class, Pressure::of),
                 Map.entry(SpecificEnthalpy.class, SpecificEnthalpy::of),
+                Map.entry(SpecificEntropy.class, SpecificEntropy::of),
                 Map.entry(SpecificHeat.class, SpecificHeat::of),
                 Map.entry(Temperature.class, Temperature::of),
                 Map.entry(ThermalConductivity.class, ThermalConductivity::of),
@@ -154,7 +157,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Force.class, ForceUnits.NEWTON),
                 Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),
                 Map.entry(Torque.class, TorqueUnits.NEWTON_METER),
-                // Thermodynamic (11)
+                // Thermodynamic (12)
                 Map.entry(Density.class, DensityUnits.KILOGRAM_PER_CUBIC_METER),
                 Map.entry(DynamicViscosity.class, DynamicViscosityUnits.PASCAL_SECOND),
                 Map.entry(Energy.class, EnergyUnits.JOULE),
@@ -162,6 +165,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Power.class, PowerUnits.WATT),
                 Map.entry(Pressure.class, PressureUnits.PASCAL),
                 Map.entry(SpecificEnthalpy.class, SpecificEnthalpyUnits.JOULE_PER_KILOGRAM),
+                Map.entry(SpecificEntropy.class, SpecificEntropyUnits.JOULE_PER_KILOGRAM_KELVIN),
                 Map.entry(SpecificHeat.class, SpecificHeatUnits.JOULES_PER_KILOGRAM_KELVIN),
                 Map.entry(Temperature.class, TemperatureUnits.KELVIN),
                 Map.entry(ThermalConductivity.class, ThermalConductivityUnits.WATTS_PER_METER_KELVIN),
