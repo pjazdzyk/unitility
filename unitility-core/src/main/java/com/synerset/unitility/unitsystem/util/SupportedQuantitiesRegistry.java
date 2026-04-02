@@ -26,6 +26,7 @@ import com.synerset.unitility.unitsystem.mechanical.*;
 import com.synerset.unitility.unitsystem.oscillation.Frequency;
 import com.synerset.unitility.unitsystem.oscillation.FrequencyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
+import com.synerset.unitility.unitsystem.thermodynamic.IsothermalCompressibility;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -98,6 +99,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Temperature.class, () -> Arrays.asList(TemperatureUnits.values())),
                 Map.entry(ThermalConductivity.class, () -> Arrays.asList(ThermalConductivityUnits.values())),
                 Map.entry(ThermalDiffusivity.class, () -> Arrays.asList(ThermalDiffusivityUnits.values())),
+                Map.entry(IsothermalCompressibility.class, () -> Arrays.asList(IsothermalCompressibilityUnits.values())),
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),

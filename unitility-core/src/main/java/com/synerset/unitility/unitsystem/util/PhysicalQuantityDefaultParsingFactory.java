@@ -27,6 +27,7 @@ import com.synerset.unitility.unitsystem.oscillation.FrequencyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.*;
 import com.synerset.unitility.unitsystem.thermodynamic.SpecificEntropy;
 import com.synerset.unitility.unitsystem.thermodynamic.SpecificEntropyUnits;
+import com.synerset.unitility.unitsystem.thermodynamic.IsothermalCompressibility;
 
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -96,6 +97,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Temperature.class, Temperature::of),
                 Map.entry(ThermalConductivity.class, ThermalConductivity::of),
                 Map.entry(ThermalDiffusivity.class, ThermalDiffusivity::of),
+                Map.entry(IsothermalCompressibility.class, IsothermalCompressibility::of),
                 // Geographic
                 Map.entry(Latitude.class, Latitude::of),
                 Map.entry(Longitude.class, Longitude::of),
@@ -157,7 +159,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Force.class, ForceUnits.NEWTON),
                 Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),
                 Map.entry(Torque.class, TorqueUnits.NEWTON_METER),
-                // Thermodynamic (12)
+                // Thermodynamic (13)
                 Map.entry(Density.class, DensityUnits.KILOGRAM_PER_CUBIC_METER),
                 Map.entry(DynamicViscosity.class, DynamicViscosityUnits.PASCAL_SECOND),
                 Map.entry(Energy.class, EnergyUnits.JOULE),
@@ -170,6 +172,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Temperature.class, TemperatureUnits.KELVIN),
                 Map.entry(ThermalConductivity.class, ThermalConductivityUnits.WATTS_PER_METER_KELVIN),
                 Map.entry(ThermalDiffusivity.class, ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND),
+                Map.entry(IsothermalCompressibility.class, IsothermalCompressibilityUnits.INVERSE_PASCAL),
                 // Geographic (3)
                 Map.entry(Latitude.class, AngleUnits.DEGREES),
                 Map.entry(Longitude.class, AngleUnits.DEGREES),
