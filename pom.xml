@@ -46,7 +46,7 @@
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>3.1.0</project.version>
+        <project.version>4.0.0</project.version>
 
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>

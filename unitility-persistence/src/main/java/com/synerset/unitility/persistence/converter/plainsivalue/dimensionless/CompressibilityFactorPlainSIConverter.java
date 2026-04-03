@@ -1,7 +1,7 @@
 package com.synerset.unitility.persistence.converter.plainsivalue.dimensionless;
 
-import com.synerset.unitility.unitsystem.dimensionless.CompressibilityFactor;
-import com.synerset.unitility.unitsystem.dimensionless.CompressibilityFactorUnit;
+import com.synerset.unitility.unitsystem.thermodynamic.CompressibilityFactor;
+import com.synerset.unitility.unitsystem.thermodynamic.CompressibilityFactorUnit;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

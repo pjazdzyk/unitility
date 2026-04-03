@@ -1,9 +1,9 @@
-package com.synerset.unitility.unitsystem.dimensionless;
+package com.synerset.unitility.unitsystem.similaritynumber;
 
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum ReynoldsNumberUnits implements ReynoldsNumberUnit {
+public enum GenericDimensionlessUnits implements GenericDimensionlessUnit {
 
     DIMENSIONLESS("", val -> val, val -> val);
 
@@ -11,7 +11,7 @@ public enum ReynoldsNumberUnits implements ReynoldsNumberUnit {
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    ReynoldsNumberUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    GenericDimensionlessUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -23,7 +23,7 @@ public enum ReynoldsNumberUnits implements ReynoldsNumberUnit {
     }
 
     @Override
-    public ReynoldsNumberUnit getBaseUnit() {
+    public GenericDimensionlessUnit getBaseUnit() {
         return DIMENSIONLESS;
     }
 
@@ -36,4 +36,5 @@ public enum ReynoldsNumberUnits implements ReynoldsNumberUnit {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

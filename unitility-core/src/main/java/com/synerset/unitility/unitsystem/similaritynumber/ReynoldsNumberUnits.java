@@ -1,9 +1,9 @@
-package com.synerset.unitility.unitsystem.dimensionless;
+package com.synerset.unitility.unitsystem.similaritynumber;
 
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum GrashofNumberUnits implements GrashofNumberUnit {
+public enum ReynoldsNumberUnits implements ReynoldsNumberUnit {
 
     DIMENSIONLESS("", val -> val, val -> val);
 
@@ -11,7 +11,7 @@ public enum GrashofNumberUnits implements GrashofNumberUnit {
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    GrashofNumberUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    ReynoldsNumberUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -23,7 +23,7 @@ public enum GrashofNumberUnits implements GrashofNumberUnit {
     }
 
     @Override
-    public GrashofNumberUnit getBaseUnit() {
+    public ReynoldsNumberUnit getBaseUnit() {
         return DIMENSIONLESS;
     }
 

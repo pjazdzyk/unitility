@@ -7,7 +7,7 @@ import com.synerset.unitility.unitsystem.acoustic.SoundPowerUnits;
 import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
 import com.synerset.unitility.unitsystem.acoustic.SoundPressureUnits;
 import com.synerset.unitility.unitsystem.common.*;
-import com.synerset.unitility.unitsystem.dimensionless.*;
+import com.synerset.unitility.unitsystem.similaritynumber.*;
 import com.synerset.unitility.unitsystem.electric.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
@@ -29,6 +29,8 @@ import com.synerset.unitility.unitsystem.thermodynamic.*;
 import com.synerset.unitility.unitsystem.thermodynamic.IsothermalCompressibility;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarEnthalpy;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarEnthalpyUnits;
+import com.synerset.unitility.unitsystem.thermodynamic.MolarFraction;
+import com.synerset.unitility.unitsystem.thermodynamic.MolarMass;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -106,6 +108,8 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(MolarVolume.class, () -> Arrays.asList(MolarVolumeUnits.values())),
                 Map.entry(MolarEnthalpy.class, () -> Arrays.asList(MolarEnthalpyUnits.values())),
                 Map.entry(MolarEntropy.class, () -> Arrays.asList(MolarEntropyUnits.values())),
+                Map.entry(MolarFraction.class, () -> Arrays.asList(MolarFractionUnits.values())),
+                Map.entry(MolarMass.class, () -> Arrays.asList(MolarMassUnits.values())),
                 Map.entry(SpecificVolume.class, () -> Arrays.asList(SpecificVolumeUnits.values())),
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),

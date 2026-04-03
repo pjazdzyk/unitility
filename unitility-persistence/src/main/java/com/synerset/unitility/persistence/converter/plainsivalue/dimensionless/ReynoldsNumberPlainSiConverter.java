@@ -1,7 +1,7 @@
 package com.synerset.unitility.persistence.converter.plainsivalue.dimensionless;
 
-import com.synerset.unitility.unitsystem.dimensionless.ReynoldsNumber;
-import com.synerset.unitility.unitsystem.dimensionless.ReynoldsNumberUnit;
+import com.synerset.unitility.unitsystem.similaritynumber.ReynoldsNumber;
+import com.synerset.unitility.unitsystem.similaritynumber.ReynoldsNumberUnit;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

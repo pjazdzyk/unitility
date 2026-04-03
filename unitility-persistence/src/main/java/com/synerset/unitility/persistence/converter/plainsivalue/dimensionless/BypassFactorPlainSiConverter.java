@@ -1,7 +1,7 @@
 package com.synerset.unitility.persistence.converter.plainsivalue.dimensionless;
 
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactorUnit;
+import com.synerset.unitility.unitsystem.hydraulic.BypassFactor;
+import com.synerset.unitility.unitsystem.hydraulic.BypassFactorUnit;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

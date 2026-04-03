@@ -3,7 +3,7 @@ package com.synerset.unitility.unitsystem;
 import com.synerset.unitility.unitsystem.common.Distance;
 import com.synerset.unitility.unitsystem.common.DistanceUnits;
 import com.synerset.unitility.unitsystem.common.Volume;
-import com.synerset.unitility.unitsystem.dimensionless.BypassFactor;
+import com.synerset.unitility.unitsystem.hydraulic.BypassFactor;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnit;

@@ -1,7 +1,7 @@
 package com.synerset.unitility.persistence.converter.plainsivalue.dimensionless;
 
-import com.synerset.unitility.unitsystem.dimensionless.GrashofNumber;
-import com.synerset.unitility.unitsystem.dimensionless.GrashofNumberUnit;
+import com.synerset.unitility.unitsystem.similaritynumber.GrashofNumber;
+import com.synerset.unitility.unitsystem.similaritynumber.GrashofNumberUnit;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

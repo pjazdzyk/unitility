@@ -1,24 +1,23 @@
-package com.synerset.unitility.unitsystem.dimensionless;
+package com.synerset.unitility.unitsystem.similaritynumber;
 
 import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class GenericDimensionless implements CalculableQuantity<GenericDimensionlessUnit, GenericDimensionless> {
-
+public class PrandtlNumber implements CalculableQuantity<PrandtlNumberUnit, PrandtlNumber> {
     private final double value;
     private final double baseValue;
-    private final GenericDimensionlessUnit unitType;
+    private final PrandtlNumberUnits unitType;
 
-    public GenericDimensionless(double value, GenericDimensionlessUnit unitType) {
+    public PrandtlNumber(double value, PrandtlNumberUnits unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static GenericDimensionless of(double value) {
-        return new GenericDimensionless(value, GenericDimensionlessUnits.DIMENSIONLESS);
+    public static PrandtlNumber of(double value) {
+        return new PrandtlNumber(value, PrandtlNumberUnits.DIMENSIONLESS);
     }
 
     @Override
@@ -32,41 +31,41 @@ public class GenericDimensionless implements CalculableQuantity<GenericDimension
     }
 
     @Override
-    public GenericDimensionlessUnit getUnit() {
+    public PrandtlNumberUnit getUnit() {
         return unitType;
     }
 
     @Override
-    public GenericDimensionless toBaseUnit() {
+    public PrandtlNumber toBaseUnit() {
         return this;
     }
 
     @Override
-    public GenericDimensionless toUnit(GenericDimensionlessUnit targetUnit) {
+    public PrandtlNumber toUnit(PrandtlNumberUnit targetUnit) {
         return this;
     }
 
     @Override
-    public GenericDimensionless toUnit(String targetUnit) {
+    public PrandtlNumber toUnit(String targetUnit) {
         return this;
     }
 
     @Override
-    public GenericDimensionless withValue(double value) {
-        return GenericDimensionless.of(value);
+    public PrandtlNumber withValue(double value) {
+        return PrandtlNumber.of(value);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GenericDimensionless that = (GenericDimensionless) o;
+        PrandtlNumber that = (PrandtlNumber) o;
         return Double.compare(that.value, value) == 0;
     }
 
     @Override
     public String toString() {
-        return "GenericDimensionless{" + value + " " + unitType.getSymbol() + '}';
+        return "PrandtlNumber{" + value + " " + unitType.getSymbol() + '}';
     }
 
     @Override

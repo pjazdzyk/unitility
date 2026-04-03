@@ -1,14 +1,16 @@
-package com.synerset.unitility.unitsystem.dimensionless;
+package com.synerset.unitility.unitsystem.similaritynumber;
 
+import com.synerset.unitility.unitsystem.hydraulic.BypassFactor;
+import com.synerset.unitility.unitsystem.hydraulic.BypassFactorUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class BypassFactorTest {
+class GenericDimensionlessTest {
 
     @Test
-    @DisplayName("should create By-pass factor")
+    @DisplayName("should create Generic dimensionless quantity")
     void shouldCreatBypassFactor() {
         // Given
         double expectedValue = 0.2;
@@ -17,11 +19,11 @@ class BypassFactorTest {
         BypassFactor actualBypassFactor = BypassFactor.of(expectedValue);
 
         // Then
-        BypassFactor expectedBypassFactor = BypassFactor.of(0.2);
+        BypassFactor genericDimensionless = BypassFactor.of(0.2);
         assertThat(actualBypassFactor.getValue()).isEqualTo(expectedValue);
         assertThat(actualBypassFactor.toUnit(BypassFactorUnits.DIMENSIONLESS)).isEqualTo(actualBypassFactor.toBaseUnit());
         assertThat(actualBypassFactor.getBaseValue()).isEqualTo(actualBypassFactor.getValue());
-        assertThat(actualBypassFactor).isEqualTo(expectedBypassFactor);
+        assertThat(actualBypassFactor).isEqualTo(genericDimensionless);
     }
 
 }

@@ -1,23 +1,24 @@
-package com.synerset.unitility.unitsystem.dimensionless;
+package com.synerset.unitility.unitsystem.similaritynumber;
 
 import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class GrashofNumber implements CalculableQuantity<GrashofNumberUnit, GrashofNumber> {
+public class GenericDimensionless implements CalculableQuantity<GenericDimensionlessUnit, GenericDimensionless> {
+
     private final double value;
     private final double baseValue;
-    private final GrashofNumberUnit unitType;
+    private final GenericDimensionlessUnit unitType;
 
-    public GrashofNumber(double value, GrashofNumberUnit unitType) {
+    public GenericDimensionless(double value, GenericDimensionlessUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static GrashofNumber of(double value) {
-        return new GrashofNumber(value, GrashofNumberUnits.DIMENSIONLESS);
+    public static GenericDimensionless of(double value) {
+        return new GenericDimensionless(value, GenericDimensionlessUnits.DIMENSIONLESS);
     }
 
     @Override
@@ -31,41 +32,41 @@ public class GrashofNumber implements CalculableQuantity<GrashofNumberUnit, Gras
     }
 
     @Override
-    public GrashofNumberUnit getUnit() {
+    public GenericDimensionlessUnit getUnit() {
         return unitType;
     }
 
     @Override
-    public GrashofNumber toBaseUnit() {
+    public GenericDimensionless toBaseUnit() {
         return this;
     }
 
     @Override
-    public GrashofNumber toUnit(GrashofNumberUnit targetUnit) {
+    public GenericDimensionless toUnit(GenericDimensionlessUnit targetUnit) {
         return this;
     }
 
     @Override
-    public GrashofNumber toUnit(String targetUnit) {
+    public GenericDimensionless toUnit(String targetUnit) {
         return this;
     }
 
     @Override
-    public GrashofNumber withValue(double value) {
-        return GrashofNumber.of(value);
+    public GenericDimensionless withValue(double value) {
+        return GenericDimensionless.of(value);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GrashofNumber that = (GrashofNumber) o;
+        GenericDimensionless that = (GenericDimensionless) o;
         return Double.compare(that.value, value) == 0;
     }
 
     @Override
     public String toString() {
-        return "GrashofNumber{" + value + " " + unitType.getSymbol() + '}';
+        return "GenericDimensionless{" + value + " " + unitType.getSymbol() + '}';
     }
 
     @Override

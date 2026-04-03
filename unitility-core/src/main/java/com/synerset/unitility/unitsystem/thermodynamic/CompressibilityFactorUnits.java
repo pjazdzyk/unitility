@@ -1,31 +1,27 @@
-package com.synerset.unitility.unitsystem.dimensionless;
-
+package com.synerset.unitility.unitsystem.thermodynamic;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum BypassFactorUnits implements BypassFactorUnit {
-
+public enum CompressibilityFactorUnits implements CompressibilityFactorUnit {
+    
     DIMENSIONLESS("", val -> val, val -> val);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    BypassFactorUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    CompressibilityFactorUnits(String symbol, DoubleUnaryOperator toBaseConverter, 
+                               DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
     }
 
     @Override
-    public String getSymbol() {
-        return symbol;
-    }
+    public String getSymbol() { return symbol; }
 
     @Override
-    public BypassFactorUnit getBaseUnit() {
-        return DIMENSIONLESS;
-    }
+    public CompressibilityFactorUnit getBaseUnit() { return DIMENSIONLESS; }
 
     @Override
     public double toValueInBaseUnit(double valueInThisUnit) {
@@ -36,5 +32,4 @@ public enum BypassFactorUnits implements BypassFactorUnit {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
-
 }

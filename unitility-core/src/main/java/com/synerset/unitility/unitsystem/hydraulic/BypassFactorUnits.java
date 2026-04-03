@@ -1,9 +1,9 @@
-package com.synerset.unitility.unitsystem.dimensionless;
+package com.synerset.unitility.unitsystem.hydraulic;
 
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum PrandtlNumberUnits implements PrandtlNumberUnit {
+public enum BypassFactorUnits implements BypassFactorUnit {
 
     DIMENSIONLESS("", val -> val, val -> val);
 
@@ -11,7 +11,7 @@ public enum PrandtlNumberUnits implements PrandtlNumberUnit {
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    PrandtlNumberUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    BypassFactorUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -23,7 +23,7 @@ public enum PrandtlNumberUnits implements PrandtlNumberUnit {
     }
 
     @Override
-    public PrandtlNumberUnit getBaseUnit() {
+    public BypassFactorUnit getBaseUnit() {
         return DIMENSIONLESS;
     }
 
@@ -36,4 +36,5 @@ public enum PrandtlNumberUnits implements PrandtlNumberUnit {
     public double fromValueInBaseUnit(double valueInBaseUnit) {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
+
 }

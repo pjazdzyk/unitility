@@ -1,7 +1,7 @@
 package com.synerset.unitility.persistence.converter.plainsivalue.dimensionless;
 
-import com.synerset.unitility.unitsystem.dimensionless.GenericDimensionless;
-import com.synerset.unitility.unitsystem.dimensionless.GenericDimensionlessUnit;
+import com.synerset.unitility.unitsystem.similaritynumber.GenericDimensionless;
+import com.synerset.unitility.unitsystem.similaritynumber.GenericDimensionlessUnit;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;

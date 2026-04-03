@@ -71,13 +71,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/3.1.0/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/4.0.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -89,7 +89,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -97,7 +97,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -176,9 +176,17 @@ units and at least one Imperial unit.
 * Dynamic viscosity: Kilogram per meter second [kg/(m·s)], Pascal second [Pa·s], Poise [P]
 * Kinematic viscosity: Square meter per second [m²/s], Square foot per second [ft²/s]
 * Specific enthalpy: Joule per kilogram [J/kg], Kilojoule per kilogram [kJ/kg], BTU per pound [BTU/lb]
+it* Specific entropy: Joule per kilogram Kelvin [J/(kg·K)], Kilojoule per kilogram Kelvin [kJ/(kg·K)], BTU per pound Fahrenheit [BTU/(lb·°F)]
 * Thermal conductivity: Watts per meter Kelvin [W/(m·K)], Kilowatts per meter Kelvin [kW/(m·K)], BTU per hour foot
   Fahrenheit [BTU/(h·ft·°F)]
 * Thermal diffusivity: Square meter per second [m²/s], Square feet per second [ft²/s]
+* Molar enthalpy: Joule per mole [J/mol], Kilojoule per mole [kJ/mol], Megajoule per kilomole [MJ/kmol], Millijoule per millimole [mJ/mmol], BTU per pound-mole [BTU/lb-mol], Calorie per mole [cal/mol], Kilocalorie per mole [kcal/mol]
+* Molar entropy: Joule per mole Kelvin [J/(mol·K)], Kilojoule per mole Kelvin [kJ/(mol·K)], Calorie per mole Kelvin [cal/(mol·K)]
+* Molar fraction: dimensionless [-]
+* Molar mass: gram per mole [g/mol], kilogram per kilomole [kg/kmol], kilogram per mole [kg/mol], milligram per millimole [mg/mmol], pound per pound-mole [lb/lb-mol], ounce per mole [oz/mol]
+* Molar volume: cubic meter per mole [m³/mol], liter per mole [L/mol], cubic decimeter per mole [dm³/mol], cubic centimeter per mole [cm³/mol], milliliter per mole [mL/mol], cubic foot per pound-mole [ft³/lb-mol], cubic inch per pound-mole [in³/lb-mol]
+* Isothermal compressibility: Inverse Pascal [1/Pa], Inverse kilopascal [1/kPa], Inverse megapascal [1/MPa], Inverse bar [1/bar], Inverse PSI [1/psi], Inverse atmosphere [1/atm]
+* Compressibility factor: dimensionless [-]
 
 #### FLOWS:
 
@@ -199,7 +207,7 @@ units and at least one Imperial unit.
 * LocalLoss factor: [-]
 * Rotation speed To Flow Rate Ratio: Radians per second per meter per second [rad·s⁻¹/m³·s⁻¹], revolutions per minute per gallons per minute [rpm/gpm]
 
-#### DIMENSIONLESS:
+#### SIMILARITY NUMBERS:
 
 * Grashof number, Prandtl number, Reynolds number, Bypass factor
 
@@ -553,7 +561,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -632,7 +640,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -671,7 +679,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:

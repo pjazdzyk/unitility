@@ -1,4 +1,4 @@
-package com.synerset.unitility.unitsystem.dimensionless;
+package com.synerset.unitility.unitsystem.similaritynumber;
 
 import com.synerset.unitility.unitsystem.CalculableQuantity;
 

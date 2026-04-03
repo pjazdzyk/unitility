@@ -1,23 +1,23 @@
-package com.synerset.unitility.unitsystem.dimensionless;
+package com.synerset.unitility.unitsystem.similaritynumber;
 
 import com.synerset.unitility.unitsystem.CalculableQuantity;
 
 import java.util.Objects;
 
-public class PrandtlNumber implements CalculableQuantity<PrandtlNumberUnit, PrandtlNumber> {
+public class GrashofNumber implements CalculableQuantity<GrashofNumberUnit, GrashofNumber> {
     private final double value;
     private final double baseValue;
-    private final PrandtlNumberUnits unitType;
+    private final GrashofNumberUnit unitType;
 
-    public PrandtlNumber(double value, PrandtlNumberUnits unitType) {
+    public GrashofNumber(double value, GrashofNumberUnit unitType) {
         this.value = value;
         this.unitType = unitType;
         this.baseValue = unitType.toValueInBaseUnit(value);
     }
 
     // Static factory methods
-    public static PrandtlNumber of(double value) {
-        return new PrandtlNumber(value, PrandtlNumberUnits.DIMENSIONLESS);
+    public static GrashofNumber of(double value) {
+        return new GrashofNumber(value, GrashofNumberUnits.DIMENSIONLESS);
     }
 
     @Override
@@ -31,41 +31,41 @@ public class PrandtlNumber implements CalculableQuantity<PrandtlNumberUnit, Pran
     }
 
     @Override
-    public PrandtlNumberUnit getUnit() {
+    public GrashofNumberUnit getUnit() {
         return unitType;
     }
 
     @Override
-    public PrandtlNumber toBaseUnit() {
+    public GrashofNumber toBaseUnit() {
         return this;
     }
 
     @Override
-    public PrandtlNumber toUnit(PrandtlNumberUnit targetUnit) {
+    public GrashofNumber toUnit(GrashofNumberUnit targetUnit) {
         return this;
     }
 
     @Override
-    public PrandtlNumber toUnit(String targetUnit) {
+    public GrashofNumber toUnit(String targetUnit) {
         return this;
     }
 
     @Override
-    public PrandtlNumber withValue(double value) {
-        return PrandtlNumber.of(value);
+    public GrashofNumber withValue(double value) {
+        return GrashofNumber.of(value);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PrandtlNumber that = (PrandtlNumber) o;
+        GrashofNumber that = (GrashofNumber) o;
         return Double.compare(that.value, value) == 0;
     }
 
     @Override
     public String toString() {
-        return "PrandtlNumber{" + value + " " + unitType.getSymbol() + '}';
+        return "GrashofNumber{" + value + " " + unitType.getSymbol() + '}';
     }
 
     @Override
