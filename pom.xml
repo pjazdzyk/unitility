@@ -13,6 +13,7 @@
         <module>unitility-bom</module>
         <module>unitility-core</module>
         <module>unitility-jackson</module>
+        <module>unitility-jackson-legacy</module>
         <module>unitility-spring</module>
         <module>unitility-quarkus</module>
         <module>unitility-validation</module>
@@ -54,14 +55,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Jackson module -->
-        <jackson-databind.version>2.19.2</jackson-databind.version>
+        <jackson-databind.version>3.1.1</jackson-databind.version>
+        <jackson-datatype.version>3.0.0-rc2</jackson-datatype.version>
+        <!-- Jackson legacy module (Jackson 2.x for frameworks not yet on Jackson 3.x) -->
+        <jackson-legacy-databind.version>2.21.2</jackson-legacy-databind.version>
         <!-- SpringBoot module -->
-        <spring-boot-starter-web.version>3.5.6</spring-boot-starter-web.version>
+        <spring-boot-starter-web.version>4.0.5</spring-boot-starter-web.version>
         <!-- Quarkus module -->
-        <quarkus-version>3.27.0</quarkus-version>
+        <quarkus-version>3.34.2</quarkus-version>
         <!-- Jakarta validation module -->
-        <jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
-        <jakarta.el.version>6.0.1</jakarta.el.version>
+        <jakarta.validation-api.version>4.0.0-M1</jakarta.validation-api.version>
+        <jakarta.el.version>6.1.0-M1</jakarta.el.version>
         <hibernate-validator.version>9.0.1.Final</hibernate-validator.version>
 
         <!-- Test dependencies versions -->
@@ -72,10 +76,10 @@
         <!-- Plugin versions -->
         <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
-        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
-        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
-        <jandex-maven-plugin.version>3.5.0</jandex-maven-plugin.version>
+        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+        <jandex-maven-plugin.version>3.5.3</jandex-maven-plugin.version>
 
         <!-- Sonar Cloud Properties-->
         <sonar.organization>synerset</sonar.organization>

@@ -2,10 +2,10 @@ package com.synerset.unitility.spring;
 
 import com.synerset.unitility.spring.serialization.PhysicalQuantityWebMvcConverter;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 class PhysicalQuantityWebMvcConfiguration implements WebMvcConfigurer {
 
     private final PhysicalQuantityParsingFactory parsingFactory;
+
     PhysicalQuantityWebMvcConfiguration(@Qualifier("defaultParsingFactory") PhysicalQuantityParsingFactory parsingFactory) {
 
         this.parsingFactory = parsingFactory;

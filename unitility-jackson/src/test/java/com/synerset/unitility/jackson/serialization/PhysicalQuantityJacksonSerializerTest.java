@@ -1,7 +1,6 @@
 package com.synerset.unitility.jackson.serialization;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModulePlainSIValue;
 import com.synerset.unitility.unitsystem.geographic.GeoCoordinate;
@@ -17,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PhysicalQuantityJacksonSerializerTest {
 
     @Test
-    void serialize_shouldSerializePhysicalQuantityToJson() throws JsonProcessingException {
+    void serialize_shouldSerializePhysicalQuantityToJson() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20);
         Latitude latitude = Latitude.ofDegrees(-30.11);
@@ -25,8 +24,9 @@ class PhysicalQuantityJacksonSerializerTest {
 
         PhysicalQuantityParsingFactory DEFAULT_PARSING_FACTORY = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModule(DEFAULT_PARSING_FACTORY));
+        JsonMapper objectMapper = JsonMapper.builder()
+                .addModule(new PhysicalQuantityJacksonModule(DEFAULT_PARSING_FACTORY))
+                .build();
 
         // When
         String temperatureAsJson = objectMapper.writeValueAsString(temperature);
@@ -43,7 +43,7 @@ class PhysicalQuantityJacksonSerializerTest {
     }
 
     @Test
-    void serialize_shouldSerializeGeoGraphicQuantitiesToJSON() throws JsonProcessingException {
+    void serialize_shouldSerializeGeoGraphicQuantitiesToJSON() {
         // Given
         GeoCoordinate start = GeoCoordinate.of(Latitude.ofDegrees(20), Longitude.ofDegrees(-20));
         GeoCoordinate target = GeoCoordinate.of(Latitude.ofDegrees(40), Longitude.ofDegrees(60));
@@ -52,8 +52,9 @@ class PhysicalQuantityJacksonSerializerTest {
         PhysicalQuantityParsingFactory DEFAULT_PARSING_FACTORY = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
 
         // When
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModule(DEFAULT_PARSING_FACTORY));
+        JsonMapper objectMapper = JsonMapper.builder()
+                .addModule(new PhysicalQuantityJacksonModule(DEFAULT_PARSING_FACTORY))
+                .build();
 
         // Then
         String geoDistanceAsString = objectMapper.writeValueAsString(geoDistance);
@@ -68,7 +69,7 @@ class PhysicalQuantityJacksonSerializerTest {
     }
 
     @Test
-    void serialize_shouldSerializePhysicalQuantityToJsonWithoutUnitsIfDirected() throws JsonProcessingException {
+    void serialize_shouldSerializePhysicalQuantityToJsonWithoutUnitsIfDirected() {
         // Given
         Temperature temperature = Temperature.ofCelsius(20);
         Latitude latitude = Latitude.ofRadians(-0.311);
@@ -78,8 +79,9 @@ class PhysicalQuantityJacksonSerializerTest {
 
         PhysicalQuantityParsingFactory defaultParsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModulePlainSIValue(defaultParsingFactory));
+        JsonMapper objectMapper = JsonMapper.builder()
+                .addModule(new PhysicalQuantityJacksonModulePlainSIValue(defaultParsingFactory))
+                .build();
 
         // When
         String temperatureAsJson = objectMapper.writeValueAsString(temperature);

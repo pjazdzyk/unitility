@@ -29,6 +29,11 @@
             </dependency>
             <dependency>
                 <groupId>com.synerset</groupId>
+                <artifactId>unitility-jackson-legacy</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.synerset</groupId>
                 <artifactId>unitility-quarkus</artifactId>
                 <version>${project.version}</version>
             </dependency>

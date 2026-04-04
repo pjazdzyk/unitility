@@ -1,7 +1,6 @@
 package com.synerset.unitility.jackson;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +10,8 @@ class UnitilityObjectMapperFactoryTest {
 
     @Test
     @DisplayName("Object mapper factory: should successfully use object mapper from factory")
-    void shouldSuccessfullyUseObjectMapperFromFactory() throws JsonProcessingException {
-        ObjectMapper objectMapper = UnitilityObjectMapperFactory.QUANTITY_AWARE_OBJECT_MAPPER;
+    void shouldSuccessfullyUseObjectMapperFromFactory() {
+        JsonMapper objectMapper = UnitilityObjectMapperFactory.QUANTITY_AWARE_OBJECT_MAPPER;
 
         TestMaterialComposition parsedClass = objectMapper.readValue("{\"layers\":[{\"code\":\"M_STG\",\"thickness\":{\"value\":0.5,\"unit\":\"mm\"}}]}", TestMaterialComposition.class);
 

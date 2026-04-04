@@ -9,18 +9,14 @@
         <version>${project.version}</version>
     </parent>
 
-    <artifactId>unitility-jackson</artifactId>
+    <artifactId>unitility-jackson-legacy</artifactId>
 
-    <name>Unitility Jackson</name>
+    <name>Unitility Jackson Legacy</name>
     <description>
-        The Java Physics Units of Measure Library - Unitility, Jackson extension.
-        This module provides JSON deserializers and serializers, along with a preconfigured implementation of the
-        Jackson SimpleModule tailored for ObjectMapper setup. This module is specifically designed to handle Unitility
-        types seamlessly during serialization and deserialization processes.
+        The Java Physics Units of Measure Library - Unitility, Jackson 2.x legacy extension.
+        This module provides JSON deserializers and serializers compatible with Jackson 2.x API,
+        for frameworks that have not yet migrated to Jackson 3.x (e.g., Quarkus).
     </description>
-    <properties>
-
-    </properties>
 
     <dependencies>
         <dependency>
@@ -29,14 +25,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>tools.jackson.core</groupId>
+            <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson-databind.version}</version>
+            <version>${jackson-legacy-databind.version}</version>
         </dependency>
         <dependency>
-            <groupId>tools.jackson.datatype</groupId>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${jackson-datatype.version}</version>
+            <version>${jackson-legacy-databind.version}</version>
         </dependency>
     </dependencies>
 
@@ -48,7 +44,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Automatic-Module-Name>com.synerset.unitility.jackson</Automatic-Module-Name>
+                            <Automatic-Module-Name>com.synerset.unitility.jackson.legacy</Automatic-Module-Name>
                         </manifestEntries>
                     </archive>
                 </configuration>

@@ -1,12 +1,11 @@
 package com.synerset.unitility.spring;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.boot.jackson.autoconfigure.JsonMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 
 /**
@@ -18,17 +17,17 @@ import org.springframework.context.annotation.Bean;
 class PhysicalQuantityJacksonConfiguration {
 
     /**
-     * Creates a {@link Jackson2ObjectMapperBuilderCustomizer} that registers the {@link PhysicalQuantityJacksonModule}.
-     * This bean is responsible for customizing the Jackson {@link ObjectMapper} by adding the
+     * Creates a {@link JsonMapperBuilderCustomizer} that registers the {@link PhysicalQuantityJacksonModule}.
+     * This bean is responsible for customizing the Jackson mapper builder by adding the
      * {@link PhysicalQuantityJacksonModule} to the module registry.
      *
-     * @param parsingFactory The {@link PhysicalQuantityJacksonModule} used to create the {@link PhysicalQuantityJacksonModule}.
-     * @return A {@link Jackson2ObjectMapperBuilderCustomizer}.
+     * @param parsingFactory The {@link PhysicalQuantityParsingFactory} used to create the {@link PhysicalQuantityJacksonModule}.
+     * @return A {@link JsonMapperBuilderCustomizer}.
      */
     @Bean
-    Jackson2ObjectMapperBuilderCustomizer createPhysicalQuantityJacksonModule(@Qualifier("defaultParsingFactory") PhysicalQuantityParsingFactory parsingFactory) {
+    JsonMapperBuilderCustomizer createPhysicalQuantityJacksonModule(@Qualifier("defaultParsingFactory") PhysicalQuantityParsingFactory parsingFactory) {
 
-        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.modules(
+        return builder -> builder.addModule(
                 new PhysicalQuantityJacksonModule(parsingFactory)
         );
     }

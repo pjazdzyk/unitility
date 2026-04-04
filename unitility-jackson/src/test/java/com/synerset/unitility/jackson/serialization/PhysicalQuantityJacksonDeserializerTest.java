@@ -1,7 +1,6 @@
 package com.synerset.unitility.jackson.serialization;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModulePlainSIValue;
 import com.synerset.unitility.unitsystem.acoustic.SoundPower;
@@ -30,11 +29,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PhysicalQuantityJacksonDeserializerTest {
 
     @Test
-    void deserialize_shouldDeserializeJsonToPhysicalQuantity() throws JsonProcessingException {
+    void deserialize_shouldDeserializeJsonToPhysicalQuantity() {
         // Given
         PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
+        JsonMapper objectMapper = JsonMapper.builder()
+                .addModule(new PhysicalQuantityJacksonModule(parsingFactory))
+                .build();
 
         String tempInput1 = "{\"value\":20.0,\"unit\":\"°C\"}";
         String tempInput2 = "{\"value\":20,\"unit\":\"oC\"}";
@@ -182,11 +182,12 @@ class PhysicalQuantityJacksonDeserializerTest {
     }
 
     @Test
-    void deserialize_shouldDeserializeJsonToPhysicalQuantityFromEngFormat() throws JsonProcessingException {
+    void deserialize_shouldDeserializeJsonToPhysicalQuantityFromEngFormat() {
         // Given
         PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
+        JsonMapper objectMapper = JsonMapper.builder()
+                .addModule(new PhysicalQuantityJacksonModule(parsingFactory))
+                .build();
 
         String tempInput1 = "{\"value\":\"20.123 [°C]\"}";
         String tempInput2 = "{\"value\":\"20.123 [°C]\", \"unit\":\"K\"}";
@@ -201,11 +202,12 @@ class PhysicalQuantityJacksonDeserializerTest {
     }
 
     @Test
-    void deserialize_shouldDeserializeJsonToPhysicalQuantityFromEngFormatWithoutBrackets() throws JsonProcessingException {
+    void deserialize_shouldDeserializeJsonToPhysicalQuantityFromEngFormatWithoutBrackets() {
         // Given
         PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
+        JsonMapper objectMapper = JsonMapper.builder()
+                .addModule(new PhysicalQuantityJacksonModule(parsingFactory))
+                .build();
 
         String tempInput1 = "{\"value\":\"20.123 °C\"}";
         String tempInput2 = "{\"value\":\"20.123 °C\", \"unit\":\"K\"}";
@@ -220,11 +222,12 @@ class PhysicalQuantityJacksonDeserializerTest {
     }
 
     @Test
-    void deserialize_shouldDeserializeJsonToLatitudeAndLongitude() throws JsonProcessingException {
+    void deserialize_shouldDeserializeJsonToLatitudeAndLongitude() {
         // Given
         PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModule(parsingFactory));
+        JsonMapper objectMapper = JsonMapper.builder()
+                .addModule(new PhysicalQuantityJacksonModule(parsingFactory))
+                .build();
 
         String lat1 = "{\"value\":\"52°14'5.123\\\"N\"}";
         String lon1 = "{\"value\":\"021°4'3.986\\\"W\"}";
@@ -290,11 +293,12 @@ class PhysicalQuantityJacksonDeserializerTest {
     }
 
     @Test
-    void deserialize_shouldDeserializeFormPlainSiValue() throws JsonProcessingException {
+    void deserialize_shouldDeserializeFormPlainSiValue() {
         // Given
         PhysicalQuantityParsingFactory parsingFactory = PhysicalQuantityParsingFactory.getDefaultParsingFactory();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new PhysicalQuantityJacksonModulePlainSIValue(parsingFactory));
+        JsonMapper objectMapper = JsonMapper.builder()
+                .addModule(new PhysicalQuantityJacksonModulePlainSIValue(parsingFactory))
+                .build();
 
         // When
         Temperature temperature = objectMapper.readValue("293.15", Temperature.class);

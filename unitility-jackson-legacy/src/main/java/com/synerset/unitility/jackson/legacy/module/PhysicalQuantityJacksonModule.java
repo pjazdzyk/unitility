@@ -1,19 +1,19 @@
-package com.synerset.unitility.jackson.module;
+package com.synerset.unitility.jackson.legacy.module;
 
-import tools.jackson.databind.JavaType;
-import tools.jackson.databind.module.SimpleModule;
-import tools.jackson.databind.type.TypeFactory;
-import com.synerset.unitility.jackson.serialization.GeoDistanceDeserializer;
-import com.synerset.unitility.jackson.serialization.GeoDistanceSerializer;
-import com.synerset.unitility.jackson.serialization.PhysicalQuantityDeserializer;
-import com.synerset.unitility.jackson.serialization.PhysicalQuantitySerializer;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.synerset.unitility.jackson.legacy.serialization.GeoDistanceDeserializer;
+import com.synerset.unitility.jackson.legacy.serialization.GeoDistanceSerializer;
+import com.synerset.unitility.jackson.legacy.serialization.PhysicalQuantityDeserializer;
+import com.synerset.unitility.jackson.legacy.serialization.PhysicalQuantitySerializer;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.Unit;
 import com.synerset.unitility.unitsystem.geographic.GeoDistance;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 
 /**
- * The PhysicalQuantityJacksonModule class is a Jackson module that provides serializers and deserializers for
+ * The PhysicalQuantityJacksonModule class is a Jackson 2.x module that provides serializers and deserializers for
  * handling {@link PhysicalQuantity} instances during JSON serialization and deserialization.
  */
 public class PhysicalQuantityJacksonModule extends SimpleModule {
@@ -22,7 +22,7 @@ public class PhysicalQuantityJacksonModule extends SimpleModule {
         super("PhysicalQuantityJacksonModule");
 
         /* SERIALIZERS */
-        JavaType type = TypeFactory.createDefaultInstance().constructParametricType(PhysicalQuantity.class, Unit.class);
+        JavaType type = TypeFactory.defaultInstance().constructParametricType(PhysicalQuantity.class, Unit.class);
         // Handles all PhysicalQuantity implementations
         addSerializer(new PhysicalQuantitySerializer(type));
         // Special type

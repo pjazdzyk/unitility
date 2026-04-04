@@ -1,7 +1,7 @@
 package com.synerset.unitility.quarkus;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
+import com.synerset.unitility.jackson.legacy.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.PhysicalQuantity;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import io.quarkus.jackson.ObjectMapperCustomizer;

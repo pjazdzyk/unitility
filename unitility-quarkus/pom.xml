@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>com.synerset</groupId>
-            <artifactId>unitility-jackson</artifactId>
+            <artifactId>unitility-jackson-legacy</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -1,10 +1,10 @@
 package com.synerset.unitility.jackson;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.datatype.jsr310.JavaTimeModule;
 
 /**
  * A factory class that provides a static, singleton instance of a pre-configured {@link ObjectMapper}.
@@ -24,27 +24,26 @@ public class UnitilityObjectMapperFactory {
     }
 
     /**
-     * The static, singleton instance of the pre-configured {@link ObjectMapper}.
+     * The static, singleton instance of the pre-configured {@link JsonMapper}.
      * This instance is initialized lazily and is ready for use across the application.
      */
-    public static final ObjectMapper QUANTITY_AWARE_OBJECT_MAPPER = createPhysicalQuantityAwareObjectMapper();
+    public static final JsonMapper QUANTITY_AWARE_OBJECT_MAPPER = createPhysicalQuantityAwareObjectMapper();
 
     /**
-     * Creates and configures a new {@link ObjectMapper} instance.
+     * Creates and configures a new {@link JsonMapper} instance.
      * This method registers key modules for handling custom data types and common Java types.
      *
-     * @return A new, fully configured {@link ObjectMapper} instance.
+     * @return A new, fully configured {@link JsonMapper} instance.
      */
-    private static ObjectMapper createPhysicalQuantityAwareObjectMapper() {
+    private static JsonMapper createPhysicalQuantityAwareObjectMapper() {
         PhysicalQuantityJacksonModule physicalQuantityJacksonModule = new PhysicalQuantityJacksonModule(PhysicalQuantityParsingFactory.getDefaultParsingFactory());
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(physicalQuantityJacksonModule);
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.findAndRegisterModules();
-
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
-        return objectMapper;
+        return JsonMapper.builder()
+                .addModule(physicalQuantityJacksonModule)
+                .addModule(new JavaTimeModule())
+                .findAndAddModules()
+                .changeDefaultPropertyInclusion(v ->
+                        v.withValueInclusion(JsonInclude.Include.NON_NULL))
+                .build();
     }
 }

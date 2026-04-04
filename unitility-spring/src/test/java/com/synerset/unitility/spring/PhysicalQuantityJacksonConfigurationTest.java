@@ -1,13 +1,11 @@
 package com.synerset.unitility.spring;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.synerset.unitility.unitsystem.thermodynamic.Temperature;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.boot.jackson.autoconfigure.JsonMapperBuilderCustomizer;
+import tools.jackson.databind.json.JsonMapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,18 +13,18 @@ class PhysicalQuantityJacksonConfigurationTest {
 
     @Test
     @DisplayName("should register jackson module and correctly resolve input string to physical quantity")
-    void createPhysicalQuantityJacksonModule() throws JsonProcessingException {
+    void createPhysicalQuantityJacksonModule() {
         // Given
         PhysicalQuantityJacksonConfiguration jacksonConfiguration = new PhysicalQuantityJacksonConfiguration();
         PhysicalQuantityParsingFactory parsingRegistry = jacksonConfiguration.defaultParsingFactory();
-        Jackson2ObjectMapperBuilderCustomizer jacksonCustomizer
+        JsonMapperBuilderCustomizer jacksonCustomizer
                 = jacksonConfiguration.createPhysicalQuantityJacksonModule(parsingRegistry);
-        Jackson2ObjectMapperBuilder objectMapperBuilder = Jackson2ObjectMapperBuilder.json();
+        JsonMapper.Builder builder = JsonMapper.builder();
         String inputQuantity = "{\"value\":20.0,\"unit\":\"°C\"}";
 
         // When
-        jacksonCustomizer.customize(objectMapperBuilder);
-        ObjectMapper objectMapper = objectMapperBuilder.build();
+        jacksonCustomizer.customize(builder);
+        JsonMapper objectMapper = builder.build();
         Temperature resolvedQuantity = objectMapper.readValue(inputQuantity, Temperature.class);
 
         // Then
