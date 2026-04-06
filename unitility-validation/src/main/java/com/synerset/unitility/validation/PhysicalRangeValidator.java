@@ -6,6 +6,14 @@ import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+/**
+ * Validator for the {@link PhysicalRange} constraint annotation.
+ * <p>
+ * Parses the annotation's min and max string values into {@link PhysicalQuantity} instances using
+ * {@link PhysicalQuantityParsingFactory} and validates that the field's base value falls within the specified range.
+ * Input length for both min and max is limited to {@value ValidationHelpers#MAX_INPUT_LENGTH} characters
+ * as a safety guard before parsing. Supports partial ranges (only min or only max specified).
+ */
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 public class PhysicalRangeValidator implements ConstraintValidator<PhysicalRange, PhysicalQuantity<? extends Unit>> {
 
@@ -29,6 +37,8 @@ public class PhysicalRangeValidator implements ConstraintValidator<PhysicalRange
             return true;
         }
 
+        ValidationHelpers.validateInputLength(minQuantityAsString);
+        ValidationHelpers.validateInputLength(maxQuantityAsString);
         Class<? extends PhysicalQuantity> targetClass = validatedField.getClass();
 
         if (ValidationHelpers.isNotEmpty(minQuantityAsString) && ValidationHelpers.isEmpty(maxQuantityAsString)) {

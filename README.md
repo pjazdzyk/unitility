@@ -71,13 +71,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/4.0.0/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/4.0.1/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -89,7 +89,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -97,7 +97,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -561,7 +561,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -640,7 +640,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -679,7 +679,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:
@@ -1309,9 +1309,6 @@ Tech shield with version tag for manual adjustment (you can indicate which versi
 Special thank you to [msummersgill](https://github.com/msummersgill) for your valuable contributions, ideas, and improvements!  
 Your support is greatly appreciated.
 
-Thanks to Kret11, VeloxDigits, Olin44, and others for all discussions on architecture we had.<br>
-I extend my heartfelt gratitude to the [Silesian University of Technology](https://www.polsl.pl/en/) for imparting
-Badges used in readme: [Shields.io](https://img.shields.io)
-and [Badges 4 README.md](https://github.com/alexandresanlim/Badges4-README.md-Profile).
-
-May the force be with you.
+I extend my heartfelt gratitude to the [Silesian University of Technology](https://www.polsl.pl/en/) as it is here
+that my professional identity was forged, transforming me into an engineer to my very core.
+Amicus Plato, sed magis amica veritas.

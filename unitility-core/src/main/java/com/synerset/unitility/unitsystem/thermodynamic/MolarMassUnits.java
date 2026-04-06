@@ -55,6 +55,9 @@ public enum MolarMassUnits implements MolarMassUnit {
     }
 
     private static String unifySymbol(String inputString) {
-        return StringTransformer.of(inputString).trimAndClean().toString();
+        return StringTransformer.of(inputString)
+                .trimAndClean()
+                .unifyMultiAndDiv()
+                .toString();
     }
 }

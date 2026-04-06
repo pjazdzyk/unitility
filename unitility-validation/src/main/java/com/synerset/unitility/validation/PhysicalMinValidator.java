@@ -6,6 +6,13 @@ import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+/**
+ * Validator for the {@link PhysicalMin} constraint annotation.
+ * <p>
+ * Parses the annotation's string value into a {@link PhysicalQuantity} using {@link PhysicalQuantityParsingFactory}
+ * and compares it against the validated field's base value. Input length is limited to
+ * {@value ValidationHelpers#MAX_INPUT_LENGTH} characters as a safety guard before parsing.
+ */
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 public class PhysicalMinValidator implements ConstraintValidator<PhysicalMin, PhysicalQuantity<? extends Unit>> {
 
@@ -26,6 +33,7 @@ public class PhysicalMinValidator implements ConstraintValidator<PhysicalMin, Ph
             return true;
         }
 
+        ValidationHelpers.validateInputLength(minQuantityAsString);
         Class<? extends PhysicalQuantity> targetClass = validatedField.getClass();
 
         return minInclusive

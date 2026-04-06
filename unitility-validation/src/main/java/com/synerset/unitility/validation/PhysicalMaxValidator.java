@@ -8,6 +8,13 @@ import jakarta.validation.ConstraintValidatorContext;
 
 import static com.synerset.unitility.validation.ValidationHelpers.isEmpty;
 
+/**
+ * Validator for the {@link PhysicalMax} constraint annotation.
+ * <p>
+ * Parses the annotation's string value into a {@link PhysicalQuantity} using {@link PhysicalQuantityParsingFactory}
+ * and compares it against the validated field's base value. Input length is limited to
+ * {@value ValidationHelpers#MAX_INPUT_LENGTH} characters as a safety guard before parsing.
+ */
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 public class PhysicalMaxValidator implements ConstraintValidator<PhysicalMax, PhysicalQuantity<? extends Unit>> {
 
@@ -27,6 +34,7 @@ public class PhysicalMaxValidator implements ConstraintValidator<PhysicalMax, Ph
             return true;
         }
 
+        ValidationHelpers.validateInputLength(maxQuantityAsString);
         Class<? extends PhysicalQuantity> targetClass = validatedField.getClass();
 
         return maxInclusive

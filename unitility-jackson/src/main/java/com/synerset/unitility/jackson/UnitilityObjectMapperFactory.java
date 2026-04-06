@@ -4,14 +4,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.synerset.unitility.jackson.module.PhysicalQuantityJacksonModule;
 import com.synerset.unitility.unitsystem.util.PhysicalQuantityParsingFactory;
 import tools.jackson.databind.json.JsonMapper;
-import tools.jackson.datatype.jsr310.JavaTimeModule;
 
 /**
  * A factory class that provides a static, singleton instance of a pre-configured {@link ObjectMapper}.
  * This ObjectMapper is specifically designed to handle various data types, including:
  * <ul>
  * <li>Custom physical quantity objects from the 'synerset-unitility' library.</li>
- * <li>Standard Java Date/Time objects (e.g., LocalDate, LocalDateTime, Instant).</li>
+ * <li>Standard Java Date/Time objects (auto-discovered by Jackson 3.x databind).</li>
  * <li>Other common modules auto-detected by Jackson's module finder.</li>
  * </ul>
  * The singleton approach ensures that the ObjectMapper is initialized only once, promoting efficiency and thread safety
@@ -40,7 +39,6 @@ public class UnitilityObjectMapperFactory {
 
         return JsonMapper.builder()
                 .addModule(physicalQuantityJacksonModule)
-                .addModule(new JavaTimeModule())
                 .findAndAddModules()
                 .changeDefaultPropertyInclusion(v ->
                         v.withValueInclusion(JsonInclude.Include.NON_NULL))

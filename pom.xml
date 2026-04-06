@@ -47,7 +47,7 @@
 
     <properties>
         <!-- MODULES VERSION -->
-        <project.version>4.0.0</project.version>
+        <project.version>4.0.1</project.version>
 
         <!-- Maven Properties -->
         <maven.compiler.source>17</maven.compiler.source>
@@ -56,7 +56,6 @@
 
         <!-- Jackson module -->
         <jackson-databind.version>3.1.1</jackson-databind.version>
-        <jackson-datatype.version>3.0.0-rc2</jackson-datatype.version>
         <!-- Jackson legacy module (Jackson 2.x for frameworks not yet on Jackson 3.x) -->
         <jackson-legacy-databind.version>2.21.2</jackson-legacy-databind.version>
         <!-- SpringBoot module -->

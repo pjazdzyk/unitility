@@ -82,6 +82,31 @@ public class MolarMass implements CalculableQuantity<MolarMassUnit, MolarMass> {
     }
 
     // Conversion methods
+    public MolarMass toGramPerMole() {
+        return toUnit(MolarMassUnits.GRAM_PER_MOLE);
+    }
+
+    public MolarMass toKilogramPerKilomole() {
+        return toUnit(MolarMassUnits.KILOGRAM_PER_KILOMOLE);
+    }
+
+    public MolarMass toKilogramPerMole() {
+        return toUnit(MolarMassUnits.KILOGRAM_PER_MOLE);
+    }
+
+    public MolarMass toMilligramPerMillimole() {
+        return toUnit(MolarMassUnits.MILLIGRAM_PER_MILLIMOLE);
+    }
+
+    public MolarMass toPoundPerPoundMole() {
+        return toUnit(MolarMassUnits.POUND_PER_POUND_MOLE);
+    }
+
+    public MolarMass toOuncePerMole() {
+        return toUnit(MolarMassUnits.OUNCE_PER_MOLE);
+    }
+
+    // Get value in target unit
     public double getInGramPerMole() {
         return getInUnit(MolarMassUnits.GRAM_PER_MOLE);
     }
