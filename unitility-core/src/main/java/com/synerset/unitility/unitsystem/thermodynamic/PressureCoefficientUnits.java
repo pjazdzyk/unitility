@@ -5,23 +5,22 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum EnergyUnits implements EnergyUnit {
+public enum PressureCoefficientUnits implements PressureCoefficientUnit {
 
-    JOULE("J", val -> val, val -> val),
-    MILLIJOULE("mJ", val -> val * 0.001, val -> val / 0.001),
-    KILOJOULE("kJ", val -> val * 1000, val -> val / 1000),
-    MEGAJOULE("MJ", val -> val * 1_000_000, val -> val / 1_000_000),
-    BTU("BTU", val -> val * 1055.05585262, val -> val / 1055.05585262),
-    CALORIE("cal", val -> val * 4.1868, val -> val / 4.1868),
-    KILOCALORIE("kcal", val -> val * 4186.8, val -> val / 4186.8),
-    WATT_HOUR("Wh", val -> val * 3600, val -> val / 3600),
-    KILOWATT_HOUR("kWh", val -> val * 3_600_000, val -> val / 3_600_000);
+    PASCAL_PER_KELVIN("Pa/K", val -> val, val -> val),
+    KILOPASCAL_PER_KELVIN("kPa/K", val -> val * 1000.0, val -> val / 1000.0),
+    MEGAPASCAL_PER_KELVIN("MPa/K", val -> val * 1_000_000.0, val -> val / 1_000_000.0),
+    BAR_PER_KELVIN("bar/K", val -> val * 100_000.0, val -> val / 100_000.0),
+    ATMOSPHERE_PER_KELVIN("atm/K", val -> val * 101325.0, val -> val / 101325.0),
+    PSI_PER_RANKINE("psi/°R", val -> val * 12410.56312770305, val -> val / 12410.56312770305),
+    PSI_PER_FAHRENHEIT("psi/°F", val -> val * 12410.56312770305, val -> val / 12410.56312770305);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    EnergyUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    PressureCoefficientUnits(String symbol, DoubleUnaryOperator toBaseConverter,
+                             DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -33,8 +32,8 @@ public enum EnergyUnits implements EnergyUnit {
     }
 
     @Override
-    public EnergyUnit getBaseUnit() {
-        return JOULE;
+    public PressureCoefficientUnit getBaseUnit() {
+        return PASCAL_PER_KELVIN;
     }
 
     @Override
@@ -47,25 +46,25 @@ public enum EnergyUnits implements EnergyUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static EnergyUnit fromSymbol(String rawSymbol) {
+    public static PressureCoefficientUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return JOULE;
+            return PASCAL_PER_KELVIN;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (EnergyUnit unit : values()) {
+        for (PressureCoefficientUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
-        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + EnergyUnits.class.getSimpleName());
+        throw new UnitSystemParseException("Unsupported unit symbol: " + rawSymbol);
     }
 
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
+                .unifyMultiAndDiv()
+                .dropDegreeSymbols()
                 .toString();
     }
-
 }

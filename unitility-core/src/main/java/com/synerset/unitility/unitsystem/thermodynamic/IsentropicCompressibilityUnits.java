@@ -5,23 +5,22 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum EnergyUnits implements EnergyUnit {
+public enum IsentropicCompressibilityUnits implements IsentropicCompressibilityUnit {
 
-    JOULE("J", val -> val, val -> val),
-    MILLIJOULE("mJ", val -> val * 0.001, val -> val / 0.001),
-    KILOJOULE("kJ", val -> val * 1000, val -> val / 1000),
-    MEGAJOULE("MJ", val -> val * 1_000_000, val -> val / 1_000_000),
-    BTU("BTU", val -> val * 1055.05585262, val -> val / 1055.05585262),
-    CALORIE("cal", val -> val * 4.1868, val -> val / 4.1868),
-    KILOCALORIE("kcal", val -> val * 4186.8, val -> val / 4186.8),
-    WATT_HOUR("Wh", val -> val * 3600, val -> val / 3600),
-    KILOWATT_HOUR("kWh", val -> val * 3_600_000, val -> val / 3_600_000);
+    INVERSE_PASCAL("1/Pa", val -> val, val -> val),
+    INVERSE_KILOPASCAL("1/kPa", val -> val / 1000.0, val -> val * 1000.0),
+    INVERSE_MEGAPASCAL("1/MPa", val -> val / 1_000_000.0, val -> val * 1_000_000.0),
+    INVERSE_BAR("1/bar", val -> val / 100_000.0, val -> val * 100_000.0),
+    INVERSE_ATMOSPHERE("1/atm", val -> val / 101325.0, val -> val * 101325.0),
+    INVERSE_PSI("1/psi", val -> val / 6894.757293168361, val -> val * 6894.757293168361),
+    INVERSE_PSF("1/psf", val -> val / 47.88025898033584, val -> val * 47.88025898033584);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    EnergyUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    IsentropicCompressibilityUnits(String symbol, DoubleUnaryOperator toBaseConverter,
+                                   DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -33,8 +32,8 @@ public enum EnergyUnits implements EnergyUnit {
     }
 
     @Override
-    public EnergyUnit getBaseUnit() {
-        return JOULE;
+    public IsentropicCompressibilityUnit getBaseUnit() {
+        return INVERSE_PASCAL;
     }
 
     @Override
@@ -47,25 +46,24 @@ public enum EnergyUnits implements EnergyUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static EnergyUnit fromSymbol(String rawSymbol) {
+    public static IsentropicCompressibilityUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return JOULE;
+            return INVERSE_PASCAL;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (EnergyUnit unit : values()) {
+        for (IsentropicCompressibilityUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
-        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + EnergyUnits.class.getSimpleName());
+        throw new UnitSystemParseException("Unsupported unit symbol: " + rawSymbol);
     }
 
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
+                .unifyMultiAndDiv()
                 .toString();
     }
-
 }

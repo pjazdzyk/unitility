@@ -55,49 +55,49 @@ class SpecificVolumeTest {
     }
 
     @Test
-    @DisplayName("should convert to m³/kg from ft³/kg and vice versa")
+    @DisplayName("should convert to m³/kg from ft³/lb and vice versa")
     void shouldProperlyConvertToCubicMeterPerKilogramFromCubicFoot() {
         // Given
-        SpecificVolume initialSpecificVolInFT = SpecificVolume.ofCubicFootPerKilogram(1.0);
+        SpecificVolume initialSpecificVolInFT = SpecificVolume.ofCubicFootPerPound(1.0);
 
         // When
         SpecificVolume actualInCubicMeter = initialSpecificVolInFT.toBaseUnit();
-        SpecificVolume actualInFT = actualInCubicMeter.toUnit(SpecificVolumeUnits.CUBIC_FOOT_PER_KILOGRAM);
+        SpecificVolume actualInFT = actualInCubicMeter.toUnit(SpecificVolumeUnits.CUBIC_FOOT_PER_POUND);
 
         // Then
-        SpecificVolume expectedInCubicMeter = SpecificVolume.ofCubicMeterPerKilogram(0.0283168466);
+        SpecificVolume expectedInCubicMeter = SpecificVolume.ofCubicMeterPerKilogram(0.0624279606);
         assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeter.getValue(), withPrecision(1E-8));
         assertThat(actualInFT).isEqualTo(initialSpecificVolInFT);
     }
 
     @Test
-    @DisplayName("should convert to m³/kg from gal_US/kg and vice versa")
+    @DisplayName("should convert to m³/kg from gal_US/lb and vice versa")
     void shouldProperlyConvertToCubicMeterPerKilogramFromGallonUS() {
         // Given
-        SpecificVolume initialSpecificVolInGal = SpecificVolume.ofGallonUSPerKilogram(1.0);
+        SpecificVolume initialSpecificVolInGal = SpecificVolume.ofGallonUSPerPound(1.0);
 
         // When
         SpecificVolume actualInCubicMeter = initialSpecificVolInGal.toBaseUnit();
-        SpecificVolume actualInGal = actualInCubicMeter.toUnit(SpecificVolumeUnits.GALLON_US_PER_KILOGRAM);
+        SpecificVolume actualInGal = actualInCubicMeter.toUnit(SpecificVolumeUnits.GALLON_US_PER_POUND);
 
         // Then
-        SpecificVolume expectedInCubicMeter = SpecificVolume.ofCubicMeterPerKilogram(0.003785411784);
+        SpecificVolume expectedInCubicMeter = SpecificVolume.ofCubicMeterPerKilogram(0.0083454045);
         assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeter.getValue(), withPrecision(1E-8));
         assertThat(actualInGal).isEqualTo(initialSpecificVolInGal);
     }
 
     @Test
-    @DisplayName("should convert to m³/kg from gal_UK/kg and vice versa")
+    @DisplayName("should convert to m³/kg from gal_UK/lb and vice versa")
     void shouldProperlyConvertToCubicMeterPerKilogramFromGallonUK() {
         // Given
-        SpecificVolume initialSpecificVolInGal = SpecificVolume.ofGallonUKPerKilogram(1.0);
+        SpecificVolume initialSpecificVolInGal = SpecificVolume.ofGallonUKPerPound(1.0);
 
         // When
         SpecificVolume actualInCubicMeter = initialSpecificVolInGal.toBaseUnit();
-        SpecificVolume actualInGal = actualInCubicMeter.toUnit(SpecificVolumeUnits.GALLON_UK_PER_KILOGRAM);
+        SpecificVolume actualInGal = actualInCubicMeter.toUnit(SpecificVolumeUnits.GALLON_UK_PER_POUND);
 
         // Then
-        SpecificVolume expectedInCubicMeter = SpecificVolume.ofCubicMeterPerKilogram(0.00454608999999);
+        SpecificVolume expectedInCubicMeter = SpecificVolume.ofCubicMeterPerKilogram(0.0100224129);
         assertThat(actualInCubicMeter.getValue()).isEqualTo(expectedInCubicMeter.getValue(), withPrecision(1E-8));
         assertThat(actualInGal).isEqualTo(initialSpecificVolInGal);
     }
@@ -111,7 +111,7 @@ class SpecificVolumeTest {
         // When
         SpecificVolume actual = expected.toCubicMeterPerKilogram()
                 .toCubicCentimeterPerKilogram()
-                .toCubicFootPerKilogram()
+                .toCubicFootPerPound()
                 .toLiterPerKilogram();
         double actualValue = expected.getInLiterPerKilogram();
 
@@ -133,9 +133,9 @@ class SpecificVolumeTest {
         assertThat(oneCubicMeter.getInCubicCentimeterPerKilogram()).isCloseTo(1000000.0, withPrecision(1E-10));
         assertThat(oneCubicMeter.getInMilliliterPerKilogram()).isCloseTo(1000000.0, withPrecision(1E-10));
         assertThat(oneCubicMeter.getInHectoliterPerKilogram()).isCloseTo(10.0, withPrecision(1E-10));
-        assertThat(oneCubicMeter.getInCubicFootPerKilogram()).isCloseTo(35.3146667, withPrecision(1E-5));
-        assertThat(oneCubicMeter.getInGallonUSPerKilogram()).isCloseTo(264.172052, withPrecision(1E-5));
-        assertThat(oneCubicMeter.getInGallonUKPerKilogram()).isCloseTo(219.969248, withPrecision(1E-5));
+        assertThat(oneCubicMeter.getInCubicFootPerPound()).isCloseTo(16.01846337, withPrecision(1E-5));
+        assertThat(oneCubicMeter.getInGallonUSPerPound()).isCloseTo(119.826427, withPrecision(1E-5));
+        assertThat(oneCubicMeter.getInGallonUKPerPound()).isCloseTo(99.77637221, withPrecision(1E-5));
     }
 
     @Test
@@ -144,12 +144,12 @@ class SpecificVolumeTest {
         // Given/When
         SpecificVolume vol1 = SpecificVolume.of(1.0, "m³/kg");
         SpecificVolume vol2 = SpecificVolume.of(1.0, "L/kg");
-        SpecificVolume vol3 = SpecificVolume.of(1.0, "ft³/kg");
+        SpecificVolume vol3 = SpecificVolume.of(1.0, "ft³/lb");
 
         // Then
         assertThat(vol1.getUnit()).isEqualTo(SpecificVolumeUnits.CUBIC_METER_PER_KILOGRAM);
         assertThat(vol2.getUnit()).isEqualTo(SpecificVolumeUnits.LITER_PER_KILOGRAM);
-        assertThat(vol3.getUnit()).isEqualTo(SpecificVolumeUnits.CUBIC_FOOT_PER_KILOGRAM);
+        assertThat(vol3.getUnit()).isEqualTo(SpecificVolumeUnits.CUBIC_FOOT_PER_POUND);
     }
 
     @Test

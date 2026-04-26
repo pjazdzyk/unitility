@@ -37,8 +37,8 @@ public class SpecificVolume implements CalculableQuantity<SpecificVolumeUnit, Sp
         return new SpecificVolume(value, SpecificVolumeUnits.CUBIC_DECIMETER_PER_KILOGRAM);
     }
 
-    public static SpecificVolume ofCubicFootPerKilogram(double value) {
-        return new SpecificVolume(value, SpecificVolumeUnits.CUBIC_FOOT_PER_KILOGRAM);
+    public static SpecificVolume ofCubicFootPerPound(double value) {
+        return new SpecificVolume(value, SpecificVolumeUnits.CUBIC_FOOT_PER_POUND);
     }
 
     public static SpecificVolume ofLiterPerKilogram(double value) {
@@ -53,20 +53,16 @@ public class SpecificVolume implements CalculableQuantity<SpecificVolumeUnit, Sp
         return new SpecificVolume(value, SpecificVolumeUnits.MILLILITER_PER_KILOGRAM);
     }
 
-    public static SpecificVolume ofOuncePerKilogram(double value) {
-        return new SpecificVolume(value, SpecificVolumeUnits.OUNCE_PER_KILOGRAM);
+    public static SpecificVolume ofOuncePerPound(double value) {
+        return new SpecificVolume(value, SpecificVolumeUnits.OUNCE_PER_POUND);
     }
 
-    public static SpecificVolume ofPintPerKilogram(double value) {
-        return new SpecificVolume(value, SpecificVolumeUnits.PINT_PER_KILOGRAM);
+    public static SpecificVolume ofGallonUSPerPound(double value) {
+        return new SpecificVolume(value, SpecificVolumeUnits.GALLON_US_PER_POUND);
     }
 
-    public static SpecificVolume ofGallonUSPerKilogram(double value) {
-        return new SpecificVolume(value, SpecificVolumeUnits.GALLON_US_PER_KILOGRAM);
-    }
-
-    public static SpecificVolume ofGallonUKPerKilogram(double value) {
-        return new SpecificVolume(value, SpecificVolumeUnits.GALLON_UK_PER_KILOGRAM);
+    public static SpecificVolume ofGallonUKPerPound(double value) {
+        return new SpecificVolume(value, SpecificVolumeUnits.GALLON_UK_PER_POUND);
     }
 
     // Implement CalculableQuantity interface methods
@@ -104,27 +100,25 @@ public class SpecificVolume implements CalculableQuantity<SpecificVolumeUnit, Sp
     public SpecificVolume toCubicMeterPerKilogram() { return toUnit(SpecificVolumeUnits.CUBIC_METER_PER_KILOGRAM); }
     public SpecificVolume toCubicCentimeterPerKilogram() { return toUnit(SpecificVolumeUnits.CUBIC_CENTIMETER_PER_KILOGRAM); }
     public SpecificVolume toCubicDecimeterPerKilogram() { return toUnit(SpecificVolumeUnits.CUBIC_DECIMETER_PER_KILOGRAM); }
-    public SpecificVolume toCubicFootPerKilogram() { return toUnit(SpecificVolumeUnits.CUBIC_FOOT_PER_KILOGRAM); }
+    public SpecificVolume toCubicFootPerPound() { return toUnit(SpecificVolumeUnits.CUBIC_FOOT_PER_POUND); }
     public SpecificVolume toLiterPerKilogram() { return toUnit(SpecificVolumeUnits.LITER_PER_KILOGRAM); }
     public SpecificVolume toHectoliterPerKilogram() { return toUnit(SpecificVolumeUnits.HECTOLITER_PER_KILOGRAM); }
     public SpecificVolume toMilliliterPerKilogram() { return toUnit(SpecificVolumeUnits.MILLILITER_PER_KILOGRAM); }
-    public SpecificVolume toOuncePerKilogram() { return toUnit(SpecificVolumeUnits.OUNCE_PER_KILOGRAM); }
-    public SpecificVolume toPintPerKilogram() { return toUnit(SpecificVolumeUnits.PINT_PER_KILOGRAM); }
-    public SpecificVolume toGallonUSPerKilogram() { return toUnit(SpecificVolumeUnits.GALLON_US_PER_KILOGRAM); }
-    public SpecificVolume toGallonUKPerKilogram() { return toUnit(SpecificVolumeUnits.GALLON_UK_PER_KILOGRAM); }
+    public SpecificVolume toOuncePerPound() { return toUnit(SpecificVolumeUnits.OUNCE_PER_POUND); }
+    public SpecificVolume toGallonUSPerPound() { return toUnit(SpecificVolumeUnits.GALLON_US_PER_POUND); }
+    public SpecificVolume toGallonUKPerPound() { return toUnit(SpecificVolumeUnits.GALLON_UK_PER_POUND); }
 
     // Value getter methods
     public double getInCubicMeterPerKilogram() { return getInUnit(SpecificVolumeUnits.CUBIC_METER_PER_KILOGRAM); }
     public double getInCubicCentimeterPerKilogram() { return getInUnit(SpecificVolumeUnits.CUBIC_CENTIMETER_PER_KILOGRAM); }
     public double getInCubicDecimeterPerKilogram() { return getInUnit(SpecificVolumeUnits.CUBIC_DECIMETER_PER_KILOGRAM); }
-    public double getInCubicFootPerKilogram() { return getInUnit(SpecificVolumeUnits.CUBIC_FOOT_PER_KILOGRAM); }
+    public double getInCubicFootPerPound() { return getInUnit(SpecificVolumeUnits.CUBIC_FOOT_PER_POUND); }
     public double getInLiterPerKilogram() { return getInUnit(SpecificVolumeUnits.LITER_PER_KILOGRAM); }
     public double getInHectoliterPerKilogram() { return getInUnit(SpecificVolumeUnits.HECTOLITER_PER_KILOGRAM); }
     public double getInMilliliterPerKilogram() { return getInUnit(SpecificVolumeUnits.MILLILITER_PER_KILOGRAM); }
-    public double getInOuncePerKilogram() { return getInUnit(SpecificVolumeUnits.OUNCE_PER_KILOGRAM); }
-    public double getInPintPerKilogram() { return getInUnit(SpecificVolumeUnits.PINT_PER_KILOGRAM); }
-    public double getInGallonUSPerKilogram() { return getInUnit(SpecificVolumeUnits.GALLON_US_PER_KILOGRAM); }
-    public double getInGallonUKPerKilogram() { return getInUnit(SpecificVolumeUnits.GALLON_UK_PER_KILOGRAM); }
+    public double getInOuncePerPound() { return getInUnit(SpecificVolumeUnits.OUNCE_PER_POUND); }
+    public double getInGallonUSPerPound() { return getInUnit(SpecificVolumeUnits.GALLON_US_PER_POUND); }
+    public double getInGallonUKPerPound() { return getInUnit(SpecificVolumeUnits.GALLON_UK_PER_POUND); }
 
     @Override
     public boolean equals(Object o) {

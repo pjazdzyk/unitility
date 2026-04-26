@@ -36,6 +36,12 @@ import com.synerset.unitility.unitsystem.thermodynamic.MolarFraction;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarMass;
 import com.synerset.unitility.unitsystem.common.SpecificVolume;
 import com.synerset.unitility.unitsystem.common.SpecificVolumeUnits;
+import com.synerset.unitility.unitsystem.thermodynamic.IsentropicCompressibility;
+import com.synerset.unitility.unitsystem.thermodynamic.IsentropicCompressibilityUnits;
+import com.synerset.unitility.unitsystem.thermodynamic.CubicExpansionCoefficient;
+import com.synerset.unitility.unitsystem.thermodynamic.CubicExpansionCoefficientUnits;
+import com.synerset.unitility.unitsystem.thermodynamic.PressureCoefficient;
+import com.synerset.unitility.unitsystem.thermodynamic.PressureCoefficientUnits;
 
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -112,7 +118,11 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(MolarEntropy.class, MolarEntropy::of),
                 Map.entry(MolarFraction.class, MolarFraction::of),
                 Map.entry(MolarMass.class, MolarMass::of),
+                Map.entry(SpecificInternalEnergy.class, SpecificInternalEnergy::of),
                 Map.entry(SpecificVolume.class, SpecificVolume::of),
+                Map.entry(IsentropicCompressibility.class, IsentropicCompressibility::of),
+                Map.entry(CubicExpansionCoefficient.class, CubicExpansionCoefficient::of),
+                Map.entry(PressureCoefficient.class, PressureCoefficient::of),
                 // Geographic
                 Map.entry(Latitude.class, Latitude::of),
                 Map.entry(Longitude.class, Longitude::of),
@@ -195,6 +205,10 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(MolarFraction.class, MolarFractionUnits.DIMENSIONLESS),
                 Map.entry(MolarMass.class, MolarMassUnits.KILOGRAM_PER_MOLE),
                 Map.entry(SpecificVolume.class, SpecificVolumeUnits.CUBIC_METER_PER_KILOGRAM),
+                Map.entry(SpecificInternalEnergy.class, SpecificInternalEnergyUnits.JOULE_PER_KILOGRAM),
+                Map.entry(IsentropicCompressibility.class, IsentropicCompressibilityUnits.INVERSE_PASCAL),
+                Map.entry(CubicExpansionCoefficient.class, CubicExpansionCoefficientUnits.INVERSE_KELVIN),
+                Map.entry(PressureCoefficient.class, PressureCoefficientUnits.PASCAL_PER_KELVIN),
                 // Geographic (3)
                 Map.entry(Latitude.class, AngleUnits.DEGREES),
                 Map.entry(Longitude.class, AngleUnits.DEGREES),

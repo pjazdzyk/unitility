@@ -10,14 +10,14 @@ public enum SpecificVolumeUnits implements SpecificVolumeUnit {
     CUBIC_METER_PER_KILOGRAM("m³/kg", val -> val, val -> val),
     CUBIC_CENTIMETER_PER_KILOGRAM("cm³/kg", val -> val * 1e-6, val -> val / 1e-6),
     CUBIC_DECIMETER_PER_KILOGRAM("dm³/kg", val -> val * 0.001, val -> val / 0.001),
-    CUBIC_FOOT_PER_KILOGRAM("ft³/kg", val -> val * 0.028316846592, val -> val / 0.028316846592),
     LITER_PER_KILOGRAM("L/kg", val -> val * 0.001, val -> val / 0.001),
     HECTOLITER_PER_KILOGRAM("hL/kg", val -> val * 0.1, val -> val / 0.1),
     MILLILITER_PER_KILOGRAM("mL/kg", val -> val * 1e-6, val -> val / 1e-6),
-    OUNCE_PER_KILOGRAM("fl.oz/kg", val -> val * 2.95735295625e-5, val -> val / 2.95735295625e-5),
-    PINT_PER_KILOGRAM("pt/kg", val -> val * 0.000473176473, val -> val / 0.000473176473),
-    GALLON_US_PER_KILOGRAM("gal_US/kg", val -> val * 0.003785411784, val -> val / 0.003785411784),
-    GALLON_UK_PER_KILOGRAM("gal_UK/kg", val -> val * 0.00454609, val -> val / 0.00454609);
+
+    CUBIC_FOOT_PER_POUND("ft³/lb", val -> val * 0.0624279606, val -> val / 0.0624279606),
+    GALLON_US_PER_POUND("gal_US/lb", val -> val * 0.0083454045, val -> val / 0.0083454045),
+    GALLON_UK_PER_POUND("gal_UK/lb", val -> val * 0.0100224129, val -> val / 0.0100224129),
+    OUNCE_PER_POUND("fl.oz/lb", val -> val * 6.520391e-5, val -> val / 6.520391e-5);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -73,7 +73,7 @@ public enum SpecificVolumeUnits implements SpecificVolumeUnit {
 
     private static boolean hasMatchBeenFound(SpecificVolumeUnit currentUnit, String requestedSymbol) {
         String currentSymbol = unifySymbol(currentUnit.getSymbol());
-        if (currentUnit == SpecificVolumeUnits.GALLON_UK_PER_KILOGRAM) {
+        if (currentUnit == SpecificVolumeUnits.GALLON_UK_PER_POUND) {
             String truncatedSymbol = currentSymbol.replace("uk", "");
             return truncatedSymbol.equalsIgnoreCase(requestedSymbol) || currentSymbol.equalsIgnoreCase(requestedSymbol);
         }

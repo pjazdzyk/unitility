@@ -5,23 +5,20 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum EnergyUnits implements EnergyUnit {
+public enum CubicExpansionCoefficientUnits implements CubicExpansionCoefficientUnit {
 
-    JOULE("J", val -> val, val -> val),
-    MILLIJOULE("mJ", val -> val * 0.001, val -> val / 0.001),
-    KILOJOULE("kJ", val -> val * 1000, val -> val / 1000),
-    MEGAJOULE("MJ", val -> val * 1_000_000, val -> val / 1_000_000),
-    BTU("BTU", val -> val * 1055.05585262, val -> val / 1055.05585262),
-    CALORIE("cal", val -> val * 4.1868, val -> val / 4.1868),
-    KILOCALORIE("kcal", val -> val * 4186.8, val -> val / 4186.8),
-    WATT_HOUR("Wh", val -> val * 3600, val -> val / 3600),
-    KILOWATT_HOUR("kWh", val -> val * 3_600_000, val -> val / 3_600_000);
+    INVERSE_KELVIN("1/K", val -> val, val -> val),
+    INVERSE_CELSIUS("1/°C", val -> val, val -> val),
+    INVERSE_MILLIKELVIN("1/mK", val -> val * 1000.0, val -> val / 1000.0),
+    INVERSE_RANKINE("1/°R", val -> val * 1.8, val -> val / 1.8),
+    INVERSE_FAHRENHEIT("1/°F", val -> val * 1.8, val -> val / 1.8);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    EnergyUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    CubicExpansionCoefficientUnits(String symbol, DoubleUnaryOperator toBaseConverter,
+                                   DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -33,8 +30,8 @@ public enum EnergyUnits implements EnergyUnit {
     }
 
     @Override
-    public EnergyUnit getBaseUnit() {
-        return JOULE;
+    public CubicExpansionCoefficientUnit getBaseUnit() {
+        return INVERSE_KELVIN;
     }
 
     @Override
@@ -47,25 +44,25 @@ public enum EnergyUnits implements EnergyUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static EnergyUnit fromSymbol(String rawSymbol) {
+    public static CubicExpansionCoefficientUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return JOULE;
+            return INVERSE_KELVIN;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (EnergyUnit unit : values()) {
+        for (CubicExpansionCoefficientUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
-        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + EnergyUnits.class.getSimpleName());
+        throw new UnitSystemParseException("Unsupported unit symbol: " + rawSymbol);
     }
 
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
+                .unifyMultiAndDiv()
+                .dropDegreeSymbols()
                 .toString();
     }
-
 }

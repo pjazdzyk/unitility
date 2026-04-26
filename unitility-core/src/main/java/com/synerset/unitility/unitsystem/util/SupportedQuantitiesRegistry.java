@@ -31,6 +31,12 @@ import com.synerset.unitility.unitsystem.thermodynamic.MolarEnthalpy;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarEnthalpyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarFraction;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarMass;
+import com.synerset.unitility.unitsystem.thermodynamic.IsentropicCompressibility;
+import com.synerset.unitility.unitsystem.thermodynamic.IsentropicCompressibilityUnits;
+import com.synerset.unitility.unitsystem.thermodynamic.CubicExpansionCoefficient;
+import com.synerset.unitility.unitsystem.thermodynamic.CubicExpansionCoefficientUnits;
+import com.synerset.unitility.unitsystem.thermodynamic.PressureCoefficient;
+import com.synerset.unitility.unitsystem.thermodynamic.PressureCoefficientUnits;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -93,6 +99,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Torque.class, () -> Arrays.asList(TorqueUnits.values())),
                 // Thermodynamic
                 Map.entry(Density.class, () -> Arrays.asList(DensityUnits.values())),
+                Map.entry(SpecificInternalEnergy.class, () -> Arrays.asList(SpecificInternalEnergyUnits.values())),
                 Map.entry(DynamicViscosity.class, () -> Arrays.asList(DynamicViscosityUnits.values())),
                 Map.entry(Energy.class, () -> Arrays.asList(EnergyUnits.values())),
                 Map.entry(KinematicViscosity.class, () -> Arrays.asList(KinematicViscosityUnits.values())),
@@ -111,6 +118,9 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(MolarFraction.class, () -> Arrays.asList(MolarFractionUnits.values())),
                 Map.entry(MolarMass.class, () -> Arrays.asList(MolarMassUnits.values())),
                 Map.entry(SpecificVolume.class, () -> Arrays.asList(SpecificVolumeUnits.values())),
+                Map.entry(IsentropicCompressibility.class, () -> Arrays.asList(IsentropicCompressibilityUnits.values())),
+                Map.entry(CubicExpansionCoefficient.class, () -> Arrays.asList(CubicExpansionCoefficientUnits.values())),
+                Map.entry(PressureCoefficient.class, () -> Arrays.asList(PressureCoefficientUnits.values())),
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),

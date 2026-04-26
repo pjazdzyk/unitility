@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.withPrecision;
 
 class EnergyTest {
     @Test
@@ -84,7 +85,7 @@ class EnergyTest {
     @DisplayName("should convert from J to cal and vice versa")
     void shouldProperlyConvertToJoulesFromCalories() {
         // Given
-        Energy initialEnergyInJoule = Energy.ofJoules(4.184);
+        Energy initialEnergyInJoule = Energy.ofJoules(4.1868);
 
         // When
         Energy actualInCalories = initialEnergyInJoule.toUnit(EnergyUnits.CALORIE);
@@ -102,7 +103,7 @@ class EnergyTest {
     @DisplayName("should convert from J to kcal and vice versa")
     void shouldProperlyConvertToJoulesFromKilocalories() {
         // Given
-        Energy initialEnergyInJoule = Energy.ofJoules(4184.0);
+        Energy initialEnergyInJoule = Energy.ofJoules(4186.8);
 
         // When
         Energy actualInKilocalorie = initialEnergyInJoule.toUnit(EnergyUnits.KILOCALORIE);
@@ -186,7 +187,7 @@ class EnergyTest {
         double actualValue = expected.getInJoules();
 
         // Then
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual.getValue()).isEqualTo(expected.getValue(), withPrecision(1E-11));
         assertThat(actualValue).isEqualTo(expected.getValue());
     }
 

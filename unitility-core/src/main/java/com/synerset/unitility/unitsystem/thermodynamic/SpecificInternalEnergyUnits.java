@@ -5,23 +5,21 @@ import com.synerset.unitility.unitsystem.util.StringTransformer;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum EnergyUnits implements EnergyUnit {
+public enum SpecificInternalEnergyUnits implements SpecificInternalEnergyUnit {
 
-    JOULE("J", val -> val, val -> val),
-    MILLIJOULE("mJ", val -> val * 0.001, val -> val / 0.001),
-    KILOJOULE("kJ", val -> val * 1000, val -> val / 1000),
-    MEGAJOULE("MJ", val -> val * 1_000_000, val -> val / 1_000_000),
-    BTU("BTU", val -> val * 1055.05585262, val -> val / 1055.05585262),
-    CALORIE("cal", val -> val * 4.1868, val -> val / 4.1868),
-    KILOCALORIE("kcal", val -> val * 4186.8, val -> val / 4186.8),
-    WATT_HOUR("Wh", val -> val * 3600, val -> val / 3600),
-    KILOWATT_HOUR("kWh", val -> val * 3_600_000, val -> val / 3_600_000);
+    JOULE_PER_KILOGRAM("J/kg", val -> val, val -> val),
+    KILOJOULE_PER_KILOGRAM("kJ/kg", val -> val * 1000.0, val -> val / 1000.0),
+    MEGAJOULE_PER_KILOGRAM("MJ/kg", val -> val * 1_000_000.0, val -> val / 1_000_000.0),
+    BTU_PER_POUND("BTU/lb", val -> val * 2326.0, val -> val / 2326.0),
+    CALORIE_PER_GRAM("cal/g", val -> val * 4186.8, val -> val / 4186.8);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
-    EnergyUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    SpecificInternalEnergyUnits(String symbol,
+                                DoubleUnaryOperator toBaseConverter,
+                                DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -33,8 +31,8 @@ public enum EnergyUnits implements EnergyUnit {
     }
 
     @Override
-    public EnergyUnit getBaseUnit() {
-        return JOULE;
+    public SpecificInternalEnergyUnit getBaseUnit() {
+        return JOULE_PER_KILOGRAM;
     }
 
     @Override
@@ -47,25 +45,25 @@ public enum EnergyUnits implements EnergyUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static EnergyUnit fromSymbol(String rawSymbol) {
+    public static SpecificInternalEnergyUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return JOULE;
+            return JOULE_PER_KILOGRAM;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (EnergyUnit unit : values()) {
+        for (SpecificInternalEnergyUnits unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
-        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + EnergyUnits.class.getSimpleName());
+        throw new UnitSystemParseException("Unsupported unit symbol: {" + rawSymbol + "}. Target class: "
+                + SpecificInternalEnergyUnits.class.getSimpleName());
     }
 
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
+                .unifyMultiAndDiv()
                 .toString();
     }
-
 }
