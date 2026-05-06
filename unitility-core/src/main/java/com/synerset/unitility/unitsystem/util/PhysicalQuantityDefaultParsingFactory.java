@@ -8,9 +8,12 @@ import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
 import com.synerset.unitility.unitsystem.acoustic.SoundPressureUnits;
 import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.similaritynumber.*;
+import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.electric.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
+import com.synerset.unitility.unitsystem.flow.MassFlux;
+import com.synerset.unitility.unitsystem.flow.MassFluxUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnits;
 import com.synerset.unitility.unitsystem.geographic.Bearing;
@@ -83,8 +86,20 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(PrandtlNumber.class, (value, symbol) -> PrandtlNumber.of(value)),
                 Map.entry(ReynoldsNumber.class, (value, symbol) -> ReynoldsNumber.of(value)),
                 Map.entry(CompressibilityFactor.class, (value, symbol) -> CompressibilityFactor.of(value)),
+                Map.entry(NusseltNumber.class, (value, symbol) -> NusseltNumber.of(value)),
+                Map.entry(PecletNumber.class, (value, symbol) -> PecletNumber.of(value)),
+                Map.entry(RayleighNumber.class, (value, symbol) -> RayleighNumber.of(value)),
+                Map.entry(BiotNumber.class, (value, symbol) -> BiotNumber.of(value)),
+                Map.entry(MartinelliParameter.class, (value, symbol) -> MartinelliParameter.of(value)),
+                Map.entry(TwoPhaseMultiplier.class, (value, symbol) -> TwoPhaseMultiplier.of(value)),
+                Map.entry(BondNumber.class, (value, symbol) -> BondNumber.of(value)),
+                Map.entry(WeberNumber.class, (value, symbol) -> WeberNumber.of(value)),
+                Map.entry(JakobNumber.class, (value, symbol) -> JakobNumber.of(value)),
+                Map.entry(BoilingNumber.class, (value, symbol) -> BoilingNumber.of(value)),
+                Map.entry(ConfinementNumber.class, (value, symbol) -> ConfinementNumber.of(value)),
                 // Flows
                 Map.entry(MassFlow.class, MassFlow::of),
+                Map.entry(MassFlux.class, MassFlux::of),
                 Map.entry(VolumetricFlow.class, VolumetricFlow::of),
                 // Humidity
                 Map.entry(HumidityRatio.class, HumidityRatio::of),
@@ -96,6 +111,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatio::of),
                 Map.entry(SDR.class, SDR::of),
                 Map.entry(AbsoluteRoughness.class, AbsoluteRoughness::of),
+                Map.entry(FlowCoefficient.class, FlowCoefficient::of),
                 // Mechanical
                 Map.entry(Force.class, Force::of),
                 Map.entry(Momentum.class, Momentum::of),
@@ -124,6 +140,10 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(IsentropicCompressibility.class, IsentropicCompressibility::of),
                 Map.entry(CubicExpansionCoefficient.class, CubicExpansionCoefficient::of),
                 Map.entry(PressureCoefficient.class, PressureCoefficient::of),
+                Map.entry(SpecificGasConstant.class, SpecificGasConstant::of),
+                Map.entry(HeatTransferCoefficient.class, HeatTransferCoefficient::of),
+                Map.entry(HeatFlux.class, HeatFlux::of),
+                Map.entry(LinearHeatFlux.class, LinearHeatFlux::of),
                 // Geographic
                 Map.entry(Latitude.class, Latitude::of),
                 Map.entry(Longitude.class, Longitude::of),
@@ -170,8 +190,20 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(PrandtlNumber.class, PrandtlNumberUnits.DIMENSIONLESS),
                 Map.entry(ReynoldsNumber.class, ReynoldsNumberUnits.DIMENSIONLESS),
                 Map.entry(CompressibilityFactor.class, CompressibilityFactorUnits.DIMENSIONLESS),
-                // Flows (2)
+                Map.entry(NusseltNumber.class, NusseltNumberUnits.DIMENSIONLESS),
+                Map.entry(PecletNumber.class, PecletNumberUnits.DIMENSIONLESS),
+                Map.entry(RayleighNumber.class, RayleighNumberUnits.DIMENSIONLESS),
+                Map.entry(BiotNumber.class, BiotNumberUnits.DIMENSIONLESS),
+                Map.entry(MartinelliParameter.class, MartinelliParameterUnits.DIMENSIONLESS),
+                Map.entry(TwoPhaseMultiplier.class, TwoPhaseMultiplierUnits.DIMENSIONLESS),
+                Map.entry(BondNumber.class, BondNumberUnits.DIMENSIONLESS),
+                Map.entry(WeberNumber.class, WeberNumberUnits.DIMENSIONLESS),
+                Map.entry(JakobNumber.class, JakobNumberUnits.DIMENSIONLESS),
+                Map.entry(BoilingNumber.class, BoilingNumberUnits.DIMENSIONLESS),
+                Map.entry(ConfinementNumber.class, ConfinementNumberUnits.DIMENSIONLESS),
+                // Flows (3)
                 Map.entry(MassFlow.class, MassFlowUnits.KILOGRAM_PER_SECOND),
+                Map.entry(MassFlux.class, MassFluxUnits.KILOGRAM_PER_SQUARE_METER_SECOND),
                 Map.entry(VolumetricFlow.class, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND),
                 // Humidity (2)
                 Map.entry(HumidityRatio.class, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM),
@@ -183,6 +215,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(LocalLossFactor.class, LocalLossFactorUnits.DIMENSIONLESS),
                 Map.entry(RotationSpeedToFlowRateRatio.class, RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND),
                 Map.entry(SDR.class, RatioUnits.DECIMAL),
+                Map.entry(FlowCoefficient.class, FlowCoefficientUnits.KV),
                 // Mechanical (3)
                 Map.entry(Force.class, ForceUnits.NEWTON),
                 Map.entry(Momentum.class, MomentumUnits.KILOGRAM_METER_PER_SECOND),
@@ -211,6 +244,10 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(IsentropicCompressibility.class, IsentropicCompressibilityUnits.INVERSE_PASCAL),
                 Map.entry(CubicExpansionCoefficient.class, CubicExpansionCoefficientUnits.INVERSE_KELVIN),
                 Map.entry(PressureCoefficient.class, PressureCoefficientUnits.PASCAL_PER_KELVIN),
+                Map.entry(SpecificGasConstant.class, SpecificGasConstantUnits.JOULE_PER_KILOGRAM_KELVIN),
+                Map.entry(HeatTransferCoefficient.class, HeatTransferCoefficientUnits.WATTS_PER_SQUARE_METER_KELVIN),
+                Map.entry(HeatFlux.class, HeatFluxUnits.WATTS_PER_SQUARE_METER),
+                Map.entry(LinearHeatFlux.class, LinearHeatFluxUnits.WATTS_PER_METER),
                 // Geographic (3)
                 Map.entry(Latitude.class, AngleUnits.DEGREES),
                 Map.entry(Longitude.class, AngleUnits.DEGREES),

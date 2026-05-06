@@ -8,9 +8,12 @@ import com.synerset.unitility.unitsystem.acoustic.SoundPressure;
 import com.synerset.unitility.unitsystem.acoustic.SoundPressureUnits;
 import com.synerset.unitility.unitsystem.common.*;
 import com.synerset.unitility.unitsystem.similaritynumber.*;
+import com.synerset.unitility.unitsystem.dimensionless.*;
 import com.synerset.unitility.unitsystem.electric.*;
 import com.synerset.unitility.unitsystem.flow.MassFlow;
 import com.synerset.unitility.unitsystem.flow.MassFlowUnits;
+import com.synerset.unitility.unitsystem.flow.MassFlux;
+import com.synerset.unitility.unitsystem.flow.MassFluxUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnits;
 import com.synerset.unitility.unitsystem.geographic.Bearing;
@@ -81,8 +84,20 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(PrandtlNumber.class, Collections::emptyList),
                 Map.entry(ReynoldsNumber.class, Collections::emptyList),
                 Map.entry(CompressibilityFactor.class, () -> Arrays.asList(CompressibilityFactorUnits.values())),
+                Map.entry(NusseltNumber.class, () -> Arrays.asList(NusseltNumberUnits.values())),
+                Map.entry(PecletNumber.class, () -> Arrays.asList(PecletNumberUnits.values())),
+                Map.entry(RayleighNumber.class, () -> Arrays.asList(RayleighNumberUnits.values())),
+                Map.entry(BiotNumber.class, () -> Arrays.asList(BiotNumberUnits.values())),
+                Map.entry(MartinelliParameter.class, () -> Arrays.asList(MartinelliParameterUnits.values())),
+                Map.entry(TwoPhaseMultiplier.class, () -> Arrays.asList(TwoPhaseMultiplierUnits.values())),
+                Map.entry(BondNumber.class, () -> Arrays.asList(BondNumberUnits.values())),
+                Map.entry(WeberNumber.class, () -> Arrays.asList(WeberNumberUnits.values())),
+                Map.entry(JakobNumber.class, () -> Arrays.asList(JakobNumberUnits.values())),
+                Map.entry(BoilingNumber.class, () -> Arrays.asList(BoilingNumberUnits.values())),
+                Map.entry(ConfinementNumber.class, () -> Arrays.asList(ConfinementNumberUnits.values())),
                 // Flows
                 Map.entry(MassFlow.class, () -> Arrays.asList(MassFlowUnits.values())),
+                Map.entry(MassFlux.class, () -> Arrays.asList(MassFluxUnits.values())),
                 Map.entry(VolumetricFlow.class, () -> Arrays.asList(VolumetricFlowUnits.values())),
                 // Humidity
                 Map.entry(HumidityRatio.class, () -> Arrays.asList(HumidityRatioUnits.values())),
@@ -94,6 +109,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(RotationSpeedToFlowRateRatio.class, () -> Arrays.asList(RotationSpeedToFlowRateRatioUnits.values())),
                 Map.entry(SDR.class, () -> Arrays.asList(RatioUnits.values())),
                 Map.entry(AbsoluteRoughness.class, () -> Arrays.asList(DistanceUnits.values())),
+                Map.entry(FlowCoefficient.class, () -> Arrays.asList(FlowCoefficientUnits.values())),
                 // Mechanical
                 Map.entry(Force.class, () -> Arrays.asList(ForceUnits.values())),
                 Map.entry(Momentum.class, () -> Arrays.asList(MomentumUnits.values())),
@@ -122,6 +138,10 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(IsentropicCompressibility.class, () -> Arrays.asList(IsentropicCompressibilityUnits.values())),
                 Map.entry(CubicExpansionCoefficient.class, () -> Arrays.asList(CubicExpansionCoefficientUnits.values())),
                 Map.entry(PressureCoefficient.class, () -> Arrays.asList(PressureCoefficientUnits.values())),
+                Map.entry(SpecificGasConstant.class, () -> Arrays.asList(SpecificGasConstantUnits.values())),
+                Map.entry(HeatTransferCoefficient.class, () -> Arrays.asList(HeatTransferCoefficientUnits.values())),
+                Map.entry(HeatFlux.class, () -> Arrays.asList(HeatFluxUnits.values())),
+                Map.entry(LinearHeatFlux.class, () -> Arrays.asList(LinearHeatFluxUnits.values())),
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),
