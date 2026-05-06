@@ -71,6 +71,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(AngularVelocity.class, () -> Arrays.asList(AngularVelocityUnits.values())),
                 Map.entry(Volume.class, () -> Arrays.asList(VolumeUnits.values())),
                 Map.entry(Ratio.class, () -> Arrays.asList(RatioUnits.values())),
+                Map.entry(Effectiveness.class, () -> Arrays.asList(EffectivenessUnits.values())),
                 Map.entry(Curvature.class, () -> Arrays.asList(CurvatureUnits.values())),
                 Map.entry(DataSize.class, () -> Arrays.asList(DataSizeUnits.values())),
                 // Dimensionless
