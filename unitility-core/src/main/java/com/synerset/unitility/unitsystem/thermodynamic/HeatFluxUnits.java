@@ -8,7 +8,13 @@ import java.util.function.DoubleUnaryOperator;
 public enum HeatFluxUnits implements HeatFluxUnit {
 
     WATTS_PER_SQUARE_METER("W/m²", val -> val, val -> val),
-    KILOWATTS_PER_SQUARE_METER("kW/m²", val -> val * 1000.0, val -> val / 1000.0);
+    KILOWATTS_PER_SQUARE_METER("kW/m²", val -> val * 1000.0, val -> val / 1000.0),
+    BTU_PER_HOUR_SQUARE_FOOT("BTU/(h·ft²)",
+            val -> val * ConversionConstants.BTU_H_FT2_TO_W_M2,
+            val -> val / ConversionConstants.BTU_H_FT2_TO_W_M2),
+    BTU_PER_MINUTE_SQUARE_FOOT("BTU/(min·ft²)",
+            val -> val * ConversionConstants.BTU_MIN_FT2_TO_W_M2,
+            val -> val / ConversionConstants.BTU_MIN_FT2_TO_W_M2);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -45,7 +51,7 @@ public enum HeatFluxUnits implements HeatFluxUnit {
             return WATTS_PER_SQUARE_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (HeatFluxUnit unit : values()) {
+        for (HeatFluxUnits unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
@@ -60,5 +66,10 @@ public enum HeatFluxUnits implements HeatFluxUnit {
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
                 .toString();
+    }
+
+    private static class ConversionConstants {
+        private static final double BTU_H_FT2_TO_W_M2 = 3.15459148;
+        private static final double BTU_MIN_FT2_TO_W_M2 = BTU_H_FT2_TO_W_M2 * 60.0;
     }
 }

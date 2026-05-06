@@ -36,6 +36,14 @@ public class SpecificGasConstant implements CalculableQuantity<SpecificGasConsta
         return new SpecificGasConstant(value, SpecificGasConstantUnits.KILOJOULE_PER_KILOGRAM_KELVIN);
     }
 
+    public static SpecificGasConstant ofBTUPerPoundRankine(double value) {
+        return new SpecificGasConstant(value, SpecificGasConstantUnits.BTU_PER_POUND_RANKINE);
+    }
+
+    public static SpecificGasConstant ofBTUPerPoundFahrenheit(double value) {
+        return new SpecificGasConstant(value, SpecificGasConstantUnits.BTU_PER_POUND_FAHRENHEIT);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -84,6 +92,14 @@ public class SpecificGasConstant implements CalculableQuantity<SpecificGasConsta
         return toUnit(SpecificGasConstantUnits.KILOJOULE_PER_KILOGRAM_KELVIN);
     }
 
+    public SpecificGasConstant toBTUPerPoundRankine() {
+        return toUnit(SpecificGasConstantUnits.BTU_PER_POUND_RANKINE);
+    }
+
+    public SpecificGasConstant toBTUPerPoundFahrenheit() {
+        return toUnit(SpecificGasConstantUnits.BTU_PER_POUND_FAHRENHEIT);
+    }
+
     // Get value in target unit
     public double getInJoulesPerKilogramKelvin() {
         return getInUnit(SpecificGasConstantUnits.JOULE_PER_KILOGRAM_KELVIN);
@@ -91,6 +107,14 @@ public class SpecificGasConstant implements CalculableQuantity<SpecificGasConsta
 
     public double getInKilojoulesPerKilogramKelvin() {
         return getInUnit(SpecificGasConstantUnits.KILOJOULE_PER_KILOGRAM_KELVIN);
+    }
+
+    public double getInBTUPerPoundRankine() {
+        return getInUnit(SpecificGasConstantUnits.BTU_PER_POUND_RANKINE);
+    }
+
+    public double getInBTUPerPoundFahrenheit() {
+        return getInUnit(SpecificGasConstantUnits.BTU_PER_POUND_FAHRENHEIT);
     }
 
     @Override

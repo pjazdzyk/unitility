@@ -8,7 +8,9 @@ import java.util.function.DoubleUnaryOperator;
 public enum MassFluxUnits implements MassFluxUnit {
 
     KILOGRAM_PER_SQUARE_METER_SECOND("kg/(m²·s)", val -> val, val -> val),
-    GRAM_PER_SQUARE_METER_SECOND("g/(m²·s)", val -> val / 1000.0, val -> val * 1000.0);
+    GRAM_PER_SQUARE_METER_SECOND("g/(m²·s)", val -> val / 1000.0, val -> val * 1000.0),
+    POUND_PER_SQUARE_FOOT_SECOND("lb/(ft²·s)", val -> val * 4.8824276364, val -> val / 4.8824276364),
+    POUND_PER_SQUARE_FOOT_HOUR("lb/(ft²·h)", val -> val * 4.8824276364 / 3600.0, val -> val / (4.8824276364 / 3600.0));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

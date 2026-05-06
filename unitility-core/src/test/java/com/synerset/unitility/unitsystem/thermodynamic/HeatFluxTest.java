@@ -57,4 +57,58 @@ class HeatFluxTest {
         assertThat(base.getUnit()).isEqualTo(HeatFluxUnits.WATTS_PER_SQUARE_METER);
         assertThat(base.getValue()).isCloseTo(2500.0, within(1E-10));
     }
+
+    @Test
+    @DisplayName("should convert between W/m² and BTU/(h·ft²)")
+    void shouldConvertToImperialBTUPerHourSquareFoot() {
+        // Given
+        HeatFlux inBTU = HeatFlux.ofBTUPerHourSquareFoot(1.0);
+        double expectedW = inBTU.toWattsPerSquareMeter().getInWattsPerSquareMeter();
+
+        // When
+        HeatFlux q = HeatFlux.ofWattsPerSquareMeter(expectedW);
+        HeatFlux roundtrip = q.toBTUPerHourSquareFoot();
+
+        // Then
+        assertThat(roundtrip.getInBTUPerHourSquareFoot()).isCloseTo(1.0, within(1E-6));
+    }
+
+    @Test
+    @DisplayName("should convert between W/m² and BTU/(min·ft²)")
+    void shouldConvertToImperialBTUPerMinuteSquareFoot() {
+        // Given
+        HeatFlux inBTU = HeatFlux.ofBTUPerMinuteSquareFoot(1.0);
+        double expectedW = inBTU.toWattsPerSquareMeter().getInWattsPerSquareMeter();
+
+        // When
+        HeatFlux q = HeatFlux.ofWattsPerSquareMeter(expectedW);
+        HeatFlux roundtrip = q.toBTUPerMinuteSquareFoot();
+
+        // Then
+        assertThat(roundtrip.getInBTUPerMinuteSquareFoot()).isCloseTo(1.0, within(1E-6));
+    }
+
+    @Test
+    @DisplayName("should consider equal heat fluxes across metric and imperial units")
+    void shouldBeEqualAcrossMetricAndImperial() {
+        // Given
+        HeatFlux inBTU = HeatFlux.ofBTUPerHourSquareFoot(1.0);
+        double expectedW = inBTU.toWattsPerSquareMeter().getInWattsPerSquareMeter();
+        HeatFlux inW = HeatFlux.ofWattsPerSquareMeter(expectedW);
+
+        // Then
+        assertThat(inW).isEqualTo(inBTU);
+    }
+
+    @Test
+    @DisplayName("should consider equal heat fluxes across metric and imperial minute units")
+    void shouldBeEqualAcrossMetricAndImperialMinute() {
+        // Given
+        HeatFlux inBTU = HeatFlux.ofBTUPerMinuteSquareFoot(1.0);
+        double expectedW = inBTU.toWattsPerSquareMeter().getInWattsPerSquareMeter();
+        HeatFlux inW = HeatFlux.ofWattsPerSquareMeter(expectedW);
+
+        // Then
+        assertThat(inW).isEqualTo(inBTU);
+    }
 }

@@ -8,7 +8,13 @@ import java.util.function.DoubleUnaryOperator;
 public enum LinearHeatFluxUnits implements LinearHeatFluxUnit {
 
     WATTS_PER_METER("W/m", val -> val, val -> val),
-    KILOWATTS_PER_METER("kW/m", val -> val * 1000.0, val -> val / 1000.0);
+    KILOWATTS_PER_METER("kW/m", val -> val * 1000.0, val -> val / 1000.0),
+    BTU_PER_HOUR_FOOT("BTU/(h·ft)",
+            val -> val * ConversionConstants.BTU_H_FT_TO_W_M,
+            val -> val / ConversionConstants.BTU_H_FT_TO_W_M),
+    BTU_PER_MINUTE_FOOT("BTU/(min·ft)",
+            val -> val * ConversionConstants.BTU_MIN_FT_TO_W_M,
+            val -> val / ConversionConstants.BTU_MIN_FT_TO_W_M);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -45,7 +51,7 @@ public enum LinearHeatFluxUnits implements LinearHeatFluxUnit {
             return WATTS_PER_METER;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (LinearHeatFluxUnit unit : values()) {
+        for (LinearHeatFluxUnits unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
@@ -60,5 +66,11 @@ public enum LinearHeatFluxUnits implements LinearHeatFluxUnit {
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
                 .toString();
+    }
+
+    private static class ConversionConstants {
+        // 1 BTU(IT)/(h·ft) ≈ 0.96132649 W/m
+        private static final double BTU_H_FT_TO_W_M = 0.96132649;
+        private static final double BTU_MIN_FT_TO_W_M = BTU_H_FT_TO_W_M * 60.0;
     }
 }

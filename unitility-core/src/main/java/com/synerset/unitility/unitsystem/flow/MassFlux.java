@@ -36,6 +36,14 @@ public class MassFlux implements CalculableQuantity<MassFluxUnit, MassFlux> {
         return new MassFlux(value, MassFluxUnits.GRAM_PER_SQUARE_METER_SECOND);
     }
 
+    public static MassFlux ofPoundsPerSquareFootSecond(double value) {
+        return new MassFlux(value, MassFluxUnits.POUND_PER_SQUARE_FOOT_SECOND);
+    }
+
+    public static MassFlux ofPoundsPerSquareFootHour(double value) {
+        return new MassFlux(value, MassFluxUnits.POUND_PER_SQUARE_FOOT_HOUR);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -84,6 +92,14 @@ public class MassFlux implements CalculableQuantity<MassFluxUnit, MassFlux> {
         return toUnit(MassFluxUnits.GRAM_PER_SQUARE_METER_SECOND);
     }
 
+    public MassFlux toPoundsPerSquareFootSecond() {
+        return toUnit(MassFluxUnits.POUND_PER_SQUARE_FOOT_SECOND);
+    }
+
+    public MassFlux toPoundsPerSquareFootHour() {
+        return toUnit(MassFluxUnits.POUND_PER_SQUARE_FOOT_HOUR);
+    }
+
     // Get value in target unit
     public double getInKilogramsPerSquareMeterSecond() {
         return getInUnit(MassFluxUnits.KILOGRAM_PER_SQUARE_METER_SECOND);
@@ -91,6 +107,14 @@ public class MassFlux implements CalculableQuantity<MassFluxUnit, MassFlux> {
 
     public double getInGramsPerSquareMeterSecond() {
         return getInUnit(MassFluxUnits.GRAM_PER_SQUARE_METER_SECOND);
+    }
+
+    public double getInPoundsPerSquareFootSecond() {
+        return getInUnit(MassFluxUnits.POUND_PER_SQUARE_FOOT_SECOND);
+    }
+
+    public double getInPoundsPerSquareFootHour() {
+        return getInUnit(MassFluxUnits.POUND_PER_SQUARE_FOOT_HOUR);
     }
 
     @Override

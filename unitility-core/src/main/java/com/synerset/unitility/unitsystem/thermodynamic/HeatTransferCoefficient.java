@@ -36,6 +36,14 @@ public class HeatTransferCoefficient implements CalculableQuantity<HeatTransferC
         return new HeatTransferCoefficient(value, HeatTransferCoefficientUnits.KILOWATTS_PER_SQUARE_METER_KELVIN);
     }
 
+    public static HeatTransferCoefficient ofBTUPerHourSquareFootFahrenheit(double value) {
+        return new HeatTransferCoefficient(value, HeatTransferCoefficientUnits.BTU_PER_HOUR_SQUARE_FOOT_FAHRENHEIT);
+    }
+
+    public static HeatTransferCoefficient ofBTUPerMinuteSquareFootFahrenheit(double value) {
+        return new HeatTransferCoefficient(value, HeatTransferCoefficientUnits.BTU_PER_MINUTE_SQUARE_FOOT_FAHRENHEIT);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -84,6 +92,14 @@ public class HeatTransferCoefficient implements CalculableQuantity<HeatTransferC
         return toUnit(HeatTransferCoefficientUnits.KILOWATTS_PER_SQUARE_METER_KELVIN);
     }
 
+    public HeatTransferCoefficient toBTUPerHourSquareFootFahrenheit() {
+        return toUnit(HeatTransferCoefficientUnits.BTU_PER_HOUR_SQUARE_FOOT_FAHRENHEIT);
+    }
+
+    public HeatTransferCoefficient toBTUPerMinuteSquareFootFahrenheit() {
+        return toUnit(HeatTransferCoefficientUnits.BTU_PER_MINUTE_SQUARE_FOOT_FAHRENHEIT);
+    }
+
     // Get value in target unit
     public double getInWattsPerSquareMeterKelvin() {
         return getInUnit(HeatTransferCoefficientUnits.WATTS_PER_SQUARE_METER_KELVIN);
@@ -91,6 +107,14 @@ public class HeatTransferCoefficient implements CalculableQuantity<HeatTransferC
 
     public double getInKilowattsPerSquareMeterKelvin() {
         return getInUnit(HeatTransferCoefficientUnits.KILOWATTS_PER_SQUARE_METER_KELVIN);
+    }
+
+    public double getInBTUPerHourSquareFootFahrenheit() {
+        return getInUnit(HeatTransferCoefficientUnits.BTU_PER_HOUR_SQUARE_FOOT_FAHRENHEIT);
+    }
+
+    public double getInBTUPerMinuteSquareFootFahrenheit() {
+        return getInUnit(HeatTransferCoefficientUnits.BTU_PER_MINUTE_SQUARE_FOOT_FAHRENHEIT);
     }
 
     @Override

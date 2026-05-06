@@ -36,6 +36,14 @@ public class LinearHeatFlux implements CalculableQuantity<LinearHeatFluxUnit, Li
         return new LinearHeatFlux(value, LinearHeatFluxUnits.KILOWATTS_PER_METER);
     }
 
+    public static LinearHeatFlux ofBTUPerHourFoot(double value) {
+        return new LinearHeatFlux(value, LinearHeatFluxUnits.BTU_PER_HOUR_FOOT);
+    }
+
+    public static LinearHeatFlux ofBTUPerMinuteFoot(double value) {
+        return new LinearHeatFlux(value, LinearHeatFluxUnits.BTU_PER_MINUTE_FOOT);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -84,6 +92,14 @@ public class LinearHeatFlux implements CalculableQuantity<LinearHeatFluxUnit, Li
         return toUnit(LinearHeatFluxUnits.KILOWATTS_PER_METER);
     }
 
+    public LinearHeatFlux toBTUPerHourFoot() {
+        return toUnit(LinearHeatFluxUnits.BTU_PER_HOUR_FOOT);
+    }
+
+    public LinearHeatFlux toBTUPerMinuteFoot() {
+        return toUnit(LinearHeatFluxUnits.BTU_PER_MINUTE_FOOT);
+    }
+
     // Get value in target unit
     public double getInWattsPerMeter() {
         return getInUnit(LinearHeatFluxUnits.WATTS_PER_METER);
@@ -91,6 +107,14 @@ public class LinearHeatFlux implements CalculableQuantity<LinearHeatFluxUnit, Li
 
     public double getInKilowattsPerMeter() {
         return getInUnit(LinearHeatFluxUnits.KILOWATTS_PER_METER);
+    }
+
+    public double getInBTUPerHourFoot() {
+        return getInUnit(LinearHeatFluxUnits.BTU_PER_HOUR_FOOT);
+    }
+
+    public double getInBTUPerMinuteFoot() {
+        return getInUnit(LinearHeatFluxUnits.BTU_PER_MINUTE_FOOT);
     }
 
     @Override

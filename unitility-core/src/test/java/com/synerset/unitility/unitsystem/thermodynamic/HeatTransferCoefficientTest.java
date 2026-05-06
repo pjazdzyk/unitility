@@ -57,4 +57,58 @@ class HeatTransferCoefficientTest {
         assertThat(base.getUnit()).isEqualTo(HeatTransferCoefficientUnits.WATTS_PER_SQUARE_METER_KELVIN);
         assertThat(base.getValue()).isCloseTo(500.0, within(1E-10));
     }
+
+    @Test
+    @DisplayName("should convert between W/(m²·K) and BTU/(h·ft²·°F)")
+    void shouldConvertToImperialBTUPerHourSquareFootFahrenheit() {
+        // Given
+        HeatTransferCoefficient inBTU = HeatTransferCoefficient.ofBTUPerHourSquareFootFahrenheit(1.0);
+        double expectedW = inBTU.toWattsPerSquareMeterKelvin().getInWattsPerSquareMeterKelvin();
+
+        // When
+        HeatTransferCoefficient h = HeatTransferCoefficient.ofWattsPerSquareMeterKelvin(expectedW);
+        HeatTransferCoefficient roundtrip = h.toBTUPerHourSquareFootFahrenheit();
+
+        // Then
+        assertThat(roundtrip.getInBTUPerHourSquareFootFahrenheit()).isCloseTo(1.0, within(1E-5));
+    }
+
+    @Test
+    @DisplayName("should convert between W/(m²·K) and BTU/(min·ft²·°F)")
+    void shouldConvertToImperialBTUPerMinuteSquareFootFahrenheit() {
+        // Given
+        HeatTransferCoefficient inBTU = HeatTransferCoefficient.ofBTUPerMinuteSquareFootFahrenheit(1.0);
+        double expectedW = inBTU.toWattsPerSquareMeterKelvin().getInWattsPerSquareMeterKelvin();
+
+        // When
+        HeatTransferCoefficient h = HeatTransferCoefficient.ofWattsPerSquareMeterKelvin(expectedW);
+        HeatTransferCoefficient roundtrip = h.toBTUPerMinuteSquareFootFahrenheit();
+
+        // Then
+        assertThat(roundtrip.getInBTUPerMinuteSquareFootFahrenheit()).isCloseTo(1.0, within(1E-5));
+    }
+
+    @Test
+    @DisplayName("should consider equal coefficients across metric and imperial units")
+    void shouldBeEqualAcrossMetricAndImperial() {
+        // Given
+        HeatTransferCoefficient inBTU = HeatTransferCoefficient.ofBTUPerHourSquareFootFahrenheit(1.0);
+        double expectedW = inBTU.toWattsPerSquareMeterKelvin().getInWattsPerSquareMeterKelvin();
+        HeatTransferCoefficient inW = HeatTransferCoefficient.ofWattsPerSquareMeterKelvin(expectedW);
+
+        // Then
+        assertThat(inW).isEqualTo(inBTU);
+    }
+
+    @Test
+    @DisplayName("should consider equal coefficients across metric and imperial minute units")
+    void shouldBeEqualAcrossMetricAndImperialMinute() {
+        // Given
+        HeatTransferCoefficient inBTU = HeatTransferCoefficient.ofBTUPerMinuteSquareFootFahrenheit(1.0);
+        double expectedW = inBTU.toWattsPerSquareMeterKelvin().getInWattsPerSquareMeterKelvin();
+        HeatTransferCoefficient inW = HeatTransferCoefficient.ofWattsPerSquareMeterKelvin(expectedW);
+
+        // Then
+        assertThat(inW).isEqualTo(inBTU);
+    }
 }

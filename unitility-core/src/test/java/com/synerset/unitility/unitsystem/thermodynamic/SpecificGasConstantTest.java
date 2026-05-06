@@ -57,4 +57,56 @@ class SpecificGasConstantTest {
         assertThat(base.getUnit()).isEqualTo(SpecificGasConstantUnits.JOULE_PER_KILOGRAM_KELVIN);
         assertThat(base.getValue()).isCloseTo(500.0, within(1E-10));
     }
+
+    @Test
+    @DisplayName("should convert between J/(kg·K) and BTU/(lb·°R)")
+    void shouldConvertToImperialBTUPerPoundRankine() {
+        // Given
+        SpecificGasConstant r = SpecificGasConstant.ofJoulesPerKilogramKelvin(4186.8);
+
+        // When
+        SpecificGasConstant inImperial = r.toBTUPerPoundRankine();
+
+        // Then
+        assertThat(inImperial.getInBTUPerPoundRankine()).isCloseTo(1.0, within(1E-4));
+        assertThat(inImperial.toJoulesPerKilogramKelvin().getInJoulesPerKilogramKelvin())
+                .isCloseTo(4186.8, within(1E-4));
+    }
+
+    @Test
+    @DisplayName("should convert between J/(kg·K) and BTU/(lb·°F)")
+    void shouldConvertToImperialBTUPerPoundFahrenheit() {
+        // Given
+        SpecificGasConstant r = SpecificGasConstant.ofJoulesPerKilogramKelvin(4186.8);
+
+        // When
+        SpecificGasConstant inImperial = r.toBTUPerPoundFahrenheit();
+
+        // Then
+        assertThat(inImperial.getInBTUPerPoundFahrenheit()).isCloseTo(1.0, within(1E-4));
+        assertThat(inImperial.toJoulesPerKilogramKelvin().getInJoulesPerKilogramKelvin())
+                .isCloseTo(4186.8, within(1E-4));
+    }
+
+    @Test
+    @DisplayName("should consider equal gas constants across metric and imperial units")
+    void shouldBeEqualAcrossMetricAndImperial() {
+        // Given
+        SpecificGasConstant inJ = SpecificGasConstant.ofJoulesPerKilogramKelvin(4186.8);
+        SpecificGasConstant inBTU = SpecificGasConstant.ofBTUPerPoundRankine(1.0);
+
+        // Then
+        assertThat(inJ).isEqualTo(inBTU);
+    }
+
+    @Test
+    @DisplayName("should consider equal gas constants across metric and BTU/(lb·°F) units")
+    void shouldBeEqualAcrossMetricAndImperialFahrenheit() {
+        // Given
+        SpecificGasConstant inJ = SpecificGasConstant.ofJoulesPerKilogramKelvin(4186.8);
+        SpecificGasConstant inBTU = SpecificGasConstant.ofBTUPerPoundFahrenheit(1.0);
+
+        // Then
+        assertThat(inJ).isEqualTo(inBTU);
+    }
 }

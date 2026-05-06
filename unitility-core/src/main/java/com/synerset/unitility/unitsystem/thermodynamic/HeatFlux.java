@@ -36,6 +36,14 @@ public class HeatFlux implements CalculableQuantity<HeatFluxUnit, HeatFlux> {
         return new HeatFlux(value, HeatFluxUnits.KILOWATTS_PER_SQUARE_METER);
     }
 
+    public static HeatFlux ofBTUPerHourSquareFoot(double value) {
+        return new HeatFlux(value, HeatFluxUnits.BTU_PER_HOUR_SQUARE_FOOT);
+    }
+
+    public static HeatFlux ofBTUPerMinuteSquareFoot(double value) {
+        return new HeatFlux(value, HeatFluxUnits.BTU_PER_MINUTE_SQUARE_FOOT);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -84,6 +92,14 @@ public class HeatFlux implements CalculableQuantity<HeatFluxUnit, HeatFlux> {
         return toUnit(HeatFluxUnits.KILOWATTS_PER_SQUARE_METER);
     }
 
+    public HeatFlux toBTUPerHourSquareFoot() {
+        return toUnit(HeatFluxUnits.BTU_PER_HOUR_SQUARE_FOOT);
+    }
+
+    public HeatFlux toBTUPerMinuteSquareFoot() {
+        return toUnit(HeatFluxUnits.BTU_PER_MINUTE_SQUARE_FOOT);
+    }
+
     // Get value in target unit
     public double getInWattsPerSquareMeter() {
         return getInUnit(HeatFluxUnits.WATTS_PER_SQUARE_METER);
@@ -91,6 +107,14 @@ public class HeatFlux implements CalculableQuantity<HeatFluxUnit, HeatFlux> {
 
     public double getInKilowattsPerSquareMeter() {
         return getInUnit(HeatFluxUnits.KILOWATTS_PER_SQUARE_METER);
+    }
+
+    public double getInBTUPerHourSquareFoot() {
+        return getInUnit(HeatFluxUnits.BTU_PER_HOUR_SQUARE_FOOT);
+    }
+
+    public double getInBTUPerMinuteSquareFoot() {
+        return getInUnit(HeatFluxUnits.BTU_PER_MINUTE_SQUARE_FOOT);
     }
 
     @Override
