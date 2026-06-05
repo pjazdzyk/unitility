@@ -1,0 +1,118 @@
+{
+  "$version": 3,
+  "model": {
+    "name": "qwen/qwen3.6-27b",
+    "generationConfig": {
+      "timeout": 900000,
+      "maxOutputTokens": 100000,
+      "temperature": 0.7,
+      "topP": 1,
+      "frequencyPenalty": 0,
+      "presencePenalty": 0
+    },
+    "thinking": {
+      "enabled": true,
+      "budgetTokens": 100000
+    },
+    "chatCompression": {
+      "contextPercentageThreshold": 0.95
+    }
+  },
+  "modelProviders": {
+    "openai": [
+      {
+        "id": "qwen/qwen3.6-27b",
+        "name": "LM Studio",
+        "baseUrl": "http://192.168.1.11:1234/v1",
+        "envKey": "API_KEY",
+        "customHeaders": {
+          "Connection": "keep-alive"
+        }
+      }
+    ]
+  },
+  "security": {
+    "auth": {
+      "selectedType": "openai",
+      "apiKey": "not-needed"
+    }
+  },
+  "general": {
+    "approvalMode": false,
+    "showMemoryUsage": true,
+    "language": "en",
+    "theme": "auto"
+  },
+  "advanced": {
+    "ignoreFiles": [
+      "node_modules/**",
+      ".quasar/**",
+      "dist/**",
+      ".git/**",
+      "package-lock.json",
+      "yarn.lock",
+      "target/**",
+      "*.class",
+      "*.jar"
+    ],
+    "maxFileScanSize": 1048576,
+    "enableLinter": true
+  },
+  "permissions": {
+    "allow": [
+      "WebFetch(qwenlm.github.io)",
+      "Bash(git log *)",
+      "Bash(mvn *)",
+      "Bash(java *)",
+      "Bash(javac *)",
+      "WebFetch(en.wikipedia.org)",
+      "Bash(findstr *)",
+      "WebFetch(webbook.nist.gov)",
+      "WebFetch(www.engineeringtoolbox.com)",
+      "WebFetch(https://iapws.org/)",
+      "Bash(dir *)",
+      "Bash(type *)",
+      "Bash(del *)",
+      "Bash(git *)",
+      "Bash(gradle *)",
+      "Write(*)",
+      "Bash(mkdir *)",
+      "Bash(select-object *)",
+      "Bash(python *)",
+      "WebFetch(iapws.org)",
+      "WebFetch(scholar.google.com)",
+      "WebFetch(github.com)",
+      "WebFetch(raw.githubusercontent.com)",
+      "WebFetch(www.coolprop.org)",
+      "WebFetch(www.google.com)",
+      "Bash(pip install *)",
+      "Bash(powershell *)",
+      "WebFetch(geo.libretexts.org)",
+      "Bash(jar *)",
+      "Bash(javap *)",
+      "Bash(c:\\python313\\python.exe *)",
+      "Bash(where *)",
+      "Bash(rm *)",
+      "Bash(move *)",
+      "Bash(select-string *)",
+      "Bash(tee *)",
+      "Bash(copy *)",
+      "Read(C:\\1_PROJECTS\\hvac-engine-pro\\src\\main\\java\\com\\synerset\\hvacengine/**)",
+      "Read(C:\\1_PROJECTS\\hvac-engine-pro\\pom.xml/**)",
+      "Read(C:\\Users\\jazdz\\.m2\\repository\\com\\synerset/**)",
+      "Bash(rmdir *)",
+      "Read(C:\\temp\\hvac-sources\\com\\synerset\\hvacengine\\property\\fluids\\dryair/**)",
+      "Read(C:\\temp\\hvac-sources\\com\\synerset\\hvacengine\\property\\fluids\\humidair/**)",
+      "Read(C:\\temp\\hvac-sources\\com\\synerset\\hvacengine\\property\\fluids\\steam/**)",
+      "Read(C:\\temp\\hvac-sources\\com\\synerset\\hvacengine\\property\\fluids\\liquidwater/**)",
+      "Read(C:\\temp\\hvac-sources\\com\\synerset\\hvacengine\\property\\fluids\\watervapour/**)",
+      "Bash(cd *)",
+      "Bash(docker version)",
+      "Bash(docker ps)",
+      "Bash(docker run *)",
+      "Read(C:\\Users\\jazdz\\.m2\\repository\\com\\synerset\\hvac-engine/**)",
+      "Bash(do *)"
+    ],
+    "deny": []
+  }
+}

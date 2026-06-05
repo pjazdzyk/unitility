@@ -32,6 +32,8 @@ import com.synerset.unitility.unitsystem.thermodynamic.SpecificEntropy;
 import com.synerset.unitility.unitsystem.thermodynamic.SpecificEntropyUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.IsothermalCompressibility;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarVolume;
+import com.synerset.unitility.unitsystem.thermodynamic.EnergyDensity;
+import com.synerset.unitility.unitsystem.thermodynamic.EnergyDensityUnits;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarEnthalpy;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarEntropy;
 import com.synerset.unitility.unitsystem.thermodynamic.MolarEntropyUnits;
@@ -131,6 +133,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(ThermalDiffusivity.class, ThermalDiffusivity::of),
                 Map.entry(IsothermalCompressibility.class, IsothermalCompressibility::of),
                 Map.entry(MolarVolume.class, MolarVolume::of),
+                Map.entry(EnergyDensity.class, EnergyDensity::of),
                 Map.entry(MolarEnthalpy.class, MolarEnthalpy::of),
                 Map.entry(MolarEntropy.class, MolarEntropy::of),
                 Map.entry(MolarFraction.class, MolarFraction::of),
@@ -235,6 +238,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(ThermalDiffusivity.class, ThermalDiffusivityUnits.SQUARE_METER_PER_SECOND),
                 Map.entry(IsothermalCompressibility.class, IsothermalCompressibilityUnits.INVERSE_PASCAL),
                 Map.entry(MolarVolume.class, MolarVolumeUnits.CUBIC_METER_PER_MOLE),
+                Map.entry(EnergyDensity.class, EnergyDensityUnits.JOULE_PER_CUBIC_METER),
                 Map.entry(MolarEnthalpy.class, MolarEnthalpyUnits.JOULE_PER_MOLE),
                 Map.entry(MolarEntropy.class, MolarEntropyUnits.JOULE_PER_MOLE_KELVIN),
                 Map.entry(MolarFraction.class, MolarFractionUnits.DIMENSIONLESS),

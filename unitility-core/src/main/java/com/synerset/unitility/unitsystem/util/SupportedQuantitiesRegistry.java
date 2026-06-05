@@ -130,6 +130,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(ThermalDiffusivity.class, () -> Arrays.asList(ThermalDiffusivityUnits.values())),
                 Map.entry(IsothermalCompressibility.class, () -> Arrays.asList(IsothermalCompressibilityUnits.values())),
                 Map.entry(MolarVolume.class, () -> Arrays.asList(MolarVolumeUnits.values())),
+                Map.entry(EnergyDensity.class, () -> Arrays.asList(EnergyDensityUnits.values())),
                 Map.entry(MolarEnthalpy.class, () -> Arrays.asList(MolarEnthalpyUnits.values())),
                 Map.entry(MolarEntropy.class, () -> Arrays.asList(MolarEntropyUnits.values())),
                 Map.entry(MolarFraction.class, () -> Arrays.asList(MolarFractionUnits.values())),
