@@ -134,6 +134,8 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(MolarEnthalpy.class, () -> Arrays.asList(MolarEnthalpyUnits.values())),
                 Map.entry(MolarEntropy.class, () -> Arrays.asList(MolarEntropyUnits.values())),
                 Map.entry(MolarFraction.class, () -> Arrays.asList(MolarFractionUnits.values())),
+                Map.entry(AirFuelRatioVolume.class, () -> Arrays.asList(AirFuelRatioVolumeUnits.values())),
+                Map.entry(AirFuelRatioMass.class, () -> Arrays.asList(AirFuelRatioMassUnits.values())),
                 Map.entry(MolarMass.class, () -> Arrays.asList(MolarMassUnits.values())),
                 Map.entry(SpecificVolume.class, () -> Arrays.asList(SpecificVolumeUnits.values())),
                 Map.entry(IsentropicCompressibility.class, () -> Arrays.asList(IsentropicCompressibilityUnits.values())),
