@@ -16,6 +16,8 @@ import com.synerset.unitility.unitsystem.flow.MassFlux;
 import com.synerset.unitility.unitsystem.flow.MassFluxUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnits;
+import com.synerset.unitility.unitsystem.flow.NormalVolumetricFlow;
+import com.synerset.unitility.unitsystem.flow.NormalVolumetricFlowUnits;
 import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
 import com.synerset.unitility.unitsystem.geographic.Longitude;
@@ -103,6 +105,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(MassFlow.class, MassFlow::of),
                 Map.entry(MassFlux.class, MassFlux::of),
                 Map.entry(VolumetricFlow.class, VolumetricFlow::of),
+                Map.entry(NormalVolumetricFlow.class, NormalVolumetricFlow::of),
                 // Humidity
                 Map.entry(HumidityRatio.class, HumidityRatio::of),
                 Map.entry(RelativeHumidity.class, RelativeHumidity::of),
@@ -120,6 +123,8 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Torque.class, Torque::of),
                 // Thermodynamic
                 Map.entry(Density.class, Density::of),
+                Map.entry(RelativeDensity.class, RelativeDensity::of),
+                Map.entry(VapourQuality.class, VapourQuality::of),
                 Map.entry(DynamicViscosity.class, DynamicViscosity::of),
                 Map.entry(Energy.class, Energy::of),
                 Map.entry(KinematicViscosity.class, KinematicViscosity::of),
@@ -210,6 +215,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(MassFlow.class, MassFlowUnits.KILOGRAM_PER_SECOND),
                 Map.entry(MassFlux.class, MassFluxUnits.KILOGRAM_PER_SQUARE_METER_SECOND),
                 Map.entry(VolumetricFlow.class, VolumetricFlowUnits.CUBIC_METERS_PER_SECOND),
+                Map.entry(NormalVolumetricFlow.class, NormalVolumetricFlowUnits.NORMAL_CUBIC_METERS_PER_SECOND),
                 // Humidity (2)
                 Map.entry(HumidityRatio.class, HumidityRatioUnits.KILOGRAM_PER_KILOGRAM),
                 Map.entry(RelativeHumidity.class, RelativeHumidityUnits.DECIMAL),
@@ -227,6 +233,8 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Torque.class, TorqueUnits.NEWTON_METER),
                 // Thermodynamic (13)
                 Map.entry(Density.class, DensityUnits.KILOGRAM_PER_CUBIC_METER),
+                Map.entry(RelativeDensity.class, RelativeDensityUnits.DIMENSIONLESS),
+                Map.entry(VapourQuality.class, VapourQualityUnits.FRACTION),
                 Map.entry(DynamicViscosity.class, DynamicViscosityUnits.PASCAL_SECOND),
                 Map.entry(Energy.class, EnergyUnits.JOULE),
                 Map.entry(KinematicViscosity.class, KinematicViscosityUnits.SQUARE_METER_PER_SECOND),

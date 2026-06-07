@@ -16,6 +16,8 @@ import com.synerset.unitility.unitsystem.flow.MassFlux;
 import com.synerset.unitility.unitsystem.flow.MassFluxUnits;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlow;
 import com.synerset.unitility.unitsystem.flow.VolumetricFlowUnits;
+import com.synerset.unitility.unitsystem.flow.NormalVolumetricFlow;
+import com.synerset.unitility.unitsystem.flow.NormalVolumetricFlowUnits;
 import com.synerset.unitility.unitsystem.geographic.Bearing;
 import com.synerset.unitility.unitsystem.geographic.GeoDistance;
 import com.synerset.unitility.unitsystem.geographic.Latitude;
@@ -99,6 +101,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(MassFlow.class, () -> Arrays.asList(MassFlowUnits.values())),
                 Map.entry(MassFlux.class, () -> Arrays.asList(MassFluxUnits.values())),
                 Map.entry(VolumetricFlow.class, () -> Arrays.asList(VolumetricFlowUnits.values())),
+                Map.entry(NormalVolumetricFlow.class, () -> Arrays.asList(NormalVolumetricFlowUnits.values())),
                 // Humidity
                 Map.entry(HumidityRatio.class, () -> Arrays.asList(HumidityRatioUnits.values())),
                 Map.entry(RelativeHumidity.class, () -> Arrays.asList(RelativeHumidityUnits.values())),
@@ -116,6 +119,8 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Torque.class, () -> Arrays.asList(TorqueUnits.values())),
                 // Thermodynamic
                 Map.entry(Density.class, () -> Arrays.asList(DensityUnits.values())),
+                Map.entry(RelativeDensity.class, () -> Arrays.asList(RelativeDensityUnits.values())),
+                Map.entry(VapourQuality.class, () -> Arrays.asList(VapourQualityUnits.values())),
                 Map.entry(SpecificInternalEnergy.class, () -> Arrays.asList(SpecificInternalEnergyUnits.values())),
                 Map.entry(DynamicViscosity.class, () -> Arrays.asList(DynamicViscosityUnits.values())),
                 Map.entry(Energy.class, () -> Arrays.asList(EnergyUnits.values())),
