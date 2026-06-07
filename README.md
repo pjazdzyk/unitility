@@ -19,14 +19,6 @@ features, such as overloaded operators.
 [![Unitility](https://img.shields.io/github/v/release/pjazdzyk/Unitility?label=Unitility&color=13ADF3&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI0LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 &nbsp;
 ![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) <br>
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility)
-&nbsp;
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility)
-&nbsp;
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility)
-&nbsp;
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pjazdzyk_unitility&metric=coverage)](https://sonarcloud.io/summary/new_code?id=pjazdzyk_unitility)
-&nbsp;
 
 > AUTHOR: **Piotr Jazdzyk**, MSc Eng <br>
 > LINKEDIN: https://www.linkedin.com/in/pjazdzyk <br>
@@ -71,13 +63,13 @@ features, such as overloaded operators.
 
 Copy the Maven dependency provided below to your pom.xml file, and you are ready to go. For other package managers,
 check maven central repository:
-[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/4.0.2/jar?eh=).
+[UNITILITY](https://search.maven.org/artifact/com.synerset/unitility/4.1.0/jar?eh=).
 
 ```xml
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-core</artifactId>
-    <version>4.0.2</version>
+    <version>4.1.0</version>
 </dependency>
 ```
 If you use frameworks to develop web applications, it is recommended to use Unitility extension modules, 
@@ -89,7 +81,7 @@ Extension for the Spring Boot framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>4.0.2</version>
+    <version>4.1.0</version>
 </dependency>
 ```
 Extension for the Quarkus framework:
@@ -97,7 +89,7 @@ Extension for the Quarkus framework:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>4.0.2</version>
+    <version>4.1.0</version>
 </dependency>
 ```
 Extensions include CORE module, so you don't have to put it separate in your pom.
@@ -120,7 +112,6 @@ Extension modules:<br>
 CI/CD:<br>
 ![image](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 &nbsp;
-![image](https://img.shields.io/badge/Sonar%20cloud-F3702A?style=for-the-badge&logo=sonarcloud&logoColor=white) &nbsp;
 
 The Key concept of the core module is to use plain Java, to minimize any issues with compatibility, conflicting
 transitive dependencies or excessive dependency version management.
@@ -186,7 +177,18 @@ it* Specific entropy: Joule per kilogram Kelvin [J/(kg·K)], Kilojoule per kilog
 * Molar mass: gram per mole [g/mol], kilogram per kilomole [kg/kmol], kilogram per mole [kg/mol], milligram per millimole [mg/mmol], pound per pound-mole [lb/lb-mol], ounce per mole [oz/mol]
 * Molar volume: cubic meter per mole [m³/mol], liter per mole [L/mol], cubic decimeter per mole [dm³/mol], cubic centimeter per mole [cm³/mol], milliliter per mole [mL/mol], cubic foot per pound-mole [ft³/lb-mol], cubic inch per pound-mole [in³/lb-mol]
 * Isothermal compressibility: Inverse Pascal [1/Pa], Inverse kilopascal [1/kPa], Inverse megapascal [1/MPa], Inverse bar [1/bar], Inverse PSI [1/psi], Inverse atmosphere [1/atm]
+* Isentropic compressibility: Inverse Pascal [1/Pa], Inverse kilopascal [1/kPa], Inverse megapascal [1/MPa], Inverse bar [1/bar], Inverse atmosphere [1/atm], Inverse PSI [1/psi], Inverse PSF [1/psf]
+* Cubic expansion coefficient: Inverse Kelvin [1/K], Inverse Celsius [1/°C], Inverse millikelvin [1/mK], Inverse Rankine [1/°R], Inverse Fahrenheit [1/°F]
 * Compressibility factor: dimensionless [-]
+* Specific internal energy: Joule per kilogram [J/kg], Kilojoule per kilogram [kJ/kg], Megajoule per kilogram [MJ/kg], BTU per pound [BTU/lb], Calorie per gram [cal/g]
+* Specific gas constant: Joule per kilogram Kelvin [J/(kg·K)], Kilojoule per kilogram Kelvin [kJ/(kg·K)], BTU per pound Rankine [BTU/(lb·°R)], BTU per pound Fahrenheit [BTU/(lb·°F)]
+* Energy density: Joule per cubic meter [J/m³], Kilojoule per cubic meter [kJ/m³], Megajoule per cubic meter [MJ/m³], Watt hour per cubic meter [Wh/m³], Kilowatt hour per cubic meter [kWh/m³], Kilocalorie per cubic meter [kcal/m³], BTU per cubic foot [BTU/ft³], Kilo BTU per cubic foot [MBTU/ft³]
+* Heat flux: Watts per square meter [W/m²], Kilowatts per square meter [kW/m²], BTU per hour square foot [BTU/(h·ft²)], BTU per minute square foot [BTU/(min·ft²)]
+* Linear heat flux: Watts per meter [W/m], Kilowatts per meter [kW/m], BTU per hour foot [BTU/(h·ft)], BTU per minute foot [BTU/(min·ft)]
+* Heat transfer coefficient: Watts per square meter Kelvin [W/(m²·K)], Kilowatts per square meter Kelvin [kW/(m²·K)], BTU per hour square foot Fahrenheit [BTU/(h·ft²·°F)], BTU per minute square foot Fahrenheit [BTU/(min·ft²·°F)]
+* Pressure coefficient: Pascal per Kelvin [Pa/K], Kilopascal per Kelvin [kPa/K], Megapascal per Kelvin [MPa/K], Bar per Kelvin [bar/K], Atmosphere per Kelvin [atm/K], PSI per Rankine [psi/°R], PSI per Fahrenheit [psi/°F]
+* Air-fuel ratio (mass): Kilogram per kilogram [kg/kg], Gram per gram [g/g], Pound per pound [lb/lb], Ounce per ounce [oz/oz]
+* Air-fuel ratio (volume): Cubic meter per cubic meter [m³/m³], Normal cubic meter per normal cubic meter [Nm³/Nm³], Cubic foot per cubic foot [ft³/ft³], Standard cubic foot per standard cubic foot [scf/scf]
 
 #### FLOWS:
 
@@ -194,6 +196,7 @@ it* Specific entropy: Joule per kilogram Kelvin [J/(kg·K)], Kilojoule per kilog
 * Volumetric flow: Cubic meters per second [m³/s], Cubic meters per minute [m³/min], Cubic meters per hour [m³/h], Litre
   per second [L/s], Litre per minute [L/min], Litre per hour [L/h], Gallons per second US [gal/s_US], Gallons per minute US [gal/min_US],
   Gallons per hour US [gal/h_US], Gallons per second UK [gal/s_UK], Gallons per minute UK [gal/min_UK], Gallons per hour UK [gal/h_UK]
+* Mass flux: Kilogram per square meter second [kg/(m²·s)], Gram per square meter second [g/(m²·s)], Pound per square foot second [lb/(ft²·s)], Pound per square foot hour [lb/(ft²·h)]
 
 #### HUMID AIR SPECIFIC:
 
@@ -205,11 +208,17 @@ it* Specific entropy: Joule per kilogram Kelvin [J/(kg·K)], Kilojoule per kilog
 * Linear resistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
 * Friction factor: [-]
 * LocalLoss factor: [-]
+* Flow coefficient: Metric flow coefficient [Kv], Imperial flow coefficient [CV]
+* Bypass factor: [-]
 * Rotation speed To Flow Rate Ratio: Radians per second per meter per second [rad·s⁻¹/m³·s⁻¹], revolutions per minute per gallons per minute [rpm/gpm]
 
 #### SIMILARITY NUMBERS:
 
-* Grashof number, Prandtl number, Reynolds number, Bypass factor
+* Biot number, Bond number, Grashof number, Nusselt number, Peclet number, Prandtl number, Rayleigh number, Reynolds number, Weber number, Generic dimensionless
+
+#### DIMENSIONLESS:
+
+* Boiling number, Confinement number, Jakob number, Martinelli parameter, Two-phase multiplier
 
 #### ACOUSTIC:
 * Sound power: Watt [W], Decibel [dB]
@@ -561,7 +570,7 @@ deserialization back to Java objects. To include this module in your project, us
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-jackson</artifactId>
-    <version>4.0.2</version>
+    <version>4.1.0</version>
 </dependency>
 ```
 PhysicalQuantity JSON structure for valid serialization / deserialization has been defined as in the following example:
@@ -640,7 +649,7 @@ add the following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-spring</artifactId>
-    <version>4.0.2</version>
+    <version>4.1.0</version>
 </dependency>
 ```
 Adding Spring module to the project will automatically:
@@ -679,7 +688,7 @@ add following dependency:
 <dependency>
     <groupId>com.synerset</groupId>
     <artifactId>unitility-quarkus</artifactId>
-    <version>4.0.2</version>
+    <version>4.1.0</version>
 </dependency>
 ```
 Adding Quarkus module to the project will automatically:
@@ -1299,10 +1308,10 @@ Small shield with referenced most recent version tag:<br>
 ```
 
 Tech shield with version tag for manual adjustment (you can indicate which version you actually use): <br>
-[![Unitility](https://img.shields.io/badge/UNITILITY-v4.0.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v4.1.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 
 ```markdown
-[![Unitility](https://img.shields.io/badge/UNITILITY-v4.0.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
+[![Unitility](https://img.shields.io/badge/UNITILITY-v4.1.0-13ADF3?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMi41bW0iIGhlaWdodD0iMTQuNW1tIiB2aWV3Qm94PSIwIDAgMjI1MCAxNDUwIj4NCiAgPHBvbHlnb24gZmlsbD0iIzUwN0QxNCIgcG9pbnRzPSIyMjQxLjAzLDE1Ljg4IDExMzYuMzgsMTUuODQgOTA1Ljg4LDQxNS4xIDIwMTAuNTMsNDE1LjA5IiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNzFBQjIzIiBwb2ludHM9IjExMTYuMzgsMTUuODQgNjU1Ljk5LDE1Ljg0IDQ5NC4xNSwyOTYuMTcgNzI4LjM1LDY5NC44OCIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzhBQzkzNCIgcG9pbnRzPSI0ODQuMTUsMzA2LjE3IDI1NS4wNiw3MDIuOTYgMzg3LjY2LDkzMi42NCA4NDUuODMsOTMyLjYzIiAvPg0KICA8cG9seWdvbiBmaWxsPSIjNThEMEZGIiBwb2ludHM9Ii03LjE3LDE0NDAuMDkgMTA5Ny45NywxNDQwLjA4IDEzMjguNDcsMTA0MC44MyAyMjMuMzIsMTA0MC44NSIgLz4NCiAgPHBvbHlnb24gZmlsbD0iIzEzQURGMyIgcG9pbnRzPSIxNzM5LjA0LDExNjAuOTEgMTUwOS4wOSw3NjIuNjQgMTExNy45NywxNDQwLjA4IDExODYuOTMsMTQ0MC4wOCAxNTc3Ljg3LDE0NDAuMDgiIC8+DQogIDxwb2x5Z29uIGZpbGw9IiMwMzkzRDAiIHBvaW50cz0iMTk3OC44LDc1Mi45NiAxODQ2LjIsNTIzLjMgMTM4Ni42OCw1MjMuMyAxNzQ5LjA0LDExNTAuOTEiIC8+DQo8L3N2Zz4=)](https://github.com/pjazdzyk/Unitility)
 ```
 
 ## 11. ACKNOWLEDGMENTS

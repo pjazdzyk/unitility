@@ -66,8 +66,8 @@ mvn test -Dtest=TemperatureTest
 # Skip tests
 mvn clean install -DskipTests
 
-# Build + Sonar analysis
-mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=pjazdzyk_unitility
+# Build and verify
+mvn -B verify
 
 # Coverage report
 # Generated in target/site/jacoco/ after running tests
@@ -109,7 +109,6 @@ See detailed step-by-step guide in [AGENTS.md](AGENTS.md) under "How to Add a Ne
 
 - **GitHub Actions:** `build-test-analyze.yml` runs on push/PR to `master`
 - **JDK 17 (Zulu)** with Maven caching
-- **SonarCloud** for code quality, coverage, and vulnerability analysis
 - **Maven Central** deployment via `centralDeploy` profile with GPG signing
 
 ## Key Files

@@ -63,8 +63,9 @@
         <!-- Quarkus module -->
         <quarkus-version>3.34.2</quarkus-version>
         <!-- Jakarta validation module -->
-        <jakarta.validation-api.version>4.0.0-M1</jakarta.validation-api.version>
-        <jakarta.el.version>6.1.0-M1</jakarta.el.version>
+        <jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
+        <jakarta.persistance-api.version>3.2.0</jakarta.persistance-api.version>
+        <jakarta.el.version>6.1.0-M2</jakarta.el.version>
         <hibernate-validator.version>9.0.1.Final</hibernate-validator.version>
 
         <!-- Test dependencies versions -->
@@ -79,16 +80,6 @@
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
         <jandex-maven-plugin.version>3.5.3</jandex-maven-plugin.version>
-
-        <!-- Sonar Cloud Properties-->
-        <sonar.organization>synerset</sonar.organization>
-        <sonar.projectKey>pjazdzyk_unitility</sonar.projectKey>
-        <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.language>java</sonar.language>
-        <sonar.binaries>target/classes</sonar.binaries>
     </properties>
 
     <dependencies>
