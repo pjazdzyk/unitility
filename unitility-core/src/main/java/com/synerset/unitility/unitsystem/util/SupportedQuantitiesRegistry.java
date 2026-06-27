@@ -73,6 +73,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(Mass.class, () -> Arrays.asList(MassUnits.values())),
                 Map.entry(LinearMassDensity.class, () -> Arrays.asList(LinearMassDensityUnits.values())),
                 Map.entry(Velocity.class, () -> Arrays.asList(VelocityUnits.values())),
+                Map.entry(Time.class, () -> Arrays.asList(TimeUnits.values())),
                 Map.entry(AngularVelocity.class, () -> Arrays.asList(AngularVelocityUnits.values())),
                 Map.entry(Volume.class, () -> Arrays.asList(VolumeUnits.values())),
                 Map.entry(Ratio.class, () -> Arrays.asList(RatioUnits.values())),
@@ -150,6 +151,10 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(HeatTransferCoefficient.class, () -> Arrays.asList(HeatTransferCoefficientUnits.values())),
                 Map.entry(HeatFlux.class, () -> Arrays.asList(HeatFluxUnits.values())),
                 Map.entry(LinearHeatFlux.class, () -> Arrays.asList(LinearHeatFluxUnits.values())),
+                Map.entry(ThermalConductance.class, () -> Arrays.asList(ThermalConductanceUnits.values())),
+                Map.entry(HeatCapacity.class, () -> Arrays.asList(HeatCapacityUnits.values())),
+                Map.entry(Emissivity.class, () -> Arrays.asList(RatioUnits.values())),
+                Map.entry(Absorptivity.class, () -> Arrays.asList(RatioUnits.values())),
                 // Geographic
                 Map.entry(Latitude.class, () -> Arrays.asList(AngleUnits.values())),
                 Map.entry(Longitude.class, () -> Arrays.asList(AngleUnits.values())),

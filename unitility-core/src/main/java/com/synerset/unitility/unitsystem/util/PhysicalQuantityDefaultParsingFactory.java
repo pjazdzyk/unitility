@@ -77,6 +77,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Mass.class, Mass::of),
                 Map.entry(LinearMassDensity.class, LinearMassDensity::of),
                 Map.entry(Velocity.class, Velocity::of),
+                Map.entry(Time.class, Time::of),
                 Map.entry(AngularVelocity.class, AngularVelocity::of),
                 Map.entry(Volume.class, Volume::of),
                 Map.entry(Ratio.class, Ratio::of),
@@ -154,6 +155,10 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(HeatTransferCoefficient.class, HeatTransferCoefficient::of),
                 Map.entry(HeatFlux.class, HeatFlux::of),
                 Map.entry(LinearHeatFlux.class, LinearHeatFlux::of),
+                Map.entry(ThermalConductance.class, ThermalConductance::of),
+                Map.entry(HeatCapacity.class, HeatCapacity::of),
+                Map.entry(Emissivity.class, Emissivity::of),
+                Map.entry(Absorptivity.class, Absorptivity::of),
                 // Geographic
                 Map.entry(Latitude.class, Latitude::of),
                 Map.entry(Longitude.class, Longitude::of),
@@ -191,6 +196,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(Effectiveness.class, EffectivenessUnits.PERCENT),
                 Map.entry(Thickness.class, DistanceUnits.METER),
                 Map.entry(Velocity.class, VelocityUnits.METER_PER_SECOND),
+                Map.entry(Time.class, TimeUnits.SECOND),
                 Map.entry(Volume.class, VolumeUnits.CUBIC_METER),
                 Map.entry(DataSize.class, DataSizeUnits.BYTE),
                 // Dimensionless (6)
@@ -264,6 +270,10 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(HeatTransferCoefficient.class, HeatTransferCoefficientUnits.WATTS_PER_SQUARE_METER_KELVIN),
                 Map.entry(HeatFlux.class, HeatFluxUnits.WATTS_PER_SQUARE_METER),
                 Map.entry(LinearHeatFlux.class, LinearHeatFluxUnits.WATTS_PER_METER),
+                Map.entry(ThermalConductance.class, ThermalConductanceUnits.WATTS_PER_KELVIN),
+                Map.entry(HeatCapacity.class, HeatCapacityUnits.JOULES_PER_KELVIN),
+                Map.entry(Emissivity.class, RatioUnits.DECIMAL),
+                Map.entry(Absorptivity.class, RatioUnits.DECIMAL),
                 // Geographic (3)
                 Map.entry(Latitude.class, AngleUnits.DEGREES),
                 Map.entry(Longitude.class, AngleUnits.DEGREES),
