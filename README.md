@@ -23,6 +23,15 @@ features, such as overloaded operators.
 > AUTHOR: **Piotr Jazdzyk**, MSc Eng <br>
 > LINKEDIN: https://www.linkedin.com/in/pjazdzyk <br>
 
+### Unitility in production
+
+Unitility is the typed-quantity backbone of **[EnergyFlowX](https://energyflowx.com)**, a free
+platform of professional engineering calculators. Every input and result there is a Unitility
+`PhysicalQuantity`, from the [humid air psychrometric calculator](https://energyflowx.com/fluid-properties/air/humid-air)
+and [steam properties (IAPWS-IF97)](https://energyflowx.com/fluid-properties/water-steam/steam)
+to the [ventilation duct sizing calculator](https://energyflowx.com/hydraulics/duct-sizing-calculator).
+Try them to see the library working at scale.
+
 ## TABLE OF CONTENTS
 1. [Installation](#1-installation) <br>
 2. [Tech & dependencies](#2-tech-and-dependencies) <br>
