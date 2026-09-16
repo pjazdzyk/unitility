@@ -157,6 +157,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(LinearHeatFlux.class, LinearHeatFlux::of),
                 Map.entry(ThermalConductance.class, ThermalConductance::of),
                 Map.entry(HeatCapacity.class, HeatCapacity::of),
+                Map.entry(SurfaceTension.class, SurfaceTension::of),
                 Map.entry(Emissivity.class, Emissivity::of),
                 Map.entry(Absorptivity.class, Absorptivity::of),
                 // Geographic
@@ -272,6 +273,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(LinearHeatFlux.class, LinearHeatFluxUnits.WATTS_PER_METER),
                 Map.entry(ThermalConductance.class, ThermalConductanceUnits.WATTS_PER_KELVIN),
                 Map.entry(HeatCapacity.class, HeatCapacityUnits.JOULES_PER_KELVIN),
+                Map.entry(SurfaceTension.class, SurfaceTensionUnits.NEWTON_PER_METER),
                 Map.entry(Emissivity.class, RatioUnits.DECIMAL),
                 Map.entry(Absorptivity.class, RatioUnits.DECIMAL),
                 // Geographic (3)

@@ -153,6 +153,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(LinearHeatFlux.class, () -> Arrays.asList(LinearHeatFluxUnits.values())),
                 Map.entry(ThermalConductance.class, () -> Arrays.asList(ThermalConductanceUnits.values())),
                 Map.entry(HeatCapacity.class, () -> Arrays.asList(HeatCapacityUnits.values())),
+                Map.entry(SurfaceTension.class, () -> Arrays.asList(SurfaceTensionUnits.values())),
                 Map.entry(Emissivity.class, () -> Arrays.asList(RatioUnits.values())),
                 Map.entry(Absorptivity.class, () -> Arrays.asList(RatioUnits.values())),
                 // Geographic

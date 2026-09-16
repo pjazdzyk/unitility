@@ -1,0 +1,78 @@
+package com.synerset.unitility.unitsystem.thermodynamic;
+
+import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
+import com.synerset.unitility.unitsystem.util.StringTransformer;
+
+import java.util.function.DoubleUnaryOperator;
+
+/**
+ * Surface tension {@code σ} (force per unit length of interface, N/m). Every factor below is an exact
+ * definition: 1 dyn/cm = 1E-3 N/m, and 1 lbf/ft = 4.4482216152605 N / 0.3048 m from the international
+ * pound-force and foot.
+ */
+public enum SurfaceTensionUnits implements SurfaceTensionUnit {
+
+    NEWTON_PER_METER("N/m", val -> val, val -> val),
+    MILLINEWTON_PER_METER("mN/m", val -> val * 1E-3, val -> val / 1E-3),
+    DYNE_PER_CENTIMETER("dyn/cm", val -> val * 1E-3, val -> val / 1E-3),
+    POUND_FORCE_PER_FOOT("lbf/ft",
+            val -> val * ConversionConstants.LBF_FT_TO_N_M,
+            val -> val / ConversionConstants.LBF_FT_TO_N_M);
+
+    private final String symbol;
+    private final DoubleUnaryOperator toBaseConverter;
+    private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    SurfaceTensionUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+        this.symbol = symbol;
+        this.toBaseConverter = toBaseConverter;
+        this.fromBaseToUnitConverter = fromBaseToUnitConverter;
+    }
+
+    @Override
+    public String getSymbol() {
+        return symbol;
+    }
+
+    @Override
+    public SurfaceTensionUnit getBaseUnit() {
+        return NEWTON_PER_METER;
+    }
+
+    @Override
+    public double toValueInBaseUnit(double valueInThisUnit) {
+        return toBaseConverter.applyAsDouble(valueInThisUnit);
+    }
+
+    @Override
+    public double fromValueInBaseUnit(double valueInBaseUnit) {
+        return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
+    }
+
+    public static SurfaceTensionUnit fromSymbol(String rawSymbol) {
+        if (rawSymbol == null || rawSymbol.isBlank()) {
+            return NEWTON_PER_METER;
+        }
+        String requestedSymbol = unifySymbol(rawSymbol);
+        for (SurfaceTensionUnits unit : values()) {
+            String currentSymbol = unifySymbol(unit.getSymbol());
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
+                return unit;
+            }
+        }
+        throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
+                + SurfaceTensionUnits.class.getSimpleName());
+    }
+
+    private static String unifySymbol(String inputString) {
+        return StringTransformer.of(inputString)
+                .trimLowerAndClean()
+                .unifyMultiAndDiv()
+                .toString();
+    }
+
+    private static class ConversionConstants {
+        // 1 lbf = 4.4482216152605 N and 1 ft = 0.3048 m, both exact.
+        private static final double LBF_FT_TO_N_M = 4.4482216152605 / 0.3048;
+    }
+}
