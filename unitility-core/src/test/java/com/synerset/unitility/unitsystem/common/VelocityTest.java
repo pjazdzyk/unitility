@@ -134,7 +134,9 @@ class VelocityTest {
         Velocity actualInMetersPerSecond = actualInKnots.toBaseUnit();
 
         // Then
-        Velocity expectedInKnots = Velocity.ofKnots(19.43844492440606);
+        // 10 m/s ÷ (1852/3600 m/s) = 19.438 444 924 406 047 5... kn. 4.1.0 pinned 19.43844492440606, from its
+        // truncated knot 0.514444444444444 m/s.
+        Velocity expectedInKnots = Velocity.ofKnots(19.438444924406048);
         assertThat(actualInKnots.getValue()).isEqualTo(actualInKnotsVal);
         assertThat(actualInKnots.getValue()).isEqualTo(expectedInKnots.getValue(), withPrecision(1e-14));
         assertThat(actualInMetersPerSecond).isEqualTo(initialVelocity);

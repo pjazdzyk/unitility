@@ -2,17 +2,27 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum EffectivenessUnits implements EffectivenessUnit {
 
-    PERCENT("%", val -> val, val -> val),
-    DECIMAL("", val -> val * 100, val -> val / 100);
+    PERCENT("%", 1.0),
+    DECIMAL("", 100.0);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    EffectivenessUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     EffectivenessUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

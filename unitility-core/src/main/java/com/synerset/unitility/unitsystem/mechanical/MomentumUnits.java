@@ -2,17 +2,28 @@ package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum MomentumUnits implements MomentumUnit {
-    KILOGRAM_METER_PER_SECOND("kg·m/s", val -> val, val -> val),
-    POUND_FEET_PER_SECOND("lb·ft/s", val -> val * 0.138254954376, val -> val / 0.138254954376),
-    GRAM_CENTIMETRE_PER_SECOND("g·cm/s", val -> val * 0.00001, val -> val / 0.00001);
+    KILOGRAM_METER_PER_SECOND("kg·m/s", 1.0),
+    POUND_FEET_PER_SECOND("lb·ft/s", UnitDefinitions.POUND_FOOT_PER_SECOND),
+    GRAM_CENTIMETRE_PER_SECOND("g·cm/s", 1.0E-5);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    MomentumUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     MomentumUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

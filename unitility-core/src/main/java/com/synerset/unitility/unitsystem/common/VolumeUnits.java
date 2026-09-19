@@ -2,26 +2,37 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum VolumeUnits implements VolumeUnit {
 
-    CUBIC_METER("m³", val -> val, val -> val),
-    CUBIC_CENTIMETER("cm³", val -> val * 0.000001, val -> val * 1000000.0),
-    CUBIC_DECIMETER("dm³", val -> val * 0.001, val -> val * 1000.0),
-    CUBIC_FOOT("ft³", val -> val * 0.0283168466, val -> val / 0.0283168466),
-    LITRE("l", val -> val * 0.001, val -> val * 1000.0),
-    HECTOLITRE("hl", val -> val * 0.1, val -> val * 10.0),
-    MILLILITRE("ml", val -> val * 0.000001, val -> val * 1000000.0),
-    OUNCE("fl.oz", val -> val * 0.0000295735295625, val -> val / 0.0000295735295625),
-    PINT("pt", val -> val * 0.000473176473, val -> val / 0.000473176473),
-    GALLON_US("gal_US", val -> val * 0.003785411784, val -> val / 0.003785411784),
-    GALLON_UK("gal_UK", val -> val * 0.00454608999999, val -> val / 0.00454608999999);
+    CUBIC_METER("m³", 1.0),
+    CUBIC_CENTIMETER("cm³", 1.0E-6),
+    CUBIC_DECIMETER("dm³", 1.0E-3),
+    CUBIC_FOOT("ft³", UnitDefinitions.CUBIC_FOOT),
+    LITRE("l", UnitDefinitions.LITRE),
+    HECTOLITRE("hl", 0.1),
+    MILLILITRE("ml", 1.0E-6),
+    OUNCE("fl.oz", UnitDefinitions.US_FLUID_OUNCE),
+    PINT("pt", UnitDefinitions.US_PINT),
+    GALLON_US("gal_US", UnitDefinitions.US_GALLON),
+    GALLON_UK("gal_UK", UnitDefinitions.UK_GALLON);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    VolumeUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     VolumeUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

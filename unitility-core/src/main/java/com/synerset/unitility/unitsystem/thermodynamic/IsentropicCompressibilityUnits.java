@@ -2,22 +2,33 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum IsentropicCompressibilityUnits implements IsentropicCompressibilityUnit {
 
-    INVERSE_PASCAL("1/Pa", val -> val, val -> val),
-    INVERSE_KILOPASCAL("1/kPa", val -> val / 1000.0, val -> val * 1000.0),
-    INVERSE_MEGAPASCAL("1/MPa", val -> val / 1_000_000.0, val -> val * 1_000_000.0),
-    INVERSE_BAR("1/bar", val -> val / 100_000.0, val -> val * 100_000.0),
-    INVERSE_ATMOSPHERE("1/atm", val -> val / 101325.0, val -> val * 101325.0),
-    INVERSE_PSI("1/psi", val -> val / 6894.757293168361, val -> val * 6894.757293168361),
-    INVERSE_PSF("1/psf", val -> val / 47.88025898033584, val -> val * 47.88025898033584);
+    INVERSE_PASCAL("1/Pa", 1.0),
+    INVERSE_KILOPASCAL("1/kPa", 1.0E-3),
+    INVERSE_MEGAPASCAL("1/MPa", 1.0E-6),
+    INVERSE_BAR("1/bar", 1.0E-5),
+    INVERSE_ATMOSPHERE("1/atm", UnitDefinitions.PER_ATMOSPHERE),
+    INVERSE_PSI("1/psi", UnitDefinitions.PER_PSI),
+    INVERSE_PSF("1/psf", UnitDefinitions.PER_PSF);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    IsentropicCompressibilityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     IsentropicCompressibilityUnits(String symbol, DoubleUnaryOperator toBaseConverter,
                                    DoubleUnaryOperator fromBaseToUnitConverter) {

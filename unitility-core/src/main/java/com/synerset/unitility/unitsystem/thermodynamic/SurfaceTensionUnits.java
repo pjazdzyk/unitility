@@ -2,6 +2,8 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -12,16 +14,23 @@ import java.util.function.DoubleUnaryOperator;
  */
 public enum SurfaceTensionUnits implements SurfaceTensionUnit {
 
-    NEWTON_PER_METER("N/m", val -> val, val -> val),
-    MILLINEWTON_PER_METER("mN/m", val -> val * 1E-3, val -> val / 1E-3),
-    DYNE_PER_CENTIMETER("dyn/cm", val -> val * 1E-3, val -> val / 1E-3),
-    POUND_FORCE_PER_FOOT("lbf/ft",
-            val -> val * ConversionConstants.LBF_FT_TO_N_M,
-            val -> val / ConversionConstants.LBF_FT_TO_N_M);
+    NEWTON_PER_METER("N/m", 1.0),
+    MILLINEWTON_PER_METER("mN/m", 1.0E-3),
+    DYNE_PER_CENTIMETER("dyn/cm", 1.0E-3),
+    POUND_FORCE_PER_FOOT("lbf/ft", UnitDefinitions.POUND_FORCE_PER_FOOT);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    SurfaceTensionUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     SurfaceTensionUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
@@ -71,8 +80,4 @@ public enum SurfaceTensionUnits implements SurfaceTensionUnit {
                 .toString();
     }
 
-    private static class ConversionConstants {
-        // 1 lbf = 4.4482216152605 N and 1 ft = 0.3048 m, both exact.
-        private static final double LBF_FT_TO_N_M = 4.4482216152605 / 0.3048;
-    }
 }

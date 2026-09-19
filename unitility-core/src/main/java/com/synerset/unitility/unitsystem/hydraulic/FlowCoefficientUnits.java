@@ -2,17 +2,28 @@ package com.synerset.unitility.unitsystem.hydraulic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum FlowCoefficientUnits implements FlowCoefficientUnit {
 
-    KV("Kv", val -> val, val -> val),
-    CV("CV", val -> val * 0.85667, val -> val / 0.85667);
+    KV("Kv", 1.0),
+    CV("CV", UnitDefinitions.CV_IN_KV);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    FlowCoefficientUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     FlowCoefficientUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

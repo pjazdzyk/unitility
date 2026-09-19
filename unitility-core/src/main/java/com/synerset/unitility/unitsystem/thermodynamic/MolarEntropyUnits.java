@@ -2,17 +2,28 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum MolarEntropyUnits implements MolarEntropyUnit {
-    JOULE_PER_MOLE_KELVIN("J/mol·K", val -> val, val -> val),
-    KILOJOULE_PER_MOLE_KELVIN("kJ/mol·K", val -> val * 1000.0, val -> val / 1000.0),
-    CALORIE_PER_MOLE_KELVIN("cal/mol·K", val -> val * 4.1868, val -> val / 4.1868);
+    JOULE_PER_MOLE_KELVIN("J/mol·K", 1.0),
+    KILOJOULE_PER_MOLE_KELVIN("kJ/mol·K", 1.0E3),
+    CALORIE_PER_MOLE_KELVIN("cal/mol·K", UnitDefinitions.CALORIE_IT);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    MolarEntropyUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     MolarEntropyUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

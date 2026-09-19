@@ -2,20 +2,31 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum SpecificInternalEnergyUnits implements SpecificInternalEnergyUnit {
 
-    JOULE_PER_KILOGRAM("J/kg", val -> val, val -> val),
-    KILOJOULE_PER_KILOGRAM("kJ/kg", val -> val * 1000.0, val -> val / 1000.0),
-    MEGAJOULE_PER_KILOGRAM("MJ/kg", val -> val * 1_000_000.0, val -> val / 1_000_000.0),
-    BTU_PER_POUND("BTU/lb", val -> val * 2326.0, val -> val / 2326.0),
-    CALORIE_PER_GRAM("cal/g", val -> val * 4186.8, val -> val / 4186.8);
+    JOULE_PER_KILOGRAM("J/kg", 1.0),
+    KILOJOULE_PER_KILOGRAM("kJ/kg", 1.0E3),
+    MEGAJOULE_PER_KILOGRAM("MJ/kg", 1.0E6),
+    BTU_PER_POUND("BTU/lb", UnitDefinitions.BTU_PER_POUND),
+    CALORIE_PER_GRAM("cal/g", UnitDefinitions.CALORIE_PER_GRAM);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    SpecificInternalEnergyUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     SpecificInternalEnergyUnits(String symbol,
                                 DoubleUnaryOperator toBaseConverter,

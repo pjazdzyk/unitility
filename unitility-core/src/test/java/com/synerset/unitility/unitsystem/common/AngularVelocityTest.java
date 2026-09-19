@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 class AngularVelocityTest {
 
@@ -64,7 +65,11 @@ class AngularVelocityTest {
         assertThat(actualInDegreesPerSecond.getValue()).isEqualTo(expectedInDegreesPerSecond.getValue());
         assertThat(actualInDegreesPerSecond.getValue()).isEqualTo(actualInDegreesPerSecondVal);
         assertThat(actualInRadiansPerSecond.getValue()).isEqualTo(actualInRadiansPerSecondVal);
-        assertThat(actualInRadiansPerSecond).isEqualTo(initialAngularVelocity);
+        // 4.2.0: °/s scales by the correctly rounded π/180, so 6 °/s comes back as 6 × round(π/180) =
+        // 0.10471975511965978, one ulp above the correctly rounded 2π/60 (0.10471975511965977) this test starts
+        // from. Two roundings, one ulp: noise, not a factor change. The factor is pinned by UnitGoldenTableTest.
+        assertThat(actualInRadiansPerSecond.getValue())
+                .isCloseTo(initialAngularVelocity.getValue(), within(Math.ulp(initialAngularVelocity.getValue())));
     }
 
     @Test
@@ -96,7 +101,9 @@ class AngularVelocityTest {
         double actualValue = expected.getInRadiansPerSecond();
 
         // Then
-        assertThat(actual).isEqualTo(expected);
+        // 4.2.0: a chain of conversions may now end one ulp from where it started (double arithmetic); the factors
+        // themselves are pinned by UnitGoldenTableTest.
+        assertThat(actual.getValue()).isCloseTo(expected.getValue(), within(Math.ulp(expected.getValue())));
         assertThat(actualValue).isEqualTo(expected.getValue());
     }
 

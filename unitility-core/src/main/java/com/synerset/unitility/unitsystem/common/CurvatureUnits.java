@@ -2,23 +2,32 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
-import static java.lang.Math.toDegrees;
-import static java.lang.Math.toRadians;
-
 public enum CurvatureUnits implements CurvatureUnit {
 
-    RADIANS_PER_METER("rad/m", val -> val, val -> val),
-    RADIANS_PER_FOOT("rad/ft", val -> val / 0.3048, val -> val * 0.3048),
+    RADIANS_PER_METER("rad/m", 1.0),
+    RADIANS_PER_FOOT("rad/ft", UnitDefinitions.RADIAN_PER_FOOT),
+    // Kept on Math.toRadians / Math.toDegrees, as AngleUnits.DEGREES is. Linear in effect.
     DEGREES_PER_METER("°/m", Math::toRadians, Math::toDegrees),
-    DEGREES_PER_FOOT("°/ft", val -> toRadians(val) / 0.3048, val -> toDegrees(val) * 0.3048),
-    DEGREES_PER_HUNDRED_FEET("°/100ft", val -> toRadians(val) / 0.3048 * 100.0, val -> toDegrees(val) * 0.3048 /100.0);
+    DEGREES_PER_FOOT("°/ft", UnitDefinitions.DEGREE_PER_FOOT),
+    DEGREES_PER_HUNDRED_FEET("°/100ft", UnitDefinitions.DEGREE_PER_HUNDRED_FEET);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    CurvatureUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     CurvatureUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

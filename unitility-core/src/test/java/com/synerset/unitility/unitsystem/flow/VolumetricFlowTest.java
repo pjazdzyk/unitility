@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 import static org.assertj.core.api.Assertions.withPrecision;
 
 class VolumetricFlowTest {
@@ -112,7 +113,8 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpSec.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpSec = VolumetricFlow.ofGallonsPerSecondUS(264.17205236);
+        VolumetricFlow expectedFlowInGalpSec = VolumetricFlow.ofGallonsPerSecondUS(264.1720523581484);
+        // 1 / 0.003785411784 (231 in³) = 264.172 052 358 148 4...; 4.1.0 pinned 264.17205236, its truncated factor.
         assertThat(actualFlowInGalpSec.getValue()).isEqualTo(actualFlowInGalpSecVal);
         assertThat(actualFlowInGalpSec).isEqualTo(expectedFlowInGalpSec);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
@@ -130,7 +132,9 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpMin.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpMin = VolumetricFlow.ofGallonsPerMinuteUS(15850.323141);
+        VolumetricFlow expectedFlowInGalpMin = VolumetricFlow.ofGallonsPerMinuteUS(15850.323141488903);
+        // 60 / 0.003785411784 = 15 850.323 141 488 905...: the double result lands within two ulp. 4.1.0 pinned
+        // 15850.323141, its truncated factor.
         assertThat(actualFlowInGalpMin.getValue()).isEqualTo(actualFlowInGalpMinVal);
         assertThat(actualFlowInGalpMin).isEqualTo(expectedFlowInGalpMin);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
@@ -148,7 +152,8 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3PerSec = actualFlowInGalPerHr.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalPerHr = VolumetricFlow.ofGallonsPerHourUS(951019.38849);
+        VolumetricFlow expectedFlowInGalPerHr = VolumetricFlow.ofGallonsPerHourUS(951019.3884893343);
+        // 3600 / 0.003785411784 = 951 019.388 489 334 3...; 4.1.0 pinned 951019.38849, its truncated factor.
         assertThat(actualFlowInGalPerHr.getValue()).isEqualTo(actualFlowInGalPerHrVal);
         assertThat(actualFlowInGalPerHr).isEqualTo(expectedFlowInGalPerHr);
         assertThat(actualFlowInM3PerSec).isEqualTo(initialFlowInM3PerSec);
@@ -198,7 +203,8 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpSecUK.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpSecUK = VolumetricFlow.ofGallonsPerSecondUK(219.9692483);
+        VolumetricFlow expectedFlowInGalpSecUK = VolumetricFlow.ofGallonsPerSecondUK(219.96924829908778);
+        // 1 / 0.00454609 = 219.969 248 299 087 8...; 4.1.0 pinned 219.9692483, its truncated factor.
         assertThat(actualFlowInGalpSecUK.getValue()).isEqualTo(actualFlowInGalpSecUKVal);
         assertThat(actualFlowInGalpSecUK).isEqualTo(expectedFlowInGalpSecUK);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
@@ -216,7 +222,8 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpMinUK.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpMinUK = VolumetricFlow.ofGallonsPerMinuteUK(13198.154898);
+        VolumetricFlow expectedFlowInGalpMinUK = VolumetricFlow.ofGallonsPerMinuteUK(13198.154897945267);
+        // 60 / 0.00454609 = 13 198.154 897 945 267...; 4.1.0 pinned 13198.154898, its truncated factor.
         assertThat(actualFlowInGalpMinUK.getValue()).isEqualTo(actualFlowInGalpMinUKVal);
         assertThat(actualFlowInGalpMinUK).isEqualTo(expectedFlowInGalpMinUK);
         assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
@@ -234,10 +241,12 @@ class VolumetricFlowTest {
         VolumetricFlow actualFlowInM3pSec = actualFlowInGalpHourUK.toBaseUnit();
 
         // Then
-        VolumetricFlow expectedFlowInGalpHourUK = VolumetricFlow.ofGallonsPerHourUK(791889.29388);
+        VolumetricFlow expectedFlowInGalpHourUK = VolumetricFlow.ofGallonsPerHourUK(791889.2938767159);
+        // 3600 / 0.00454609 = 791 889.293 876 716 0...; 4.1.0 pinned 791889.29388, its truncated factor.
         assertThat(actualFlowInGalpHourUK.getValue()).isEqualTo(actualFlowInGalpHourUKVal);
         assertThat(actualFlowInGalpHourUK).isEqualTo(expectedFlowInGalpHourUK);
-        assertThat(actualFlowInM3pSec).isEqualTo(initialFlowInM3pSec);
+        // 4.2.0: the round trip ends one ulp below 1.0 (0.9999999999999999), as double arithmetic may.
+        assertThat(actualFlowInM3pSec.getValue()).isCloseTo(1.0, within(Math.ulp(1.0)));
     }
 
     @Test

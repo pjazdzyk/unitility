@@ -2,23 +2,30 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum SpecificGasConstantUnits implements SpecificGasConstantUnit {
 
-    JOULE_PER_KILOGRAM_KELVIN("J/(kg·K)", val -> val, val -> val),
-    KILOJOULE_PER_KILOGRAM_KELVIN("kJ/(kg·K)", val -> val * 1000.0, val -> val / 1000.0),
-    BTU_PER_POUND_RANKINE("BTU/(lb·°R)",
-            val -> val * ConversionConstants.BTU_LB_R_TO_J_KG_K,
-            val -> val / ConversionConstants.BTU_LB_R_TO_J_KG_K),
-    BTU_PER_POUND_FAHRENHEIT("BTU/(lb·°F)",
-            val -> val * ConversionConstants.BTU_LB_R_TO_J_KG_K,
-            val -> val / ConversionConstants.BTU_LB_R_TO_J_KG_K);
+    JOULE_PER_KILOGRAM_KELVIN("J/(kg·K)", 1.0),
+    KILOJOULE_PER_KILOGRAM_KELVIN("kJ/(kg·K)", 1.0E3),
+    BTU_PER_POUND_RANKINE("BTU/(lb·°R)", UnitDefinitions.BTU_PER_POUND_FAHRENHEIT_DEGREE),
+    BTU_PER_POUND_FAHRENHEIT("BTU/(lb·°F)", UnitDefinitions.BTU_PER_POUND_FAHRENHEIT_DEGREE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    SpecificGasConstantUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     SpecificGasConstantUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
@@ -69,8 +76,4 @@ public enum SpecificGasConstantUnits implements SpecificGasConstantUnit {
                 .toString();
     }
 
-    private static class ConversionConstants {
-        // 1 BTU/(lb·°R) = 1 BTU/(lb·°F) = 4186.8 J/(kg·K) [Exact]
-        private static final double BTU_LB_R_TO_J_KG_K = 4186.8;
-    }
 }

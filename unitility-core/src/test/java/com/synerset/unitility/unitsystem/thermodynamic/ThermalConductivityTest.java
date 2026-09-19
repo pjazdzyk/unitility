@@ -40,7 +40,9 @@ class ThermalConductivityTest {
         ThermalConductivity actual_W_PER_M_K = actual_BTU_PER_HR_FT_F.toBaseUnit();
 
         // Then
-        ThermalConductivity expected_BTU_PER_HR_FT_F = ThermalConductivity.ofBTUPerHourFeetFahrenheit(577.7891109505047);
+        ThermalConductivity expected_BTU_PER_HR_FT_F = ThermalConductivity.ofBTUPerHourFeetFahrenheit(577.7893165429982);
+        // 1000 / (1055.05585262 / 3600 / 0.3048 × 1.8) = 577.789 316 542 998 2...; 4.1.0 used 1.7307352822121 and
+        // pinned 577.7891109505047.
         assertThat(actual_BTU_PER_HR_FT_F.getValue()).isEqualTo(actual_BTU_PER_HR_FT_FVal);
         assertThat(actual_BTU_PER_HR_FT_F.getValue()).isEqualTo(expected_BTU_PER_HR_FT_F.getValue(), withPrecision(1E-10));
         assertThat(actual_W_PER_M_K.getValue()).isEqualTo(1000, withPrecision(1E-10));

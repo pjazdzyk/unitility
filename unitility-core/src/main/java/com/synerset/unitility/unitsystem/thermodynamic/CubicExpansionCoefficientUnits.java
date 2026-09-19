@@ -2,20 +2,31 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum CubicExpansionCoefficientUnits implements CubicExpansionCoefficientUnit {
 
-    INVERSE_KELVIN("1/K", val -> val, val -> val),
-    INVERSE_CELSIUS("1/°C", val -> val, val -> val),
-    INVERSE_MILLIKELVIN("1/mK", val -> val * 1000.0, val -> val / 1000.0),
-    INVERSE_RANKINE("1/°R", val -> val * 1.8, val -> val / 1.8),
-    INVERSE_FAHRENHEIT("1/°F", val -> val * 1.8, val -> val / 1.8);
+    INVERSE_KELVIN("1/K", 1.0),
+    INVERSE_CELSIUS("1/°C", 1.0),
+    INVERSE_MILLIKELVIN("1/mK", 1.0E3),
+    INVERSE_RANKINE("1/°R", UnitDefinitions.PER_FAHRENHEIT_DEGREE),
+    INVERSE_FAHRENHEIT("1/°F", UnitDefinitions.PER_FAHRENHEIT_DEGREE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    CubicExpansionCoefficientUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     CubicExpansionCoefficientUnits(String symbol, DoubleUnaryOperator toBaseConverter,
                                    DoubleUnaryOperator fromBaseToUnitConverter) {

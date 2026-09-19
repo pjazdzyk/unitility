@@ -2,24 +2,35 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum EnergyUnits implements EnergyUnit {
 
-    JOULE("J", val -> val, val -> val),
-    MILLIJOULE("mJ", val -> val * 0.001, val -> val / 0.001),
-    KILOJOULE("kJ", val -> val * 1000, val -> val / 1000),
-    MEGAJOULE("MJ", val -> val * 1_000_000, val -> val / 1_000_000),
-    BTU("BTU", val -> val * 1055.05585262, val -> val / 1055.05585262),
-    CALORIE("cal", val -> val * 4.1868, val -> val / 4.1868),
-    KILOCALORIE("kcal", val -> val * 4186.8, val -> val / 4186.8),
-    WATT_HOUR("Wh", val -> val * 3600, val -> val / 3600),
-    KILOWATT_HOUR("kWh", val -> val * 3_600_000, val -> val / 3_600_000);
+    JOULE("J", 1.0),
+    MILLIJOULE("mJ", 1.0E-3),
+    KILOJOULE("kJ", 1.0E3),
+    MEGAJOULE("MJ", 1.0E6),
+    BTU("BTU", UnitDefinitions.BTU_IT),
+    CALORIE("cal", UnitDefinitions.CALORIE_IT),
+    KILOCALORIE("kcal", UnitDefinitions.KILOCALORIE_IT),
+    WATT_HOUR("Wh", UnitDefinitions.WATT_HOUR),
+    KILOWATT_HOUR("kWh", UnitDefinitions.KILOWATT_HOUR);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    EnergyUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     EnergyUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

@@ -1,14 +1,25 @@
 package com.synerset.unitility.unitsystem.dimensionless;
 
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+
 import java.util.function.DoubleUnaryOperator;
 
 public enum JakobNumberUnits implements JakobNumberUnit {
 
-    DIMENSIONLESS("", val -> val, val -> val);
+    DIMENSIONLESS("", 1.0);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    JakobNumberUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     JakobNumberUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

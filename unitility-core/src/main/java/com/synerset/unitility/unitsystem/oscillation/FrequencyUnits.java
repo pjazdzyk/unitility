@@ -1,20 +1,30 @@
 package com.synerset.unitility.unitsystem.oscillation;
 
-import com.synerset.unitility.unitsystem.Constants;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum FrequencyUnits implements FrequencyUnit {
 
-    HERTZ("Hz", val -> val, val -> val),
-    KILOHERTZ("kHz", val -> val * Constants.KILO, val -> val / Constants.KILO),
-    MEGAHERTZ("MHz", val -> val * Constants.MEGA, val -> val / Constants.MEGA),
-    GIGAHERTZ("GHz", val -> val * Constants.GIGA, val -> val / Constants.GIGA),
-    CYCLES_PER_MINUTE("cpm", val -> val / Constants.SECONDS_IN_MINUTE, val -> val * Constants.SECONDS_IN_MINUTE);
+    HERTZ("Hz", 1.0),
+    KILOHERTZ("kHz", 1.0E3),
+    MEGAHERTZ("MHz", 1.0E6),
+    GIGAHERTZ("GHz", 1.0E9),
+    CYCLES_PER_MINUTE("cpm", UnitDefinitions.PER_MINUTE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    FrequencyUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     FrequencyUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

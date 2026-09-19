@@ -2,22 +2,33 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum IsothermalCompressibilityUnits implements IsothermalCompressibilityUnit {
 
-    INVERSE_PASCAL("1/Pa", val -> val, val -> val),
-    INVERSE_KILOPASCAL("1/kPa", val -> val / 1000.0, val -> val * 1000.0),
-    INVERSE_MEGAPASCAL("1/MPa", val -> val / 1_000_000.0, val -> val * 1_000_000.0),
-    INVERSE_BAR("1/bar", val -> val / 100_000.0, val -> val * 100_000.0),
-    INVERSE_PSI("1/psi", val -> val / 6894.757293168, val -> val * 6894.757293168),
-    INVERSE_ATMOSPHERE("1/atm", val -> val / 101325.0, val -> val * 101325.0);
+    INVERSE_PASCAL("1/Pa", 1.0),
+    INVERSE_KILOPASCAL("1/kPa", 1.0E-3),
+    INVERSE_MEGAPASCAL("1/MPa", 1.0E-6),
+    INVERSE_BAR("1/bar", 1.0E-5),
+    INVERSE_PSI("1/psi", UnitDefinitions.PER_PSI),
+    INVERSE_ATMOSPHERE("1/atm", UnitDefinitions.PER_ATMOSPHERE);
 
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    IsothermalCompressibilityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     IsothermalCompressibilityUnits(String symbol, DoubleUnaryOperator toBaseConverter,
                                    DoubleUnaryOperator fromBaseToUnitConverter) {

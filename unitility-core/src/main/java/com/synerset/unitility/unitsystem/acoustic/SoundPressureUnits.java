@@ -4,18 +4,31 @@ import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.thermodynamic.PressureUnit;
 import com.synerset.unitility.unitsystem.thermodynamic.PressureUnits;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum SoundPressureUnits implements PressureUnit {
-    // Assumed reference pressure = 2E-5 Pa.
-
-    PASCAL("Pa", val -> val, val -> val),
-    DECIBEL("dB", db -> Math.pow(10.0, db / 20.0) * 2E-5, pa -> 20.0 * Math.log10(pa / 2E-5));
+    PASCAL("Pa", 1.0),
+    // Non-linear, so it keeps explicit converters: a field level, L = 20 lg(p / p0) dB (NIST SP 811 Sec. 8.7),
+    // with the reference pressure p0 = 20 µPa as declared (see UnitDefinitions).
+    DECIBEL("dB",
+            db -> Math.pow(10.0, db / 20.0) * UnitDefinitions.SOUND_PRESSURE_REFERENCE,
+            pa -> 20.0 * Math.log10(pa / UnitDefinitions.SOUND_PRESSURE_REFERENCE));
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    SoundPressureUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     SoundPressureUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

@@ -1,24 +1,33 @@
 package com.synerset.unitility.unitsystem.electric;
 
-import com.synerset.unitility.unitsystem.Constants;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum ChargeUnits implements ChargeUnit {
 
-    COULOMB("C", val -> val, val -> val),
-    PICOCOULOMB("pC", val -> val * Constants.PICO, val -> val / Constants.PICO),
-    NANOCOULOMB("nC", val -> val * Constants.NANO, val -> val / Constants.NANO),
-    MICROCOULOMB("µC", val -> val * Constants.MICRO, val -> val / Constants.MICRO),
-    MILLICOULOMB("mC", val -> val * Constants.MILLI, val -> val / Constants.MILLI),
-    KILOCOULOMB("kC", val -> val * Constants.KILO, val -> val / Constants.KILO),
-    MEGACOULOMB("MC", val -> val * Constants.MEGA, val -> val / Constants.MEGA);
+    COULOMB("C", 1.0),
+    PICOCOULOMB("pC", 1.0E-12),
+    NANOCOULOMB("nC", 1.0E-9),
+    MICROCOULOMB("µC", 1.0E-6),
+    MILLICOULOMB("mC", 1.0E-3),
+    KILOCOULOMB("kC", 1.0E3),
+    MEGACOULOMB("MC", 1.0E6);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    ChargeUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     ChargeUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

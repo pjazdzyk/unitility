@@ -2,22 +2,38 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
+/**
+ * Data size units. The multiples are binary (1 KB = 1024 B, ..., 1 PB = 2^50 B), so in SI and IEC terms the symbols
+ * "KB", "MB", "GB", "TB", "PB" denote KiB, MiB, GiB, TiB, PiB (in SI, 1 kB = 1000 B). The values are the intended
+ * ones and are kept. The symbols are kept too, because changing them would break parsing of existing strings.
+ */
 public enum DataSizeUnits implements DataSizeUnit {
 
-    BYTE("B", val -> val, val -> val),
-    BIT("bit", val -> val / 8.0, val -> val * 8.0),
-    KILOBYTE("KB", val -> val * 1024.0, val -> val / 1024.0),
-    MEGABYTE("MB", val -> val * Math.pow(1024.0, 2), val -> val / Math.pow(1024.0, 2)),
-    GIGABYTE("GB", val -> val * Math.pow(1024.0, 3), val -> val / Math.pow(1024.0, 3)),
-    TERABYTE("TB", val -> val * Math.pow(1024.0, 4), val -> val / Math.pow(1024.0, 4)),
-    PETABYTE("PB", val -> val * Math.pow(1024.0, 5), val -> val / Math.pow(1024.0, 5)); // Max safe unit to fit in double (1 PB = 2^50 Bytes)
+    BYTE("B", 1.0),
+    BIT("bit", UnitDefinitions.BIT),
+    KILOBYTE("KB", UnitDefinitions.KIBIBYTE),
+    MEGABYTE("MB", UnitDefinitions.MEBIBYTE),
+    GIGABYTE("GB", UnitDefinitions.GIBIBYTE),
+    TERABYTE("TB", UnitDefinitions.TEBIBYTE),
+    PETABYTE("PB", UnitDefinitions.PEBIBYTE); // Max safe unit to fit in double (1 PB = 2^50 Bytes)
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    DataSizeUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     DataSizeUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

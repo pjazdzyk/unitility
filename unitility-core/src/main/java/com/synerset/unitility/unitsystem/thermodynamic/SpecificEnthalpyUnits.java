@@ -2,18 +2,29 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum SpecificEnthalpyUnits implements SpecificEnthalpyUnit {
 
-    JOULE_PER_KILOGRAM("J/kg", val -> val, val -> val),
-    KILOJOULE_PER_KILOGRAM("kJ/kg", val -> val * 1000, val -> val / 1000),
-    BTU_PER_POUND("BTU/lb", val -> val * 2326, val -> val / 2326.0);
+    JOULE_PER_KILOGRAM("J/kg", 1.0),
+    KILOJOULE_PER_KILOGRAM("kJ/kg", 1.0E3),
+    BTU_PER_POUND("BTU/lb", UnitDefinitions.BTU_PER_POUND);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    SpecificEnthalpyUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     SpecificEnthalpyUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

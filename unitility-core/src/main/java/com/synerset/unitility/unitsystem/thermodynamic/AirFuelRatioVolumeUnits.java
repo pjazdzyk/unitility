@@ -2,6 +2,7 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -11,14 +12,23 @@ import java.util.function.DoubleUnaryOperator;
  */
 public enum AirFuelRatioVolumeUnits implements AirFuelRatioVolumeUnit {
 
-    CUBIC_METER_PER_CUBIC_METER("m³/m³", val -> val, val -> val),                          // Base SI unit
-    NORMAL_CUBIC_METER_PER_NORMAL_CUBIC_METER("Nm³/Nm³", val -> val, val -> val),
-    CUBIC_FOOT_PER_CUBIC_FOOT("ft³/ft³", val -> val, val -> val),
-    STANDARD_CUBIC_FOOT_PER_STANDARD_CUBIC_FOOT("scf/scf", val -> val, val -> val);
+    CUBIC_METER_PER_CUBIC_METER("m³/m³", 1.0),                          // Base SI unit
+    NORMAL_CUBIC_METER_PER_NORMAL_CUBIC_METER("Nm³/Nm³", 1.0),
+    CUBIC_FOOT_PER_CUBIC_FOOT("ft³/ft³", 1.0),
+    STANDARD_CUBIC_FOOT_PER_STANDARD_CUBIC_FOOT("scf/scf", 1.0);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    AirFuelRatioVolumeUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     AirFuelRatioVolumeUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

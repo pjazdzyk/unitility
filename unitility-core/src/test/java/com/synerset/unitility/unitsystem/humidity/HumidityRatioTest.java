@@ -22,11 +22,13 @@ class HumidityRatioTest {
         double actualInKgPerKgVal = actualInLbPerLb.getInKilogramPerKilogram();
 
         // Then
-        HumidityRatio expectedInLbPerLb = HumidityRatio.of(0.033069339826536, HumidityRatioUnits.POUND_PER_POUND);
+        // A mass ratio has no factor: lb/lb = kg/kg (01_audit.md [S0]). 4.1.0 divided by 2.20462262184878 and this
+        // test pinned that wrong 0.033069339826536.
+        HumidityRatio expectedInLbPerLb = HumidityRatio.of(0.015, HumidityRatioUnits.POUND_PER_POUND);
         assertThat(actualInKgPerKg.getValue()).isEqualTo(initialValue);
         assertThat(actualInLbPerLb.getValue()).isEqualTo(actualInLbPerLbVal);
         assertThat(actualInKgPerKg.getValue()).isEqualTo(actualInKgPerKgVal);
-        assertThat(actualInLbPerLb.getValue()).isEqualTo(expectedInLbPerLb.getValue(), withPrecision(1E-9));
+        assertThat(actualInLbPerLb.getValue()).isEqualTo(expectedInLbPerLb.getValue());
         assertThat(actualInKgPerKg.getUnit()).isEqualTo(HumidityRatioUnits.KILOGRAM_PER_KILOGRAM);
         assertThat(initialHumidityRatio).isEqualTo(HumidityRatio.ofKilogramPerKilogram(initialValue));
     }

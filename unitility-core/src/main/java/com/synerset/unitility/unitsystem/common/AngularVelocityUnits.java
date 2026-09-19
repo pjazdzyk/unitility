@@ -2,18 +2,29 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum AngularVelocityUnits implements AngularVelocityUnit {
 
-    RADIANS_PER_SECOND("rad/s", val -> val, val -> val),
-    REVOLUTIONS_PER_SECOND("rps", val -> val / (1.0 / 2.0 / Math.PI), val -> val * (1.0 / 2.0 / Math.PI)),
-    REVOLUTIONS_PER_MINUTE("rpm", val -> val / (60.0 / 2.0 / Math.PI), val -> val * (60.0 / 2.0 / Math.PI)),
-    DEGREES_PER_SECOND("°/s", val -> val / (360.0 / 2.0 / Math.PI), val -> val * (360.0 / 2.0 / Math.PI));
+    RADIANS_PER_SECOND("rad/s", 1.0),
+    REVOLUTIONS_PER_SECOND("rps", UnitDefinitions.REVOLUTION),
+    REVOLUTIONS_PER_MINUTE("rpm", UnitDefinitions.REVOLUTION_PER_MINUTE),
+    DEGREES_PER_SECOND("°/s", UnitDefinitions.DEGREE);
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    AngularVelocityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     AngularVelocityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

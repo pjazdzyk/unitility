@@ -2,26 +2,37 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum SpecificVolumeUnits implements SpecificVolumeUnit {
 
-    CUBIC_METER_PER_KILOGRAM("m³/kg", val -> val, val -> val),
-    CUBIC_CENTIMETER_PER_KILOGRAM("cm³/kg", val -> val * 1e-6, val -> val / 1e-6),
-    CUBIC_DECIMETER_PER_KILOGRAM("dm³/kg", val -> val * 0.001, val -> val / 0.001),
-    LITER_PER_KILOGRAM("L/kg", val -> val * 0.001, val -> val / 0.001),
-    HECTOLITER_PER_KILOGRAM("hL/kg", val -> val * 0.1, val -> val / 0.1),
-    MILLILITER_PER_KILOGRAM("mL/kg", val -> val * 1e-6, val -> val / 1e-6),
+    CUBIC_METER_PER_KILOGRAM("m³/kg", 1.0),
+    CUBIC_CENTIMETER_PER_KILOGRAM("cm³/kg", 1.0E-6),
+    CUBIC_DECIMETER_PER_KILOGRAM("dm³/kg", 1.0E-3),
+    LITER_PER_KILOGRAM("L/kg", UnitDefinitions.LITRE),
+    HECTOLITER_PER_KILOGRAM("hL/kg", 0.1),
+    MILLILITER_PER_KILOGRAM("mL/kg", 1.0E-6),
 
-    CUBIC_FOOT_PER_POUND("ft³/lb", val -> val * 0.0624279606, val -> val / 0.0624279606),
-    GALLON_US_PER_POUND("gal_US/lb", val -> val * 0.0083454045, val -> val / 0.0083454045),
-    GALLON_UK_PER_POUND("gal_UK/lb", val -> val * 0.0100224129, val -> val / 0.0100224129),
-    OUNCE_PER_POUND("fl.oz/lb", val -> val * 6.520391e-5, val -> val / 6.520391e-5);
+    CUBIC_FOOT_PER_POUND("ft³/lb", UnitDefinitions.CUBIC_FOOT_PER_POUND),
+    GALLON_US_PER_POUND("gal_US/lb", UnitDefinitions.US_GALLON_PER_POUND),
+    GALLON_UK_PER_POUND("gal_UK/lb", UnitDefinitions.UK_GALLON_PER_POUND),
+    OUNCE_PER_POUND("fl.oz/lb", UnitDefinitions.US_FLUID_OUNCE_PER_POUND);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    SpecificVolumeUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     SpecificVolumeUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

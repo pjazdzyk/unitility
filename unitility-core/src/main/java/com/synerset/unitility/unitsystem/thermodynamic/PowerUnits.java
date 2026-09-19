@@ -2,20 +2,31 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum PowerUnits implements PowerUnit {
 
-    WATT("W", val -> val, val -> val),
-    KILOWATT("kW", val -> val * 1000.0, val -> val / 1000.0),
-    MEGAWATT("MW", val -> val * 1_000_000, val -> val / 1_000_000),
-    BTU_PER_HOUR("BTU/h", val -> val * 0.2930710701722222, val -> val / 0.2930710701722222),
-    HORSE_POWER("HP", val -> val * 745.69987158227022, val -> val / 745.69987158227022);
+    WATT("W", 1.0),
+    KILOWATT("kW", 1.0E3),
+    MEGAWATT("MW", 1.0E6),
+    BTU_PER_HOUR("BTU/h", UnitDefinitions.BTU_PER_HOUR),
+    HORSE_POWER("HP", UnitDefinitions.HORSEPOWER);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    PowerUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     PowerUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

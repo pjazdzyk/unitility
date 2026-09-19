@@ -2,17 +2,27 @@ package com.synerset.unitility.unitsystem.humidity;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum RelativeHumidityUnits implements RelativeHumidityUnit {
 
-    DECIMAL("", val -> val, val -> val),
-    PERCENT("%", val -> val / 100, val -> val * 100);
+    DECIMAL("", 1.0),
+    PERCENT("%", 0.01);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    RelativeHumidityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     RelativeHumidityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

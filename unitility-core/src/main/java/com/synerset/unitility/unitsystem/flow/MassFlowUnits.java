@@ -2,19 +2,30 @@ package com.synerset.unitility.unitsystem.flow;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum MassFlowUnits implements MassFlowUnit {
 
-    KILOGRAM_PER_SECOND("kg/s", val -> val, val -> val),
-    KILOGRAM_PER_HOUR("kg/h", val -> val / 3600.0, val -> val * 3600.0),
-    TONNE_PER_HOUR("t/h", val -> val * (1000.0 / 3600.0), val -> val / (1000.0 / 3600.0)),
-    POUND_PER_SECOND("lb/s", val -> val * 0.45359237, val -> val / 0.45359237);
+    KILOGRAM_PER_SECOND("kg/s", 1.0),
+    KILOGRAM_PER_HOUR("kg/h", UnitDefinitions.PER_HOUR),
+    TONNE_PER_HOUR("t/h", UnitDefinitions.TONNE_PER_HOUR),
+    POUND_PER_SECOND("lb/s", UnitDefinitions.POUND);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    MassFlowUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     MassFlowUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

@@ -1,29 +1,39 @@
 package com.synerset.unitility.unitsystem.common;
 
-import com.synerset.unitility.unitsystem.Constants;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum DistanceUnits implements DistanceUnit {
 
-    METER("m", val -> val, val -> val),
-    CENTIMETER("cm", val -> val * Constants.CENTI, val -> val / Constants.CENTI),
-    MILLIMETER("mm", val -> val * Constants.MILLI, val -> val / Constants.MILLI),
-    KILOMETER("km", val -> val * Constants.KILO, val -> val / Constants.KILO),
-    MILE("mi", val -> val * 1609.344, val -> val / 1609.344),
-    NAUTICAL_MILE("nmi", val -> val * 1852, val -> val / 1852),
-    FEET("ft", val -> val * 0.3048, val -> val / 0.3048),
-    INCH("in", val -> val * 0.0254, val -> val / 0.0254),
-    YARD("yd", val -> val * 0.9144, val -> val / 0.9144),
-    DECAMETER("dam", val -> val * Constants.DECA, val -> val / Constants.DECA),
-    HECTOMETER("hm", val -> val * Constants.HECTO, val -> val / Constants.HECTO),
-    DATAMILE("datmi", val -> val * 1828.8, val -> val / 1828.8);
+    METER("m", 1.0),
+    CENTIMETER("cm", 1.0E-2),
+    MILLIMETER("mm", 1.0E-3),
+    KILOMETER("km", 1.0E3),
+    MILE("mi", UnitDefinitions.MILE),
+    NAUTICAL_MILE("nmi", UnitDefinitions.NAUTICAL_MILE),
+    FEET("ft", UnitDefinitions.FOOT),
+    INCH("in", UnitDefinitions.INCH),
+    YARD("yd", UnitDefinitions.YARD),
+    DECAMETER("dam", 1.0E1),
+    HECTOMETER("hm", 1.0E2),
+    DATAMILE("datmi", UnitDefinitions.DATAMILE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    DistanceUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     DistanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

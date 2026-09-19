@@ -61,6 +61,10 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
         return new Velocity(value, VelocityUnits.KNOT);
     }
 
+    /**
+     * @deprecated Mach is a ratio, not a unit of velocity; see {@link VelocityUnits#MACH}.
+     */
+    @Deprecated(since = "4.2.0")
     public static Velocity ofMach(double value) {
         return new Velocity(value, VelocityUnits.MACH);
     }
@@ -137,6 +141,10 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
         return toUnit(VelocityUnits.KNOT);
     }
 
+    /**
+     * @deprecated Mach is a ratio, not a unit of velocity; see {@link VelocityUnits#MACH}.
+     */
+    @Deprecated(since = "4.2.0")
     public Velocity toMach() {
         return toUnit(VelocityUnits.MACH);
     }
@@ -174,6 +182,10 @@ public class Velocity implements CalculableQuantity<VelocityUnit, Velocity> {
         return getInUnit(VelocityUnits.KNOT);
     }
 
+    /**
+     * @deprecated Mach is a ratio, not a unit of velocity; see {@link VelocityUnits#MACH}.
+     */
+    @Deprecated(since = "4.2.0")
     public double getInMach() {
         return getInUnit(VelocityUnits.MACH);
     }

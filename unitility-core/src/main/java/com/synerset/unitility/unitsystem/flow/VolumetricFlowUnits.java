@@ -2,28 +2,39 @@ package com.synerset.unitility.unitsystem.flow;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum VolumetricFlowUnits implements VolumetricFlowUnit {
 
-    CUBIC_METERS_PER_SECOND("m³/s", val -> val, val -> val),
-    CUBIC_METERS_PER_MINUTE("m³/min", val -> val / 60.0, val -> val * 60.0),
-    CUBIC_METERS_PER_HOUR("m³/h", val -> val / 3600.0, val -> val * 3600.0),
-    CUBIC_FEET_PER_MINUTE("ft³/min", val -> val / 2118.880003289315415, val -> val * 2118.880003289315415),
-    LITRE_PER_SECOND("l/s", val -> val / 1000.0, val -> val * 1000.0),
-    LITRE_PER_MINUTE("l/min", val -> val / 60000.0, val -> val * 60000.0),
-    LITRE_PER_HOUR("l/h", val -> val / 3600000.0, val -> val * 3600000.0),
-    GALLONS_PER_SECOND_US("gal/s_US", val -> val / 264.17205236, val -> val * 264.17205236),
-    GALLONS_PER_MINUTE_US("gal/min_US", val -> val / 15850.323141, val -> val * 15850.323141),
-    GALLONS_PER_HOUR_US("gal/h_US", val -> val / 951019.38849, val -> val * 951019.38849),
-    GALLONS_PER_SECOND_UK("gal/s_UK", val -> val / 219.9692483, val -> val * 219.9692483),
-    GALLONS_PER_MINUTE_UK("gal/min_UK", val -> val / 13198.154898, val -> val * 13198.154898),
-    GALLONS_PER_HOUR_UK("gal/h_UK", val -> val / 791889.29388, val -> val * 791889.29388);
+    CUBIC_METERS_PER_SECOND("m³/s", 1.0),
+    CUBIC_METERS_PER_MINUTE("m³/min", UnitDefinitions.PER_MINUTE),
+    CUBIC_METERS_PER_HOUR("m³/h", UnitDefinitions.PER_HOUR),
+    CUBIC_FEET_PER_MINUTE("ft³/min", UnitDefinitions.CUBIC_FOOT_PER_MINUTE),
+    LITRE_PER_SECOND("l/s", UnitDefinitions.LITRE),
+    LITRE_PER_MINUTE("l/min", UnitDefinitions.LITRE_PER_MINUTE),
+    LITRE_PER_HOUR("l/h", UnitDefinitions.LITRE_PER_HOUR),
+    GALLONS_PER_SECOND_US("gal/s_US", UnitDefinitions.US_GALLON),
+    GALLONS_PER_MINUTE_US("gal/min_US", UnitDefinitions.US_GALLON_PER_MINUTE),
+    GALLONS_PER_HOUR_US("gal/h_US", UnitDefinitions.US_GALLON_PER_HOUR),
+    GALLONS_PER_SECOND_UK("gal/s_UK", UnitDefinitions.UK_GALLON),
+    GALLONS_PER_MINUTE_UK("gal/min_UK", UnitDefinitions.UK_GALLON_PER_MINUTE),
+    GALLONS_PER_HOUR_UK("gal/h_UK", UnitDefinitions.UK_GALLON_PER_HOUR);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    VolumetricFlowUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     VolumetricFlowUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

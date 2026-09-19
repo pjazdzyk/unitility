@@ -2,18 +2,28 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum DynamicViscosityUnits implements DynamicViscosityUnit {
 
-    KILOGRAM_PER_METER_SECOND("kg/(m·s)", val -> val, val -> val),
-    PASCAL_SECOND("Pa·s", val -> val, val -> val),
-    POISE("P", val -> val * 0.1, val -> val / 0.1);
+    KILOGRAM_PER_METER_SECOND("kg/(m·s)", 1.0),
+    PASCAL_SECOND("Pa·s", 1.0),
+    POISE("P", 0.1);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    DynamicViscosityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     DynamicViscosityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

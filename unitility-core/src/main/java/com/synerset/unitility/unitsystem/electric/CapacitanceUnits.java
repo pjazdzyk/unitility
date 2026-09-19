@@ -2,22 +2,32 @@ package com.synerset.unitility.unitsystem.electric;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum CapacitanceUnits implements CapacitanceUnit {
 
-    FARAD("F", val -> val, val -> val),
-    PICOFARAD("pF", val -> val * 1E-12, val -> val / 1E-12),
-    NANOFARAD("nF", val -> val * 1E-9, val -> val / 1E-9),
-    MICROFARAD("µF", val -> val * 1E-6, val -> val / 1E-6),
-    MILLIFARAD("mF", val -> val * 1E-3, val -> val / 1E-3),
-    KILOFARAD("kF", val -> val * 1E3, val -> val / 1E3),
-    MEGAFARAD("MF", val -> val * 1E6, val -> val / 1E6);
+    FARAD("F", 1.0),
+    PICOFARAD("pF", 1.0E-12),
+    NANOFARAD("nF", 1.0E-9),
+    MICROFARAD("µF", 1.0E-6),
+    MILLIFARAD("mF", 1.0E-3),
+    KILOFARAD("kF", 1.0E3),
+    MEGAFARAD("MF", 1.0E6);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    CapacitanceUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     CapacitanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

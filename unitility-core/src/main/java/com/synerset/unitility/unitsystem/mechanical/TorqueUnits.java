@@ -2,20 +2,31 @@ package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum TorqueUnits implements TorqueUnit {
 
-    NEWTON_METER("N·m", val -> val, val -> val),
-    MILLINEWTON_METER("mN·m", val -> val * 0.001, val -> val * 1000),
-    KILOPOND_METER("kp·m", val -> val * 9.80665, val -> val / 9.80665),
-    FOOT_POUND("ft·lb", val -> val * 1.3558179483314004, val -> val / 1.3558179483314004),
-    INCH_POUND("in·lb", val -> val * 0.1129848290276167, val -> val / 0.1129848290276167);
+    NEWTON_METER("N·m", 1.0),
+    MILLINEWTON_METER("mN·m", 1.0E-3),
+    KILOPOND_METER("kp·m", UnitDefinitions.KILOGRAM_FORCE),
+    FOOT_POUND("ft·lb", UnitDefinitions.POUND_FORCE_FOOT),
+    INCH_POUND("in·lb", UnitDefinitions.POUND_FORCE_INCH);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    TorqueUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     TorqueUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

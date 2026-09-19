@@ -111,7 +111,9 @@ class PressureTest {
         Pressure actualInPascal = actualInTorr.toBaseUnit();
 
         // Then
-        Pressure expectedInTorr = Pressure.ofTorr(759.9999999999979);
+        // 1 atm = 760 Torr exactly (torr = 101 325/760 Pa, NIST SP 811). 4.1.0 pinned 759.9999999999979, an artifact of
+        // its rounded factor 133.322368421053.
+        Pressure expectedInTorr = Pressure.ofTorr(760.0);
         assertThat(actualInTorr.getValue()).isEqualTo(actualInTorrValue);
         assertThat(actualInTorr.getValue()).isEqualTo(expectedInTorr.getValue(), withPrecision(1E-15));
         assertThat(actualInPascal).isEqualTo(initialPressure);
@@ -161,7 +163,9 @@ class PressureTest {
         Pressure actualInMetreOfWater10 = actualInPa.toUnit(PressureUnits.METRE_OF_WATER_10);
 
         // Then
-        Pressure expectedInPa = Pressure.ofPascal(9802.19483921956398939);
+        // 999.70247 kg/m³ (NIST Chemistry WebBook, water at 10 °C, 1 atm) × 9.80665 m/s² = 9803.7322274255 Pa. 4.1.0
+        // used 999.5457 kg/m³ and pinned 9802.19483921956398939.
+        Pressure expectedInPa = Pressure.ofPascal(9803.7322274255);
         assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
         assertThat(actualInMetreOfWater10.getValue()).isEqualTo(initialPressure.getValue());
         assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));
@@ -179,7 +183,9 @@ class PressureTest {
         Pressure actualInMetreOfWater60 = actualInPa.toUnit(PressureUnits.METRE_OF_WATER_60);
 
         // Then
-        Pressure expectedInPa = Pressure.ofPascal(9636.71656869821414767);
+        // 983.19582 kg/m³ (NIST Chemistry WebBook, water at 60 °C, 1 atm) × 9.80665 m/s² = 9641.857288203 Pa. 4.1.0
+        // used 982.6716 kg/m³ and pinned 9636.71656869821414767.
+        Pressure expectedInPa = Pressure.ofPascal(9641.857288203);
         assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
         assertThat(actualInMetreOfWater60.getValue()).isEqualTo(initialPressure.getValue());
         assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));
@@ -197,7 +203,9 @@ class PressureTest {
         Pressure actualInMetreOfWater95 = actualInPa.toUnit(PressureUnits.METRE_OF_WATER_95);
 
         // Then
-        Pressure expectedInPa = Pressure.ofPascal(9426.82921524257130525);
+        // 961.88792 kg/m³ (NIST Chemistry WebBook, water at 95 °C, 1 atm) × 9.80665 m/s² = 9432.898170668 Pa. 4.1.0
+        // used 961.2691 kg/m³ and pinned 9426.82921524257130525.
+        Pressure expectedInPa = Pressure.ofPascal(9432.898170668);
         assertThat(actualInPa.getValue()).isEqualTo(actualInPaVal);
         assertThat(actualInMetreOfWater95.getValue()).isEqualTo(initialPressure.getValue());
         assertThat(actualInPa.getValue()).isEqualTo(expectedInPa.getValue(), withPrecision(1E-9));

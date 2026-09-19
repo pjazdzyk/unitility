@@ -2,6 +2,8 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -11,15 +13,22 @@ import java.util.function.DoubleUnaryOperator;
  */
 public enum HeatCapacityUnits implements HeatCapacityUnit {
 
-    JOULES_PER_KELVIN("J/K", val -> val, val -> val),
-    KILOJOULES_PER_KELVIN("kJ/K", val -> val * 1000.0, val -> val / 1000.0),
-    BTU_PER_FAHRENHEIT("BTU/°F",
-            val -> val * ConversionConstants.BTU_F_TO_J_K,
-            val -> val / ConversionConstants.BTU_F_TO_J_K);
+    JOULES_PER_KELVIN("J/K", 1.0),
+    KILOJOULES_PER_KELVIN("kJ/K", 1.0E3),
+    BTU_PER_FAHRENHEIT("BTU/°F", UnitDefinitions.BTU_PER_FAHRENHEIT_DEGREE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    HeatCapacityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     HeatCapacityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
@@ -69,8 +78,4 @@ public enum HeatCapacityUnits implements HeatCapacityUnit {
                 .toString();
     }
 
-    private static class ConversionConstants {
-        // 1 BTU_IT = 1055.05585262 J; per °F difference = per (5/9) K, so multiply by 9/5.
-        private static final double BTU_F_TO_J_K = 1055.05585262 * 9.0 / 5.0;
-    }
 }

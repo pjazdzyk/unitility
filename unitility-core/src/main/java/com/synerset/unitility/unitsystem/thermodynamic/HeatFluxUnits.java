@@ -2,23 +2,30 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum HeatFluxUnits implements HeatFluxUnit {
 
-    WATTS_PER_SQUARE_METER("W/m²", val -> val, val -> val),
-    KILOWATTS_PER_SQUARE_METER("kW/m²", val -> val * 1000.0, val -> val / 1000.0),
-    BTU_PER_HOUR_SQUARE_FOOT("BTU/(h·ft²)",
-            val -> val * ConversionConstants.BTU_H_FT2_TO_W_M2,
-            val -> val / ConversionConstants.BTU_H_FT2_TO_W_M2),
-    BTU_PER_MINUTE_SQUARE_FOOT("BTU/(min·ft²)",
-            val -> val * ConversionConstants.BTU_MIN_FT2_TO_W_M2,
-            val -> val / ConversionConstants.BTU_MIN_FT2_TO_W_M2);
+    WATTS_PER_SQUARE_METER("W/m²", 1.0),
+    KILOWATTS_PER_SQUARE_METER("kW/m²", 1.0E3),
+    BTU_PER_HOUR_SQUARE_FOOT("BTU/(h·ft²)", UnitDefinitions.BTU_PER_HOUR_SQUARE_FOOT),
+    BTU_PER_MINUTE_SQUARE_FOOT("BTU/(min·ft²)", UnitDefinitions.BTU_PER_MINUTE_SQUARE_FOOT);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    HeatFluxUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     HeatFluxUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
@@ -68,8 +75,4 @@ public enum HeatFluxUnits implements HeatFluxUnit {
                 .toString();
     }
 
-    private static class ConversionConstants {
-        private static final double BTU_H_FT2_TO_W_M2 = 3.15459148;
-        private static final double BTU_MIN_FT2_TO_W_M2 = BTU_H_FT2_TO_W_M2 * 60.0;
-    }
 }

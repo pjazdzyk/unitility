@@ -2,18 +2,32 @@ package com.synerset.unitility.unitsystem.hydraulic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum LinearResistanceUnits implements LinearResistanceUnit {
 
-    PASCAL_PER_METER("Pa/m", val -> val, val -> val),
-    INCH_OF_WATER_PER_100_FEET("inH₂O/100ft", val -> val * 8.16722, val -> val / 8.16722),
-    INCH_OF_MERCURY_PER_100_FEET("inHg/100ft", val -> val * 111.10166332193331, val -> val / 111.10166332193331);
+    PASCAL_PER_METER("Pa/m", 1.0),
+    // Conventional inch of water (1000 kg/m³, standard gravity), NIST SP 811 App. B.8 2.490 889 E+02 Pa, per 100 ft.
+    INCH_OF_WATER_PER_100_FEET("inH₂O/100ft", UnitDefinitions.INCH_OF_WATER_PER_100_FEET),
+    // Inch of mercury at 32 °F (NIST SP 811 App. B.8, 3.386 38 E+03 Pa), not the conventional inch of mercury
+    // (3.386 389 E+03 Pa), per 100 ft. A property-based unit: see UnitDefinitions.INCH_OF_MERCURY_PER_100_FEET.
+    INCH_OF_MERCURY_PER_100_FEET("inHg/100ft", UnitDefinitions.INCH_OF_MERCURY_PER_100_FEET);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    LinearResistanceUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     LinearResistanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

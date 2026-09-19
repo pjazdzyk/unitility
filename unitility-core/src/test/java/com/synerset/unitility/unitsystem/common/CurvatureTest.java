@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 import static org.assertj.core.api.Assertions.withPrecision;
 
 class CurvatureTest {
@@ -40,7 +41,9 @@ class CurvatureTest {
         double actualInRadiansPerMeterVal = actualInRadiansPerMeter.getInRadiansPerMeter();
 
         // Then
-        Curvature expectedCurvatureInDegreesPerHundredFeet = Curvature.ofDegreesPerHundredFeet(360.0 * 0.3048 / 100.0);
+        // 2π rad/m = 360 °/m = 360 × 30.48 °/100ft = 10 972.8 °/100ft. 4.1.0 pinned 360 × 0.3048 / 100 = 1.09728, the
+        // value of its factor, which multiplied by 100 where it must divide (10 000 times too large, 01_audit.md).
+        Curvature expectedCurvatureInDegreesPerHundredFeet = Curvature.ofDegreesPerHundredFeet(10972.8);
         assertThat(actualInDegreesPerHundredFeet).isEqualTo(expectedCurvatureInDegreesPerHundredFeet);
         assertThat(actualInDegreesPerHundredFeetVal).isEqualTo(actualInDegreesPerHundredFeet.getValue());
         assertThat(actualInRadiansPerMeter.getValue()).isEqualTo(actualInRadiansPerMeterVal);
@@ -78,7 +81,9 @@ class CurvatureTest {
         double actualInRadiansPerMeterVal = actualInRadiansPerMeter.getInRadiansPerMeter();
 
         // Then
-        Curvature expectedCurvatureInDegreesPerFoot = Curvature.ofDegreesPerFoot(360.0 * 0.3048);
+        // 360 × 0.3048 = 109.728 exactly; 4.2.0 gives the double nearest to it (the double product 360.0 * 0.3048,
+        // which this test used before, is one ulp above).
+        Curvature expectedCurvatureInDegreesPerFoot = Curvature.ofDegreesPerFoot(109.728);
         assertThat(actualInDegreesPerFoot).isEqualTo(expectedCurvatureInDegreesPerFoot);
         assertThat(actualInDegreesPerFootVal).isEqualTo(actualInDegreesPerFoot.getValue());
         assertThat(actualInRadiansPerMeter.getValue()).isEqualTo(actualInRadiansPerMeterVal);
@@ -112,7 +117,9 @@ class CurvatureTest {
         double actualValue = expected.getInRadiansPerMeter();
 
         // Then
-        assertThat(actual).isEqualTo(expected);
+        // 4.2.0: each of the five conversions of this chain rounds once, so it may end up to five ulp from where it
+        // started (here two). The factors themselves are pinned by UnitGoldenTableTest.
+        assertThat(actual.getValue()).isCloseTo(expected.getValue(), within(5 * Math.ulp(expected.getValue())));
         assertThat(actualValue).isEqualTo(expected.getValue());
     }
 
@@ -136,7 +143,8 @@ class CurvatureTest {
                 .toRadiansPerMeter();
 
         // Then
-        assertThat(actual.minus(expected).getValue()).isEqualTo(8.881784197001252E-16);
+        // 4.1.0 drifted by 8.881784197001252E-16 here. With correctly rounded factors, 4.2.0 lands exactly.
+        assertThat(actual.minus(expected).getValue()).isEqualTo(0.0);
     }
 
     @Test

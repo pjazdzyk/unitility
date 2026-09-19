@@ -2,22 +2,33 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum MolarVolumeUnits implements MolarVolumeUnit {
 
-    CUBIC_METER_PER_MOLE("m³/mol", val -> val, val -> val),
-    LITER_PER_MOLE("L/mol", val -> val * 0.001, val -> val / 0.001),
-    CUBIC_DECIMETER_PER_MOLE("dm³/mol", val -> val * 0.001, val -> val / 0.001),
-    CUBIC_CENTIMETER_PER_MOLE("cm³/mol", val -> val * 1e-6, val -> val / 1e-6),
-    MILLILITER_PER_MOLE("mL/mol", val -> val * 1e-6, val -> val / 1e-6),
-    CUBIC_FOOT_PER_POUND_MOLE("ft³/lbmol", val -> val * 0.00006242796, val -> val / 0.00006242796),
-    CUBIC_INCH_PER_POUND_MOLE("in³/lbmol", val -> val * 0.00000003612729, val -> val / 0.00000003612729);
+    CUBIC_METER_PER_MOLE("m³/mol", 1.0),
+    LITER_PER_MOLE("L/mol", UnitDefinitions.LITRE),
+    CUBIC_DECIMETER_PER_MOLE("dm³/mol", 1.0E-3),
+    CUBIC_CENTIMETER_PER_MOLE("cm³/mol", 1.0E-6),
+    MILLILITER_PER_MOLE("mL/mol", 1.0E-6),
+    CUBIC_FOOT_PER_POUND_MOLE("ft³/lbmol", UnitDefinitions.CUBIC_FOOT_PER_POUND_MOLE),
+    CUBIC_INCH_PER_POUND_MOLE("in³/lbmol", UnitDefinitions.CUBIC_INCH_PER_POUND_MOLE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    MolarVolumeUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     MolarVolumeUnits(String symbol, DoubleUnaryOperator toBaseConverter,
                      DoubleUnaryOperator fromBaseToUnitConverter) {

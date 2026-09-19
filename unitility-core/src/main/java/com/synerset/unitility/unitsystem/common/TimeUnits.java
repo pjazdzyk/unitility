@@ -2,6 +2,8 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -11,15 +13,24 @@ import java.util.function.DoubleUnaryOperator;
  */
 public enum TimeUnits implements TimeUnit {
 
-    SECOND("s", val -> val, val -> val),
-    MILLISECOND("ms", val -> val * 1.0E-3, val -> val / 1.0E-3),
-    MINUTE("min", val -> val * 60.0, val -> val / 60.0),
-    HOUR("h", val -> val * 3600.0, val -> val / 3600.0),
-    DAY("day", val -> val * 86400.0, val -> val / 86400.0);
+    SECOND("s", 1.0),
+    MILLISECOND("ms", 1.0E-3),
+    MINUTE("min", UnitDefinitions.MINUTE),
+    HOUR("h", UnitDefinitions.HOUR),
+    DAY("day", UnitDefinitions.DAY);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    TimeUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     TimeUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

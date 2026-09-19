@@ -91,6 +91,8 @@ public interface YourQuantityUnit extends Unit {
 ```java
 package com.synerset.unitility.unitsystem.<category>;
 
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
 
@@ -98,20 +100,26 @@ import java.util.function.DoubleUnaryOperator;
 
 public enum YourQuantityUnits implements YourQuantityUnit {
 
-    // Base SI unit — identity converters
-    BASE_UNIT_SYMBOL("symbol", val -> val, val -> val),
+    // Base SI unit: scale 1
+    BASE_UNIT_SYMBOL("symbol", 1.0),
 
-    // Sub-multiples and multiples — multiplication/division
-    SUB_UNIT("sub", val -> val * 1E-3, val -> val / 1E-3),
-    MULTI_UNIT("multi", val -> val * 1E3, val -> val / 1E3),
+    // SI multiples: the prefix itself
+    SUB_UNIT("sub", 1.0E-3),
+    MULTI_UNIT("multi", 1.0E3),
 
-    // Offset units (like Celsius/Fahrenheit) — affine transforms
-    OFFSET_UNIT("°O", val -> val * scale + offset, val -> (val - offset) / scale);
+    // Anything else: a named, sourced factor from UnitDefinitions, never a typed literal
+    IMPERIAL_UNIT("imp", UnitDefinitions.POUND_PER_CUBIC_FOOT);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
 
+    // A linear unit is declared by ONE number, its scale to the base unit; both converters are built from it.
+    YourQuantityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
+
+    // Only for genuinely non-linear units (decibels). Affine units: see TemperatureUnits.
     YourQuantityUnits(String symbol, DoubleUnaryOperator toBaseConverter, 
                       DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
@@ -166,8 +174,16 @@ public enum YourQuantityUnits implements YourQuantityUnit {
 ```
 
 **Key points:**
-- The **base unit** always has identity converters (`val -> val`)
-- Non-base units define `toBaseConverter` (this unit → base) and `fromBaseToUnitConverter` (base → this unit)
+- A linear unit is declared by its **scale** to the base unit (the base unit's scale is 1). Never write two lambdas
+  for it: `LinearScale` builds both converters from the one number, so they cannot disagree.
+- A factor that is not an SI prefix comes from `UnitDefinitions` (`unitility-core`, package `definitions`). If the
+  one you need is missing, add it there as an expression over the existing definitions, with its source (NIST SP 811
+  Appendix B.8, NIST Handbook 44, ...) in a comment. Never type a compound factor as a literal.
+- Every new unit needs a row in the golden table (`definitions/GoldenTable.java` in the tests), with its reference
+  value typed from the source, not from `UnitDefinitions`. `UnitGoldenTableTest` fails for a unit without one.
+  Then regenerate `unit-scales.json` (see `UnitScalesFixtureTest`).
+- Only logarithmic units (decibels) keep explicit converters, and affine units (temperatures) take a scale and their
+  reading at the ice point
 - The `fromSymbol()` method uses `StringTransformer` for case-insensitive, cleaned symbol matching
 - Return the base unit for `null` or blank input
 

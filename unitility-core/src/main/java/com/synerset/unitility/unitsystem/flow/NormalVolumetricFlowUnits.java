@@ -2,6 +2,8 @@ package com.synerset.unitility.unitsystem.flow;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -23,28 +25,31 @@ import java.util.function.DoubleUnaryOperator;
 public enum NormalVolumetricFlowUnits implements NormalVolumetricFlowUnit {
 
     // Normal-referenced (0 °C) — pure geometric/time factors.
-    NORMAL_CUBIC_METERS_PER_SECOND("Nm³/s", val -> val, val -> val),
-    NORMAL_CUBIC_METERS_PER_MINUTE("Nm³/min", val -> val / 60.0, val -> val * 60.0),
-    NORMAL_CUBIC_METERS_PER_HOUR("Nm³/h", val -> val / 3600.0, val -> val * 3600.0),
-    NORMAL_LITERS_PER_SECOND("Nl/s", val -> val / 1000.0, val -> val * 1000.0),
-    NORMAL_LITERS_PER_MINUTE("Nl/min", val -> val / 60000.0, val -> val * 60000.0),
+    NORMAL_CUBIC_METERS_PER_SECOND("Nm³/s", 1.0),
+    NORMAL_CUBIC_METERS_PER_MINUTE("Nm³/min", UnitDefinitions.PER_MINUTE),
+    NORMAL_CUBIC_METERS_PER_HOUR("Nm³/h", UnitDefinitions.PER_HOUR),
+    NORMAL_LITERS_PER_SECOND("Nl/s", UnitDefinitions.LITRE),
+    NORMAL_LITERS_PER_MINUTE("Nl/min", UnitDefinitions.LITRE_PER_MINUTE),
 
     // Standard-referenced (15 °C) — carry the ideal-gas T-ratio 273.15/288.15 to the normal base.
-    STANDARD_CUBIC_METERS_PER_HOUR("Sm³/h",
-            val -> val * (273.15 / 288.15) / 3600.0,
-            val -> val * 3600.0 / (273.15 / 288.15)),
-    STANDARD_LITERS_PER_MINUTE("slpm",
-            val -> val * (273.15 / 288.15) / 60000.0,
-            val -> val * 60000.0 / (273.15 / 288.15)),
+    STANDARD_CUBIC_METERS_PER_HOUR("Sm³/h", UnitDefinitions.STANDARD_CUBIC_METER_PER_HOUR),
+    STANDARD_LITERS_PER_MINUTE("slpm", UnitDefinitions.STANDARD_LITRE_PER_MINUTE),
 
     // Standard cubic foot (60 °F) — geometric ft³ + ideal-gas T-ratio 273.15/288.70556 to normal base.
-    STANDARD_CUBIC_FEET_PER_MINUTE("scfm",
-            val -> val * (0.028316846592 * (273.15 / 288.7055555555556)) / 60.0,
-            val -> val * 60.0 / (0.028316846592 * (273.15 / 288.7055555555556)));
+    STANDARD_CUBIC_FEET_PER_MINUTE("scfm", UnitDefinitions.STANDARD_CUBIC_FOOT_PER_MINUTE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    NormalVolumetricFlowUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     NormalVolumetricFlowUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

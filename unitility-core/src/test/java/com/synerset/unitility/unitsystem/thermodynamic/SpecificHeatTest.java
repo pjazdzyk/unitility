@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 import static org.assertj.core.api.Assertions.withPrecision;
 
 class SpecificHeatTest {
@@ -40,7 +41,9 @@ class SpecificHeatTest {
         SpecificHeat actual_J_PER_KG_KG = actual_BTU_PER_KG_F.toBaseUnit();
 
         // Then
-        SpecificHeat expected_BTU_PER_KG_F = SpecificHeat.ofBTUPerPoundFahrenheit(0.2388458969999981);
+        // 1000 / 4186.8 = 0.238 845 896 627 495 9... (Btu_IT/(lb·°F) = 4186.8 J/(kg·K) exactly, NIST SP 811 App. B.8).
+        // 4.1.0 used 4186.7999934703 and pinned 0.2388458969999981.
+        SpecificHeat expected_BTU_PER_KG_F = SpecificHeat.ofBTUPerPoundFahrenheit(0.23884589662749594);
         assertThat(actual_BTU_PER_KG_F.getValue()).isEqualTo(actual_BTU_PER_KG_FVal);
         assertThat(actual_BTU_PER_KG_F.getValue()).isEqualTo(expected_BTU_PER_KG_F.getValue(), withPrecision(1E-10));
         assertThat(actual_J_PER_KG_KG.getValue()).isEqualTo(1000, withPrecision(1E-10));
@@ -74,7 +77,9 @@ class SpecificHeatTest {
         double actualValue = expected.getInJoulePerKiloGramKelvin();
 
         // Then
-        assertThat(actual).isEqualTo(expected);
+        // 4.2.0: a chain of conversions may now end one ulp from where it started (double arithmetic); the factors
+        // themselves are pinned by UnitGoldenTableTest.
+        assertThat(actual.getValue()).isCloseTo(expected.getValue(), within(Math.ulp(expected.getValue())));
         assertThat(actualValue).isEqualTo(expected.getValue());
     }
 

@@ -21,7 +21,8 @@ class DensityTest {
         double actualInKilogramPerCubicMeterVal = actualInPoundsPerCubicFoot.getInKilogramsPerCubicMeters();
 
         // Then
-        Density expectedInPoundsPerCubicFoot = Density.ofPoundPerCubicFoot(0.0749135526913747);
+        Density expectedInPoundsPerCubicFoot = Density.ofPoundPerCubicFoot(0.07491355269137354);
+        // 1.2 × 0.3048³ / 0.45359237 = 0.074 913 552 691 373 534...; 4.1.0 pinned 0.0749135526913747 (factor 16.0184633739599).
         assertThat(actualInPoundsPerCubicFoot.getValue()).isEqualTo(actualInPoundsPerCubicFootVal);
         assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(actualInKilogramPerCubicMeterVal);
         assertThat(actualInPoundsPerCubicFoot.getValue()).isEqualTo(expectedInPoundsPerCubicFoot.getValue(), withPrecision(1E-16));
@@ -40,7 +41,8 @@ class DensityTest {
         Density actualInKilogramPerCubicMeter = actualInPoundsPerCubicInch.toBaseUnit();
 
         // Then
-        Density expectedInPoundsPerCubicInch = Density.ofPoundPerCubicInch(0.0000433527506616);
+        Density expectedInPoundsPerCubicInch = Density.ofPoundPerCubicInch(4.335275040010042E-5);
+        // 1.2 × 0.0254³ / 0.45359237 = 4.335 275 040 010 042 5E-5; 4.1.0 pinned 4.33527506616E-5 (factor 1/0.000036127292218).
         assertThat(actualInPoundsPerCubicInch.getValue()).isEqualTo(actualInPoundsPerCubicInchVal);
         assertThat(actualInPoundsPerCubicInch.getValue()).isEqualTo(expectedInPoundsPerCubicInch.getValue(), withPrecision(1E-16));
         assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(1.2, withPrecision(1E-16));
@@ -59,7 +61,8 @@ class DensityTest {
         double actualInKilogramPerCubicMeterVal = actualInPoundsPerGallonUS.getInKilogramsPerCubicMeters();
 
         // Then
-        Density expectedInPoundsPerGallonUS = Density.ofPoundPerGallonUS(8.3454063545262);
+        Density expectedInPoundsPerGallonUS = Density.ofPoundPerGallonUS(8.345404452019332);
+        // 1000 × 231 × 0.0254³ / 0.45359237 = 8.345 404 452 019 331 8...; 4.1.0 pinned 8.3454063545262 (factor 119.8264).
         assertThat(actualInPoundsPerGallonUS.getValue()).isEqualTo(actualInPoundsPerGallonUSVal);
         assertThat(actualInKilogramPerCubicMeter.getValue()).isEqualTo(actualInKilogramPerCubicMeterVal);
         assertThat(actualInPoundsPerGallonUS.getValue()).isEqualTo(expectedInPoundsPerGallonUS.getValue(), withPrecision(1E-16));

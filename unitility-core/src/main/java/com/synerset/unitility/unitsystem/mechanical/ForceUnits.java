@@ -2,21 +2,32 @@ package com.synerset.unitility.unitsystem.mechanical;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum ForceUnits implements ForceUnit {
 
-    NEWTON("N", val -> val, val -> val),
-    KILONEWTON("kN", val -> val * 1000.0, val -> val / 1000.0),
-    KILOPOND("kp", val -> val * 9.80665, val -> val / 9.80665),
-    DYNE("dyn", val -> val * 0.00001, val -> val / 0.00001),
-    POUND_FORCE("lbf", val -> val * 4.4482216152605, val -> val / 4.4482216152605),
-    POUNDAL("pdl", val -> val * 0.138254954376, val -> val / 0.138254954376);
+    NEWTON("N", 1.0),
+    KILONEWTON("kN", 1.0E3),
+    KILOPOND("kp", UnitDefinitions.KILOGRAM_FORCE),
+    DYNE("dyn", UnitDefinitions.DYNE),
+    POUND_FORCE("lbf", UnitDefinitions.POUND_FORCE),
+    POUNDAL("pdl", UnitDefinitions.POUNDAL);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    ForceUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     ForceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

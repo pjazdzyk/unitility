@@ -20,7 +20,10 @@ class LinearResistanceUnitsTest {
         LinearResistance backToPaPerMeter = inInchOfWater.toPascalPerMeter();
 
         // Then
-        double expectedInInchOfWater = 12.244068361082473;
+        // 100 Pa/m ÷ (249.088 91 Pa / 30.48 m) = 12.236 594 555 735 14 inH₂O/100ft, with the conventional inch of water
+        // 25.4 × 9.806 65 Pa (NIST SP 811 App. B.8, 2.490 889 E+02). 4.1.0 used 8.16722 Pa/m per inH₂O/100ft,
+        // which matches no inch of water, and this test pinned 12.244068361082473.
+        double expectedInInchOfWater = 12.236594555735139;
         assertThat(inInchOfWater.getValue()).isEqualTo(expectedInInchOfWater, withPrecision(1E-3));
         assertThat(inInchOfWaterValue).isEqualTo(expectedInInchOfWater, withPrecision(1E-3));
         // Converting back to Pa/m should yield the original value

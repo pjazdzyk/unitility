@@ -2,19 +2,30 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum LinearMassDensityUnits implements LinearMassDensityUnit {
 
-    KILOGRAM_PER_METER("kg/m", val -> val, val -> val),
-    TONNE_PER_METER("t/m", val -> val * 1000.0, val -> val / 1000.0),
-    OUNCE_PER_FOOT("oz/ft", val -> val * (0.028349523125 / 0.3048), val -> val / (0.028349523125 / 0.3048)),
-    POUND_PER_FOOT("lb/ft", val -> val * (0.45359237 / 0.3048), val -> val / (0.45359237 / 0.3048));
+    KILOGRAM_PER_METER("kg/m", 1.0),
+    TONNE_PER_METER("t/m", 1.0E3),
+    OUNCE_PER_FOOT("oz/ft", UnitDefinitions.OUNCE_PER_FOOT),
+    POUND_PER_FOOT("lb/ft", UnitDefinitions.POUND_PER_FOOT);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    LinearMassDensityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     LinearMassDensityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

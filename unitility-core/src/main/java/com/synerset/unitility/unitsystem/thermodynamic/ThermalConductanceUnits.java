@@ -2,6 +2,8 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
@@ -13,15 +15,22 @@ import java.util.function.DoubleUnaryOperator;
  */
 public enum ThermalConductanceUnits implements ThermalConductanceUnit {
 
-    WATTS_PER_KELVIN("W/K", val -> val, val -> val),
-    KILOWATTS_PER_KELVIN("kW/K", val -> val * 1000.0, val -> val / 1000.0),
-    BTU_PER_HOUR_FAHRENHEIT("BTU/(h·°F)",
-            val -> val * ConversionConstants.BTU_H_F_TO_W_K,
-            val -> val / ConversionConstants.BTU_H_F_TO_W_K);
+    WATTS_PER_KELVIN("W/K", 1.0),
+    KILOWATTS_PER_KELVIN("kW/K", 1.0E3),
+    BTU_PER_HOUR_FAHRENHEIT("BTU/(h·°F)", UnitDefinitions.BTU_PER_HOUR_FAHRENHEIT_DEGREE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    ThermalConductanceUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     ThermalConductanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
@@ -71,8 +80,4 @@ public enum ThermalConductanceUnits implements ThermalConductanceUnit {
                 .toString();
     }
 
-    private static class ConversionConstants {
-        // 1 BTU_IT/h = 0.29307107017 W; per °F difference = per (5/9) K, so multiply by 9/5.
-        private static final double BTU_H_F_TO_W_K = 0.29307107017 * 9.0 / 5.0;
-    }
 }

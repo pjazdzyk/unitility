@@ -1,0 +1,2 @@
+# unit-scales.json is compared byte for byte by UnitScalesFixtureTest: never CRLF.
+*.json text eol=lf

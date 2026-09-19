@@ -2,19 +2,29 @@ package com.synerset.unitility.unitsystem.electric;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum ResistanceUnits implements ResistanceUnit {
 
-    OHM("Ω", val -> val, val -> val),
-    MILLIOHM("mΩ", val -> val * 1E-3, val -> val / 1E-3),
-    KILOOHM("kΩ", val -> val * 1E3, val -> val / 1E3),
-    MEGAOHM("MΩ", val -> val * 1E6, val -> val / 1E6);
+    OHM("Ω", 1.0),
+    MILLIOHM("mΩ", 1.0E-3),
+    KILOOHM("kΩ", 1.0E3),
+    MEGAOHM("MΩ", 1.0E6);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    ResistanceUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     ResistanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

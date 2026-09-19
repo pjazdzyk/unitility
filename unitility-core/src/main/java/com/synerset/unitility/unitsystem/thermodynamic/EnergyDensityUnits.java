@@ -2,30 +2,41 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum EnergyDensityUnits implements EnergyDensityUnit {
 
     // ─── SI / metric (base J/m³) ───
-    JOULE_PER_CUBIC_METER("J/m³", val -> val, val -> val),
-    KILOJOULE_PER_CUBIC_METER("kJ/m³", val -> val * 1.0E3, val -> val / 1.0E3),
-    MEGAJOULE_PER_CUBIC_METER("MJ/m³", val -> val * 1.0E6, val -> val / 1.0E6),
+    JOULE_PER_CUBIC_METER("J/m³", 1.0),
+    KILOJOULE_PER_CUBIC_METER("kJ/m³", 1.0E3),
+    MEGAJOULE_PER_CUBIC_METER("MJ/m³", 1.0E6),
     // Watt-hour basis — European gas-metering / billing unit (1 Wh = 3600 J exactly).
-    WATT_HOUR_PER_CUBIC_METER("Wh/m³", val -> val * 3.6E3, val -> val / 3.6E3),
-    KILOWATT_HOUR_PER_CUBIC_METER("kWh/m³", val -> val * 3.6E6, val -> val / 3.6E6),
+    WATT_HOUR_PER_CUBIC_METER("Wh/m³", UnitDefinitions.WATT_HOUR),
+    KILOWATT_HOUR_PER_CUBIC_METER("kWh/m³", UnitDefinitions.KILOWATT_HOUR),
     // 1 kcal_IT = 4186.8 J exactly (older metric calorific unit, still common).
-    KILOCALORIE_PER_CUBIC_METER("kcal/m³", val -> val * 4186.8, val -> val / 4186.8),
+    KILOCALORIE_PER_CUBIC_METER("kcal/m³", UnitDefinitions.KILOCALORIE_IT),
     // ─── Imperial / US customary ───
     // US gas industry. 1 BTU_IT = 1055.05585262 J, 1 ft³ = 0.3048³ = 0.028316846592 m³ (both exact),
     // so BTU_IT/ft³ = 1055.05585262 / 0.028316846592 = 37258.945802… J/m³.
-    BTU_PER_CUBIC_FOOT("BTU/ft³", val -> val * 37258.9458020, val -> val / 37258.9458020),
+    BTU_PER_CUBIC_FOOT("BTU/ft³", UnitDefinitions.BTU_PER_CUBIC_FOOT),
     // Thousand BTU per cubic foot (US pipeline heating-value scale, MBTU/ft³).
-    KILO_BTU_PER_CUBIC_FOOT("MBTU/ft³", val -> val * 37258945.8020, val -> val / 37258945.8020);
+    KILO_BTU_PER_CUBIC_FOOT("MBTU/ft³", UnitDefinitions.KILO_BTU_PER_CUBIC_FOOT);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    EnergyDensityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     EnergyDensityUnits(String symbol, DoubleUnaryOperator toBaseConverter,
                        DoubleUnaryOperator fromBaseToUnitConverter) {

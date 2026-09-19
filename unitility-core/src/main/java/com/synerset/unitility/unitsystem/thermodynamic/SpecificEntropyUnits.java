@@ -2,21 +2,32 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum SpecificEntropyUnits implements SpecificEntropyUnit {
     
-    JOULE_PER_KILOGRAM_KELVIN("J/(kg·K)", val -> val, val -> val),
-    KILOJOULE_PER_KILOGRAM_KELVIN("kJ/(kg·K)", val -> val * 1000.0, val -> val / 1000.0),
-    MILLIJOULE_PER_GRAM_KELVIN("mJ/(g·K)", val -> val, val -> val),
-    MEGAJOULE_PER_TONNE_KELVIN("MJ/(t·K)", val -> val * 1000.0, val -> val / 1000.0),
-    BTU_PER_POUND_RANKINE("BTU/(lb·°R)", val -> val * 4186.8, val -> val / 4186.8),
-    BTU_PER_POUND_FAHRENHEIT("BTU/(lb·°F)", val -> val * 4186.8, val -> val / 4186.8);
+    JOULE_PER_KILOGRAM_KELVIN("J/(kg·K)", 1.0),
+    KILOJOULE_PER_KILOGRAM_KELVIN("kJ/(kg·K)", 1.0E3),
+    MILLIJOULE_PER_GRAM_KELVIN("mJ/(g·K)", 1.0),
+    MEGAJOULE_PER_TONNE_KELVIN("MJ/(t·K)", 1.0E3),
+    BTU_PER_POUND_RANKINE("BTU/(lb·°R)", UnitDefinitions.BTU_PER_POUND_FAHRENHEIT_DEGREE),
+    BTU_PER_POUND_FAHRENHEIT("BTU/(lb·°F)", UnitDefinitions.BTU_PER_POUND_FAHRENHEIT_DEGREE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    SpecificEntropyUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     SpecificEntropyUnits(String symbol, DoubleUnaryOperator toBaseConverter, 
                         DoubleUnaryOperator fromBaseToUnitConverter) {

@@ -2,30 +2,44 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum PressureUnits implements PressureUnit {
 
-    PASCAL("Pa", val -> val, val -> val),
-    HECTOPASCAL("hPa", val -> val * 1.0E2, val -> val / 1.0E2),
-    KILOPASCAL("kPa", val -> val * 1.0E3, val -> val / 1.0E3),
-    MEGAPASCAL("MPa", val -> val * 1.0E6, val -> val / 1.0E6),
-    BAR("bar", val -> val * 1.0E5, val -> val / 1.0E5),
-    MILLIBAR("mbar", val -> val * 100, val -> val / 100),
-    TORR("Torr", val -> val * 133.322368421053, val -> val / 133.322368421053),
-    PSI("psi", val -> val * 6894.757293168, val -> val / 6894.757293168),
-    // Pressure units based on formula P = rho * g * h
-    METRE_OF_WATER_10("mH₂O_10", val -> val * 999.5457000320766 * 9.80665, val -> val / (999.5457000320766 * 9.80665)),
-    METRE_OF_WATER_60("mH₂O_60", val -> val * 982.6716124974598 * 9.80665, val -> val / (982.6716124974598 * 9.80665)),
-    METRE_OF_WATER_95("mH₂O_95", val -> val * 961.269058775685 * 9.80665, val -> val / (961.269058775685 * 9.80665)),
-    MILLIMETRE_OF_MERCURY_10("mmHg_10", val -> val * 13570 * 9.80665 * 0.001, val -> val / (13570 * 9.80665 * 0.001)),
-    MILLIMETRE_OF_MERCURY_60("mmHg_60", val -> val * 13448 * 9.80665 * 0.001, val -> val / (13448 * 9.80665 * 0.001)),
-    MILLIMETRE_OF_MERCURY_95("mmHg_95", val -> val * 13364 * 9.80665 * 0.001, val -> val / (13364 * 9.80665 * 0.001));
+    PASCAL("Pa", 1.0),
+    HECTOPASCAL("hPa", 1.0E2),
+    KILOPASCAL("kPa", 1.0E3),
+    MEGAPASCAL("MPa", 1.0E6),
+    BAR("bar", UnitDefinitions.BAR),
+    MILLIBAR("mbar", 1.0E2),
+    TORR("Torr", UnitDefinitions.TORR),
+    PSI("psi", UnitDefinitions.PSI),
+    // Property-based units, p = rho * g_n * h: the density is a property at a stated temperature, not a definition.
+    // Water: NIST Chemistry WebBook densities at 1 atm (IAPWS-95), see UnitDefinitions.
+    METRE_OF_WATER_10("mH₂O_10", UnitDefinitions.METRE_OF_WATER_10C),
+    METRE_OF_WATER_60("mH₂O_60", UnitDefinitions.METRE_OF_WATER_60C),
+    METRE_OF_WATER_95("mH₂O_95", UnitDefinitions.METRE_OF_WATER_95C),
+    // Mercury: UNVERIFIED. No primary source for the density of mercury at 10, 60 or 95 °C was read, so these
+    // factors are the 4.1.0 values, unchanged. NIST SP 811 fn 12: such units do not justify many digits anyway.
+    MILLIMETRE_OF_MERCURY_10("mmHg_10", UnitDefinitions.MILLIMETRE_OF_MERCURY_10C),
+    MILLIMETRE_OF_MERCURY_60("mmHg_60", UnitDefinitions.MILLIMETRE_OF_MERCURY_60C),
+    MILLIMETRE_OF_MERCURY_95("mmHg_95", UnitDefinitions.MILLIMETRE_OF_MERCURY_95C);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    PressureUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     PressureUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

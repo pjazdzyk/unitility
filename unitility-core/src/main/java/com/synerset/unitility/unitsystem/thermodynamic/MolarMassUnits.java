@@ -2,21 +2,32 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum MolarMassUnits implements MolarMassUnit {
-    KILOGRAM_PER_MOLE("kg/mol", val -> val, val -> val),   // Base SI unit
-    GRAM_PER_MOLE("g/mol", val -> val * 1e-3, val -> val / 1e-3),
-    KILOGRAM_PER_KILOMOLE("kg/kmol", val -> val * 1e-3, val -> val / 1e-3),
-    MILLIGRAM_PER_MILLIMOLE("mg/mmol", val -> val * 1e-3, val -> val / 1e-3),
-    POUND_PER_POUND_MOLE("lb/lbmol", val -> val * 1e-3, val -> val / 1e-3),
+    KILOGRAM_PER_MOLE("kg/mol", 1.0),   // Base SI unit
+    GRAM_PER_MOLE("g/mol", 1.0E-3),
+    KILOGRAM_PER_KILOMOLE("kg/kmol", 1.0E-3),
+    MILLIGRAM_PER_MILLIMOLE("mg/mmol", 1.0E-3),
+    POUND_PER_POUND_MOLE("lb/lbmol", UnitDefinitions.POUND_PER_POUND_MOLE),
     // 1 oz ≈ 0.0283495 kg, 1 oz/mol = 0.0283495 kg/mol
-    OUNCE_PER_MOLE("oz/mol", val -> val * 0.028349523125, val -> val / 0.028349523125);
+    OUNCE_PER_MOLE("oz/mol", UnitDefinitions.OUNCE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    MolarMassUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     MolarMassUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

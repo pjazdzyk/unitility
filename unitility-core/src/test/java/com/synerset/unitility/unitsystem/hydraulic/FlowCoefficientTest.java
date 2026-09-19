@@ -28,7 +28,9 @@ class FlowCoefficientTest {
         FlowCoefficient cv = kv.toCv();
 
         // Then
-        assertThat(cv.getInCv()).isCloseTo(1.167, within(0.001));
+        // 1 Kv = 1 / 0.864 977 655 442 3... Cv = 1.156 099 228 353 656... Cv (Cv: US gpm at 1 psi; Kv: m³/h at 1 bar;
+        // NIST SP 811 gallon, psi and bar). 4.1.0 used 0.85667 and this test pinned 1.167.
+        assertThat(cv.getInCv()).isCloseTo(1.1560992283536565, within(1E-15));
         assertThat(cv.toKv().getInKv()).isCloseTo(1.0, within(0.001));
     }
 
@@ -36,9 +38,9 @@ class FlowCoefficientTest {
     @DisplayName("should consider equal flow coefficients in different units")
     void shouldBeEqualAcrossUnits() {
         // Given
-        FlowCoefficient inKv = FlowCoefficient.ofKv(1.0);
-        // 1 Kv = 1/0.85667 CV ≈ 1.16737 CV
-        FlowCoefficient inCv = FlowCoefficient.ofCv(1.0 / 0.85667);
+        // 1 Cv = 0.864 977 655 442 301 8 Kv (was 0.85667 in 4.1.0, 0.96 % low).
+        FlowCoefficient inKv = FlowCoefficient.ofKv(0.8649776554423018);
+        FlowCoefficient inCv = FlowCoefficient.ofCv(1.0);
 
         // Then
         assertThat(inKv).isEqualTo(inCv);
@@ -55,6 +57,7 @@ class FlowCoefficientTest {
 
         // Then
         assertThat(base.getUnit()).isEqualTo(FlowCoefficientUnits.KV);
-        assertThat(base.getValue()).isCloseTo(8.567, within(0.001));
+        // 10 Cv = 8.649 776 554 423 0... Kv; 4.1.0 pinned 8.567 from its factor 0.85667.
+        assertThat(base.getValue()).isCloseTo(8.649776554423018, within(1E-14));
     }
 }

@@ -2,21 +2,31 @@ package com.synerset.unitility.unitsystem.electric;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum ConductanceUnits implements ConductanceUnit {
 
-    SIEMENS("S", val -> val, val -> val),
-    PICOSIEMENS("pS", val -> val * 1E-12, val -> val / 1E-12),
-    NANOSIEMENS("nS", val -> val * 1E-9, val -> val / 1E-9),
-    MICROSIEMENS("µS", val -> val * 1E-6, val -> val / 1E-6),
-    MILLISIEMENS("mS", val -> val * 1E-3, val -> val / 1E-3),
-    KILOSIEMENS("kS", val -> val * 1E3, val -> val / 1E3);
+    SIEMENS("S", 1.0),
+    PICOSIEMENS("pS", 1.0E-12),
+    NANOSIEMENS("nS", 1.0E-9),
+    MICROSIEMENS("µS", 1.0E-6),
+    MILLISIEMENS("mS", 1.0E-3),
+    KILOSIEMENS("kS", 1.0E3);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    ConductanceUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     ConductanceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

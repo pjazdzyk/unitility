@@ -2,22 +2,33 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum MolarEnthalpyUnits implements MolarEnthalpyUnit {
 
-    JOULE_PER_MOLE("J/mol", val -> val, val -> val),
-    KILOJOULE_PER_MOLE("kJ/mol", val -> val * 1000.0, val -> val / 1000.0),
-    MEGAJOULE_PER_KILOMOLE("MJ/kmol", val -> val * 1000.0, val -> val / 1000.0),
-    MILLIJOULE_PER_MILLIMOLE("mJ/mmol", val -> val, val -> val),
-    BTU_PER_POUND_MOLE("BTU/lbmol", val -> val * 2.326, val -> val / 2.326),
-    CALORIE_PER_MOLE("cal/mol", val -> val * 4.1868, val -> val / 4.1868),
-    KILOCALORIE_PER_MOLE("kcal/mol", val -> val * 4186.8, val -> val / 4186.8);
+    JOULE_PER_MOLE("J/mol", 1.0),
+    KILOJOULE_PER_MOLE("kJ/mol", 1.0E3),
+    MEGAJOULE_PER_KILOMOLE("MJ/kmol", 1.0E3),
+    MILLIJOULE_PER_MILLIMOLE("mJ/mmol", 1.0),
+    BTU_PER_POUND_MOLE("BTU/lbmol", UnitDefinitions.BTU_PER_POUND_MOLE),
+    CALORIE_PER_MOLE("cal/mol", UnitDefinitions.CALORIE_IT),
+    KILOCALORIE_PER_MOLE("kcal/mol", UnitDefinitions.KILOCALORIE_IT);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    MolarEnthalpyUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     MolarEnthalpyUnits(String symbol, DoubleUnaryOperator toBaseConverter, 
                        DoubleUnaryOperator fromBaseToUnitConverter) {

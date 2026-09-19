@@ -2,21 +2,32 @@ package com.synerset.unitility.unitsystem.common;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum MassUnits implements MassUnit {
 
-    KILOGRAM("kg", val -> val, val -> val),
-    GRAM("g", val -> val * 0.001, val -> val / 0.001),
-    MILLIGRAM("mg", val -> val * 0.000001, val -> val / 0.000001),
-    TONNE_SI("t", val -> val * 1000.0, val -> val / 1000.0),
-    OUNCE("oz", val -> val * 0.028349523125, val -> val / 0.028349523125),
-    POUND("lb", val -> val * 0.45359237, val -> val / 0.45359237);
+    KILOGRAM("kg", 1.0),
+    GRAM("g", 1.0E-3),
+    MILLIGRAM("mg", 1.0E-6),
+    TONNE_SI("t", 1.0E3),
+    OUNCE("oz", UnitDefinitions.OUNCE),
+    POUND("lb", UnitDefinitions.POUND);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    MassUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     MassUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;

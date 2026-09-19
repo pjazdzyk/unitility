@@ -2,19 +2,30 @@ package com.synerset.unitility.unitsystem.thermodynamic;
 
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 
 import java.util.function.DoubleUnaryOperator;
 
 public enum DensityUnits implements DensityUnit {
 
-    KILOGRAM_PER_CUBIC_METER("kg/m³", val -> val, val -> val),
-    POUND_PER_CUBIC_FOOT("lb/ft³", val -> val * 16.0184633739599, val -> val / 16.0184633739599),
-    POUND_PER_CUBIC_INCH("lb/in³", val -> val / 0.000036127292218, val -> val * 0.000036127292218),
-    POUND_PER_GALLON_US("lb/gal_US", val -> val / 0.0083454063545262, val -> val * 0.0083454063545262);
+    KILOGRAM_PER_CUBIC_METER("kg/m³", 1.0),
+    POUND_PER_CUBIC_FOOT("lb/ft³", UnitDefinitions.POUND_PER_CUBIC_FOOT),
+    POUND_PER_CUBIC_INCH("lb/in³", UnitDefinitions.POUND_PER_CUBIC_INCH),
+    POUND_PER_GALLON_US("lb/gal_US", UnitDefinitions.POUND_PER_US_GALLON);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
     private final DoubleUnaryOperator fromBaseToUnitConverter;
+
+    /**
+     * A linear unit, declared by its scale to the base unit ({@code base = value * scaleToBase}). Both
+     * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
+     * with the forward.
+     */
+    DensityUnits(String symbol, double scaleToBase) {
+        this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
+    }
 
     DensityUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
