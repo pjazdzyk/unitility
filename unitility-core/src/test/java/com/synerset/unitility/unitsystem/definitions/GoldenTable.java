@@ -11,7 +11,7 @@ import java.util.function.DoubleUnaryOperator;
  * The golden table: for every unit of every {@code *Units} enum, the reference factor to its base unit, written as
  * the published numbers of its source, never as a Unitility constant.
  * <p>
- * Sources (full quotes in {@code energy-flow-x-ui/reports/plans/accepted/unitility-exact-conversions/01_audit.md}):
+ * Sources (full quotes in {@code energy-flow-x-ui/reports/plans/completed/unitility-exact-conversions/01_audit.md}):
  * <ul>
  *     <li>[SI] SI prefixes, exact by definition.</li>
  *     <li>[S0] Dimensional reasoning, no factor: a base unit, a pure number, or a ratio whose unit cancels.</li>
