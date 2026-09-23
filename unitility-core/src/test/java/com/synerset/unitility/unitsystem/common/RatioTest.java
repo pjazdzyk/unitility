@@ -16,7 +16,7 @@ class RatioTest {
         // When
         Ratio actualInDecimal = initialRatio.toUnit(RatioUnits.DECIMAL);
         double actualInDecimalVal = initialRatio.getInDecimal();
-        Ratio actualInPercent = actualInDecimal.toBaseUnit();
+        Ratio actualInPercent = actualInDecimal.toUnit(RatioUnits.PERCENT);
         double actualInPercentVal = actualInDecimal.getInPercent();
 
         // Then
@@ -27,11 +27,22 @@ class RatioTest {
         assertThat(actualInPercent).isEqualTo(initialRatio);
     }
 
+    /**
+     * The base unit is the dimensionless decimal, not the percent.
+     *
+     * <p>It matters well beyond arithmetic. {@code DECIMAL} carries the empty symbol, so a
+     * serialized decimal value has no unit text for a reader to key on, and a blank symbol
+     * has to resolve to <i>something</i>. If that something were the percent, then a value
+     * written as a decimal would be read back a hundred times larger, silently, and with
+     * every range check in the library still passing because a fraction is a legal percent.
+     * Making the decimal the base makes the blank symbol mean what it looks like it means.
+     * This matches {@code RelativeHumidityUnits}, which had it right first.</p>
+     */
     @Test
-    @DisplayName("should have % as base unit")
-    void shouldHavePercentAsBaseUnit() {
+    @DisplayName("should have the decimal as base unit, so a blank symbol round-trips")
+    void shouldHaveDecimalAsBaseUnit() {
         // Given
-        RatioUnit expectedBaseUnit = RatioUnits.PERCENT;
+        RatioUnit expectedBaseUnit = RatioUnits.DECIMAL;
 
         // When
         Ratio ratioInDecimal = Ratio.ofDecimal(0.1);
@@ -76,4 +87,37 @@ class RatioTest {
         assertThat(flowRatio.getInDecimal()).isEqualTo(0.5);
     }
 
+    /**
+     * The regression this convention exists to prevent.
+     *
+     * <p>A quantity crosses a REST boundary as a value plus its unit symbol. {@code ofDecimal}
+     * produces the empty symbol, so the round trip is only lossless if a blank symbol resolves
+     * back to the decimal. When it resolved to the percent instead, a fan efficiency sent as
+     * {@code ofDecimal(0.65)} came back as 0.65 percent, the fan did a hundred times the shaft
+     * work, and the air left at over 130 degrees Celsius. Nothing complained, because 0.0065 is
+     * a perfectly legal fraction and every bounds check in the chain passed.</p>
+     */
+    @Test
+    @DisplayName("a decimal value survives a symbol round trip without changing by a factor of 100")
+    void decimalSurvivesASymbolRoundTrip() {
+        for (double decimal : new double[]{0.0, 0.05, 0.505, 0.65, 0.9, 1.0}) {
+            Ratio original = Ratio.ofDecimal(decimal);
+            Ratio roundTripped = Ratio.of(original.getValue(), original.getUnit().getSymbol());
+
+            assertThat(roundTripped.getInDecimal())
+                    .as("decimal %s must not be re-read as a percent", decimal)
+                    .isEqualTo(decimal);
+            assertThat(roundTripped).isEqualTo(original);
+        }
+    }
+
+    @Test
+    @DisplayName("a percentage value survives a symbol round trip too")
+    void percentageSurvivesASymbolRoundTrip() {
+        Ratio original = Ratio.ofPercentage(65.0);
+        Ratio roundTripped = Ratio.of(original.getValue(), original.getUnit().getSymbol());
+
+        assertThat(roundTripped.getInPercent()).isEqualTo(65.0);
+        assertThat(roundTripped.getInDecimal()).isEqualTo(0.65);
+    }
 }

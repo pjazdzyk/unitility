@@ -108,6 +108,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(RelativeHumidity.class, () -> Arrays.asList(RelativeHumidityUnits.values())),
                 // Hydraulic
                 Map.entry(LinearResistance.class, () -> Arrays.asList(LinearResistanceUnits.values())),
+                Map.entry(SpecificFanPower.class, () -> Arrays.asList(SpecificFanPowerUnits.values())),
                 Map.entry(FrictionFactor.class, Collections::emptyList),
                 Map.entry(LocalLossFactor.class, Collections::emptyList),
                 Map.entry(RotationSpeedToFlowRateRatio.class, () -> Arrays.asList(RotationSpeedToFlowRateRatioUnits.values())),
@@ -132,6 +133,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(SpecificEntropy.class, () -> Arrays.asList(SpecificEntropyUnits.values())),
                 Map.entry(SpecificHeat.class, () -> Arrays.asList(SpecificHeatUnits.values())),
                 Map.entry(Temperature.class, () -> Arrays.asList(TemperatureUnits.values())),
+                Map.entry(TemperatureDifference.class, () -> Arrays.asList(TemperatureDifferenceUnits.values())),
                 Map.entry(ThermalConductivity.class, () -> Arrays.asList(ThermalConductivityUnits.values())),
                 Map.entry(ThermalDiffusivity.class, () -> Arrays.asList(ThermalDiffusivityUnits.values())),
                 Map.entry(IsothermalCompressibility.class, () -> Arrays.asList(IsothermalCompressibilityUnits.values())),

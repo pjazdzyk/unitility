@@ -8,8 +8,8 @@ import java.util.function.DoubleUnaryOperator;
 
 public enum RatioUnits implements RatioUnit {
 
-    PERCENT("%", 1.0),
-    DECIMAL("", 100.0);
+    DECIMAL("", 1.0),
+    PERCENT("%", 0.01);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -37,7 +37,7 @@ public enum RatioUnits implements RatioUnit {
 
     @Override
     public RatioUnit getBaseUnit() {
-        return PERCENT;
+        return DECIMAL;
     }
 
     @Override
@@ -52,7 +52,7 @@ public enum RatioUnits implements RatioUnit {
 
     public static RatioUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return PERCENT;
+            return DECIMAL;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (RatioUnit unit : values()) {

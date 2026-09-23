@@ -141,8 +141,8 @@ final class GoldenTable {
         exact("DistanceUnits.DATAMILE", "6000 * 0.3048", null,
                 "[DEF-UNVERIFIED] data mile = 6000 ft, no primary source; [S1] foot");
 
-        base("EffectivenessUnits.PERCENT");
-        exact("EffectivenessUnits.DECIMAL", "100", null, "[S0] 1 = 100 %");
+        base("EffectivenessUnits.DECIMAL");
+        exact("EffectivenessUnits.PERCENT", "0.01", null, "[S0] 1 % = 0.01");
 
         base("LinearMassDensityUnits.KILOGRAM_PER_METER");
         exact("LinearMassDensityUnits.TONNE_PER_METER", "1000", null, "[S1-T6] 1 t = 10³ kg");
@@ -157,8 +157,8 @@ final class GoldenTable {
         exact("MassUnits.OUNCE", "0.45359237 / 16", "2.834952E-02", "[S2] 16 oz = 1 lb; [S1] pound");
         exact("MassUnits.POUND", "0.45359237", null, "[S1] fn 22, pound 0.453 592 37 kg exactly");
 
-        base("RatioUnits.PERCENT");
-        exact("RatioUnits.DECIMAL", "100", null, "[S0] 1 = 100 %");
+        base("RatioUnits.DECIMAL");
+        exact("RatioUnits.PERCENT", "0.01", null, "[S0] 1 % = 0.01");
 
         base("SpecificVolumeUnits.CUBIC_METER_PER_KILOGRAM");
         exact("SpecificVolumeUnits.CUBIC_CENTIMETER_PER_KILOGRAM", "1E-6", null, SI);
@@ -321,6 +321,13 @@ final class GoldenTable {
                         + "of them), inch of water, conventional 2.490 889 E+02; foot. Was 8.16722 in 4.1.0");
         published("LinearResistanceUnits.INCH_OF_MERCURY_PER_100_FEET", "3386.38 / (100 * 0.3048)",
                 "[S1] inch of mercury (32 °F) 3.386 38 E+03 Pa, a property-based unit (fn 12)");
+        base("SpecificFanPowerUnits.WATT_PER_CUBIC_METER_PER_SECOND");
+        exact("SpecificFanPowerUnits.WATT_PER_LITRE_PER_SECOND", "1000", null,
+                "W per (l/s): a litre per second is a thousandth of a cubic metre per second, [S1] litre");
+        exact("SpecificFanPowerUnits.KILOWATT_PER_CUBIC_METER_PER_SECOND", "1000", null,
+                "The same number as W per (l/s), written the other way round; [S1] SI prefix kilo");
+        exact("SpecificFanPowerUnits.WATT_PER_CUBIC_FOOT_PER_MINUTE", "60 / (0.3048 * 0.3048 * 0.3048)",
+                "2118.88", "The reciprocal of a cubic foot per minute; [S1] foot 0.3048 exact, minute");
         base("RotationSpeedToFlowRateRatioUnits.RADIAN_PER_SECOND_PER_CUBIC_METER_PER_SECOND");
         exact("RotationSpeedToFlowRateRatioUnits.RPM_PER_GPM", "2 * pi / " + US_GAL, null,
                 "(2π rad / min) / (US gal / min); [S2] gallon");
@@ -539,6 +546,14 @@ final class GoldenTable {
         base("TemperatureUnits.KELVIN");
         affine("TemperatureUnits.CELSIUS", "1", "273.15", "[S1] T/K = t/°C + 273.15");
         affine("TemperatureUnits.FAHRENHEIT", "1 / 1.8", "459.67 / 1.8", "[S1] T/K = (t/°F + 459.67)/1.8");
+
+        base("TemperatureDifferenceUnits.KELVIN");
+        exact("TemperatureDifferenceUnits.CELSIUS", "1", null,
+                "[S0] a degree Celsius interval IS a kelvin; only the degree size survives in a difference");
+        exact("TemperatureDifferenceUnits.FAHRENHEIT", "1 / 1.8", null,
+                "[S0] a degree Fahrenheit interval is 5/9 K, with no ice-point offset");
+        exact("TemperatureDifferenceUnits.RANKINE", "1 / 1.8", null,
+                "[S0] a rankine interval is the same size as a Fahrenheit one");
 
         base("ThermalConductanceUnits.WATTS_PER_KELVIN");
         exact("ThermalConductanceUnits.KILOWATTS_PER_KELVIN", "1E3", null, SI);

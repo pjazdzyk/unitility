@@ -1,15 +1,30 @@
-package com.synerset.unitility.unitsystem.common;
+package com.synerset.unitility.unitsystem.thermodynamic;
 
+import com.synerset.unitility.unitsystem.definitions.LinearScale;
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
 import com.synerset.unitility.unitsystem.exceptions.UnitSystemParseException;
 import com.synerset.unitility.unitsystem.util.StringTransformer;
-import com.synerset.unitility.unitsystem.definitions.LinearScale;
 
 import java.util.function.DoubleUnaryOperator;
 
-public enum EffectivenessUnits implements EffectivenessUnit {
+/**
+ * Units of a temperature <b>interval</b>.
+ *
+ * <p>An interval is not a point on a scale, and that is the whole reason this type exists.
+ * {@link TemperatureUnits} is affine: converting 20 °C to Fahrenheit adds the ice-point offset and
+ * gives 68 °F. A <i>rise</i> of 20 °C is 36 °F, not 68 °F, because the offsets on the two ends
+ * cancel. Every unit here is therefore purely linear, and a degree Celsius interval is exactly a
+ * kelvin interval.</p>
+ *
+ * <p>Using {@code Temperature} for a difference is a silent error: it type-checks, it serialises,
+ * and it is only wrong once somebody switches to imperial units.</p>
+ */
+public enum TemperatureDifferenceUnits implements TemperatureDifferenceUnit {
 
-    DECIMAL("", 1.0),
-    PERCENT("%", 0.01);
+    KELVIN("K", 1.0),
+    CELSIUS("°C", 1.0),
+    FAHRENHEIT("°F", UnitDefinitions.FAHRENHEIT_DEGREE),
+    RANKINE("°R", UnitDefinitions.FAHRENHEIT_DEGREE);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -20,11 +35,11 @@ public enum EffectivenessUnits implements EffectivenessUnit {
      * converters are built from that one number (see {@link LinearScale}), so the inverse cannot disagree
      * with the forward.
      */
-    EffectivenessUnits(String symbol, double scaleToBase) {
+    TemperatureDifferenceUnits(String symbol, double scaleToBase) {
         this(symbol, LinearScale.toBase(scaleToBase), LinearScale.fromBase(scaleToBase));
     }
 
-    EffectivenessUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
+    TemperatureDifferenceUnits(String symbol, DoubleUnaryOperator toBaseConverter, DoubleUnaryOperator fromBaseToUnitConverter) {
         this.symbol = symbol;
         this.toBaseConverter = toBaseConverter;
         this.fromBaseToUnitConverter = fromBaseToUnitConverter;
@@ -36,8 +51,8 @@ public enum EffectivenessUnits implements EffectivenessUnit {
     }
 
     @Override
-    public EffectivenessUnit getBaseUnit() {
-        return DECIMAL;
+    public TemperatureDifferenceUnit getBaseUnit() {
+        return KELVIN;
     }
 
     @Override
@@ -50,27 +65,26 @@ public enum EffectivenessUnits implements EffectivenessUnit {
         return fromBaseToUnitConverter.applyAsDouble(valueInBaseUnit);
     }
 
-    public static EffectivenessUnit fromSymbol(String rawSymbol) {
+    public static TemperatureDifferenceUnit fromSymbol(String rawSymbol) {
         if (rawSymbol == null || rawSymbol.isBlank()) {
-            return DECIMAL;
+            return KELVIN;
         }
         String requestedSymbol = unifySymbol(rawSymbol);
-        for (EffectivenessUnit unit : values()) {
+        for (TemperatureDifferenceUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
             if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }
         throw new UnitSystemParseException("Unsupported unit symbol: " + "{" + rawSymbol + "}." + " Target class: "
-                + EffectivenessUnits.class.getSimpleName());
+                + TemperatureDifferenceUnits.class.getSimpleName());
     }
 
     private static String unifySymbol(String inputString) {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
-                .dropHyphens()
+                .dropDegreeSymbols()
                 .toString();
     }
-
 
 }

@@ -82,10 +82,11 @@ class UnitGoldenTableTest {
     }
 
     @Test
-    @DisplayName("the catalog finds all 88 *Units enums")
+    @DisplayName("the catalog finds all 89 *Units enums")
     void catalogFindsAllUnitEnums() {
         List<String> names = UnitCatalog.allUnitEnums().stream().map(Class::getSimpleName).collect(Collectors.toList());
-        assertThat(names).hasSize(88).contains("PressureUnits", "VapourQualityUnits", "NormalVolumetricFlowUnits");
+        assertThat(names).hasSize(90).contains("PressureUnits", "VapourQualityUnits", "NormalVolumetricFlowUnits",
+                "SpecificFanPowerUnits");
     }
 
     private static void check(GoldenTable.Row row) {
