@@ -74,6 +74,7 @@ public enum AirFuelRatioVolumeUnits implements AirFuelRatioVolumeUnit {
         return StringTransformer.of(inputString)
                 .trimAndClean()
                 .unifyMultiAndDiv()
+                .unifyAerialAndVol()
                 .toString();
     }
 }

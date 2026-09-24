@@ -72,6 +72,7 @@ public enum MassFluxUnits implements MassFluxUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
+                .unifyAerialAndVol()
                 .toString();
     }
 }

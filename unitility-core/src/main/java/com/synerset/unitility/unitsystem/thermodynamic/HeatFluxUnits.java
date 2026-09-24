@@ -72,6 +72,7 @@ public enum HeatFluxUnits implements HeatFluxUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
+                .unifyAerialAndVol()
                 .toString();
     }
 

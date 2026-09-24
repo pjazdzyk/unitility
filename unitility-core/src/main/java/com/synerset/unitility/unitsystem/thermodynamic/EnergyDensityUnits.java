@@ -79,6 +79,7 @@ public enum EnergyDensityUnits implements EnergyDensityUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
+                .unifyAerialAndVol()
                 .toString();
     }
 }

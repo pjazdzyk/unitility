@@ -96,6 +96,7 @@ public enum NormalVolumetricFlowUnits implements NormalVolumetricFlowUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .dropDegreeSymbols()
+                .unifyAerialAndVol()
                 .toString();
     }
 }
