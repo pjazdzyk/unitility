@@ -1,5 +1,50 @@
 # Changelog
 
+## 5.0.0
+
+A major version because two existing quantities change behaviour. Nothing is removed and no method signature
+changes, so code still compiles, which is exactly why the change has to be read: it can alter numbers without
+a compiler error. Two quantities are added alongside.
+
+### Breaking: `Ratio` and `Effectiveness` are decimal-based
+
+The base unit of `Ratio` and `Effectiveness` moves from percent to decimal, so a ratio is stored and computed
+as the fraction it is (0.5), not as a percentage (50).
+
+| What | 4.2.0 | 5.0.0 |
+| --- | --- | --- |
+| Base unit | `PERCENT` | `DECIMAL` |
+| 50 % in the base unit | 50 | 0.5 |
+| A bare number with no unit, parsed as `Ratio` or `Effectiveness` | percent: `"50"` is 50 % | decimal: `"50"` is 5000 % |
+| A blank unit symbol (`fromSymbol("")`) | `PERCENT` | `DECIMAL` |
+
+**Migrating:**
+
+- Build ratios with an explicit unit: `Ratio.ofPercentage(50)` or `Ratio.ofDecimal(0.5)`. Both give the same
+  quantity in 4.2.0 and 5.0.0.
+- Anything that reads the base-unit value, or the value of a quantity converted to its base unit, now gets
+  the fraction. Multiply by 100 where a percentage was meant, or convert to `RatioUnits.PERCENT` explicitly.
+- Anything that parses a ratio from text or JSON should send the unit: `"50%"`. A bare `"50"` now means 50,
+  that is 5000 %.
+
+### Added
+
+- **`TemperatureDifference`**, a temperature *interval* rather than a temperature. It converts by ratio where a
+  temperature converts by offset, so a 1.15 K rise is 2.07 °F and not 34.07 °F. Units: K, °C, °F, °R. Use it for
+  every rise, drop and approach, which until now had to be carried as a bare `Temperature` and read wrongly the
+  moment anyone asked for imperial units.
+- **`SpecificFanPower`**, fan electrical power per unit of air flow: W/(m³/s), W/(l/s), kW/(m³/s) and W/cfm, the
+  figure fan selection and the energy codes both argue about.
+
+Both are registered in `SupportedQuantitiesRegistry` and the default parsing factory, both get a plain-SI
+persistence converter, and both are covered by the golden unit table. No existing conversion factor changes.
+
+### Tests
+
+- `Ratio` and `Effectiveness` gained their missing golden-table entries.
+- The Jackson round trip now covers the blank unit symbol that `DECIMAL` uses, which serialises as an empty string
+  and had no test.
+
 ## 4.2.0
 
 Every unit conversion factor now comes from a named, sourced, exact definition, and ten factors that were wrong in
