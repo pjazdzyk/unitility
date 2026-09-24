@@ -1,5 +1,23 @@
 # Changelog
 
+## 5.0.1
+
+A fix release. No quantity, unit or conversion factor changes.
+
+### Fixed: plain-digit exponents in five unit parsers
+
+A unit written with a superscript exponent now also parses when the exponent is typed as a plain digit, which
+is how every keyboard and every API client writes it. Five unit enums did not normalise the two forms, so
+`"450Nm3/h"` was refused while `"450Nm³/h"` and `"12m3/h"` parsed:
+
+- `NormalVolumetricFlow`: `Nm3/h`, `Nm3/s`, `Nm3/min`, `Sm3/h`
+- `HeatFlux`: `W/m2`, `kW/m2`
+- `EnergyDensity`: `J/m3`, `kWh/m3` and the rest
+- `MassFlux` and `AirFuelRatioVolume`, wherever their symbols parse at all
+
+A registry-wide test now holds every unit to it: when a unit's superscript spelling parses, its plain-digit
+spelling must parse to the same unit, so a new unit enum cannot bring the defect back.
+
 ## 5.0.0
 
 A major version because two existing quantities change behaviour. Nothing is removed and no method signature
