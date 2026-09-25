@@ -1,5 +1,43 @@
 # Changelog
 
+## 5.0.2
+
+A fix release. No quantity, unit or conversion factor changes, but symbols that differ only by case now parse
+as the units they name, and some inputs that were read wrongly are read correctly. Read this if you parse
+electrical or energy quantities from text.
+
+### Fixed: mega read as milli
+
+`MJ` parsed as a millijoule, `MV` as a millivolt, `MF` as a millifarad and `MC` as a millicoulomb: a factor of a
+billion, with no error. The parsing factory lower-cased the whole input before any unit enum saw it, so a symbol
+that differs from another only by case resolved to whichever came first, and `EnergyUnits.fromSymbol("MJ")`
+made the same mistake when called directly.
+
+### Fixed: 61 of the registry's own symbols did not parse
+
+Beyond the four above, every ohm (`Ω`, `mΩ`, `kΩ`, `MΩ`) and every compound symbol written with parentheses
+(`kg/(m²·s)`, `BTU/(h·ft²)`, `W/(m³/s)`, `kJ/(kg·K)`) failed, because the factory also dropped the parentheses the
+unit enums compare against. A value followed by a reciprocal unit, `"4.5e-10 1/Pa"`, lost its space and read as
+4.51 of `/Pa`.
+
+### How symbols resolve now
+
+The factory resolves the unit from the symbol as written, through the new `UnitSymbolResolver`, before any unit
+enum sees it: the exact symbol first, then the symbol with spelling differences removed and case kept
+(whitespace, parentheses, multiplication dots, plain-digit exponents, `u` for micro, the ohm sign for omega), then
+case-insensitively only when that is unambiguous or the first letter's case decides the SI prefix (`mv` is milli,
+`Mv` mega). Anything else still goes to the unit enum, so every alias (`degC`, `cfm`, `ohm`) works as before.
+
+Checked against 5.0.1 over 24,710 inputs, every registered symbol in six spellings plus every quantity string in
+the test suite: nothing that parsed before is refused, 240 inputs parse that did not, and the 32 that changed
+are the mega/milli cases and reciprocal units above.
+
+### Tests
+
+`UnitSymbolRoundTripTest` walks the whole registry: every unit's own symbol must parse back to that unit through
+the factory, with and without a space, and through its enum's `fromSymbol`. `AsciiExponentSymbolTest` no longer
+exempts any unit.
+
 ## 5.0.1
 
 A fix release. No quantity, unit or conversion factor changes.
