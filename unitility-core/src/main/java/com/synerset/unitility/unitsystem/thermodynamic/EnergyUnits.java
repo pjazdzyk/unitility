@@ -62,6 +62,12 @@ public enum EnergyUnits implements EnergyUnit {
         if (rawSymbol == null || rawSymbol.isBlank()) {
             return JOULE;
         }
+        // The exact symbol first: MJ and mJ differ only by case, and the comparison below ignores it.
+        for (EnergyUnit unit : values()) {
+            if (unit.getSymbol().equals(rawSymbol.trim())) {
+                return unit;
+            }
+        }
         String requestedSymbol = unifySymbol(rawSymbol);
         for (EnergyUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());

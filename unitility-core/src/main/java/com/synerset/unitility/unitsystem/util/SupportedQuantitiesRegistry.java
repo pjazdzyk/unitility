@@ -221,6 +221,16 @@ public class SupportedQuantitiesRegistry {
     }
 
     /**
+     * The units registered for a quantity class, as unit objects rather than descriptions.
+     *
+     * @param clazz The class of the physical quantity.
+     * @return Its units, or an empty Optional if the class is not registered.
+     */
+    public Optional<List<? extends Unit>> findUnitsByClass(Class<?> clazz) {
+        return Optional.ofNullable(immutableRegistry.get(clazz)).map(Supplier::get);
+    }
+
+    /**
      * Retrieves a set of all registered physical quantity classes.
      *
      * @param <U> The type of unit associated with the physical quantity.

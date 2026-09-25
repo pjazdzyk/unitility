@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * {@code "250W/m2"}. Most unit enums already normalise the two forms, and five did not (normal volume flow, mass
  * flux, heat flux, energy density, air-fuel ratio by volume), so {@code "Nm3/h"} was refused while {@code "m3/h"}
  * parsed. This test walks the whole registry rather than the five, so a new unit enum cannot bring the defect
- * back. It holds every unit whose superscript spelling parses to the same rule for its plain-digit spelling.
+ * back. Since 5.0.2 every canonical symbol parses (UnitSymbolRoundTripTest), so no unit is exempt.
  */
 @DisplayName("Unit symbols: a plain-digit exponent parses like the superscript one")
 class AsciiExponentSymbolTest {
@@ -38,9 +38,8 @@ class AsciiExponentSymbolTest {
                     continue;
                 }
                 String plain = symbol.replace("²", "2").replace("³", "3");
-                if (!parses((Class) info.quantityClass(), symbol)) {
-                    // The canonical spelling itself does not parse (compound symbols in parentheses, and case
-                    // lost to lower-casing). That is a different defect, outside what this test pins.
+                if (!FACTORY_PARSES.contains(info.quantityClass())) {
+                    // A GeoDistance is two coordinates, not a value and a unit, so it has nothing to parse.
                     continue;
                 }
                 checked++;
@@ -55,19 +54,11 @@ class AsciiExponentSymbolTest {
                 }
             }
         }
-        assertThat(checked).as("the registry has superscript units to check").isGreaterThan(40);
+        assertThat(checked).as("the registry has superscript units to check").isGreaterThan(60);
         assertThat(refused).as("plain-digit spellings that do not reach their unit").isEmpty();
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    private static boolean parses(Class quantityClass, String symbol) {
-        try {
-            PhysicalQuantity<Unit> parsed = PARSING_FACTORY.parse(quantityClass, "2.5" + symbol);
-            return parsed.getUnitSymbol().equals(symbol);
-        } catch (RuntimeException notParsed) {
-            return false;
-        }
-    }
+    private static final java.util.Set<?> FACTORY_PARSES = PARSING_FACTORY.findAllRegisteredClasses();
 
     @Test
     @DisplayName("normal and standard gas volumes parse as an agent types them")
