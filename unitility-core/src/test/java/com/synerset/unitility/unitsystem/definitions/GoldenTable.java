@@ -316,6 +316,10 @@ final class GoldenTable {
                 "[S6] Cv = US gpm per 1 psi, Kv = m³/h per 1 bar, so Kv/Cv = (gpm in m³/h) * sqrt(bar/psi); "
                         + "[S2] gallon; [S1] inch, pound-force; [S1-T9] bar. Was 0.85667 in 4.1.0");
         base("LinearResistanceUnits.PASCAL_PER_METER");
+        exact("LinearResistanceUnits.KILOPASCAL_PER_METER", "1000", null, "[S1] SI prefix kilo");
+        exact("LinearResistanceUnits.PSI_PER_100_FEET", "0.45359237 * 9.80665 / (0.0254 * 0.0254) / (100 * 0.3048)",
+                "6894.757 / 30.48", "[S1] pound-force per square inch 6.894 757 E+03 Pa, exact from the pound and the "
+                        + "inch; foot 3.048 E-01 exact");
         exact("LinearResistanceUnits.INCH_OF_WATER_PER_100_FEET", "25.4 * 9.80665 / (100 * 0.3048)",
                 "249.0889 / 30.48", "[S1] millimeter of water, conventional 9.806 65 Pa exact (so an inch is 25.4 "
                         + "of them), inch of water, conventional 2.490 889 E+02; foot. Was 8.16722 in 4.1.0");

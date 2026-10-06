@@ -73,6 +73,8 @@ public enum VapourQualityUnits implements VapourQualityUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .dropDegreeSymbols()
+                // A dimensionless fraction is often written "-", as Ratio and RelativeHumidity accept.
+                .dropHyphens()
                 .toString();
     }
 }

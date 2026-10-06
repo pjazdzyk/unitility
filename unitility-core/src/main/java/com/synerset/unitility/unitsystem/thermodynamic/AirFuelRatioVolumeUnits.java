@@ -63,7 +63,8 @@ public enum AirFuelRatioVolumeUnits implements AirFuelRatioVolumeUnit {
         String requestedSymbol = unifySymbol(rawSymbol);
         for (AirFuelRatioVolumeUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
-            if (currentSymbol.equals(requestedSymbol)) {
+            // No two of these symbols differ only by case, so "nm³/nm³" is the normal cubic metre ratio.
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
                 return unit;
             }
         }

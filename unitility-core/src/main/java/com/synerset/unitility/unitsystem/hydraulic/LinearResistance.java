@@ -34,6 +34,14 @@ public class LinearResistance implements CalculableQuantity<LinearResistanceUnit
         return new LinearResistance(value, LinearResistanceUnits.PASCAL_PER_METER);
     }
 
+    public static LinearResistance ofKilopascalPerMeter(double value) {
+        return new LinearResistance(value, LinearResistanceUnits.KILOPASCAL_PER_METER);
+    }
+
+    public static LinearResistance ofPsiPer100Feet(double value) {
+        return new LinearResistance(value, LinearResistanceUnits.PSI_PER_100_FEET);
+    }
+
     public static LinearResistance ofInchOfWaterPer100Feet(double value) {
         return new LinearResistance(value, LinearResistanceUnits.INCH_OF_WATER_PER_100_FEET);
     }
@@ -86,6 +94,14 @@ public class LinearResistance implements CalculableQuantity<LinearResistanceUnit
         return toUnit(LinearResistanceUnits.PASCAL_PER_METER);
     }
 
+    public LinearResistance toKilopascalPerMeter() {
+        return toUnit(LinearResistanceUnits.KILOPASCAL_PER_METER);
+    }
+
+    public LinearResistance toPsiPer100Feet() {
+        return toUnit(LinearResistanceUnits.PSI_PER_100_FEET);
+    }
+
     public LinearResistance toInchOfWaterPer100Feet() {
         return toUnit(LinearResistanceUnits.INCH_OF_WATER_PER_100_FEET);
     }
@@ -97,6 +113,14 @@ public class LinearResistance implements CalculableQuantity<LinearResistanceUnit
     // Get value in target unit
     public double getInPascalPerMeter() {
         return getInUnit(LinearResistanceUnits.PASCAL_PER_METER);
+    }
+
+    public double getInKilopascalPerMeter() {
+        return getInUnit(LinearResistanceUnits.KILOPASCAL_PER_METER);
+    }
+
+    public double getInPsiPer100Feet() {
+        return getInUnit(LinearResistanceUnits.PSI_PER_100_FEET);
     }
 
     public double getInInchOfWaterPer100Feet() {

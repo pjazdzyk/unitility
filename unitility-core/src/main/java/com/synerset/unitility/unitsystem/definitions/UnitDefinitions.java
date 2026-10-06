@@ -337,6 +337,8 @@ public final class UnitDefinitions {
     /** Conventional inch of water per 100 ft, in Pa/m. */
     public static final double INCH_OF_WATER_PER_100_FEET =
             round(div(Exact.INCH_OF_WATER_CONVENTIONAL, mul(new BigDecimal("100"), Exact.FOOT)));
+    /** Pound-force per square inch per 100 ft, in Pa/m: PSI exact from lbf and inch, over 100 ft exact. */
+    public static final double PSI_PER_100_FEET = round(div(Exact.PSI, mul(new BigDecimal("100"), Exact.FOOT)));
     /** Inch of mercury at 32 °F per 100 ft, in Pa/m ([S1] 3386.38 Pa per inch, see INCH_OF_MERCURY_32F). */
     public static final double INCH_OF_MERCURY_PER_100_FEET =
             round(div(Exact.INCH_OF_MERCURY_32F, mul(new BigDecimal("100"), Exact.FOOT)));

@@ -1,5 +1,29 @@
 # Changelog
 
+## 5.1.0
+
+Two symbol spellings that real clients send now parse, and two pressure-gradient units are added. No conversion
+factor of an existing unit changes.
+
+### Fixed
+
+- **Vapour quality written "-".** `VapourQualityUnits.fromSymbol("-")` threw, where `Ratio` and `RelativeHumidity`
+  read a hyphen as their dimensionless unit. It now returns `FRACTION`.
+- **Air-fuel ratio in another letter case.** `AirFuelRatioVolumeUnits` compared case-sensitively, so `nm³/nm³`, the
+  form a caller that lower-cases symbols sends, was refused. None of its symbols differ only by case, so it now
+  compares case-insensitively.
+
+### Added
+
+- `LinearResistanceUnits.KILOPASCAL_PER_METER` (`kPa/m`) and `PSI_PER_100_FEET` (`psi/100ft`, exact from the pound,
+  the inch and the foot), with `LinearResistance.ofKilopascalPerMeter`, `ofPsiPer100Feet`, their `to…` and `getIn…`
+  methods, and golden-table entries.
+
+### Not changed, on purpose
+
+A bare `mH2O` still reads as the metre of water at 10 °C (`METRE_OF_WATER_10`), as `PressureTest` pins. A caller that
+means the conventional metre of water (9806.65 Pa, NIST SP 811) converts to pascals itself.
+
 ## 5.0.2
 
 A fix release. No quantity, unit or conversion factor changes, but symbols that differ only by case now parse

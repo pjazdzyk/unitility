@@ -10,6 +10,9 @@ import java.util.function.DoubleUnaryOperator;
 public enum LinearResistanceUnits implements LinearResistanceUnit {
 
     PASCAL_PER_METER("Pa/m", 1.0),
+    KILOPASCAL_PER_METER("kPa/m", 1.0E3),
+    // Pound-force per square inch (NIST SP 811 App. B.8, 6.894 757 E+03 Pa, exact from lbf and inch), per 100 ft.
+    PSI_PER_100_FEET("psi/100ft", UnitDefinitions.PSI_PER_100_FEET),
     // Conventional inch of water (1000 kg/m³, standard gravity), NIST SP 811 App. B.8 2.490 889 E+02 Pa, per 100 ft.
     INCH_OF_WATER_PER_100_FEET("inH₂O/100ft", UnitDefinitions.INCH_OF_WATER_PER_100_FEET),
     // Inch of mercury at 32 °F (NIST SP 811 App. B.8, 3.386 38 E+03 Pa), not the conventional inch of mercury
