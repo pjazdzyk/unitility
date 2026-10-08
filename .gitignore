@@ -89,6 +89,7 @@ nb-configuration.xml
 
 plans/
 AGENTS.md
+CLAUDE.md
 
 # Claude Code per-user settings (personal permission rules and local paths)
 .claude/settings.local.json
