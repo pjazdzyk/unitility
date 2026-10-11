@@ -43,3 +43,13 @@ jobs:
         shell: bash
         env:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          # Maven 3.10.0 (ubuntu-latest image since 2026-10-04) writes maven-metadata-local.xml,
+          # _remote.repositories and .locks into target/central-staging. The central-publishing plugin
+          # zips them, and Central rejects the bundle: "content that does NOT have a .pom file".
+          # These three properties restore the Maven 3.9 behaviour. Drop them once the plugin
+          # (mavenplugins/central-publishing-maven-plugin#79) or Maven (apache/maven#13388) is fixed.
+          MAVEN_ARGS: >-
+            --no-transfer-progress
+            -Daether.priority.VersionsMetadataGeneratorFactory=NaN
+            -Daether.priority.EnhancedLocalRepositoryManagerFactory=NaN
+            -Daether.syncContext.named.factory=rwlock-local
