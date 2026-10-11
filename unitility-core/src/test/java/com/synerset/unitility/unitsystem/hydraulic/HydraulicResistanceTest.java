@@ -94,4 +94,53 @@ class HydraulicResistanceTest {
         // Then
         assertThat(pressureDropPa).isEqualTo(1.0E5, withPrecision(1E-8));
     }
+
+    @Test
+    @DisplayName("should convert the US units with exact factors: psi/lb² and inH₂O/lb² from the exact pound, inch and g")
+    void shouldConvertUsUnitsWithExactFactors() {
+        // Given
+        double poundSquared = 0.45359237 * 0.45359237;
+        double psi = 0.45359237 * 9.80665 / (0.0254 * 0.0254);
+        double inchOfWater = 25.4 * 9.80665;
+
+        // When
+        double psiFactor = HydraulicResistance.ofPsiSecondSquaredPerPoundSquared(1.0).getBaseValue();
+        double inchOfWaterFactor = HydraulicResistance.ofInchOfWaterSecondSquaredPerPoundSquared(1.0).getBaseValue();
+
+        // Then
+        assertThat(psiFactor).isEqualTo(psi / poundSquared, withPrecision(1E-8));
+        assertThat(inchOfWaterFactor).isEqualTo(inchOfWater / poundSquared, withPrecision(1E-8));
+        assertThat(psiFactor).isEqualTo(33511.0, withPrecision(1.0));
+        assertThat(HydraulicResistance.ofPascalSecondSquaredPerKilogramSquared(psiFactor).getInPsiSecondSquaredPerPoundSquared())
+                .isEqualTo(1.0, withPrecision(1E-13));
+        assertThat(HydraulicResistance.ofPsiSecondSquaredPerPoundSquared(1.0).toInchOfWaterSecondSquaredPerPoundSquared().getValue())
+                .isEqualTo(6894.757293168361 / 249.08891, withPrecision(1E-6));
+    }
+
+    @Test
+    @DisplayName("should round-trip the US units and resolve their plain-ASCII spellings")
+    void shouldRoundTripAndParseUsUnits() {
+        // Given
+        HydraulicResistance initial = HydraulicResistance.ofPsiSecondSquaredPerPoundSquared(0.37);
+
+        // When
+        HydraulicResistance back = initial.toInchOfWaterSecondSquaredPerPoundSquared()
+                .toBarHourSquaredPerTonneSquared()
+                .toPsiSecondSquaredPerPoundSquared();
+
+        // Then
+        assertThat(back.getValue()).isEqualTo(0.37, withPrecision(1E-13));
+        assertThat(HydraulicResistanceUnits.fromSymbol("psi·s²/lb²"))
+                .isEqualTo(HydraulicResistanceUnits.PSI_SECOND_SQUARED_PER_POUND_SQUARED);
+        assertThat(HydraulicResistanceUnits.fromSymbol("psi*s2/lb2"))
+                .isEqualTo(HydraulicResistanceUnits.PSI_SECOND_SQUARED_PER_POUND_SQUARED);
+        assertThat(HydraulicResistanceUnits.fromSymbol("PSI s2/lb2"))
+                .isEqualTo(HydraulicResistanceUnits.PSI_SECOND_SQUARED_PER_POUND_SQUARED);
+        assertThat(HydraulicResistanceUnits.fromSymbol("inH₂O·s²/lb²"))
+                .isEqualTo(HydraulicResistanceUnits.INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED);
+        assertThat(HydraulicResistanceUnits.fromSymbol("inH2O*s2/lb2"))
+                .isEqualTo(HydraulicResistanceUnits.INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED);
+        assertThat(HydraulicResistance.of(2.0, "inH2O*s2/lb2"))
+                .isEqualTo(HydraulicResistance.ofInchOfWaterSecondSquaredPerPoundSquared(2.0));
+    }
 }

@@ -43,6 +43,14 @@ public class HydraulicResistance implements CalculableQuantity<HydraulicResistan
         return new HydraulicResistance(value, HydraulicResistanceUnits.BAR_HOUR_SQUARED_PER_TONNE_SQUARED);
     }
 
+    public static HydraulicResistance ofPsiSecondSquaredPerPoundSquared(double value) {
+        return new HydraulicResistance(value, HydraulicResistanceUnits.PSI_SECOND_SQUARED_PER_POUND_SQUARED);
+    }
+
+    public static HydraulicResistance ofInchOfWaterSecondSquaredPerPoundSquared(double value) {
+        return new HydraulicResistance(value, HydraulicResistanceUnits.INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -95,6 +103,14 @@ public class HydraulicResistance implements CalculableQuantity<HydraulicResistan
         return toUnit(HydraulicResistanceUnits.BAR_HOUR_SQUARED_PER_TONNE_SQUARED);
     }
 
+    public HydraulicResistance toPsiSecondSquaredPerPoundSquared() {
+        return toUnit(HydraulicResistanceUnits.PSI_SECOND_SQUARED_PER_POUND_SQUARED);
+    }
+
+    public HydraulicResistance toInchOfWaterSecondSquaredPerPoundSquared() {
+        return toUnit(HydraulicResistanceUnits.INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED);
+    }
+
     // Get value in target unit
     public double getInPascalSecondSquaredPerKilogramSquared() {
         return getInUnit(HydraulicResistanceUnits.PASCAL_SECOND_SQUARED_PER_KILOGRAM_SQUARED);
@@ -106,6 +122,14 @@ public class HydraulicResistance implements CalculableQuantity<HydraulicResistan
 
     public double getInBarHourSquaredPerTonneSquared() {
         return getInUnit(HydraulicResistanceUnits.BAR_HOUR_SQUARED_PER_TONNE_SQUARED);
+    }
+
+    public double getInPsiSecondSquaredPerPoundSquared() {
+        return getInUnit(HydraulicResistanceUnits.PSI_SECOND_SQUARED_PER_POUND_SQUARED);
+    }
+
+    public double getInInchOfWaterSecondSquaredPerPoundSquared() {
+        return getInUnit(HydraulicResistanceUnits.INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED);
     }
 
     @Override

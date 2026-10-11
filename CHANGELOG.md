@@ -25,8 +25,12 @@ described in the units of their catalogues. No conversion factor of an existing 
 - `HydraulicResistance`, the quadratic loss coefficient K of a flow path, dp = K·ṁ², in `unitility-core`
   (`hydraulic` package) with a plain-SI JPA converter in `unitility-persistence`. Units (`HydraulicResistanceUnits`):
   `Pa·s²/kg²` (SI base, = 1/(kg·m)), `kPa·s²/kg²` (1 000) and `bar·h²/t²` (10⁵ Pa × 3600² s² / (10³ kg)² =
-  1.296E6, exactly). Factories `ofPascalSecondSquaredPerKilogramSquared`, `ofKilopascalSecondSquaredPerKilogramSquared`
-  and `ofBarHourSquaredPerTonneSquared`, with matching `to…` and `getIn…`. `GoldenTable` has rows for all three units.
+  1.296E6, exactly), and the US units `psi·s²/lb²` (psi over the pound squared, 6894.757293168361 Pa /
+  0.45359237² kg² = 33 511.0087955752) and `inH₂O·s²/lb²` (the conventional inch of water, 249.08891 Pa, over the pound
+  squared = 1 210.661999975118). Plain-ASCII spellings such as `psi*s2/lb2` and `inH2O*s2/lb2` are read. Factories
+  `ofPascalSecondSquaredPerKilogramSquared`, `ofKilopascalSecondSquaredPerKilogramSquared`, `ofBarHourSquaredPerTonneSquared`,
+  `ofPsiSecondSquaredPerPoundSquared` and `ofInchOfWaterSecondSquaredPerPoundSquared`, with matching `to…` and `getIn…`.
+  `GoldenTable` has rows for all five units.
 - `kelvin` is read as the kelvin by `TemperatureUnits` and `TemperatureDifferenceUnits`.
 
 ### Not changed, on purpose

@@ -219,7 +219,7 @@ it* Specific entropy: Joule per kilogram Kelvin [J/(kg·K)], Kilojoule per kilog
 * Linear resistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
 * Friction factor: [-]
 * LocalLoss factor: [-]
-* Hydraulic resistance K (dp = K·ṁ²): Pascal second squared per kilogram squared [Pa·s²/kg²], Kilopascal second squared per kilogram squared [kPa·s²/kg²], Bar hour squared per tonne squared [bar·h²/t²]
+* Hydraulic resistance K (dp = K·ṁ²): Pascal second squared per kilogram squared [Pa·s²/kg²], Kilopascal second squared per kilogram squared [kPa·s²/kg²], Bar hour squared per tonne squared [bar·h²/t²], Psi second squared per pound squared [psi·s²/lb²], Inch of water second squared per pound squared [inH₂O·s²/lb²]
 * Flow coefficient: Metric flow coefficient [Kv], Imperial flow coefficient [CV], SI flow coefficient in m² [Av]
 * Bypass factor: [-]
 * Specific fan power: Watt per cubic meter per second [W/(m³/s)], Watt per litre per second [W/(l/s)], Kilowatt per cubic meter per second [kW/(m³/s)], Watt per cubic foot per minute [W/cfm]

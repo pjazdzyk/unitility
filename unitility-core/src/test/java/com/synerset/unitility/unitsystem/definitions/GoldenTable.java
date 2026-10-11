@@ -326,6 +326,14 @@ final class GoldenTable {
         exact("HydraulicResistanceUnits.BAR_HOUR_SQUARED_PER_TONNE_SQUARED", "100000 * 3600 * 3600 / (1000 * 1000)",
                 "1.296E6", "[S1-T9] bar; [S1-T6] hour; tonne = 1000 kg; K = dp / mdot², so Pa·s²/kg² scales as "
                         + "pressure × time² / mass²");
+        exact("HydraulicResistanceUnits.PSI_SECOND_SQUARED_PER_POUND_SQUARED",
+                "0.45359237 * 9.80665 / (0.0254 * 0.0254) / (0.45359237 * 0.45359237)",
+                "6894.757 / (0.45359237 * 0.45359237)", "[S1] pound-force per square inch 6.894 757 E+03 Pa, exact "
+                        + "from the pound and the inch; avoirdupois pound 0.453 592 37 kg exact; K = dp / mdot²");
+        exact("HydraulicResistanceUnits.INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED",
+                "25.4 * 9.80665 / (0.45359237 * 0.45359237)", "249.0889 / (0.45359237 * 0.45359237)",
+                "[S1] millimeter of water, conventional 9.806 65 Pa exact (so an inch is 25.4 times that); avoirdupois "
+                        + "pound 0.453 592 37 kg exact; K = dp / mdot²");
         base("LinearResistanceUnits.PASCAL_PER_METER");
         exact("LinearResistanceUnits.KILOPASCAL_PER_METER", "1000", null, "[S1] SI prefix kilo");
         exact("LinearResistanceUnits.PSI_PER_100_FEET", "0.45359237 * 9.80665 / (0.0254 * 0.0254) / (100 * 0.3048)",

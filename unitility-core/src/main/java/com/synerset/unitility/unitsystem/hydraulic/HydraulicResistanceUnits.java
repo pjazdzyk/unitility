@@ -14,7 +14,11 @@ public enum HydraulicResistanceUnits implements HydraulicResistanceUnit {
     PASCAL_SECOND_SQUARED_PER_KILOGRAM_SQUARED("Pa·s²/kg²", 1.0),
     KILOPASCAL_SECOND_SQUARED_PER_KILOGRAM_SQUARED("kPa·s²/kg²", 1.0E3),
     // Bar and hour per tonne: 1 bar·h²/t² = 10⁵ Pa × 3600² s² / (10³ kg)² = 1.296E6 Pa·s²/kg², exactly.
-    BAR_HOUR_SQUARED_PER_TONNE_SQUARED("bar·h²/t²", UnitDefinitions.BAR_HOUR_SQUARED_PER_TONNE_SQUARED);
+    BAR_HOUR_SQUARED_PER_TONNE_SQUARED("bar·h²/t²", UnitDefinitions.BAR_HOUR_SQUARED_PER_TONNE_SQUARED),
+    // US practice: psi and lb per second. 1 psi·s²/lb² = 6894.757... Pa / 0.45359237² kg² (psi and lb exact).
+    PSI_SECOND_SQUARED_PER_POUND_SQUARED("psi·s²/lb²", UnitDefinitions.PSI_SECOND_SQUARED_PER_POUND_SQUARED),
+    // The conventional inch of water (the pressure unit INCH_OF_WATER) over the pound squared.
+    INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED("inH₂O·s²/lb²", UnitDefinitions.INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;

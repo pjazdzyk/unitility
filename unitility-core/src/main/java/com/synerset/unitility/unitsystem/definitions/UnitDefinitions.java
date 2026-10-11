@@ -366,6 +366,11 @@ public final class UnitDefinitions {
     /** Pa·s²/kg² per bar·h²/t²: 10⁵ Pa × (3600 s)² / (1000 kg)² = 1.296E6, exactly. [S1-T9] bar; [S1-T6] hour; tonne is 1000 kg. */
     public static final double BAR_HOUR_SQUARED_PER_TONNE_SQUARED =
             round(div(mul(Exact.BAR, Exact.HOUR, Exact.HOUR), new BigDecimal("1000"), new BigDecimal("1000")));
+    /** Pa·s²/kg² per psi·s²/lb²: psi (lbf/in², exact) over the avoirdupois pound squared, [S1] lb = 0.453 592 37 kg. */
+    public static final double PSI_SECOND_SQUARED_PER_POUND_SQUARED = round(div(Exact.PSI, Exact.POUND, Exact.POUND));
+    /** Pa·s²/kg² per inH₂O·s²/lb²: the conventional inch of water ({@link #INCH_OF_WATER}) over the pound squared. */
+    public static final double INCH_OF_WATER_SECOND_SQUARED_PER_POUND_SQUARED =
+            round(div(Exact.INCH_OF_WATER_CONVENTIONAL, Exact.POUND, Exact.POUND));
     /** Kv per Av (Av in m²), exactly 36 000: Kv is m³/h at 1 bar and 1000 kg/m³, Av is defined by q = Av·√(Δp/ρ). */
     public static final double AV_IN_KV = round(Exact.AV_IN_KV);
 
