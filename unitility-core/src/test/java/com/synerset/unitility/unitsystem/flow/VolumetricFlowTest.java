@@ -287,4 +287,15 @@ class VolumetricFlowTest {
 
     }
 
+    @Test
+    @DisplayName("should read gpm as the US gallon per minute, never the UK one")
+    void shouldReadGpmAsUsGallonPerMinute() {
+        // 1 gpm = 231 in³ / 60 s = 6.30901964E-5 m³/s, the unit Cv is defined in
+        assertThat(VolumetricFlow.of(1, "gpm")).isEqualTo(VolumetricFlow.ofGallonsPerMinuteUS(1));
+        assertThat(VolumetricFlow.of(1, "GPM")).isEqualTo(VolumetricFlow.ofGallonsPerMinuteUS(1));
+        assertThat(VolumetricFlow.of(1, "US gpm")).isEqualTo(VolumetricFlow.ofGallonsPerMinuteUS(1));
+        assertThat(VolumetricFlow.of(1, "gpm").getInCubicMetersPerSecond()).isEqualTo(6.30901964E-5, withPrecision(1E-18));
+        assertThat(VolumetricFlow.of(1, "gpm")).isNotEqualTo(VolumetricFlow.ofGallonsPerMinuteUK(1));
+        assertThat(VolumetricFlow.of(1, "gal/min")).isEqualTo(VolumetricFlow.ofGallonsPerMinuteUK(1));
+    }
 }

@@ -93,6 +93,11 @@ public enum VolumetricFlowUnits implements VolumetricFlowUnit {
             String truncatedSymbol = currentSymbol.replace("uk", "");
             return truncatedSymbol.equalsIgnoreCase(requestedSymbol) || currentSymbol.equalsIgnoreCase(requestedSymbol);
         }
+        if (currentUnit == VolumetricFlowUnits.GALLONS_PER_MINUTE_US) {
+            // gpm is the US gallon per minute, the unit the flow coefficient Cv is defined in. It is never the UK gallon.
+            return currentSymbol.equalsIgnoreCase(requestedSymbol) || requestedSymbol.equalsIgnoreCase("gpm")
+                   || requestedSymbol.equalsIgnoreCase("usgpm");
+        }
         return currentSymbol.equalsIgnoreCase(requestedSymbol);
     }
 

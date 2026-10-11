@@ -36,6 +36,11 @@ public class FlowCoefficient implements CalculableQuantity<FlowCoefficientUnit, 
         return new FlowCoefficient(value, FlowCoefficientUnits.CV);
     }
 
+    /** The SI flow coefficient Av, in m²: q = Av·√(Δp/ρ). One Av is 36 000 Kv. */
+    public static FlowCoefficient ofAv(double value) {
+        return new FlowCoefficient(value, FlowCoefficientUnits.AV);
+    }
+
     @Override
     public double getValue() {
         return value;
@@ -84,6 +89,10 @@ public class FlowCoefficient implements CalculableQuantity<FlowCoefficientUnit, 
         return toUnit(FlowCoefficientUnits.CV);
     }
 
+    public FlowCoefficient toAv() {
+        return toUnit(FlowCoefficientUnits.AV);
+    }
+
     // Get value in target unit
     public double getInKv() {
         return getInUnit(FlowCoefficientUnits.KV);
@@ -91,6 +100,10 @@ public class FlowCoefficient implements CalculableQuantity<FlowCoefficientUnit, 
 
     public double getInCv() {
         return getInUnit(FlowCoefficientUnits.CV);
+    }
+
+    public double getInAv() {
+        return getInUnit(FlowCoefficientUnits.AV);
     }
 
     @Override

@@ -315,6 +315,11 @@ final class GoldenTable {
         exact("FlowCoefficientUnits.CV", US_GAL + " * 60 * sqrt(100000 / " + PSI + ")", "0.865",
                 "[S6] Cv = US gpm per 1 psi, Kv = m³/h per 1 bar, so Kv/Cv = (gpm in m³/h) * sqrt(bar/psi); "
                         + "[S2] gallon; [S1] inch, pound-force; [S1-T9] bar. Was 0.85667 in 4.1.0");
+        // Av is typed from its definition q = Av·√(Δp/ρ) with Kv = m³/h at 1 bar and 1000 kg/m³: 1 Av passes
+        // √(10⁵/10³) = 10 m³/s = 36 000 m³/h.
+        exact("FlowCoefficientUnits.AV", "3600 * sqrt(100000 / 1000)", "36000",
+                "[S0] definition of the SI flow coefficient Av (m²), q = Av·√(Δp/ρ); Kv = m³/h at 1 bar, 1000 kg/m³ "
+                        + "(the reference of [S6]); [S1-T6] hour; [S1-T9] bar");
         base("LinearResistanceUnits.PASCAL_PER_METER");
         exact("LinearResistanceUnits.KILOPASCAL_PER_METER", "1000", null, "[S1] SI prefix kilo");
         exact("LinearResistanceUnits.PSI_PER_100_FEET", "0.45359237 * 9.80665 / (0.0254 * 0.0254) / (100 * 0.3048)",
@@ -509,6 +514,13 @@ final class GoldenTable {
                 "[S5] water 983.19582 kg/m³ at 60 °C, 1 atm; [S1] standard gravity. Was 982.6716 kg/m³ in 4.1.0");
         published("PressureUnits.METRE_OF_WATER_95", "961.88792 * 9.80665",
                 "[S5] water 961.88792 kg/m³ at 95 °C, 1 atm; [S1] standard gravity. Was 961.2691 kg/m³ in 4.1.0");
+
+        exact("PressureUnits.INCH_OF_WATER", "25.4 * 9.80665", "2.490889E+02",
+                "[S1] millimeter of water, conventional, 9.806 65 Pa exactly, so an inch is 25.4 of them; "
+                        + "inch of water, conventional, 2.490 889 E+02");
+        published("PressureUnits.INCH_OF_WATER_10", "0.0254 * 999.70247 * 9.80665",
+                "[S5] water 999.70247 kg/m³ at 10 °C, 1 atm, the basis of the bare mH₂O; [S1] standard gravity and "
+                        + "inch. Not the conventional inch of water (1000 kg/m³, 249.0889 Pa), which is 0.030 % higher");
 
         base("SpecificEnthalpyUnits.JOULE_PER_KILOGRAM");
         exact("SpecificEnthalpyUnits.KILOJOULE_PER_KILOGRAM", "1E3", null, SI);

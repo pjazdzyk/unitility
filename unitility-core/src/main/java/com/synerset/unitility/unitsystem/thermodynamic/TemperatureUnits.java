@@ -72,7 +72,8 @@ public enum TemperatureUnits implements TemperatureUnit {
         String requestedSymbol = unifySymbol(rawSymbol);
         for (TemperatureUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
-            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
+            boolean isKelvinWritten = unit == KELVIN && requestedSymbol.equals("kelvin");
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol) || isKelvinWritten) {
                 return unit;
             }
         }

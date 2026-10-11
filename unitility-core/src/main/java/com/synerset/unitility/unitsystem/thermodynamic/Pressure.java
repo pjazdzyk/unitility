@@ -75,6 +75,16 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
         return new Pressure(value, PressureUnits.METRE_OF_WATER_95);
     }
 
+    /** Conventional inch of water, 249.08891 Pa exactly, as in ventilation data and the inH₂O/100ft gradient. */
+    public static Pressure ofInchOfWater(double value) {
+        return new Pressure(value, PressureUnits.INCH_OF_WATER);
+    }
+
+    /** Inch of water column on the 10 °C water basis of {@link #ofMetreOfWater10(double)}, 249.0148 Pa. */
+    public static Pressure ofInchOfWater10(double value) {
+        return new Pressure(value, PressureUnits.INCH_OF_WATER_10);
+    }
+
     public static Pressure ofMillimetreOfMercury10(double value) {
         return new Pressure(value, PressureUnits.MILLIMETRE_OF_MERCURY_10);
     }
@@ -171,6 +181,14 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
         return toUnit(PressureUnits.METRE_OF_WATER_95);
     }
 
+    public Pressure toInchOfWater() {
+        return toUnit(PressureUnits.INCH_OF_WATER);
+    }
+
+    public Pressure toInchOfWater10() {
+        return toUnit(PressureUnits.INCH_OF_WATER_10);
+    }
+
     public Pressure toMillimetreOfMercury10() {
         return toUnit(PressureUnits.MILLIMETRE_OF_MERCURY_10);
     }
@@ -226,6 +244,14 @@ public class Pressure implements CalculableQuantity<PressureUnit, Pressure> {
 
     public double getInMetreOfWater95() {
         return getInUnit(PressureUnits.METRE_OF_WATER_95);
+    }
+
+    public double getInInchOfWater() {
+        return getInUnit(PressureUnits.INCH_OF_WATER);
+    }
+
+    public double getInInchOfWater10() {
+        return getInUnit(PressureUnits.INCH_OF_WATER_10);
     }
 
     public double getInMillimetreOfMercury10() {

@@ -10,7 +10,9 @@ import java.util.function.DoubleUnaryOperator;
 public enum FlowCoefficientUnits implements FlowCoefficientUnit {
 
     KV("Kv", 1.0),
-    CV("CV", UnitDefinitions.CV_IN_KV);
+    CV("CV", UnitDefinitions.CV_IN_KV),
+    // Av in m², the SI coefficient q = Av·√(Δp/ρ): 1 Av = 36 000 Kv exactly (see UnitDefinitions.AV_IN_KV).
+    AV("Av", UnitDefinitions.AV_IN_KV);
 
     private final String symbol;
     private final DoubleUnaryOperator toBaseConverter;
@@ -58,7 +60,9 @@ public enum FlowCoefficientUnits implements FlowCoefficientUnit {
         String requestedSymbol = unifySymbol(rawSymbol);
         for (FlowCoefficientUnit unit : values()) {
             String currentSymbol = unifySymbol(unit.getSymbol());
-            if (currentSymbol.equalsIgnoreCase(requestedSymbol)) {
+            // Av is a flow coefficient in m², so within this quantity m² (or m2) names it.
+            boolean isSquareMetreOfAv = unit == AV && requestedSymbol.equals("m2");
+            if (currentSymbol.equalsIgnoreCase(requestedSymbol) || isSquareMetreOfAv) {
                 return unit;
             }
         }
@@ -70,6 +74,7 @@ public enum FlowCoefficientUnits implements FlowCoefficientUnit {
         return StringTransformer.of(inputString)
                 .trimLowerAndClean()
                 .unifyMultiAndDiv()
+                .unifyAerialAndVol()
                 .toString();
     }
 }

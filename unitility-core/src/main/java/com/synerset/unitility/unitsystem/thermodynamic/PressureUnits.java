@@ -22,6 +22,12 @@ public enum PressureUnits implements PressureUnit {
     METRE_OF_WATER_10("mH₂O_10", UnitDefinitions.METRE_OF_WATER_10C),
     METRE_OF_WATER_60("mH₂O_60", UnitDefinitions.METRE_OF_WATER_60C),
     METRE_OF_WATER_95("mH₂O_95", UnitDefinitions.METRE_OF_WATER_95C),
+    // The inch of water is the conventional one, as in ventilation practice and in the inH₂O/100ft gradient:
+    // 0.0254 m × 9806.65 Pa/m = 249.08891 Pa, exactly.
+    INCH_OF_WATER("inH₂O", UnitDefinitions.INCH_OF_WATER),
+    // The property-based inch on the 10 °C water basis of mH₂O_10: 0.0254 m × 999.70247 kg/m³ × 9.80665 m/s² =
+    // 249.014798... Pa. It is read only from its explicit symbol inH2O_10.
+    INCH_OF_WATER_10("inH₂O_10", UnitDefinitions.INCH_OF_WATER_10C),
     // Mercury: UNVERIFIED. No primary source for the density of mercury at 10, 60 or 95 °C was read, so these
     // factors are the 4.1.0 values, unchanged. NIST SP 811 fn 12: such units do not justify many digits anyway.
     MILLIMETRE_OF_MERCURY_10("mmHg_10", UnitDefinitions.MILLIMETRE_OF_MERCURY_10C),
@@ -88,11 +94,19 @@ public enum PressureUnits implements PressureUnit {
                 .toString();
     }
 
+    /** Water column and water gauge, the other names of the inch of water in ventilation data (inWC, inWG). */
+    private static boolean isInchOfWaterAlias(String requestedSymbol) {
+        return requestedSymbol.equalsIgnoreCase("inwc") || requestedSymbol.equalsIgnoreCase("inwg");
+    }
+
     private static boolean hasMatchBeenFound(PressureUnit currentUnit, String requestedSymbol) {
         String currentSymbol = unifySymbol(currentUnit.getSymbol());
-        if(currentUnit == PressureUnits.METRE_OF_WATER_10 || currentUnit == PressureUnits.MILLIMETRE_OF_MERCURY_10){
+        if (currentUnit == PressureUnits.METRE_OF_WATER_10 || currentUnit == PressureUnits.MILLIMETRE_OF_MERCURY_10) {
             String truncatedSymbol = currentSymbol.replace("10", "");
             return truncatedSymbol.equalsIgnoreCase(requestedSymbol) || currentSymbol.equalsIgnoreCase(requestedSymbol);
+        }
+        if (currentUnit == PressureUnits.INCH_OF_WATER) {
+            return currentSymbol.equalsIgnoreCase(requestedSymbol) || isInchOfWaterAlias(requestedSymbol);
         }
         return currentSymbol.equalsIgnoreCase(requestedSymbol);
     }

@@ -163,10 +163,11 @@ units and at least one Imperial unit.
 
 #### THERMODYNAMIC:
 
-* Temperature: Kelvin [K], Celsius [°C], Fahrenheit [°F]
+* Temperature: Kelvin [K] (also written kelvin), Celsius [°C], Fahrenheit [°F]
 * Temperature difference: Kelvin [K], Celsius [°C], Fahrenheit [°F], Rankine [°R] (an interval, so it converts by ratio, never by offset)
 * Pressure: Pascal [Pa], Hectopascal [hPa], Kilopascal [kPa], Megapascal [MPa], Bar [bar], Milli Bar [mbar] PSI [psi], Torr [Torr],
   Meters of water in 10°C [mH₂O_10], Meters of water in 60°C [mH₂O_60], Meters of water in 95°C [mH₂O_95],
+  Inch of water, conventional [inH₂O] (also written inWC or inWG), Inch of water in 10°C [inH₂O_10],
   Millimeters of mercury in 10°C [mmHg_10], Millimeters of mercury in 60°C [mmHg_60], Millimeters of mercury in 95°C [mmHg_95],
 * Energy: Joule [J], Milli joule [mJ], Kilojoule [kJ], Megajoule [MJ], British Thermal Unit [BTU], Calorie [cal], Kilocalorie [kcal], Watt
   hour [Wh], Kilowatt hour [kWh]
@@ -204,7 +205,7 @@ it* Specific entropy: Joule per kilogram Kelvin [J/(kg·K)], Kilojoule per kilog
 
 * Mass flow: Kilogram per second [kg/s], Kilogram per hour [kg/h], Tonne per hour [t/h], Pound per second [lb/s],
 * Volumetric flow: Cubic meters per second [m³/s], Cubic meters per minute [m³/min], Cubic meters per hour [m³/h], Litre
-  per second [L/s], Litre per minute [L/min], Litre per hour [L/h], Gallons per second US [gal/s_US], Gallons per minute US [gal/min_US],
+  per second [L/s], Litre per minute [L/min], Litre per hour [L/h], Gallons per second US [gal/s_US], Gallons per minute US [gal/min_US] (also written gpm),
   Gallons per hour US [gal/h_US], Gallons per second UK [gal/s_UK], Gallons per minute UK [gal/min_UK], Gallons per hour UK [gal/h_UK]
 * Mass flux: Kilogram per square meter second [kg/(m²·s)], Gram per square meter second [g/(m²·s)], Pound per square foot second [lb/(ft²·s)], Pound per square foot hour [lb/(ft²·h)]
 
@@ -218,7 +219,7 @@ it* Specific entropy: Joule per kilogram Kelvin [J/(kg·K)], Kilojoule per kilog
 * Linear resistance: Pascal per meter [Pa/m], Inch of water per 100 feet [inH₂O/100ft], Inch of mercury per 100 feet [inHg/100ft]
 * Friction factor: [-]
 * LocalLoss factor: [-]
-* Flow coefficient: Metric flow coefficient [Kv], Imperial flow coefficient [CV]
+* Flow coefficient: Metric flow coefficient [Kv], Imperial flow coefficient [CV], SI flow coefficient in m² [Av]
 * Bypass factor: [-]
 * Specific fan power: Watt per cubic meter per second [W/(m³/s)], Watt per litre per second [W/(l/s)], Kilowatt per cubic meter per second [kW/(m³/s)], Watt per cubic foot per minute [W/cfm]
 * Rotation speed To Flow Rate Ratio: Radians per second per meter per second [rad·s⁻¹/m³·s⁻¹], revolutions per minute per gallons per minute [rpm/gpm]

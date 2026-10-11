@@ -1,5 +1,7 @@
 package com.synerset.unitility.unitsystem.thermodynamic;
 
+import com.synerset.unitility.unitsystem.definitions.UnitDefinitions;
+import com.synerset.unitility.unitsystem.hydraulic.LinearResistanceUnits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -308,4 +310,58 @@ class PressureTest {
 
     }
 
+    @Test
+    @DisplayName("should convert inH₂O_10 to Pa and vice versa")
+    void shouldProperlyConvertInchOfWater10ToPa() {
+        // Given
+        Pressure initialPressure = Pressure.ofInchOfWater10(1.0);
+
+        // When
+        Pressure actualInPa = initialPressure.toPascal();
+        Pressure backInInch = actualInPa.toInchOfWater10();
+
+        // Then
+        // 0.0254 m × 999.70247 kg/m³ (NIST Chemistry WebBook, water at 10 °C, 1 atm) × 9.80665 m/s² = 249.0147985766 Pa,
+        // the bare mH₂O basis. The conventional inch of water (1000 kg/m³) is 249.08891 Pa, 0.030 % higher.
+        assertThat(actualInPa.getInPascals()).isEqualTo(249.0147985766077, withPrecision(1E-9));
+        assertThat(backInInch.getValue()).isEqualTo(1.0, withPrecision(1E-13));
+        assertThat(Pressure.ofMetreOfWater10(1.0).getInInchOfWater10()).isEqualTo(1.0 / 0.0254, withPrecision(1E-10));
+        assertThat(Pressure.ofPascal(249.0147985766077).getInInchOfWater10()).isEqualTo(1.0, withPrecision(1E-13));
+    }
+
+    @Test
+    @DisplayName("should convert the conventional inH₂O to Pa and vice versa")
+    void shouldProperlyConvertInchOfWaterToPa() {
+        // 0.0254 m × 9806.65 Pa/m = 249.08891 Pa exactly (1 mm of water, conventional, is 9.80665 Pa)
+        Pressure inch = Pressure.ofInchOfWater(1.0);
+
+        assertThat(inch.getInPascals()).isEqualTo(249.08891, withPrecision(1E-12));
+        assertThat(Pressure.ofPascal(249.08891).getInInchOfWater()).isEqualTo(1.0, withPrecision(1E-13));
+        assertThat(inch.toPascal().toInchOfWater().getValue()).isEqualTo(1.0, withPrecision(1E-13));
+        assertThat(Pressure.ofInchOfWater10(1.0).getInPascals() / inch.getInPascals())
+                .isEqualTo(999.70247 / 1000.0, withPrecision(1E-14));
+    }
+
+    @Test
+    @DisplayName("should pin the pressure inch of water and the inH₂O/100ft gradient to one constant")
+    void shouldShareTheInchOfWaterWithTheGradient() {
+        double gradientPerInchOfRunningFoot = LinearResistanceUnits.INCH_OF_WATER_PER_100_FEET.toValueInBaseUnit(1.0) * (100 * 0.3048);
+
+        assertThat(PressureUnits.INCH_OF_WATER.toValueInBaseUnit(1.0)).isEqualTo(UnitDefinitions.INCH_OF_WATER);
+        assertThat(gradientPerInchOfRunningFoot)
+                .isEqualTo(PressureUnits.INCH_OF_WATER.toValueInBaseUnit(1.0), withPrecision(1E-12));
+    }
+
+    @Test
+    @DisplayName("should parse the bare inch of water as the conventional inch and the 10 °C inch only when explicit")
+    void shouldProperlyParseInchOfWaterFromString() {
+        assertThat(Pressure.of(2, "inH2O")).isEqualTo(Pressure.ofInchOfWater(2));
+        assertThat(Pressure.of(2, "inH₂O")).isEqualTo(Pressure.ofInchOfWater(2));
+        assertThat(Pressure.of(2, "in H2O")).isEqualTo(Pressure.ofInchOfWater(2));
+        assertThat(Pressure.of(2, "inWC")).isEqualTo(Pressure.ofInchOfWater(2));
+        assertThat(Pressure.of(2, "inWG")).isEqualTo(Pressure.ofInchOfWater(2));
+        assertThat(Pressure.of(2, "inH2O_10")).isEqualTo(Pressure.ofInchOfWater10(2));
+        assertThat(Pressure.of(2, "inH₂O_10")).isEqualTo(Pressure.ofInchOfWater10(2));
+        assertThat(Pressure.of(1, "mH2O")).isEqualTo(Pressure.ofMetreOfWater10(1));
+    }
 }

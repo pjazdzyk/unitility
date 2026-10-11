@@ -180,6 +180,13 @@ public final class UnitDefinitions {
          * Kv/Cv = (1 US gpm in m³/h) × √(1 bar / 1 psi) = 0.864 977 655... . [S6] rounds it to 0.865.
          */
         static final BigDecimal CV_IN_KV = mul(div(US_GALLON, MINUTE), HOUR, div(BAR, PSI).sqrt(MC));
+        /**
+         * Kv per Av. The SI flow coefficient of a control valve is defined by q = Av·√(Δp/ρ), with Av in m², q in
+         * m³/s, Δp in Pa and ρ in kg/m³. Kv is the water flow in m³/h at Δp = 1 bar and ρ = 1000 kg/m³
+         * (CONVENTIONAL_WATER_DENSITY). One m² of Av therefore passes √(10⁵ / 10³) = 10 m³/s = 36 000 m³/h, so
+         * Kv/Av = HOUR × √(BAR / CONVENTIONAL_WATER_DENSITY) = 36 000, exactly. This is a definition, not a table value.
+         */
+        static final BigDecimal AV_IN_KV = mul(HOUR, div(BAR, CONVENTIONAL_WATER_DENSITY).sqrt(MC));
     }
 
     private UnitDefinitions() {
@@ -325,6 +332,18 @@ public final class UnitDefinitions {
     public static final double METRE_OF_WATER_60C = round(mul(Exact.WATER_DENSITY_60C, Exact.STANDARD_GRAVITY));
     /** [S5] water at 95 °C × standard gravity × 1 m. */
     public static final double METRE_OF_WATER_95C = round(mul(Exact.WATER_DENSITY_95C, Exact.STANDARD_GRAVITY));
+    /**
+     * Conventional inch of water, in Pa: 0.0254 m × 9806.65 Pa/m = 249.088 91 Pa, exactly. [S1] millimeter of water,
+     * conventional, is 9.806 65 Pa exactly (1 mm × 1000 kg/m³ × 9.806 65 m/s²), so an inch is 25.4 of them. The
+     * pressure unit and the gradient {@link #INCH_OF_WATER_PER_100_FEET} are both built from this one definition.
+     */
+    public static final double INCH_OF_WATER = round(Exact.INCH_OF_WATER_CONVENTIONAL);
+    /**
+     * [S5] water at 10 °C × standard gravity × 1 in, the same temperature basis as {@link #METRE_OF_WATER_10C}:
+     * 0.0254 m × 999.70247 kg/m³ × 9.80665 m/s² = 249.014 798... Pa. It is 0.030 % below {@link #INCH_OF_WATER}.
+     */
+    public static final double INCH_OF_WATER_10C =
+            round(mul(Exact.INCH, Exact.WATER_DENSITY_10C, Exact.STANDARD_GRAVITY));
     /** [UNVERIFIED] mercury at 10 °C × standard gravity × 1 mm. */
     public static final double MILLIMETRE_OF_MERCURY_10C =
             round(mul(Exact.MERCURY_DENSITY_10C, Exact.STANDARD_GRAVITY, new BigDecimal("0.001")));
@@ -344,6 +363,8 @@ public final class UnitDefinitions {
             round(div(Exact.INCH_OF_MERCURY_32F, mul(new BigDecimal("100"), Exact.FOOT)));
     /** Kv per Cv, see [S6]. */
     public static final double CV_IN_KV = round(Exact.CV_IN_KV);
+    /** Kv per Av (Av in m²), exactly 36 000: Kv is m³/h at 1 bar and 1000 kg/m³, Av is defined by q = Av·√(Δp/ρ). */
+    public static final double AV_IN_KV = round(Exact.AV_IN_KV);
 
     // Energy-based
     public static final double BTU_PER_HOUR = round(div(Exact.BTU_IT, Exact.HOUR));

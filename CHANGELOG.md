@@ -1,5 +1,40 @@
 # Changelog
 
+## 5.2.0
+
+Three units and two spellings are added for hydronic balancing and sizing data, where valves and dampers are
+described in the units of their catalogues. No conversion factor of an existing unit changes.
+
+### Added
+
+- `PressureUnits.INCH_OF_WATER` (`inH₂O`), with `Pressure.ofInchOfWater`, `toInchOfWater` and `getInInchOfWater`.
+  It is the conventional inch of water, 0.0254 m × 9806.65 Pa/m = 249.08891 Pa exactly, because one millimetre of
+  water, conventional, is 9.80665 Pa. It is read from `inH2O`, `inH₂O`, `in H2O`, `inWC` and `inWG`, in any letter
+  case. This is the inch of ventilation practice, and it is the same constant that `inH₂O/100ft` already uses, so
+  a pressure in `inH₂O` and a gradient in `inH₂O/100ft` agree.
+- `PressureUnits.INCH_OF_WATER_10` (`inH₂O_10`), with `ofInchOfWater10`, `toInchOfWater10` and `getInInchOfWater10`.
+  It is 0.0254 m × 999.70247 kg/m³ × 9.80665 m/s² = 249.0147985766 Pa, with the density of water at 10 °C and 1 atm
+  (NIST Chemistry WebBook, IAPWS-95), the basis of `mH₂O_10`. It is read only from its explicit symbol
+  `inH2O_10`. It is 0.030 % below the conventional inch.
+- `FlowCoefficientUnits.AV` (`Av`), the SI flow coefficient in m², with `FlowCoefficient.ofAv`, `toAv` and
+  `getInAv`. It is defined by q = Av·√(Δp/ρ). With Kv as the water flow in m³/h at 1 bar and 1000 kg/m³, one
+  m² passes √(10⁵ / 10³) = 10 m³/s = 36 000 m³/h, so 1 Av = 36 000 Kv exactly, and 1 Cv is
+  0.8649776554423018 / 36 000 = 2.40271570956E-5 Av. Within a flow coefficient, `m²` and `m2` also name it.
+- `gpm` (and `GPM`, `US gpm`) is read as `GALLONS_PER_MINUTE_US`, the US gallon per minute (231 in³ per
+  60 s = 6.30901964E-5 m³/s), the unit that Cv is defined in. It is never the UK gallon.
+- `kelvin` is read as the kelvin by `TemperatureUnits` and `TemperatureDifferenceUnits`.
+
+### Not changed, on purpose
+
+- A bare `mH2O` is still the metre of water at 10 °C, and a bare `gal/min` is still the UK gallon per minute.
+- A caller who needs the water column at another temperature converts to pascals itself.
+
+### Tests
+
+`BalancingPlanSymbolsTest` pins 43 unit symbols and 9 whole-string forms of the balancing plan, each to a value derived
+from the defining numbers and not from `UnitDefinitions`. `GoldenTable` has rows for `INCH_OF_WATER`, `INCH_OF_WATER_10` and `AV`,
+and `unit-scales.json` is regenerated.
+
 ## 5.1.0
 
 Two symbol spellings that real clients send now parse, and two pressure-gradient units are added. No conversion
