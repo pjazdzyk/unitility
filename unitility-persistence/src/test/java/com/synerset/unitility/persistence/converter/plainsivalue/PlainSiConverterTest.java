@@ -659,6 +659,24 @@ class PlainSiConverterTest {
     }
 
     @Test
+    @DisplayName("Hydraulic Resistance Plain SI Converter: should successfully convert Hydraulic Resistance")
+    void shouldSuccessfullyConvertHydraulicResistanceTest() {
+        // Given
+        HydraulicResistance hydraulicResistance = HydraulicResistance.ofBarHourSquaredPerTonneSquared(2.0);
+        HydraulicResistanceUnit defaultConverterUnit = HydraulicResistancePlainSiConverter.DEFAULT_SI_UNIT;
+        HydraulicResistancePlainSiConverter converter = new HydraulicResistancePlainSiConverter();
+
+        // When
+        Double actualValueToBePersistedInDB = converter.convertToDatabaseColumn(hydraulicResistance);
+        HydraulicResistance actualQuantityFromDB = converter.convertToEntityAttribute(actualValueToBePersistedInDB);
+
+        // Then
+        assertThat(defaultConverterUnit).isEqualTo(HydraulicResistanceUnits.PASCAL_SECOND_SQUARED_PER_KILOGRAM_SQUARED);
+        assertThat(actualValueToBePersistedInDB).isEqualTo(2.592E6, withPrecision(1E-6));
+        assertThat(actualQuantityFromDB).isEqualTo(hydraulicResistance);
+    }
+
+    @Test
     @DisplayName("Friction Factor Plain SI Converter: should successfully convert Friction Factor")
     void shouldSuccessfullyConvertFrictionFactorTest() {
         // Given

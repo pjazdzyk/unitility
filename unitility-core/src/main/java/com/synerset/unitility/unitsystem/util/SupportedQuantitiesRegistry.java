@@ -108,6 +108,7 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(RelativeHumidity.class, () -> Arrays.asList(RelativeHumidityUnits.values())),
                 // Hydraulic
                 Map.entry(LinearResistance.class, () -> Arrays.asList(LinearResistanceUnits.values())),
+                Map.entry(HydraulicResistance.class, () -> Arrays.asList(HydraulicResistanceUnits.values())),
                 Map.entry(SpecificFanPower.class, () -> Arrays.asList(SpecificFanPowerUnits.values())),
                 Map.entry(FrictionFactor.class, Collections::emptyList),
                 Map.entry(LocalLossFactor.class, Collections::emptyList),

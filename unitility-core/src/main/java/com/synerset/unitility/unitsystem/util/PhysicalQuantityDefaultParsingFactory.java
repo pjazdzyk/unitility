@@ -112,6 +112,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(RelativeHumidity.class, RelativeHumidity::of),
                 // Hydraulic
                 Map.entry(LinearResistance.class, LinearResistance::of),
+                Map.entry(HydraulicResistance.class, HydraulicResistance::of),
                 Map.entry(SpecificFanPower.class, SpecificFanPower::of),
                 Map.entry(FrictionFactor.class, (value, symbol) -> FrictionFactor.of(value)),
                 Map.entry(LocalLossFactor.class, (value, symbol) -> LocalLossFactor.of(value)),
@@ -232,6 +233,7 @@ final class PhysicalQuantityDefaultParsingFactory extends PhysicalQuantityAbstra
                 Map.entry(AbsoluteRoughness.class, DistanceUnits.METER),
                 Map.entry(FrictionFactor.class, FrictionFactorUnits.DIMENSIONLESS),
                 Map.entry(LinearResistance.class, LinearResistanceUnits.PASCAL_PER_METER),
+                Map.entry(HydraulicResistance.class, HydraulicResistanceUnits.PASCAL_SECOND_SQUARED_PER_KILOGRAM_SQUARED),
                 Map.entry(SpecificFanPower.class,
                         SpecificFanPowerUnits.WATT_PER_CUBIC_METER_PER_SECOND),
                 Map.entry(LocalLossFactor.class, LocalLossFactorUnits.DIMENSIONLESS),

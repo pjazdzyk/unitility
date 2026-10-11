@@ -2,7 +2,7 @@
 
 ## 5.2.0
 
-Three units and two spellings are added for hydronic balancing and sizing data, where valves and dampers are
+Three units, a quantity and two spellings are added for hydronic balancing and sizing data, where valves and dampers are
 described in the units of their catalogues. No conversion factor of an existing unit changes.
 
 ### Added
@@ -22,6 +22,11 @@ described in the units of their catalogues. No conversion factor of an existing 
   0.8649776554423018 / 36 000 = 2.40271570956E-5 Av. Within a flow coefficient, `m²` and `m2` also name it.
 - `gpm` (and `GPM`, `US gpm`) is read as `GALLONS_PER_MINUTE_US`, the US gallon per minute (231 in³ per
   60 s = 6.30901964E-5 m³/s), the unit that Cv is defined in. It is never the UK gallon.
+- `HydraulicResistance`, the quadratic loss coefficient K of a flow path, dp = K·ṁ², in `unitility-core`
+  (`hydraulic` package) with a plain-SI JPA converter in `unitility-persistence`. Units (`HydraulicResistanceUnits`):
+  `Pa·s²/kg²` (SI base, = 1/(kg·m)), `kPa·s²/kg²` (1 000) and `bar·h²/t²` (10⁵ Pa × 3600² s² / (10³ kg)² =
+  1.296E6, exactly). Factories `ofPascalSecondSquaredPerKilogramSquared`, `ofKilopascalSecondSquaredPerKilogramSquared`
+  and `ofBarHourSquaredPerTonneSquared`, with matching `to…` and `getIn…`. `GoldenTable` has rows for all three units.
 - `kelvin` is read as the kelvin by `TemperatureUnits` and `TemperatureDifferenceUnits`.
 
 ### Not changed, on purpose

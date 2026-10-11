@@ -320,6 +320,12 @@ final class GoldenTable {
         exact("FlowCoefficientUnits.AV", "3600 * sqrt(100000 / 1000)", "36000",
                 "[S0] definition of the SI flow coefficient Av (m²), q = Av·√(Δp/ρ); Kv = m³/h at 1 bar, 1000 kg/m³ "
                         + "(the reference of [S6]); [S1-T6] hour; [S1-T9] bar");
+        base("HydraulicResistanceUnits.PASCAL_SECOND_SQUARED_PER_KILOGRAM_SQUARED");
+        exact("HydraulicResistanceUnits.KILOPASCAL_SECOND_SQUARED_PER_KILOGRAM_SQUARED", "1000", null,
+                "[S1] SI prefix kilo");
+        exact("HydraulicResistanceUnits.BAR_HOUR_SQUARED_PER_TONNE_SQUARED", "100000 * 3600 * 3600 / (1000 * 1000)",
+                "1.296E6", "[S1-T9] bar; [S1-T6] hour; tonne = 1000 kg; K = dp / mdot², so Pa·s²/kg² scales as "
+                        + "pressure × time² / mass²");
         base("LinearResistanceUnits.PASCAL_PER_METER");
         exact("LinearResistanceUnits.KILOPASCAL_PER_METER", "1000", null, "[S1] SI prefix kilo");
         exact("LinearResistanceUnits.PSI_PER_100_FEET", "0.45359237 * 9.80665 / (0.0254 * 0.0254) / (100 * 0.3048)",
