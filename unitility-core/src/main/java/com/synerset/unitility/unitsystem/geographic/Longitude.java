@@ -62,10 +62,9 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
 
     /**
      * Creates a {@link Longitude} instance by parsing a coordinate string expressed
-     * in <b>ICAO-compliant DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
+     * in <b>aviation-style DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
      * <p>
-     * The input must follow the conventions defined in
-     * <b>ICAO Annex 15 — Aeronautical Information Services</b>, where longitude
+     * The input must follow the notation commonly used in aviation, where longitude
      * is expressed in degrees (°), minutes (′), and seconds (″) of arc,
      * followed by an <b>East (E)</b> or <b>West (W)</b> direction indicator.
      * <p>
@@ -83,7 +82,7 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
      *
      * <h4>Examples:</h4>
      * <pre>{@code
-     * Longitude lon1 = Longitude.ofDMSFormat("021°04'03.98\"E");  // Valid, ICAO precision
+     * Longitude lon1 = Longitude.ofDMSFormat("021°04'03.98\"E");  // Valid, 0.01 second precision
      * Longitude lon2 = Longitude.ofDMSFormat("21°4'3.9\"W");      // Valid, lower precision
      * Longitude lon3 = Longitude.ofDMSFormat("21deg4min3.98secE"); // Valid, alternate format
      * Longitude.ofDMSFormat("21°4'3.9");  // X Invalid — missing direction (E/W)
@@ -144,9 +143,9 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
 
     // Formatted in DMS_s (degrees, minutes, seconds) format
     /**
-     * Returns the longitude formatted in ICAO-compliant <b>DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
+     * Returns the longitude formatted in aviation-style <b>DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
      * <p>
-     * This format follows the conventions defined in <b>ICAO Annex 15 — Aeronautical Information Services</b>, where
+     * This format follows the notation commonly used in aviation, where
      * geographical coordinates are expressed in degrees, minutes, and seconds of arc. The seconds component is
      * typically represented to a precision of <b>0.01″ (hundredth of a second)</b> by default.
      * <p>
@@ -157,14 +156,14 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
      *   <li>Direction (E/W) is mandatory for longitude.</li>
      * </ul>
      *
-     * @return DMS_S-formatted longitude string using the default ICAO seconds resolution (0.01″)
+     * @return DMS_S-formatted longitude string using the default seconds resolution (0.01″)
      */
     public String toDMSsFormat() {
         return DMSCoordinateFormatter.longitudeToDMSSFormat(this, DMSCoordinateFormatter.DEFAULT_ICAO_SECONDS_RESOLUTION);
     }
 
     /**
-     * Returns the longitude formatted in ICAO-compliant <b>DMS_S</b> format,
+     * Returns the longitude formatted in aviation-style <b>DMS_S</b> format,
      * prefixed with the provided variable name.
      * <p>
      * Example output: {@code LON = 021°04'03.98"E}
@@ -177,13 +176,13 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
     }
 
     /**
-     * Returns the longitude formatted in ICAO-compliant <b>DMS_S</b> format using a custom
+     * Returns the longitude formatted in aviation-style <b>DMS_S</b> format using a custom
      * seconds resolution.
      * <p>
      * The seconds resolution defines how precisely the seconds component is rounded or displayed. For example:
      * <ul>
      *   <li>{@code secondsResolution = 0.1} → seconds rounded to one decimal place</li>
-     *   <li>{@code secondsResolution = 0.01} → seconds rounded to two decimals (default ICAO precision)</li>
+     *   <li>{@code secondsResolution = 0.01} → seconds rounded to two decimals (default precision)</li>
      *   <li>{@code secondsResolution = 1} → seconds displayed as whole numbers</li>
      * </ul>
      * Example output with {@code secondsResolution = 0.1}: {@code 021°04'03.9"E}
@@ -196,7 +195,7 @@ public class Longitude implements CalculableQuantity<AngleUnit, Longitude> {
     }
 
     /**
-     * Returns the longitude formatted in ICAO-compliant <b>DMS_S</b> format using a custom
+     * Returns the longitude formatted in aviation-style <b>DMS_S</b> format using a custom
      * seconds resolution, and prefixed with the provided variable name.
      * <p>
      * Example output: {@code LON = 021°04'03.98"E}

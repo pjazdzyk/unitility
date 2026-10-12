@@ -63,10 +63,9 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
 
     /**
      * Creates a {@link Latitude} instance by parsing a coordinate string expressed
-     * in <b>ICAO-compliant DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
+     * in <b>aviation-style DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
      * <p>
-     * The input must follow the conventions defined in
-     * <b>ICAO Annex 15 — Aeronautical Information Services</b>, where latitude
+     * The input must follow the notation commonly used in aviation, where latitude
      * is expressed in degrees (°), minutes (′), and seconds (″) of arc,
      * followed by a <b>North (N)</b> or <b>South (S)</b> direction indicator.
      * <p>
@@ -86,7 +85,7 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
      *
      * <h4>Examples:</h4>
      * <pre>{@code
-     * Latitude lat1 = Latitude.ofDMSFormat("52°14'05.12\"N");    // Valid, ICAO precision
+     * Latitude lat1 = Latitude.ofDMSFormat("52°14'05.12\"N");    // Valid, 0.01 second precision
      * Latitude lat2 = Latitude.ofDMSFormat("52°14'5.1\"S");      // Valid, lower precision
      * Latitude lat3 = Latitude.ofDMSFormat("52deg14min5.123secN"); // Valid, alternate format
      * Latitude.ofDMSFormat("52°14'5.1");  // X Invalid — missing direction (N/S)
@@ -166,9 +165,9 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
 
     // Formatted in DMS_s (degrees, minutes, seconds) format
     /**
-     * Returns the latitude formatted in ICAO-compliant <b>DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
+     * Returns the latitude formatted in aviation-style <b>DMS_S</b> (Degrees–Minutes–Seconds with Symbol) format.
      * <p>
-     * This format follows the conventions defined in <b>ICAO Annex 15 — Aeronautical Information Services</b>, where
+     * This format follows the notation commonly used in aviation, where
      * coordinates are expressed in degrees, minutes, and seconds of arc, and the seconds value is typically given
      * to a resolution of <b>0.01″ (hundredth of a second)</b>.
      * <p>
@@ -179,14 +178,14 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
      *   <li>Direction (N/S for latitude, E/W for longitude) is mandatory.</li>
      * </ul>
      *
-     * @return DMS_S-formatted latitude string using the default ICAO seconds resolution (0.01″)
+     * @return DMS_S-formatted latitude string using the default seconds resolution (0.01″)
      */
     public String toDMSsFormat() {
         return DMSCoordinateFormatter.latitudeToDMSSFormat(this, DMSCoordinateFormatter.DEFAULT_ICAO_SECONDS_RESOLUTION);
     }
 
     /**
-     * Returns the latitude formatted in ICAO-compliant <b>DMS_S</b> format,
+     * Returns the latitude formatted in aviation-style <b>DMS_S</b> format,
      * prefixed with the provided variable name.
      * <p>
      * Example output: {@code LAT = 52°14'05.12"N}
@@ -199,13 +198,13 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
     }
 
     /**
-     * Returns the latitude formatted in ICAO-compliant <b>DMS_S</b> format using a custom
+     * Returns the latitude formatted in aviation-style <b>DMS_S</b> format using a custom
      * seconds resolution.
      * <p>
      * The resolution defines the rounding precision of the seconds value. For example:
      * <ul>
      *   <li>{@code secondsResolution = 0.1} → seconds rounded to 1 decimal place</li>
-     *   <li>{@code secondsResolution = 0.01} → seconds rounded to 2 decimals (default ICAO precision)</li>
+     *   <li>{@code secondsResolution = 0.01} → seconds rounded to 2 decimals (default precision)</li>
      *   <li>{@code secondsResolution = 1} → seconds shown as integers only</li>
      * </ul>
      * Example output with {@code secondsResolution = 0.1}: {@code 52°14'05.1"N}
@@ -218,7 +217,7 @@ public class Latitude implements CalculableQuantity<AngleUnit, Latitude> {
     }
 
     /**
-     * Returns the latitude formatted in ICAO-compliant <b>DMS_S</b> format using a custom
+     * Returns the latitude formatted in aviation-style <b>DMS_S</b> format using a custom
      * seconds resolution, and prefixed with the given variable name.
      * <p>
      * Example output: {@code LAT = 52°14'05.12"N}

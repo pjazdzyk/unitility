@@ -23,7 +23,7 @@ import java.util.Objects;
  *
  * <p>
  * When an instance is created using the constructor, the given SDR value is automatically
- * rounded **up to one decimal place** to match typical industry standards. For example,
+ * rounded **up to one decimal place** as is common for catalogue SDR values. For example,
  * a raw input value of {@code 27.24} would be rounded to {@code 27.3}.
  * </p>
  *

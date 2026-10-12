@@ -8,15 +8,14 @@ import java.util.Objects;
 /**
  * Represents a geographic Earth coordinate consisting of latitude, longitude, and an optional name.
  * Provides methods for formatting and manipulating geographic coordinates in both
- * decimal and ICAO-compliant DMS<sub>S</sub> (Degrees–Minutes–Seconds with rounded seconds) formats.
+ * decimal and aviation-style DMS<sub>S</sub> (Degrees–Minutes–Seconds with rounded seconds) formats.
  *
  * <p>Latitude and longitude are validated against the Earth’s valid ranges:
  * latitude ∈ [-90°, +90°], longitude ∈ [-180°, +180°].
  * Values outside these limits throw a {@link UnitSystemArgumentException}.
  *
- * <p><b>Note:</b> The DMS<sub>S</sub> format implemented here follows
- * <em>ICAO Doc 9674 (WGS-84 Manual)</em>, § 2.5.1 —
- * <q>the resolution is always a <b>rounded value</b> as opposed to a truncated value.</q>
+ * <p><b>Note:</b> The DMS<sub>S</sub> format implemented here rounds
+ * seconds to the requested resolution instead of truncating them.
  *
  * @param latitude  The {@link Latitude} of this coordinate.
  * @param longitude The {@link Longitude} of this coordinate.
@@ -49,41 +48,41 @@ public record GeoCoordinate(Latitude latitude, Longitude longitude, String name)
         return new GeoCoordinate(latitude, longitude, null);
     }
 
-    // ICAO DMS_S FORMAT  (Degrees–Minutes–Seconds with defined seconds resolution)
+    // DMS_S FORMAT  (Degrees–Minutes–Seconds with defined seconds resolution)
     /**
-     * Returns the coordinate in ICAO-compliant DMS<sub>S</sub> format
-     * (Degrees–Minutes–Seconds with rounded seconds), using the default ICAO seconds resolution 0.01″.
+     * Returns the coordinate in aviation-style DMS<sub>S</sub> format
+     * (Degrees–Minutes–Seconds with rounded seconds), using the default seconds resolution 0.01″.
      *
      * <p>Example:
      * <pre>
      * 52°14'05.12"N, 010°13'02.12"W
      * </pre>
      *
-     * @return Coordinate in ICAO DMS<sub>S</sub> format (lat, lon).
+     * @return Coordinate in DMS<sub>S</sub> format (lat, lon).
      */
     public String toDMSsFormat() {
         return latitude.toDMSsFormat() + ", " + longitude.toDMSsFormat();
     }
 
     /**
-     * Returns the coordinate in ICAO DMS<sub>S</sub> format with a variable label.
+     * Returns the coordinate in DMS<sub>S</sub> format with a variable label.
      * <p>Example:
      * <pre>
      * pointA = 52°14'05.12"N, 010°13'02.12"W
      * </pre>
      *
      * @param variableName Label to prepend.
-     * @return Labeled coordinate in ICAO DMS<sub>S</sub> format.
+     * @return Labeled coordinate in DMS<sub>S</sub> format.
      */
     public String toDMSsFormat(String variableName) {
         return variableName + " = " + toDMSsFormat();
     }
 
     /**
-     * Returns the coordinate in ICAO DMS<sub>S</sub> format with a custom seconds resolution.
+     * Returns the coordinate in DMS<sub>S</sub> format with a custom seconds resolution.
      *
      * <p>Resolution defines the smallest step between consecutive second values (e.g. 0.01, 0.1, 1.0).
-     * Seconds are <b>rounded</b>, not truncated, per ICAO Doc 9674 § 2.5.1.
+     * Seconds are <b>rounded</b>, not truncated, to the requested resolution.
      *
      * <p>Examples:</p>
      * <ul>
@@ -92,14 +91,14 @@ public record GeoCoordinate(Latitude latitude, Longitude longitude, String name)
      * </ul>
      *
      * @param secondsResolution Seconds resolution (> 0 → custom; ≤ 0 → defaults to 0.01).
-     * @return Coordinate in ICAO DMS<sub>S</sub> format with specified resolution.
+     * @return Coordinate in DMS<sub>S</sub> format with specified resolution.
      */
     public String toDMSsFormat(double secondsResolution) {
         return latitude.toDMSsFormat(secondsResolution) + ", " + longitude.toDMSsFormat(secondsResolution);
     }
 
     /**
-     * Returns the coordinate in ICAO DMS<sub>S</sub> format with both label and seconds resolution.
+     * Returns the coordinate in DMS<sub>S</sub> format with both label and seconds resolution.
      * <p>Example:
      * <pre>
      * pointA = 52°14'05.12"N, 010°13'02.12"W
@@ -107,7 +106,7 @@ public record GeoCoordinate(Latitude latitude, Longitude longitude, String name)
      *
      * @param variableName      Label to prepend.
      * @param secondsResolution Seconds resolution (e.g. 0.01, 0.1, 1.0).
-     * @return Labeled coordinate in ICAO DMS<sub>S</sub> format.
+     * @return Labeled coordinate in DMS<sub>S</sub> format.
      */
     public String toDMSsFormat(String variableName, double secondsResolution) {
         return variableName + " = " + toDMSsFormat(secondsResolution);

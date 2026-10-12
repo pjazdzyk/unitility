@@ -2,22 +2,16 @@ package com.synerset.unitility.unitsystem.geographic;
 
 /**
  * Utility class for formatting latitude and longitude values
- * into ICAO-compliant DMS (Degrees–Minutes–Seconds) strings.
+ * into DMS (Degrees–Minutes–Seconds) strings in the notation commonly used in aviation.
  *
  * <p>
- * According to ICAO Doc 9674, Chapter 2.5.1:
- * <blockquote>
- * “Resolution of positional data is the smallest separation that can be represented
- * by the method employed to make the positional statement.
- * Care must be taken that the resolution does not affect accuracy;
- * the resolution is always a <b>rounded value</b> as opposed to a truncated value.”
- * </blockquote>
+ * Seconds are rounded to the requested resolution, not truncated.
  * </p>
  */
 class DMSCoordinateFormatter {
 
     /**
-     * Default ICAO Annex 15 resolution for seconds (0.01).
+     * Default resolution for seconds (0.01).
      */
     public static final double DEFAULT_ICAO_SECONDS_RESOLUTION = 0.01;
 
@@ -26,21 +20,21 @@ class DMSCoordinateFormatter {
     }
 
     /**
-     * Formats latitude to ICAO DMS string (DD°MM'SS.ss"N/S) using default 0.01 resolution.
+     * Formats latitude to DMS string (DD°MM'SS.ss"N/S) using default 0.01 resolution.
      *
      * @param latitude the latitude object
-     * @return ICAO-compliant DMS string
+     * @return DMS string
      */
     static String latitudeToDMSSFormat(Latitude latitude) {
         return latitudeToDMSSFormat(latitude, DEFAULT_ICAO_SECONDS_RESOLUTION);
     }
 
     /**
-     * Formats latitude to ICAO DMS string (DD°MM'SS.s..."N/S) using custom seconds resolution.
+     * Formats latitude to DMS string (DD°MM'SS.s..."N/S) using custom seconds resolution.
      *
      * @param latitude          the latitude object
      * @param secondsResolution the desired seconds resolution (e.g., 0.01, 0.1, 1.0, or 0 for full seconds)
-     * @return ICAO-compliant DMS string
+     * @return DMS string
      */
     static String latitudeToDMSSFormat(Latitude latitude, double secondsResolution) {
         double latitudeInDegrees = latitude.getInDegrees();
@@ -49,21 +43,21 @@ class DMSCoordinateFormatter {
     }
 
     /**
-     * Formats longitude to ICAO DMS string (DDD°MM'SS.ss"E/W) using default 0.01 resolution.
+     * Formats longitude to DMS string (DDD°MM'SS.ss"E/W) using default 0.01 resolution.
      *
      * @param longitude the longitude object
-     * @return ICAO-compliant DMS string
+     * @return DMS string
      */
     static String longitudeToDMSSFormat(Longitude longitude) {
         return longitudeToDMSSFormat(longitude, DEFAULT_ICAO_SECONDS_RESOLUTION);
     }
 
     /**
-     * Formats longitude to ICAO DMS string (DDD°MM'SS.s..."E/W) using custom seconds resolution.
+     * Formats longitude to DMS string (DDD°MM'SS.s..."E/W) using custom seconds resolution.
      *
      * @param longitude         the longitude object
      * @param secondsResolution the desired seconds resolution (e.g., 0.01, 0.1, 1.0, or 0 for full seconds)
-     * @return ICAO-compliant DMS string
+     * @return DMS string
      */
     static String longitudeToDMSSFormat(Longitude longitude, double secondsResolution) {
         double longitudeInDegrees = longitude.getInDegrees();
@@ -72,10 +66,10 @@ class DMSCoordinateFormatter {
     }
 
     /**
-     * ICAO-compliant DMS notation builder.
+     * DMS notation builder.
      *
      * <p>This method rounds seconds to the specified resolution,
-     * in accordance with ICAO Doc 9674 §2.5.1.
+     * rather than truncating them.
      * </p>
      *
      * @param coordinateInDegrees the coordinate value in decimal degrees
@@ -109,7 +103,7 @@ class DMSCoordinateFormatter {
             decimalPlaces = Math.max(0, (int) Math.round(Math.log10(multiplier)));
         }
 
-        // Round seconds to the specified resolution (ICAO-compliant)
+        // Round seconds to the specified resolution (rounded, not truncated)
         double roundedSeconds = Math.round(seconds * multiplier) / multiplier;
 
         // Handle rounding overflow (e.g. 59.9999 -> 60.00)
@@ -133,7 +127,7 @@ class DMSCoordinateFormatter {
         String minutesFormatted = String.format("%02d", minutes);
         String secondsFormatted = String.format(secondsFormatString, roundedSeconds);
 
-        // ICAO DMS output (no spaces)
+        // DMS output (no spaces)
         return String.format("%s°%s'%s\"%c", degreesFormatted, minutesFormatted, secondsFormatted, directionSymbol);
     }
 
