@@ -20,7 +20,7 @@ features, such as overloaded operators.
 &nbsp;
 ![Build And Test](https://github.com/pjazdzyk/unitility/actions/workflows/build-test-analyze.yml/badge.svg) <br>
 
-> AUTHOR: **Piotr Jazdzyk**, MSc Eng <br>
+> AUTHOR: **Piotr Jażdżyk**, MSc Eng <br>
 > LINKEDIN: https://www.linkedin.com/in/pjazdzyk <br>
 
 ### Unitility in production
@@ -1302,10 +1302,10 @@ Feel free to contact me if yoy have any questions or comments.
 
 ---
 
-This work is licensed under the terms of the **APACHE 2.0** License with the additional requirement that proper attribution be
-given
-to the [Piotr Jażdżyk](https://www.linkedin.com/in/pjazdzyk) as the original author in all derivative works and
-publications.
+This work is licensed under the **Apache License 2.0**, with no additional conditions. The attribution that Apache 2.0
+requires on redistribution is carried in the [NOTICE](NOTICE) file. If you build on the library, a mention of
+[Piotr Jażdżyk](https://www.linkedin.com/in/pjazdzyk) as the original author in your publications is appreciated,
+but it is a request and not a condition of the licence.
 
 For citation and attribution, I have provided badges that you can include in your project to showcase your usage
 of the library: <br>

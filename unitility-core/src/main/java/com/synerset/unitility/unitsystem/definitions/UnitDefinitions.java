@@ -406,8 +406,9 @@ public final class UnitDefinitions {
     // ================= Property-based, non-linear and deprecated =================
 
     /**
-     * Reference sound pressure of the decibel, 20 µPa, as declared by the library. The 20 lg form is NIST SP 811
-     * Sec. 8.7; this reference value was not verified against a primary source.
+     * Reference sound pressure of the decibel in air, 20 µPa (2E-5 Pa). This is the conventional reference value
+     * for sound pressure level, the roughly lowest sound a young healthy ear can hear. The level is 20 lg of the
+     * pressure ratio to it, the 20 lg form being NIST SP 811 Sec. 8.7.
      */
     public static final double SOUND_PRESSURE_REFERENCE = 2E-5;
     /**
