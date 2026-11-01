@@ -117,6 +117,15 @@ public class HeatTransferCoefficient implements CalculableQuantity<HeatTransferC
         return getInUnit(HeatTransferCoefficientUnits.BTU_PER_MINUTE_SQUARE_FOOT_FAHRENHEIT);
     }
 
+    /**
+     * The reciprocal of this coefficient: the area-specific thermal resistance (R-value) in m²·K/W.
+     *
+     * @return thermal resistance, zero coefficient gives infinity
+     */
+    public ThermalResistance toThermalResistance() {
+        return ThermalResistance.ofSquareMeterKelvinPerWatt(1.0 / baseValue);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

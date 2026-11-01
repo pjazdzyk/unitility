@@ -1,5 +1,23 @@
 # Changelog
 
+## 5.3.0
+
+Two thermal resistances are added for insulation sizing, where a layer is described by its resistance per unit area or
+per metre of pipe. No conversion factor of an existing unit changes.
+
+### Added
+
+- `ThermalResistance`, the area-specific thermal resistance (R-value), in `unitility-core` (`thermodynamic` package)
+  with a plain-SI JPA converter in `unitility-persistence`. Units (`ThermalResistanceUnits`): `m²·K/W` (SI base),
+  `m²·°C/W` (the same scale, a Celsius interval is a kelvin), `m²·K/kW` (0.001) and the US R-value unit
+  `ft²·°F·h/BTU` (0.3048² m² × (1/1.8) K × 3600 s / 1055.05585262 J = 0.17611018368230585 m²·K/W, with the
+  International Table Btu used by the other BTU units). Plain-ASCII spellings such as `m2K/W` and `ft2*F*h/BTU` are read.
+- `LinearThermalResistance`, the thermal resistance per metre of pipe, with the same layout. Units
+  (`LinearThermalResistanceUnits`): `m·K/W` (SI base), `m·°C/W` (same scale) and `ft·°F·h/BTU`
+  (0.3048 m × (1/1.8) K × 3600 s / 1055.05585262 J = 0.5777893165429981 m·K/W).
+- `HeatTransferCoefficient.toThermalResistance()` and `ThermalResistance.toHeatTransferCoefficient()`, the
+  reciprocals of each other (R = 1/U).
+
 ## 5.2.0
 
 Three units, a quantity and two spellings are added for hydronic balancing and sizing data, where valves and dampers are

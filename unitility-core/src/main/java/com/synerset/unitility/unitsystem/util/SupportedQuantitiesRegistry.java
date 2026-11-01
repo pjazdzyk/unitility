@@ -152,6 +152,8 @@ public class SupportedQuantitiesRegistry {
                 Map.entry(PressureCoefficient.class, () -> Arrays.asList(PressureCoefficientUnits.values())),
                 Map.entry(SpecificGasConstant.class, () -> Arrays.asList(SpecificGasConstantUnits.values())),
                 Map.entry(HeatTransferCoefficient.class, () -> Arrays.asList(HeatTransferCoefficientUnits.values())),
+                Map.entry(ThermalResistance.class, () -> Arrays.asList(ThermalResistanceUnits.values())),
+                Map.entry(LinearThermalResistance.class, () -> Arrays.asList(LinearThermalResistanceUnits.values())),
                 Map.entry(HeatFlux.class, () -> Arrays.asList(HeatFluxUnits.values())),
                 Map.entry(LinearHeatFlux.class, () -> Arrays.asList(LinearHeatFluxUnits.values())),
                 Map.entry(ThermalConductance.class, () -> Arrays.asList(ThermalConductanceUnits.values())),

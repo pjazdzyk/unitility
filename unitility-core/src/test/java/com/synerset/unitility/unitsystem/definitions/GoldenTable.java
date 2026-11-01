@@ -446,6 +446,19 @@ final class GoldenTable {
         exact("HeatTransferCoefficientUnits.BTU_PER_MINUTE_SQUARE_FOOT_FAHRENHEIT",
                 "1055.05585262 / 60 / (0.3048 * 0.3048) * 1.8", null, "[S1] fn 9 Btu_IT; minute; foot; °F interval");
 
+        base("ThermalResistanceUnits.SQUARE_METER_KELVIN_PER_WATT");
+        exact("ThermalResistanceUnits.SQUARE_METER_CELSIUS_PER_WATT", "1", null, "[S1] t/°C interval = K");
+        exact("ThermalResistanceUnits.SQUARE_METER_KELVIN_PER_KILOWATT", "1E-3", null, SI);
+        exact("ThermalResistanceUnits.SQUARE_FOOT_FAHRENHEIT_HOUR_PER_BTU",
+                "(0.3048 * 0.3048) * 3600 / 1.8 / 1055.05585262", "1.761102E-01",
+                "[S1] fn 9 Btu_IT; hour; foot; °F interval");
+
+        base("LinearThermalResistanceUnits.METER_KELVIN_PER_WATT");
+        exact("LinearThermalResistanceUnits.METER_CELSIUS_PER_WATT", "1", null, "[S1] t/°C interval = K");
+        exact("LinearThermalResistanceUnits.FOOT_FAHRENHEIT_HOUR_PER_BTU",
+                "0.3048 * 3600 / 1.8 / 1055.05585262", "5.777893E-01",
+                "[S1] fn 9 Btu_IT; hour; foot; °F interval");
+
         base("IsentropicCompressibilityUnits.INVERSE_PASCAL");
         exact("IsentropicCompressibilityUnits.INVERSE_KILOPASCAL", "1E-3", null, SI);
         exact("IsentropicCompressibilityUnits.INVERSE_MEGAPASCAL", "1E-6", null, SI);

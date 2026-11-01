@@ -390,6 +390,12 @@ public final class UnitDefinitions {
             round(div(Exact.BTU_IT, Exact.MINUTE, Exact.FOOT, Exact.FOOT, Exact.FAHRENHEIT_DEGREE));
     public static final double BTU_PER_HOUR_FOOT_FAHRENHEIT_DEGREE =
             round(div(Exact.BTU_IT, Exact.HOUR, Exact.FOOT, Exact.FAHRENHEIT_DEGREE));
+    /** ft²·°F·h/BTU in m²·K/W, the US R-value unit: the reciprocal of BTU/(h·ft²·°F). [S1] fn 9 Btu_IT; hour; foot; °F interval. */
+    public static final double SQUARE_FOOT_FAHRENHEIT_DEGREE_HOUR_PER_BTU =
+            round(div(mul(Exact.FOOT, Exact.FOOT, Exact.FAHRENHEIT_DEGREE, Exact.HOUR), Exact.BTU_IT));
+    /** ft·°F·h/BTU in m·K/W, the reciprocal of BTU/(h·ft·°F). [S1] fn 9 Btu_IT; hour; foot; °F interval. */
+    public static final double FOOT_FAHRENHEIT_DEGREE_HOUR_PER_BTU =
+            round(div(mul(Exact.FOOT, Exact.FAHRENHEIT_DEGREE, Exact.HOUR), Exact.BTU_IT));
     public static final double BTU_PER_CUBIC_FOOT = round(div(Exact.BTU_IT, Exact.CUBIC_FOOT));
     public static final double KILO_BTU_PER_CUBIC_FOOT = round(div(mul(new BigDecimal("1000"), Exact.BTU_IT),
             Exact.CUBIC_FOOT));
