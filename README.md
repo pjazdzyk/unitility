@@ -282,7 +282,7 @@ Temperature tempInKelvins = temperature.toBaseUnit();                           
 
 All quantities have smart toEngineeringFormat() method, which will always adjust values decimal precision to capture by
 default specified relevant digits depending on your unit type and its value.
-This way you have guaranteed an elegant output without any additional effort of reformatting. Values will be rounded up
+This way you get an elegant output without any additional effort of reformatting. Values will be rounded up
 using HALF_EVEN approach.
 
 ```java

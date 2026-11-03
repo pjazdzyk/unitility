@@ -87,7 +87,7 @@ final class GoldenTable {
         base("SoundPressureUnits.PASCAL");
         nonlinear("SoundPressureUnits.DECIBEL", db -> 2E-5 * Math.pow(10.0, db / 20.0),
                 "[S1-8.7] field level L = 20 lg(p/p0) dB; p0 = 20 µPa as declared by the library, "
-                        + "reference value not verified against a primary source");
+                        + "reference value not checked against a primary source");
 
         // --- Common ---
         base("AngleUnits.RADIANS");
@@ -310,7 +310,7 @@ final class GoldenTable {
 
         // --- Hydraulic ---
         base("FlowCoefficientUnits.KV");
-        // Cross-checked against [S6]'s "Kv = 0.865 Cv". [S6] also gives 0.86497767, which is 1 in its last
+        // Agrees with [S6]'s "Kv = 0.865 Cv". [S6] also gives 0.86497767, which is 1 in its last
         // digit away from the value its own definitions give (0.8649776554...), so it is not used as a check.
         exact("FlowCoefficientUnits.CV", US_GAL + " * 60 * sqrt(100000 / " + PSI + ")", "0.865",
                 "[S6] Cv = US gpm per 1 psi, Kv = m³/h per 1 bar, so Kv/Cv = (gpm in m³/h) * sqrt(bar/psi); "
